@@ -1,0 +1,791 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{14}
+\def\pagetitle{Espaces préhilbertiens réels.}
+
+\input{setup.tex}
+
+\begin{document}
+
+\input{title.tex}
+
+\renewcommand*{\D}{\cursive{D}}
+
+\section{Révisions.}
+
+\begin{defi}{Produit scalaire.}{}
+    Soit $E$ un $\R$-espace vectoriel, on appelle \bf{produit scalaire} sur $E$ toute application
+    \begin{equation*}
+        \langle \cdot,\cdot \rangle ~ : ~ \begin{cases} E\times E &\to \quad \R \\ (x,y) &\mapsto \quad \langle x, y \rangle\end{cases}
+    \end{equation*},
+    \begin{itemize}
+        \item bilinéaire : $\forall(x,x',y,y')\in E^4, ~ \forall(\l,\mu)\in\R^2, ~ \begin{cases}\Lg\l x + \mu x', y\Rg &= \quad \l\Lg x,y \Rg + \mu\Lg x', y \Rg\\\Lg x, \l y + \mu y' \Rg &= \quad \l\Lg x, y \Rg + \mu \Lg x, y' \Rg\end{cases}$
+        \item symétrique : $\forall x,y\in E, ~ \Lg x, y \Rg = \Lg y, x \Rg$.
+        \item définie : $\forall x \in E, ~ \Lg x, x \Rg = 0 \ra x = 0_E$.
+        \item positive : $\forall x \in E, ~ \Lg x, x \Rg \geq 0$.
+    \end{itemize}
+    Pour $x,y$ deux vecteurs de $E$, $\Lg x, y\Rg$ est une nombre réel, appelé produit scalaire de $x$ et $y$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    On appelle \bf{norme associée au produit scalaire} $\Lg\cdot,\cdot\Rg$ l'application
+    \begin{equation*}
+        \|\cdot\|:\begin{cases}E&\to\quad\R_+\\x&\mapsto\quad\|x\|:=\sqrt{\Lg x,x\Rg}\end{cases}
+    \end{equation*}
+    \bf{Remarque:} Bien définie car $\Lg x,x \Rg$ est positif pour tout $x\in E$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{Cauchy-Schwarz.}{}
+    Soit $E$ un espace préhilbertien réel muni d'un produit scalaire $\Lg\cdot,\cdot\Rg$.
+    \begin{equation*}
+        \forall (x,y) \in E^2, ~ \left| \Lg x, y \Rg \right|^2 \leq \|x\|\|y\|.
+    \end{equation*}
+    \tcblower
+    Soit $x,y\in E^2$, on pose $P(\l)=\Lg x + \l y, x + \l y \Rg$.\\
+    D'abord $P\in\R_2[X]$ : $P(\l)=\Lg x, x \Rg + 2\l \Lg x, y \Rg + \l^2 \Lg y, y \Rg$ par symétrie.\\
+    De plus, $\forall \l \in \R, ~ P(\l)\geq 0$ par positivité de $\Lg\cdot,\cdot\Rg$, donc $\Delta \leq 0$, donc $4\Lg x, y \Rg^2 \leq 4\Lg x, x \Rg\Lg y, y\Rg$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{Identités remarquables.}{}
+    Soit $\|\cdot\|$ la norme associée à $\Lg.,.\Rg$ sur $E$. Soient $x,y\in E$.
+    \begin{enumerate}
+        \item $\|x+y\|^2=\|x\|^2+2\Lg x,y \Rg + \|y\|^2 \quad$ et $\quad \|x-y\|^2=\|x\|^2-2\Lg x,y \Rg + \|y\|^2$.
+        \item $\|x+y\|^2+\|x-y\|^2=2(\|x\|^2+\|y\|^2)$.
+        \item $\Lg x,y \Rg=\frac{1}{4}(\|x+y\|^2-\|x-y\|^2)$.
+    \end{enumerate}
+    \bf{Polarisation :} $\Lg x, y \Rg = \frac{1}{2}(\|x+y\|^2 - \|x\|^2 - \|y\|^2)$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\cdot,\cdot\Rg)$ un espace préhilbertien réel de norme associée $\|\cdot\|$. Alors :
+    \begin{equation*}
+        \forall (x,y) \in E^2, ~ \|x+y\| = \|x\|+\|y\| \iff (x, y) \nt{ est liée}.
+    \end{equation*}
+    \tcblower
+    Il y a égalité dans l'IT ssi c'est une égalité ssi $\Lg x,y \Rg = \|x\|\|y\|$ cas d'égalité de Cauchy-Schwarz ssi $(x,y)$ liée.\\
+    Dans $\C$, $|z+z'|\leq|z|+|z'|$ où $\Lg z, z'\Rg = \Re(z\ov{z'})$.
+\end{prop}
+
+\begin{defi}{Sur $\M_n(\R)$.}{}
+    L'application $\Lg \cdot,\cdot \Rg$ qui à deux matrices $A=(a_{i,j})$ et $B=(b_{i,j})$ de $\M_n(\R)$ associe :
+    \begin{equation*}
+        \Lg A, B \Rg = \Tr(A^\top B) = \sum_{1\leq i,j \leq n} a_{i,j}b_{i,j}
+    \end{equation*}
+    est un produit scalaire sur $\M_n(\R)$.
+\end{defi}
+
+\begin{ex}{}{}
+    Soit :
+    \begin{equation*}
+        \forall x,y \in \R^n, ~ \phi(x,y) = \sum_{1\leq i,j \leq n}\frac{x_i y_j}{i + j}.
+    \end{equation*}
+    Montrer que $\phi$ définit un produit scalaire sur $\R^n$.
+    \tcblower
+    La bilinéarité et la symétrie sont triviales.
+    \begin{align*}
+        \forall x \in \R^n, ~ \phi(x,x) &= \sum_{1\leq i,j \leq n}\frac{x_ix_j}{i+j}= \sum_{1\leq i,j \leq n} \int_0^1t^{i+j-1}x_ix_j\dt=\int_0^1 \sum_{1\leq i,j \leq n} x_i x_j t^{i-\frac{1}{2}}t^{j-\frac{1}{2}}\dt\\
+        &=\int_0^1\left( \sum_{i=1}^n x_it^{i-\frac{1}{2}} \right)\left( \sum_{j=1}^nx_j t^{j-\frac{1}{2}} \right)\dt = \int_0^1 \left( \sum_{i=1}^n x_i t^{i-\frac{1}{2}} \right)^2\dt \geq 0
+    \end{align*}
+    \begin{align*}
+        \forall x \in \R^n, ~ \phi(x,x) = 0 &\ra \int_0^1\left( \sum_{i=1}^n x_it^{i-\frac{1}{2}} \right)^2\dt=0 \ra \forall t \in [0,1], ~ \sum_{i=1}^n x_i t^{i-\frac{1}{2}}=0\\
+    &\ra \forall t \in [0,1], ~ \sum_{i=1}^n x_it^i = 0 \ra x=0.
+    \end{align*}
+\end{ex}
+
+\begin{defi}{}{}
+    Soit $(E,\Lg \cdot, \cdot \Rg)$ un espace préhilbertien réel.
+    \begin{enumerate}
+        \item Soit $(x,y) \in E^2$. Alors $x$ et $y$ sont orthogonaux ssi $\Lg x,y \Rg = 0$.
+        \item Soit $A\subset E$ non-vide, on note $A^\bot = \{x \in E, ~ \forall a \in A, ~ \Lg x, a \Rg = 0\}$.
+    \end{enumerate}
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    Soit $E$ un espace euclidien (dimension finie), et $\B=(e_1,...,e_n)$ une base de $E$.
+    \begin{enumerate}
+        \item $\B$ est orthogonale ssi $\forall i\neq j \in \lb1,n\rb, ~ \Lg e_i, e_j \Rg = 0$.
+        \item $\B$ est orthonormale ssi $\forall i, j \in \lb 1, n \rb, ~ \Lg e_i, e_j \Rg = \d_{i,j}$. 
+    \end{enumerate}
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{thm}{}{}
+    Soit $(E,\Lg\cdot,\cdot\Rg)$ un espace préhilbertien réel.
+    \begin{equation*}
+        \forall (x, y) \in E^2, ~ \Lg x, y \Rg = 0 \iff \| x + y \| = \| x \|^2 + \| y \|^2
+    \end{equation*}
+\end{thm}
+
+\vspace*{-0.8cm}
+
+\begin{thm}{}{}
+    Soit $A\subset E$ non-vide.
+    \begin{enumerate}
+        \item $A^\bot$ est un ssev de $E$.
+        \item $\{0\}^\bot = E$ et $E^\bot = \{0\}$.
+        \item $A\subset B \ra B^\bot \subset A^\bot$.
+        \item Si $A=\Vect(e_1,...,e_p)$, alors $x\in A^\bot \iff \forall i \in \lb1,p\rb, ~ \Lg x, e_i \Rg = 0$.
+        \item $A\subset \left(A^\bot\right)^\bot$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $0\in A^\bot$ car $\forall a \in A, ~ \Lg 0, a\Rg = 0_\R$.\\
+    Soient $x,y \in A^\bot, ~ \l \in \R$, alors $\forall a \in \R, ~ \Lg x + \l y, a \Rg = \Lg x, a \Rg + \l \Lg y, a \Rg = 0$.\\
+    \boxed{2.} $\{0_E\}^\bot = \{ x \in E, ~ \Lg x,0_E\Rg = 0 \} = E$, et $x\in E^\bot \ra \Lg x,x\Rg = 0 \ra x=0_E$.\\
+    \boxed{3.} Soit $x\in B^\bot$, alors $\forall a \in B, ~ \Lg x,a\Rg = 0$ puis $\forall a \in A, ~ \Lg x, a \Rg = 0$.\\
+    \boxed{4.\ra} triviale.\\
+    \boxed{4.\la} Soit $x$ vérifiant les hypothèses et $a\in A$, alors $\exists (\l_1,...,\l_p)\in\K^p, ~ a=\sum_{i=1}^p \l_i e_i$.\\
+    Alors $\Lg x,a\Rg = \sum_{i=1}^p \l_i\Lg x,e_i\Rg=0$, donc $x\in A^\bot$.\\
+    \boxed{5.} Soit $a\in A$, et $b\in A^\bot$, alors $\Lg a, b \Rg = 0$, donc $a$ est orthogonal à tous les vecteurs de $A^\bot$ donc $A\subset (A^\bot)^\bot$.
+\end{thm}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    Soit $E=\cursive{C}^0([a,b],\R)$ et $F$ l'ensemble des fonctions polynomiales sur $E$. Déterminer $F^\bot$ puis $(F^\bot)^\bot$.
+    \begin{equation*}
+        \forall f,g \in E, ~ \Lg f,g \Rg = \int_a^b f(t)g(t)\dt
+    \end{equation*}
+    \tcblower
+    On a $f\in F^\bot \iff \forall g \in F, ~ \Lg f,g \Rg = 0 \ra \forall k \in \N, ~ \Lg f,t^k\Rg = 0 \ra \forall k \in \N, ~ \int_a^b f(t)t^k\dt=0$.\\
+    On utilise le théorème d'approximation de Weierstraß : $\exists (P_n)\in\R[X]^\N, ~ P_n \cu f$ sur $[a,b]$.
+    \begin{equation*}
+        \forall n \in \N, ~ \int_a^b f^2(t)\dt = \int_a^b f(t)\left( f(t) - P_n(t) \right)\dt + \int_a^b f(t)P_n(t)\dt
+    \end{equation*}
+    Puis :
+    \begin{equation*}
+        0 \leq \int_a^b f^2(t)\dt \leq \|P_n - f\|_{\infty}^{[a,b]} \int_a^b|f(t)|\dt \xrightarrow[n\to+\infty]{}0.
+    \end{equation*}
+    Donc $F^{\bot} \subset \{0_E\}$, donc $F^\bot = \{0_E\}$, donc $(F^\bot)^\bot = E$ et $F\subsetneq E$.
+\end{ex}
+
+\begin{prop}{}{}
+    Soient $F$ et $G$ deux sous-espaces vectoriels de $E$ préhilbertien réel.
+    \begin{equation*}
+        F ~ \bot ~ G \ra F \subset G^\bot \et G \subset F^\bot.
+    \end{equation*}
+    \tcblower
+    Soit $x\in F$. Alors $\forall y \in G, ~ \Lg x, y \Rg = 0$ donc $x\in G^\bot$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{exercice}{}{}
+    Vérifier que $\S_n(\R) \bot \A_n(\R)$ pour le produit scalaire $\Lg A,B \Rg = \Tr(A^\top B)$.
+    \tcblower
+    Soit $A\in\S_n(\R)$ et $B\in\A_n(\R)$.
+    \begin{equation*}
+        \Lg A, B \Rg = \Tr(A^\top B) = \Tr(AB) \et \Lg B, A \Rg = \Tr(B^\top A) = \Tr(-BA)= -\Tr(AB)
+    \end{equation*}
+    Donc $\Tr(AB)=-\Tr(AB)$ donc $\Tr(AB)=0$. 
+\end{exercice}
+
+\vspace*{-0.7cm}
+
+\begin{exercice}{}{}
+    Déterminer $\D_n(\R)^\top$.
+    \tcblower
+    On a $\D_n(\R)=\Vect(E_{1,1},...,E_{n,n})$, avec $M\in\D_n^\bot$ ssi $\forall i \in \lb1,n\rb, ~ \Lg M, E_{i,i} \Rg = 0$ ssi $\Tr(M^\top E_{i,i})=0$.\\
+    Donc $\D_n(\R)^\bot = \{M = (m_{i,j}) \in \M_n(\R), ~ \forall i \in \lb1,n\rb, ~ m_{i,i}=0\}$.
+\end{exercice}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien, de norme associée $\|\.\|$, et $\B=(e_1,...,e_n)$ une b.o.n. de $E$.
+    \begin{enumerate}
+        \item $\forall x \in E, ~ x = \sum_{i=1}^n\Lg x, e_i \Rg e_i$.
+        \item $\forall x,y \in E, ~ \Lg x,y \Rg = \sum_{i=1}^n\Lg x, e_i \Rg\Lg y, e_i \Rg$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $x\in E$, $x=\sum_{i=1}^nx_ie_i$, puis $\forall j \in \lb1,n\rb, ~ \Lg x, e_j \Rg = \sum_{i=1}^nx_i\Lg e_i, e_j \Rg = x_j$.\\
+    \boxed{2.} Soit $x,y\in E$ $x=\sum_{i=1}^n x_i e_i$ et $y=\sum_{j=1}^n y_j e_j$, puis $\Lg x,y \Rg = \Lg \sum_{i=1}^n x_ie_i,\sum_{j=1}^ny_je_j\Rg=\sum_{1\leq i,j \leq n}x_iy_j\Lg e_i,e_j\Rg$.\\
+    Donc $\Lg x,y \Rg = \sum_{i=1}^n x_iy_i = \sum_{i=1}^n \Lg x_i, e_i \Rg \Lg y_i, e_i\Rg$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{Exemples de bases orthonormées.}{}
+    $\bullet$ Les bases canoniques de $\R^n$, de $\M_n(\R)$.
+    \tcblower
+    En effet, $\forall i,j,k,l \in \lb1,n\rb^4, ~ E_{i,j}E_{k,l}=\d_{j,k}E_{i,l}$, puis :
+    \begin{align*}
+        \Lg E_{i,j}, E_{k,l} \Rg &= \Tr(E_{i,j}^\top E_{k,l}) = \Tr(E_{j,i} E_{k,l}) = \Tr(\d_{i,k}E_{j,l}) = \d_{i,k}\Tr(E_{j,l}) = \d_{i,k}\d_{j,l}.
+    \end{align*}
+    Si $(i,j) \neq (k,l)$, alors $i\neq k$ ou $j \neq l$, donc $\Lg E_{i,j}, E_{k,l} \Rg = 0$, sinon $\Lg E_{i,j}, E_{k,l} \Rg = 1$.\\
+    Soit $A=(a_{i,j})\in\M_n(\R)$, $A=\sum_{1\leq i,j \leq n} a_{i,j}E_{ij}$ avec $a_{i,j} = \Lg A, E_{i,j} \Rg$ car c'est une b.o.n.\\
+    Donc $a_{i,j} = \Tr(A^\top E_{i,j}) = \Tr(E_{i,j}^\top A)= \Tr(E_{j,i}A)$. On retiendra $\Tr(AE_{i,j})=\Tr(E_{i,j}A)=a_{j,i}$.
+\end{ex}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace euclidien, $u\in\L(E)$ et $\B=(e_1,...,e_n)$ une b.o.n. de $E$. Alors :
+    \begin{equation*}
+        \Mat_{[\B]}(u) = \begin{pmatrix} \Lg u(e_1), e_1 \Rg & ... & \Lg u(e_n), e_1 \Rg \\ \vdots & & \vdots \\ \Lg u(e_1), e_n \Rg & ... & \Lg u(e_n), e_n \Rg\end{pmatrix} \et \Tr(u) = \sum_{i=1}^n \Lg u(e_i), e_i \Rg.
+    \end{equation*}
+    \tcblower
+    Par définition, $\Mat_{[\B]}(u) = (a_{i,j})$ où $a_{i,j}$ est la $i^{\nt{ème}}$ coordonnée de $u(e_j)$ dans $\B$.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{ex}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ préhilbertien réel et $F$ un sous-espace vectoriel de $E$. Montrer que $F^\bot = \ov{F}^\bot$.
+    \tcblower
+    Rappel : $\ov{F}$ est le plus petit fermé qui contient $F$, et $x\in\ov{F}\iff \exists (x_n) \in F^\N, ~ x = \lim x_n$.\\
+    \boxed{\supset} $F\subset\ov{F}$, puis $\ov{F}^\bot \subset F^\top$.\\
+    \boxed{\subset} Soit $x\in F^\bot$. Soit $y\in\ov{F}$ : $\exists (y_n)\in F^\N$ tel que $y=\lim y_n$.\\
+    Déjà, $\forall n \in \N, ~ \Lg x, y_n \Rg = 0$ car $x \in F^\bot$, puis $\lim \Lg x, y_n \Rg = \Lg x, y\Rg$ par continuité (Cauchy-Schwarz).\\
+    Donc $\Lg x,y\Rg=0$.
+\end{ex}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ préhilbertien réel. Une famille de vecteurs de $E$ non nuls et deux-à-deux orthogonaux est libre.
+    \tcblower
+    Soit $(x_i)_{i\in I}$ une famille de vecteurs de $E$ non-nuls et deux-à-deux orthogonaux.\\
+    Soit $(\l_1,...,\l_n)\in\R^n$ tel que $\l_1x_1+...+\l_nx_n=0_E$, soit $j\in\lb1,n\rb$ : $\Lg x_j, \l_1x_1+...+\l_nx_n\Rg = \Lg x_j, 0_E \Rg = 0_\R$.\\
+    D'autre part, $\Lg x_j, \l_1x_1+...+\l_nx_n\Rg = \sum_{i=1}^n\l_i\Lg x_i, x_j\Rg=\l_j\Lg x_j,x_j\Rg=\l_j\|x_j\|^2$ par bilinéarité de $\Lg\.,\.\Rg$.\\
+    Il reste $\l_j\|x_j\|^2=0_\R$, puis $\l_j=0$, finalement : $\forall i \in \lb1,n\rb, ~ \l_i = 0$. La famille est libre.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ préhilbertien réel, et $E_1,...,E_n$ sous-espaces vectoriels de $E$ deux-à-deux orthogonaux.\\
+    Alors $E_1\oplus...\oplus E_n$ : ils sont en somme directe.
+    \tcblower
+    Soit $x_1,...,x_n \in E_1\times ... \times E_n$ tels que $x_1+...+x_n=0_E$. Soit $j\in\lb1,n\rb$, alors :\\
+    D'une part, $\Lg x_j, x_1+...+x_n\Rg=\Lg x_j, 0_E\Rg=0_\R$.\\
+    D'autre part, $\Lg x_j, x_1+...+x_n\Rg = \sum_{i=1}^n\Lg x_j, x_i\Rg = \|x_j\|^2 = 0_\R$ donc $x_j=0$. 
+\end{prop}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    Soit $(P,Q)\in\R[X]^2$, on pose $\Lg P,Q \Rg = \int_{-1}^1\frac{P(t)Q(t)}{\sqrt{1-t^2}}\dt$.
+    \begin{enumerate}
+        \item Vérifier que l'on a ainsi défini un produit scalaire sur $\R[X]$.
+        \item $T_0 = 1$, $T_1=X$ et $\forall n \in \N, ~ T_{n+2} = 2XT_{n+1}-T_n$.\\
+        Vérifier que $(T_n)_n$ est une base de $\R[X]$.
+        \item Vérifier que $\forall n \in \N, ~ \forall \theta \in \R, ~ T_n(\cos \theta) = \cos(n\theta)$.
+        \item Montrer que $n\neq m \ra \Lg T_n, T_m \Rg = 0$, en déduire une b.o.n. de $(\R[X], \Lg\.,\.\Rg)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Vérifions d'abord que l'intégrale converge. On pose $\ds \forall t \in ]-1,1[, ~ f(t)=\frac{P(t)Q(t)}{\sqrt{1-t^2}}$, cpm.\\
+    En 1 : $\ds f(t)=\frac{P(t)Q(t)}{\sqrt{1+t}}\frac{1}{\sqrt{1-t}}=O\left( (1-t)^{-\frac{1}{2}} \right)$ intégrable par comparaison sur $[0,1[$.\\
+    En -1 : $\ds f(t)=\frac{P(t)Q(t)}{\sqrt{1-t}}\frac{1}{\sqrt{1+t}}=O\left( (1+t)^{-\frac{1}{2}} \right)$, intégrable par comparaison sur $]-1,0]$.\\
+    Finalement, $f$ est intégrable sur $]1,1[$, donc $\int_{-1}^1 f$ converge. \\
+    C'est une forme bilinéaire : linéaire selon la première variable par linéarité de l'intégrale, puis selon la deuxième par symétrie. Puis positif, $\Lg P, P\Rg \geq 0$.
+    Et défini : $\Lg P,P \Rg = 0 \ra \forall t \in ]-1,1[, ~ \frac{P^2(t)}{\sqrt{1-t}}=0$ car positive, continue et d'intégrale nulle, donc $\forall t \in]-1,1[, ~ P(t)=0$. Donc $P=0$ par rigidité des polynômes.\\
+    \boxed{2.} Par récurrence double, $\forall n \in \N, ~ \deg(T_n) = n$.\\
+    \bf{Libre.} Toute sous-famille de $(T_n)$ est libre (degrés distincts).\\
+    \bf{Génératrice.} Soit $P\in\R[X]$ non-nul, de degré $n$, alors $P\in\R_n[X]$, puis $(T_0,...,T_n)$ est libre dans $\R_n[X]$ donc base par caractérisation en dimension finie, donc $\R[X]=\Vect(T_n)_n$.\\
+    \boxed{3.} Pour tout $n\in\N$, on pose $\P_n:$<< $\forall \theta \in \R, ~ T_n(\cos \theta) = \cos(n\theta)$ >>.\\
+    \bf{Initialisation.} Soit $\theta\in\R$. $T_0(\cos\theta)=1=\cos(0)$ et $T_1(\cos\theta)=\cos(\theta)$.\\
+    \bf{Hérédité.} Soit $n\in\N$ tel que $\P_n$ et $\P_{n+1}$ soient vrais. Soit $\theta\in\R$.\\
+    Alors $T_{n+2}(\cos\theta)=2\cos(\theta)T_{n+1}(\cos\theta)-T_n(\cos\theta)=2\cos(\theta)\cos((n+1)\theta)-\cos(n\theta)$.\\
+    Or $2\cos a\cos b = \cos(a+b) + \cos(a-b)$ donc $T_{n+2}(\cos \theta)=\cos((n+2)\theta)+\cos(n\theta)-\cos(n\theta)=\cos((n+2)\theta)$.\\
+    Donc $\P_{n+2}$ est vérifiée, et par récurrence double, $\forall n \in \N, ~ \P_n$ est vraie.\\
+    \boxed{4.} Soient $n,m\in\N$ tels que $n\neq m$. On pose $t=\cos\theta=\phi(\theta)$, $\cursive{C}^1$ str.decr. bijective de $]0,\pi[$ sur $]-1,1[$
+    \begin{align*}
+        \Lg T_n, T_m \Rg &= \int_{-1}^1\frac{T_n(t)T_m(t)}{\sqrt{1-t}}\dt = \int_{\pi}^{0}\frac{T_n(\cos\theta)T_m(\cos\theta)}{\sqrt{1-\cos^2\theta}}(-\sin\theta\nt{d}\theta)=\int_0^{\pi}\cos(n\theta)\cos(m\theta)\nt{d}\theta\\
+        &=\frac{1}{2}\int_0^{\pi}\cos((n+m)\theta)\nt{d}\theta + \frac{1}{2}\int_0^\pi\cos((n-m)\theta)\nt{d}\theta = \frac{1}{2}\left[ \frac{\sin((n+m)\theta)}{n+m} \right]_0^\pi + \frac{1}{2}\left[ \frac{\sin((n-m)\theta)}{n-m} \right]_0^\pi\\
+    \end{align*}
+    Donc le produit scalaire est nul, donc $\B=\left( \frac{T_n}{\|T_n\|} \right)_n$ est une famille orthonormale, puis c'est une base par Q3.
+    \begin{align*}
+        \forall n \in \N, ~ \|T_n\|^2 = \Lg T_n, T_n \Rg &= \int_0^\pi\cos^2(n\theta)\nt{d}\theta = \int_0^\pi\frac{\cos(2n\theta)+1}{2}\nt{d}\theta=\frac{1}{2}\int_0^\pi\cos(2n\theta)\nt{d}\theta + \frac{\pi}{2} 
+    \end{align*}
+    Donc si $n\neq0$, $\|T_n\|^2=\frac{1}{2}\left[ \frac{\sin(2n\theta)}{2n} \right]_0^\pi + \frac{\pi}{2}=\frac{\pi}{2}$ puis $\|T_n\|=\sqrt{\frac{\pi}{2}}$. Si $n=0$, alors $\|T_0\|^2=\pi$ puis $\|T_0\|=\sqrt{\pi}$.
+\end{exercice}
+
+\pagebreak
+
+\section{Adjoint d'un endomorphisme.}
+
+\begin{thm}{Représentation de Riesz.}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace euclidien et $\phi$ une forme linéaire sur $E$, alors $\exists!a\in E, ~ \forall x \in E, ~ \phi(x)=\Lg a,x\Rg$.
+    \tcblower
+    Soit $\psi$ de $E$ dans $\L(E,\R)$ telle que $\psi:a\mapsto(x\mapsto \Lg a,x \Rg)$.\\
+    Soit $(a,b)\in E^2$, $\l\in\R$, et $x\in E$. Alors $\psi(a+\l b)(x) = \Lg a, x \Rg + \l \Lg b, x\Rg = \psi(a)(x)+\l\psi(b)(x)=(\psi(a)+\l \psi(b))(x)$. \\
+    Soit $a\in\Ker(\psi)$, alors $\psi(a)(a)=\|a\|^2=0$, donc $a=0$, donc $\psi$ est injective.\\
+    Ensuite, $\dim \L(E,\R)=\dim(E)\dim(\R)=\dim(E)$, donc $\psi$ injective ssi $\psi$ surjective ssi $\psi$ bijective.\\
+    Donc $\psi$ est bijection de $E$ dans $\L(E,\R)$. Soit $\phi\in\L(E,\R)$, $\exists!a,~\phi=\psi(a)$ donc $\forall x\in E, ~ \phi(x)=\psi(a)(x)=\Lg a,x\Rg$.
+\end{thm}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Montrer l'existence et l'unicité de $A\in\R_n[X]$ tel que $\forall P \in \R_n[X], ~ P(0)=\int_0^1A(t)P(t)\dt$.
+    \tcblower
+    Posons $\Lg P, Q \Rg = \int_0^1P(t)Q(t)\dt$, qui définit un produit scalaire sur $\R_n[X]$, et même sur $\R[X]$.\\
+    On remarque que $\phi:P\mapsto P(0)$ est une forme linéaire sur $E$, donc on applique la représentation de Riesz : \begin{equation*}\exists!A\in R_n[X], ~ P(0)=\int_0^1A(t)P(t)\dt\end{equation*}.\\
+    Supposons par l'absurde que $\deg(A)<n$, alors $t\mapsto tA(t)$ est un polynôme de degré inférieur à $n$\\
+    Alors $P=XA\in\R_n[X]$, donc $P(0)=\int_0^1A(t)P(t)\dt=0$, donc $\int_0^1tA^2(t)\dt=0$, donc $A=0$, absurde.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{corr}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien et $H$ un hyperplan de $E$.\\
+    Alors $\exists a \in E, ~ H = a^\bot$, il y a unicité de $a$ non-nul à un scalaire près.
+    \tcblower
+    $H$ est un hyperplan donc $\exists \phi \in \L(E), ~ H=\Ker(\phi)$ où $\phi$ non-nulle.\\
+    Par théorème de Riesz, $\exists!a\in E, ~ \forall x \in E, ~ \phi(x)=\Lg a,x\Rg$, et $x\in H \iff \phi(x)=0 \iff \Lg a,x\Rg=0$ : $H=a^\bot$.\\
+    Supposons $H=a^\bot=b^\bot$, posons $\phi(x)=\Lg a, x\Rg$ et $\psi(x)=\Lg b,x\Rg$ pour tout $x\in E$.\\
+    Alors $\phi$ et $\psi$ sont des formes linéaires sur $E$ non-nulles, et $\Ker(\phi)=\Ker(\psi)=H$.\\
+    Enfin, $\forall \phi,\psi\in\L(E), ~ \Ker(\phi)=\Ker(\psi)\iff \exists \l \in \K^*, ~ \phi=\l\psi$, donc $\Lg a, x \Rg = \l\Lg b, x \Rg$ donc $a-\l b=0$
+\end{corr}
+
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien et $u\in\L(E)$, l'adjoint de $u$, noté $u^*$ est l'unique endomorphisme de $E$ tel que :
+    \begin{equation*}
+        \forall (x,y) \in E^2, ~ \Lg x, u(y) \Rg = \Lg u^*(x), y \Rg.
+    \end{equation*}
+    \tcblower
+    Soit $x\in E$ fixé, posons $\phi(y)=\Lg x,u(y)\Rg$, c'est une forme linéaire sur $E$.\\
+    D'après le théorème de représentation de Riesz : $\exists!a\in E, ~ \forall y \in E, ~ \phi(y)=\Lg a,y\Rg$.\\
+    Donc $a$ est fonction de $x$, on notera $a=u^*(x)$, $\forall (x,y) \in E^2, ~ \Lg x,u(y)\Rg=\Lg u^*(x),y\Rg$.\\
+    Vérifions que $u^*$ est linéaire : soient $x_1,x_2\in E$ et $\l\in\R$, alors :
+    \begin{align*}
+        \forall y \in E, ~ \Lg x_1 + \l x_2, u(y)\Rg &= \Lg u^*(x_1+\l x_2), y\Rg\\
+        &= \Lg x_1, u(y)\Rg + \l \Lg x_2, u(y)\Rg = \Lg u^*(x_1), y\Rg + \l\Lg u^*(x_2), y\Rg = \Lg u^*(x_1) + \l u^*(x_2), y \Rg
+    \end{align*}
+\end{defi}
+
+\begin{ex}{}{}
+    \begin{itemize}
+        \item $\Id_E^*=\Id_E$.
+        \item $(E,\Lg\.,\.\Rg)$ euclidien et $a,b\in E$ et $\forall x \in E, ~ u(x)=\Lg a,x\Rg b - \Lg b,x\Rg a$.
+    \end{itemize}
+    \tcblower
+    Soit $(x,y)\in E^2$. Alors $\Lg x,u(y)\Rg=\Lg x, \Lg a,y\Rg b - \Lg b, y \Rg a\Rg=\Lg a, y \Rg \Lg x, b \Rg - \Lg b, y \Rg \Lg x, a\Rg=\Lg y, \Lg x,b \Rg a - \Lg x, a \Rg b\Rg$.\\
+    Donc $u^*(x)=\Lg x,b \Rg a - \Lg x, a \Rg b$ pour tout $x\in E$, donc $u^*=-u$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{thm}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien.
+    \begin{enumerate}
+        \item $\forall u \in \L(E), ~ (u^*)^* = u$.
+        \item $\forall (u,v)\in\L(E)^2$ et $\l\in\R$, $(u+\l v)^* = u^* + \l v^*$.
+        \item $\forall (u,v)\in\L(E), ~ (u\circ v)^* = v^* \circ u^*$.
+    \end{enumerate}
+    \tcblower
+    On utilise $x=y \iff \forall z \in E ~ \Lg x,z\Rg = \Lg y,z\Rg$.\\
+    \boxed{1.} Soit $u\in\L(E)$, $\forall x, y \in E, ~ \Lg x, u(y) \Rg = \Lg u^*(x),y\Rg = \Lg x, (u^*)^*(y)\Rg$, donc $u(y)=(u^*)^*(y)$.\\
+    \boxed{2.} Soient $u,v\in\L(E)$ et $\l\in\R$. $\forall x,y \in E, \Lg x, (u+\l v)(y)\Rg = \Lg x, u(y)\Rg + \l \Lg x, v(y)\Rg=\Lg u^*(x), y \Rg + \l\Lg v^*(x), y\Rg$.\\
+    \boxed{3.} $\forall x,y \in E, ~ \Lg x, (u\circ v)(y) \Rg = \Lg u^*(x), v(y)\Rg = \Lg (v^* \circ u^*)(x), y \Rg$.
+\end{thm}
+
+\vspace*{-0.7cm}
+
+\begin{rappel}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace euclidien et $\B=(e_1,...,e_n)$ base orthonormée de $E$.\\
+    Soient $x,y \in E$, et $X,Y$ les vecteurs des coordonnées de $x$ et $y$ dans la base $\B$.
+    \begin{equation*}
+        \Lg x,y \Rg = \sum_{i=1}^n x_i y_i \ra \Lg x, y \Rg = X^\top Y.
+    \end{equation*}
+    Soit $u\in\L(E)$, $A=\Mat_\B(u)$ avec $\forall i, j \in \lb1,n\rb, ~ a_{i,j}=\Lg u(e_j), e_i \Rg$, alors $\Lg x, u(y) \Rg = X^\top AY=\sum_{1\leq i,j \leq n} a_{i,j}x_iy_j$.
+\end{rappel}
+
+\vspace*{-0.7cm}
+
+\begin{lemme}{}{}
+    Soient $A,B\in\M_n(\K)$. Alors :
+    \begin{equation*}
+        \left( \forall X,Y \in \M_{n,1}(\R), ~ X^\top A Y = X^\top B Y \right) \ra A = B.
+    \end{equation*}
+    \tcblower
+    On a $\forall i,j \in \lb1,n\rb, ~ E_j^\top A E_j = a_{i,j} = E_{i}^\top B E_j = b_{i,j}$.
+\end{lemme}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace euclidien de dimension $n\in\N$, et $\B$ une base orthonormée de $E$.
+    \begin{equation*}
+        \forall u \in \L(E), ~ \Mat_\B(u^*) = \Mat_\B(u)^\top.
+    \end{equation*}
+    \tcblower
+    On note $A=\Mat_\B(u)$ et $C=\Mat_\B(u^*)$, alors $\forall (x,y) \in E, ~ \Lg x, u(y)\Rg = \Lg u^*(x), y\Rg$.\\
+    Donc $\forall X,Y \in \M_{n,1}(\K), ~ X^\top(AY)=(CX)^\top Y$ puis $X^\top A Y = X^\top C^\top Y$, puis $A=C^\top$ et $C=A^\top$ (lemme).
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $u\in\L(E)$ tel que $u\circ u^* = 0$, montrons que $u=0$.
+    \tcblower
+    Soit $x\in E$, $\|u(x)\|^2=\Lg u(x), u(x) \Rg = \Lg x, (u^*\circ u)(x)\Rg$.\\
+    De plus, $\|u^*(x)\|^2=\Lg x, ((u^*)^*\circ u^*)(x)\Rg = \Lg x, (u\circ u^*)(x)\Rg=0_\R$ car $u\circ u^*=0$.\\
+    Donc $u^*=0_{\L(E)}$, puis $u=(u^*)^*=0_{\L(E)}$.\\
+    Version matricielle : soit $A\in\M_n(\R)$ tel que $AA^\top=0_{\M_n(\R)}$, donc $\Tr(AA^\top)=0$, donc $A=0$.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace euclidien.
+    \begin{enumerate}
+        \item Soit $u\in\L(E)$. Montrer que $\Ker(u^*\circ u)=\Ker u$.
+        \item Pour $A\in\M_n(\R)$, montrer que $\rg(AA^\top)=\rg(A)=\rg(A^\top A)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} \boxed{\supset} trivial.\\
+    \boxed{\subset} Soit $x\in\Ker(u^*\circ u)$ : $u^*\circ u(x)=0$, donc $\|u(x)\|^2=\Lg x, u^*\circ u(x) \Rg = 0$, donc $u(x)=0$, donc $x\in\Ker u$.\\
+    \boxed{2.} Soit $A\in\M_n(\R)$, vérifions déjà que $\Ker(A^\top A)=\Ker(A)$. Soit $u$ canoniquement associé à $A$.\\
+    Puis $\Mat_\B(u^*\circ u)=A^\top A$ donc $\Ker(u^*\circ u)=\Ker u \iff \Ker(A^\top A) = \Ker(A)$.\\
+    Ou par double inclusion : $\Ker(A)\subset \Ker(A^\top A)$ trivial.\\
+    Soit $X\in\Ker(A^\top A)$ : $A^\top AX=0$ donc $X^\top (A^\top AX)=0$ donc $(AX)^\top(AX)=0$ donc $\|AX\|^2=0$ donc $AX=0$.\\
+    Par théorème du rang : $n=\rg(A^\top A)+\dim\Ker(A^\top A)=\rg(A)+\dim\Ker(A)$, donc $\rg(A^\top A)=\rg(A)$.\\
+    Puis avec $A^\top$ : $\rg((A^\top)^\top A^\top)=\rg(A^\top)=\rg(A)$ donc $\rg(AA^\top)=\rg(A)$. 
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace euclidien et $u\in\L(E)$ tel que $u^2=0$. Montrer que $\Ker(u+u^*)=\Ker(u)\cap\Ker(u^*)$.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace euclidien, $u\in\L(E)$ et $F$ un sous-espace vectoriel de $E$ stable par $u$.\\
+    Alors $F^\bot$ est stable par $u^*$.
+    \tcblower
+    Soit $y\in u^*(F^\bot)$ et $z\in F$ : $\exists x \in F^\bot, ~ y=u^*(x)$, on a $\Lg y, z \Rg = \Lg u^*(x), z\Rg = \Lg x, u(z) \Rg=0$ car $u(F)\subset F$ et $x\in F^\bot$.
+\end{prop}
+
+\vspace*{-1cm}
+
+\section{Projections orthogonales et calcul de distance.}
+
+\begin{thm}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace préhilbertien réel et $F$ un sous-espace vectoriel de $E$ de dimension finie.
+    \begin{equation*}
+        E=F\oplus F^\bot, \quad y = p_F(x) \iff y \in F \et (x-y)\in F^\bot 
+    \end{equation*}
+    De plus, si $(e_1,...,e_n)$ est une b.o.n. de $F$, alors $\forall x \in E, ~ p_F(x)=\sum_{i=1}^n \Lg x,e_i\Rg e_i$.
+    \tcblower
+    Déjà, $F\bot F^\bot$, on en déduit $F\oplus F^\bot$, montrons que $E=F+F^\bot$. Soit $\B=(e_1,...,e_n)$ une b.o.n. de $F$.\\
+    Soit $x\in E$, $x=\sum_{i=1}^n \Lg x,e_i\Rg e_i + \left( x - \sum_{i=1}^n\Lg x, e_i\Rg e_i \right) = y + (x-y)$, on a bien $y\in F$.\\
+    Of $F=\Vect(e_1,...,e_n)$, donc en montrant $\forall j \in \lb1,n\rb, ~ \Lg x-y, e_j \Rg = 0$, on a $x-y\in F^\bot$.\\
+    Pour $j\in\lb1,n\rb, ~ \Lg x-y, e_j \Rg = \Lg x, e_j \Rg - \Lg y, e_j \Rg$ et $\Lg y, e_j \Rg = \sum_{i=1}^n\Lg x,e_i\Rg\Lg e_i, e_j\Rg=\Lg x,e_j\Rg$.\\
+    On a bien $x-y\in F^\bot$ puis $E=F\oplus F^\bot$.
+\end{thm}
+
+\begin{defi}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace préhilbertien et $F$ un sous-espace vectoriel de $E$ et $x\in E$.
+    \begin{equation*}
+        d(x,F) = \inf\{\|x-y\|, ~ y \in F\}.
+    \end{equation*}
+\end{defi}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace préhilbertien réel et $F$ sous-espace vectoriel de $E$ de dimension finie.\\
+    On note $p_F$ la projection orthogonale sur $F$, alors $\forall x \in E, ~ d(x,F)=\|x-p_F(x)\|$.
+    \tcblower
+    Soit $x\in E$, $p_F(x)\in F$ par définition, donc $d(x,F)=\inf\{\|x-t\|,y\in F\}\leq\|x-p_F(x)\|$.\\
+    D'autre part, si $y\in F$, alors $x-y=x-p_F(x)+p_F(x)-y$ et $x-p_F(x)\in F^\bot$ et $p_F(x)-y \in F$.\\
+    Puis $\|x-y\|^2 = \|x-p_F(x)\|^2 + \|p_F(x)-y\|^2$ (Pythagore), donc $\|x-y\|\geq\|x-p_F(x)\|$.\\
+    Par passage à l'inf, $d(x,F) \geq \|x-p_F(x)\|$, donc par double-inégalité, $d(x,F)=\|x-p_F(x)\|$.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{ex}{}{}
+    Soit $\M_n(\R)$ muni du produit scalaire usuel $\Lg A,B \Rg = \Tr(A^\top B)$ et $\S_n(\R)$ le sev des matrices symétriques.\\
+    Déterminer $d(M,\S_n(\R))$ pour $M=(a_{i,j})\in \M_n(\R)$.
+    \tcblower
+    On sait que $\M_n(\R)=\S_n(\R)\oplus \A_n(\R)$, donc $\forall M \in \M_n(\R), ~ M=\frac{M+M^\top}{2}+\frac{M-M^\top}{2}$.\\
+    Notons $p$ la projection orthogonale sur $\S_n(\R)$, alors $p(M)=\frac{M+M^\top}{2}$ puis : 
+    \begin{equation*}
+        d(M,\S_n(\R))=\|M-p(M)\|=\left\|\frac{M-M^\top}{2}\right\| = \frac{1}{2}\|M-M^\top\| = \frac{1}{2}\sqrt{\sum_{1\leq i,j \leq n}(m_{i,j} - m_{j,i})^2}
+    \end{equation*}
+    Et $d(M,\S_n(\R))=0 \iff M \in \S_n(\R)$.
+\end{ex}
+
+\vspace*{-0.4cm}
+
+\renewcommand*{\D}{\cursive{D}}
+
+\begin{prop}{Projection orthogonale sur une droite vectorielle.}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace préhilbertien et $\D=\Vect(u)$ une droite vectorielle.\\
+    On note $p_\D$ la projection orthogonale sur $\D$, alors $\ds\forall x \in E, ~ p_\D(x)=\frac{\Lg x,u \Rg}{\|u\|^2}u$
+    \tcblower
+    Déjà, $\left( \frac{u}{\|u\|} \right)$ est une base orthonormée de $\D$, puis $\forall x \in E, ~ p_\D(x)=\Lg x, \frac{u}{\|u\|}\Rg\frac{u}{\|u\|}=\frac{\Lg x,u \Rg}{\|u\|^2}u$.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace euclidien de dimension $n$, $F$ un sous-espace vectoriel de $E$ de dimension $p$.\\
+    Alors $F^\bot$ est l'unique supplémentaire orthogonal de $F$, puis $(F^\bot)^\bot = F$, et $p_F + p_{F^\bot}=\id_E$.
+    \tcblower
+    On sait que $E=F\oplus F^\bot$, $\forall x \in E, ~ \exists (y,z) \in F\times F^\bot, ~ x=y+z$, donc $x=p_F(x)+p_{F^\bot}(x)$ donc $p_F+p_{F^\bot}=\id_E$.\\
+    Supposons que $E=F \oplus G$, avec $F\bot G$, alors $G \subset F^\bot$, et $\dim G = \dim E - \dim F = \dim F^\bot$ donc $G=F^\bot$.\\
+    Enfin, $F\subset (F^\bot)^\bot$ et $\dim F = \dim(F^\bot)^\bot$, donc $F=(F^\bot)^\bot$.
+\end{prop}
+
+\begin{prop}{calcul de distance à un hyperplan dans $E$ euclidien.}{}
+    \small
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien de dimension $n$ et $H$ un hyperplan de $E$.\\
+    Soit $a\in H^\bot$ non-nul, alors $E=H\oplus\Vect(a)$ et $\ds\forall x \in E, ~ d(x,H)=\frac{|\Lg x, a \Rg|}{\|a\|}$.
+    \tcblower
+    \small
+    On a $a\notin H$, donc $\Vect(a)$ est le supplémentaire orthogonal de $H$.\\
+    Notons $p_H$ la projection orthogonale sur $H$ et $p_a$ sur $\Vect(a)$.\\
+    Alors $\forall x \in E, ~ p_H(x) + p_a(x)=x$, $d(x,H)=\|x-p_H(x)\|$ et $p_a(x)=\frac{\Lg x,a\Rg}{\|a\|^2}a$.\\
+    Donc pour $x\in E, ~ d(x,H)=\|x-p_H(x)\|=\|p_a(x)\|=\frac{|\Lg x,a\Rg}{\|a\|^2}\|a\|=\frac{|\Lg x,a\Rg|}{\|a\|}$.
+\end{prop}
+
+\vspace*{-0.9cm}
+
+\begin{exercice}{}{}
+    \small
+    Soit $\R^n$ euclidien canonique. Soit $H$ un hyperplan de $E$, noyau d'une forme linéaire non-nulle $\phi$.\\
+    Donc $\phi(x)=\sum_{i=1}^n u_ix_i$ avec $u_1,...,u_n$ des réels non tous nuls.
+    \begin{equation*}
+        x \in H \iff \phi(x)= 0 \iff u_1x_1 + ... + u_nx_n = 0.
+    \end{equation*}
+    Déterminons $d(x,H)$ pour $x\in E$.
+    \tcblower
+    \small
+    Posons $u=(u_1,...,u_n)\in E$ non-nul, alors $x\in H \iff \sum_{i=1}^n u_ix_i = 0_\R \iff \Lg x, u \Rg = 0_\R$.\\
+    Donc $H=u^\bot$ et $H^\bot = \Vect(u)$, $d(x,H)=\frac{|\Lg u,x \Rg}{\|u\|}=\frac{|\sum_{i=1}^n u_ix_i|}{\sqrt{\sum_{i=1}^nu_i^2}}$.
+\end{exercice}
+
+\vspace*{-0.9cm}
+
+\begin{exercice}{}{}
+    \small
+    On munit $\M_n(\R)$ du produit scalaire usuel $\Lg A,B\Rg = \Tr(A^\top B)$, on note $H=\{A\in \M_n(\R), ~ \Tr(A)=0\}$.\\
+    Pour $M\in\M_n(\R)$, déterminer $d(M,H)$.
+    \tcblower
+    \small
+    $H$ est un hyperplan de $\M_n(\R)$ comme noyau de la trace, puis $A\in H \iff \Lg A, I_n\Rg=0$, donc $H^\bot=\Vect(I_n)$.\\
+    Pour $M\in\M_n(\R)$, $d(M,H)=\frac{|\Lg M, I_n \Rg|}{\|I_n\|}=\frac{|\Tr(M)|}{\sqrt{n}}$.
+\end{exercice}
+
+\vspace*{-0.9cm}
+
+\begin{exercice}{}{}
+    \small
+    On munit $\R_n[X])$ du produit scalaire $\Lg P,Q \Rg = \sum_{k=0}^n a_kb_k$. Soit $F=\{P\in\R_n[X], ~ P(1)=0\}$.\\
+    Pour $P\in\R[X]$, déterminer $d(P,F)$.
+    \tcblower
+    \small
+    Posons $\forall P \in \R_n[X], ~ \phi(P)=P(1)$, forme linéaire non-nulle, on a $F=\Ker\phi$, c'est un hyperplan.\\
+    Posons $Q=1+X+...+X^n$, alors $\forall P \in \R_n[X], ~ \Lg P,Q \Rg = 0 \iff \sum_{k=0}^n a_k = 0 \iff P(1) = 0$.\\
+    Donc $F^\bot=\Vect(Q)$, donc pour $P\in\R_n[X]$, $d(P,F) = \frac{|\Lg P, Q \Rg|}{\|Q\|}=\frac{|\sum_{k=0}^n a_k|}{\sqrt{n+1}}$.
+\end{exercice}
+
+\vspace*{-0.9cm}
+
+\begin{thm}{Caractérisation des projections orthogonales.}{}
+    \small
+    Soit $(E,\Lg\.,\.\Rg)$ un espace préhilbertien réel et $p$ un projecteur de $E$ de rang fini.\\
+    Alors $p$ est un projecteur orthogonal ssi $\forall x \in E, ~ \|p(x)\|\leq\|x\|$.
+    \tcblower
+    \small
+    On sait que $p$ est projecteur sur $F=\Im p=\Inv p$ de dimension finie, dans la direction $G=\Ker p$ et $E=F\oplus G$.\\
+    \boxed{\ra} Soit $x\in E, x=p(x)+x-p(x)$ donc $\|x\|^2=\|p(x)\|^2+\|x-p(x)\|^2$ donc $\|p(x)\|\leq\|x\|$.\\
+    \boxed{\la} Soit $x\in F$ et $y\in G$, $\forall \l \in \R, ~ p(x+\l y)=x$, donc $\|x\|\leq\|x+\l y\|$.\\
+    Donc $\|x\|^2\leq\|x\|^2+2\l\Lg x,y\Rg + \l^2\|y\|^2$ puis $\l(\l\|y\|^2+2\Lg x,y\Rg)\geq0$. Si $y=0,\Lg x,y\Rg = 0$.\\
+    Sinon, $y\neq0$ et $\Delta=4\Lg x,y \Rg^2\leq 0$ puis $\Lg x,y\Rg = 0$, dans tous les cas $\Lg x,y\Rg = 0$.\\
+    $p$ est linéaire et $\forall x \in E, ~ \|p(x)\|\leq C\|x\|$ donc $p$ est continue sur $E$ par théorème.
+\end{thm}
+
+\begin{prop}{Algorithme d'orthonormalisation de Gram-Schmidt.}{}
+    Soit $E$ un espace préhilbertien. Soit $(u_1,...,u_n)$ une famille libre de vecteurs de $E$ ($n\geq2$).\\
+    Il est possible de définir des vecteurs $e_1,...,e_n$ tels que
+    \begin{equation*}
+        \forall k \in \lb1,n\rb, ~ (e_1,...,e_k) \nt{ est une b.o.n de } \Vect(u_1,...,u_k):=F_k.
+    \end{equation*}
+    Le procédé de construction est le suivant : on commence par poser
+    \begin{equation*}
+        e_1 := \frac{u_1}{\|u_1\|}.
+    \end{equation*}
+    Pour $k\in\lb1,n-1\rb$, si $e_1,...,e_k$ sont construits, on pose $e_{k+1}=\frac{v_{k+1}}{\|v_{k+1}\|}$, où
+    \begin{equation*}
+        v_{k+1}:=u_{k+1}-p_{F_k}(u_{k+1})=u_{k+1}-\sum_{i=1}^k\Lg u_k,e_i\Rg e_i.
+    \end{equation*}
+    Le procédé mis en oeuvre pour passer de $(u_1,...,e_n)$ à $(e_1,...,e_n)$ est appelé \bf{algorithme d'orthonormalisation de Gram-Schmidt} et on dit que l'on a orthonormalisé la famille $(u_1,...,u_n)$
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $a_1=(1,1,0)$, $a_2=(0,1,2)$ et $a_3=(1,1,1)$. Orthonormaliser la famille $(a_1,a_2,a_3)$ dans $\R_3$.
+    \tcblower
+    C'est bien une base car $\det(a_1,a_2,a_3)=1$.\\
+    On pose $e_1 = \frac{a_1}{\|a_1\|}=\frac{a_1}{\sqrt{2}}=(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0)$.\\
+    On pose $v_2 = a_2 - p_1(a_2) = (0,1,2) - \Lg a_2, e_1 \Rg e_1 = (-\frac{1}{2},\frac{1}{2},2)$ puis $\|v_2\|=\frac{3}{\sqrt{2}}$ donc $e_2=(-\frac{1}{3\sqrt{2}}, \frac{1}{3\sqrt{2}}, \frac{2\sqrt{2}}{3})$.\\
+    On pose $v_3 = a_3 - p_2(a_3) = (1,1,1) - \Lg a_3, e_2 \Rg e_2 - \Lg a_3, e_1\Rg e_1 = (1,1,1)-\sqrt{2}e_2-\frac{2\sqrt{2}}{3}e_1$ ...
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$, la matrice de passage d'une base de $E$ à sa base orthonormalisée de Schmidt est une matrice triangulaire à diagonale strictement positive.
+    \tcblower
+    Soit $\B=(a_1,...,a_n)$ une base de $E$, et $\B'=(e_1,...,e_n)$ orthonormalisée de Schmidt.\\
+    On note $P$ la matrice de passage de $\B$ à $\B'$, et $P^{-1}$ de $\B'$ à $\B$. On exprime $P^{-1}$.
+    \begin{equation*}
+        P^{-1} = \begin{pmatrix} \Lg a_1, e_1 \Rg & \dots & \Lg a_n, e_1 \Rg \\ \vdots & & \vdots \\ \Lg a_1, e_n \Rg & \dots & \Lg a_n, e_n \Rg\end{pmatrix} = \begin{pmatrix}\Lg a_1, e_1 \Rg & \dots & \dots & \Lg a_n, e_1\Rg \\ 0 & \ddots & & \vdots \\ \vdots & \ddots & \ddots & \vdots \\ 0 & \dots & 0 & \Lg a_n, e_n \Rg \end{pmatrix}
+    \end{equation*}
+    En effet, $\forall i \in \lb1,n\rb, ~ a_i \in \Vect(e_1,...,e_i)$ et $\Lg a_i, e_i \Rg > 0$. Donc $P^{-1}$ est triangulaire à diagonale strictement positive, $P$ aussi.
+\end{prop}
+
+\vspace*{-0.7cm}
+\newcommand*{\Gram}{\nt{Gram}}
+
+\begin{defi}{Matrice de Gram.}{}
+    Soit $(E,\Lg\.,\.\Rg)$ préhilbertien réel et $(a_1,...,a_n)\in E^n$, on note $\Gram(a_1,...,a_n)=(\Lg a_i, a_j \Rg)_{1\leq i,j\leq n}$ la matrice de Gram associée à la famille $(a_1,...,a_n)$, et $G(a_1,...,a_n)=\det\Gram(a_1,...,a_n)$.\\
+    \bf{Remarque.} $\Gram(a_1,...,a_n)\in\S_n(\R)$, et si $(a_1,...,a_n)$ est orthogonale, $\Gram(a_1,...,a_n)=\Diag(\|a_i\|^2)$.
+\end{defi}
+
+\begin{exercice}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ préhilbertien réel, et $(a_1,...,a_n)$ une famille de vecteurs libre de $E$.\\
+    Montrer que $G(a_1,...,a_n)>0$.
+    \tcblower
+    On a $(a_1,...,a_n)$ une base de $\Vect(a_1,...,a_n)$, on note $(e_1,...,e_n)$ son orthonormalisée de Schmidt.\\
+    Notons $A$ la matrice de passage de $(e_1,...,e_n)$ à $(a_1,...,a_n)$, alors $A=(\Lg a_i, e_j \Rg)$.\\
+    Donc $[A^\top A]_{i,j} = \sum_{k=1}^n a_{k,i}a_{k,j}= \sum_{k=1}^n \Lg a_i, e_k \Rg \Lg a_j, e_k \Rg=[\Gram(a_1,...,a_n)]_{i,j}$.\\
+    Finalement, $\Gram(a_1,...,a_n)=A^\top A$, puis $G(a_1,...,a_n)=\det(A^\top A)=\det(A)^2\geq0$ et $A$ est inversible comme matrice de passage, donc $G(a_1,...,a_n)>0$.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace préhilbertien réel et $(a_1,...,a_n)$ une famille de vecteurs de $E$.\\
+    Montrer que $(a_1,...,a_n)$ est une famille liée ssi $G(a_1,...,a_n)=0$.
+    \tcblower
+    \boxed{\ra} Supposons $(a_1,...,a_n)$ liée : $\exists (\l_1,...,\l_n)\in\R^n$ non tous nuls tels que $\l_1a_1+...+\l_na_n=0$.
+    \begin{equation*}
+        \Gram(a_1,...,a_n) = \begin{pmatrix}\Lg a_1,a_1\Rg & \dots & \Lg a_n, a_1 \Rg \\ \vdots & & \vdots \\ \Lg a_1,a_n\Rg & \dots & \Lg a_n, a_n \Rg \end{pmatrix} 
+    \end{equation*}
+    \begin{equation*}
+        \l_1C_1 + ... + \l_nC_n = \begin{pmatrix}\Rg\l_1a_1+...+\l_na_n, a_n\Rg\\\vdots\\\Lg\l_1a_1+...+\l_na_n,a_n\Rg\end{pmatrix}=\begin{pmatrix}0\\\vdots\\0\end{pmatrix}=0_{\R^n}.
+    \end{equation*}
+    La famille des colonnes de $\Gram(a_1,...,a_n)$ est liée donc $G(a_1,...,a_n)=0$.\\
+    \boxed{\la} Par hypothèse, $G(a_1,...,a_n)=0$, donc la famille $(C_1,...,C_n)$ des colonnes de la matrice est liée.\\
+    Donc $\exists (\l_1,...,\l_n)\in\R^n$ non tous nuls tels que $\l_1C_1+...+\l_nC_n = 0_{\R^n}$.\\
+    Ainsi, $\forall i \in \lb1,n\rb, ~ \Lg \sum_{j=1}^n\l_ja_j,a_i\Rg = 0$, donc $\sum_{j=1}^n\l_j a_j \in \Vect(a_1,...,a_n)\cap\Vect(a_1,...,a_n)^\bot=\{0\}$.\\
+    Donc $\sum_{j=1}^n\l_ja_j=0$, donc $(a_1,...,a_n)$ est liée avec la même liaison.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ préhilbertien réel et $F$ un sous-espace vectoriel de $E$ de dimension finie $p$.\\
+    Soit $(e_1,...,e_p)$ une base de $F$.
+    \begin{equation*}
+        \forall x \in E, ~ d(x,F) = G(e_1,...,e_p,x) / G(e_1,...,e_p)
+    \end{equation*} 
+    \tcblower
+    Déjà, $(e_1,...,e_p)$ est une famille libre donc $G(e_1,...,e_p)\neq0$.\\
+    Ensuite, $F$ est un sevdf de $E$ donc la projection $p_F$ est bien définie et $d(x,F)=\|x-p_F(x)\|$.\\
+    Vérifions que $\forall x \in E, ~ G(e_1,...,e_p,x)=G(e_1,...,e_p)d(x,F)$. Soit $x\in E$. Notons $y=p_F(x)$ et $z=x-p_F(x)$.
+    \begin{align*}
+        \Gram(e_1,...,e_p,x) &= \begin{pmatrix}\Lg e_1,e_1\Rg & ... & \Lg e_1,e_p\Rg & \Lg e_1,x\Rg \\ \vdots & & \vdots & \vdots \\ \Lg e_p,e_1\Rg & ... & \Lg e_p, e_p \Rg & \Lg e_p, x\Rg \\ \Lg x, e_1 \Rg & ... & \Lg x, e_p \Rg & \Lg x, x \Rg\end{pmatrix} = \begin{pmatrix}\Lg e_1, e_1 \Rg & ... & \Lg e_1, e_p \Rg & \Lg y, e_1 \Rg \\ \vdots & & \vdots & \vdots \\ \Lg e_p, e_1 \Rg & ... & \Lg e_p, e_p \Rg & \Lg y, e_p \Rg \\ \Lg y, e_1 \Rg & ... & \Lg y, e_p \Rg & \|y\|^2+\|z\|^2\end{pmatrix}\\
+    \end{align*}
+    Or $y\in F$ donc $(e_1,...,e_p,y)$ liée donc $        G(e_1,...,e_p,x) = \cancel{G(e_1,...,e_p,y)} + G(e_1,...,e_p,z)=\|z\|^2G(e_1,...,e_p)$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ préhilbertien réel, $F$ sevdf de $E$ de dimension $p$.\\
+    Soit $\B=(e_1,...,e_p)$ base de $F$, et $x\in E$. Déterminer les coordonnées de $p_F(x)$ dans $\B$.
+    \tcblower
+    Soit $x\in E$, $p_F(x)\in F$ et $(x-p_F(x))\in F^\bot$, $\exists (\l_1,...,\l_p) \in \R^p, ~ p_F(x)=\sum_{i=1}^p\l_i e_i$.
+    \begin{align*}
+        x - p_F(x) \in F^\bot &\iff \forall i \in \lb1,p\rb ~ \Lg \left( x - p_F(x) \right), e_i \Rg = 0_\R \iff \forall i \in \lb1,p\rb, ~ \Lg p_F(x), e_i \Rg = \Lg x, e_i \Rg.\\
+        &\iff \forall i \in \lb1,p\rb, ~ \sum_{j=1}^n \l_j\Lg e_j, e_i \Rg = \Lg x, e_i \Rg \iff \begin{pmatrix}\Lg e_1, e_2 \Rg & ... & \Lg e_p, e_1 \Rg \\ \vdots & & \vdots \\ \Lg e_1,e_p \Rg & ... & \Lg e_p, e_p \Rg\end{pmatrix} \begin{pmatrix}\l_1 \\ \vdots \\ \l_p\end{pmatrix} = \begin{pmatrix}\Lg x, e_1 \Rg \\ \vdots \\ \Lg x, e_p \Rg\end{pmatrix}
+    \end{align*}
+    On a $(e_1,...,e_p)$ libre donc $\Gram(e_1,...,e_p)\in\GL_p(\R)$.
+    \begin{equation*}
+        x-p_F(x)\in F^\bot \iff \begin{pmatrix}\l_1\\\vdots\\\l_p\end{pmatrix} = \Gram(e_1,...,e_p)^{-1}\begin{pmatrix}\Lg x,e_1\Rg \\ \vdots \\ \Lg x, e_p\Rg\end{pmatrix}.
+    \end{equation*}
+\end{exercice}
+
+\vspace*{-0.7cm}
+
+\section{Matrices orthogonales.}
+
+\begin{defi}{}{}
+    Soit $A\in\M_n(\R)$, alors $A$ est orthogonale ssi $AA^\top=I_n$.\\
+    \bf{Remarque.} $AA^\top=I_n \iff A^\top A=I_n$ et $A$ orthogonale $\iff$ $A^\top$ orthogonale.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $A\in\M_n(\R)$ orthogonale. Alors $A\in\GL_n(\R)$ et $A^{-1}=A^\top$ et $\det(A)=\{-1,1\}$.
+    \tcblower
+    $\det(A)\det(A^\top)=1 \ra (\det A)^2 = 1 \ra \det(A)\in\{-1,1\}$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{nota}{}{}
+    On notera $O_n(\R)$ l'ensemble des matrices orthogonales réelles et $SO_n(\R)$ l'ensemble des matrices orthogonales réelles de déterminant $1$. Les éléments de $SO_n(\R)$ sont appelées des matrices de rotation.
+\end{nota}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item $(O_n(\R),\times)$ est un groupe, appelé \bf{groupe orthogonal}.
+        \item $(SO_n(\R),\times)$ est un groupe, appelé \bf{groupe spécial orthogonal}.
+    \end{enumerate}
+    \tcblower
+    Vérifions que $(O_n(\R),\times)$ est un sous-groupe de $(\GL_n(\R),\times)$ (et pas $(\M_n(\R), \times)$).\\
+    Déjà, $O_n(\R)\subset \GL_n(\R)$ car $\forall A \in O_n(\R), ~ \det(A)\in\{-1,1\}$, et $I_n\in O_n(\R)$.\\
+    Puis $\forall (A,B) \in O_n(\R)^2$, $(AB)(AB)^\top=ABB^\top A^\top=I_n$, donc $AB\in O_n(\R)$.\\
+    Enfin, $\forall A \in O_n(\R), ~ A^{-1}(A^{-1})^\top=A^{-1}(A^\top)^{-1}=(A^\top A)^{-1}=I_n$, donc $A^{-1}\in O_n(\R)$.\\
+    De plus, $(SO_n(\R),\times)$ est un sous-groupe de $(O_n(\R),\times)$ :\\
+    $I_n\in SO_n(\R)$ et $\forall A,B \in SO_n(\R)$, $\det(AB^{-1})=\det(A)\det(B^{-1})=\det(A)/\det(B)=1/1=1$.
+\end{prop}
+
+\begin{ex}{}{}
+    \begin{equation*}
+        A = \begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix}; \quad A \in O_3(\R) ? \quad A \in SO_3(\R) ?
+    \end{equation*}
+    \tcblower
+    Elle est symétrique : $AA^\top = A^2 = I_3$ donc $A\in O_3(\R)$, et $\det(A)=-1$ donc $A\notin SO_3(\R)$.
+\end{ex}
+
+\begin{prop}{}{}
+    Soit $A\in\M_n(\R)$; $A\in O_n(\R)$ ssi ses vecteurs colonnes sont orthonormés dans $\R^n$ euclidien canonique.
+    \tcblower
+    Notons $C_1,...,C_n$ les vecteurs colonnes de $A$.
+    \begin{equation*}
+        \forall i,j \in \lb1,n\rb, ~ \Lg C_i, C_j \Rg = \sum_{k=1}^na_{k,i}a_{k,j}.
+    \end{equation*}
+    Puis $[A^\top A]_{i,j}=\sum_{k=1}^na_{k,i}a_{k,j}=\Lg C_i,C_j \Rg$.
+    \begin{align*}
+        A \in O_n(\R) &\iff \forall i,j \in \lb1,n\rb, ~ [A^\top A]_{i,j} = \d_{i,j} \iff \forall i,j \in \lb1,n\rb, ~ \Lg C_i, C_j \Rg = \d_{i,j} \\&\iff (C_1,...,C_n) \nt{ est orthonormée par le produit scalaire usuel}.
+    \end{align*}
+    Puis même propriété sur les lignes puisque $A\in O_n(\R) \iff A^\top \in O_n(\R)$.
+\end{prop}
+
+\begin{prop}{}{}
+    $O_n(\R)$ est un compact de $\M_n(\R)$.
+    \tcblower
+    Déjà, $\M_n(\R)$ est un $\R$-evdf donc toutes les normes sont équivalentes, on choisit la norme usuelle. 
+\end{prop}
+
+\end{document}

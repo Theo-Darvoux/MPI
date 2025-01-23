@@ -1,0 +1,660 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{12}
+\def\pagetitle{Intégrales généralisées.}
+
+\input{setup.tex}
+
+\begin{document}
+
+\input{title.tex}
+
+On prendra par la suite des intervalles $[a,b[$, avec $a\in\R$ et $b\in\R\cup\{+\infty\}$.
+
+\section{Généralités sur les intégrales généralisées.}
+
+\begin{defi}{}{}
+    Soit $f:I\to\K$, $I$ un intervalle quelconque de $\R$.\\
+    Alors $f$ est cpm sur $I$ ssi $f$ est cpm sur tout segment de $I$.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{}{}
+    Soit $f:[a,b[\to\K$ cpm sur $[a,b[$, avec $a\in\R$ et $b\in\R\cup\{+\infty\}$.
+    \begin{center}
+        L'intégrale généralisée $\ds\int_a^bf$ converge ssi $\ds\lim_{x\to b^{-}}\int_a^x f$ existe.
+    \end{center}
+    \bf{Remarque.} Faire le parallèle avec les séries.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Nature et éventuellement calcul des intégrales généralisées :
+    \begin{equation*}
+        a) ~ \int_0^{+\infty}e^{-t}\dt; \qquad b) ~ \int_0^{+\infty}\frac{\dt}{1+t^2}; \qquad c) ~ \int_0^{+\infty}\frac{\dx}{(x+1)(x+2)}; \qquad d) ~ \int_0^1\frac{\dx}{\sqrt{1-x}}.
+    \end{equation*}
+    \tcblower
+    \boxed{a)} $\forall x \in [0,+\infty[, ~ \int_0^xe^{-t}\dt = \left[ -e^{-t} \right]_0^x = 1-e^{-x}\xrightarrow[x\to\infty]{}1$.\\
+    \boxed{b)} $\forall x \in [0,+\infty[, ~ \int_0^x\frac{\dt}{1+t^2} = \left[ \arctan(t) \right]_0^{x} = \arctan(x) \xrightarrow[x\to+\infty]{} \frac{\pi}{2}$.\\
+    \boxed{c)} Par décomposition en éléments simples : $\frac{1}{(X+1)(X+2)}=\frac{1}{X+1} - \frac{1}{X+2}$. Ainsi, pour $a\in[0,\infty[$ :
+    \begin{equation*}
+        \int_0^a\frac{\dx}{(x+1)(x+2)} = \int_0^a\left( \frac{1}{x+1} - \frac{1}{x+2} \right)\dx = \left[ \ln\left|\frac{x+1}{x+2}\right| \right]_0^a = \ln\left( \frac{a+1}{a+2} \right) - \ln\frac{1}{2} \xrightarrow[a\to+\infty]{}\ln2.
+    \end{equation*}
+    \boxed{d)} On pose, pour $x\in[0,1[, ~ f(x)=\frac{1}{\sqrt{1-x}}$ qui est cpm sur $[0,1[$. Alors pour $a\in[0,1[$ :
+    \begin{equation*}
+        \int_0^x\frac{\dx}{\sqrt{1-x}} = \int_0^a(1-x)^{\frac{1}{2}} = \left[ -\frac{(1-x)^{\frac{1}{2}}}{1/2} \right]_0^a = -2\left( \sqrt{1-a} - 1\right) \xrightarrow[a\to1]{}2.
+    \end{equation*}
+\end{ex}
+
+\begin{ex}{}{}
+    Nature et calcul éventuellement de $\ds\int_0^1\ln t\dt$.
+    \tcblower
+    D'abord, $\ln$ est cpm sur $]0,1]$. On a donc une intégrale généralisée.
+    \begin{equation*}
+        \forall a \in ]0,1], ~ \int_a^1\ln t\dt = \left[ t\ln t - t \right]_a^1 = -1-a\ln a + a \xrightarrow[a\to0]{} -1.
+    \end{equation*}
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{Élémentaires.}{}
+    \begin{enumerate}
+        \item Soient $f,g$ cpm de $[a,b[$ dans $\K$ et $\l\in\K$. Si $\int_a^bf$ et $\int_a^bg$ convergent, alors :
+        \begin{equation*}
+            \int_a^b(f+\l g) ~\nt{converge} \et \int_a^b(f+\l g) = \int_a^b f + \l\int_a^bg.
+        \end{equation*}
+        \item Soit $f$ cpm de $[a,b[$ dans $\R$. Si $f\geq0$ et $\int_a^b f$ converge, alors $\int_a^b f\geq0$.
+    \end{enumerate}
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{Localisation du problème de convergence.}{}
+    Soit $f$ cpm de $[a,b[$ dans $\K$, et $c\in]a,b[$. Alors $\int_a^b f$ converge ssi $\int_c^b f$ converge et :
+    \begin{equation*}
+        \int_a^b f = \int_a^c f + \int_c^b f.
+    \end{equation*} 
+    \bf{Remarque.} Si $f$ est continue sur $[a,b[$ et admet une limite en $b$, alors $f$ est prolongeable par continuité en $b$.\\
+    Dans ce cas, l'intégrale sur $[a,b]$ est bien définie et égale à l'intégrale sur $[a,b[$.
+    \tcblower
+    L'intégrale $\int_a^cf$ n'est pas généralisée, car $f$ est cpm sur $[a,c]$.\\
+    Soit $x\in[c,b[$. Par la relation de Chasles sur les intégrales propres :
+    \begin{equation*}
+        \underbrace{\int_a^x f}_{\phi(x)} = \int_a^c f + \underbrace{\int_c^x f}_{\psi(x)}.
+    \end{equation*}
+    Puis $\ds\lim_{x\to b^{-}} \phi(x)$ existe ssi $\ds\lim_{x\to b^{-}}\phi(x)$ existe, i.e. $\int_a^b f$ converge ssi $\int_c^b f$ converge et par passage à la limite : \vspace*{-0.1cm}
+    \begin{equation*}
+        \int_a^b f = \int_a^c f + \int_c^b f.
+    \end{equation*}
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Nature de :
+    \begin{equation*}
+        \int_0^1\frac{\sin x}{x}\dx
+    \end{equation*}
+    \tcblower
+    On pose $f(x)=\frac{\sin x}{x}$ pour tout $x$ dans $]0,1]$. L'intégrale est généralisée.\\
+    Or $f$ est cpm sur $]0,1]$ et $\lim_{x\to0} f(x)=1$, on la prolonge donc par continuité en posant $f(0)=1$.
+\end{ex}
+
+\begin{prop}{}{}
+    Soit $f$ cpm de $[a,b]$ dans $\K$.
+    \begin{equation*}
+        \int_a^b f ~\nt{converge} \ra \lim_{x\to b} ~ \int_x^bf(t)\dt = 0.
+    \end{equation*}
+    \tcblower
+    Déjà, $\forall x \in[a,b[, ~ \int_x^b f$ est de même nature que $\int_a^b f$ donc convergente, et :
+    \begin{equation*}
+        \int_a^b f = \int_a^x + \int_x^b f ~\nt{donc}~ \int_x^b f = \int_a^b f - \int_a^xf \xrightarrow[x\to 0]{} \int_a^bf - \int_a^bf = 0.
+    \end{equation*} 
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item Soit $f$ cpm de $[a,b[$ dans $\K$. On peut avoir $\lim_{x\to b^-}f(x)=0$ et $\int_a^b f$ diverge.
+        \item Soit $f$ cpm de $[a,b[$ dans $\K$. On peut avoir $\int_a^bf$ convergente et $\lim_{x\to b} f \neq 0$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Avec $f(x)=\frac{1}{x}$ sur $[1,+\infty[$, $\ds\lim_{x\to+\infty} f = 0$ et $\int_1^{+\infty} f$ diverge. \vspace*{-0.2cm}\\
+    \boxed{2.} Avec $f(x)=\ln(t)$, convergente et $\lim_{x\to0}\ln(t)=-\infty$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $f$ cpm de $[a,+\infty[$ dans $\K$.
+    \begin{center}
+        Si $\ds\int_a^{+\infty} f$ converge et que $\ds\lim_{x\to+\infty}f(x)=l\in\R$, alors $l=0$.
+    \end{center} 
+    \bf{Contraposée.} Si $f$ admet une limite non nulle en $+\infty$, alors $\int_a^{+\infty}f$ diverge.
+    \tcblower
+    On note $f=\lim_{x\to+\infty}f(x)$, supposons $l\neq0$, et spdg que $l>0$.\\
+    Alors $\forall \e>0, ~ \exists A \geq a, ~ \forall x \in[A,+\infty[, ~ |f(x)-l|\leq \e$. On chosiit $\e=\frac{l}{2}>0$ et $A$ associé.\\
+    \boxed{\K=\R} Alors $x\geq A \ra -\frac{l}{2} \leq f(x)-l \leq \frac{l}{2} \ra f(x)\geq\frac{l}{2}$ puis $\int_a^{+\infty}f$ et $\int_A^{+\infty}f$ sont de mêmes natures.\\
+    Et $\forall x \geq A, ~ \int_a^x f(t)\dt \geq (x-A)\frac{l}{2}\xrightarrow[x\to+\infty]{}+\infty$. Par minoration, $\int_A^xf(t)\dt\xrightarrow[x\to+\infty]{}+\infty$ donc $\int_A^{+\infty} f$ diverge.\\
+    \boxed{\K=\C} Alors $f=g+ih$, donc $\int_a^{+\infty} f$ converge ssi $\int_a^{+\infty}$ converge et $\int_a^{+\infty} h$ converge.\\
+    Si $f$ admet une limite $l=l_1+il_2$ en $b$, alors $\lim g = l_1$ et $\lim h = l_2$, puis $l_1=l_2=0$ (cas précédent).
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $f$ continue de $[a,b[$ dans $\R$. On suppose que $f\geq0$ sur $[a,b]$.
+    \begin{equation*}
+        \int_a^b f = 0 \ra \forall x \in [a,b[ ~ f(x) = 0.
+    \end{equation*}
+    \tcblower
+    Soit $x\in[a,b[$. On a $\int_x^bf$ de même nature que $\int_a^b$ donc convergente puis :
+    \begin{equation*}
+        0 \leq \int_a^x f = \int_a^b f - \int_x^b f \leq \int_a^b f = 0.
+    \end{equation*}
+    Donc par encadrement, $\forall x \in [a,b[, ~ \int_a^x f = 0$ puis en dérivant, $\forall x \in [a,b[, ~ f(x)=0$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $f$ continue sur $[a,b[$ à valeurs dans $\K$ telle que $\int_a^b f$ converge.\\
+    On pose $\forall x \in [a,b[, ~ F(x)=\int_x^bf(t)\dt$, alors $F$ est $\cursive{C}^1$ et $\forall x \in [a,b[, ~ F'(x)=-f(x)$.
+    \tcblower
+    Déjà, $F$ est bien définie sur $[a,b[$ par localisation des problèmes de convergence.
+    \begin{equation*}
+        \forall x \in [a,b[, ~ F(x) = \int_a^b f(t)\dt - \underbrace{\int_a^xf(t)\dt}_{G(x)}.
+    \end{equation*}
+    On sait que $G$ est $\cursive{C}^1$ sur $[a,b[$ donc $F$ est aussi $\cursive{C}^1$ sur $[a,b[$ et $\forall x \in [a,b[, ~ F'(x)=-G'(X)=-f(x)$.
+\end{prop}
+
+\section{Intégrales de référence et théorèmes de comparaison.}
+
+\begin{prop}{Intégrales de Riemann.}{}
+    \begin{equation*}
+        a) ~ \int_1^{+\infty}\frac{\dt}{t^\a} \nt{ converge ssi } \a>1; \qquad b) ~ \int_0^1\frac{\dt}{t^\a} \nt{ converge ssi } \a<1; \qquad c) ~ \int_a^b\frac{\dt}{(t-a)^\a} \nt{ converge ssi } \a<1.
+    \end{equation*}
+    \tcblower
+    \boxed{a)} On pose $\forall t \in [1,+\infty[, ~ f(t)=\frac{1}{t^{\a}}$ cpm sur $[1,+\infty[$, et :
+    \begin{equation*}
+        \forall x > 1, ~ \int_1^xf(t)\dt = \begin{cases} \left[ \frac{t^{-\a+1}}{-\a+1} \right]_1^x = \frac{1-x^{1-\a}}{\a-1} \nt{ si } \a\neq1 \\ \ln x \nt{ si } \a=1\end{cases}.
+    \end{equation*}
+    Finalement, $\int_1^xf(t)\dt$ admet une limite quand $x\to+\infty$ ssi $\a>1$.\\
+    \boxed{b)} On pose $\forall t \in ]0,1], ~ f(t)=\frac{1}{t^\a}$ cpm sur $]0,1]$ et pour $x\in]0,1]$ : 
+    \begin{equation*}
+        \int_0^1 f(t)\dt = \begin{cases}\left[ \frac{t^{-\a+1}}{1-\a} \right]_x^1 = \frac{1-x^{1-\a}}{1-\a} \nt{ si } \a\neq 1 \\ \left[ \ln t \right]_x^1 = -\ln x \nt{ si } \a=1\end{cases}.
+    \end{equation*}
+    Finalement, $\int_x^1$ admet une limite quand $x\to0^+$ ssi $\a<1$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $f$ cpm de $[a,b[$ dans $\R$ positive. On pose $\forall x \in [a,b[, ~ F=\int_a^xf(t)\dt$.\\
+    Alors $F$ est croissante sur $[a,b[$ et $\int_a^b f$ converge ssi $F$ est majorée sur $[a,b[$.
+    \tcblower
+    Soit $a<x\leq y<b$. Alors $F(y)=\int_a^yf(t)\dt=\int_a^xf(t)\dt+\int_x^yf(t)\dt\geq\int_a^xf(t)\dt$.\\
+    On a donc $x\leq y \ra F(x) \leq F(y)$ i.e. $F$ est croissante puis $F$ admet une limite en $b$ ssi $F$ majorée (TLM).\\
+    Puis par définition, $\int_a^b f$ converge ssi $F$ admet une limite en $b$.
+\end{prop}
+
+\begin{thm}{Comparaison.}{}
+    Soit $f,g$ cpm de $[a,b]$ dans $\R$ positives.
+    \begin{enumerate}
+        \item Si $0\leq f \leq g$ sur $[a,b[$, alors $\int_a^bg$ converge $\ra$ $\int_a^bf$ converge.
+        \item Si $f\sim_b g$, alors $\int_a^b f$ et $\int_a^b g$ sont de même nature.
+        \begin{enumerate}
+            \item En cas de convergence, $\int_x^bf(t)\dt \sim_b \int_x^bg(t)\dt$.
+            \item En cas de divergence, $\int_a^xf(t)\dt\sim_b\int_a^xg(t)\dt$.
+        \end{enumerate}
+        \item Si $f=_bO(g)$, alors $\int_a^b g$ converge $\ra$ $\int_a^b f$ converge.
+        \begin{enumerate}
+            \item En cas de convergence, $\int_x^bf(t)\dt=O\left( \int_x^bg(t)\dt \right)$.
+            \item En cas de divergence, $\int_a^xf(t)\dt=O\left( \int_a^xg(t)\dt\right)$
+        \end{enumerate}
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On note $F(x)=\int_a^xf(t)\dt$ et $G(x)=\int_a^xg(t)\dt$ pour $x\in[a,b]$.\\
+    Or $f$ et $g$ sont positives sur $[a,b[$, donc on peut appliquer la propriété précédente.\\
+    Supposons que $\int_a^b g$ converge, alors $G$ est bornée sur $[a,b]$ puis $\forall x \in [a,b[, ~ F(x)\leq G(x)$.\\
+    Donc $F$ est bornée sur $[a,b[$, donc $\int_a^bf$ converge.\\
+    \boxed{2.} Supposons $f\sim_bg$. Alors $f(x)=g(x)(1+\e(x))$ avec $\e(x)\xrightarrow[x\to b]{}0$.\\
+    Sur un voisinage de $b$, $-\frac{1}{2}\leq \e(x) \leq \frac{1}{2}$ puis $\frac{1}{2}g(x)\leq f(x) \leq \frac{3}{2}g(x)$.\\
+    D'après \boxed{1}, $\int_a^bg$ converge $\ra$ $\int_a^b f$ converge et $\int_a^b f$ converge $\ra$ $\int_a^b g$ converge. \\
+    Donc $\int_a^b f$ et $\int_a^bg$ sont de même nature. On admet le reste du théorème. 
+\end{thm}
+
+\begin{ex}{}{}
+    Montrons que $\ds\int_0^{+\infty}e^{-t^2}$ converge.
+    \tcblower
+    On pose $\forall t \in [0,\infty[, ~ f(t)=e^{-t^2}$ cpm sur $[0,\infty[$ et positive.\\
+    Puis $f(t)=o(\frac{1}{t^2})$ car $\lim t^2e^{-t^2}=0$, or $\int_1^{+\infty}\frac{\dt}{t^2}$ converge donc par comparaison, $\int_1^{+\infty}f$ converge.\\
+    Puis $\int_0^{+\infty}f$ converge par localisation du problème de convergence.
+\end{ex}
+
+\begin{prop}{}{}
+    Soit $m\in\C$.
+    \begin{equation*}
+        \int_0^{+\infty}e^{mt}\dt \quad \nt{converge ssi} \quad \Re(m)<0.
+    \end{equation*}
+    \tcblower
+    Soit $x\geq0$. $\int_0^xe^{mt}\dt=\left[ \frac{e^{mt}}{m} \right]_0^x=\frac{e^{mx}-1}{m}$ si $m\neq0$.\\
+    Étudions $\lim e^{mx}$. On pose $m=a+ib$, alors $e^{mx}=e^{ax}e^{ibx}$ puis $|e^{mx}|=e^{ax}$.\\
+    $\hra$ Si $a<0$, alors $|e^{mx}|\to 0$ i.e. $e^{mx}\to0$ donc l'intégrale converge.\\
+    $\hra$ Si $a>0$, $|e^{mx}|\to+\infty$, donc $e^{mx}$ n'est pas borné, donc l'intégrale diverge.\\
+    $\hra$ Si $a=0$, $e^{mx}=\cos(bx)+i\sin(bx)$ converge ssi $b=0$.
+\end{prop}
+
+\begin{prop}{Intégrales de Bertrand.}{}
+    \begin{equation*}
+        \int^{+\infty}_2\frac{\dt}{t^\a(\ln t)^\b} \quad \nt{converge ssi} \quad \a>1 \ou (\a=1\et \b>1).
+    \end{equation*}
+    \tcblower
+    On pose $f(x)=\frac{1}{t^\a\ln^\b x}$ pour tout $x\in[2,+\infty[$, cpm et positive sur $[2,+\infty[$.\\
+    \boxed{\a>1} On choisit $\g\in]1,\a[$ puis :
+    \begin{equation*}
+        \frac{x^\g}{x^\a\ln^\b x} = \frac{1}{x^{\a-\g}\ln^\b x} \xrightarrow[x\to+\infty]{} 0.
+    \end{equation*}
+    Donc $f(x)=o(\frac{1}{x^\g})$, convergente par comparaison à une intégrale de Riemann.\\
+    \boxed{\a<1} On choisit $\g\in]\a,1]$ puis :
+    \begin{equation*}
+        \frac{x^\g}{x^\a\ln^\b x}=\frac{x^{\g-\a}}{\ln^\b x} \xrightarrow[x\to+\infty]{}+\infty
+    \end{equation*}
+    Donc $\frac{1}{x^\g}=o(f)$, divergente par comparaison à une intégrale de Riemann.\\
+    \boxed{\a=\b=1}
+    \begin{equation*}
+        \forall X \geq 2, ~ \int_2^X\frac{\dx}{x\ln x} = \left[ \ln(\ln x) \right]_2^X = \ln(\ln X) - \ln(\ln 2) \xrightarrow[X\to+\infty]{}+\infty.
+    \end{equation*}
+    Donc divergente.\\
+    \boxed{\a=1\et\b\neq1}
+    \begin{equation*}
+        \forall X \geq 2, ~ \int_2^X \frac{\dx}{x\ln^\b x} = \left[ \frac{(\ln x)^{1-\b}}{1-\b} \right]_2^X = \frac{1}{1-\b}\left( \left( \ln X \right)^{1-\b} - \left( \ln 2 \right)^{1-\b} \right)
+    \end{equation*}
+    Admet une limite quand $X$ tend vers $+\infty$ ssi $1-\b<0$ ssi $\b>1$.
+\end{prop}
+
+\section{Intégrales généralisées sur un intervalle quelconque.}
+
+\begin{defi}{}{}
+    Soit $f:~]a,b[\to\K$ cpm sur $]a,b[$ avec $a,b\in\R$ ou $a=-\infty$ ou $b=+\infty$.
+    \begin{equation*}
+        \int_a^b f ~ \nt{converge} ~ \iff \exists c \in ]a,b[, ~ \int_a^c f \et \int_c^b f ~ \nt{convergent}.
+    \end{equation*}
+    On pose alors $\int_a^b f = \int_a^c f + \int_c^b f$.
+\end{defi}
+
+\begin{ex}{}{}
+    Nature de $\ds\int_{-\infty}^{+\infty}\frac{1+x^2e^{-x}}{x^2+e^{-2x}}\dx$.
+    \tcblower
+    On pose $f(x)=\frac{1+x^2e^{-x}}{x^2+e^{-2x}}$ pour tout $x\in\R$, cpm et positive sur $\R$.
+    \begin{equation*}
+        f(x)\underset{+\infty}{\sim}\frac{1}{x^2} \et \int_1^{+\infty}\frac{\dx}{x^2} \nt{ converge, donc } \int_1^\infty f \nt{ converge}.
+    \end{equation*}
+    De même en $-\infty$, on conclut que l'intégrale converge.
+\end{ex}
+
+\begin{prop}{Linéarité.}{}
+    Soient $f,g:I\to\K$ avec $I$ intervalle quelconque de $\R$ d'extrémités $a$ et $b$; et $\l\in\K$.
+    \begin{equation*}
+        \int_a^b f \et \int_a^b g \nt{ convergent} \ra \int_a^b(f+\l g) \nt{ converge et } \int_a^b(f+\l g) = \int_a^b f + \l\int_a^b g.
+    \end{equation*}
+\end{prop}
+
+\begin{prop}{Positivité.}{}
+    Soit $f:I\to\R$ cpm sur $I$, positive.
+    \begin{equation*}
+        \int_a^b f \nt{ converge } \ra \int_a^b f \geq 0.
+    \end{equation*}
+\end{prop}
+
+\begin{prop}{Croissance.}{}
+    Soit $f,g:I\to\R$ cpm sur $I$ intervalle d'extémités $a$ et $b$, et $f\leq g$ sur $I$.
+    \begin{equation*}
+        \int_a^b f \et \int_a^b g \nt{ convergent } \ra \int_a^b f \leq \int_a^b g.
+    \end{equation*}
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $f:I\to \R$ continue sur $I$. Si $f$ est positive sur $I$ et d'intégrale convergente, nulle alors $f$ est nulle sur $I$.
+\end{prop}
+
+\begin{exercice}{}{}
+    On pose $N(x,y)=\int_0^{+\infty}|x+ty|e^{-t}\dt$ pour tout $(x,y)\in\R^2$. Montrer que $N$ est une norme sur $\R^2$.
+    \tcblower
+    Soit $(x,y)\in\R^2$. On pose $f(t)=|x+ty|e^{-t}$, cpm et positive sur $[0,+\infty[$.
+    \begin{equation*}
+        f=o\left(\frac{1}{t^2}\right) \et \int_1^{+\infty}\frac{\dt}{t^2} \nt{ converge } \ra \int_1^{+\infty} \nt{ converge}.
+    \end{equation*}
+    Donc $N(x,y)$ est bien définie.\\
+    \bf{Séparation.} On a $N(x,y)=0\ra\int_0^{+\infty}f(t)\dt=0$, or $|x+ty|e^{-x}|$ est continue et positive sur $[0,+\infty[$.\\
+    Elle est positive donc par théorème, $|x+ty|e^{-x}=0$ puis $|x+ty|=0$ donc $x=y=0$.\\
+    \bf{Homogénéité.} Pour $\l\in\R$ et $(x,y\in\R^2)$, $N(\l(x,y))=N(\l x,\l y)=\int_0^\infty|\l||x+ty|e^{-t}\dt=|\l|N(x,y)$.\\
+    \bf{Inégalité triangulaire.} Soit $(x,y)\in\R^2$ et $(x',y')\in\R^2$.
+    \begin{equation*}
+        N((x,y)+(x',y')) = N(x+x',y+y')=\int_0^{+\infty}|x+x'+t(y+y')|e^{-t}\dt.
+    \end{equation*}
+    Or $\forall t \geq 0, ~ |x+x'+t(y-y')|\leq |x+ty|+|x'+ty'|$ puis $|x+x'+t(y+y')|e^{-t}\leq|x+ty|e^{-t}+|x'+ty'|e^{-t}$.\\
+    Puis par récurrence et linéarité de l'intégrale généralisée : $N((x,y)+(x',y'))\leq N(x,y)+N(x'+y')$.
+\end{exercice}
+
+\begin{thm}{Intégration par parties.}{}
+    \begin{enumerate}
+        \item Soient $u,v\in\cursive{C}^1([a,b[\to\K)$ avec $a\in\R$ et $b\in\R$ pu $b=+\infty$.\\
+        On suppose que $(uv)$ admet une limite en $b$, alors $\int_a^bu'v$ et $\int_a^buv'$ sont de même nature et :
+        \begin{equation*}
+            \int_a^b u'v=\left[ uv \right]_a^b - \int_a^b uv' \quad \nt{où} \quad \left[ uv \right]_a^b = \lim_{b}(uv)(x) - uv(a).
+        \end{equation*}
+        \item Soit $I$ intervalle d'extrêmités $a$ et $b$, soit $u,v\in\cursive{C}^1(I,\K)$.\\
+        On suppose que $(uv)$ admet une limite en $a$ et en $b$. Alors $\int_a^b u'v$ et $\int_a^buv'$ sont de même nature et :
+        \begin{equation*}
+            \int_a^b u'v = \left[ uv \right]_a^b - \int_a^b uv'.
+        \end{equation*}
+    \end{enumerate}
+    (En cas de convergence.)
+    \tcblower
+    \boxed{1.} Soit $x\in[a,b[$, par IPP sur $[a,x]$ :
+    \begin{equation*}
+        \underbrace{\int_a^x u'(t)v(t)\dt}_{\phi(x)} = \underbrace{u(x)v(x)-u(a)v(a)}_{h(x)} - \underbrace{\int_a^xu(t)v'(t)\dt}_{\psi(x)}.
+    \end{equation*}
+    Par hypothèse, $h$ admet une limite quand $x\to b^-$, puis $\phi=h-\psi$ admet une limite en $b$ ssi $\psi$ en admet une.\\
+    On obtient la formule d'IPP généralisée par passage à la limite en $b$.\\
+    \boxed{2.} Prendre $c\in]a,b[$ et appliquer $1$ sur $]a,c]$ puis sur $[c,b[$.
+\end{thm}
+
+\begin{exercice}{}{}
+    Pour $n\in\N^*$, on pose :
+    \begin{equation*}
+        I_n = \int_0^{+\infty} \frac{e^{-x}}{n+x}\dx 
+    \end{equation*}
+    \begin{enumerate}
+        \item Montrer que $I_n$ est bien définie pour tout $n\in\N^*$.
+        \item Donner un équivalent de $I_n$ en $+\infty$ par IPP.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On pose $f(x)=\frac{e^{-x}}{n+x}$, cpm et positive sur $x\in[0,+\infty[$. Le problème de convergence est localisé en $+\infty$.\\
+    Par théorème de comparaison, $f(x)=o(\frac{1}{x^2})$ donc convergente par comparaison à une intégrale de Riemann.\\
+    On remarque que $\forall n \in \N^*, ~ 0 \leq I_{n+1} \leq I_n$ donc $(I_n)$ est décroissante, minorée par 0, elle converge.\\
+    \boxed{2.} On réalise une IPP généralisée, on pose $u(x)=\frac{1}{n+x}$ et $v'(x)=e^{-x}$, qui sont $\cursive{C}^1$ sur $[0,+\infty[$.\\
+    On a $u(x)v(x)=-\frac{e^{-x}}{n+x}\to 0$, puis par IPP, $\int_0^{+\infty}u'v$ et $\int_0^{+\infty}uv'$ sont de même natures (convergentes par 1) et :
+    \begin{align*}
+        \int_0^{+\infty}\frac{e^{-x}}{n+x}\dx &= \left[ -\frac{1}{n+x}e^{-x} \right]_0^{+\infty} - \int_0^{+\infty} \frac{e^{-x}}{(n+x)^2}\dx = \frac{1}{n} - R_n.
+    \end{align*}
+    Et \begin{equation*}0 \leq nR_n = \int_0^{+\infty}\frac{ne^{-x}}{(n+x)^2}\dx\leq\int_0^1\frac{e^{-x}}{n}=\frac{1}{n}\to0\end{equation*}
+    Donc $R_n=o(\frac{1}{n})$, donc $I_n\sim\frac{1}{n}$.
+\end{exercice}
+
+\begin{exi}{Fonction Gamma.}{}
+    On pose $\ds\G(x)=\int_0^{+\infty}t^{x-1}e^{-t}\dt$.
+    \begin{enumerate}
+        \item Montrer que $\G(x)$ est bien définie ssi $x>0$.
+        \item Montrer que $\forall x > 0, ~ \G(x+1)=x\G(x)$.
+        \item En déduire que $\forall n \in \N, ~ \G(n+1)=n!$.
+    \end{enumerate}
+    On retiendra que $\int_0^{+\infty}t^ne^{-t}\dt=n!$ pour tout $n\in\N$.
+    \tcblower
+    \boxed{1.} On pose $f(t)=x^{x-1}e^{-t}$, cpm et positive sur $]0,+\infty[$. Les problèmes de convergence sont en 0 et $+\infty$.\\
+    En l'infini, $f$ est positive et $f(t)=o(\frac{1}{t^2})$, donc convergente.\\
+    En 0, $f(t)\sim\frac{1}{t^{1-x}}$ et $f\geq0$, donc l'intégrale converge ssi $x>0$.\\
+    \boxed{2.} Soit $x>0$. $\G(x+1)=\int_0^\infty t^x e^{-t}\dt$. On pose $u(t)=t^x$ et $v'(t)=e^{-t}$, donc $v(t)=-e^{-t}$.\\
+    $u,v\in\cursive{C}^1(]0,+\infty[)$ et $u(t)v(t)\to_{\infty}0, ~ u(t)v(t)\to_{0}0$. On peut donc effecteur l'IPP :
+    \begin{equation*}
+        \G(x+1)=[uv]_0^{+\infty}-\int_0^{\infty}u'v = \int_0^{+\infty}xt^{x-1}e^t\dt = x\G(x).
+    \end{equation*}
+    \boxed{3.} Par récurrence sur $n$, $\P(n)=\G(n+1)=n!$.\\
+    \bf{Initialisation.} $G(1)=\int_0^{+\infty}e^{-t}\dt=\left[ -e^{-t} \right]_0^{+\infty}=1$.\\
+    \bf{Hérédité.} Soit $n\in\N$ tel que $\P(n)$. On a $\G(n+2)=(n+1)\G(n+1)=(n+1)!$ d'après le 2.
+\end{exi}
+
+\vspace*{-0.7cm}
+
+\begin{thm}{Changement de variable généralisé.}{}
+    \begin{enumerate}
+        \item Soit $f$ continue de $[a,b[$ dans $\K$, et $\phi:[\a,\b[\to[a,b[$ continue, strict. croissante et bijective.\\
+        Alors $\int_a^bf(t)\dt$ est de même nature que $\int_\a^\b f(\phi(u))\phi'(u)\du$, et en cas de convergence :
+        \begin{equation*}
+            \int_a^b f(t)\dt = \int_\a^\b (f\circ\phi)(u)\phi'(u)\du.
+        \end{equation*}
+        \item Soit $f:]a,b[\to\K$, et $\phi\in\cursive{C}^1(]\a,\b[,]a,b[)$ strict. croissante et bijective. \\
+        Alors $\int_a^b f(t)\dt$ et $\int_\a^\bf(\phi(u))\phi'(u)\du$ sont de même nature et en cas de convergence :
+        \begin{equation*}
+            \int_a^b f(t)\dt = \int_\a^\b(f\circ\phi)(u)\phi'(u)\du.
+        \end{equation*}
+    \end{enumerate}
+    \tcblower
+    On pose $F(x)=\int_a^xf(t)\dt$ pour $a\leq x < b$. Puisque $f\in\cursive{C}([a,b[)$, $F\in\cursive{C}^1([a,b[)$.\\
+    On pose $G(x)=\int_\a^{\phi^{-1}(x)}f(\phi(u))\phi'(u)\du$, donc $G\in\cursive{C}^1([a,b[)$ et $G'(x)=(\phi^{-1})'(x)f(\phi(\phi^{-1}(x)))\phi'(\phi^{-1}(x))$.\\
+    Donc $G'=f(x)$ donc $G'(x)=f(x)=F'(x)$ donc $G-F$ constante, et $G(a)=0$ donc $G=F$ sur $[a,b[$.
+\end{thm}
+
+\vspace*{-0.7cm}
+
+\begin{exercice}{}{}
+    Soit $f$ continue et paire de $\R$ dans $\R$ telle que $\int_{-\infty}^{+\infty}f$ converge. Montrer que :
+    \begin{equation*}
+        \int_{-\infty}^{+\infty}f(t)\dt = 2\int_0^{+\infty}f(t)\dt
+    \end{equation*}
+    \tcblower
+    Posons $t=-u$, $\dt=-\du$, puis $\int_0^{+\infty}f(t)\dt=\int_0^{-\infty}f(-u)(-\du)=\int_{-\infty}^0f(u)\du$, donc $\int_0^{+\infty}f(t)\dt=\int_{-\infty}^0f(t)\dt$.\\
+    Puis $\int_{-\infty}^{+\infty}f(t)\dt=\int_0^{+\infty}f(t)\dt+\int_{-\infty}^0f(t)\dt=2\int_0^{+\infty}f(t)\dt$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Montrer que $\ds\int_0^1\frac{\ln t}{t^a}\dt$ converge ssi $a<1$.
+    \tcblower
+    On pose $f(t)=\frac{\ln t}{t^a}$ pour $t\in]0,1]$, continue sur $]0,1]$.\\
+    On pose $u=\frac{1}{t}$ i.e. $t=\frac{1}{u}=\phi(u)$ et $\dt=-\frac{\du}{u^2}$.\\
+    On a $\int_0^1\frac{\ln t}{t^a}\dt$ de même nature que $\int_{+\infty}^1\frac{\ln(1/u)}{(1/u)^a}\left( -\frac{\du}{u^2} \right)=\int_1^{+\infty}\frac{-\ln u}{u^{2-a}}\du$.\\
+    On reconnaît une intégrale de Bertrand, convergente ssi $2-a>1$ ssi $a<1$. 
+\end{exercice}
+
+\begin{exercice}{}{}
+    Nature et calcul de :
+    \begin{equation*}
+        I=\int_0^{+\infty}\frac{t^2\ln t}{(1+t^3)^2}\dt.
+    \end{equation*}
+    \tcblower
+    On pose $\forall t \in ]0,+\infty[, ~ f(t)=\frac{t^3\ln t}{(1+t^3)^2}$, cpm, on a localisé deux problèmes de cv en 0 et $\infty$.\\
+    \boxed{\infty} On a $f\geq0$ sur $[1,+\infty[$ et $f(t)\sim_{\infty}\frac{\ln t}{t^4}=o(\frac{1}{t^2})$ cv par comparaison.\\
+    \boxed{0} $f$ est continue sur $]0,1]$ et $\lim_0 f(t) = 0$ par croissances comparées.\\
+    On peut prolonger $f$ par continuité en posant $f(0)=0$, la fonction est continue sur $[0,1]$, donc $I$ est bien définie.\\
+    Posons $u=\frac{1}{t}$ i.e. $t=\frac{1}{u}=\phi(u)$, alors $\dt=-\frac{\du}{u^2}$.
+    \begin{equation*}
+        I=\int_0^{+\infty}\frac{t^2\ln t}{(1+t^3)^2}\dt = \int_{+\infty}^{0}\frac{\frac{1}{u^2}(\ln u)}{(1+\frac{1}{u^3})^2}\left( \frac{\du}{u^2} \right) = \int_0^\infty\frac{-u^2\ln u}{(1+u^3)^2}\du=-I
+    \end{equation*}
+    Donc $I=-I=0$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Déterminer l'ensemble des couples $(p,q)\in\R^2$ tels que $B(p,q)=\int_0^1t^{p-1}(1-t)^{q-1}\dt$ converge.
+        \item Vérifier que $B(p,q)=B(q,p)$.
+        \item Vérifier que $B(p,q)=2\int_0^\frac{\pi}{2}\sin^{2p-1}(\theta)\cos^{2q-1}(\theta)\nt{d}\theta$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On pose $f(t)=t^{p-1}(1-t)^{q-1}$ pour $t\in]0,1[$, cpm.\\
+    En 0: $f(t)\sim\frac{1}{t^{1-p}}$ donc $\int_0^{\frac{1}{2}}f$ et $\int_0^{\frac{1}{2}}\frac{\dt}{t^{1-p}}$ sont de même nature ($f\geq0$) cv ssi $p>0$.\\
+    En 1: $f(t)\sim\frac{1}{(1-t)^{1-q}}$ et $\int_{1/2}^{1}f<1$ ssi $q>0$. Finalement, l'intégrale converge ssi $p>0$ et $q>0$.\\
+    \boxed{2.} Posons $u=1-t$ i.e. $t=1-u=\phi(u)$ qui est $\cursive{C}^1$ strictement décroissante. Par changement de variable dans une intégrale généralisée (converge par théorème) :
+    \begin{equation*}
+        \forall p,q>0, ~ B(p,q)=\int_1^0(1-u)^{p-1}u^{q-1}(-\du) = \int_0^1(1-u)^{p-1}u^{q-1}\du=B(q,p)
+    \end{equation*}
+    \boxed{3.} Posons $t=\sin^2(\theta)=\phi(\theta)$ qui est $\cursive{C}^1$ strictement croissante de $]0,\frac{\pi}{2}[\to]0,1[$. ($\dt=2\sin\theta\cos\theta d\theta$)
+    \begin{equation*}
+        \forall p,q>0, ~ B(p,q)=\int_0^{\frac{\pi}{2}}\sin^{2p-2}\theta(1-\sin^2\theta)^{q-1}2\sin\theta\cos\theta d\theta=2\int_0^{\frac{\pi}{2}}\sin^{2p-1}(\theta)\cos^{2q-1}(\theta)d\theta.
+    \end{equation*}
+\end{exercice}
+
+\begin{exercice}{}{}
+    On pose $\ds I=\int_0^{\frac{\pi}{2}}\ln(\sin x)\dx$.
+    \begin{enumerate}
+        \item Montrer que l'intégrale qui définit $I$ converge.
+        \item Montrer que $\ds I=\int_0^{\frac{\pi}{2}}\ln(\cos x)\dx$.
+        \item Calculer $\ds\int_0^\frac{\pi}{2}\ln(\sin 2x)\dx$ et en déduire $I$.
+        \item Nature et calcul de $\ds\int_0^\frac{\pi}{2}\frac{x}{\tan x}\dx$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On pose $f(x)=\ln(\sin x)$ pour $x\in]0,\frac{\pi}{2}]$, continue, négative au voisinage de 0.\\
+    On a $f\sim_0\ln$ donc par théorème de comparaison, $\int_0^1 f$ et $\int_0^1\ln$ dont de même nature, convergentes.\\
+    \boxed{2.} On pose $t=\frac{\pi}{2}-u=\phi(u)$ : $\dt=-\du$.
+    \begin{equation*}
+        I=\int_{\frac{\pi}{2}}^0\ln(\sin(\frac{\pi}{2}-u))(-\du)=\int_0^{\frac{\pi}{2}}\ln(\cos u)\du.
+    \end{equation*}
+    \boxed{3.} Posons $x=\frac{u}{2}=\phi(u)$
+    \begin{align*}
+        \int_0^{\frac{\pi}{2}}\ln(\sin 2x)\dx &= \int_0^\frac{\pi}{2}\left( \ln 2 + \ln \sin x + \ln \cos x \right)\dx = \frac{\pi}{2}\ln2+2I\\
+        &=\frac{1}{2}\left(\int_0^\frac{\pi}{2}\ln(\sin u)\du + \int_{\frac{\pi}{2}}^0\ln(\sin u)\du\right) = I
+    \end{align*}
+    Donc $I=-\frac{\pi}{2}\ln2$.\\
+    \boxed{4.} Posons $f(x)=\frac{x}{\tan x}$ pour $x\in]0,\frac{\pi}{2}[$. En zéro, $f(x)\to_01$ donc on prolonge $f$ par continuité en $0$ : $f(0)=1$.\\
+    De plus, en $\pi/2$, la fonction tend vers 0, donc on prolonge.\\
+    Par IPP, on pose $u(x)=x$, $v'(x)=\frac{1}{\tan x}$ donc $v(x)=\ln(\sin x)$ qui sont $\cursive{C}^1$ sur $]0,\frac{\pi}{2}[$.\\
+    De plus, $u(x)v(x)\sim x\ln x \to_0 0$ et $u(x)v(x)\to_{\frac{\pi}{2}}0$.
+    \begin{equation*}
+        \int_0^{\frac{\pi}{2}}\frac{x}{\tan x}\dx = \left[ x\ln|\sin x| \right]_0^{\frac{\pi}{2}} - \int_0^{\frac{\pi}{2}}\ln(\sin x)\dx = \frac{\pi}{2}\ln 2.
+    \end{equation*}
+\end{exercice}
+
+\section{Fonctions intégrables, intégrables absolument convergentes.}
+
+\begin{defi}{}{}
+    Soit $f:I\to\K$ cpm sur $I$. Alors $\int_I f$ est absolument convergente ssi $\int_I|f|$ converge.\\
+    \bf{Remarque.} C'est la version continue des séries absolument convergentes.\\
+    Si $f$ est positive, on peut toujours écrire $\int_I f$ avec $\int_I f=+\infty$ si elle diverge.
+\end{defi}
+
+\begin{defi}{}{}
+    Soit $f:I\to\K$ cpm sur $I$. Si $\int_I f$ converge, mais $\int_I|f|$ diverge, on dit que $\int_I f$ est semi-convergente.
+\end{defi}
+
+\begin{prop}{$\CA\ra\CV$}{}
+    Soit $f:I\to\K$ cpm sur $I$.
+    \begin{equation*}
+        \int_I f ~ \CA \ra \int_I f ~ \CV
+    \end{equation*}
+    \tcblower
+    Soit $f:I\to\R$ cpm sur $I$. On pose $f_+(x)=f(x)$ si $f(x)\geq0$, $f_+(x)=0$ sinon.\\
+    On pose $f_-(x)=-f(x)$ si $f(x)\leq0$, $f_-(x)=0$ sinon. Donc $f_++f_-=|f|$ et $f_+-f_-=f$.\\
+    On en déduit que $f_+=\frac{1}{2}(|f|+f)$ et $f_-=\frac{1}{2}(|f|-f)$. Par combinaisons linéaires, $f_+$ et $f_-$ sont cpm sur $I$.\\
+    Donc $\forall x \in I, ~ 0\leq f_+(x) \leq |f(x)|$ et $0\leq f_-(x)\leq|f(x)|$.\\
+    Par théorème de comparaison, $\int_I|f|~\CV\ra\int_If_+$ et $\int_If_-$ convergent.\\
+    Puis $f=f_+-f_-$ donc $\int_I f$ converge comme somme de deux intégrales convergentes et $\int_If=\int_If_++\int_If_-$. \\
+    Sur $\C$, on pose $f=g+ih$ avec $g:I\to\R$ et $h:I\to\R$ où $g=\Re(f)$ et $h=\Im(f)$.\\
+    On a $|g|\leq|f|$ et $|h|\leq|f|$ par théorème de compoaraison sur les fonction positives :
+    \begin{equation*}
+        \int_I|f|~\CV\ra\int_I|g|\et\int_I|h|~\CV\ra\int_Ig\et\int_Ih~\CV\ra\int_If~\CV.
+    \end{equation*}
+\end{prop}
+
+\begin{ex}{}{}
+    On pose $\forall x \in \R, ~ f(x)=\frac{1}{(1+x^2)(1+ix)}$.
+    \begin{enumerate}
+        \item Montrer que $\int_\R f$ converge absolument.
+        \item On pose $I=\int_\R f$. Montrer que $I\in\R$.
+        \item Montrer que $I=\Re(I)=\int_{-\infty}^{+\infty}\frac{\dx}{(1+x^2)^2}$. En déduire $I$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $f:\R\to\C$ cpm sur $\R$ et $\forall x \in \R, ~ |f(x)|=\frac{1}{(1+x^2)^{3/2}}$.\\
+    On pose $\forall x \in \R, ~ g(x)=\frac{1}{(1+x^2)^{3/2}}$, cpm sur $]-\infty,+\infty[$. Il y a deux problèmes de convergence.\\
+    En $+\infty$: $g(x)\sim\frac{1}{x^3}$, par théorème de comparaison, $\int_1^{+\infty}g$ et $\int_1^{+\infty}\frac{\dx}{x^3}$ sont de même nature, ici convergente.\\
+    En $-\infty$: idem. Conclusion : $\int_{-\infty}^{+\infty}f$ converge absolument, donc $\int_{-\infty}^{+\infty}f$ converge.\\
+    \boxed{2.} $\forall x \in \R, ~ \frac{1}{1+ix}=\frac{1-ix}{1+x^2}=\frac{1}{1+x^2}-i\frac{x}{1+x^2}$. Donc $f(x)=\frac{1}{(1+x^2)^2}-i\frac{x}{(1+x^2)^2}$. Donc :
+    \begin{equation*}
+        I=\int_{-\infty}^{+\infty}\frac{\dx}{(1+x^2)^2} - i\int_{-\infty}^{+\infty}\frac{x}{(1+x^2)^2}\dx
+    \end{equation*}
+    Or $\frac{x}{(1+x^2)^2}$ est impaire sur $\R$ et $\int_{-\infty}^{+\infty}\frac{x}{(1+x^2)^2}\dx$ converge donc l'intégrale est nulle.\\
+    Il reste $I=\int_{-\infty}^{+\infty}\frac{\dx}{(1+x^2)^2}\in\R$.\\
+    \boxed{3.} On a $I=2\int_0^{+\infty}\frac{\dx}{(1+x^2)^2}$, et $\frac{1}{(1+x^2)^2}=\frac{1}{1+x^2}-\frac{x^2}{(1+x^2)^2}$.
+    \begin{equation*}
+        I=2\int_0^{+\infty}\frac{\dx}{1+x^2}-2\int_0^{+\infty}\frac{x^2}{(1+x^2)^2}\dx
+    \end{equation*}
+    Par IPP généralisée, on pose $u'(x)=\frac{2x}{(1+x^2)^2}$ et $u(x)=-\frac{1}{(1+x^2)}$; $v(x)=x$ et $v'(x)=1$, qui sont $\cursive{C}^1$.\\
+    Donc $I=\pi-\frac{\pi}{2}=\frac{\pi}{2}$.
+\end{ex}
+
+\begin{defi}{}{}
+    Soit $f:I\to\K$ cpm sur $I$. On dit que $f$ est intégrable sur $I$ ssi $\int_I f$ converge absolument.
+\end{defi}
+
+\begin{nota}{}{}
+    On note $\L^1(I,\K)$ l'ensemble des fonctions intégrables sur $I$ à valeurs dans $\K$.
+\end{nota}
+
+\begin{prop}{}{}
+    $\L^1(I,\K)$ a une structure de $\K$-espace vectoriel.
+    \tcblower
+    Montrons que $\L^1(I,\K)$ est un sous-espace vectoriel de $\F(I,\K)$.\\
+    La fonction nulle est dans $\L^1(I,\K)$, donc $\L^1(I,\K)$ est non-vide.\\
+    Stable par combinaisons linéaires : $\forall f,g\in\L^1(I,\K), ~ \forall \l \in \K, ~ |f+\l g| \leq |f| + |\l||g|$.\\
+    Puis $\int_I(|f|+|\l||g|)$ converge donc par comparaison, $\int_I|f+\l g|$ converge.
+\end{prop}
+
+\begin{ex}{}{}
+    Soient $f,g,h:I\to\R$ cpm sur $I$. Si $f,h$ sont intégrables sur $I$ et $f\leq g\leq h$, alors $g$ est intégrable sur $I$.
+    \tcblower
+    En effet, $f \leq g \leq h \ra 0 \leq g-f \leq h-f$, or $h$ et $f$ sont intégrables sur $I$ donc $h-f$ aussi.\\
+    Par théorème de comparaison, $\int_I (g-f)$ converge puis $g-f$ est intégrable puis $g$ est intégrable sur $I$.
+\end{ex}
+
+\begin{exi}{}{}
+    \begin{equation*}
+        \int_0^{+\infty}\frac{\sin t}{t}\dt ~\nt{est une intégrale semi-convergente}.
+    \end{equation*}
+    \tcblower
+    On pose $f(t)=\frac{\sin t}{t}$ pour $t\in\R_+^*$. On a localisé deux problèmes.\\
+    En zéro, $f$ continue sur $]0,1]$ et $\lim_{t\to 0} f=1$, donc on peut prolonger $f$ en 0 en posant $f(0)=1$;\\
+    En l'infini, on effectue une IPP généralisée. On pose $u(t)=\frac{1}{t}$, $u'(t)=-\frac{1}{t^2}$; $v'(t)=\sin t$ et $v(t)=-\cos t$.\\
+    On a $u,v\in\cursive{C}^1([1,+\infty[)$, et $u(t)v(t)=-\frac{\cos t}{t}\xrightarrow[t\to+\infty]{}0$ donc :
+    Donc $\int_1^\infty\frac{\sin t}{t}\dt$ est de même nature que $\int_1^\infty\frac{\cos t}{t^2}\dt$.\\
+    Or $\left|\frac{\cos t}{t^2}\right|\leq\frac{1}{t^2}$ pour $t\in[1,\infty[$, par comparaison, $\int_1^{\infty}\frac{\cos t}{t^2}~\CA$ donc $\CV$, donc $\int_0^{+\infty}\frac{\sin t}{t}\dt$ converge.\\
+    Vérifions que $\int_0^{+\infty}\left|\frac{\sin t}{t}\right|\dt$ diverge.
+    \begin{equation*}
+        \forall k \in \N, ~ \int_{k\pi}^{(k+1)\pi}\frac{|\sin t|}{t}\dt \geq \int_{k\pi}^{(k+1)\pi}\frac{|\sin t|}{(k+1)\pi}\dt = \frac{1}{(k+1)\pi}\int_{k\pi}^{(k+1)\pi}|\sin t|\dt = \frac{2}{(k+1)\pi}.
+    \end{equation*}
+    Puis $\forall N \in \N^*, ~ \int_0^{N\pi}\frac{|\sin t|}{t}\dt=\sum_{k=0}^{N-1}\int_{k\pi}^{(k+1)\pi}\frac{|\sin t|}{t}\dt\geq\frac{2}{\pi}\sum_{k=0}^{N-1}\frac{1}{k+1}=\frac{2}{\pi}H_N$.\\
+    Supposons par l'absurde que $I=\int_0^{+\infty}\frac{|\sin t|}{t}\dt<\infty$, alors $\forall N \in \N^*, ~ \frac{2}{\pi}H_N\leq I$ donc $H_N\leq\frac{\pi}{2}I$, absurde.
+\end{exi}
+
+\begin{ex}{}{}
+    Posons $\L^2=\{f \nt{ continues sur } \R_+ \mid \int_0^{+\infty}f^2<+\infty\}$.
+    \begin{enumerate}
+        \item Montrer que $\L^2(\R_+,\R)$ est un $\R$-espace vectoriel. On note $\|f\|=\sqrt{\int_0^{+\infty}f^2}$ pour $f\in\L^2$.
+        \item On pose $g(x)=\frac{1}{x}\int_0^xf(t)\dt$ si $x\neq 0$, et $g(0)=f(0)$.\\
+        Montrer que $g$ est continue sur $\R_+$ et que $\forall x \in \R_+, ~ \int_0^xg^2(t)\dt=2\int_0^xf(t)g(t)\dt-xg^2(x)$.
+        \item En déduire que $\forall x \in \R_+, ~ \int_0^xg^2(t)\dt\leq4\int_0^xf^2(t)\dt$ puis $\|g\|\leq2\|f\|$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $\L^2(\R_+,\R)$ est non-vide car $0\in\L^2(\R_+,\R)$.\\
+    Soient $f,g\in\L^2(\R_+,\R)$ et $\l\in\R$. Alors $(f+\l g)^2=f^2+2\l fg + \l^2g^2$, par hypothèse, $f^2$ et $g^2$ sont intégrables sur $\R_+$ puis $|fg|\leq\frac{1}{2}(f^2+g^2)$ donc $fg$ est intégrable sur $\R_+$ par comparaison.\\
+    Finalement, $(f+\l g)^2$ est intégrable sur $\R_+$ comme combinaison linéaire de fonctions intégrables sur $\R_+$.\\
+    \boxed{2.} Posons $F(x)=\int_0^xf(t)\dt$ pour $x\geq0$, elle est $\cursive{C}^1$ sur $\R_+$ et $\forall x \in \R, ~ F'(x)=f(x)$, puis $g(x)=\frac{F(x)}{x}$.\\
+    Ainsi, $g$ est continue sur $]0,+\infty[$ comme quotient de fonctions continues dans le dénominateur ne s'annule pas.\\
+    On a $\lim_{x\to 0}g(x)=\lim_{x\to0}\frac{F(x)-F(0)}{x-0}=F'(0)=f(0)=g(0)$, donc $g$ est continue en 0 puis sur $\R_+$.\\
+    Posons $\phi(x)=\int_0^xg^2(t)\dt$ et $\psi(x)=2\int_0^xf(t)g(t)\dt-xg^2(x)$; déjà $\phi(0)=\psi(0)=0$.\\
+    On a $\phi\in\cursive{C}^1(]0,+\infty[)$ et $\forall x > 0, ~ \psi'(x)=2f(x)g(x)-[g^2(x)+2xg(x)g'(x)]$.\\
+    Avec $g(x)=\frac{F(x)}{x}$ et $g'(x)=\frac{xF'(x)-F(x)}{x^2}=\frac{xf(x)-F(x)}{x^2}$.\\
+    Donc $\psi'(x)=2f(x)g(x)-g^2(x)-2xg(x)\left( \frac{f(x)}{x} - \frac{F(x)}{x^2} \right)=2g(x)\frac{F(x)}{x}-g^2(x)=g^2(x)$.\\
+    On a $\psi'=\phi'$ sur $]0,+\infty[$ : $\exists \l \in \R, ~ \forall x > 0, ~ \psi(x)=\phi(x)+\l$.\\
+    Par passage à la limite en 0, et continuité de $\phi$ et $\psi$ en 0, $\psi(0)=\phi(0)+\l$ donc $\l=0$.\\
+    Donc $\forall x \geq 0, ~ \phi(x)=\psi(x)$.\\
+    \boxed{3.} D'après $2.$ : $0\leq\int_0^2g^2(t)\dt=2\int_0^xf(t)g(t)\dt-xg^2(x)\leq 2\int_0^xf(t)g(t)\dt$.\\
+    Puis $\left( \int_0^xg^2(t)\dt \right)^2\leq 4\left(\int_0^xf(t)g(t)\dt\right)^2\leq 4\int_0^xf^2(t)\dt\int_0^xg^2(t)\dt$.\\
+    Si $\int_0^xg^2(t)\dt>0$, on a alors en divisant par $\int_0^xg^2(t)\dt$ : $\int_0^xg^2(t)\dt\leq4\int_0^xf^2(t)\dt$ (*).\\
+    Sinon, $\int_0^xg^2(t)\dt=0$ et (*) est triviale.\\
+    Dans tous les cas, $\forall x \in \R_+, \int_0^xg^2(t)\dt\leq4\int_0^xf^2(t)\dt$.\\
+    Si $f\in\L^2(\R_+,\R)$, alors $\int_0^\infty f^2(t)\dt<\infty$ puis $\int_0^\infty g^2(t)\dt<\infty$.\\
+    Et par passage à la limite dans (*) : $\int_0^\infty g^2(t)\dt\leq 4\int_0^{+\infty}f^2(t)\dt$ i.e. $\|g\|^2\leq4\|f\|^2$.
+\end{ex}
+
+\begin{thm}{}{}
+    Soient $f:[a,b[\to\K$, $a\in\R$ et $b\in\R$ ou $b=+\infty$, et $g:[a,b[\to\K$ cpm positive.
+    \begin{enumerate}
+        \item Si $f=_b O(g)$ et $g$ intégrable sur $[a,b[$, alors $f$ est intégrable sur $[a,b[$.\\
+        Alors $\int_x^b f(t)\dt = O(\int_x^b g(t)\dt)$.
+        \item Si $f=_b o(g)$ et $g$ intégrable sur $[a,b[$, alors $f$ est intégrable sur $[a,b[$.\\
+        Alors $\int_x^bf(t)\dt=o(\int_x^bg(t)\dt)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Si $g$ est intégrable sur $[a,b[$ et positive, alors $\int_a^b g$ converge.\\
+    Puis $f=_bO(g)$ donc $\exists M\geq0, ~ |f|\leq Mg$ au voisinage de $b$. Par théorème de comparaison pour les fonctions positives, $\int_a^b|f|$ converge.
+\end{thm}
+
+\end{document}

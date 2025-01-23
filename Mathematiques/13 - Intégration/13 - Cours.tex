@@ -1,0 +1,728 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{13}
+\def\pagetitle{Intégration.}
+
+\input{setup.tex}
+
+\begin{document}
+
+\input{title.tex}
+
+\section{Comportements asymptotiques.}
+
+\begin{thm}{Théorème de convergence dominée. (Admis)}{}
+    Soit $f_n:I\to\K$ cpm sur un intervalle de $\R$ pour tout $n\in\N$. On suppose que :
+    \begin{enumerate}
+        \item $f_n\cs f$ sur $I$, avec $f$ cpm sur $I$.
+        \item $\exists \phi : I\to\R_+, ~ \forall n \in \N, ~ |f_n|\leq \phi$ intégrable sur $I$.
+    \end{enumerate}
+    Alors :
+    \begin{equation*}
+        \int_I f_n \xrightarrow[n\to+\infty]{}\int_I f
+    \end{equation*}
+    \bf{Remarque.} C'est un théorème d'échange limite-intégrale.
+\end{thm}
+
+\vspace*{-0.7cm}
+
+\bf{Remarque.} $\forall n \in \N, ~ |f_n|\leq\phi$ donc $f_n=O(\phi)$.\\
+Par domination, $\phi$ intégrable sur $I$ $\Rightarrow$ $f_n$ intégrable sur $I$ puis $\CA\Rightarrow\CV$ donc $\int_I f$ sont bien des intégrales convergentes. 
+
+\begin{ex}{}{}
+    Étudier
+    \begin{equation*}
+        \lim_{n\to+\infty} \int_0^{+\infty} \frac{e^{-x/n}}{1+x^2}\dx
+    \end{equation*}
+    \tcblower
+    Vérifions déjà que l'intégrale est bien convergente pour tout $n\in\N^*$.\\
+    On pose $f_n(x)=\frac{e^{-x/n}}{1+x^2}$ pour tout $x\in[0,+\infty[$ et pour $n\geq1$.\\
+    La fonction $f_n$ est cpm sur $[0,+\infty[$; il y a un seul problème de convergence en $+\infty$.\\
+    Par exemple, $\forall x \geq 0, ~ \forall n \geq 1, ~ 0 \leq f_n(x) \leq \frac{1}{1+x^2}$ où $\frac{1}{1+x^2}$ est intégrable sur $[0,+\infty[$.\\
+    Donc par comparaison, $f_n$ est intégrable sur $[0,+\infty[$. On applique le théorème de convergence dominée:\\
+    On a $f_n\cs f$ sur $[0,+\infty[$ avec $f(x)=\frac{1}{1+x^2}$ pour $x\in[0,+\infty[$.\\
+    De plus, $\forall n \in \N, ~ |f_n|\leq\phi$ en posant $\phi(x)=\frac{1}{1+x^2}$ pour $x\in[0,+\infty[$, qui est intégrable sur $[0,+\infty[$.
+    \begin{equation*}
+        \int_0^{+\infty}f_n(x)\dx \xrightarrow[n\to+\infty]{}\int_0^{+\infty}\frac{1}{1+x^2}=\left[ \arctan x \right]_{0}^{+\infty} = \frac{\pi}{2}.
+    \end{equation*}
+\end{ex}
+
+\begin{ex}{}{}
+    Soit $f$ continue et intégrable sur $\R_+$. Étudier :
+    \begin{equation*}
+        \lim_{n\to+\infty} \int_0^1\frac{nf(nx)}{1+x}\dx.
+    \end{equation*}
+    \tcblower
+    L'intégrale est bien définie pour tout $n\in\N$ comme intégrale propre.\\
+    On pose le changement de variable $x=\frac{u}{n}$ pour $n\geq1$, qui est $\cursive{C}^1([0,n],[0,1])$ strictement croissante.
+    \begin{equation*}
+        \int_0^1\frac{nf(nx)}{1+x}\dx = \int_0^n\frac{f(u)}{1+\frac{u}{n}}\du = \int_0^{+\infty}\underbrace{\1_{u\leq n}\frac{f(u)}{1+\frac{u}{n}}}_{:=f_n(u)}\du
+    \end{equation*}
+    Appliquons le théorème de convergence dominée :\\
+    $\hra$ $f_n\cs f$ sur $I$ et pour $u\in I$ : on a $n\geq u$ àpdcr, $f_n(u)\xrightarrow[n\to+\infty]{}f(u)$.\\
+    $\hra$ $\forall u \geq 0, ~ \forall n \geq 1, ~ |f_n(u)|\leq\frac{|f(u)|}{1+\frac{u}{n}}\leq|f(u)|$ donc $\forall n \geq 1, ~ |f_n|\leq \phi=|f|$ intégrable sur $\R_+$.
+    \begin{equation*}
+        \lim_{n\to+\infty}\int_0^1\frac{nf(nx)}{1+x}\dx=\lim_{n\to+\infty}\int_0^{+\infty}f_n(u)\du=\int_0^{+\infty}f(u)\du
+    \end{equation*}
+\end{ex}
+
+\begin{ex}{}{}
+    Déterminer la limite en l'infini de :
+    \begin{equation*}
+        W_n = \int_0^{\frac{\pi}{2}}(\sin t)^n\dt
+    \end{equation*}
+    \tcblower
+    On sait que $W_n$ décroît vers 0, appliquons le théorème de convergence dominée pour déterminer la limite de $W_n$.\\
+    \boxed{1.} Soit $I=[0,\frac{\pi}{2}[$. On pose $\forall n \in \N, ~ \forall t \in I, ~ f_n(t)=(\sin t)^n$.\\
+    $\hra$ $f_n\cs f$ sur $I$ avec $\forall t \in I, ~ f(t)=0$ car $0\leq \sin t < 1$.\\
+    $\hra$ $\forall n \in \N, ~ |f_n|\leq \phi$ sur $I$ avec $\forall t \in I, ~ \phi(t)=1$ intégrable sur $I$.\\
+    Par théorème, $(W_n)_n$ converge et $W_n\to\int_0^{\frac{\pi}{2}}f(t)\dt=0$.\\
+    \boxed{2.} Soit $I=[0,\frac{\pi}{2}]$. On pose $\forall n \in \N, ~ \forall t \in In ~ f_n(t)=(\sin t)^n$.\\
+    $\hra$ $f_n\cs f$ sur $I$ avec $f(t)=0$ si $0\leq t < \frac{\pi}{2}$ et $f(\frac{\pi}{2})=1$.\\
+    $\hra$ $\forall n \in \N, ~ |f_n|\leq\phi=1$ sur $I$ et $\phi$ intégrable sur $I$.\\
+    Par théorème, $(W_n)_n$ converge et $W_n\to\int_0^{\frac{\pi}{2}}f(t)\dt=0$.
+\end{ex}
+
+\begin{thm}{Théorème d'intégration terme-à-terme. (Admis)}{}
+    Soit $f_n:I\to\K$ cpm et intégrable sur $I$ pour tout $n\in\N$. On suppose que :
+    \begin{enumerate}
+        \item $\sum_{n\geq0}f_n$ converge simplement sur $I$ et que $\sum_{n=0}^{\infty}f_n$ est cpm sur $I$.
+        \item $\sum_{n\geq0}\int_I |f_n|$ converge.
+    \end{enumerate}
+    Alors $\sum_{n=0}^\infty f_n$ est intégrable sur $I$ et :
+    \begin{equation*}
+        \sum_{n=0}^{+\infty}\int_I f_n = \int_I \sum_{n=0}^{+\infty}f_n
+    \end{equation*}
+\end{thm}
+
+\begin{ex}{}{}
+    Exprimer sous forme d'une série l'intégrale :
+    \begin{equation*}
+        I_p = \int_0^{+\infty}\frac{t^p}{e^t-1}\dt \quad (p\geq2)
+    \end{equation*}
+    \tcblower
+    Vérifions déjà que $I_p$ est bien définie pour $p\geq2$.\\
+    On pose $\forall t \in ]0,+\infty[, ~ f_p(t)=\frac{t^p}{e^t-1}$, cpm sur $]0,+\infty[$.\\
+    En 0 : $f_p(t)\sim_0\frac{t^p}{t}=t^{p-1}$ avec $p-1\geq1$, c'est un faux problème de convergence.\\
+    En $+\infty$ : $f_p(t)=o(\frac{1}{t^2})$ par croissances comparées, donc l'intégrale converge.\\
+    Ensuite:  $\forall x \in ]-1,1[, ~ \frac{1}{1-x}=\sum_{n=0}^\infty x^n$; ici $\forall t \geq 0, ~ \frac{1}{e^t-1}=e^{-t}\sum_{n=0}^{\infty}(e^{-t})^n=\sum_{n=0}^\infty e^{-(n+1)t}$ car $e^{-t}\in[0,1[$.\\
+    Puis $I_p=\int_0^{+\infty}\sum_{n=0}^{+\infty}t^pe^{-(n+1)t}\dt=\sum_{n=0}^{\infty}\int_0^{+\infty}t^pe^{-(n+1)t}\dt$.\\
+    On pose $u=(n+1)t$ donc $t=\frac{u}{n+1}$ qui est $\cursive{C}^1$ strictement croissante sur $[0,\infty[\to[0,\infty[$.
+    \begin{equation*}
+        \int t^p e^{-(n+1)t}\dt = \int_0^{+\infty}\frac{u^p}{(n+1)^p}e^{-u}\frac{\du}{n+1}=\frac{1}{(n+1)^{p+1}}\int_0^{+\infty}u^pe^{-u}\du=\frac{p!}{(n+1)^{p+1}}.
+    \end{equation*}
+    Finalement, $I_p=\sum_{n=0}^\infty\frac{p!}{(n+1)^{p+1}}=p!\sum_{n=1}^{\infty}\frac{1}{n^{p+1}}=p!\zeta(p+1)$.\\
+    Justifions l'échange série intégrale. Posons $f_n(t)=t^pe^{-(n+1)t}$ pour $t\in[0,\infty[$.\\
+    $\hra$ $\sum_{n\geq0} f_n$ converge simplement sur $]0,\infty[$ et $\forall t > 0, ~ \sum_{n=0}^{\infty} f_n(t)=\frac{t^p}{e^{t}-1}$.\\
+    $\hra$ $\sum_{n=0}^\infty\int_I |f_n(t)|\dt=\sum_{n=0}^\infty\int_0^{+\infty}t^pe^{-(n+1)t}\dt=p!\sum_{n=1}^{\infty}\frac{1}{n^{p+1}}$.
+\end{ex}
+
+\begin{ex}{}{}
+    On pose $u_n=\int_0^{+\infty}\frac{\dt}{(1+t^2)^n}$ pour $n\geq1$.
+    \begin{enumerate}
+        \item Montrer que $u_n$ décroît vers 0.
+        \item Trouver une relation entre $u_{n+1}$ et $u_n$ par IPP généralisée.
+        \item Nature des séries $\sum_{n\geq1}u_n$ et $\sum_{n\geq1}(-1)^nu_n$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Déjà, $u_n$ est bien définie pour tout $n\geq1$, ensuite $u_{n+1}-u_n=\int_0^{+\infty}\left( \frac{1}{(1+t^2)^{n+1}} - \frac{1}{(1+t^2)} \right)\dt$ par linéarité.\\
+    Donc $u_{n+1}-u_n\leq0$, donc $(u_n)$ décroît. Ensuite, $\forall n \in \N^*, ~ u_n\geq0$, donc $u_n\to l\geq0$ par TLM.\\
+    Montrons que $l=0$ avec le théorème de convergence dominée sur $\R_+^*$ : posons $f_n(t)=\frac{1}{(1+t^2)^n}$ pour $t>0$, $n\geq1$.\\
+    On a $f_n\cs f$ sur $I$ où $f(t)=0$ pour $t\in I$. Et $|f_n|\leq \phi$ avec $\phi=\frac{1}{1+t^2}=f_1(t)$ intégrable sur $I$.\\
+    Par théorème, $\lim u_n = \int_I f = 0$.\\
+    \boxed{2.}
+    \begin{align*}
+        \forall n \geq 1, ~ u_{n+1} &= \int_0^{+\infty}\frac{\dt}{(1+t^2)^{n+1}} = \int_0^{+\infty}\frac{(1+t^2)-t^2}{(1+t^2)^{n+1}}\dt = \int_0^{+\infty}\frac{\dt}{(1+t^2)^n}-\int_0^{+\infty}\frac{t^2}{(1+t^2)^{n+1}}\dt\\
+        &=u_n - \int_0^{+\infty}\frac{t^2}{(1+t^2)^{n+1}}\dt = u_n - \int_0^{+\infty}\frac{1}{2n}\frac{1}{(1+t^2)^n}\dt=(1-\frac{1}{2n})u_n
+    \end{align*}
+    \boxed{3.} Déjà, $\sum_{n\geq1}(-1)^nu_n$ converge d'après le CSSA car $u_n$ décroît vers 0.
+\end{ex}
+
+\begin{ex}{}{}
+    Existence et calcul de $\sum_{n=0}^{\infty}(-1)^n W_n$.
+    \tcblower
+    On rappelle que $W_n$ décroît vers 0, donc d'après le CSSA, la série converge. On note $S$ sa somme.\\
+    On a $0\leq S \leq W_0 = \frac{\pi}{2}$ et même $W_0-1 = \frac{\pi}{2}-1\leq S \leq W_0 = \frac{\pi}{2}$.
+    \begin{equation*}
+        S=\sum_{n=0}^{\infty}(-1)^n\int_0^{\frac{\pi}{2}}(\sin t)^n\dt=\int_0^{\frac{\pi}{2}}\sum_{n=0}^{\infty}(-\sin t)^n\dt.
+    \end{equation*}
+    Sur $[0,\frac{\pi}{2}[$, $0\leq\sin t\leq 1$ puis $\sum_{n=0}^{\infty}(-\sin t)^n = \frac{1}{1+\sin t}$.\\
+    On a pu échanger la série et l'intégrale : on pose $f_n(t)=(-\sin t)^n$ pour $t\in[0,\frac{\pi}{2}[$.
+    \begin{equation*}
+        \forall n \in \N, ~ \int_I|f_n| = \int_0^{\frac{\pi}{2}}(\sin t)^n\dt = W_n.
+    \end{equation*}
+    Et on sait que $\sum_{n\geq0} W_n$ diverge, avec $W_n\sim\sqrt{\frac{\pi}{2n}}$, donc l'hypothèse n'est pas vérifiée. Soit $N\in\N$.
+    \begin{align*}S_N&=\sum_{n=0}^N\int_0^\frac{\pi}{2}(-1)^n(\sin t)^n\dt = \int_0^{\frac{\pi}{2}}\sum_{n=0}^N(-\sin t)^n=\int_0^\frac{\pi}{2}\frac{1-(-1)^{N+1}\sin^{N+1}(t)}{1+\sin t}\dt\\&=\int_0^{\frac{\pi}{2}}\frac{\dt}{1+\sin t}\dt + \int_0^{\frac{\pi}{2}}\frac{(-1)^N(\sin t)^{N+1}}{1+\sin t}\dt\end{align*}
+    Or :
+    \begin{equation*}
+        \left|\int_0^\frac{\pi}{2}\frac{(-1)^N(\sin t)^{N+1}}{1+\sin t}\dt\right| \leq \int_0^\frac{\pi}{2}\frac{(\sin t)^{N+1}}{1+\sin t}\dt  \leq \int_0^{\frac{\pi}{2}}(\sin t)^{N+1}\dt = W_{N+1}\xrightarrow[N\to+\infty]{}0
+    \end{equation*}
+    Donc $S=\lim_{N\to+\infty}S_N=\int_0^{\frac{\pi}{2}}\frac{\dt}{1+\sin t}$. Posons $u=\tan\frac{t}{2}$, avec $t\in[0,\frac{\pi}{2}]$ donc $u\in[0,1]$.
+    \begin{equation*}
+        \tan(a+b)=\frac{\tan a + \tan b}{1 - \tan a \tan b} \et \tan(a+\frac{\pi}{2})=-\frac{1}{\tan a}.
+    \end{equation*}
+    Donc $\tan t = \frac{2u}{1-u^2}$, puis $a+\tan^2t=\frac{1}{\cos^2t}$, donc $\cos^2t=\frac{1}{1+\tan^2t}$ et $\cos t \geq 0$ pour $t\in[0,\frac{\pi}{2}]$.\\
+    Donc $\cos t = \frac{1}{\sqrt{1+\tan^2t}}=\frac{1}{\sqrt{1+\frac{4u^2}{(1-u^2)^2}}}=\frac{1-u^2}{\sqrt{(1-u^2)^2+4u^2}}=\frac{1-u^2}{\sqrt{(1+u^2)^2}}=\frac{1-u^2}{1+u^2}$, puis $\sin t = \frac{2u}{1+u^2}$.\\
+    Enfin, $u=\tan\frac{t}{2}$, donc $\du = \frac{1}{2}(1+\tan^2 \frac{t}{2})\dt$ donc $\du = \frac{1}{2}(1+u^2)\dt$.
+    \begin{equation*}
+        \int_0^{\frac{\pi}{2}}\frac{\dt}{1+\sin t} = \int_0^1\frac{1}{1+\frac{2u}{1+u^2}}\frac{2\du}{1+u^2} = \int_0^1\frac{2\du}{1+2u+u^2}=2\int_0^1\frac{\du}{(1+u)^2}=1.
+    \end{equation*}
+    Finalement, $\sum_{n=0}^\infty(-1)^nW_n=1$.
+\end{ex}
+
+\pagebreak
+
+\begin{ex}{}{}
+    \begin{enumerate}
+        \item Justifier $\ds\sum_{n\geq0}\frac{(-1)^n}{2n+1}$ converge. On note $S$ sa somme.
+        \item Montrer que $\int_0^1\frac{\dt}{1+t^2}=\sum_{n=0}^\infty\frac{(-1)^n}{2n+1}$.
+        \item En déduire $S$. Retrouver ce résultat avec des séries entières.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On pose $u_n=\frac{1}{2n+1}$, décroissante vers 0, puis par CSSA, $\sum(-1)^nu_n$ converge.\\
+    \boxed{2.} On a $\forall t \in [0,1[, ~ \frac{1}{1+t^2}=\sum_{n=0}^{\infty}(-t^2)^n$ puis :
+    \begin{equation*}
+        \int_0^1\frac{\dt}{1+t^2} = \int_0^1 \sum_{n=0}^\infty(-t^2)^n\dt = \sum_{n=0}^{\infty}\int_0^1(-t^2)^n\dt=\sum_{n=0}^\infty(-1)^n\left[ \frac{t^2{n+1}}{2n+1} \right]^1_0.
+    \end{equation*}
+    Justifions l'échange série intégrale :
+    \begin{align*}
+        \forall N \in \N, ~ \sum_{n=0}^N\int_0^1(-t^2)^n\dt&=\int_0^1\sum_{n=0}^N(-t^2)^n\dt=\int_0^1\frac{1-(-1)^{N+1}t^{2(N+1)}}{1+t^2}\dt=\int_0^1\frac{\dt}{1+t^2}+\int_0^1\frac{(-1)^Nt^{2(N+1)}}{1+t^2}\dt.
+    \end{align*}
+    Et $|R_N|\leq\int_0^1\frac{t^{2(N+1)}}{1+t^2}\dt\leq\int_0^1t^{2(N+1)}\dt=\frac{1}{2N+3}\to0$.\\
+    Par passage à la limite : $\sum_{n=0}^\infty\int_0^1(-t^2)^n\dt = \int_0^1\frac{\dt}{1+t^2}=\left[ \arctan t \right]_0^1=\frac{\pi}{4}$.\\
+    \boxed{3.} On pose $\forall t \in [-1,1]$, $\arctan(t) = f(t)$. Or $f$ est définie en 1, avec le CSSA, donc par théorème d'Abel radial, $f$ est continue en 1, et même en $-1$, par passage à la limite, et la continuité en 1 : $\arctan 1 = f(1)$, puis $S=\frac{\pi}{4}$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\section{Intégrales à paramètres.}
+
+\vspace*{-0.3cm}
+
+C'est la version continue des séries de fonctions $\sum u_n(x)$.
+
+\begin{ex}{}{}
+    \begin{equation*}
+        \G(x)=\int_0^{\infty}t^{x-1}e^{-t}\dt
+    \end{equation*}
+    \tcblower
+    Soit $x\in\R$ fixé, on pose $g(t)=t^{x-1}e^{-t}$ pour $t\in]0,+\infty[$, cpm sur $]0,+\infty[$.\\
+    On localise deux problèmes de convergence, en 0 et $\infty$. On a $g\geq0$, on peut appliquer le théorème de comparaison.\\
+    En $\infty$ : $g(t)=o(\frac{1}{t^2})$, donc par comparaison, $\int_{1}^{\infty} g$ converge.\\
+    En 0 : $g(t)\sim \frac{1}{t^{1-x}}$ convergente ssi $x>0$, donc $D\G=]0,+\infty[$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{thm}{Continuité des intégrales à paramètres.}{}
+    Soit $F(x,t)=\int_I f(x,t)\dt$ pour $x\in J$ où $I,J$ sont deux intervalles de $\R$.\\
+    On suppose que $\forall x\in J, ~ t\mapsto f(x,t)$ est cpm sur $I$, et $\forall t \in I, ~ x\mapsto f(x,t)$ est continue sur $J$.\\
+    S'il existe $\phi$ cpm sur $i$ telle que $\forall x \in J, ~ |f(x,t)|\leq\phi(t)$ avec $\phi$ intégrable sur $I$, alors $F$ est continue sur $J$.
+    \tcblower
+    Il s'agit de montrer que $F$ est continue en tout point de $J$. Soit $x_0\in J$.\\
+    Montrons que $F$ est continue en $x_0$ en utilisant la caractérisation par les suites.\\
+    Soit $x_n\to x_0$ dans $J$, $F(x_0) = \int_If(x_n,t)\dt$, on applique le TCD, en posant $k_n(t)=f(x_n,t)$ :\\
+    On a $k_n \cs k$ sur $I$ avec $k(t)=f(x_0,t)$ pour tout $t\in I$, alors $\forall t \in I, ~ |k_n(t)|=|f(x_n,t)|\leq\phi(t)$ intégrable sur $I$.\\
+    Par TCD : $\lim_{n\to+\infty} F(x_n) = \int_I f(x_0,t)\dt=F(x_0)$. On a bien $F$ continue en $x_0$.
+\end{thm}
+
+\begin{ex}{}{}
+    Soit $F(x)=\int_0^{\frac{\pi}{2}}\frac{\sin(xt)}{\sin t}\dt$. Montrer que $F$ est définie sur $\R$, impaire, puis continue sur $\R$.
+    \tcblower
+    Soit $x\in\R$. On pose $f(t)=\frac{\sin(xt)}{\sin t}$ pour $t\in]0,\frac{\pi}{2}]$, cpm sur $]0,\frac{\pi}{2}]$.\\
+    En 0 : $\lim_{t\to0_+} f(t)=x$ car $\sin(xt)\sim xt$ et $\sin(t)\sim t$, on prolonge donc en 0 avec $f(0)=x$, donc $DF=\R$.\\
+    Puis $\forall x \in \R, ~ F(-x)=\int_0^{\frac{\pi}{2}}\frac{-\sin(xt)}{\sin t}\dt = -F(x)$ par linéarité.\\
+    On pose $\forall t \in ]0,\frac{\pi}{2}], ~ \forall x \in \R, ~ f(x,t)=\frac{\sin(xt)}{\sin t}$. On vérifie les hypothèses du théorème :\\
+    On a $\forall t \in ]0,\frac{\pi}{2}], ~ x\mapsto f(x,t)$ est continue sur $\R$.\\
+    On a $\forall A \in \R_+, ~ \forall x \in [-A,A], ~ \forall t \in ]0,\frac{\pi}{2}], ~ |f(x,t)|\leq A\frac{t}{\sin t}=\phi(t)$.\\
+    Avec $\phi$ cpm et intégrable sur $]0,\frac{\pi}{2}]$, par théorème $F$ est continue sur $[-A,A]$ pour tout $A$ donc continue sur $\R$.
+\end{ex}
+
+\begin{ex}{}{}
+    Soit $F(x)=\int_1^\infty\frac{\dt}{1+t^x}$.
+    \begin{enumerate}
+        \item Montrer que $F$ est définie et continue sur $]1,+\infty[$.
+        \item Montrer que $F$ est décroissante sur $]1,+\infty[$.
+        \item Déterminer $\lim_{x\to 1}F(x)$ et $\lim_{x\to+\infty}F(x)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $x>1$, montrons que l'intégrale que définit $F$ est convergente.\\
+    On pose $\forall t \in [1,+\infty[, ~ f(t)=\frac{1}{1+t^x}$, cpm sur $[1,+\infty[$. Un seul problème de convergence en $+\infty$.\\
+    On a $f(t)\sim_{\infty}\frac{1}{t^x}$ et positive, par théorème de comparaison, $\int_1^{+\infty} f$ et $\int_1^\infty\frac{\dt}{t^x}$ sont de mêmes natures, ici convergentes. On a montré que $]1,+\infty[ ~ \subset$ DF.\\
+    Vérifions que $F$ est continue sur $]1,+\infty[$. On pose $\forall x>1, ~ \forall t \geq 1, ~ f(x,t)=\frac{1}{1+t^x}$, cpm.\\
+    De plus, $\forall t \geq 1, ~ x\mapsto f(x,t)=\frac{1}{1+e^{x\ln t}}$ est continue sur $]1,+\infty[$ (hypothèse essentielle).\\
+    On a $\forall a > 1, ~ \forall x > a, ~ \forall t \geq 1, ~  |f(x,t)|\leq\frac{1}{1+t^a}=\phi(t)$ avec $\phi$ cpm sur $[1,+\infty[$.\\
+    Par théorème, $f$ est continue sur $]1,+\infty[$.\\
+    \boxed{2.} Soit $1<x\leq y$, alors $\forall t \geq 1, ~ t^x \leq t^y$ puis $\frac{1}{1+t^x}\geq\frac{1}{1+t^y}$.\\
+    Par croissance de l'intégrale généralisée, $F(x)\geq F(y)$, donc $F$ est décroissante sur $]1,+\infty[$.\\
+    Ainsi, $F$ est décroissante, positive donc minorée par 0, donc par le TLM, elle admet une limite finie en $+\infty$.\\
+    \boxed{3.} Soit $x_n$ telle que $x_n\to +\infty$, alors $F(x_n)=\int_1^{+\infty}\frac{\dt}{1+t^{x_n}}$. On pose $\forall t \geq 1, ~ \forall n \in \N, ~  f_n(t)=\frac{1}{1+t^{x_n}}$.\\
+    Alors $f_n\cs f$ sur $[1,+\infty[$ avec $\forall t > 1, ~ f(t)=0$ et $f(1)=\frac{1}{2}$, puis $\forall n \in \N, ~ |f_n|\leq\phi$ en posant $\phi(t)=\frac{1}{1+t^2}$.\\
+    Par TCD, $F(x_n)=\int_1^{+\infty}f_n(t)\dt\xrightarrow[n\to+\infty]{}\int_1^{+\infty}f(t)\dt=0$, donc $\lim_{x\to+\infty}F(x)=0$.\\
+    En $1$, on conjecture que la limite est $+\infty$. $\forall x > 1, ~ \forall t \geq 1, ~ \frac{1}{1+t^x}\geq\frac{1}{2t^x}$ puis $F(x)\geq\frac{1}{2}\frac{1}{x-1}\to+\infty$.
+\end{ex}
+
+\pagebreak
+
+\begin{ex}{}{}
+    On pose :
+    \begin{equation*}
+        f(x) = \int_0^1\frac{\dt}{(1+t^2)(x^2+t^2)}.
+    \end{equation*}
+    \begin{enumerate}
+        \item Montrer que D$f=\R^*$, et que $f$ est paire sur D$f$.
+        \item Calculer $f(x)$ pour $x\notin\{0,1,-1\}$ avec une décomposition en éléments simples.
+        \item Montrer que $f$ est continue sur $\R^*$.
+        \item En déduire $I=\int_0^1\frac{\dt}{(1+t^2)^2}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $x\in\R$, on pose $\forall t \in [0,1], ~ g(t)=\frac{1}{(1+t^2)(x^2+t^2)}$.\\
+    Si $x\neq0$, $g$ est cpm sur $[0,1]$, l'intégrale est propre donc convergente, donc $R^*\subset$ D$f$.\\
+    Si $x=0$, alors $\forall t \in ]0,1], ~ g(t)=\frac{1}{(1+t^2)t^2}$ cpm sur $]0,1]$, on a $g(t)\sim_0\frac{1}{t^2}$ et positive.\\
+    Par théorème de comparaison, $\int_0^1 g$ et $\int_0^1\frac{\dt}{t^2}$ sont de mêmes natures, ici divergentes, donc $0\notin$ D$f$.\\
+    Puis $\forall x \in \R^*, ~ f(-x)=f(x)$ trivial.\\
+    \boxed{2.} Pour $x\notin\{0,1,-1\}$, 
+    \begin{equation*}
+        \frac{1}{(1+t^2)(x^2+t^2)}= \frac{\cancel{at}+b}{1+t^2} + \frac{\cancel{ct}+d}{x^2+t^2}
+    \end{equation*}
+    Ici, la fonction est paire pour $t$, donc $a=c=0$, il reste à déterminer $b$ et $d$.
+    \begin{equation*}
+        \frac{1}{(1+t^2)(x^2+t^2)} = - \frac{1}{1-x^2}\frac{1}{1+t^2} + \frac{1}{1-x^2}\frac{1}{x^2+t^2}.
+    \end{equation*}
+    Donc :
+    \begin{align*}
+        f(x) &= - \frac{1}{1-x^2}\int_0^1\frac{1}{1+t^2}\dt + \frac{1}{1-x^2}\int_0^1\frac{1}{x^2+t^2}\dt \\
+        &= - \frac{1}{1-x^2}\left[ \arctan t \right]_0^1 - \frac{1}{1-x^2}\left[ \frac{1}{x}\arctan\left( \frac{t}{x} \right)\right]_0^1\\
+        &= \frac{1}{1-x^2}\left( \frac{1}{x}\arctan\frac{1}{x}-\frac{\pi}{4} \right)
+    \end{align*}
+    \boxed{3.} Vérifions que $f$ est continue sur $\R^*$ en appliquant le théorème de continuité des intégrales à paramètres.\\
+    Posons $g(x,t)=\frac{1}{(1+t^2)(x^2+t^2)}$ pour $x\neq0$ et $t\in[0,1]$. On a $\forall t \in [0,1], ~ x\mapsto g(x,t)$ continue sur $\R^*$.\\
+    De plus, $\forall a > 0, ~ \forall x \geq a, ~ \forall t \in [0,1], ~ |g(x,t)|\leq\frac{1}{(1+t^2)(a^2+t^2)}=g(a,t)$ intégrable sur $[0,1]$.\\
+    On en conclut que $f$ est continue sur $]0,+\infty[$, et $f$ est paire, donc continue sur $\R^*$.\\
+    \boxed{4.} $I=f(1)$, or $f$ est continue en 1, donc :
+    \begin{equation*}
+        \forall x \notin \{0,1,-1\}, ~ f(x)=\frac{h(x)}{1-x^2}, ~ \nt{avec} ~ h(x)=\frac{1}{x}\arctan\frac{1}{x}-\frac{\pi}{4}.
+    \end{equation*}
+    Or $1-x^2\sim_12(1-x)$, et $h(x)\sim_1-\left( \frac{\pi}{4} + \frac{1}{2} \right)(x-1)$ avec la formule de Taylor-Young, donc $f(x)\sim_1\frac{\pi}{8}+\frac{1}{4}$.
+\end{ex}
+
+\begin{rappel}{}{}
+    Si $\forall n \in \N, ~ u_n$ est $\cursive{C}^1$ sur $I$, et que $\sum_{n\geq0}u_n'$ $\CU$ sur $I$, alors $\sum_{n=0}^\infty u_n(x)$ est $\cursive{C}^1$ sur $I$.
+\end{rappel}
+
+\begin{thm}{Dérivation sous le signe intégral.}{}
+    Soit $\forall x\in J, ~ F(x)=\int_I f(x,t)\dt$ avec $I,J$ deux intervalles de $\R$. On suppose que :
+    \begin{enumerate}
+        \item $\forall x \in J ~ t\mapsto f(x,t)$ est cpm et intégrable sur $I$.
+        \item $f$ admet une dérivée partielle selon $x$ sur $J\times I$, et $\forall t \in I, ~ x\mapsto\frac{\6 f}{\6 x}(x,t)$ est continue sur $J$.
+        \item $\forall t \in I, ~ \forall x \in J, ~ \left|\frac{\6 f}{\6 x}(x,t)\right|\leq\phi(t)$ avec $\phi$ cpm et intégrable sur $I$.
+    \end{enumerate}
+    Alors $F$ est $\cursive{C}^1$ sur $J$ et $\forall x \in J, ~ F'(x)=\int_I\frac{\6 f}{\6 x}(x,t)\dt$.
+    \tcblower
+    Soit $x_0\in J$, on vérifie que $F$ est dérivable en $x_0$. Soit $x_n\to x_0$ dans $J$.
+    \begin{equation*}
+        \frac{F(x_n)-F(x_0)}{x_n-x_0} = \int_I \frac{f(x_n,t) - f(x_0,t)}{x_n - x_0} \xrightarrow[n\to+\infty]{} \int_I \frac{\6 f}{\6 x}(x_0, t)\dt. \quad (\nt{TCD})
+    \end{equation*}
+    Donc $f$ est dérivable en $x_0$ et $F'(x_0)=\int_I\frac{\6 f}{\6 x}(x_0,t)\dt$, et $F'$ est continue avec le théorème de continuité des intégrales à paramètres.
+\end{thm}
+
+\begin{ex}{}{}
+    On pose :
+    \begin{equation*}
+        \forall x \in \R, ~ F(x) = \int_0^{\frac{\pi}{2}}\frac{\sin(xt)}{\sin t}\dt.
+    \end{equation*}
+    On a déjà vu que D$f=\R$, $F$ impaire et $F$ continue sur $\R$.\\
+    Montrer que $F$ est $\cursive{C}^1$ sur $\R$ et calculer $F'$.
+    \tcblower
+    On pose $\forall t \in ]0,\frac{\pi}{2}], ~ \forall x \in \R, ~ f(x,t)=\frac{\sin(xt)}{\sin t}$, qui est intégrable sur $[0,\frac{\pi}{2}]$ pour $x$ fixé (facile).\\
+    Elle admet une dérivée partielle par rapport à $x$ : $\forall x \in \R, ~ \forall t \in ]0,\frac{\pi}{2}], ~ \frac{\6 f}{\6 x}(x,t) = \frac{t\cos(xt)}{\sin t}$.\\
+    Pour $t\in]0,\frac{\pi}{2}], ~ x\mapsto\frac{\6 f}{\6 x}(x,t)$ est continue sur $\R$, et $\forall x \in \R, ~ \forall t \in ]0,\frac{\pi}{2}], ~ \left|\frac{\6 f}{\6 x}(x,t)\right|\leq\frac{t}{\sin t}=\phi(t)$.\\
+    Avec $\phi$ cpm et intégrable sur $]0,\frac{\pi}{2}]$, car prolongeable par continuité en 0.\\
+    Par théorème de dérivation sous le signe intégral, $F$ est $\cursive{C}^1$ sur $\R$ et $\forall x \in \R, ~ F'(x) = \int_0^{\frac{\pi}{2}}\frac{t\cos(xt)}{\sin t}\dt$.
+\end{ex}
+
+\begin{thm}{Dérivations successives.}{}
+    Soit $F(x)=\int_I f(x,t)\dt$ pour $x\in J$, avec $I,J$ intervalles de $\R$. Soit $p\in\N$. On suppose que :
+    \begin{enumerate}
+        \item $f$ admet une dérivée partielle $p^2$ selon $x$, et $\forall t \in I, ~ x\mapsto \frac{\6^p f}{\6 x^p}(x,t)$ est continue sur $J$.
+        \item $\forall k < p, ~ \forall x \in J, ~ t\mapsto \frac{\6^k f}{\6 x^k}(x,t)$ est intégrable sur $I$.
+        \item $\forall x \in J, ~ \forall t \in I, ~ \left|\frac{\6^p f}{\6 x^p}(x,t)\right|\leq\phi(t)$ avec $\phi$ cpm et intégrable sur $I$.
+    \end{enumerate}
+    Alors $F$ est $\cursive{C}^p$ sur $K$ et $\forall x \in J, ~ F^{(p)}(x)=\int_I \frac{\6^p f}{\6 x^p}(x,t)\dt$.
+\end{thm}
+
+\pagebreak
+
+\begin{ex}{}{}
+    On pose :
+    \begin{equation*}
+        F(x) = \int_0^{+\infty} \frac{1-\cos(xt)}{t^2}e^{-t}\dt.
+    \end{equation*}
+    \begin{enumerate}
+        \item Donner le domaine de définition $D$ de $F$, montrer que $F$ est paire.
+        \item Montrer que $F$ est continue sur $D$.
+        \item Montrer que $F$ est $\cursive{C}^2$ sur $D$ et calculer $F''$.
+        \item En déduire $F$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $x\in\R$, on pose $f(t)=\frac{1-\cos(xt)}{t^2}e^{-t}$ pour $t\in\R_+^*$, continue sur $\R_+^*$.\\
+    En 0, on prolonge par continuité en posant $f(0)=\frac{x^2}{2}$ (DL).\\
+    En $+\infty$, $f(t)=O(e^{-t})$, donc l'intégrale converge.\\
+    L'intégrale converge pour tout $x\in\R$ donc $D=\R$, puis $\forall x \in \R, ~ F(-x)=F(x)$ par parité du cosinus.\\
+    \boxed{2.} Montrons que $F$ est continue sur $\R$. On utilise le théorème de continuité des intégrales à paramètres.\\
+    On pose $f(x,t)=\frac{1-\cos xt}{t^2}e^{-t}$ pour $x\in\R_+$, $t\in\R^*_+$.\\
+    Pour $t>0$, $x\mapsto f(x,t)$ est continue sur $[0,+\infty]$;\\
+    On a $\cos 2x=1-2\sin^2(x)$, donc $1-\cos2x=2\sin^2x$, puis $|f(x,t)|=\frac{2\sin^2(\frac{x-t}{2})}{t^2}e^{-t}\leq\frac{2|\frac{x-t}{2}|^2}{t^2}e^{-t}=\frac{x^2}{2}e^{-t}$.\\
+    La majoration dépend de $x$, on fait une domination locale :
+    \begin{equation*}
+        \forall A \geq 0, ~ \forall x \in [0,A], ~ \forall t >0, ~ |f(x,t)|\leq\frac{A^2}{2}e^{-t}=\phi(t).
+    \end{equation*}
+    $\phi$ est cpm et intégrable sur $]0,\infty[$, le théorème s'applique donc $F$ est continue sur $\R_+$ puis sur $\R$ par parité.\\
+    \boxed{3.} $f$ admet des dérivées premières et secondes par rapport à $x$ :
+    \begin{equation*}
+        \forall x \in \R, ~ \forall t > 0, ~ \frac{\6 f}{\6 x}(x,t) = \frac{t\sin xt}{t^2}e^{-t} = \frac{\sin xt}{t}e^{-t} \et \frac{\6^2 f}{\6 x^2}(x,t)=\cos(xt)e^{-t}.
+    \end{equation*}
+    On a $\forall x \in \R, ~ t\mapsto f(x,t)$ est intégrable sur $]0,+\infty[$.\\
+    On a $\forall x \in \R, ~ t\mapsto\frac{\6 f}{\6 x}(x,t)$ intégrable sur $\R_+^*$ : prolongeable en 0, et $o(\frac{1}{t^2})$ en $+\infty$.\\
+    On a $\forall t > 0, ~ x\mapsto \frac{\6^2 f}{\6 x^2}(x,t)$ continue sur $\R$ et intégrable.\\
+    Par théorème, $F$ est $\cursive{C}^2$ sur $\R$ et on peut dériver sous le signe intégral :
+    \begin{align*}
+        \forall x \in \R, ~ F''(x) &= \int_0^{+\infty}\cos(xt)e^{-t}\dt = \Re\left( \int_0^{+\infty} e^{(ix-1)t}\dt \right)\\
+        &=\Re\left( \frac{e^{(ix-1)t}}{ix-1} \right)_0^{+\infty} = \Re\left(\frac{1}{1-ix}\right) = \frac{1}{1+x^2}
+    \end{align*}
+    \boxed{4.} On primitive : $F'(x)=\arctan x + C$, or $F'$ est impaire car $F$ est paire, donc $F'(0)=0$ donc $F'(x)=\arctan x$.\\
+    Une primitive d'arctan est $x\arctan x - \frac{1}{2}\ln|1+x^2|+\a$ (par IPP sur $\int \arctan$).\\
+    En évaluant en 0, on obtient $\a=0$, donc $\forall x \in \R, ~ F(x)=x\arctan x - \frac{1}{2}\ln|1+x^2|$
+\end{ex}
+
+\pagebreak
+
+\begin{ex}{}{}
+    Soit $f\in\cursive{C}^{\infty}(\R)$, on pose :
+    \begin{equation*}
+        g(x) = \begin{cases}
+            \frac{f(x)-f(0)}{x} ~ \nt{si} ~ x\neq0\\
+            f'(0) ~ \nt{sinon}
+        \end{cases}
+    \end{equation*}
+    \begin{enumerate}
+        \item Calculer $\int_0^1 f'(tx)\dt$ pour $x\in\R$.
+        \item En déduire que $g$ est $\cursive{C}^\infty$ sur $\R$ et calculer $g^{(n)}(0)$ pour tout $n\in\N$.
+        \item Retrouver le résultat avec l'hypothèse $f\in\cursive{C}^{\infty}$ et DSE0.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Posons $u=xt$, alors $t=\frac{u}{x}=\phi(u)$ $\cursive{C}^1(]0,x[,[0,1])$.\\
+    Par changement de variable : $\int_0^1 f'(tx)\dt = \int_0^x f'(u)\frac{\du}{x} = \frac{f(x)-f(0)}{x}$.\\
+    Si $x=0, ~ \int_0^1 f'(tx)\dt = \int_0^1f'(0)\dt=f'(0)$ dans tous les cas, $x\neq0$ car $x=0$, et $\int_0^1 f'(tx)\dt=g(x)$.\\
+    \boxed{2.} On a écrit $g$ sous la forme d'une intégrale à paramètres avec $1.$\\
+    On peut montrer que $g$ est $\cursive{C}^{\infty}$ sur $\R$ en utilisant le théorème de dérivation des intégrales à paramètres.\\
+    Posons $h(x,t)=f'(tx)$ pour $t\in[0,1]$ et $x\in\R$, elle admet des dérivées partielles en $x$ à tout ordre :
+    \begin{equation*}
+        \forall x \in \R, ~ \forall t \in [0,1], ~ \forall k \in \N, ~ \frac{\6^k f}{\6 x^k}(x,t) = t^k f^{(k+1)}(tx).
+    \end{equation*}
+    Soit $n\in\N$, justifions que $g$ est $\cursive{C}^n$ sur $\R$ :\\
+    On a $\forall x \in \R, ~ \forall k < n, ~ t\mapsto \frac{\6^k h}{\6 x^k}(x,t)$ intégrable sur $[0,1]$.\\
+    On a $\forall t \in [0,1], ~ x\mapsto \frac{\6^n h}{\6 x^n}(x,t)$ continue sur $\R$.\\
+    On a $\forall A \geq 0, ~ \forall x \in [-A,A], ~ \forall t \in [0,1], ~ \left|\frac{\6^n h}{\6 x^n}(x,t)\right|\leq t^n\sup_{[-A,A]}|f^{(n+1)}|=\phi(t)$.\\
+    Où $\phi$ est cpm, intégrable sur $[0,1]$. L'hypothèse de domination locale est vérifiée.\\
+    Finalement, $g$ est $\cursive{C}^{\infty}$ sur $\R$ pour tout $n\in\N$, et $\forall x \in \R, ~ g^{(n)}(x)=\int_0^1 t^nf^{(n+1)}(tx)\dt$.\\
+    En particulier, $g^{(n)}(0)=\int_0^1 t^n f^{(n+1)}(0)\dt = \frac{f^{(n+1)(0)}}{n+1}$.\\
+    \boxed{3.} Supposons que $\forall x \in \R, ~ f(x)=\sum_{n=0}^{\infty}a_nx^n$ de rayon de convergence infini.\\
+    On sait que $\forall n \in \N, ~ a_n = \frac{f^{(n)}(0)}{n!}$, que $f$ est $\cursive{C}^{\infty}$ sur $\R$ et que l'on peut dériver terme-à-terme.
+    \begin{equation*}
+        \forall x \neq 0, ~ g(x) = \frac{1}{x}(f(x)-f(0)) = \sum_{n=0}^{\infty} a_{n+1}x^n.
+    \end{equation*}
+    Donc $g$ est $\cursive{C}^\infty$ sur $\R$ comme somme d'une série entière de rayon infini, et $\forall n \in \N, ~ a_{n+1}=\frac{g^{(n)}(0)}{n!}$.\\
+    Donc $g^{(n)}(0)=n!$, $a_{n+1}=n!\frac{f^{(n+1)}(0)}{(n+1)!}$, on retrouve le résultat.
+\end{ex}
+
+\pagebreak
+
+\section{Intégrales classiques.}
+
+\begin{ex}{}{}
+    \begin{equation*}
+        \G(x) = \int_0^{+\infty}t^{x-1}e^{-t}\dt.
+    \end{equation*}
+    On a déjà vu qu'elle est définie sur $\R_+^*$, que $\forall x \in\R_+^*, ~ \G(x+1)=x\G(x)$ par IPP.
+    \begin{enumerate}
+        \item Vérifier que $\G$ est continue sur $\R_+^*$.
+        \item Montrer que $\G$ est de classe $\cursive{C}^1$, puis calculer $\G'$ sur $\R_+^*$.
+        \item Vérifier que $\G$ est de classe $\cursive{C}^2$ sur $\R_+^*$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $\forall x,t \in \R_+^* ~:~ f(x,t)=t^{x-1}e^{-t}$. On a $\forall t > 0, ~ x\mapsto f(x,t)=e^{(x-1)\ln t}e^{-t}$ continue sur $\R_+^*$.\\
+    Soient $0<a<b$, si $t>1$ : $|f(x,t)|\leq e^{(b-1)\ln t}e^{-t}=t^{b-1}e^{-t}$.\\
+    Si $t<1$, $\forall x \in [a,b], ~ |f(x,t)|\leq e^{(a-1)\ln t}e^{-t}=t^{a-1}e^{-t}$.\\
+    Posons $\phi(t)=t^{b-1}e^{-t}$ si $t>1$, $\phi(t)=t^{a-1}e^{-t}$ si $t<1$, cpm et intégrable sur $\R_+^*$.\\
+    Donc $\G$ est continue sur $\R$.\\
+    \boxed{2.} Soit $\forall x,t \in \R_+^*, ~ f(x,t)=t^{x-1}e^{-t}$. Alors $\frac{\6 f}{\6 x}=\left( \ln t \right)t^{x-1}e^{-t}$. On applique le théorème de dérivation.\\
+    On a $\forall x > 0, ~ t\mapsto f(x,t)$ est intégrable sur $\R_+^*$.\\
+    On a $\forall t > 0, x\mapsto \frac{\6 f}{\6 x}(x,t)=e^{(x-1)\ln t}(\ln t)e^{-t}$ continue sur $\R_+^*$.\\
+    Domination locale : soit $0<a<b$, $\forall x \in [a,b], ~ \forall t \geq 1, ~ \left|\frac{\6 f}{\6 x}(x,t)\right|\leq e^{(b-1)\ln t}(\ln t)e^{-t}=\frac{\ln t}{t^{b-1}}e^{-t}$.\\
+    Puis $\forall t \in ]0,1[, ~ \left|\frac{\6 f}{\6 x}(x,t)\right|\leq e^{(a-1)\ln t}|\ln t| e^{-t}=\frac{|\ln t|}{t^{1-a}}e^{-t}=\phi(t)$ qui est cpm et intégrable sur $\R_+^*$ :\\
+    En l'infini, $\phi(t)=o\left( \frac{1}{t^2} \right)$ par cc, et en 0, $\phi(t)\sim\frac{|\ln t|}{t^{1-a}}$ puis pour $\a\in]1-a,1[$, $\phi(t)=o(\frac{1}{t^\a})$.\\
+    Donc $\G$ est $\cursive{C}^1$ sur $]0,+\infty[$ et $\forall x > 0, ~ \G'(x)=\int_0^{+\infty}(\ln t)t^{x-1}e^{-t}\dt$.\\
+    \boxed{3.} On pose $\forall x>0, ~ \forall t > 0, ~ f(x,t)=t^{x-1}e^{-t}$.
+    \begin{equation*}
+        \frac{\6^2 f}{\6 x^2}(x,t)=\left( \ln t \right)^2 t^{x-1} e^{-t}
+    \end{equation*}
+    On vérifie les hypothèses du théorème de dérivation.\\
+    $\forall x > 0, ~ t\mapsto f(x,t)$ et $t\mapsto\frac{\6 f}{\6 x}(x,t)$ sont intégrables sur $\R_+^*$; $\forall t > 0, ~ x\mapsto\frac{\6^2 f}{\6 x^2}(x,t)$ est continue sur $\R_+^*$.\\
+    Soit $0<a<b$, $\forall x \in [a,b], ~ \forall t > 0, ~ \left|\frac{\6^2 f}{\6 x^2}(x,t)\right| \leq \phi(t)$, avec $\phi(t)=(\ln t)^2 t^{b-1}e^{-t}$ si $t\geq 1$ et $\phi(t)=(\ln t)^2t^{a-1}e^{-t}$ sinon, avec $\phi$ cpm et intégrable sur $\R_+^*$.\\
+    \boxed{4.} $\G''$ est positive sur $\R_+^*$ par positivité de l'intégrale généralisée.\\
+    On en déduit que $\G'$ croît sur $\R_+^*$, et on sait que $\G(n+1)=n!$.\\
+    En particulier, $\G(1)=0!=1$ et $\G(2)=1!=1$, $\G$ est continue sur $[1,2]$, dérivable sur $]1,2[$, et $\G(1)=\G(2)$, donc par Rolle, $\exists c \in ]1,2[, ~ \G'(c)=0$.\\
+    On a $\G(n+1)=n!$ donc $\G(x)\xrightarrow[x\to+\infty]{}+\infty$, et $\G(x+1)=x\G(x)$ donc $\G(x+1)\xrightarrow[x\to0]{}1$.\\
+    Puis $x\G(x)\sim_01$ i.e. $\G(x)\sim_0\frac{1}{x}$ donc $\G(x)\xrightarrow[x\to0]{}+\infty$.
+\end{ex}
+
+\pagebreak
+
+\begin{ex}{}{}
+    Vérifier que l'intégrale converge sur $I$.
+    \begin{equation*}
+        I=\int_0^{+\infty}\frac{e^{-t}}{\sqrt{t}}\dt; \quad F(x)=\int_0^{+\infty}\frac{e^{-xt}}{(1+t)\sqrt{t}}\dt
+    \end{equation*}
+    \begin{enumerate}
+        \item Montrer que $I$ converge.
+        \item Donner l'ensemble $D$ de définition de $F$.
+        \item Montrer que $F$ est continue sur $D$.
+        \item Montrer que $F$ est $\cursive{C}^1$ sur $\R_+^*$.
+        \item Calculer $F-F'$ et en déduire une équation différentielle vérifiée par $F$.  
+        \item Calculer $F(0)$ et $\ds\lim_{x\to+\infty} F(x)$
+        \item Résoudre l'équation différentielle vérifiée par $F$ et en déduire $I$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On pose $f(t)=\frac{e^{-t}}{\sqrt{t}}$ pour $t\in\R_+^*$. Alors $f$ est cpm sur $\R_+^*$; en 0 : $f(t)\sim\frac{1}{\sqrt{t}}$ convergente.\\
+    En $+\infty$, $f(t)=o(\frac{1}{t^2})$ par c.c, et $f$ intégrable sur $[1,+\infty[$. Remarque. $I=\G(\frac{1}{2})$.\\
+    \boxed{2.} On pose $f(t)=\frac{e^{-xt}}{(1+t)\sqrt{t}}$ pour $t\in\R_+^*$, cpm.\\
+    En 0 : $f\geq0$, et $f\sim\frac{1}{\sqrt{t}}$, donc $\int_0^1 f$ et $\int_0^1\frac{\dt}{\sqrt{t}}$ sont de même nature : convergentes.\\
+    En $+\infty$ : si $x\geq0$, $f(t)\leq\frac{1}{t^{3/2}}$, donc l'intégrale converge; si $x<0$, l'intégrale diverge.\\
+    \boxed{3.} On pose $f(x,t)=\frac{e^{-xt}}{(1+t)\sqrt{t}}$, $\forall t > 0, ~ x\mapsto f(x,t)$ est continue sur $\R_+$\\
+    De plus, $\forall t>0, ~ \forall x \geq 0, ~ |f(x,t)|\leq\frac{1}{(1+t)\sqrt{t}}=\phi(t)$ cpm et intégrable sur $\R_+^*$.\\
+    Par théorème, $F$ est continue sur $\R_+$.\\
+    \boxed{4.} $f$ admet une dérivée partielle par rapport à $x$ : $\forall x,t > 0, ~ \frac{\6 f}{\6 x}(x,t)=\frac{-te^{-xt}}{(1+t)\sqrt{t}}$.\\
+    $\forall x > 0, ~ t\mapsto f(x,t)$ est intégrable sur $\R_+^*; \quad \forall t > 0, ~ x\mapsto\frac{\6 f}{\6 x}(x,t)$ est continue sur $\R_+^*$.\\
+    $\forall a > 0, ~ \forall x \geq a, ~ \forall t > 0, ~ \left|\frac{\6 f}{\6 x}(x,t)\right|\leq\frac{\sqrt{t}}{1+t}e^{-at}=\phi(t)$ cpm et intégrable sur $\R_+^*$.\\
+    Donc $f\in\cursive{C}^1(\R_+^*)$ et on peut dériver sous le signe intégral : $\forall x > 0, ~ F'(x) = -\int_0^{+\infty}\frac{\sqrt{t}e^{-xt}}{1+t}\dt$.\\
+    \boxed{5.} $\forall x > 0, ~ F(x) - F'(x) = \int_0^{+\infty}\left( \frac{e^{-xt}}{(1+t)\sqrt{t}} + \frac{\sqrt{t}e^{-xt}}{1+t} \right)\dt = \int_0^{+\infty}\frac{e^{-xt}}{\sqrt{t}}\dt$.\\
+    Posons $u=xt$, alors $t=\frac{u}{x}=\phi(u)$ $\cursive{C}^1$, strictement croissante, bijection ... Par changement de variable :
+    \begin{equation*}
+        \forall x > 0, ~ F(x) - F'(x) = \int_0^{+\infty}\frac{e^{-u}}{\sqrt{u/x}}\frac{\du}{x} = \frac{1}{\sqrt{x}}\int_0^{+\infty}\frac{e^{-u}}{\sqrt{u}}\du=\frac{I}{\sqrt{x}}.
+    \end{equation*}
+    Alors $F$ est solution de $y-y'=\frac{I}{\sqrt{x}}$.\\
+    \boxed{6.} $F(0)=\int_0^{+\infty}\frac{1}{(1+t)\sqrt{t}}\dt$, on pose $u=\sqrt{t}$ donc $t=u^2=\phi(u)$, $\cursive{C}^1$, strct. croissante bijection de $\R_+^*$ dans $\R_+^*$ :
+    \begin{equation*}
+        F(0) = \int_0^{+\infty}\frac{1}{(1+u^2)u}2u\du = 2\int_0^{+\infty}\frac{1}{1+u^2}\du = \pi.
+    \end{equation*}
+    Ensuite, $F$ décroît sur $\R_+$, minorée par 0, donc admet une limite finie en $+\infty$.\\
+    On applique le TCD avec $x_n\to+\infty$ quelconque :\\
+    $\forall n \in \N, ~ f_n \cs f$ avec $\forall t \in \R_+^*, ~ f(t)=0$.\\
+    $\forall n \in \N, ~ |f_n|\leq\frac{1}{(1+t)\sqrt{t}}$ cpm et intégrable, donc :
+    \begin{equation*}
+        \lim_{n\to+\infty} F(x_n) = \int_0^{+\infty} f(t)\dt = 0, ~ \nt{puis} ~ \lim_{x\to+\infty}F(x)=0.
+    \end{equation*}
+    \boxed{7.} Homogène : $y_0-y_0'=0$ donc $y_0=\l e^x$.\\
+    Variation de la cste : $y=\l e^x \ra y' = \l' e^x + \l e^x$ donc $\l' = -I\frac{e^{-x}}{\sqrt{x}}$ donc $\l=K-I\int_0^{x}\frac{e^{-t}}{\sqrt{t}}\dt$.\\
+    Puis $F(x)=\l e^x = Ke^x - Ie^x\int_0^{x}\frac{e^{-t}}{\sqrt{t}}\dt$, et $\int_0^x\frac{e^{-t}}{\sqrt{t}}\dt\to_{x\to 0}0$, donc $K=\pi$, puis en $+\infty$, $K=I^2$ donc $I=\sqrt{\pi}$.
+\end{ex}
+
+\begin{ex}{Intégrale de Dirichlet.}{}
+    \begin{enumerate}
+        \item Montrer que
+        \begin{equation*}
+            \forall n \in \N, ~ \forall x \notin \pi\Z, ~ \frac{1}{2} + \sum_{k=1}^n\cos(2kx) = \frac{\sin(2n+1)x}{2\sin x}
+        \end{equation*}
+        \item En déduire que $\ds\forall n \in \N, ~ \int_0^{\frac{\pi}{2}}\frac{\sin((2n+1)x)}{\sin x}\dx = \frac{\pi}{2}$.
+        \item Montrer que $f(x)=\frac{1}{x}-\frac{1}{\sin x}$ prolongée en 0 est $\cursive{C}^1$ sur $[0,\frac{\pi}{2}]$.
+        \item En déduire que $\ds\int_0^{\frac{\pi}{2}}\frac{\sin((2n+1)x)}{x}\dx\xrightarrow[n\to+\infty]{}\frac{\pi}{2}$ puis calculer $\ds\int_0^{+\infty}\frac{\sin x}{x}\dx$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $n\in\N, x\notin\pi\Z$.
+    \begin{align*}
+        \sum_{k=0}^n \cos(2kx) &= \Re\left( \sum_{k=0}^n \left( e^{2ix} \right)^k \right) = \Re\left( \frac{1 - e^{(2ix)(n+1)}}{1-e^{2ix}} \right)\\
+        &= \Re\left( \frac{e^{ix(n+1)}}{e^{ix}}\cdot\frac{-2i\sin((n+1)x)}{(-2i\sin x)} \right) = \Re\left( e^{inx}\frac{\sin((n+1)x)}{\sin x} \right)\\
+        &= \cos(nx)\frac{\sin((n+1)x)}{\sin x}
+    \end{align*}
+    Puis :
+    \begin{equation*}
+        \frac{1}{2} + \sum_{k=1}^n\cos(2kx) = \cos(nx)\frac{\sin(n+1)x}{\sin x} - \frac{1}{2} = \frac{2\cos(nx)\sin((n+1)x)-\sin x}{2\sin x} 
+    \end{equation*}
+    Or $2\cos a\sin b = \sin(a+b) - \sin(a - b)$, donc :
+    \begin{equation*}
+        \frac{1}{2} + \sum_{k=1}^n\cos(2kx) = \frac{\sin((2n+1)x) - \sin(-x) - \sin x}{2\sin x} = \frac{\sin((2n+1)x)}{2\sin x}.
+    \end{equation*}
+    \boxed{2.} Déjà, l'intégrale est faussement impropre : on pose $\forall x \in ]0,\frac{\pi}{2}], ~ f(x)=\frac{\sin((2n+1)x)}{\sin x}$.\\
+    Elle est continue sur $]0,\frac{\pi}{2}]$, et prolongeable par continuité en 0 avec $f(0)=2n+1$. D'après 1 :
+    \begin{equation*}
+        \int_0^{\frac{\pi}{2}}\frac{\sin((2n+1)x)}{\sin x}\dx = 2\int_0^\frac{\pi}{2}\left( \frac{1}{2} + \sum_{k=1}^n \cos(2kx) \right) \dx = \frac{\pi}{2} + 2\sum_{k=1}^n\int_0^{\frac{\pi}{2}}\cos(2kx)\dx=\frac{\pi}{2}.
+    \end{equation*}
+    \boxed{3.} On a $\forall x \in ]0,\frac{\pi}{2}], ~ f(x)=\frac{\sin x - x}{x\sin x}\sim_0-\frac{x^3}{3!}\to_00$, on prolonge donc $f$ par continuité en zéro avec $f(0)=0$.\\
+    De plus, $f$ est $\cursive{C}^1$ sur $]0,\frac{\pi}{2}]$ par opérations et $\forall x \in ]0,\frac{\pi}{2}], ~ f'(x)=-\frac{1}{x^2}+\frac{\cos x}{(\sin x)^2}=\frac{x^2\cos x - (\sin x)^2}{x^2(\sin x)^2} \sim_0 -\frac{1}{6}$.\\
+    D'après le théorème de la limite de la dérivée, $f$ est $\cursive{C}^1$ sur $[0,\frac{\pi}{2}]$, et $f'(0)=-\frac{1}{6}$.\\
+    \boxed{4.}
+    \begin{equation*}
+        \int_0^{\frac{\pi}{2}}\frac{\sin((2n+1)x)}{x}\dx = \int_0^{\frac{\pi}{2}}f(x)\sin((2n+1)x)\dx + \int_0^{\frac{\pi}{2}}\frac{\sin((2n+1)x)}{\sin x}\dx 
+    \end{equation*}
+    La première intégrale tend vers 0 par Riemann-Lebesgue, la seconde vers $\pi/2$ avec Q2. Donc la limite est bien $\frac{\pi}{2}$.\\
+    Posons $u=(2n+1)x$ donc $x=\frac{u}{2n+1}=\phi(u)$ qui est $\cursive{C}^1$, str.croiss. sur $[0,\frac{\pi}{2}]$, bijective de $[0,\frac{(2n+1)\pi}{2}]$ sur $[0,\frac{\pi}{2}]$.
+    \begin{equation*}
+        \int_0^\frac{\pi}{2}\frac{\sin((2n+1)x)}{x}\dx = \int_0^{\frac{(2n+1)\pi}{2}}\frac{\sin u}{u}\du \xrightarrow[n\to+\infty]{}I.
+    \end{equation*}
+    Donc $I=\frac{\pi}{2}$.
+\end{ex}
+
+\begin{ex}{}{}
+    \begin{enumerate}
+        \item Montrer que $\forall u \geq 0, ~ \forall n \in \N^*, ~ \left( 1 + \frac{u}{n} \right)^n \geq 1+u$.
+        \item $\forall x \in \R, ~ \forall n \in \N^*, ~ f_n(x)=\left( 1 + \frac{x^2}{n} \right)^{-n}$. Montrer que :
+        \begin{equation*}
+            \lim_{n\to+\infty}\int_{-\infty}^{+\infty}f_n(x)\dx = \int_{-\infty}^{+\infty}e^{-x^2}\dx.
+        \end{equation*}
+        \item Calculer l'intégrale en posant $t=\frac{x}{\sqrt{n}}$ puis $u=\arctan(t)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On pose $\forall u \geq 0, ~ \phi(u)=\left( 1 + \frac{u}{n} \right)^n$, convexe sur $\R_+^*$, donc $\phi(u)\geq\phi(0)+u\phi'(0)=1+u$.\\
+    \boxed{2.} On a $f_n\cs f$ en posant $f(x)=e^{-x^2}$ sur $\R$.\\
+    De plus, $\forall n \geq 1, ~ \forall x \in \R, ~ |f_n(x)|\leq\phi(x)=\frac{1}{1+x^2}$, cpm et intégrable sur $\R$. Le TCD s'applique.\\
+    \boxed{3.} Posons $\phi(t)=t\sqrt{n}$, qui est $\cursive{C}^1$, strictement croissante et bijective de $\R$ sur $\R$.
+    \begin{equation*}
+        \int_{-\infty}^{+\infty}f_n(x)\dx = \sqrt{n}\int_{-\infty}^{+\infty}\frac{\dt}{\left( 1 + t^2 \right)^n} = \sqrt{n}\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}\cos^{2n}(u)\frac{\du}{\cos^2u} = \sqrt{n}\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}\cos^{2(n-1)}(u)\du=2\sqrt{n}W_{2(n-1)}
+    \end{equation*}
+    Et $W_n\sim\sqrt{\frac{\pi}{2n}}$, donc $2\sqrt{n}W_{2(n-1)}\sim\sqrt{\pi}$, donc par unicité de la limite :
+    \begin{equation*}
+        \int_{-\infty}^{+\infty}e^{-x^2}\dx = \sqrt{\pi}.
+    \end{equation*}
+\end{ex}
+
+\pagebreak
+
+\begin{ex}{Transformée de Laplace.}{}
+    Soit $E=\{f\in\cursive{C}(\R_+,\R), ~ \forall x > 0, ~ t \mapsto f(t)e^{-xt} ~ \nt{est intégrable sur} ~ \R_+\}$.\\
+    Soit $F=\{f\in\cursive{C}(\R_+,\R), ~ \nt{est bornée}\}$.
+    \begin{enumerate}
+        \item Montrer que $E$ est un $\R$-espace vectoriel et $F$ un sous-espace vectoriel de $E$.
+        \item On pose $\forall f \in E, ~ \forall x>0, ~ L(f)(x)=\int_0^{+\infty}f(t)e^{-xt}\dt$. Montrer que $L$ est définie et linéaire.
+        \item On pose $\forall t \in \R_+, ~ \forall \l \in \R_+, ~ h_\l(t)=e^{-\l t}$, montrer que $\forall \l \in \R_+, ~ h_\l \in E$, et calculer $L(h_\l)$.
+        \item Soit $f\in F$, $\cursive{C}^1$ et croissante sur $\R_+$. Montrer que $f'\in E$, puis $\forall x > 0, ~ L(f')(x)=x L(f)(x)-f(0)$.
+        \item Soit $f\in E$, montrer que $L(f)\in\cursive{C}^1(\R_+^*)$ et calculer $(L(f))'$.
+        \item Soit $f\in F$, déterminer $\lim_{x\to+\infty}L(f)(x)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soient $f,g\in E$ et $\l\in\R$. On pose $\phi(t)=(f+\l g)(t)e^{-xt} = f(t)e^{-xt}+\l g(t)e^{-xt}$.\\
+    Donc $\phi$ est intégrable comme combinaison linéaire de fonctions intégrables sur $\R_+$.\\
+    Soit $f\in F$, $\exists M > 0, ~ \forall x > 0, ~ |f(x)|\leq M$. Pour $x>0$, on pose $\forall t > 0, ~ \phi(t)=f(t)e^{-xt}$.\\
+    Or $\forall t > 0, ~ |\phi(t)|\leq Me^{-xt}$ et $e^{-xt}$ est intégrable sur $\R_+$ car $x>0$, donc $\phi$ intégrable sur $\R_+$ donc $f\in E$.\\
+    \boxed{2.} Soit $f\in E$, on a $t\mapsto f(t)e^{-xt}$ intégrable sur $\R_+$, or $\CA\ra\CV$, donc $\int_0^{+\infty}f(t)e^{-xt}\dt$ converge.\\
+    Elle est donc bien définie, et linéaire par linéarité de l'intégrale.\\
+    \boxed{3.} Soit $\l\in\R_+$, on pose pour $x>0$, $\phi(t)=h_\l(t)e^{-xt}=e^{-(\l+x)t}$ intégrable sur $\R_+$ car $\l+x>0$. Donc $h_\l\in E$.
+    On a $L(h_\l)(x)=\int_0^{+\infty}e^{-(\l+x)t}\dt=\frac{1}{\l+x}$.\\
+    \boxed{4.} Déjà, $f'$ est continue sur $\R_+$, puis pour $x>0$, on pose $\forall t\in\R_+, ~ \phi(t)=f'(t)e^{-xt}$.\\
+    De plus, $f$ est croissante donc $f'\geq0$, donc $\phi$ intégrable ssi $\int_0^{+\infty}\phi(t)\dt$ converge.\\
+    Par IPP, on pose $u'=f'$, $u=f$, $v=e^{-xt}$, $v'=-xe^{-xt}$; avec $u,v\in\cursive{C}^1(\R_+)$ et $f$ bornée donc $u(t)v(t)\to_{\infty}0$
+    Donc $\int u'v$ et $\int uv'$ sont de même natures, convergentes car $f\in E$. 
+    \begin{equation*}
+        \int_0^{+\infty}f'(t)e^{-xt}\dt = \left[ f(t)e^{-xt} \right]_0^{+\infty} + x\int_0^{+\infty}f(t)e^{-xt}\dt \ra L(f')(x) = xL(f)(x)-f(0).
+    \end{equation*}
+    \boxed{5.} Soit $f\in E$, $L(f)(x)=\int_0^{+\infty}f(t)e^{-xt}\dt$ est une intégrale à paramètres.\\
+    Posons $\forall x \in \R_+^*, ~ \forall t \in \R_+, ~ g(x,t)=f(t)e^{-xt}$, on a $\frac{\6 g}{\6 x}(x,t) = -tf(t)e^{-xt}$.\\
+    Ensuite, $\forall x \in \R_+^*, ~ t\mapsto g(x,t)$ est intégrable sur $\R_+$, $\forall t \in \R_+, ~ x\mapsto\frac{\6 g}{\6 x}$ est continue sur $\R_+^*$. \\
+    $\forall t \in \R_+, ~ \forall a \in \R_+^*, ~ \forall x \geq a, ~ \left|\frac{\6 g}{\6 x}(x,t)\right| = t|f(t)|e^{-xt}|\leq t|f(t)|e^{-at}=\phi(t)$.\\
+    On a $\phi(t)=t|f(t)|e^{-\frac{at}{2}}e^{-\frac{at}{2}}=(te^{-\frac{at}{2}})|f(t)|e^{-\frac{at}{2}}$ intégrable, cpm sur $\R_+$.\\
+    Par théorème, $L(f)$ est $\cursive{C}^1((\R_+^*))$ et on peut dériver sous le signe intégral
+    \begin{equation*}
+        \forall x \in \R_+^*, ~ (L(f))'(x) = -\int_0^{+\infty}tf(t)e^{-xt}\dt.
+    \end{equation*}
+    \boxed{6.} Soit $x_n\to+\infty$ strictement positive, $L(f)(x_n)=\int_0^{+\infty}f(t)e^{-x_n t}\dt$, on pose $g_n(t)=f(t)e^{-x_n t}\cs g=0$.\\
+    On a $\forall n \in \N, ~ \forall t > 0, ~ |g_n(t)|\leq\|f\|_\infty^{\R_+}e^{-t}$, avec $\|f\|_\infty^{\R_+}e^{-t}$ intégrable sur $\R_+$.\\
+    Par TCD, $\lim L(f)(x)=\int_0^{+\infty} g=0$
+\end{ex}
+
+\pagebreak
+
+\section{Exercices de Khôlles.}
+
+\begin{exercice}{}{}
+    Donner nature de la série $\sum u_n$ avec :
+    \begin{equation*}
+        \forall n \in \N^*, ~ u_n = \int_1^{+\infty}e^{-t^n}\dt 
+    \end{equation*}
+    \tcblower
+    Cette série existe car $e^{-t^n} \leq e^{-t}$ sur $[1,+\infty[$ pour $n\geq1$.\\
+    Soit $n\geq1$, on pose $x=t^{1/n}$, $\dx=nt^{n-1}\dt$, $\dt=\frac{\dx}{nx^\frac{n-1}{n}}$, avec $t\mapsto t^n$ de classe $\cursive{C}^1$, strictement croissante sur $[1,+\infty[$ et bijective de $[1,+\infty[$ dans lui-même :
+    \begin{equation*}
+        u_n = \int_1^{+\infty}\frac{e^{-x}}{nx^{1-\frac{1}{n}}}\dx = \frac{1}{n}\int_1^{+\infty}f_n(x)\dx
+    \end{equation*}
+    Avec $f_n\cs f$ où $f(x)=\frac{e^{-x}}{x}$ sur $[1,+\infty[$. On a $\forall n \geq 1, ~ \forall t \geq 1, ~ |f_n(t)|\leq\phi(t)=e^{-t}$ positive intégrable et cpm sur $[1,+\infty[$. TCD :
+    \begin{equation*}
+        \int_1^{+\infty}f_n \xrightarrow[n\to+\infty]{} \int_1^{+\infty}f := C\neq0 \ra u_n \sim_{+\infty}\frac{C}{n}
+    \end{equation*}
+    Donc par comparaison, $\sum u_n$ diverge.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Nature de $\int_1^{+\infty}|\sin(x)|^x\dx$.
+    \tcblower
+    On pose $f(x)=|\sin(x)|^x=\exp(x\ln|\sin x|)$ cpm sur $[1,+\infty[$.\\
+    Soit $x_n \in (\R\setminus \pi\Z)^\N$ telle que $x_n\to x \in \pi\N$, alors $x_n\ln|\sin x_n|\to-\infty$, donc $f(x_n)\to0$.\\
+    On prolonge donc $f$ par continuité en posant $\forall x \in \pi\N, ~ f(x)=0$.\\
+    Alors $\int_1^{+\infty}f(x)\dx$ est de même nature que $\sum_{n\geq1}u_n$ avec $\forall n \in \N^*, ~ u_n= \int_{n\pi}^{(n+1)\pi}f(x)\dx$.\\
+    En effet, si $\int_1^{+\infty} f$ converge, alors $\exists L \geq 0, ~ \forall X \geq 1, ~ \int_1^Xf \leq L$ car $f$ est positive.\\
+    Donc pour $n\in\N^*$, $X=n\pi$, $\int_1^Xf\leq L$.
+    \begin{align*}
+        \int_{n\pi}^{(n+1)\pi}|\sin x|^x\dx &\geq \int_{n\pi}^{(n+1)\pi}|\sin x|^{(n+1)\pi}\dx = 2\int_0^{\frac{\pi}{2}}\sin(x)^{(n+1)\pi}\dx\\&\geq2\int_0^{\frac{\pi}{2}}\sin(x)^{4(n+1)}\dx=2W_{4(n+1)}\sim_{+\infty}2\sqrt{\frac{\pi}{8(n+1)}}\sim_{+\infty}\sqrt{\frac{\pi}{2n}}
+    \end{align*}
+\end{exercice}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    Soit $a\in]-1,+\infty[$.
+    \begin{enumerate}
+        \item Montrer que $\int_0^{\frac{\pi}{2}}\frac{\dt}{1+a\sin^2(t)}=\frac{\pi}{2\sqrt{1+a}}$ en posant $x=\tan t$.
+        \item Pour $\a>0$, quelle est la nature de $\sum\int_0^\pi\frac{\dt}{t+(n\pi)^\a\sin^2(t)}$.
+        \item Nature de $\sum\int_{n\pi}^{(n+1)\pi}\frac{\dt}{1+t^\a\sin^2(t)}$
+        \item Nature de $\int_0^{+\infty}\frac{\dt}{1+t^\a\sin^2(t)}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On pose $x=\tan t$ et $\dx=(1+\tan^2(t))\dt$, $\frac{\dx}{1+x^2}=\dt$, elle est $\cursive{C}^1$ strictement croissante sur $[0,\frac{\pi}{2}[$, bijection de $[0,\frac{\pi}{2}[$ sur $[0,+\infty[$.
+    \begin{align*}
+        \int_0^\frac{\pi}{2}\frac{\dt}{1+\arcsin^2(t)} &= \int_0^{+\infty}\frac{\dx}{1+\arcsin^2(\arctan(x))(1+x^2)} = \int_0^{+\infty}\frac{\dx}{(1+a\frac{x^2}{1+x^2})(1+x^2)}\\
+        &=\int_0^{+\infty}\frac{\dx}{1+x^2+ax^2} = \int_0^{+\infty}\frac{\dx}{1+(\sqrt{1+a}x)^2}\\
+        &=\frac{1}{\sqrt{1+a}}\left[ \arctan(\sqrt{1+a}x) \right]_0^{+\infty} = \frac{\pi}{2\sqrt{1+a}}
+    \end{align*}
+    \boxed{2.} On pose $\pi-t=u=\phi(t)$, $-\dt=\du$, $\cursive{C}^1$, strict. croiss. bijection de $[\frac{\pi}{2},\pi]$ dans $[0,\frac{\pi}{2}]$.
+    \begin{align*}
+        \int_0^{\pi}\frac{\dt}{t+(n\pi)^\a\sin^2(t)} &= \frac{\pi}{2\sqrt{1+(n\pi)^\a}} + \int_{\frac{\pi}{2}}^\pi\frac{\dt}{1+(n\pi)^\a\sin^2(t)} = \frac{\pi}{\sqrt{1+(n\pi)^\a}} \sim_{+\infty} \frac{\pi^{1-\frac{\a}{2}}}{n^{\frac{\a}{2}}}.
+    \end{align*}
+    Converge ssi $\frac{\a}{2}>1$ ssi $a>2$.\\
+    \boxed{3.} $\forall t \in [n\pi, (n+1)\pi], ~ \frac{1}{1+t^\a\sin^2(t)} \leq \frac{1}{1+(n\pi)^\a\sin^2(t)}$.
+    \begin{equation*}
+        0  \leq \int_{n\pi}^{(n+1)\pi}\frac{\dt}{1+t^\a\sin^2(t)} \leq \int_{n\pi}^{(n+1)\pi}\frac{\dt}{1+(n\pi)^\a\sin^2(t)}=\int_0^\pi\frac{\du}{1+(n\pi)^\a\sin^2(u)}=\frac{\pi}{\sqrt{1+(n\pi)^\a}}
+    \end{equation*} 
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{(Riyad).}{}
+    \begin{enumerate}
+        \item Calculer $\forall n \in \N, ~ \forall x \in \R_+^*, ~ I_n(x) = \int_0^n t^{x-1}(1-\frac{t}{n})^n\dt$.
+        \item Montrer que $\G(x)=\lim_{n\to+\infty}\frac{n^xn!}{x(x+1)...(x+n)}$.
+    \end{enumerate}
+    \tcblower
+    L'intégrale est bien convergence, en zéro, elle est équivalente à $1/t^{1-x}$.\\
+    \boxed{1.} On pose $u=\left( 1-\frac{t}{n} \right)^n$, $u'=-\frac{n}{n}\left( 1 - \frac{t}{n} \right)^{n-1}$, $v=\frac{t^x}{x}$, $v'=t^{x-1}$.\\
+    On a $\lim_{t\to 0}uv=0$ car $x>0$ et $uv(n)=0$, donc :
+    \begin{align*}
+        I_n &= 0 + \frac{n}{nx}\int_0^nt^x(1-\frac{t}{n})^{n-1}\dt = ... = \frac{n!}{n^nx(x+1)...(x+n-1)}\int_0^nt^{x+n-1}\left( 1-\frac{t}{n} \right)^0 \dt\\
+        &=\frac{n!}{n^nx...(x+n-1)} n^{x+n} = \frac{n^xn!}{x(x+1)...(x+n)}.
+    \end{align*}
+    \boxed{2.} Soit $x\in\R_+^*$, on pose $\forall t \in \R_+, ~ f_n(t)=\1_{t\leq n}t^{x-1}(1-\frac{t}{n})^n$, et $f_n\cs f$ sur $\R_+$ avec $\forall t > 0, ~ f(t)=t^{x-1}e^{-t}$.\\
+    Alors $|f_n(t)|\leq \phi(t)$ avec $\phi(t)=t^{x-1}e^{-t}$, où $\phi$ est cpm et intégrable sur $\R_+$. Par le TCD :
+    \begin{equation*}
+        I_n(x) = \int_0^{+\infty}f_n(t)\dt \xrightarrow[n\to+\infty]{} \int_0^{+\infty}f(t)\dt = \G(x)
+    \end{equation*}
+\end{exercice}
+
+\end{document}

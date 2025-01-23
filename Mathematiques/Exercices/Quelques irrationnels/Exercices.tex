@@ -1,0 +1,105 @@
+\documentclass[11pt]{article}
+
+\input{/home/theo/MP2I/setup.tex}
+
+\def\nomchap{Exercices}
+\def\chapitre{1}
+\def\pagetitle{Quelques irrationnels.}
+
+\begin{document}
+
+\input{/home/theo/MP2I/title.tex}
+
+\thispagestyle{fancy}
+
+\begin{exercice}{Irrationnalité de $e$.}{}
+    On pose $u_n=\sum_{k=0}^n\frac{1}{k!}$ et $v_n=u_n+\frac{1}{nn!}$.
+    \begin{enumerate}
+        \item Montrer que $(u_n)$ et $(v_n)$ sont adjacentes, de limite $l$.
+        \item Démontrer que $\forall n \in \N, ~ u_n < l < v_n$.
+        \item Montrer que $\forall n \in \N^*, ~ 0 < e - u_n < \frac{1}{nn!}$.
+        \item Montrer par l'absurde que $e$ est irrationnel.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $n\in\N$.\\
+    On a $u_{n+1}-u_n=\frac{1}{(n+1)!}>0$ donc $(u_n)$ est strictement croissante.\\
+    On a $v_{n+1}-v_n=\frac{1}{(n+1)!}+\frac{1}{(n+1)(n+1)!}-\frac{1}{nn!}=\frac{1}{n!}\left(  \frac{n+2}{(n+1)^2}-\frac{1}{n} \right)=-\frac{1}{n!}\left( \frac{1}{n(n+1)^2} \right)<0$.\\
+    On a $v_n-u_n=\frac{1}{nn!}\to0$ donc ces deux suites sont bien adjacentes.\\
+    \boxed{2.} Elles sont adjacentes, elles convergent donc vers un réel $l$ par théorème.\\
+    On a donc $\forall \e > 0, ~ \exists N \in \N, ~ \forall n \geq N, ~ 0\leq|u_{n+1}-l|<|u_n-l|\leq\e$ d'où $|u_n-l|>0$.\\
+    De même pour $(v_n)$, d'où les inégalité strictes.\\
+    \boxed{3.} On a $u_n\to e$ par déf. donc $v_n\to e$ par adjacence. Soit $n\in\N^*$.\\
+    On a donc $u_n < e < v_n$ d'où $0 < e - u_n < \frac{1}{nn!}$.\\
+    \boxed{4.} Supposons par l'absurde que $\exists p,q\in\N^*, ~ e = \frac{p}{q}$.\\
+    On a donc $0<\frac{p}{q}-u_q<\frac{1}{qq!}$, donc $0<pq!-qq!u_q<1$.\\
+    Or $pq!\in\N$ et $qq!u_q=q\sum_{k=0}^q\frac{q!}{k!}\in\N$ car $k!\mid q!$ pour $k\in\lb0,q\rb$.\\
+    On en déduit que $pq!-qq!u_q$ est un entier dans $]0,1[$. Absurde.  
+\end{exercice}
+
+
+
+\begin{exercice}{Irrationnalité de $\left( \frac{1}{\pi}\arccos\frac{1}{3} \right)$}{}
+    On pose $\a=\frac{1}{\pi}\arccos\frac{1}{3}$.
+    \begin{enumerate}
+        \item Calculer $e^{i\a\pi}$.
+        \item Montrer que $\a\in\Q\iff\exists n \in \N^* ~ (1+2\sqrt{2}i)^n=3^n$.
+        \item Montrer que $(1+2\sqrt{2}i)^n=a_n+ib_n\sqrt{2}$ où $a_n$ et $b_n$ sont des entiers vérifiant $a_n-b_n\not\equiv0[3]$.
+        \item Conclure.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $e^{i\a\pi}=e^{i\arccos(\frac{1}{3})}$ et $\cos(\arccos(\frac{1}{3}))=\frac{1}{3}$ et $\sin(\arccos(\frac{1}{3}))=\sqrt{1-\frac{1}{3^2}}=\frac{2\sqrt{2}}{3}$.\\
+    On en déduit que $e^{i\a\pi}=\frac{1}{3}\left( 1 + 2\sqrt{2}i \right)$.\\
+    \boxed{2.\ra} Supposons que $\a\in\Q : ~ \exists p,q\in\N^* ~ \a=\frac{p}{q}$, alors $e^{i\frac{2p}{2q}\pi}=\frac{1}{3}(1+2\sqrt{2}i)$ puis $3^{2q}\cancel{(e^{i\pi})^{2p}}=(1+2\sqrt{2}i)^{2q}$.\\
+    \boxed{2.\la} Supposons $\exists n \in \N^*, ~ (1+2\sqrt{2}i)^n=3^n$; $e^{in\a\pi}=\frac{1}{3^n}\left( 1+2\sqrt{2}i \right)^n=1$ donc $\exists k \in \N, ~ n\a = 2k$ d'où $\a=\frac{2k}{n}$.\\
+    \boxed{3.} On montre le résultat par récurrence.\\
+    \bf{Initialisation.} Pour $n=1$, c'est vrai : $a_n=1$ et $b_n=2$ et $a_n-b_n\equiv2[3]$.\\
+    \bf{Hérédité.} Soit $n\in\N$ tel que $a_n\in\N$, $b_n\in\N$ et $a_n-b_n\not\equiv0[3]$.\\
+    On a $(1+2\sqrt{2}i)^{n+1}=(a_n+ib_n\sqrt{2})(1+2\sqrt{2}i)=(a_n-4b_n)+i(b_n+2a_n)\sqrt{2}$.\\
+    On pose alors $a_{n+1}=a_n-4b_n$ et $b_{n+1}=b_n+2a_n$. Ainsi, $a_{n+1}-b_{n+1}=-a_n-5b_n=-(a_n-b_n)-6b_n$.\\
+    Or $6b_n\equiv0[3]$ et $-(a_n-b_n)\not\equiv0[3]$ donc $a_{n+1}-b_{n+1}\not\equiv0[3]$.\\
+    \boxed{4.} On a donc $a_n+ib_n\sqrt{2}=3^n$. Or $3^n\in\R$ donc $a_n=3^n$ et $b_n=0$, ce qui est impossible car $a_n-b_n\not\equiv0[3]$.
+\end{exercice}
+
+\pagebreak
+
+\begin{exercice}{Irrationnalité de $\pi$.}{}
+    À tout polynôme $f$, on associe $F=\sum_{k\in\N}(-1)^kf^{(2k)}$.
+    \begin{enumerate}
+        \item Calculer $\int_0^\pi f(t)\sin t\dt$ en fonction de $F(0)$ et $F(\pi)$.
+        \item Supposons par l'absurde que $\pi=\frac{a}{b}$ avec $a,b$ entiers premiers entre eux, strictement positifs.
+        Pour $n\in\N^*$, on pose $f_n(x)=\frac{x^n(a-bx)^n}{n!}$. Tracer le graphe de $f_n$ sur $[0,\pi]$ et déterminer son maximum.
+        \item Montrer que $\forall p \in \N, ~ f_n^{(p)}(0)\in\Z$ puis $\forall p \in \N, ~ f_n^{(p)}(\pi)\in\Z$.\\
+        On distinguera les cas $p>2n$, $p<n$ et $n\leq p \leq 2n$.
+        \item Montrer que $\forall n \in \N^*, ~ I_n = \int_0^\pi f_n(t)\sin t\dt\in\N^*$ et étudier $\lim_{n\to+\infty}I_n$.
+        \item Conclure.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a :
+    \begin{align*}
+        \int_0^\pi f(t)\sin t\dt &= [-f(t)\cos t]_0^\pi + \int_0^\pi f'(t)\cos t\dt = f(\pi) + f(0) + \int_0^\pi f'(t)\cos t\dt\\
+        &= f(\pi) + f(0) + [-f'(t)\sin t]_0^\pi + \int_0^\pi f''(t)\sin t\dt\\
+        &= f(\pi) + f(0) + [f''(t)\cos t]_0^\pi + \int_0^\pi f^{(3)}(t)\cos t\dt\\
+        &= ... = F(\pi) + F(0).
+    \end{align*}
+    \boxed{2.} On étudie le signe de $f'_n(x)=\frac{nx^{n-1}(2bx-a)(a-bx)^{n-1}}{(n-1)!}$, on a :
+    \begin{center}
+        \begin{tikzpicture}
+            \tkzTabInit[espcl=3]{$x$/0.6,$f'_n(x)$/0.6,$f_n$/1.4}
+            {$0$,$\frac{\pi}{2}$,$\pi$}
+            \tkzTabLine{0,+,0,-,0}
+            \tkzTabVar{-/$0$, +/$\a$, -/$0$}
+        \end{tikzpicture}
+    \end{center}
+    Où $\a=\max f_n(x)=\frac{1}{n!}\left( \frac{a\pi}{2} \right)^n$.\\
+    \boxed{3.} On a $f_n$ un polynôme de degré $2n$, donc $p>2n \ra f_n^{(p)}=0_{\R[X]} \ra f_n^{(p)}(\pi)=0\in\Z$.\\
+    On a $0$ et $\pi$ sont racines de $f_n$ de multiplicité $n$, $\forall p < n, ~ f_n^{(p)}(0)=f_n^{(p)}(\pi)=0\in\Z$.\\
+    Pour $n\leq p \leq 2n$, on revient à la formule de Leibniz :
+    \begin{align*}
+        f_n^{(p)}(x)&=\sum_{k=0}^p\binom{p}{k}\frac{1}{n!}(x^n)^{(k)}((a-bx)^n)^{(p-k)}\\
+        &=\sum_{\substack{k\leq n\\ p-k\leq n}}\binom{p}{k}\frac{1}{n!}\frac{n!}{(n-k)!}x^{n-k}(-1)^{p-k}b^{p-k}(a-bx)^{n-p+k}\frac{n!}{(n-p+k)!}
+    \end{align*}
+    En $x=0$, il ne reste que le terme $k=n$, en $x=\pi$, le terme $k=p-n$.\\
+    \boxed{4.} $\forall t \in [0,\pi]$, $f_n(t)\sin t\geq0$ donc $I_n\geq0$ par positivité de l'intégrale, puis $I_n\in\Z$ avec $1)$ et $3)$. Enfin, $I_n\neq0$ et non identiquement nulle sur $[0,\pi]$, donc $I_n\in\N^*$ et $(I_n)\to0$ par encadrement avec $2.$
+\end{exercice}
+
+\end{document}

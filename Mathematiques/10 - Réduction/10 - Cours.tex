@@ -1,0 +1,961 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{10}
+\def\pagetitle{Réductions.}
+
+\input{setup.tex}
+
+\usepackage{skull}
+
+\renewcommand*{\D}{\cursive{D}}
+
+\begin{document}
+
+\input{title.tex}
+
+\thispagestyle{fancy}
+
+\section{Diagonalisation.}
+
+\subsection{Point de vue matriciel.}
+
+\begin{rappel}{}{}
+    On note $\D_n(\K)$ l'ensemble des matrices diagonales, $(\D_n(\K), +, \times, \cdot)$ est une $\K$-algèbre de dimension $n$.\\
+    On note $(\T_n^+(\K),+,\times,\cdot)$ la $\K$-algèbre des matrices triangulaires supérieures, de dimension $\frac{n(n+1)}{2}$.\\
+    Pour $A,B\in \M_n(\K)$, $A\sim B$ ssi $\exists P \in \GL_n(\K), ~ A=PBP^{-1}$ est une relation d'équivalence.\\
+    Pour $\l\in\K, ~ A\sim \l I_n \ra A = \l I_n$ et $A\sim B \ra \forall k \in \N, ~ A^k \sim B^k$.
+\end{rappel}
+
+\begin{prop}{}{}
+    Soient $A,B\in\M_n(\K)$ tels que $A\sim B$. Soit $\Pi\in\K[X]$, alors $\Pi(A)\sim\Pi(B)$.
+    \tcblower
+    En effet, $\forall k \in \N, ~ A^k = PB^kP^{-1}$; on note $\Pi = \sum_{k=0}^N \a_kX^k$.
+    \begin{equation*}
+        P\Pi(B)P^{-1} = P\left( \sum_{k=0}^N \a_k B^k \right)P^{-1} = \sum_{k=0}^N \a_kPB^kP^{-1} = \Pi(A).
+    \end{equation*}
+\end{prop}
+
+\pagebreak
+
+\begin{exercice}{}{1}
+    Soit $D\in\Diag(\l_1,...,\l_n)$ avec $\l_1,...\l_n$ tous distincts.\\
+    Soit $A\in\M_n(\K)$ Montrer que $AD=DA\iff A \in \D_n(\K)$.
+    \tcblower
+    \boxed{\la} On sait que deux matrices diagonales commutent.\\
+    \boxed{\ra} Notons $A=(a_{i,j})$, $D=(d_{i,j})$ avec $\forall i,j \in \lb1,n\rb, ~ d_{i,j}=\d_{i,j}\l_i$.
+    \begin{align*}
+        AD=DA &\iff \forall i,j \in \lb1,n\rb, ~ [AD]_{i,j} = [DA]_{i,j} \iff \sum_{k=1}^na_{i,k}d_{k,j} = \sum_{k=1}^n d_{i,k}a_{k,j}\\
+        &\iff a_{i,j}\l_j = \l_i a_{i,j} \iff (\l_i - \l_j)a_{i,j} = 0
+    \end{align*}
+    Donc $i\neq j \ra a_{i,j}=0$ car $\l_i \neq \l_j$, donc $A\in\D_n(\K)$.
+\end{exercice}
+
+\begin{defi}{Matrice diagonalisable.}{}
+    Soit $A\in\M_n(\K)$. On dit que $A$ est diagonalisable ssi elle est semblable à une matrice diagonale.\\
+    \bf{Remarque.} Les matrices diagonales sont diagonalisables.\\
+    \bf{Remarque.} Si $A$ est semblable à une matrice diagonalisable, alors elle l'est aussi.
+\end{defi}
+
+\begin{prop}{Stabilité.}{}
+    Soit $A\in\M_n(\K)$.
+    \begin{enumerate}
+        \item $A$ diagonalisable $\ra$ $\forall k \in \N, ~ A^k$ diagonalisable.
+        \item $A$ diagonalisable $\ra$ $\forall \Pi \in \K[X], ~ \Pi(A)$ diagonalisable.
+        \item $A$ diagonalisable $\ra$ $A^\top$ diagonalisable.
+        \item $A\in\GL_n(\K)$ et $A$ diagonalisable $\ra$ $A^{-1}$ diagonalisable.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} RAS.\\
+    \boxed{2.} Si $D=\Diag(\l_1,...n\l_n)$, alors $\Pi(D)=\Diag(\Pi(\l_1),...,\Pi(\l_n))$.\\
+    \boxed{3.} On utilise $\forall M,N\in\M_n(\K), ~ (MN)^\top=N^\top M^\top$ puis $\forall D \in \D_n(\K), ~ D^\top=D$.\\
+    \boxed{4.} $\exists P\in\GL_n(\K), ~ A=PDP^{-1}$, alors $A^{-1}=(P^{-1})^{-1}D^{-1}P^{-1}\sim D^{-1}\in\D_n(\K)$.
+\end{prop}
+
+\begin{prop}{$\star$}{3}
+    Soit $A\in\M_n(\K)$ diagonalisable. Alors $\X_A$ est scindé.\\
+    Si $A\sim D$ avec $D\in\D_n(\K)$, alors les coefficients diagonaux de $D$ sont les valeurs propres de $A$.\\
+    Il y a unicité de $D$ à l'ordre des facteurs près.\\
+    \bf{Contraposée.} Si $\X_A$ n'est pas scindé, alors $A$ n'est pas diagonalisable.\\
+    \bf{Réciproque.} La réciproque est fausse.
+    \tcblower
+    Supposons $A$ diagonalisable : $\exists P \in \GL_n(\K), ~ \exists D \in \D_n(\K), ~ A=PDP^{-1}$.\\
+    On sait donc que $\X_A=\X_D$ puis si $D=\Diag(\l_1,...,\l_n)$, alors $\X_D=(X-\l_1)...(X-\l_n)$ donc $\X_A$ est scindé.\\
+    Puis la diagonale de $D$ est unique à l'ordre des facteurs près.
+\end{prop}
+
+\begin{ex}{}{}
+    Par exemple $A=\begin{pmatrix}0&-1\\1&0\end{pmatrix}\in\M_2(\R)$, alors $\X_A=X^2+1$ non-scindé dans $\R[X]$.\\
+    On a $\Sp(A)=\{-i,i\}$, valeurs propres simples, puis $\forall \l \in \Sp(A), ~ \dim E_\l = 1$.\\
+    On a alors $E_i = \Vect((1,i))$ et $E_{-i}=\Vect((1,-i))$.
+    \begin{equation*}
+        P=\begin{pmatrix}
+            i&-i\\1&1
+        \end{pmatrix} \qquad A = PDP^{-1} ~\nt{avec}~ D=\begin{pmatrix}i&0\\0&-i\end{pmatrix}.
+    \end{equation*}
+\end{ex}
+
+\begin{ex}{}{}
+    Soit $A=\begin{pmatrix}1&\dots&1\\&\ddots&\vdots\\(0)&&1\end{pmatrix}$, alors $\X_A=(X-1)^n$ est scindé et $\Sp(A)=\{1\}$.\\
+    Si $A$ est diagonalisable, alors $A\sim I_n$ puis $A=I_n$...
+\end{ex}
+
+\subsection{Point de vue endomorphisme en dimension finie.}
+
+\begin{rappel}{}{}
+    Deux matrices sont semblables ssi elles représentent un même endomorphisme dans des bases différentes.
+\end{rappel}
+
+\begin{defi}{}{}
+    Soit $E$ un $\K$-evdf de dimension $n$, et $u\in\L(E)$.\\
+    Alors $u$ est diagonalisable ssi il existe $\B = (e_1,...,e_n)$ base de $E$ telle que $D=\Mat_\B(u)\in\D_n(\K)$.
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $E$ un $\K$-evdf. Les homothéties, projections et symétries de $E$ sont diagonalisables.
+    \tcblower
+    \boxed{1.} Soit $u=\l\Id_E$ une homothétie. Alors $\Mat_\B(u)=\l I_n\in\D_n(\K)$.\\
+    \boxed{2.} Soit $p$ un projecteur de $E$. Alors $E=\Ker(p)\oplus\Im(p)=\Ker(p)\oplus\Ker(p-\Id_E)$.\\
+    Soit $\B_1$ une base de $\Ker(p)$ et $\B_2$ une base de $\Ker(p-\Id_E)$. Alors $\B=\B_1\sqcup\B_2$ est base de $E$.
+    \begin{equation*}
+        \Mat_\B(p)=\begin{pmatrix} 0_{n-r} & \Big| & (0) \\ \hline (0) & \Big| & I_{r}\end{pmatrix}
+    \end{equation*}
+    Où $r=\dim\Ker(p)$. Alors $\Mat_\B(p)\in\D_n(\K)$ donc $p$ est diagonalisable.\\
+    \boxed{3.} Soit $s$ une symétrie de $E$ non triviale, $E=\Ker(s-\Id_E)\oplus\Ker(s+\Id_E)$ puis $\B=\B_1\sqcup\B_2$ base de $E$.
+    \begin{equation*}
+        \Mat_\B(s) = \begin{pmatrix}I_r&\Big|&0\\\hline0&\Big|&-I_{n-r}\end{pmatrix}\in\D_n(\K).
+    \end{equation*}
+\end{prop}
+
+\begin{prop}{$\star$}{}
+    Soit $E$ un $\K$-evdf et $u\in\L(E)$.
+    \begin{center}
+        \fbox{$u$ est diagonalisable $\iff$ sa matrice dans n'importe quelle base de $E$ est diagonalisable.}
+    \end{center}
+    \tcblower
+    \boxed{\ra} Par hypothèse, $\exists\B=(e_1,...,e_n)$ base de $E$ telle que $D=\Mat_\B(u)\in\D_n(\K)$.\\
+    Soit $\B'=(e_1',...,e_n')$ un autre base de $E$, et $A=\Mat_{B'}(u)\in\M_n(\K)$.\\
+    Alors $A\sim D$ donc $A$ est diagonalisable.\\
+    \boxed{\la} Par hypothèse, pour $\B=(e_1,...,e_n)$ base de $E$, $A=\Mat_B(u)$ est diagonalisable.\\
+    Alors $\exists P \in \GL_n(\K), ~ \exists D \in \D_n(\K)$ tels que $A=PDP^{-1}$.\\
+    Alors $P$ est matrice de passage de $\B$ à $B'=(e_1',...,e_n')$ de $E$ et $D=\Mat_{\B'}(u)$, on a bien $u$ diagonalisable.\\
+    \bf{Remarque.}  $\forall i \in \lb1,n\rb, ~ u(e_i)=\l_i e_i$, donc $e_i$ est $\vp$ de $u$ associé à $\l_i$. 
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{CNS de diagonalisation.}{}
+    Soit $E$ un $\K$-ev de dimension finie $n$ et $u\in\L(E)$. Il y a équivalence :
+    \begin{enumerate}
+        \item $u$ est diagonalisable.
+        \item Pour toute base $\B$ de $e$, $\Mat_\B(u)$ est diagonalisable.
+        \item $E=E_{\l_1}\oplus\dots \oplus E_{\l_p}$, où $\Sp(u)=\{\l_1,...,\l_p\}$.
+        \item $\X_u$ est scindé et $\forall \l \in \Sp(u), ~ \dim E_{\l} = m_\l$, multiplicité de $\l$.
+        \item Il existe une base de $E$ constituée de vecteurs propres de $u$.
+    \end{enumerate}
+    \tcblower
+    On a déjà vu que $(1)\iff(2)\ra(5)$.\\
+    \boxed{5\ra1} Soit $\B=(e_1,...,e_n)$ base de $\vp$ de $u$ telle que $\forall i \in \lb1,n\rb, ~ u(e_i)=\l e_i$.
+    \begin{equation*}
+        D = \Mat_\B(u) = \begin{pmatrix}\l_1 & ... & (0) \\ \vdots & \ddots & \vdots \\ (0) & ... & \l_n\end{pmatrix}
+    \end{equation*}
+    \boxed{1,2,5\ra3} On sait déjà que les sous-espaces propres associés à des vp distinctes sont en somme directe.\\
+    Notons $\Sp(u)=\{\l_1,...,\l_p\}$. Par hypothèse, il existe une base de $E$ constituée de $\vp$ de $u$.\\
+    On peut permuter les vecteurs d'une base de $E$ en conservant le fait d'être une base de $E$.\\
+    On note l'ensemble des vecteurs de la base associée à la valeur propre $\l_i$ pour $i\in\lb1,p\rb$.\\
+    Alors $\B=B_1\sqcup ... \sqcup B_p$, et $n=|\B|=\sum|B_i|$, et $\forall i \in \lb1,p\rb, ~ |B_i|\leq\dim E_{\l_i}$, $B_i$ forme une famille libre de $E_{\l_i}$.\\
+    Puis $n\leq \sum \dim E_{\l_i}= \dim(E_{\l_i}\oplus...\oplus E_{\l_p})\leq n$, puis $n=\sum \dim E_{\l_i}$ puis $E=\bigoplus E_{\l_i}$.\\
+    \boxed{3\ra4} On montre que $\forall i \in \lb1,p\rb, ~ \dim E_{\l_i} = n_{\l_i}$. On sait déjà que $1\leq \dim E_{\l_i} \leq n_{\l_i}$.\\
+    D'une part, $n=\dim E =_3 \sum \dim E_{\l_i}$, et d'autre part, $n=\sum n_{\l_i}$ car $\X_u=(X-\l_1)^{n_{\l_1}}...(X-\l_p)^{n_{\l_p}}$.\\
+    Par soustraction, $\sum(n_{\l_i}-\dim E_{\l_i})=0$, ils sont tous positifs, donc $\forall i \in \lb1,p\rb, ~ n_{\l_i}=\dim E_{\l_i}$.\\
+    \boxed{4\ra5} Posons $B_i$ une base de $E_{\l_i}$ pour $i\in\lb1,p\rb$, $et \B=B_1\sqcup ... \sqcup B_p$.\\
+    Les vecteurs de $\B$ sont tous des $\vp$ de $u$, et $|\B|=\sum|B_i|=\sum\dim E_{\l_i}=_4\sum n_{\l_i}= n$.\\
+    Les vecteurs de $\B$ forment une famille libre (sous-espaces propres en somme directe.)\\
+    Donc $\B$ est base de $E$ constituée de $\vp$ de $u$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{corr}{Réciproque fausse.}{}
+    Soit $A\in\M_n(\K)$ telle que $\X_A$ soit scindé à racines simples. Alors $A$ est diagonalisable.
+    \tcblower
+    Par hypothèse, $\X_A=(X-\l_1)...(X-\l_n)$ avec $\l_1,...,\l_n$ distinctes.\\
+    Donc $\forall \l\in\Sp(A), ~ \l$ est vp simple, donc $\dim E_{\l}=1=n_\l$.
+\end{corr}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    Soit $A=\1_{4,4}\in\M_4(\R)$. Est-elle diagonalisable ? Si oui, la diagonaliser.
+    \tcblower
+    On remarque que $\rg(A+I_4)=1$ et $\dim(\Ker(A+I_4))=3$ par théorème du rang.\\
+    Donc $E_{-1}=\Ker(-I_4-A)$ est de dimension 3, donc $-1$ est vp de $A$ de multiplicité au moins 3.\\
+    Donc $\X_A$ est de la forme $\X_A=(X+1)^3(X-\l)$ avec $\l\in\R$. Donc $\X_A$ est scindé dans $\R[X]$ (car $\ov{\l}$ pas racine).\\
+    De plus, $\Tr(A)=0=-1-1-1+\l$ donc $\l=3$, on retrouve $\X_A=(X+1)^3(X-3)$.\\
+    Sous-espaces propres : $3$ est vp simple donc $\dim(E_3)=1$, -1 est vp triple donc $\dim E_{-1}\leq 3$.
+    \begin{equation*}
+        AX=-X \iff x+y+z+t=0
+    \end{equation*}
+    Donc $E_{-1}$ est hyperplan de $R^4$, donc de dimension 3, donc $A$ diagonalisable.\\
+    On a aussi $E_3=\Vect((1,1,1,1))$ donc $E=E_{-1}\oplus E_3$ alors $A=PDP^{-1}$ avec :
+    \begin{equation*}
+        P=\begin{pmatrix}
+            -1&-1&-1&1\\1&0&0&1\\0&1&0&1\\ 0&0&1&1
+        \end{pmatrix}; \qquad D = \begin{pmatrix}-1&&&(0)\\&-1&&\\&&-1&\\(0)&&&3\end{pmatrix}
+    \end{equation*} 
+\end{exercice}
+
+\begin{ex}{}{}
+    Même exercice avec $A=\begin{pmatrix}1&1&1\\0&1&1\\0&0&2\end{pmatrix}; ~ B=\begin{pmatrix}0&2&-1\\3&-2&0\\-2&2&1\end{pmatrix}$.
+    \tcblower
+    \fbox{A.} 
+    \begin{equation*}
+        \det(\l I_3 - A) = \begin{vmatrix}\l-1&-1&-1\\0&\l-1&-1\\0&0&\l-2\end{vmatrix}=(\l-1)^2(\l-2).
+    \end{equation*}
+    Donc $\X_A = (X-1)^2(X-2)$. Sous-espaces propres : $\dim E_2 = 1, ~ \dim E_1 \in \{1,2\}$.\\
+    On a $AX=X\iff x=x, y=0, z=0$ donc $\dim E_1=1$, donc $A$ n'est \bf{pas diagonalisable}.\n
+    \fbox{B.} 
+    \begin{equation*}
+        \det(\l I_3 - B)=\begin{vmatrix}\l-1&-2&1\\\l-1&\l+2&0\\\l-1&-2&\l-1\end{vmatrix}=(\l-1)\begin{vmatrix}1&-2&1\\0&\l+4&-1\\0&0&\l-2\end{vmatrix}=(\l-1)(\l+4)(\l-2).
+    \end{equation*}
+
+    Donc $\X_B=(X-1)(X-2)(X-4)$, scindé à racines simples : $B$ est \bf{diagonalisable}.\\
+    Sous-espaces propres : $E_1=\Vect((1,1,1)), ~ E_2=\Vect((4,3,-2)), ~ E_4=\Vect((1,-3/2,1))$.
+    \begin{equation*}
+        B = \begin{pmatrix}1&1&-2\\-\frac{3}{2}&1&-\frac{3}{2}\\1&1&1\end{pmatrix}\begin{pmatrix}-4&0&0\\0&1&0\\0&0&2\end{pmatrix}\begin{pmatrix}1&1&-2\\-\frac{3}{2}&1&-\frac{3}{2}\\1&1&1\end{pmatrix}^{-1}.
+    \end{equation*}
+\end{ex}
+
+\begin{ex}{}{}
+    Même exercice avec $C=\begin{pmatrix}1&2&-2\\2&1&2\\-2&2&1\end{pmatrix}; ~ D=\begin{pmatrix}0&0&0&1\\0&0&-1&0\\0&1&0&0\\-1&0&0&0\end{pmatrix}$.
+    \tcblower
+    \fbox{C.}
+    \begin{equation*}
+        \det(\l I_3 - C) = \begin{vmatrix} \l - 1 & -2 & 2 \\ -2&\l-1&-2\\2&-2&\l-1\end{vmatrix}=\begin{vmatrix}\l-3&0&2\\\l-3&\l-3&-2\\0&\l-3&\l-1\end{vmatrix}=(\l-3)^2\begin{vmatrix}1&0&2\\0&1&-4\\0&0&\l+3\end{vmatrix}=(\l-3)^2(\l+3)
+    \end{equation*}
+    Donc $\X_C = (X-3)^2(X+3)$. Sous-espaces propres : $E_3 =\Vect((1,1,0), (0,1,1))$, $E_{-3}=\Vect((1,-1,1))$.\\
+    Donc $C$ est \bf{diagonalisable}.\n
+    \fbox{D.}
+    \begin{equation*}
+        \det(\l I_4 - D) = \begin{vmatrix}\l & 0 & 0 & -1\\ 0 & \l & 1 & 0 \\ 0 & -1 & \l & 0 \\ 1 & 0 & 0 & \l\end{vmatrix}=\begin{vmatrix}0&0&0&-\l^2-1\\0&\l&1&0\\0&-1&\l&0\\1&0&0&\l\end{vmatrix} = (\l^2+1)\begin{vmatrix}0&0&0&-1\\0&\l&1&0\\0&-1&\l&0\\1&0&0&\l\end{vmatrix}=-(\l^2+1)^2
+    \end{equation*}
+    Donc $\X_D=-(X^2+1)^2=-(X-i)^2(X+i)^2$.\\
+    SEP : $E_i = \Vect((1,0,0,i), (0,1,-i,0))$, $E_{-i}=\Vect((1,0,0,-i),(0,-i,-1,0))$, donc $D$ est \bf{diagonalisable}.
+\end{ex}
+
+\begin{prop}{}{}
+    Soit $A\in\M_n(\K)$. Les propositions sont équivalentes :
+    \begin{enumerate}
+        \item $A$ diagonalisable.
+        \item $\Pi_A=(X-\l_1)...(X-\l_p)$ où $\Sp(A)=\{\l_1,...,\l_p\}$.
+        \item Il existe un polynôme annulateur de $A$ scindé à racines simples.
+    \end{enumerate}
+    \warning Si on trouve un polynôme annulateur de $A$ scindé mais pas à racines simples, on ne peut rien conclure.
+    \tcblower
+    \boxed{1\ra2} Notons $u$ l'endomorphisme canoniquement associé à $A$.\\
+    On sait déjà que les valeurs propres de $A$ sont exactement les racines de $\Pi_A=\Pi_u$.\\
+    Il suffit de montrer que $Q=(X-\l_1)...(X-\l_p)$ est annulateur de $u$, car alors $Q\mid \Pi_u$ puis $\Pi_u = Q$.\\
+    Par théorème de décomposition des noyaux, $\Ker(Q(u))=\bigoplus\Ker(u - \l_i\Id_E)=_{dz}\bigoplus E_{\l_i}=E$.\\
+    Alors $\forall x \in E, ~ Q(u)(x)=0_E$ donc $Q(u)=0_{\L(E)}$.\\
+    \boxed{2\ra3} car $\Pi_A$ est annulateur de $A$.\\
+    \boxed{3\ra1} Soit $P=(X-\mu_1)...(X-\mu_s)$ annulateur, scindé à racines simples.\\
+    Théorème de décomposition des noyaux : $\Ker(P(u))=\bigoplus \Ker(u-\mu_i\Id_E)$.\\
+    Si $\mu_i$ n'est pas valeur propre de $u$, alors $\Ker(P(u))=\bigoplus\Ker(u-\mu_i\Id_E)$.\\
+    En enlevant les sous-espaces nuls, il reste $E=\Ker(P(u))=\bigoplus E_{\mu_i}$ avec $\mu_i$ vecteurs propres.\\
+    Donc $A$ est diagonalisable.
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $A\in\M_n(\R)$ telle que $2A^3+3A^2-6A-I_n=0_n$. Montrer que $A$ est diagonalisable.
+    \tcblower
+    On pose $P=2X^3+3X^2-6X-1$, annulateur de $A$.\\
+    Alors $P'=6X^2+6X-6=6(x-r_-)(x-r_+)$ avec $r_{\pm}=\frac{-1\pm\sqrt{5}}{2}$.
+    (Tableau de variations.)\\
+    Bilan : $P$ admet trois racines réelles distinctes par TVI strictement monotone sur les intervalles de strict. monotonie.\\
+    Donc $P$ est un polynôme annulateur de $A$, scindé à racines simples, donc $A$ est diagonalisable.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $A\in\GL_n(\C)$. Montrer que $A$ est diagonalisable ssi $A^2$ l'est.
+    \tcblower
+    \boxed{\ra} Proposition $\ref{prop:3}$.\\
+    \boxed{\la} Supposons $A^2$ diagonalisable. Soit $P=(X-\a_1)...(X-\a_p)$ annulateur de $A^2$ scindé à racines simples.\\
+    Alors $P(A^2)=(A^2-\a_1I_n)...(A^2-\a_pI_n)=0_n$ donc $Q=(X^2-\a_1)...(X^2-\a_p)$ est annulateur de $A$.\\
+    Supposons qu'il existe $i\in\lb1,p\rb, ~ \a_i=0$, par exemple $\a_1$, alors $Q=X^2(X^2-\a_2)...(X^2-\a_p)$.\\
+    Or $A\in\GL_n(\C)$, on multiplie par $A^{-2}$ : $(A^2-\a_2I_n)...(A^2-\a_pI_n)=0_n$.\\
+    On suppose donc SPDG que $\forall i \in \lb1,n\rb, ~ \a_i\neq0$, or tout complexe $\a_i$ non nul possède deux racines carrées : $\pm\b_i$.\\
+    Donc $Q=(X-\b_1)(X+\b_1)...(X-\b_p)(X+\b_p)$, et toutes les racines sont distinctes.\\
+    Donc $Q$ est scindé à racines simples donc $A$ est diagonalisable.  
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $A\in\M_n(\K)$ telle que $\rg(A)=1$. Montrer que $A$ est diagonalisable ssi $\Tr(A)\neq0$.
+    \tcblower
+    On rappelle la caractérisation des matrices de rang 1 : $\exists C \in \M_{n,1}(\K), ~ \exists L \in \M_{1,n}(\K), ~ A=CL$ (non-nulles).\\
+    Alors $A^2=CLCL=C(LC)L$, or $LC=\Tr(A)$, donc $A^2=\Tr(A)CL=\Tr(A)A$.\\
+    Alors $P=X^2-\Tr(A)X=X(X-\Tr(A))$ est polynôme annulateur de $A$.\\
+    Si $\Tr(A)\neq0$, alors $P$ est scindé à racines simples, donc $A$ est diagonalisable.\\
+    Sinon, $P=X^2$ puis $\Sp(A)\subset\{0\}$ puis si $A$ diagonalisable, alors $A\sim0_n$, or $\rg(A)=1$, absurde.\\
+    Donc $A$ est diagonalisable ssi $\Tr(A)\neq0$.\\
+    \bf{Autre preuve.} $\rg(A)=1$ donc par thm du rang : $\dim\Ker(A)=n-1$.\\
+    Or $\Ker(A)=E_0$ donc 0 est valeur propre de $A$ de multiplicté supérieure à $n-1$.\\
+    Ainsi, $\X_A=X^{n-1}(X-\l)$ avec $\l\in\R$, or $\X_A$ scindé donc $\Tr(A)=\l$.\\
+    Donc $A$ diagonalisable ssi 0 est vp de multiplicité $n-1$ ssi $\l\neq0$ ssi $\Tr(A)\neq0$.\\
+    \bf{Polynôme minimal.} $\Pi_A\in\{X,X-\Tr(A),X(X-\Tr(A))\}$, on élimine $X$ car $A\neq0$ et $X-\Tr(A)$ car $A\neq\Tr(A)I_n$.\\
+    Donc $\Pi_A=X(X-\Tr(A))$. On retrouve $A$ diagonalisable ssi $\Pi_A$ scindé à racines simples ssi $\Tr(A)\neq0$.
+\end{exercice}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    Soit $A\in\M_n(\R)$ et $D\in\D_n(\R)$ telles que $A\sim D$ dans $\M_n(\C)$.\\
+    Alors $A\sim D$ dans $\M_n(\R)$.
+    \tcblower
+    Par hypothèse, $\exists P \in \GL_n(\C)$ telle que $A=PDP^{-1}$, i.e. $AP=PD$.
+    \begin{equation*}
+        P=\begin{pmatrix}
+          a_{1,1} + i b_{1,1} & \dots & a_{1,n} + i b_{1,n} \\
+            \vdots & \ddots & \vdots \\
+            a_{n,1} + i b_{n,1} & \dots & a_{n,n} + i b_{n,n}  
+        \end{pmatrix} = \underbrace{\begin{pmatrix}
+            a_{1,1} & \dots & a_{1,n} \\
+            \vdots & \ddots & \vdots \\
+            a_{n,1} & \dots & a_{n,n}
+        \end{pmatrix}}_{Q} + i\underbrace{\begin{pmatrix}
+            b_{1,1} & \dots & b_{1,n} \\
+            \vdots & \ddots & \vdots \\
+            b_{n,1} & \dots & b_{n,n}
+        \end{pmatrix}}_{R}
+    \end{equation*}
+    Alors $AP=PD\iff AQ+iAR=QD+iRD\iff AQ=QD$ et $AR=RD$.\\
+    Si $Q$ ou $R$ est inversible, alors $A\sim D$ dans $\M_n(\R)$, mais on peut avoir $P$ inversible avec $Q$ et $R$ non inversibles.\\
+    On remarque que $\forall x \in \R, ~ A(Q+xR)=AQ+xAR=QD+xRD=(Q+xR)D$.\\
+    Posons $\forall x \in \R, ~ \phi(x)=\det(Q+xR)\in\R$, alors $\phi$ est un polynôme :
+    \begin{equation*}
+        \forall x \in \R, ~ \phi(x)=\begin{vmatrix}
+            q_{1,1}+x r_{1,1} & \dots & q_{1,n}+x r_{1,n} \\
+            \vdots & \ddots & \vdots \\
+            q_{n,1}+x r_{n,1} & \dots & q_{n,n}+x r_{n,n}
+        \end{vmatrix} = \sum_{\s\in S_n} \varepsilon(\s) \prod_{i=1}^n (q_{i,\s(i)}+x r_{i,\s(i)}).
+    \end{equation*}
+    Or $\phi(i)=\det(Q+iR)=\det(P)\neq0$ donc $\phi$ n'est pas le polynôme nul, donc $\exists x_0 \in \R, ~ \phi(x_0)\neq0$.\\
+    Puis $A=(Q+x_0R)D(Q+x_0R)^{-1}$ puis $A\sim D$ dans $\M_n(\R)$.
+\end{exercice}
+
+\begin{prop}{$\star$}{14}
+    Soit $E$ un $\K$-evdf, $u\in\L(E)$ et $F$ sous-espace vectoriel de $E$ stable par $u$.\\
+    Alors $u$ diagonalisable $\ra$ $u_F$ diagonalisable.
+    \tcblower
+    Supposons $u$ diagonalisable : $\Pi_u$ est scindé à racines simples, puis $\Pi_{u_F} \mid \Pi_u$, donc $\Pi_{u_F}$ scindé à racines simples.\\
+    Par caractérisation, $u_F$ est diagonalisable.
+\end{prop}
+
+\begin{corr}{}{}
+    Soit $M=\begin{pmatrix} A & \Big| & B \\ \hline 0 & \Big| & C\end{pmatrix}\in\M_n(\K)$ avec $A\in\M_p(\K)$, alors $M$ diagonalisable $\ra$ $A$ diagonalisable. 
+\end{corr}
+
+\pagebreak
+
+\begin{prop}{}{17}
+    Soit $M=\begin{pmatrix}A_1 & \Big| & & \Big| & 0 \\ \hline & \Big| & \ddots & \Big| & \\ \hline (0) & \Big| & & \Big| & A_p\end{pmatrix}\in \M_n(\K)$, diagonale par blocs, tq $\forall i \in \lb1,p\rb, ~ A_i\in \M_{n_i}(\K)$ et $n=\sum n_i$.\\
+    Alors $M$ est diagonalisable ssi $\forall i \in \lb1,p\rb, ~ A_i$ est diagonalisable. 
+    \tcblower
+    Par récurrence sur $p$.\\
+    \bf{Initialisation.} Triviale pour $p=1$.\\
+    Pour $p=2$, soit $M=\begin{pmatrix}A&\Big|&(0)\\\hline(0)&\Big|&B\end{pmatrix}$ avec $A\in\M_p(\K)$ et $B\in\M_{n-p}(\K)$.\\
+    Déjà, $M$ diagonalisable $\ra$ $A$ et $B$ diagonalisables par la proposition précédente.\\
+    Réciproquement, supposons $A$ et $B$ diagonalisables, alors $A=PDP^{-1}$ et $B=Q\tilde{D} Q^{-1}$.\\
+    Posons $R=\begin{pmatrix}P&\Big|&(0)\\\hline(0)&\Big|& Q\end{pmatrix}$ avec $\det(R)=\det(P)\det(Q)\neq0$ donc $R\in\GL_n(\K)$.
+    \begin{equation*}
+        R^{-1}=\begin{pmatrix} P^{-1} & \Big| & (0) \\ \hline (0) & \Big| & Q^{-1} \end{pmatrix} \ra M = \begin{pmatrix}P & \Big| & (0) \\ \hline (0) & \Big| & Q \end{pmatrix} \begin{pmatrix} D & \Big| & (0) \\ \hline (0) & \Big| & \tilde{D} \end{pmatrix}\begin{pmatrix}P^{-1} & \Big| & (0) \\ \hline (0) & \Big| & Q^{-1}\end{pmatrix}.
+    \end{equation*}
+    Donc $M$ est diagonalisable. L'hérédite est triviale.
+\end{prop}
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Soit $M=\begin{pmatrix}1&4\\1&1\end{pmatrix}\in\M_2(\R)$. Montrer que $M$ est diagonalisable et la diagonaliser.
+        \item Soit $A\in\M_n(\R)$, $B=\begin{pmatrix}A&4A\\A&A\end{pmatrix}, ~ C=\begin{pmatrix}-A&0\\0&3A\end{pmatrix}$.\\
+        Montrer que $B$ et $C$ sont semblables, en déduire que $B$ est diagonalisable ssi $A$ est diagonalisable.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.}
+    \begin{equation*}
+        \det(\l I_2 - M) = \begin{vmatrix} \l - 1 & -4 \\ -1 & \l - 1 \end{vmatrix}  = (\l + 1)(\l - 3)
+    \end{equation*}
+    Donc $\X_M = (X+1)(X-3)$ scindé, à racines simples, donc $M$ est diagonalisable.\\
+    Espaces propres:  $E_{-1}=\Vect((-2,1))$, $E_{3}=\Vect((2,1))$.
+    \begin{equation*}
+        M=\begin{pmatrix}-2&2\\1&1\end{pmatrix}\begin{pmatrix}-1&0\\0&3\end{pmatrix}\begin{pmatrix}-2&2\\1&1\end{pmatrix}^{-1}
+    \end{equation*}
+    \boxed{2.} $PP^{-1}=I_{2n}$ par calcul, donc :
+    \begin{equation*}
+        B = \begin{pmatrix}A & 4A \\ A & A\end{pmatrix} = \underbrace{\begin{pmatrix}-2I_n & 2I_n \\ I_n & I_n\end{pmatrix}}_{P}\underbrace{\begin{pmatrix}-A&0\\0&3A\end{pmatrix}}_{C}\underbrace{\begin{pmatrix}-I_n&2I_n\\I_n&2I_n\end{pmatrix}\left( \frac{1}{4} \right)}_{P^{-1}}.
+    \end{equation*}
+    Donc $B\sim C$ et $B$ diagonalisable ssi $C$ diagonalisable ssi $-A,3A$ diagonalisables ssi $A$ diagonalisable.
+\end{exercice}
+
+\vspace*{-0.5cm}
+
+\begin{exercice}{}{}
+    Soit $M=\begin{pmatrix}A&B\\0&A\end{pmatrix}$ avec $A,B\in\M_n(\R)$ telles que $AB=BC$.\\
+    Montrer que $M$ est diagonalisable ssi $A$ est diagonalisable et $B=0$.
+    \tcblower
+    \boxed{\la} Trivial (\ref{prop:17}).\\
+    \boxed{\ra} Calcul de $P(M)$ par $P\in\R[X]$. Par récurrence, calculs :
+    \begin{equation*} 
+        \forall k \in \N, ~ M^k = \begin{pmatrix}A^k&kA^{k-1}B\\0&A^k\end{pmatrix} \ra P(M)=\begin{pmatrix}P(A)&P'(A)B\\0&P(A)\end{pmatrix}. 
+    \end{equation*}
+    Spécifions en $\Pi_M$, $M$ est diagonalisable donc $\Pi_M$ est scindé à racines simples :
+    \begin{equation*}
+        \Pi_M(M) = \begin{pmatrix} \Pi_M(A) & \Pi_M'(A)B \\ 0 & \Pi_M(A) \end{pmatrix} = 0_{2n} \ra \Pi_M(A)=0 \et \Pi_M'(A)B=0_n.
+    \end{equation*}
+    Déjà, $A$ est diagonalisable, car $\Pi_M$ est scindé à racines simples et annule $A$, de plus, $\Pi_M'(A)B=0_n$.\\
+    Vérifions que $\Pi_M'(A)\in\GL_n(\R)$. Posons $\Pi_M=(X-\l_1)...(X-\l_p)$, avec $\Sp(M)=\{\l_1,...,\l_p\}$.\\
+    De plus, $\Pi_M'$ est encore scindé à racines \bf{simples} donc ses racines sont toutes distinctes des $\l_1,...,\l_p$.\\
+    Notons $\Pi_M'=\a(X-\mu_1)...(X-\mu_{p-1})$, avec $\mu_i \notin \Sp(M)$.\\
+    On a $\Pi_A \mid \Pi_M$ donc $\Sp(A)\subset\Sp(M)$, donc $\mu_i\notin\Sp(A)$, donc $\Pi_M'=\a(A-\mu_1I_n)...(A-\mu_{p-1}I_n)\in\GL_n(\R)$.\\
+    \bf{Rappel.} $\l$ vp de $A$ ssi $\det(\l I_n - A) = 0$ ssi $A-\l I_n \notin \GL_n(\K)$. Alors $\l$ non vp de $A$ ssi $A - \l I_n \in \GL_n(\R)$.
+\end{exercice}
+
+\vspace*{-0.5cm}
+
+\begin{defi}{Codiagonalisation.}{}
+    Soient $A,B\in\M_n(\K)$. Elles sont codiagonales si et seulement si :
+    \begin{equation*}
+        \exists P \in \GL_n(\K), ~ \exists D,\tilde{D} \in \D_n(\K), ~ A=PDP^{-1} \et B=P\tilde{D} P^{-1}.
+    \end{equation*}
+    Donc $u,v\in\L(E)$ sont codiagonalisables ssi il existe une base $\B$ commune de $\vp$ à $u$ et $v$.
+\end{defi}
+
+\begin{prop}{}{}
+    Soient $A,B\in\M_n(\K)$ codiagonales. Alors $\forall \l \in \K, ~ A + \l B$ est diagonalisable, $AB$ et $BA$ sont diagonalisables.
+\end{prop}
+
+\begin{thm}{$\star$}{}
+    Soit $E$ un $\K$-evdf de dimension $n$ et soient $u,v\in\L(E)$ telles que $uv=vu$.\\
+    Si $u$ admet $n$ valeurs propres distinctes (i.e. $\X_u$ scindé à racines simples), alors $u$ et $v$ sont codiagonalisables.
+    \tcblower
+    Notons $\Sp(u)=\{\l_1,...,\l_n\}$, alors pour tout $i\in\lb1,n\rb, ~ \dim E_{\l_i}=1$.\\
+    Soit $e_i$ vecteur propre de $u$ associé à $\l_i$ : $u(e_i)=\l_ie_i$. Alors $\B=(e_1,...,e_n)$ est base de $\vp$ de $u$.\\
+    Soit $i\in\lb1,n\rb$, $uv(e_i)=vu(e_i)=v(\l_ie_i)=\l_i v(e_i)$ puis $v(e_i)$ est $\vp$ de $u$ : $v(e_i)\in E_{\l_i}=\Vect(e_i)$.\\
+    Donc $\exists \a_i \in \K$ tel que $v(e_i)=\a_ie_i$. Donc $e_i$ est encore $\vp$ de $v$, donc $\B$ est base de $\vp$ de $v$.
+\end{thm}
+
+\begin{prop}{Version matricielle.}{}
+    Soient $A,B\in\M_n(\K)$ telles que $AB=BA$ et $\X_A$ scindé à racines simples. Alors $A$ et $B$ sont codiagonalisables.
+    \tcblower
+    $\X_A$ est scindé à racines simples, donc $A$ est diagonalisable : $\exists P\in\GL_n(\K), ~ \exists D \in \D_n(\K), ~ A=PDP^{-1}$.\\
+    Posons $B=PMP^{-1}$ (on pose en réalité $M=P^{-1}BP$), alors :
+    \begin{equation*}
+        AB=BA\iff PDP^{-1}PMP^{-1}=PMP^{-1}PDP^{-1} \iff DM=MD.
+    \end{equation*}
+    Or $D=\Diag(\l_1,...,\l_n)$ avec $\l_1,...,\l_n$ tous distincts puis $MD=DM \ra M$ diagonale d'après $\ref{exercice:1}$.\\
+    Donc finalement, $A=PDP^{-1}$ et $B=PMP^{-1}$ avec $D,M$ diagonales, donc $A,B$ codiagonalisables.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $A,B\in\M_n(\K)$ diagonalisables. Alors $A$ et $B$ codiagonalisables ssi $AB=BA$.
+    \tcblower
+    \boxed{\ra} Par hypothèse, $\exists P \in \GL_n(\K), ~ \exists D,\tilde{D}\in\D_n(\K), ~ A=PDP^{-1}$ et $B=P\tilde{D}P^{-1}$.\\
+    Alors $AB=PDP^{-1}P\tilde{D}P^{-1}=P(D\tilde{D})P^{-1}$ et $BA=P\tilde{D}P^{-1}PDP^{-1}=P(\tilde{D}D)P^{-1}$ puis $D\tilde{D}=\tilde{D}D$.\\
+    \boxed{\la} Notons $u$ et $v$ les endomorphismes canoniquement associés à $A$ et $B$.\\
+    Par hypothèse $u$ et $v$ sont diagonalisables et $uv=vu$. Notons $\Sp(u)=\{\l_1,...,\l_p\}$.\\
+    Puisque $u$ est diagonalisable, $\K^n = \bigoplus_{i=1}^pE_{\l_i}$. Alors $\forall i \in \lb1,p\rb, ~ (u-\l_i\Id_E)v=uv-\l_iv\stackrel{uv=vu}{=}v(u-\l_i\Id_E)$.\\
+    On sait alors que $E_{\l_i}=\Ker(u-\l_i\Id_E)$ est stable par $v$, on pose alors $v_i=v_{|E_{\l_i}}$ l'endormorphisme induit.\\
+    Or $v$ est diagonalisable donc $\forall i \in \lb1,p\rb, ~ v_i$ est diagonalisable d'après \ref{prop:14}.\\
+    On peut donc choisir une base $\B_i$ de $E_{\l_i}$ constituée de $\vp$ de $v_i$ (donc de $v$).\\
+    Or les vecteurs de $\B_i$ sont des vecteurs de $E_{\l_i}$ donc des $\vp$ de $u$ associés à la vp $\l_i$.\\
+    Finalement, les vecteurs $\B_i$ sont des $\vp$ de $u$ et de $v$. On pose $\B=\B_1\sqcup...\sqcup\B_p$ par concaténation.\\
+    Alors $E=\bigoplus_{i=1}^pE_{\l_i}$ donc $\B$ est une base de $E$ donc les vecteurs sont $\vp$ de $u$ et de $v$.
+\end{prop}
+
+\section{Nilpotence.}
+
+\begin{defi}{}{}
+    Soit $A\in\M_n(\K)$. On dit que $A$ est nilpotente ssi $\exists n \in \N, ~ A^n = 0_{n}$.\\
+    L'ordre de nilpotence de $A$ est le plus petit entier $n$ tel que $A^n=0_n$.
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $A\in\M_n(\K)$. Si $A$ est nilpotente, $\det(A)=0$, et son indice de nilpotence est inférieur à $n$.
+    \tcblower
+    Par l'absurde, si $A$ est inversible, et $A^n=0$, alors $A^n\cdot(A^{-1})^n = I_n = 0_n$, absurde.
+\end{prop}
+
+\begin{prop}{$\star$}{}
+    Soit $E$ un $\K$-ev et $u\in\L(E)$ nilpotent. Alors $\Id_E+u\in\GL(E)$ et $\Id_E-u\in\GL_(E)$.
+    \tcblower
+    Par hypothèse, $u^p=0_{\L(E)}$ et $u^{p-1}\neq0_{\L(E)}$.
+    \begin{equation*}
+        (\Id_E - u) \circ (\Id_E + u + ... + u^{p-1}) = \Id_E - u^{p} = \Id_E.
+    \end{equation*}
+    Deux polynômes en $u$ commutent car $(\K[u], +, \times, \cdot)$ est une algèbre commutative.\\
+    On a aussi $(\Id_E+u+...+u^{p-1})\circ(\Id_E-u)=\Id_E$. C'est donc un inverse à gauche et à droite bijectif dans $\K[u]$.\\
+    Puis $u$ nilpotent $\ra$ $(-u)$ nilpotent $\ra$ $(\Id_E+u)\in\GL(E)$.
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $E=\R_n[X]$ avec $n\in\N$. Notons $D:P\mapsto P'$, et $f:P\mapsto P-P'$ dans $\L(E)$.
+    \begin{enumerate}
+        \item Montrer que $D$ est nilpotent, et donner son indice de nilpotence. 
+        \item Montrer que $f$ est inversible, et donner $f^{-1}$.
+        \item On prend $E=\R[X]$. $D$ est-il encore nilpotent ?
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $D^{n+1} : P \mapsto P^{(n+1)}$. Trivial : $D^{n+1}=0$. Et $D^n\neq0$ car $D^n(X^n)=n!$.\\
+    \boxed{2.} $f=\Id_E-D$ avec $D$ nilpotent, donc inversible d'après la proposition précédente, et $f^{-1}=\Id_E+D+...+D^{n}$.\\
+    \boxed{3.} Supposons par l'absurde $D$ nilpotent d'indice $p$. On a $D(X^p)=p!\neq0$, absurde.
+\end{exercice}
+
+\begin{prop}{$\star$}{}
+    Soit $E$ un $\K$-ev et $u,v\in\L(E)$.
+    \begin{enumerate}
+        \item Si $u$ est nilpotent, alors $\forall \l \in \K, ~ \l u$ est nilpotent.
+        \item Si $u$ est nilpotent et que $uv=vu$, alors $uv$ est nilpotent.
+        \item Si $u$ et $v$ sont nilpotents et que $uv=vu$, allrs $u+v$ est nilpotent.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $(\l u)^n=\l^nu^n=0$.\\
+    \boxed{2.} $\forall n \in \N, ~ (uv)^n=u^nv^n$.\\
+    \boxed{3.} $\forall k \in \N, ~ (u+v)^k=\sum_{k=0}^n\binom{n}{k}u^kv^{n-k}$. On note $p,q$ indices de $u,v$.
+    \begin{equation*}
+        (u+v)^{p+q}=v^q\sum_{k=0}^{p-1}\binom{p+q}{k}u^kv^{p-k} + u^p\sum_{k=p}^{p+q}\binom{p+q}{k}u^{k-p}v^{p+q-k} = 0.
+    \end{equation*} 
+    \smallwarning Il faut que les puissances soient positives dans le binôme, car $u,v$ ne sont pas toujours bijectives.
+\end{prop}
+
+\pagebreak
+
+\begin{prop}{$\star$}{}
+    Soit $E$ un $\K$-evdf de dimension $n$ et $u\in\L(E)$ nilpotent d'indice $p$.\\
+    Alors $\Pi_u = X^p$, $\X_u=X^n$, $\Sp(u)=\{0\}$ et $p\leq n$.
+    \tcblower
+    Par hypothèse, $\Pi_u \mid X^p$ et $\Pi_u\nmid X^{p-1}$ donc $\Pi_u=X^p$.\\
+    Les valeurs propres sont exactement les racines du polynôme minimal, donc $\Sp(u)=\{0\}$.\\
+    Les racines de $\X_u$ sont exactement les valeurs propres, et $\X_u$ unitaire et de degré $n$, donc $\X_u=X^n$.\\
+    Donc $p\leq n$ par le théorème de Cayley-Hamilton.
+\end{prop}
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item Soit $A\in\M_n(\K)$. $A$ est nilpotente ssi $\Sp(A)=\{0\}$ et $\X_A$ scindé.
+        \item Soit $E$ un $\K$-evdf. $u\in\L(E)$ est nilpotente ssi $\Sp(u)=\{0\}$ et $\X_u$ scindé.
+    \end{enumerate}
+    \tcblower
+    Trivialement, $(1)\iff(2)$. Traitons le cas 1.\\
+    \boxed{\ra} Déjà vu avec $\X_A=X^n$.\\
+    \boxed{\la} On a $\Sp(A)=\{0\}$ et $\X_A$ scindé $\ra$ $\X_A=X^n$. Or $\X_A$ est annulateur (Cayley-Hamilton) donc $A^n=0_n$.
+\end{prop}
+
+\begin{prop}{}{}
+    La \bf{seule} matrice nilpotente diagonalisable est la matrice nulle.
+    \tcblower
+    Soit $A$ une matrice carrée nilpotente et diagonalisable. Alors $\Sp(A)=\{0\}$.\\
+    Comme $A$ est diagonalisable, $A\sim \Diag(0,...,0)=0_n$. Donc $A=0_n$.
+\end{prop}
+
+\begin{exercice}{Crochet de Lie.}{}
+    Soit $E$ un $\K$-evdf et $u,v\in\L(E)$. On suppose $uv-vu=\a u$ pour $\a\in\C^*$.
+    \begin{enumerate}
+        \item Montrer que $\forall k\in\N, ~ u^kv-vu^k=k\a u^k$.
+        \item En déduire que $u$ est nilpotent. On pourra poser $\phi(u)=uv-vu$ à $v$ fixé.
+    \end{enumerate} 
+    \tcblower
+    \boxed{1.} Par récurrence, soit $k\in\N$.\\
+    \bf{Initialisation} Trivial pour $k=0$, $k=1$.\\
+    \bf{Hérédité.} Soit $k\in\N, ~ u^kv-vu^k=k\a u^k$ donc $u^kv = k\a u^k + vu^k$.
+    \begin{align*}
+        u^{k+1}v-vu^{k+1} &= u(u^kv) - vu^{k+1} = u(vu^k + k\a u^k)-vu^{k+1} = uvu^k - vu^{k+1}+k\a u^{k+1} \\
+        &= (uv-vu)u^k+k\a u^{k+1}=\a u^{k+1} + k\a u^{k+1} = (k+1)\a u^{k+1}
+    \end{align*}
+    \boxed{2.} $\phi(u)=\a_u$ puis $\forall k \in \N, ~ \phi(u^k)=k\a u^k$.\\
+    Par l'absurde, supposons que $u$ n'est pas nilpotent. Alors $\forall k \in \N, ~ k\a$ est vp de $\phi$.\\
+    Or si $\a\neq0$, $k\neq l \ra k\a \neq l\a$, donc $\{k\a, ~ k\in\N\} \subset \Sp(\phi)$.\\
+    C'est absurde, car alors $|\Sp(\phi)|>\infty$ en dimension finie. Donc $u$ est nilpotente.
+\end{exercice}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{}{}
+    Soit $E$ un $\K$-evdf de dimension $n$, et soit $u\in\L(E)$ nilpotente d'indice $n$.
+    \begin{enumerate}
+        \item $u$ est cyclique et $\Pi_u = \X_u$.\\
+        Il existe une base $\B$ telle que $\Mat_\B(u)=\begin{pmatrix}0&...&...&...&0\\ 1 & & & & \vdots \\ 0 & \ddots & & & \vdots \\ \vdots & \ddots & \ddots & & \vdots \\ 0 & ... & 0 & 1 & 0 \end{pmatrix}$.
+        \item $\forall k \in \lb0,n\rb, ~ \dim\Ker u^k=k$.
+        \item Les seuls sous-espaces stables par $u$ sont les sous-espaces $\Ker u^k$ pour $k\in\lb0,n\rb$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On rappelle que pour $p$ indice de nilpotence de $u$, $\Pi_u=X^p$, $\X_u=X^n$, $p\leq n$ et $\Sp(u)=\{0\}$.\\
+    Ici, $\Pi_u=\X_u$. Puis $u^{n-1}\neq0$ donc $\exists x_0 \in E, ~ u^{n-1}(x_0)\neq0_E$ puis $\B=(x_0,u(x_0),...,u^{n-1}(x_0))$ est libre donc base.\\
+    Par définition, $u$ est cyclique, et $\Mat_\B(u)=(\skull)$.\\
+    \boxed{2.} On sait que les noyaux sont emboîtés et stationnaires :
+    \begin{equation*}
+        (0) = \Ker u^0 \subsetneq \Ker u \subsetneq ... \subsetneq \Ker u^{n-1} \subsetneq \Ker u^n = E
+    \end{equation*}
+    Alors $0<\dim \Ker u < ... < \dim \Ker u^{n-1} < n$. D'après le principe des tiroirs, $\forall k \in \lb0,n\rb, ~ \Ker u^k = k$.\\
+    \boxed{3.} Déjà, $\forall k \in \lb0,n\rb, ~ \Ker u^k$ est un espace stable par $u$. Montrons que ce sont les seuls espaces stables par $u$.\\
+    Soit $F$ un espace stable par $u$, posons $k=\dim F$. Vérifions que $F=\Ker u^k$. Notons $u_F$ induit.\\
+    Alors $\forall x \in F, ~ \forall P \in \K[X], ~ P(u)(x)=P(u_F)(x)$ (déjà vu) donc $u$ nilpotent $\ra u_F$ nilpotent.\\
+    Puis $u_F \in \L(F)$ et $u_F$ nilpotent $\ra$ $u_F$ nilpotent d'indice $p\leq \dim F = k$.\\
+    Alors $\Ker u_F^p = F$ et $p\leq k$ donc $F=\Ker u_F^p \subset \Ker u_F^p \subset \Ker u^k$.\\
+    Donc $F\subset \Ker u^k$ et $\dim F = \dim \Ker u^k$ donnent $F=\Ker u^k$.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item Une matrice triangulaire à diagonale nulle est forcément nilpotente.
+        \item Une matrice nilpotente est semblable (pas forcément égale) à une matrice triangulaire à diagonale nulle.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $T\in\T_+(\K)$ à diagonale nulle. Alors $\X_T = X^n$, puis par Cayley-Hamilton, $T^n=0n$.\\
+    \boxed{2.} Soit $N\in\M_n(\K)$ nilpotente d'indice $p$ et $u$ l'endormorphisme canoniquement associé.\\
+    On a $(0) = \Ker u^0 \subsetneq \Ker u \subsetneq ... \subsetneq \Ker u^{p-1} \subsetneq \Ker u^p = E$.\\
+    Soit $\B_1$ base de $\Ker u$, on la complète en $\B_2$ base de $\Ker u^2$, en itérant, on obtient une base $\B_p$ de $\Ker u^p=E$.\\
+    Notons $\a_1=|\B_1|$, ... $\a_i = |\B_i \setminus \B_{i-1}|$ et $\B_p=(e_1,...,e_n)$. $\Mat_{\B_p}=(\skull)$.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\section{Triangularisation.}
+
+\begin{defi}{}{}
+    Soit $A\in\M_n(\K)$. $A$ est triangularisable ssi $A$ est semblable à une matrice triangulaire $T$.\\
+    $\hra$ $\forall k \in \N, ~ A^k$ est triangularisable.\\
+    $\hra$ $\forall P \in \K[X], ~ P(A)$ est triangularisable.\\
+    $\hra$ $A\in\GL_n(\K) \iff T \in \GL_n(\K)$ donc $A^{-1}$ est triangularisable.\\
+    $\hra$ $\X_T = (X-\l_1)...(X-\l_n)$ scindé où les $\l_i$ sont coefficients diagonaux de $T$ et $\X_A=\X_T$.\\
+    $\hra$ $A\sim B\ra B$ triangularisable.
+\end{defi}
+
+\begin{defi}{}{}
+    Soit $E$ un $\K$-evdf et $u\in\L(E)$.\\
+    $u$ est triangularisable ssi il existe $\B$ base de $E$ telle que $\Mat_\B(u)$ soit triangulaire.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $E$ un $\K$-evdf et $u\in\L(E)$.\\
+    $u$ est triangularisable ssi pour toute base $\B$ de $E$, $A=\Mat_\B(u)$ est triangularisable.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $A\in\M_n(\K)$. Les propositions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $A$ est triangularisable.
+        \item $\X_A$ est scindé.
+        \item $\Pi_A$ est scindé.
+        \item Il existe un polyôme annulateur de $A$ non-nul et scindé.
+    \end{enumerate}
+    \tcblower
+    \boxed{1\ra2} Déjà vu en remarque.\\
+    \boxed{2\ra3} Tout diviseur d'un polynôme scindé est scindé, et par Cayley-Hamilton, $\Pi_A\mid \X_A$.\\
+    \boxed{3\ra4} Par exemple, $\Pi_A$.\\
+    \boxed{4\ra3} Soit $P$ annulateur de $A$ non-nul et scindé. Alors $\Pi_A\mid P$, donc $\Pi_A$ est scindé.\\
+    \boxed{3\ra1} $\Pi_A=(X-\l_1)^{\a_1}...(X-\l_p)^{\a_p}$ par hypothèse avec $\Sp(A)=\{\l_1,...,\l_p\}$.\\
+    Par théorème de décomposition des noyaux : $\Ker\Pi_A(A)=\Ker((A-\l_1I_n)^{\a_1})\oplus...\oplus\Ker((A-\l_pI_n)^{\a_p})$.\\
+    Notons $u$ l'endomorphisme canoniquement associé à $A$. Notons $\forall i \in \lb1,p\rb, ~ G_i = \Ker((u-\l_i\Id)^{\a_i})$.\\
+    On cherche une base $\B$ de $\K^n$ telle que $\Mat_{\B}(u)\in\T_n^+(\K)$.\\
+    $\forall i \in \lb1,p\rb$, $G_i$ est un ssev de $\K^n$ comme noyau, $G_i$ est stable par $u$, notons $u_i=\l_i\Id_{G_i}+(u_i - \l_i\Id_{G_i})$ induit.\\
+    On sait alors qu'il existe $\B_i$ base de $G_i$ telle que $\Mat_{\B_i}(x_i)\in\T_{\b_i}(\K)$ avec $\b_i=\dim G_i$. Puis :
+    \begin{equation*}
+        \Mat_{\B_i}(u_i) = \begin{pmatrix}\l_i & & (*) \\ & \ddots & \\ (0) & & \l_i\end{pmatrix}.
+    \end{equation*}
+    Posons $\B=\B_1\sqcup ... \sqcup \B_p$, $E=\K^n=G_1\oplus ... \oplus G_p$ donc $\B$ est base de $E$ et :
+    \begin{equation*}
+        \Mat_\B(u) = \begin{pmatrix}\Mat_{\B_1}(u_1) &  & (0) \\ & \ddots & \\ (0) & & \Mat_{\B_p}(u_p)\end{pmatrix} = \begin{pmatrix}\begin{pmatrix}\l_1 & & (*) \\ & \ddots & \\ (0) & & \l_1\end{pmatrix} & & (0) \\ & \ddots & \\ (0) & & \begin{pmatrix}\l_p & & (*) \\ & \ddots & \\ (0) & & \l_p \end{pmatrix}\end{pmatrix}.
+    \end{equation*}
+    Donc $A$ est triangularisable.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{corr}{}{}
+    Toute matrice de $\M_n(\C)$ est triangularisable.
+    \tcblower
+    Dans $\C$, tout polynôme est scindé par d'Alembert-Gauss.
+\end{corr}
+
+\begin{exercice}{}{}
+    Soit $A=\begin{pmatrix}-2&1&1\\8&1&-5\\4&3&-3\end{pmatrix}\in\M_3(\R)$. Est-elle diagonalisable, triangularisable ?
+    \tcblower
+    On a
+    \begin{align*}
+        \X_a(\l) &= \begin{vmatrix}\l+2&-1&-1\\-8&\l-1&5\\-4&-3&\l+3\end{vmatrix} = \begin{vmatrix}\l+2&0&-1\\-8&\l-6&5\\-4&-\l-6&\l+3\end{vmatrix}\\ &=(\l+2)((\l-6)(\l+3)+5(\l-6)) - (8(\l+6) + 4(\l-6)) = \l(\l+2)^2
+    \end{align*}
+    Alors $\Sp(A)=\{0,-2\}$ avec $0$ vp simple et $2$ vp double et $E_{-2}=\Vect((1,-1,1))$ $(e_1')$. Pas diagonalisable.\\
+    Le polynôme caractéristique est scindé dans $\R$ donc elle est triangularisable. $E_0=\Vect((3,1,5))$  $(e_2)'$.
+    \begin{equation*}
+        \Mat_{\B'}(u) = \begin{pmatrix}0&0&*\\0&-2&*\\0&0&-2\end{pmatrix}
+    \end{equation*}
+    D'après le thm de la base incomplète, au moins un des 3 vecteurs de la base canonique peut compléter $(e_1',e_2')$.\\
+    On essaie avec $e_3'=(1,0,0)$, ça fonctionne, alors $A=PTP^{-1}$ avec :
+    \begin{equation*}
+        P = \begin{pmatrix}3&1&1\\1&-1&0\\5&1&0\end{pmatrix} \in \GL_3(\R); \qquad T=\begin{pmatrix}0&0&a\\0&-2&b\\0&0&-2\end{pmatrix}.
+    \end{equation*}
+    $A=PTP^{-1}\iff AP=PT \iff ... \iff a=2, b=-6$. Donc $A$ est triangularisable.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Montrer que $A\sim\begin{pmatrix}0&0&0\\0&-2&1\\0&0&-2\end{pmatrix}$.
+    \tcblower
+    On a déjà calculé $E_0=\Vect((3,1,5))$ et $E_{-2}=\Vect((1,-1,1))$. On cherche :
+    \begin{equation*}
+        P=\begin{pmatrix}3&1&\a\\1&-1&\b\\5&1&\g\end{pmatrix}\in\GL_3(\R) \quad \nt{telle que} \quad AP=PT.
+    \end{equation*}
+    \begin{align*}
+        AP=PT' &\iff \begin{pmatrix}-2&1&1 \\ 8 & 1 & -5 \\ 4 & 3 & -3\end{pmatrix}\begin{pmatrix}3 & 1 & \a \\ 1 & -1 & \b \\ 5 & 1 & \g\end{pmatrix} = \begin{pmatrix}3&1&\a\\1&-1&\b\\5&1&\g\end{pmatrix}\begin{pmatrix}0&0&0\\0&-2&1\\0&0&-2\end{pmatrix}\\
+        &\iff \begin{pmatrix}0&-2&-2\a+\b+\g\\0&2&8\a+\b-5\g\\0&-2&4\a+3\b-3\g\end{pmatrix} = \begin{pmatrix}0&-2&1-2\a\\0&2&-1-2\b\\0&-2&1-2\g\end{pmatrix}\\
+        &\iff \g = 1-\b \et \a = \frac{1}{2} - \b
+    \end{align*}
+    Par exemple, $(\a,\b,\g)=(-\frac{1}{2},1,0)$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Soit $T=\begin{pmatrix}\l & & (*) \\ & \ddots & \\ (0) & & \l\end{pmatrix}\in\M_n(\C)$.\\
+        Montrer que $T$ est limite d'une suite de matrices diagonalisables.
+        \item Vérifier le théorème de Cayley-Hamilton sur $T$.
+        \item Montrer le résultat de 1. pour $T$ triangulaire quelconque.
+        \item Vérifier le théorème de Cayley-Hamilton sur les matrices diagonales puis diagonalisables.
+        \item Montrer que les matrices diagonalisables sont denses dans $\M_n(\C)$.
+        \item Démontrer le théorème de Cayley-Hamilton avec 5.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On pose $T_k=\begin{pmatrix}\l+\frac{1}{k}&&(*)\\&\ddots&\\(0)&&\l+\frac{n}{k}\end{pmatrix}$ diagonalisable car triangulaire à éléments diagonaux tous distincts.\\
+    \boxed{2.} $\X_T=(X-\l)^n$, et $\X_T(T)=(T-\l I_n)^n$, nilpotente d'indice inférieur à $n$, donc $\X_T(T)=0_{\M_n(\K)}$.\\
+    \boxed{3.} On pose $\mu=\inf\{|\l_i - \l_j|; ~ 1 \leq i < j \leq p\}$ ensemble non-vide minoré de $\R$ donc $\mu>0$.
+    \begin{equation*}
+        T_k = \begin{pmatrix}\l_1 + \frac{\mu}{k} & & & (*) \\ & \l_1 + \frac{\mu}{2k} & & \\ & & \ddots & \\ (0) & & & \l_p + \frac{\mu}{nk}\end{pmatrix}
+    \end{equation*}
+    Déjà, $T_k\to T$, puis on vérifie que les éléments diagonaux de $T_k$ sont tous distincts.\\
+    Par l'absurde : $\l_i + \frac{\mu}{qk} = \l_j + \frac{\mu}{rk}$ avec $i<j$ et $q<r$.\\
+    Alors $\l_i - \l_j = \frac{\mu}{k}\left( \frac{1}{q} - \frac{1}{r} \right)$ puis $|\l_i-\l_j|<\frac{\mu}{k}\leq\mu$ contredit la définition de $\mu$.\\
+    Les éléments de la diagonale de $T_k$ sont donc bien distincts et $\X_{T_k}$ est SRS donc $T_k$ est diagonalisable.\\
+    \boxed{4.} Soit $D$ telle que $\X_D=(X-\l_1)^{\a_1}...(X-\l_p)^{\a_p}$, alors $\X_D(D)=(D-\l_1I_n)^{\a_1}...(D-\l_pI_n)^{\a_p}$.
+    \begin{equation*}
+        \X_D(D) = \begin{pmatrix}0& & & (0)\\ & (\l_2-\l_1)I_{\a_2} & & \\ & & \ddots & \\ (0) & & & (\l_p-\l_1)I_{\a_p} \end{pmatrix}.
+    \end{equation*}
+    Supposons maintenant $A$ diagonalisable, $\exists P\in\GL_n(\K)$ et $D\in\D_n(\K)$ tels que $A=PDP^{-1}$.\\
+    On sait que $\forall Q \in \K[X], ~ Q(A)=PQ(D)P^{-1}$, on l'applique avec $Q=\X_A=\X_D$. Alors $\X_A(A)=P\X_D(D)P^{-1}=0$.\\
+    \boxed{5.} Soit $A\in\M_n(\K)$, on sait que $A$ est trigonalisable car $\X_A$ est scindé dans $\C[X]$.\\
+    Alors $\exists P\in\GL_n(\K), ~ \exists T \in \T_n^+(\K), ~ A=PTP^{-1}$, puis d'après le 3, $T=\lim T_k$ avec $T_k$ diagonalisable.\\
+    Posons pour tout $k\in\N$, $A_k = PT_kP^{-1}$. Puisque $A_k\sim T_k$, $A_k$ est diagonalisable.\\
+    On a $T_k\to T$, et $PT_kP^{-1}\to A_k$ car le produit est continu.\\
+    \boxed{6.} Soit $A\in\M_n(\C)$. D'après 5, $A=\lim A_k$ avec pour tout $k\in\N,~A_k$ diagonalisable.\\
+    D'après 4, pour tout $k\in\N,~\X_{A_k}(A_k)=0$ et $X_A = X^n-\Tr(A)X^{n-1}+...+(-1)^n\det(A)$.\\
+    Tous les coefficients de $\X_A$ sont des sommes et produits des coefficients de la matrice $A$, donc les coefficients de $\X_A$ sont des polynômes en les coefficients de la matrice $A$, donc sont fonctions continues de ses coefficients.\\
+    Notons $\X_A = X^n  + f_{n-1}(A)X^{n-1}+...+f_0(A)$, puis $\X_A(A)=A^nf_{n-1}(A)A^{n-1}+...+f_0(A)I_n$.\\
+    Enfin, $\X_{A_k}(A_k)=A_k^n + f_{n-1}(A_k)A_k^{n-1} + ... + f_0(A_k)I_n \to A^n + f_{n-1}(A)A^{n-1} + ... + f_0(A)I_n$.\\
+    Or $\X_{A_k}(A_k)=0$ pour tout $k\in\N$, donc $\X_A(A)=0$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    \begin{equation*}
+        A = \begin{pmatrix}3&1&-1&1\\2&2&-2&0\\0&0&2&2\\1&-1&-1&3\end{pmatrix} \in \M_4(\R).
+    \end{equation*}
+    $A$ est-elle diagonalisable, trigonalisable ?
+    \tcblower
+    \begin{align*}
+        \det(\l I_4 - A) &= \begin{vmatrix}\l-3&-1&1&-1 \\ -2 & \l-2 & 2 & 0 \\ 0 & 0 & \l-2 & -2 \\ -1 & 1 & 1 & \l-3\end{vmatrix} = (\l-4)\begin{vmatrix}1 & -1 & 1 & -1 \\ 1 & \l-2 & 2 & 0 \\ 0 & 0 & \l - 2 & -2 \\ 0 & 1 & 1 & \l-3\end{vmatrix}\\
+        &= (\l-4)\begin{vmatrix}1&-1&1&-1\\0&\l-1&1&1\\0&0&\l-2&-2\\0&1&1&\l-3\end{vmatrix} = (\l-4)\begin{vmatrix}\l-1&1&1\\0&\l-2&-2\\1&1&\l-3\end{vmatrix}\\
+        &= (\l-4)(\l-2)\begin{vmatrix}1&1&1\\-1&\l-2&-2\\0&1&\l-3\end{vmatrix}=(\l-4)(\l-2)^3
+    \end{align*}
+    Donc $E_2 = \Vect((1,0,1,0))$ puis $\dim E_2 = 1$, donc $A$ n'est pas diagonalisable dans $\M_4(\C)$.\\
+    De plus, $E_4=\Vect((1,1,0,0))$. Le polynôme caractéristique est scindé dans $\M_4(\R)$, donc $A$ est trigonalisable.\\
+    On a $(\Vect((1,0,1,0),\Vect(1,1,0,0)))$ forme une famile libre comme $\vp$ associés à des vp distinctes.\\
+    Il manque deux vecteurs pour avoir une base de $\R^4$. On cherche à compléter en obtenant une matrice triangulaire.
+    \begin{equation*}
+        0 \subsetneq \Ker(A-2I_4) \subsetneq ... \subsetneq \Ker(A-2I_4)^3
+    \end{equation*}
+    De manière symétrique, par théorème du rang, $\rg(A-2I_4)^3 \leq \rg(A-2I_4)^2 \leq ... \leq 3$.
+    \begin{equation*}
+        A-2I_4 = \begin{pmatrix}1&1&-1&1\\2&0&-2&0\\0&0&0&2\\1&-1&-1&1\end{pmatrix}; \quad (A-2I_4)^2 = \begin{pmatrix}4&0&-4&0\\2&2&-2&-2\\2&-2&-2&2\\0&0&0&0\end{pmatrix}; \quad (A-2I_4)^2 = \begin{pmatrix}4&4&-4&-4\\4&4&-4&-4\\0&0&0&0\\0&0&0&0\end{pmatrix}
+    \end{equation*}
+    On a $\Ker(A-2I_4)^2=\Vect((1,0,1,0),(0,1,0,1))$, et $\Ker(A-2I_4)^3=\Vect((0,0,1,-1))$.\\
+    D'après le lemme des noyaux et Cayley-Hamilton, $\R^4=\Ker X_A(A) = \Ker(A-4I_4)\oplus \Ker(A-2I_4)^3$.\\
+    Posons $\B=(\Vect(1,1,0,0),\Vect(1,0,1,0),\Vect(0,1,0,1),\Vect(0,0,1,-1))$, base de $\R^4$.\\
+    En notant $u$ canoniquement associé à $A$, $T=\Mat_\B(u)=\begin{pmatrix}4&0&0&0 \\ 0 & 2 & 2 & -2\\ 0 & 0 & 2  & -2 \\ 0 & 0 & 0 & 2\end{pmatrix}$
+    \begin{equation*}
+        A=PTP^{-1}; \quad P = \begin{pmatrix}1&1&0&0\\1&0&1&0\\0&1&0&1\\0&0&1&-1\end{pmatrix}\in\GL_4(\R)
+    \end{equation*}
+    Et $(0,1,0,1)\in\Ker((u-2 I_4)^2)$ donc $u(e'_3) - 2e'_3 \in \Vect(e'_2)$ donc $u(e'_3)=2e'_3+\l e'_2$.
+\end{exercice}
+
+\begin{ex}{}{}
+    Soit $J=\begin{pmatrix}0&1&0&...&0\\\vdots&0&\ddots&&\vdots\\0&\vdots&\ddots&\ddots&1\\1&0&...&...&0\end{pmatrix}$, on a $J^\top$ une matrice compagnon et $\X_J=\X_{J^\top}=X^n-1$.\\
+    Notons $u$ l'endomorphisme canoniquement associé à $J$, $\B=(e_1,...,e_n)$ base canonique de $\K^n$.\\
+    Alors $u(e_1)=e_n, ~ u(e_2)=e_1, ~ u(e_3)=e_2, ~ ..., ~ u(e_n)=e_{n-1}$. Donc $u^n=\Id$.\\
+    On sait que $\Pi_J = \X_J$ (on peut le retrouver en montrant que $(I_n,J,...,J^{n-1})$).\\
+    $\K[J]$ est une $\K$-algèbre de dimension $n$ et $\K[J]=\Vect(I_n,...,J^{n-1})=\{a_0I_n + a_1J + ... + a_{n-1}J^{n-1}\}$.
+    \begin{equation*}
+        a_0I_n + a_1J + ... + a_{n-1}J^{n-1} = \begin{pmatrix} a_0 & a_1 & ... & a_{n-1} \\ a_{n-1} & a_0 & ... & a_{n-2} \\ \vdots & \vdots & \ddots & \vdots \\ a_1 & a_2 & ... & a_0\end{pmatrix}
+    \end{equation*}
+    C'est une matrice dite circulante. On pourrait aussi montrer que $\m{C}(J)=\K[J]$ (difficile).\\
+    $J$ est diagonalisable dans $\M_n(\C)$ : $\X_J=X^n-1=\prod_{i=1}^{n-1}(X-e^{\frac{2ik\pi}{n}})$.\\
+    Il est scindé à racines simples, donc $J$ est diagonalisable.\\
+    Notons $E_k=\Ker(\w_k I_n - J)$ sous-espace propre associé à la vp $\w_k$ (dimension 1). 
+    \begin{equation*}
+        J\begin{pmatrix}\w_k\\\vdots\\\w_k^{n-1}\\1\end{pmatrix} = \w_k\begin{pmatrix}\w_k\\\vdots\\\w_k^{n-1}\\1\end{pmatrix}
+    \end{equation*}
+    Vérifions que tous les éléments de $\K[J]$ sont codiagonalisables.
+    \begin{equation*}
+        J=PDP^{-1}; \quad D=\Diag(1,...,\w^{n-1}); \quad P=(X_0~X_1~...~X_{n-1}).
+    \end{equation*}
+    Soit $Q\in\K[X]$. $Q(J)=PQ(D)P^{-1}$ et $Q(D)=\Diag(Q(1),...,Q(\w^{n-1}))$.\\
+    Donc $\forall Q \in \K[X], ~ Q(J)=PQ(D)P^{-1}$ avec la même matrice $P\in\GL_n(\K)$.\\
+    Donc toutes les matrices $Q(J)$ avec $Q\in\K[X]$ sont codiagonalisables.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{(HP)}{}
+    Soit $E$ un $\C$-evdf, $(u_i)_{i\in I}$ une famille d'endormorphismes tels que $\forall i \in I, ~ u_i$ est diagonalisable.\\
+    De plus, on suppose que $\forall i,j \in I, ~  u_i\circ u_j = u_j\circ u_i$. Alors la famille $(u_i)_{i\in I}$ est codiagonalisable.
+    \tcblower
+    Soit $n$ la dimension de $E$. On procède par récurrence sur $n$.\\
+    \bf{Initialisation.} Pour $n=1$, tous les applications linéaires sont les homothéties, résultat trivial.\\
+    \bf{Hérédité.} Soit $n\in\N$ tel que le résultat soit vrai pour tout $k<n$.\\
+    Si $\forall i \in I, ~ u_i$ est une homothétie, le résultat est trivial. (toutes les bases de $E$ diagonalisent $u_i$).\\
+    Sinon, $\exists i_0 \in I, ~ u_{i_0}$ n'est pas une homothétie. Notons $\Sp(u_{i_0})=\{\l_1,...,\l_p\}$ avec $p\geq2$.\\
+    Alors $E=E_{\l_1}\oplus...\oplus E_{\l_p}$, et $\forall i \in \lb1,p\rb, ~ \dim E_{\l_i} < \dim E = n+1$, soit $i\in\lb1,p\rb$, notons $\tilde{u_j}={u_j}_{E_{\l_i}}$.\\
+    Par rectriction, les endomorphismes induits sur $E_{\l_i}$ commutent toujours et sont toujours dz (thm).\\
+    On applique l'hypothèse : tous les endo induits sur $E_{\l_i}$ sont codz, on choisit une base $\B_i$ de $E_{\l_i}$ qui diagonalise tous les endomorphismes induits. On pose enfin $\B=\B_1\sqcup...\sqcup B_p$ concaténation des bases. C'est une base de $E$ et les vecteurs de $\B$ sont des $\vp$ de tous les $u_i$.
+\end{prop}
+
+\begin{prop}{(HP)}{}
+    Soient $A,B\in\M_n(\C)$. Si $AB=BA$, alors $A$ et $B$ sont cotrigonalisables.\\
+    \warning Contrairement à la codiagonalisation, la réciproque est fausse.
+    \tcblower
+    Le théorème se démontre par réccurence sur $n$.\\
+    \bf{Initialisation.} Montrons que $A$ et $B$ ont un $\vp$ commun.\\
+    Notons $u$ et $v$ les endomorphismes canoniquement associés à $A$ et $B$.\\
+    Puisque $AB=BA$, $uv=vu$; $\Sp(A)\neq\0$ par d'Alembert-Gauss; Soit $\l\in\Sp(A)$.\\
+    Alors $E_{\l}$ est un sous-espace stable par $v$, on note $\tilde{v}=v_{|E_\l}$ l'endomorphisme induit.\\
+    Alors $\tilde{v}$ admet une vp dans $\C$ notée $\mu$. Soit $x$ $\vp$ associé.
+    \begin{equation*}
+        \tilde{v}(x)=\mu x; \quad v(x)=\mu x; \quad u(x)=\l x \nt{ car } x\in E_{\l}.
+    \end{equation*}
+    Donc $x$ est $\vp$ commun à $u$ et $v$, puis $X$ est $\vp$ commun à $A$ et $B$.
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $A\in \M_n(\K)$. Montrons que $A$ nilpotente $\iff$ $\forall k \in \N^*, \Tr(A^k)=0$.
+    \tcblower
+    \boxed{\ra} $A\sim T\in \T_N^{+}(\K)$, et $A^k\sim T^k$. Soit $k\in\N^*$, $\Tr(A^k)=\Tr(T^k)=0$.\\
+    \boxed{\la} On note $\Sp(A)=\{\l_1,...,\l_p\}$ et $n_i$ la multiplicté de $\l_i$.\\
+    $A$ est trigonalisable dans $\M_n(\C)$, et $\Tr(A^k)=n_i\l_i^k$. (on enlève les $\l_i$ nuls du système)
+    \begin{equation*}
+        \begin{cases}
+            a_1\l_1 + ... + \a_p \l_p = 0 \\ ... \\ a_1\l_1^p + ... + \a_p\l_p^p = 0
+        \end{cases} \iff \begin{pmatrix}
+            \l_1 & ... & \l_p \\ \vdots & & \vdots \\ \l_1^p & ... & \l_p^p
+        \end{pmatrix}\begin{pmatrix}
+            \a_1\\\vdots\\\a_p
+        \end{pmatrix} = 0
+    \end{equation*}
+    C'est une matrice de Vandermonde :
+    \begin{equation*}
+        \begin{vmatrix}
+            \l_1 & ... & \l_1^p \\ \vdots & & \vdots \\ \l_p & ... & \l_p^p
+        \end{vmatrix} = \l_1...\l_p \begin{vmatrix}1&\l_1&...&\l_1^{p-1} \\ \vdots & \vdots & & \vdots \\ 1 & \l_p & ... & \l_p^{p-1}\end{vmatrix} = \prod_{i=1}^{p}\l_i\prod_{1\leq i,j\leq p}(\l_j-\l_i).
+    \end{equation*}
+    Alors $(\a_1,...,\a_p)=0$ car $V\in\GL_p(\K)$ et $p\geq1$ est absurde donc la seule vp est 0 donc $A$ est nilpotente.
+\end{exercice}
+
+\fin
+
+\pagebreak
+
+\section{Exercices de Khôlles.}
+
+\begin{exercice}{}{}
+    Soit $n\geq 1$ et $A_n=\begin{pmatrix}0&1&&&(0)\\1&\ddots&\ddots&&\\ &\ddots&\ddots&\ddots&\\&&\ddots&\ddots&1\\(0)&&&1&0\end{pmatrix}\in\M_n(\R)$ et $P_n(X)=\X_{A_n}$.
+    \begin{enumerate}
+        \item Montrer que $\forall n \geq 3, ~ P_n(X)=XP_{n-1}(X)-P_{n-2}(X)$. Calculer $P_1$ et $P_2$.
+        \item Pour $x\in]-2,2[$, on pose $\a\in]0,\pi[$ tel que $x=2\cos \a$. Montrer que $\forall n \geq 2, ~ P_n(X)=\frac{\sin((n+1)\a)}{\sin \a}$.
+        \item En déduire que $\forall n \geq 2, ~ A_n$ est diagonalisable.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $\l\in\C$. En développant selon la première ligne :
+    \begin{align*}
+        P_n(\l) &= \l P_{n-1}(\l) - P_{n-2}(\l); \quad P_2(X) = \l^2-1; \quad P_1(X) = X; \quad P_0(X) = 1.
+    \end{align*}
+    \boxed{2.} Le cosinus est bijectif de $]0,\pi[$ dans $]-1,1[$ et $\frac{x}{2}\in]-1,1[$, donc $\exists \a \in ]0,\pi[, ~ x=2\cos\a$.\\
+    Par récurrence double, avec double initialisation [...]\\
+    \boxed{3.} Soit $\a\in]0,\pi[$. On a $\sin((n+1)\a)=0 \iff \exists k \in \lb1,n\rb, ~ \a = \frac{k\pi}{n+1}$.\\
+    Ce sont exactement toutes les racines de $P_n$ car le degré de $P_n$ est $n$, puisque $P_n=\X_{A_n}$.\\
+    Donc $\Sp_{A_n}=\left\{2\cos\left( \frac{k\pi}{n+1} \right), ~ k \in \lb1,n\rb\right\}$ distinctes car $\cos$ strictement décroissante sur $]0,\pi[$.\\
+    Donc $A_n$ est diagonalisable car elle a $n$ valeurs propres distinctes.
+\end{exercice}
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Soient $\l,\mu \in \C$ et $A=\begin{pmatrix}0&\l\\\mu&0\end{pmatrix}\in\M_2(\C)$.
+        Donner une condition nécessaire et suffisante pour que $A$ soit diagonalisable.
+        \item Soient $x_1,...,x_{2n}\in\C$ et $A=\begin{pmatrix}0&...&x_{2n}\\&&\\x_n&...&(0)\end{pmatrix}\in\M_{2n}(\C)$.\\
+        Donner une condition nécessaire et suffisante pour que $A$ soit diagonalisable.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $\X_A = X^2-\l\mu$.\\
+    $\hra$ Si $\l\neq0$ et $\mu\neq0$, $\X_A$ est scindé à racines simples donc $A$ est diagonalisable.\\
+    $\hra$ Si $\l=0$ ou $\mu=0$, alors $A^2=0$, donc $A$ diagonalisable ssi $A=0$\\
+    Donc $A$ est diagonalisable ssi $\l\neq0$ et $\mu\neq0$ ou $\l=0$ et $\mu=0$.\\
+    \boxed{2.} Soit $u$ l'endomorphisme canoniquement associé et $\forall i \in \lb1,n\rb, ~ E_i=\Vect(e_1,...,e_{2n-i+1})$ sous-respace stable.\\
+    On note $\B_i$ base de $E_i$ et $u_i$ l'endomorphisme induit.\\
+    On note $C_i = \Mat_{\B_i}(u)=\begin{pmatrix}0 & x_{2n-i+1} \\ x_i & 0\end{pmatrix}$, on note $\B=\B_1\sqcup...\sqcup \B_n$.\\
+    Alors $A\sim C = \Diag(C_1,....,C_n)$ donc $A$ dz ssi $C$ dz ssi $\forall i \in \lb 1, n \rb, ~ C_i$ dz.
+\end{exercice}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    Soit $E$ un $\K$-evdf, $f\in\L(E)$, $\phi:g\mapsto f\circ g$.
+    \begin{enumerate}
+        \item Montrer que $\Sp(f)\subset\Sp(\phi)$.
+        \item Montrer que si $f$ est diagonalisable, alors $\phi$ aussi.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $\l\in\Sp(f)$ et $p$ projection sur $E_{\l}(f)$.\\
+    On a $\forall x \in E, ~ p(x)\in E_\l(f)$ puis $\phi(p)(x) = (f\circ p)(x) = \l p(x)$ donc $\l\in\Sp(f)$ car $\phi(p)=\l p$.
+    \begin{align*}
+        \l\in\Sp(\phi) &\iff \exists g \in \L(E)\setminus\{0\}, ~ \phi(g) = \l g\\
+        &\iff \exists g \in \L(E), ~ \forall x \in E, ~ \phi(g)(x)=\l g(x) \\
+        &\iff\exists g \in \L(E,E_{\l}(f))\end{align*}
+    Donc $E_{\l}(\phi)=\L(E,E_{\l}(f))$.\\
+    \boxed{2.} Supposons $f$ diagonalisable, alors $\X_f$ est scindé et $\forall \l \in \Sp(f), ~ \dim(E_{\l}(f))=n_{\l}$.\\
+    Et $\forall \l \in\Sp(\phi), ~ \dim(E_{\l}(\phi))=n_{\l}\dim E$, alors $\X_\phi = \prod_{\l\in\Sp(\phi)}(X-\l)^{n_\l\dim E}$.\\
+    Donc $\phi$ est diagonalisable car $\X_f$ est scindé et sous-espaces propres de bonnes dimensions.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $T$ tel que $\forall f \in \cursive{C}([0,1],\R), ~ T(f):x\mapsto \int_0^1\min(x,t)f(t)\dt$.
+    \begin{enumerate}
+        \item L'application $T$ est-elle linéaire ?
+        \item Trouver les valeurs et vecteurs propres de $T$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soient $\l\in\R$ et $f,g\in\cursive{C}([0,1],\R)$. Soit $x\in[0,1]$. Par linéarité de l'intégrale :
+    \begin{align*}
+        T(f + \l g)(x) &= \int_0^1\min(x,t)(f(t)+\l g(t))\dt = \int_0^1\min(x,t)f(t)\dt + \l\int_0^1\min(x,t)g(t)\dt \\
+        &= T(f)(x) + \l T(g)(x) 
+    \end{align*}
+    \boxed{2.} Soit $f\in E$ et $x\in[0,1]$.
+    \begin{equation*}
+        T(f)(x) = \int_0^1\min(x,t)f(t)\dt = \int_0^x tf(t)\dt + x\int_x^1 f(t)\dt
+    \end{equation*} 
+    Donc $T(f)\in E$. Soit $\l\in\R^*$ tel que $T(f)=\l f$. En dérivant deux fois :
+    \begin{align*}
+        T(f)(x) = \int_0^x tf(t)\dt + x\int_x^1 f(t)\dt = \l f(x) &\ra xf(x) + \int_x^1 f(t)\dt -xf(x)=\l f'(x)\\
+        &\ra -\frac{1}{\l}f(x) = f''(x).
+    \end{align*}
+    Si $\l<0$, alors $f\in\Vect(\ch\frac{x}{\sqrt{-\l}}, \sh\frac{x}{\sqrt{-\l}})$.\\
+    Si $\l>0$, alors $f\in\Vect(\cos\frac{x}{\sqrt{\l}}, \sin\frac{x}{\sqrt{\l}})$.\\
+    Si $\l=0$, alors $T(f)(x)=0$ puis $f(x)=0$ puis $f=0$, donc 0 n'est pas vp.
+\end{exercice}
+
+\end{document}

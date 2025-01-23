@@ -1,0 +1,63 @@
+\documentclass[french, 11pt]{article}
+
+\input{setup.tex}
+
+\def\chapitre{6}
+\def\pagetitle{Séparation et Évaluation.}
+
+\begin{document}
+
+\input{title.tex}
+
+\begin{defi}{}{}
+    C'est une méthode de résolution exacte de problèmes durs, c'est une extension du backtracking.\\
+    On étudie des problèmes de maximisation ou de minimisation.\\
+    Pour transformer un problème d'optimisation en problème de décision, on rajoute un seuil. 
+\end{defi}
+
+\begin{ex}{Voyageur de commerce, optimisation.}{}
+    Instance : graphe $G$ complet et pondéré.\\
+    Solution : Un cycle passant exactement une fois par chaque sommet.\\
+    Fonction à minimiser : la somme totale du chemin.
+\end{ex}
+
+\begin{ex}{Max-SAT}{}
+    Instance : une formule $\phi$ sous forme normale conjonctive.\\
+    Solution : une valuation.\\
+    Fonction à maximiser : le nombre de clauses satisfaites.\n
+    Avec un retour sur trace similaire à celui de l'algorithme de Quine, on peut répondre à notre problème.\\
+    La méthode \bf{Évaluation} : parmi les branches explorables laquelle semble la plus intéressante.\\
+    Ici, on choisit la branche qui maximise le nombre de clauses satisfaites.\\
+    La méthode \bf{Séparation} : une fois qu'on a obtenu une solution, on ne poursuit la recherche dans une branche qui si celle-ci peut aboutir à une meilleure solution.\\
+    Pour estimer si une branche est potentiellement pertinente, il faut une fonction qui, étant donnée une solution partielle, nous donne une borne sur la quélité d'une solution que l'on peut obtenir à partir de celle-ci, on parle à nouveau d'heuristique.
+\end{ex}
+
+\begin{defi}{}{}
+    On dit d'une heuristique qu'elle est \bf{admissible} si elle ne sous-estime pas la valeur d'une solution complète à partir de la solution partielle.
+\end{defi}
+
+\begin{ex}{Sac à dos multiple.}{}
+    \bf{Instance.} $n$ objets de valeur $v_i$ et de poids $p_i$, un poids total $p$.\\
+    \bf{Solution.} Un $n$-uplet $(x_1,...,x_n)\in\N^n$ tel que $\sum x_i p_i \leq p$.\\
+    \bf{Fonction à Maximiser.} $\sum x_iv_i$.\\
+    On peut prendre plusieurs fois le même objet.\\
+    L'heuristique est : valeur actuelle $+$ poids restant $\times\frac{v_i}{p_i}$ où $i$ est le prochain objet.\\
+    Montrons qu'elle est admissible. On sait que tous les objets restants ont un rapport valeur/poids inférieur à $v_i/p_i$.\\
+    Quelque soient les objets choisis par la suite, leur poids ne peut excéder le poids restant.\\
+    On en déduit que la valeur que l'on peut ajouter est bornée par $\frac{v_i}{b_i}p$.
+\end{ex}
+
+\begin{defi}{}{}
+    Les méthodes de retour sur trace sont en réalité souvent efficaces, dans le pire des cas elles sont exponentielles, mais ce cas est rarement atteint.\\
+    Le tri rapide a une complexité en $n^2$ dans le pire des cas mais en $n\log n$ dans la moyenne. 
+\end{defi}
+
+\begin{ex}{}{}
+    On considère le problème de coloration de graphe.\\
+    \bf{Question.} Peut-on numéroter les sommets de $G$ avec les éléments de $\lb0,k-1\rb$ en évitant d'avoir deux voisins de même couleur ?\\
+    C'est un problème \texttt{NP}-complet.
+    \tcblower
+    Si à $n$ fixé, on tire un graphe au hasard, la complexité en moyenne est en $O(1)$.
+\end{ex}
+
+\end{document}

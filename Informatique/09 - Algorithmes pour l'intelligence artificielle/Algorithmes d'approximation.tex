@@ -1,0 +1,41 @@
+\documentclass[french, 11pt]{article}
+
+\input{setup.tex}
+
+\def\chapitre{9}
+\def\pagetitle{Algorithmes pour l'intelligence artificielle.}
+
+\begin{document}
+
+\input{title.tex}
+
+\renewcommand*{\E}{\mathbb{E}}
+\renewcommand*{\P}{\mathbb{P}}
+
+\begin{defi}{Apprentissage machine.}{}
+    En apprentissage machine, on montre à la machine un grand jeu de données d'entraînement, et elle renvoie une fonction pour notre problème. On vérifie la qualité de cette fonction en la comparant à un nouveau jeu de données.
+\end{defi}
+
+\begin{defi}{Apprentissage supervisé.}{}
+    Dans l'apprentissage supervisé, on utilise un jeu de données étiqueté, chaque élément est composé d'une intance, et d'une étiquette indiquant le résultat attendu.\\
+    Un exemple : une image avec un texte la décrivant, ou un temps $t$ et une température. 
+\end{defi}
+
+\begin{defi}{}{}
+    On distingue deux types de problèmes :
+    \begin{itemize}
+        \item Les problèmes de régression où l'ensemble des étiquettes est continu.
+        \item Les problèmes de classification où l'ensemble des étiquettes est discret.
+    \end{itemize}
+    On se restreint aux problèmes de classification.
+\end{defi}
+
+\begin{defi}{Algorithme des $k$ plus proches voisins.}{}
+    Étant donné une instance, on la compare à celles du jeu d'entraînement pour déterminer lesquelles lui ressembles le plus. On garde les $k$ plus proches. On renvoie alors l'étiquette la plus représentée parmi ceux-ci. La performance de l'algorithme dépend de la distance choisie pour calculer les plus proches voisins, et de $k$.\\
+    Lorsque $k$ est petit, on ne considère que les voisins très proches, on est très sensible aux données d'entraînement.\\
+    Il n'y a pas eu de généralisaiton, on parle de sur-apprentissage.\\
+    Lorsque $k$ est trop grand, on cosidère des voisins qui ne sont plus représentatifs, on parle de sous-apprentissage.
+\end{defi}
+
+
+\end{document}

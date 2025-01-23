@@ -1,0 +1,76 @@
+\documentclass[french, 11pt]{article}
+
+\input{/home/theo/MP2I/setup.tex}
+
+\def\nomchap{TD}
+\def\chapitre{1}
+\def\pagetitle{Des révisions en tout genre.}
+
+\begin{document}
+
+\input{/home/theo/MP2I/title.tex}
+
+\thispagestyle{fancy}
+
+\begin{exercice}{Calcul du PGCD}{}
+    \bf{Question 1.} Un variant d'appel est $a+b$, strictement décroissant et minoré par 0, toutes les instructions terminent.\\
+    \bf{Question 2.} Par induction sur les couples $(a,b)\in\N^2$.\\
+    \emph{Initialisation.} On a que $\texttt{pgcd}(0,0)=0=0\land 0$, donc c'est correct sur $(0,0)$.\\
+    \emph{Hérédité.} Soit $(a,b)\in\N^2$ tel que $\forall (a',b')\in\N^2 \mid a' < a ~\ou~ b' < b \ra \texttt{pgcd}(a',b')=a'\land b'$.\\
+    On peut supposer $a$ toujours supérieur à $b$ car $a\land b=b\land a$.\\
+    $\bullet$ Cas $a$ pair, $b$ pair:\\
+    --- $\exists p,q\in\N, ~ a=2p ~\et~ b=2q$, et $\texttt{pgcd}(a,b)=2\cdot\texttt{pgcd}(p,q)=2\cdot(p\land q)=a\land b$.\\
+    $\bullet$ Cas $a$ impair, $b$ pair:\\
+    --- $\exists q\in\N, ~ b=2q$, et $\texttt{pgcd}(a,b)=\texttt{pgcd}(a,q)=a\land q=a\land b$ car $a$ impair.\\
+    $\bullet$ Cas $a$ pair, $b$ impair:\\
+    --- $\exists p\in\N, ~ a=2p$, et $\texttt{pgcd}(a,b)=\texttt{pgcd}(p,b)=p\land b=a\land b$ car $b$ impair.\\
+    $\bullet$ Cas $a$ impair, $b$ impair:\\
+    --- $\exists p,q\in\N, ~ a=2p+1 ~\et~ b=2q+1$, et $\texttt{pgcd}(a,b)=\texttt{pgcd}(p-q,b)=(p-q)\land b=a\land b$.\\
+    En effet, $(a-b)\land b = a\land b$ d'après l'algorithme d'Euclide, et $(a-b)/2\land b=a\land b$ car $b$ impair.\\
+    \emph{Conclusion.} Dans tous les cas, l'algorithme renvoie bien $a\land b$.\\
+    \bf{Question 3.} Chaque appel s'effectue en temps constant, hormis l'unique appel récursif.\\
+    On remarque que la taille d'au moins l'un des deux arguments est divisée par 2 à chaque appel récursif.\\
+    On peut donc majorer le nombre d'appels récursifs par $\log(\max(a,b))$, lui-même majoré par $\log(a+b)$.\\
+    On a donc bien une complexité en $O(\log(a+b))$.
+\end{exercice}
+
+\begin{exercice}{Économie de matériel.}{}
+    \bf{Question 1.} Commencer avec un spaghetti; tant qu'ils cassent, en rajouter 1 de plus que l'essai précédent.\\
+    \bf{Question 2.} Commencer avec $N$ spaghetti; tant qu'ils ne cassent pas, en enlever 1.\\
+    \bf{Question 3.} Recherche dichotomique entre $1$ et $N$ spaghetti. On suppose $N=2^n$.\\
+    Pour garantir le succès de cette méthode, on aurait besoin de $N\sum_{k=1}^n\frac{2^k-1}{2^k}=N(N-1+\frac{1}{2^N})$ spaghetti.\\
+    \bf{Question 4.} Recherche dichotomique, avec moyenne géométrique.\\
+    \bf{Question 5.} La première n'a pas besoin de connaître $N$, pour les autres, on peut prendre $N=1$, puis le doubler à chaque echec. 
+\end{exercice}
+
+\begin{exercice}{Cherchez les couples.}{}
+    \bf{Question 1.} On cherche linéairement le minimum et le maximum de $S$, ils satisfont la contrainte.\\
+    \bf{Question 2.} On trie la liste, puis on cherche linéairement les deux entiers consécutifs de distance minimale.\\
+    \bf{Question 3.} Pseudo-code :\\
+    \begin{algorithm}[H]
+        \caption{}
+        Trier $S$.\\
+        $(i,j)\gets(0,n-1)$\\
+        \Tq{$i\leq j$}{
+            \Si{$S[i]+S[j] > m$}{
+                $j\gets j-1$
+            }\SinonSi{$S[i]+S[j] < m$}{
+                $i\gets i+1$
+            }\Sinon{
+                \Retour{$(S[i],S[j])$}
+            }
+        }
+    \end{algorithm}
+    \bf{Question 4.} On note $l=\frac{1}{n-1}(\max(S)-\min(S))$. On note $a_k=[\min(S)+kl,\min(S)+(k+1)l]$.\\
+    On a donc l'union "disjointe" suivante :
+    \begin{equation*}
+        [\min(S),\max(S)]=\bigcup_{k=1}^{n-1}a_k.
+    \end{equation*}
+    Elles sont de taille $l$, donc deux entiers dans le même $a_k$ vérifiront la condition.\\
+    On a $n$ entiers dans $S$, donc dans $[\min(S),\max(S)]$ à ranger dans les $n-1$ $a_k$.\\
+    Par principe des tiroirs, il existera un intervalle avec au moins deux entiers, qui vérifiront la condition.\\ 
+    \bf{Question 5.} On créée les $n-1$ tiroirs décrits précédemment, puis on itère sur les éléments de $S$, en les rangeant dans le bon tiroir.\\
+    On itère ensuite sur les tiroirs, jusqu'à en trouver un de taille supérieure à 2, puis on renvoie ses deux premiers éléments.
+\end{exercice}
+
+\end{document}

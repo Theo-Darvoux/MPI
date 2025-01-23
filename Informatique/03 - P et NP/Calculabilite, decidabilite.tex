@@ -1,0 +1,270 @@
+\documentclass[french, 11pt]{article}
+
+\input{/home/theo/MP2I/setup.tex}
+
+\def\chapitre{3}
+\def\pagetitle{Calculabilité, décidabilité.}
+
+\renewcommand*{\P}{\texttt{P}}
+\newcommand*{\NP}{\texttt{NP}}
+
+\begin{document}
+
+\input{/home/theo/MP2I/title.tex}
+
+\section{\texorpdfstring{$\P \et \NP$}{Lg}}
+
+\begin{defi}{}{}
+    $\P$ et $\NP$ sont des classes de complexité. Les classes de complexité sont des ensembles de problèmes que l'on rassemble en fonction de leur difficulté selon plusieurs critères.\\
+    La classe $\P$ correspond aux problèmes de décision qui peuvent être résolus en temps polynomial.\\
+    La classe $\NP$ correspond aux problèmes pour lesquels on peut vérifier une solution en temps polynomial.
+\end{defi}
+
+\vspace*{-0.6cm}
+
+\begin{defi}{}{}
+    Une instance $I$ d'un problème $P$ est dite positive si la réponse à la question est \texttt{Oui}.\\
+    Un algorithme $V$ est un vérificateur de $P$ si $I$ positif $\iff \exists c$ tel que $V(I,c)=$ \texttt{Oui}. 
+\end{defi}
+
+\vspace*{-0.6cm}
+
+\begin{ex}{}{}
+    Étant donné $G$ un graphe et $k$ un entier, est-il possible de colorer $S$ avec les $k$ premiers entiers en évitant d'avoirs deux voisins de même couleur ?\\
+    Un vérificateur : pour tout sommet on vérifie si ses voisins sont de couleur différente.
+\end{ex}
+
+\vspace*{-0.6cm}
+
+\begin{defi}{}{}
+    Un problème $A$ appartient à $\NP$ si :\\
+    --- Il existe un vérificateur $V$ qui s'exécute en temps polynomial en la taille de ses entrées.\\
+    --- Il existe un polynome $R$ tel que la taille d'un certificat est bornée par $R(|I|)$.
+\end{defi}
+
+\vspace*{-0.6cm}
+
+\begin{ex}{$\NP$ ?}{}
+    Problème $A$ : étant donnés un graphe $G$, un entier $k$, existe-t-il un sous-graphe $G'$ à $k$ sommets tels qu'ils soient tous voisons deux-à-deux ?\\
+    Problème $B$ : étant donnés une formule $\phi$, est-elle satisfiable.
+\end{ex}
+
+\vspace*{-0.6cm}
+
+\begin{thm}{$\P\subset\NP$}{}
+    Soit $P_1\in \P$. Il existe $A$ un algorithme polynomial pour le résoudre.\\
+    On construit $V_p$ prenant une instance $I$ de $P$, un certificat $C$ et renvoyant $A(I)$.\\
+    Alors $V_p$ s'exécute bien en temps polynomial, et c'est bien un vérificateur.\\
+    $I$ positive $\iff$ $A(I)=\texttt{Oui}\iff\exists c, ~ V_p(I,c)=\texttt{Oui}$.\\
+    On a $R=1$ convient puisqu'on peut choisir $c=\e$, alors $\P_1\in\NP$ donc $\P\subset\NP$.
+\end{thm}
+
+\vspace*{-0.6cm}
+
+\begin{defi}{Réduction.}{}
+    Une réduction de $P_1$ vers $P_2$ est une fonction $f$ qui à une instance de $P_1$ associe une instance de $P_2$ et :\\
+    --- $I$ est une instance positive de $P_1$ ssi $f(I)$ est une instance positive de $P_2$.\n
+    On dit d'une réduction qu'elle est polynomiale si elle se calcule en temps polynomiale en la taille de son entrée.
+\end{defi}
+
+\vspace*{-0.6cm}
+
+\begin{ex}{}{}
+    Ensemble Indépendant :\\
+    --- Instance : graphe $G$, entier $k$.\\
+    Existe-t-il $S'\subset S$ de taille $k$ tel que $\forall s,t \in S', ~ (s,t)\notin A$.\n
+    Couverture par les sommets :\\
+    --- Instance : graphe $G$, entier $k$.\\
+    Existe-t-il $S''\subset S$ tel que $\forall (x,y) \in A, ~ x \in S'' \ou y \in S''$ et $|S''|=k$.\n
+    Ensemble Indépendant se réduit polynomialement au problème Couverture par les sommets.
+    \tcblower
+    \boxed{\ra} Soit $f:(G,k)\mapsto (G,|S|-k)$. Montrons que $f$ est une réduction.\\
+    Soit $(G,k)$ positive de Ensemble indépendant. Il existe $S'$ qui convient.\\
+    Alors $\forall s,t \in S', ~ (s,t) \notin A$, $\forall (s,t) \in A, ~ s\notin S' \ou t \notin S'$.\\
+    Donc $\forall (s,t) \in A, ~ s \in S \setminus S' \ou t \in S \setminus S'$.\\
+    $|S\setminus S'| = |S| - k$. Donc $|S''|=S\setminus S'$ convient.\\
+    \boxed{\la} Soit $(G,k)$ instance de Ensemble indépendant telle que $f(G,k)$ est positive de Couverture par les sommets.\\
+    Il existe $S''$ de taille $|S|-k$ tel que $\forall (x,y) \in A, ~ x\in S'' \ou y \in S''$.\\
+    $\forall s,t \notin S'', ~ (s,t)\notin A$, $\forall s,t \in S\setminus S'', ~ (s,t)\notin A$. Donc $S\setminus S''$ est un ensemble indépendant de taille $k$ de $G$, $(G,k)$ est une instance positive de Ensemble Indépendant.
+    La réduction est polynomiale. Ensemble indépendant se réduit polynomialement à Couverture par les sommets.
+\end{ex}
+
+\begin{prop}{}{}
+    Soit $f$ une réduction polynomiale de $P_1$ vers $P_2$ et $g$ de $P_2$ vers $P_3$.\\
+    Alors $g\circ f$ est une réduction polynomiale de $P_1$ vers $P_3$.
+    \tcblower
+    $I$ instance positive de $P_1$ $\iff$ $f(I)$ instance positive de $P_2$ $\iff$ $g\circ f(I)$ instance positive de $P_3$.\\
+    On calcule $f(I)$ en temps polynomial en taille de $I$, $g\circ f(I)$ en temps polynomiale en taille de $f(I)$.
+\end{prop}
+
+\begin{prop}{}{}
+    Si $f(P_1) \subset P_2$, et que $P_2$ est de classe $\P$, alors $P_1$ l'est aussi.
+    \tcblower
+    Il existe $A$ un algorithme résolvant $P_2$ en temps polynomial. Il existe $f$ une réduction polynomiale.\\
+    On pose l'algorithme $B$ renvoyant $A(f(I))$.\\
+    Alors $I$ positif $\iff$ $f(I)$ positif $\iff$ $A(f(I))$ vrai $\iff$ $B(I)$ vrai.\\
+    Donc $B$ résout $P_1$ en temps polynomial. Donc $P_1$ est de classe $\P$.  
+\end{prop}
+
+\begin{prop}{}{}
+    Si $P_1$ se réduit polynomialement à $P_2$, alors $P_2\in\NP\ra P_1\in\NP$.
+    \tcblower
+    Il existe un vérificateur $V$ et un polynôme $R$ qui conviennent et une réduction polynomiale $f$ de $P_1$ vers $P_2$.\\
+    Vérificateur $V'$ : instance $I$, certificat $c$ $\mapsto$ $V(f(I),c)$.\\
+    $I$ positive pour $P_1$ $\iff$ $f(I)$ est positive pour $P_2$ $\iff$ $\exists c, ~ |c|\leq R(|f(I)|)$ et $V(f(I),c)$ vrai\\
+    $\iff$ $\exists c, ~ |c|\leq R(|f(I)|)$ et $V'(I,c)$ vrai $\iff \exists c, ~ |c|\leq R'(|I|)$ et $V'(I,c)$ vrai.\\
+    Donc $P_1\in\NP$. 
+\end{prop}
+
+\begin{defi}{}{}
+    Un problème $P$ est dit $\NP$-difficile si $\forall P'\in\NP, ~ P'$ se réduit polynomialement à $P$.\\
+    Un problème $P$ est dit $\NP$-complet si il est $\NP$-difficile et dans $\NP$. 
+\end{defi}
+
+\vspace*{-0.5cm}
+
+\begin{prop}{}{}
+    Si $P_1$ est $\NP$-complet et se réduit polynomialement à $P_2$, alors $P_2$ est $\NP$-difficile.
+    \tcblower
+    Soit $P'\in\NP$. Il se réduit polynomialement à $P_1$, il se réduit polynomialement à $P_2$, donc $P_2$ est $\NP$-difficile.
+\end{prop}
+
+\vspace*{-0.5cm}
+
+\begin{thm}{de Cook. (Admis)}{}
+    Le problème SAT est $\NP$-difficile, il est donc $\NP$-complet.
+\end{thm}
+
+\vspace*{-0.5cm}
+
+\begin{ex}{3-SAT}{}
+    Le problème 3-SAT est $\NP$-complet.
+    \tcblower
+    Il est dans $\NP$, même vérificateur que pour 2-SAT.\\
+    Soit $\phi$ une instance de SAT-FNC, conjonction de $n$ clauses $c_i$.\\
+    Pour chaque $c_i$, on modifie en fonction de sa forme :\\
+    --- $c_i = l_j \rightarrow l_j \lor l_j \lor l_j$.\\
+    --- $c_i = l_j \lor l_k \rightarrow l_j \lor l_k \lor l_j$.\\
+    --- $c_i = l_j \lor l_k \lor l_l \rightarrow l_j \lor l_k \lor l_k$.\\
+    --- $c_i = l_{i_1} \lor ... \lor l_{i_n} \rightarrow (l_{i_1}\lor l_{i_2} \lor y_{i_1}) \land (\lnot y_{i_1} \lor l_{i_3} \lor y_{i_4}) ... \land (\lnot y_{i(n-3)} \lor l_{i(n-1)} \lor l_{i_n})$.\\
+    On a défini $f$, on pose donc $\phi'$ la conjonction des $f(c_i)$.\\
+    \boxed{\ra} Supposons $\phi$ satisfiable. Il existe $v$ valuation telle que $v(\phi)=\top$.\\
+    Alors $\forall i \in \lb1,n\rb, ~ \exists l_i \in c_i, ~ v(l_i)=\top$, si $|c_i|\leq3$, alors $v(f(c_i))=\top$.\\
+    Si $|c_i|\geq4$, il existe $l_{ij}$ tel que $v(l_{ij})=\top$.\\
+    --- Si $j\leq2$, on fixe $v'(y_ik)=\bot$ pour tout $k\in\lb1,n-3\rb, ~ v'(f(c_i))=\top$.\\
+    --- Si $j\geq n-1$, $\forall k \in \lb1,j-2\rb$, $v(y_{ik})=\top$, les autres à $\bot$.\\
+    Pour chaque clause, on peut étendre $v$ en $v'$ satisfaisant l'image par $f$, donc $v'(\phi')=\top$.\\
+    \boxed{\la} Soit $\phi'$ satisfiable, $\exists v', ~ v'(\phi')=\top$.\\
+    On considère $v$ : $v'$ restreinte aux variables de $\phi$. Montrons $v(\phi)=\top$.\\
+    --- $c_i$ est de taille $\leq 3$ : $v'(f(c_i))=\top \iff v(c_i) = \top$.\\
+    --- $v'(f(c_i))=\top$ sinon.\\
+    Il y a $n-2$ clauses dans $f(c_i)$ et $n-3$ nouvelles variables. Chaque variable satisfait au plus une clause, il y a une clause qui est satisfiable par un littéral :\\
+    --- $v'(l_{ik})=\top \ra v(l_{ik})= \top \ra v(c_i) = \top$.\\
+    Donc $\forall i, ~ v(c_i) = \top \ra v(\phi)=\top$, donc $\phi$ satisfiable.\\
+    La fonction est bien une réduction de SAT-FNC à 3-SAT.\n
+    La réduction est bien polynomiale : dans le cas d'une clause de taille supérieure à 4, on crée $n-2$ clauses de taille 3, chacune en temps polynomial.
+\end{ex}
+
+\begin{ex}{}{}
+    Montrer que Clique est $\NP$-complet.
+    \tcblower
+    Soit une formule sous FNC. On fait le graphe des littéraux, avec des arêtes ssi ils ne sont pas dans la même clause.\\
+    On cherche une clique dans le graphe obtenu, elle sera de taille au plus $K$, le nombre de clauses. Montrons que c'est une réduction.\\
+    \boxed{\ra} Supposons $\phi$ satisfiable. Il existe $v$ tel que $v(\phi)=\top$. Pour chaque clause $c_i$, il y a au moins un $l_{ik}$ tel que $v(l_{ik})=\top$. On peut choisir un tel littéral pour chaque clause pour former un ensemble $S'$ de sommets.\\
+    Alors $\forall l_{ik}, l_{jk} \in S', ~ l_{ik}\neq l_{jk} \ra i \neq j$ et $v(l_{ik})=v(l_{jk})=\top$.\\
+    Ils ne sont pas négation l'un de l'autre et appartiennent à des clauses différentes, donc $(l_{ik}, l_{jk})\in A$ et $|S'|=K$.\\
+    \boxed{\la} Supposons que $G$ admette une clique de taille $K$ : $\exists S' \subset S, ~ |S'|=K \et \forall s,t \in S', ~ s\neq t \ra (s,t)\in A$.
+    On fixe $v$ une valuation telle que $\forall l_{ik}\in S', ~ v(l_{ik})=\top$, bien définie car $S'$ ne contient pas un élément et sa négation.
+    Chaque clause a au plus un élément dans $S'$, puisque $|S'|=K$, chaque clause a exactement un élément dans $S'$.\\
+    Donc chaque clause possède un élément évalué à $\top$ par $v$, donc chaque clause est évaluée à $\top$, donc $v(\phi)=\top$.\n
+    C'est une réduction; elle est bien polynomiale car pour $n$ clauses, on a $3n$ sommets et au plus $9n(n-3)$ arêtes.
+\end{ex}
+
+\begin{ex}{}{}
+    \bf{Cycle Hamiltonien} :\\
+    Instance : Graphe $G$.\\
+    Question : Existe-t-il un cycle qui passe une unique fois par chaque sommet ?\n
+    \bf{Voyageur de commerce} :\\
+    Instance : Graphe complet pondéré $G$, un entier $k$.\\
+    Question : Existe-t-il un cycle qui passe une unique fois par chaque sommet de poids total inférieur à $k$ ?\\
+    On admet Cycle Hamiltonien $\NP$-difficile, montrons que voyageur de commerce $\NP$-complet.
+    \tcblower
+    Voyageur de commerce est $\NP$. Vérificateur : instance I et liste de sommets :
+    Tient une liste des sommets vus, et la somme des poids des arêtes vues. Renvoie Vrai si Vus ne contient pas faux et somme de poids inférieur à k.\n
+    Réduction : il existe un cycle qui passe exactement une fois par tous les sommets, on fixe $b$ le poids des arêtes bleues à 1, et celui des rouges à $|S|+1$. Un tel cycle dans un tel graphe ne passe que par des arêtes bleues et une fois par chaque sommet a un poids $|S|$. Si le cycle emprunte une arête rouge, son poids est d'au moins $|S|+1$. On prend donc $K=|S|$. On a construit une réduction. En effet, si $G$ contenait un cycle hamiltonien, son image contient un cycle hamiltonien composé d'arêtes bleues, un cycle de poids total inférieur à $K$.\\
+    Si l'image contient un cycle hamiltonien de poids total inférieur à $K$, il n'est composé que d'arêtes bleues et était donc présent dans $G$.
+\end{ex}
+
+\begin{ex}{Sac à dos.}{}
+    Le problème appartient à la classe $\NP$, il est $\NP$-complet.\\
+    On étudie un algorithme de programmation dynamique. On étudie $V_{i,p}$ la valeur maximale que l'on peut transporter en n'utilisant que les $i$ premiers objets et avec un poids total inférieur ou égal à $p$.\\
+    On a alors $V_{i+1,p}=\max(V_{i,p}, V_{i,p-p_{i+1}} + v_{i+1})$, $V_{0,p}=0$.\\
+    \begin{algorithm}[H]
+        \caption{Algorithme de programmation dynamique sac à dos.}
+        \Entree{Deux tableaux $V_i$ et $P_i$, un entier $P$ et un entier $V$.}
+        $T$ $\gets$ Tableau de taille $(n+1)\times(p+1)$.\\
+        \Pour{$p$ allant de 0 à $P$}{
+            $T[0][p]=0$.
+        }
+        \Pour{$i$ allant de $1$ à $n$}{
+            \Pour{$p$ allant de 0 à $p_i-1$}{
+                $T[i][p]=T[i-1][p]$.
+            }
+            \Pour{$p$ allant de $p_i$ à $P$}{
+                $T[i][p]=\max(T[i-1][p], T[i-1][p-P_i]+v_i)$.
+            }
+        }
+        \Retour{$T[n][p]\geq v$}.
+    \end{algorithm}
+    Ce programme s'exécute en $O(nP)$ et décide bien si une instance de sac-à-dos est positive.\\
+    On a l'impression d'avoir une solution polynomiale d'un algorithme $\NP$-complet, c'est une illusion.\\
+    En effet, $P$ est de taille $O(\log P)$, donc la taille de l'instance : $O(\sum(\log v_i + \log p_i) + \log P + \log V)$.\\
+    Donc $P=2^{\log P}$, donc $nP$ n'est pas polynomial en la taille de l'instance. Notre algorithme ne prouve pas que sac-à-dos appartient à $\P$.
+\end{ex}
+
+\begin{ex}{Bin Packing}{}
+    Instance : $n$ nombres rationnels $p_i/q_i$, un entier $m$.\\
+    Question : Existe-t-il une partition des $n$ nombres en $m$ ensembles $B_j$ tels que $\forall j, ~ \sum_{B_j}\frac{p_i}{q_i}\leq 1$ ?\\
+    Vérificateur : Entrée : Instance, On crée $L$ une liste composée de $(j,\sum_{i\in B_j}\frac{p_i}{q_i})$.
+    Pour $i$ 1 à $n$, si $(T[i],x)$ est dans $L$, le remplacer par $(T[i],x+\frac{p_i}{q_i})$.\\
+    Sinon, ajouter $(T[i],\frac{p_i}{q_i})$. Renvoyer si tous les couples de $L$ ont un second élément $\leq 1$.\\
+    Toutes les opérations sur celles-ci sont donc réalisées en temps polynomial en $n$.
+\end{ex}
+
+\begin{ex}{Partitionnement Carré}{}
+    Instance : $n$ entiers $t_i$, un entier $N$.\\
+    Question : Est-il possible de partitionner le carré de taille $N\times N$ en $n$ carrés de tailles $t_i\times t_i$ ?\\
+    Vérificateur : Instance, Certificat : position des carrés à placer.\\
+    On vérifie qu'il n'y a pas de superpositions, de débordements et que la somme des aires est égale à $N^2$.\n
+    Variante : $n$ couples $(t_i, e_i)$, un entier $N$.\\
+    Question : Est-il possible de partitionner le carré de taille $N\times N$ avec $e_i$ carrés de taille $t_i\times t_i$.\\
+    La taille de l'instance est beaucoup plus compacte; ce qui rend l'ancien vérificateur non polynomial.
+\end{ex}
+
+\section{Décidabilité.}
+
+\begin{defi}{}{}
+    On dit qu'un problème de décision est décidable s'il existe un algorithme qui s'arrête sur toutes ses instances et renvoie Vrai ssi elle est positive.
+\end{defi}
+
+\begin{thm}{Machine universelle.}{}
+    Il existe un algorithme, dit \bf{machine universelle}, qui étant donné une fonction $f$ et une entrée $x$, simule $f(x)$.
+\end{thm}
+
+\begin{ex}{Problème de l'Arrêt.}{}
+    Instance : Une fonction $f$, un paramètre $x$.\\
+    Question : La fonction $f$ se termine-t-elle sur l'entrée $x$ ?\\
+    Ce problème est indécidable.
+    \tcblower
+    Supposons qu'un tel algorithme existe.\\
+    On définit \texttt{Paradoxe} tel que :\\
+    --- Si \texttt{Arrêt}($f, f$), alors boucle infinie.\\
+    --- Sinon, renvoyer vrai.\\
+    Alors \texttt{Paradoxe(Paradoxe)} s'arrête ssi \texttt{Arrêt(Paradoxe, Paradoxe)=Faux} par définition, c'est absurde.
+\end{ex}
+
+\begin{prop}{}{}
+    S'il existe une réduction de $P_1$ à $P_2$ et que $P_2$ est décidable, alors $P_1$ l'est aussi.
+\end{prop}
+
+\end{document}

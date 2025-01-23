@@ -1,0 +1,1113 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{4}
+\def\pagetitle{Espaces Vectoriels Normés.}
+
+\input{setup.tex}
+
+
+
+\begin{document}
+
+\input{title.tex}
+
+\thispagestyle{fancy}
+
+L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) sur d'autres objets que les réels ou les complexes.
+
+\section{Normes et distances.}
+
+\begin{defi}{Norme. $\star$}{}
+    Soit $E$ un $\K$-ev et $N:x\mapsto N(x)$ de $E$ dans $\R_+$. C'est une norme sur $E$ ssi :
+    \begin{enumerate}
+        \item $\forall x \in E, ~ N(x)=0 \iff x = 0_E$. (Séparation.)
+        \item $\forall x \in E, ~ \forall \lambda \in \K, ~ N(\lambda x) = |\lambda|N(x)$. (Homogénéité.)
+        \item $\forall x,y \in E, ~ N(x+y) \leq N(x) + N(y)$. (Inégalité triangulaire.)
+    \end{enumerate}
+\end{defi}
+
+\begin{ex}{}{}
+    La valeur absolue est une norme sur $\R$, le module est une norme sur $\C$.
+\end{ex}
+
+\begin{ex}{}{}
+    Montrer que toutes les normes sur $\R$ sont proportionnelles à la valeur absolue.
+    \tcblower
+    Soit $\N$ une norme sur $\R$. On a $\forall x \in \R, \forall \l \in \R, ~ N(\l x)=|\l|N(x)$ donc $N(\l)=|\l|N(1)$.\\
+    On a bien que $\forall \l \in \R, ~ N(\l)=a|\l|$.
+\end{ex}
+
+\begin{ex}{}{}
+    Donner deux normes non proportionnelles sur $\C$.
+    \tcblower
+    Le module est une norme sur $\C$, $N(a+ib)=|a|+|b|$ aussi.
+\end{ex}
+
+\begin{prop}{Généralisation de l'inégalité triangulaire.}{}
+    Soit $E$ un $\K$-ev et $N$ une norme sur $E$, notée $\|\cdot\|$.
+    \begin{enumerate}
+        \item $\forall(x_1,...,x_n)\in E^n, ~ \|\sum_{i=1}^nx_i\|\leq\sum_{i=1}^n\|x_i\|$.
+        \item $\forall x,y \in E, ~ |\|x\|-\|y\||\leq\|x-y\|$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Par récurrence facile sur $n$.\\
+    \boxed{2.} Soient $x,y\in E$.
+    \begin{equation*}
+        \begin{cases}
+            x=x-y+y\\
+            y=y-x+x
+        \end{cases} \ra \begin{cases}
+            \|x\|\leq\|x-y\|+\|y\|\\
+            \|y\|\leq\|y-x\|+\|x\|
+        \end{cases} \ra \begin{cases}
+            \|x\|-\|y\| \leq \|x-y\|\\
+            \|y\|-\|x\| \leq \|x-y\|
+        \end{cases}
+    \end{equation*}
+    Donc $|\|x\|-\|y\|| \leq \|x-y\|$.
+\end{prop}
+
+\begin{defi}{}{}
+    Un espace vectoriel normé est un espace vectoriel muni d'une norme, noté $(E,\|\cdot\|)$.
+\end{defi}
+
+\begin{defi}{}{}
+    Soit $(E,\|\cdot\|)$ un evn. Soit $x\in E$. On dit que $x$ est unitaire si $\|x\|=1$.
+\end{defi}
+
+\vspace*{-0.4cm}
+
+\begin{defi}{}{}
+    Soit $E$ un ensemble. Alors $d:E\times E \to \R_+$ est une distance sur $E$ ssi
+    \begin{enumerate}
+        \item $\forall (x,y)\in E^2, ~ d(x,y)=0 \iff x = y$. (séparation)
+        \item $\forall (x,y)\in E^2, ~ d(x,y)=d(y,x)$. (symétrie)
+        \item $\forall (x,y,z)\in E^3, ~ d(x,z)\leq d(x,y)+d(y,x)$. (inégalité triangulaire)
+    \end{enumerate}
+\end{defi}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{Distance associée à une norme. $\star$}{}
+    Soit $(E,\|\cdot\|)$ un evn, alors $d:(x,y)\mapsto \|x-y\|$ est une distance sur $E$.
+    \tcblower
+    \boxed{1.} $d(x,y)=0 \iff \|x-y\|=0 \iff x-y = 0 \iff x = y$.\\
+    \boxed{2.} $d(x,y)=\|x-y\|=|-1|\|y-x\|=\|y-x\|=d(y,x)$.\\
+    \boxed{3.} $d(x,z)=\|x-z\|=\|x-y+y-z\|\leq \|x-y\| + \|y-z\| = d(x,y) + d(y,z)$.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{rappel}{}{}
+    Un produit scalaire sur $E$ est une forme bilinéaire, symétrique, définie, positive.
+\end{rappel}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{Norme associée à un produit scalaire. $\star$}{}
+    Soit $(E,\langle\cdot\rangle)$ un espace préhilbertien réel. On pose $\|x\|=\sqrt{\langle x,x \rangle}$, alors $\|\cdot\|$ définit une norme sur $E$.\\
+    \bf{Remarque.} Si $\|\cdot\|$ est définie avec une racine carrée, on passe par le produit scalaire.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{exi}{$\K^n$. $\star$}{}
+    On définit trois normes sur $\K^n$ :
+    \begin{enumerate}
+        \item $\forall (x_1,...,x_n) \in E^n, ~ \|(x_1,...,x_n)\|_1=\sum_{i=1}^n|x_i|$.
+        \item $\forall (x_1,...,x_n) \in E^n, ~ \|(x_1,...,x_n)\|_2=\sqrt{\sum_{i=1}^n|x_i|^2}$.
+        \item $\forall (x_1,...,x_n) \in E^n, ~ \|(x_1,...,x_n)\|_\infty=\max(|x_i|)$.
+    \end{enumerate}
+\end{exi}
+
+\vspace*{-0.4cm}
+
+\begin{exi}{Fonctions bornées. $\star$}{}
+    On note $\m{B}(A,\R)$ l'ensemble des fonctions de $A\subset \R$ bornées sur $A$ non vide.\\
+    On définit la norme $\|f\|=\sup_{x\in A}|f(x)|$.
+    \tcblower 
+    On a $\{|f(x)|, ~ x \in A\}$ est non-vide et majoré de $\R$. Par théorème, il admet une borne supérieure.\\
+    \boxed{1.} $\|f\|=0\ra\forall x \in A, ~ 0 \leq |f(x)| \leq \|f\|=0$, donc $f=0$.\\
+    \boxed{2.} $|(\l f)(x)|=|\l f(x)|=|\l||f(x)|\leq |\l|\|f\|$ donc $\|\l f\| \leq |\l|\|f\|$ et $\|f\|\leq|\frac{1}{\l}|\|\l f\|$ donc $|\l|\|f\|\leq\|\l f\|$.\\
+    \boxed{3.} $|(f+g)(x)|=|f(x)+g(x)|\leq|f(x)|+|g(x)|\leq \|f\|+\|g\|$ donc $\|f+g\|\leq\|f\|+\|g\|$    
+\end{exi}
+
+\vspace*{-0.4cm}
+
+\begin{exi}{Fonctions continues. $\star$}{}
+    On définit trois normes sur $\m{C}^0([a,b],\K)$, avec $a<b$ réels :
+    \begin{enumerate}
+        \item $\forall f \in \m{C}^0([a,b],\K), ~ \|f\|_1=\int_a^b|f(t)|\dt$.
+        \item $\forall f \in \m{C}^0([a,b],\K), ~ \|f\|_2=\sqrt{\int_a^b|f(t)|^2\dt}$.
+        \item $\forall f \in \m{C}^0([a,b],\K), ~ \|f\|_\infty=\sup\{|f(x)|, ~ x\in[a,b]\}$.
+    \end{enumerate}
+\end{exi}
+
+\vspace*{-0.4cm}
+
+\begin{ex}{}{}
+    Pour $P\in\R[X]$, on définit $\|P\|=\int_0^1|P(t)|\dt$, une norme sur $\R[X]$.
+    \tcblower
+    \boxed{1.} $\|P\|=0 \ra \forall t \in [0,1], ~ P(t)=0$ car $|P|$ positive et continue, donc $P=0$ par rigidité.\\
+    \boxed{2.} $\|\l P\|=\int_0^1|\l P(t)|\dt = |\l|\int_0^1|P(t)|\dt=|\l|\|P\|$.\\
+    \boxed{3.} $|(P+Q)(t)|\leq|P(t)|+|Q(t)|$, puis par croissance et linéarité : $\|P+Q\|\leq\|P\|+\|Q\|$.
+\end{ex}
+
+\vspace*{-0.4cm}
+
+\begin{ex}{}{}
+    Soient $a_1<...<a_n\in\R$. Pour $P\in\R[X]$, on definit $\|P\|=\sum_{i=0}^n|P(a_i)|$.
+\end{ex}
+
+\vspace*{-0.4cm}
+
+\begin{ex}{}{}
+    On définit trois normes sur $M_n(\R)$ :
+    \begin{enumerate}
+        \item $\forall A \in M_n(\R), ~ \|A\|_1=\sum_{1\leq i,j\leq n}|a_{i,j}|$.
+        \item $\forall A \in M_n(\R), ~ \|A\|_2=\sqrt{\sum_{1\leq i,j \leq n} a_{i,j}^2}$.
+        \item $\forall A \in M_n(\R), ~ \|A\|_{\infty}=\sup\{|a_{i,j}|, ~ 1 \leq i,j \leq n\}$.
+    \end{enumerate}
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{Normes sur les espaces produits.}{}
+    Soit $(E_1,\|\cdot\|_1)$, ..., $(E_n,\|\cdot\|_n)$ des evn.\\
+    On pose $E=E_1\times...\times E_n$ l'espace produit, on sait que $E$ est un espace vectoriel pour les lois produits.\\
+    On définit $\|\cdot\|_{\infty}$ sur $E$ par $\|(x_1,...,x_n)\|_{\infty}=\max(\|x_i\|_i, ~ 1\leq i \leq n)$.\\
+    Alors $\|\cdot\|_{\infty}$ est une norme sur $E$, et $(E,\|,\|_{\infty})$ est l'evn produit.
+    \tcblower
+    \boxed{1.} $\|x\|_{\infty}=0\ra\forall i \in \lb1,n\rb, ~ \|x_i\|_i=0 $ donc $x_i=0_{E_i}$ donc $x=0_E$.\\
+    \boxed{2.} $\|\l x\|_\infty = \max(\|\l x_i\|_i, ~ 1 \leq i \leq n) = |\l|\max(\|x_i\|_i, ~ 1 \leq i \leq n)=\l\|x\|_{\infty}$.\\
+    \boxed{3.} $\|x_i+y_i\|\leq \|x\|_{\infty} + \|y\|_\infty$ donnc $\|x+y\|_\infty\leq\|x\|_{\infty}+\|y\|_{\infty}$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{corr}{}{}
+    Si $\|\cdot\|$ est définie avec une racine carrée, on l'associe à un produit scalaire; avec un max, on l'associe à un espace produit; sinon on vérifie les 3 axiomes à la main.
+\end{corr}
+
+\vspace*{-0.8cm}
+
+\section{Boules ouvertes, fermées, sphères.}
+
+\begin{defi}{$\star$}{}
+    Soit $(E,\|\cdot\|)$ un evn, $a\in E$ et $r\in\R_+$.
+    \begin{enumerate}
+        \item La boule ouverte de centre $a$ et de rayon $r$ est l'ensemble $B(a,r)=\{x\in E, ~ \|x-a\| < r\}$.
+        \item La boule fermée de centre $a$ et de rayon $r$ est l'ensemble $B'(a,r)=\{x\in E, ~ \|x-a\|\leq r\}$.
+        \item La sphère de centre $a$ et de rayon $r$ est l'ensemble $S(a,r)=\{x\in E, ~ \|x-a\|=r\}$.
+    \end{enumerate}
+    \bf{Remarque.} $B(a,r)\sqcup S(a,r) = B'(a,r)$ et $r_1<r_2 \ra B(a,r_1)\subset B(a,r_2)$.\\
+    \bf{Remarque.} Dans $\R$, les boules sont des intervalles ouverts ou fermés.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{nota}{}{}
+    On appelle $B(0,1)$ la boule unité ouverte, $B'(0,1)$ la boule unité fermée, et $S(0,1)$ la sphère unité.
+\end{nota}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    Soit $(E,\|\cdot\|)$ et $A\subset E$. On dit que $A$ est bornée ssi $\exists M > 0, ~ \forall x \in A, ~ \|x\|\leq M$.\\
+    \bf{Remarque.} $A\subset B'(0,M)$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    Montrer que $A$ bornée $\iff \exists a \in E, ~ \exists r \geq 0, ~ A\subset B(a,r)$.
+    \tcblower
+    \boxed{\ra} Évident en posant $a=0$ et $r=M$.\\
+    \boxed{\la} Soit $x\in A$, on a $\|x\|\leq \|a\| + \|x - a\| \leq \|a\| + r$. Donc $A$ est bornée en posant $M=\|a\|+r$. 
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    Soient $A$ un ensemble, $F$ un evn et $f:A\to F$. On dit que $f$ est bornée ssi $f(A)$ est bornée dans $F$.
+\end{defi}
+
+\vspace*{-0.4cm}
+
+\begin{defi}{Partie convexe.}{}
+    Soit $E$ un $\K$-ev et $A\subset E$.\\
+    On dit que $A$ est convexe ssi $\forall (a,b) \in A^2, \forall \l \in [0,1], ~ \l a + (1-\l)b \in A$.
+\end{defi}
+
+\vspace*{-0.4cm}
+
+\begin{rappel}{}{}
+    Les parties convexes de $\R$ sont exactement les intervalles de $\R$.
+\end{rappel}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{}{}
+    Soit $E$ un $\K$-ev et $A\subset E$ convexe.
+    \begin{equation*}
+        \forall n \in \N^*, ~ \forall (a_1,...,a_n) \in A^n, ~ \forall (\l_1,...,\l_n) \in \R_+^n, ~ \sum_{i=1}^n \l_i = 1 \ra \sum_{i=1}^n\l_ia_i\in A.
+    \end{equation*}
+    Une partie convexe est stable par passage aux barycentres.
+    \tcblower
+    On notera $y=\sum_{i=1}^n\frac{\l_i}{1-\l_{n+1}}a_i$ et $\a_i = \frac{\l_i}{1-\l_{n+1}}$.\\
+    Par récurrence sur $n$.\\
+    \bf{Initialisation.} Pour $n\leq 2$, c'est la définition de la convexité.\\
+    \bf{Hérédité.} Soit $n\in\N^*$ tel que $P(n)$. Soit $(a_1,...,a_{n+1})\in A^{n+1}$, soit $(\l_1,...,\l_{n+1})\in\R_+^{n+1}$ sommant à 1.\\
+    $\bullet$ Si $\l_{n+1}=1$, alors $\forall i \in \lb1,n\rb, ~ l_i=0$, et $\sum\l_i a_i = a_{n+1}\in A$.\\
+    $\bullet$ Si $\l_{n+1}<1$, alors $\sum_{i=1}^{n+1}\l_ia_i=\sum_{i=1}^n\l_ia_i+\l_{n+1}a_{n+1}=(1-\l_{n+1})\sum_{i=1}^n\frac{\l_i}{1-\l_{n+1}}a_i+\l_{n+1}a_{n+1}$.\\
+    Alors $\forall i \in \lb1,n\rb, ~ \a_i \geq 0$ et $\sum_{i=1}^n\a_i=1$.\\
+    D'après $P(n)$, $\sum_{i=1}^n\a_i a_i \in A$, puis $(1-\l_{n+1})y+\l_{n+1}a_{n+1}\in A$ car $A$ convexe. Donc $P(n+1)$.
+\end{prop}
+
+\begin{prop}{$\star$}{}
+    Soit $(E,\|\cdot\|)$ un evn.
+    \begin{enumerate}
+        \item Les boules fermées sont convexes.
+        \item Les boules ouvertes sont convexes.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $a\in E, ~ r\geq 0$. Soient $x,y\in B'(a,r)$ et $\l\in[0,1]$.
+    \begin{equation*}
+        \| \l x + (1 - \l)y - a \| = \| \l(x-a) + (1-\l)(y-a) \| \leq \l\|x-a\| + (1-\l)\|y-a\| \leq \l r + (1-\l)r = r.
+    \end{equation*}
+    On a bien que $\l x + (1-\l)y \in B'(a,r)$.\\
+    \boxed{2.} Idem (attention au cas $\l=0$).
+\end{prop}
+
+\begin{ex}{}{}
+    Vérifier que $S(a,r)$ pour $r>0$ n'est pas convexe.
+    \tcblower
+    Soit $x\in E$ non nul. On pose $y=a+\frac{r}{\|x\|}x$ et $y'=a-\frac{r}{\|x\|}x$ tous deux dans $S(a,r)$.\\
+    On a $\frac{1}{2}y+\frac{1}{2}y'=a\notin S(a,r)$, donc pas convexe.
+\end{ex}
+
+\section{Suites dans un EVN.}
+
+\begin{defi}{Suite bornée. $\star$}{}
+    Soit $(E,\|\cdot\|)$ un evn et $(u_n)_{n\in\N}$ une suite de $E$.
+    \begin{center}
+        $(u_n)$ est bornée ssi $\exists M \geq 0, ~ \forall n \in \N, ~ \|u_n\| \leq M$.
+    \end{center}
+\end{defi}
+
+\begin{defi}{Convergence d'une suite. $\star$}{}
+    Soit $(E,\|\cdot\|)$ un evn, $(u_n)_{n\in\N}$ une suite de $E$, et $l\in E$.
+    \begin{center}
+        $(u_n)_{n\in\N}$ converge vers $l$ ssi $\lim \|u_n - l\| = 0$ ssi $\forall \e > 0, ~ \exists n_0 \in \N, ~ \forall n \geq n_0, ~ \| u_n - l \| \leq \e$.
+    \end{center}
+\end{defi}
+
+\begin{ex}{}{}
+    Soit $A\in M_n(\R)$, pour $k\in\N$, posons $A_k=A+\frac{1}{k+1}I_n$. Alors $\|A_k-A\|=\frac{1}{k+1}\|I_n\|\to 0$ puis $\lim A_k = A$.
+\end{ex}
+
+\begin{prop}{Unicité de la limite.}{}
+    La limite d'une suite, si elle existe, est unique.
+    \tcblower
+    Supposons que $\lim u_n = l$ et $\lim u_n = l'$. Supposons par l'absurde que $l\neq l'$. On pose $\e=\frac{\|l-l'\|}{2}>0$.\\
+    On a alors $\exists n_0 \in \N, ~ \forall n \geq n_0, ~ \|u_n - l\| < \e$ et $\exists n_1 \in \N, ~ \forall n \geq n_1, ~ \|u_n - l'\| < \e$.\\
+    On pose $N=\max(n_0,n_1)$, donc $\forall n \geq N, ~ \|u_n-l\| < \e \et \|u_n - l\| < \e$.\\
+    On a alors que $\|l-l'\| \leq \|u_n - l\| + \|u_n - l'\| < 2\e = \|l-l'\|$, absurde.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{thm}{Caractère borné d'une suite convergente. $\star$}{}
+    Toute suite convergente est bornée.
+    \tcblower
+    Soit $(u_n)$ une suite convergente de $(E,\|\cdot\|)$. On note $l=\lim u_n$.\\
+    Avec $\e=1$, $\exists n_0\in\N, ~ \forall n \geq n_0, ~ \| u_n - l \| < 1$, donc $u_n \in B(l,1)$.\\
+    On pose $r=\max \{1, \|u_1-l\|, ..., \|u_{n_0-1} - l\|\}$. On a $\forall n \geq n_0, ~ u_n \in B(l,r)$ car $\|u_n - l\| < 1 \leq r$.\\
+    C'est vrai pour $0 \leq n \leq n_0 - 1$ car $\|u_n - l\| \leq r$.
+\end{thm}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{$\star$}{}
+    Soit $(E,\|\cdot\|)$ un evn, $(u_n)_{n\in\N}$, $(v_n)_{n\in\N}$ deux suites de $E$ convergentes, et $\l\in\K$.\\
+    Alors $(u_n + \l v_n)_{n\in\N}$ est convergente et $\lim(u_n + \l v_n)=\lim u_n + \l \lim v_n$.
+    \tcblower
+    Supposons $\lim u_n = l$ et $\lim v_n = l'$.
+    \begin{equation*}
+        \|(u_n + \l v_n) - (l + \l l')\| = \|(u_n - l) + \l(v_n - l')\| \leq \|u_n - l\| + |\l|\|v_n - l'\| \to 0
+    \end{equation*}
+    Par encadrement, on a le résultat.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{defi}{}{}
+    Soit $(A,+,\times,\cdot)$ une $\K$-algèbre. Soit $\|\cdot\|$ une norme sur $(A,+,\cdot)$.\\
+    On dit que $\|\cdot\|$ est une norme d'algèbre ssi $\forall (x,y)\in A, ~ \|x\times y\| \leq \|x\|\cdot\|y\|$.\\
+    Une algèbre est dite normée si elle est munie d'une norme d'algèbre.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $(A,+,\times,\cdot)$ une algèbre normée et $(u_n)_{n\in\N}$, $(v_n)_{n\in\N}$ convergentes.\\
+    Alors $(u_n\times v_n)_{n\in\N}$ est convergente et $\lim (u_n\times v_n) = \lim u_n \times \lim v_n$.
+    \tcblower
+    Notons $l=\lim u_n$ et $l'=\lim v_n$. On a $(v_n)$ convergente donc bornée par $M$.
+    \begin{equation*}
+        \|u_nv_n - ll'\| = \|(u_n - l)v_n + l(v_n - l')\| \leq \|u_n - l\|\|v_n\| + \|l\|\|v_n - l'\| \leq \|u_n-l\|M + \|l\|\|v_n - l'\| \to 0 
+    \end{equation*}
+    Par encadrement, on a le résultat.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{Convergence dans un espace produit. $\star$}{}
+    Soit $(E_1,\|\cdot\|_1),...,(E_N,\|\cdot\|_N)$ des evn et $E=E_1\times ... \times E_N$ l'evn produit.\\
+    Soit $(u_n)_{n\in\N}$ une suite de $E$, $\forall n \in \N, ~ u_n = (u_n^1, ..., u_n^N)$.\\
+    Soit $l=(l_1,...,l_N)\in E$. On a $u_n \to l \iff \forall i \in \lb1,N\rb, ~ (u_n^i)\to l_i$ dans $(E_i,\|\cdot\|_i)$.
+    \tcblower
+    \boxed{\ra} Soit $i\in\lb1,N\rb$. Par définition, $\|x\|_{\infty}=\max(\|x_i\|_i, 1 \leq i \leq N)$. Donc $\forall n \in \N, ~ \|u_n^i-l_i\|_i\leq \|u_n-l\|_{\infty}$.\\
+    Par encadrement, $\|u_n^i-l_i\|\to0$.\\
+    \boxed{\la} Supposons $\forall i \in \lb 1, N \rb, ~ \|u_n^i-l_i\|_i\to0$.\\
+    Soit $\e>0, ~ \forall i \in \lb1,n\rb, ~ \exists p_i \in \N, ~ \forall n \geq p_i, ~ \|u_n^i - l_i\| \leq \e$.\\
+    On prend alors $p=\max p_i$, puis pour $n\geq p$,  $\forall i \in \lb1,N\rb, ~ \|u_n^i-l_i\|\leq \e$ donc $\|u_n^i-l\|_{\infty}\leq\e$. 
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{exi}{}{}
+    Soient $E$ un $\K$-evdf de dimension $N$, et $\B=(e_1,...,e_n)$ une base de $E$.\\
+    Soient $(u_n)_{n\in\N}\in E^\N$, et $l\in E$.
+    \begin{equation*}
+        \forall n \in \N, ~ u_n = \sum_{i=1}^Nu_n^ie_i ~\et~ l=\sum_{i=1}^Nl^ie_i 
+    \end{equation*}
+    On munit $E$ de la norme $\|x\|_\infty=\max(|x_i|, ~ 1\leq i \leq N)$, où $x=\sum x_i e_i$.\\
+    Alors $u_n\to l$ dans $(E,\|\cdot\|_\infty) \iff \forall i \in \lb1,N\rb, ~ u_n^i \to l^i$.
+\end{exi}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Pour tout $n\in\N^*$, on pose la matrice :
+    \begin{equation*}
+        A_n = \begin{pmatrix}
+            \frac{1}{n}+2 & -1 & e^{-n} \\ \ln\left( 2 + \frac{1}{n} \right) & 0 & \frac{n+1}{2n+3}
+        \end{pmatrix}
+    \end{equation*}
+    $(A_n)_{n\in\N^*}$ est une suite de $M_{2,3}(\R)$ normé avec la norme produit associée à la base canonique, et on a :
+    \begin{equation*}
+        \lim_{n\to+\infty} A_n = \begin{pmatrix}
+            2 & -1 & 0 \\ \ln 2 & 0 & \frac{1}{2}
+        \end{pmatrix}
+    \end{equation*}
+\end{ex}
+
+\begin{defi}{Suites extraites.}{}
+    Soit $E$ un ensemble et $(u_n)_{n\in\N}\in E^\N$, alors $(v_n)_{n\in\N}$ est une suite extraite de $(u_n)_{n\in\N}$ si et seulement si :
+    \begin{equation*}
+        \exists \phi : \N \to \N \nt{ strictement croissante telle que } \forall n \in \N, ~ v_n = u_{\phi(n)}.
+    \end{equation*}
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{lemme}{}{}
+    Soit $\phi:\N\to\N$ strictement croissante, alors $\forall n \in \N, ~ \phi(n)\geq n$.
+    \tcblower
+    Par récurrence sur $n$, on note $\P_n$ : << $\phi(n)\geq n$ >>.\\
+    \bf{Initialisation.} $\phi(0)\geq0$, donc $P_0$.\\
+    \bf{Hérédité.} Soit $n\in\N$ tel que $\phi(n)\geq n$, alors $\phi(n+1)>\phi(n)\geq n$, donc $\phi(n+1)\geq n+1$.\\
+    On conclut par récurrence.
+\end{lemme}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{Double extraction.}{}
+    Soient $(u_n)_{n\in\N}$ et $(u_{\phi(n)})_{n\in\N}$, avec $\phi:\N\to\N$ strictement croissante.\\
+    Une suite extraite de $(u_{\phi(n)})_{n\in\N}$ est de la forme $(u_{(\phi\circ\psi)(n)})_{n\in\N}$, avec $\psi:\N\to\N$ strictement croissante.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $(E,\|\cdot\|)$ un evn et $(u_n)_{n\in\N}\in E^\N$.\\
+    Si $(u_n)_{n\in\N}$ converge, alors toutes ses suites extraites convergent vers la même limite.\\
+    Si $(u_n)_{n\in\N}$ possède deux suites extraites convergentes vers des limites distinctes, alors $(u_n)_{n\in\N}$ diverge.
+    \tcblower
+    On suppose $(u_n)$ convergente, et on note $l$ sa limite. Soit $\phi:\N\to\N$ strictement croissante.\\
+    Soit $\e>0, ~ \exists n_0 \in \N, ~ \forall n \geq n_0, ~ \|u_n-l\|\leq \e$, puis $\phi(n_0)\geq n_0$, donc $\|u_{\phi(n_0)}-l\|\leq \|u_{n_0}-l\|\leq \e$ donc $u_{\phi(n)}\to l$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soient $(E,\|\cdot \|)$ un evn et $(u_n)_{n\in\N}\in E^\N$. Soit $l\in\R$.
+    \begin{equation*}
+        u_{2n} \to l ~\et~ u_{2n+1} \to l \ra u_n \to l.
+    \end{equation*}
+    \bf{Remarque.} Ce théorème est valable pour n'importe quelle partition finie des indices.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soient $(E,\|\cdot\|)$ un evn et $(u_n)_{n\in\N}\in E^\N$ tels que $(u_{2n})_{n\in\N}, (u_{2n+1})_{n\in\N}, (u_{3n})_{n\in\N}$ convergent.\\
+    Montrer que $(u_n)_{n\in\N}$ converge.
+    \tcblower
+    On note $l=\lim u_{2n}$, $l'=\lim u_{2n+1}$ et $l''=\lim u_{3n}$.\\
+    On a $(u_{6n})$ suite extraite de $(u_{2n})$ et de $(u_{3n})$, donc $\lim u_{6n}=l=l''$.\\
+    On a $(u_{6n+3})$ suite extraite de $(u_{2n+1})$ et de $(u_{3n})$, donc $\lim u_{6n+3}=l'=l''$.\\
+    Alors $l=l'=l''$. On a par théorème que $\lim u_n = l$.
+\end{ex}
+
+\begin{ex}{}{}
+    Soit $(u_n)_{n\in\N}$ une suite réelle non majorée positive.
+    \begin{enumerate}
+        \item Donner un exemple d'une telle suite qui ne tend pas vers $+\infty$.
+        \item Montrer que l'on peut extraire de $(u_n)_{n\in\N}$ une suite qui tend vers $+\infty$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Par exemple, $u_2n=666^n$ et $u_{2n+1}=1$.\\
+    \boxed{2.} $\forall M \in \R_+, ~ \exists n \in \N, ~ u_n \geq M$.\\
+    Soit $M\geq0$, $\exists n_0 \in \a deuxN, u_{n_0}>M$, puis avec $M=u_{n_0}$, $\exists n_1, ~ u_{n_1}\geq u_{n_0}$...\\
+    On a donc une infinité de majorants pour tout $M\geq0$. On construit $\phi$.\\
+    --- $\exists n_0 \in \N, ~ u_{n_0}>0$, on pose $\phi(0)=n_0$.\\
+    --- $\exists n_1 \in \N, ~ u_{n_1}>1$, on pose $\phi(1)=n_1$, on peut choisir $n_1>n_0$ car infinité d'entiers.\\
+    --- $\exists n_p \in \N, ~ u_{n_p}>p$, on pose $\phi(p)=n_p$, on peut choisir $n_p>n_{p-1}$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{Valeur d'adhérence.}{}
+    Soient $(E,\|\cdot\|)$ un evn, $(u_n)_{n\in\N}\in E^\N$ et $l\in E$.\\
+    On dit que $l$ est une valeur d'adhérence de $(u_n)_{n\in\N}$ ssi $l$ est la limite d'une suite extraite de $(u_n)_{n\in\N}$.\\
+    On notera $\Val((u_n)_{n\in\N})$ l'ensemble des valeurs d'adhérence de la suite $(u_n)_{n\in\N}$.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $(u_n)_{n\in\N}$ telle que :
+    \begin{itemize}
+        \item $\forall n \in \N, u_n = n$, alors $\Val((u_n)_{n\in\N})=\0$.
+        \item $\forall n \in \N, ~ \begin{cases} u_{2n} = 0 \\ u_{2n+1} = n \end{cases} \ra \Val((u_n)_{n\in\N}) = \{0\}$.
+        \item $\forall n \in \N, ~ u_n=(-1)^n$, alors $\Val((u_n)_{n\in\N})=\{-1,1\}$.
+        \item $\exists p \in \N, ~ \forall n \in \N, ~ u_{n+p}=u_n$, alors $\Val((u_n)_{n\in\N})=\{u_0,...,u_{p-1}\}$.
+    \end{itemize}
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $(u_n)_{n\in\N}\in E^\N$ convergente de limite $l$, alors $\Val((u_n)_{n\in\N})=\{l\}$.\\
+    La réciproque est fausse à priori : $u_{2n}=0$; $u_{2n+1}=n$, $0$ est la seule valeur d'adhérence.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\section{Comparaison de normes.}
+
+\begin{defi}{Normes équivalentes.}{}
+    Soient $E$ un $\K$-ev et $\|\cdot\|_1$, $\|\cdot\|_2$ deux normes sur $E$.\\
+    On dit que les deux normes sont équivalentes ssi $\exists a,b > 0, ~ \forall x \in E, ~ a\|x\|_1\leq\|x\|_2\leq b\|x\|_1$.\\
+    \bf{Remarque.} Cela définit une relation d'équivalence.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Vérifier que les trois normes usuelles sur $\R^n$ sont équivalentes.
+    \tcblower
+    Soit $x=(x_1,...,x_n)\in\R^n$. On a $\|x\|_1=\sum_{i=1}^n|x_i|$, $\|x\|_2=\sqrt{\sum_{i=1}^nx_i^2}$ et $\|x\|_{\infty}=\max_i(|x_i|)$.\\
+    On a $\forall x \in \R^n, ~ \|x\|_1\leq n\|x\|_\infty$ et $\|x\|_\infty \leq \|x\|_1$, donc $\|x\|_1\sim \|x\|_\infty$.\\
+    On a $\forall x \in \R^n, ~ \|x\|_2\leq \sqrt(x)\|x\|_{\infty}$, et $\|x\|_{\infty}\leq\|x\|_2$, donc $\|x\|_2\sim \|x\|_\infty$. 
+\end{ex}
+
+\begin{prop}{}{}
+    Soit $E$ un $\K$-ev.
+    \begin{enumerate}
+        \item Soit $A\subset E$. Le fait que $A$ soit bornée ne dépend pas de la norme équivalente choisie.
+        \item Soit $(u_n)_{n\in\N}\in E^\N$. Le fait que $(u_n)_{n\in\N}$ soit bornée ne dépend pas de la norme équivalente choisie.
+        \item Soit $(u_n)_{n\in\N}\in E^\N$. Le fait que $(u_n)_{n\in\N}$ converge et sa limite ne dépendent pas de la norme éq. choisie.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Supposons $A$ bornée pour $\|\cdot\|_1$, et $\|\cdot\|_1\sim\|\cdot\|_2$, $\exists M \geq 0 ,~ \forall x \in A, ~ \|x\|_1\leq M$.\\
+    De plus, $\exists b>0, ~ \forall x \in E, ~ \|x\|_2\leq b\|x\|_1$, alors $\|x\|_2\leq bM$.\\
+    \boxed{2.} Cas particulier de 1., avec $A=\{u_n, ~ n\in\N\}$.\\
+    \boxed{3.} Supposons $u_n\to l$, et $\|\cdot\|_1\sim\|\cdot\|_2$. Alors $\|u_n-l\|_1\to 0$.\\
+    On a alors $\exists a,b>0, ~ \forall x \in E, ~ a\|x\|_1\leq \|x\|_1 \leq b\|x\|_2$, donc en croisant les inégalités, on a par encadrement $\|u_n-l\|_2\to0$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $E=\m{C}^0([0,1],\R)$ un $\R$-ev. Vérifions que $\|\cdot\|_1$ et $\|\cdot\|_\infty$ sont non-équivalentes.
+    \tcblower
+    Soit $f_n$ affine par morceaux, $\forall n \geq 1, ~ f_n\in E$, on a donc $(f_n)_{n\in\N^*}$ une suite de vecteurs de $E$.\\
+    On a d'une part $\|f_n\|_\infty=n\to+\infty$ donc $(f_n)_{n\in\N^*}$ non bornée dans $(E,\|\cdot\|_\infty)$.\\
+    D'autre part, $\|f_n\|_1=\int_0^1|f_n(t)|\dt=\frac{1}{2}$ donc $(f_n)_{n\in\N}$ est bornée dans $(E,\|\cdot\|_1)$.\\
+    On peut quand même remarquer que $\|\cdot\|_1\leq\|\cdot\|_\infty$.\\
+    On a pris $f_n$ valant $n-nx$ entre $0$ et $1/n$, puis égale à 0.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $E=\R[X]$, muni des normes $\|P\|_1=\sum|a_k|$ et $\|P\|_\infty=\max |a_k|$.
+    \tcblower
+    Posons $P_n=1+...+X^n\in E$. On a $\|P_n\|_\infty=1$ et $\|P\|_1=n+1\to+\infty$ donc $(P_n)$ non bornée dans $(E,\|\cdot\|_1)$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $E=\{(u_n)_{n\in\N} \in \R^\N, ~ \sum|u_n| \nt{ converge}\}$, muni de $\|(u_n)\|_1=\sum|u_n|$ et $\|(u_n)\|_{\infty}=\sup|u_n|$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{exi}{}{}
+    Soit $E=\m{C}^1([0,1],\R)$ muni de $\|\cdot\|_\infty$ et de $\|f\|=|f(0)|+\sup|f'|$.
+    \tcblower
+    Vérifions qu'elles sont bien définies. On a $f'\in\m{C}^0([0,1])$ donc $f'$ bornée sur $[0,1]$, donc $\|f\|$ est bien définie.\\
+    TFA : $\forall x \in [0,1], ~ f(x)=f(0)+\int_0^xf'(t)\dt$, donc $|f(x)|\leq|f(0)|+\int_0^x|f'(t)|\dt\leq|f(0)|+\int_0^1|f'(t)|\dt$.
+    Donc $|f(x)|\leq|f(0)|+\sup|f'(x)|$ donc $|f(x)|\leq\|f\|$ donc $\|f\|_\infty\leq\|f\|$.\\
+    On pose $f_n:x\mapsto\sin\left(\frac{n\pi}{2}x \right)$ pour $x\in[0,1]$ et $n\in\N$, alors $f_n\in E$.\\
+    On a donc $\|f_n\|_{n\in\N}=1$, puis $\forall x \in \R, ~ f'_n(x)=\frac{n\pi}{2}\cos\left( n\frac{\pi}{2}x \right)$.\\
+    Ainsi, $\|f_n\|=|f_n(0)|+n\frac{\pi}{2}\to+\infty$.\\
+    Penser à vérifier que $\|\cdot\|$ est bien une norme.
+\end{exi}
+
+\section{Topologie.}
+
+\subsection{Ouverts, fermés.}
+
+\begin{defi}{Voisinage.}{}
+    Soit $(E,\|\cdot\|)$ evn et $a\in E$, $V\subset E$ est un voisinage de $a$ ssi $\exists r > 0, ~ B(a,r)\subset V$.\\
+    On notera $\m{V}(a)$ l'ensemble des voisinages de $a$.\\
+    \bf{Remarque.} On a $E\in\m{V}(a)$ donc $\m{V}(a)\neq\0$.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{Ouvert.}{}
+    Soit $(E,\|\cdot\|)$ un evn, alors $O\subset E$ est un ouvert de $E$ ssi $\forall x \in O, ~ O\in\m{V}(x)$.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{Fermé.}{}
+    Soit $(E,\|\cdot\|)$ un evn, alors $F\subset E$ est un fermé ssi $E\setminus F$ est ouvert.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Les intervalles ouverts de $E$ sont des ouverts.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Les boules ouvertes sont des ouverts, les boules fermées et les singletons sont des fermés.
+    \tcblower
+    \boxed{1.} Soit $a\in E$, $r>0$. Soit $x\in B(a,r)$. On a $\|x-a\|<r$, on pose $r'=r-\|x-a\|>0$.\\
+    Soit $y\in B(x,r')$, on a $\|y-a\|\leq \|y-x\|+\|x-a\|<r'+\|x-a\|<r$.\\
+    \boxed{3.} Soit $a\in E$. Soit $x\in E\setminus \{a\}$. On a $\|x-a\|>0$, on pose $r=\frac{\|x-a\|}{2}$.\\
+    Soit $y\in B(x,r)$, on a $y\neq a$ car sinon $\|x-a\|<r$, absurde, donc $y\in B(x,r)$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item Toute réunion d'ouverts est un ouvert.
+        \item Toute intersection finie d'ouverts est un ouvert.
+        \item Toute réunion finie de fermés est un fermé.
+        \item Toute intersection de fermés est un fermé.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $(O_i)_{i\in I}$ une famille d'ouverts, on pose $O=\bigcup O_i$. Pour $x\in O, ~ \exists i \in I, ~ x \in O_i$ puis $O_i$ est ouvert.\\
+    On a donc $\exists r_i > 0, ~ B(x,r_i)\subset O_i$ donc $B(x,r_i)\subset O$, donc $O$ est un ouvert.\\
+    \boxed{2.} Soit $(O_i)_{i\leq n}$ une famille d'ouverts finie, on pose $O=\bigcap O_i$. Pour $x\in O, ~ \forall i\in\lb1,n\rb, ~ x \in O_i$.\\
+    Donc $\forall i \in\lb1,n\rb, ~ \exists r_i > 0 ~ B(x,r_i)\in O_i$, on pose $r=\min(r_1,...,r_n)>0$, alors $\forall i \in \lb1,n\rb, ~ B(x,r)\subset O_i$.\\
+    Alors $B(x,r)\subset O$.\\
+    \boxed{3.} Soit $(F_i)_{i\leq n}$ une famille finie de fermés, on pose $F=\bigcup F_i$.\\
+    Alors $\leftindex^CF = \bigcap \leftindex^CF_i$ est ouvert d'après 2, donc $F$ est fermé.\\
+    \boxed{4.} Idem.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $E$ un evn, et $A\subset E$ fini. Alors $A$ est fermé.
+    \tcblower
+    Notons $n=|A|$, et $A=\{a_1,...,a_n\}=\bigcup \{a_i\}$; A est réunion finie de fermés.
+\end{prop}
+
+\begin{ex}{}{}
+    Montrer que $\Z$ est un fermé.
+    \tcblower
+    On a $\leftindex^C\Z=\bigcup_{n\in\Z}]n,n+1[$ réunion d'ouverts donc ouvert, puis $\Z$ est fermé.\\
+    \bf{Remarque:} $\Z$ n'est pas ouvert non plus, et n'est le voisinage d'aucun de ses points.
+\end{ex}
+
+\begin{prop}{Ouvert dans un espace produit.}{}
+    Soit $(E_i,\|\cdot\|_i)_i$ des evn et $E=E_1\times...\times E_n$ l'evn produit.\\
+    On rappelle que par définition, la norme sur $E$ est $\|x\|_\infty=\max\|x_i\|_i$ où $x=(x_1,...,x_n)$.\\
+    Soit $O_i$ ouvert de $E_i$, alors $O=O_1\times...\times O_n$ est un ouvert de $E$.\\
+    Un produit fini d'ouverts est un ouvert de l'espace produit.
+    \tcblower
+    Soit $(x_1,...,x_n)\in O$, $\forall i \in \lb1,n\rb, ~ O_i\in \m{V}(x_i)$ : $\exists r_i > 0, ~ \forall y \in E_i, ~ \|y-x_i\|<r_i \ra y \in O_i$.\\
+    Soit $r=\min(r_1,...,r_n)$, et $y=(y_1,...,y_n)\in B(x,r)$. On a $\forall i \in \lb1,n\rb, ~ \|y_i-x_i\|_i < r$ donc $y_i \in O_i$ donc $y \in O$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soient $E$ un $\K$-ev, $\|\cdot\|_1$ et $\|\cdot\|_2$ deux normes sur $E$.
+    \begin{enumerate}
+        \item On suppose qu'il existe $a>0, ~ \forall x \in E, ~ \|x\|_1\leq a\|x\|_2$.\\
+        Soit $O\subset E$, alors $O$ ouvert pour $\|\cdot\|_1 \ra O$ ouvert pour $\|\cdot\|_2$.
+        \item On suppose $\|\cdot\|_1\sim\|\cdot\|_2$. Soient $O\subset E$ et $F\subset E$.\\
+        Alors $O$ ouvert pour $\|\cdot\|_1\iff O$ ouvert pour $\|\cdot\|_2$ et $F$ fermé pour $\|\cdot\|_1\iff F$ fermé pour $\|\cdot\|_2$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $O\subset E$ ouvert dans $(E,\|\cdot\|_1)$.\\
+    Soit $x\in O$. Par hypothèse, $\exists r_1 > 0, ~ \forall y \in E, ~ \|y-x\|_1<r_1 \ra y \in O$.\\
+    On pose $r_2=\frac{r_1}{a}>0$, alors $\forall y \in E, ~ \|y-x\|_2<r_2 \ra \|y-x\|_1\leq a\|y-x\|_2<ar_2=r_1\ra y\in O$.\\
+    \boxed{2.} Par hypothèse, $\exists a > 0, ~ \exists b > 0, ~ \forall x \in E, ~ a\|x\|_1\leq\|x_2\|\leq b\|x\|_1$.\\
+    Donc $O$ est ouvert pour $\|\cdot\|_1 \ra O$ ouvert pour $\|\cdot\|_2$, puis $O$ est ouvert pour $\|\cdot\|_2 \ra O$ ouvert pour $\|\cdot\|_1$.\\
+    Enfin, $F$ fermé pour $\|\cdot\|_1 \iff \leftindex^CF$ ouvert pour $\|\cdot\|_1 \iff \leftindex^CF$ ouvert pour $\|\cdot\|_2\iff F$ fermé pour $\|\cdot\|_2$.
+\end{prop}
+
+\begin{defi}{Ouverts relatifs.}{}
+    Soit $(E,\|\cdot\|)$ un evn et $A\subset E$.\\
+    Un ouvert relatif de $A$ est un ensemble de la forme $O\cap A$ avec $O$ ouvert de $E$. 
+\end{defi}
+
+\begin{ex}{}{}
+    Soit $A=[1,2]$ et $O'=[1,\frac{3}{2}[$ ouvert relatif de $A$, en effet, $O'=]0,\frac{3}{2}[\cap[1,2]$.
+\end{ex}
+
+\subsection{Intérieur, adhérence.}
+
+\begin{defi}{}{}
+    Soit $(E,\|\cdot\|)$ un evn et $A\subset E$.\\
+    --- L'\bf{intérieur} de $A$, noté ${\acc{A}}$, est le plus grand ouvert inclus dans $A$.\\
+    --- L'\bf{adhérence} de $A$, notée $\ov{A}$, est le plus petit fermé contenant $A$.
+    \begin{equation*}
+        {\acc{A}}\subset A \subset \ov{A}
+    \end{equation*}
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $(E,\|\cdot\|)$ un evn et $A\subset E$.
+    \begin{equation*}
+        A \nt{ ouvert} \iff A = {\acc{A}}; \quad A \nt{ fermé} \iff A = \ov{A}.
+    \end{equation*}
+    \tcblower
+    \boxed{\la} Supposons $A={\acc{A}}$, alors ${\acc{A}}$ est ouvert donc $A$ l'est aussi.\\
+    \boxed{\ra} Supposons $A$ ouvert, alors $A={\acc{A}}$, le plus grand ouvert inclus dans $A$.
+\end{prop}
+
+\begin{defi}{Frontière.}{}
+    Soit $(E,\|\cdot\|)$ evn et $A\subset E$. La frontière de $A$, notée $\Fr(A)$ est l'ensemble $\Fr(A)=\ov{A}\setminus{\acc{A}}=\ov{A}\cap\leftindex^C({\acc{A}})$.\\
+    \bf{Remarque.} La frontière de $A$ est toujours fermée, comme intersection de fermés.
+\end{defi}
+
+\begin{thm}{}{}
+    Soit $(E,\|\cdot\|)$ et $A,B\in\P(E)$.
+    \begin{enumerate}
+        \item $A\subset B \ra {\acc{A}}\subset\accentset{\circ}{B}$.
+        \item $A\subset B \ra \ov{A}\subset\ov{B}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a ${\acc{A}}\subset A \subset B$ donc ${\acc{A}}$ ouvert de $B$, donc ${\acc{A}}\subset\accentset{\circ}{B}$.\\
+    \boxed{2.} On a $A\subset B \subset \ov{B}$ donc $\ov{B}$ est un fermé contenant $A$ donc $\ov{A}\subset\ov{B}$.
+\end{thm}
+
+\begin{lemme}{}{}
+    Soit $(E,\|\cdot\|)$ un evn. Soit $A\subset E$.
+    \begin{enumerate}
+        \item $\leftindex^C{\ov{A}}=\accentset{\circ}{\leftindex^CA}$.
+        \item $\leftindex^C{\acc{A}}=\ov{\leftindex^CA}$.
+    \end{enumerate} 
+    \tcblower
+    \boxed{1.}
+    \boxed{2.} ${\acc{A}}\subset A \ra \leftindex^C A \subset \leftindex^C{\acc{A}} \ra \ov{\leftindex^CA}\subset\leftindex^C{{\acc{A}}}$ puis $\leftindex^CA\subset\leftindex^C{\ov{A}}\ra\leftindex^C{\ov{\leftindex^CA}}\subset A \ra \leftindex^C{\ov{\leftindex^CA}}\subset{\acc{A}}\ra\leftindex^C{\acc{A}}\subset\ov{\leftindex^CA}$.
+\end{lemme}
+
+\begin{thm}{Caractérisation des éléments de l'intérieur et de l'adhérence.}{caradh}
+    Soit $(E,\|\cdot\|)$ un evn et $A\subset E$.
+    \begin{enumerate}
+        \item $x\in{\acc{A}} \iff \exists V \in \m{V}(x), ~ V \subset A \iff \exists r>0, ~ B(x,r)\subset A$.\\
+        Les éléments de l'intérieur de $A$ sont les éléments qui sont à l'intérieur.
+        \item $x\in\ov{A}\iff \forall V \in \m{V}(x), ~ V \cap A \neq 0 \iff \forall r > 0, ~ B(x,r)\cap A \neq 0$.\\
+        Les éléments de l'adhérence de $A$ sont les éléments adhérents à la partie.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} La deuxième équivalence puis la première:\\
+    \boxed{\ra} $\exists V \in \m{V}(x), ~ V\subset A$ puis $\exists r > 0, ~ B(x,r)\subset V$ donc $B(x,r)\subset A$.\\
+    \boxed{\la} $\exists r > 0, ~ B(x,r)\subset A$ et $B(x,r)$ est un voisinage de $x$.\\
+    \boxed{\ra} Soit $x\in{\acc{A}}$ ouvert donc $\exists r>0, ~ B(x,r)\subset {\acc{A}}$, c'est un voisinage.\\
+    \boxed{\la} $\exists r > 0, ~ B(x,r)\subset A$ donc $B(x,r)$ est un ouvert de $A$, donc $B(x,r)\subset{\acc{A}}$.\\
+    \boxed{2.} On utilise la 1. et le passage au complémentaire.\\
+    On a $x\notin\ov{A}\iff x\in\leftindex^C{\ov{A}}\iff x \in \accentset{\circ}{\leftindex^CA}\iff \exists r>0, ~ B(x,r)\subset\leftindex^CA$.\\
+    Alors $x\in \ov{A} \iff \forall r > 0, ~ B(x,r) \cap A \neq 0$.
+\end{thm}
+
+\begin{ex}{}{}
+    Soient $(E,\|\cdot\|)$ un evn, et $A,B\in\P(E)$.
+    \begin{enumerate}
+        \item Montrer que $\accentset{\circ}{{\acc{A}}}={\acc{A}}$, et $\ov{\ov{A}}=\ov{A}$.\vspace*{-0.7cm}
+        \item Combien d'ensemble différents possibles avec $\accentset{\vdots}{\ov{\accentset{\circ}{\ov{{\acc{A}}}}}}$.
+        \item Montrer que $\accentset{\circ}{A\cap B} = {\acc{A}}\cap\accentset{\circ}{B}$ et que $\ov{A\cup B}=\ov{A}\cup\ov{B}$.
+        \item Montrer que ${\acc{A}}\cup\accentset{\circ}{B}\subset\accentset{\circ}{A\cup B}$ et que $\ov{A\cap B}\subset \ov{A}\cap\ov{B}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a ${\acc{A}}$ ouvert et on a vu que $B$ ouvert $\iff \accentset{\circ}{B}=B$.\\
+    \boxed{3.} Déjà, $A\cap B \subset A$ et $A\cap B \subset B$. On passe aux rondes : $\accentset{\circ}{A\cap B}\subset {\acc{A}}$ et $\accentset{\circ}{A\cap B}\subset \accentset{\circ}{B}$. Donc $\accentset{\circ}{A\cap B} \subset {\acc{A}}\cap\accentset{\circ}{B}$.\\
+    Réciproquement, soit $x\in {\acc{A}}\cap\accentset{\circ}{B}$. Alors $x\in{\acc{A}}$ et $x\in\accentset{\circ}{B}$ donc $\exists r_1 > 0, ~ B(x,r_1)\subset A$ et $\exists r_2 >0, ~ B(x,r_2)\subset B$.\\
+    On pose $r=\min(r_1,r_2)$, et on a $B(x,r)\subset A\cap B$, donc $x\in\accentset{\circ}{A\cap B}$.
+\end{ex}
+
+\begin{thm}{Caractérisation séquentielle de l'adhérence.}{seqadh}
+    Soit $(E,\|\cdot\|)$ un evn et $A\subset E$.
+    \begin{equation*}
+        x \in \ov{A} \iff \exists (a_n)_{n\in\N} \in A^\N, ~ \lim a_n = x.
+    \end{equation*}
+    \tcblower
+    \boxed{\la} Soit $(a_n)\in A^\N$ telle que $\lim a_n = x$. Soit $r>0, ~ \exists n_0 \in \N, ~ \forall n \geq n_0, ~ \|a_n-x\| < r$.\\
+    Alors $a_N\in B(x,r)\cap A\neq\0$, donc $x\in\ov{A}$.\\
+    \boxed{\ra} Soit $x\in\ov{A}$. On cherche à construire une suite $(a_n)$ qui convient.\\
+    Par hypothèse, $\forall r > 0, ~ B(x,r)\cap A \neq 0$, donc pour $n\in\N^*, ~ B(x,\frac{1}{n})\cap A\neq\0$.\\
+    Ainsi, $\forall n \in \N^*, ~ \exists a_n \in B(x,\frac{1}{n})\cap A$, on a construit la suite $(a_n)$, et par encadrement, $a_n\to x$.
+\end{thm}
+
+\begin{corr}{Caractérisation séquentielle d'un fermé.}{}
+    Soit $(E,\|\cdot\|)$ un evn et $F\subset E$.
+    \begin{center}
+        $F$ est fermé $\iff$ toute limite de suite convergente d'éléments de $F$ est dans $F$.
+    \end{center}
+    \tcblower
+    On a toujours $F\subset\ov{F}$ donc $F=\ov{F} \iff \ov{F} \subset F \iff $ l'énoncé.
+\end{corr}
+
+\begin{ex}{}{}
+    On a $[1,2]$ un fermé de $\R$ car pour $(u_n)\in[1,2]^\N$ convergente vers $l$, on a :
+    \begin{equation*}
+        \forall n \in \N, ~ 1 \leq u_n \leq 2 \ra 1 \leq l \leq 2.
+    \end{equation*}
+    On a $\Z$ un fermé de $\R$ car pour $(u_n)\in\Z^\N$ convergente vers $l$, on a:\\
+    $\forall \e > 0, ~ \exists n_0, ~ \forall n \geq n_0, ~ |u_n-l|<\e$ donc $|u_n-u_{n_0}|\leq2\e$.\\
+    Avec $\e=\frac{1}{2}$, on a $\exists N \in \N, ~ \forall n \geq N, ~ |u_n-u_N|<1$ donc $u_n=u_N$, et $l=u_N\in\Z$.
+\end{ex}
+
+\begin{ex}{}{}
+    Soit $(E,\|\cdot\|)$ un evn et $F$ un ssev de $E$. Montrer que $\ov{F}$ est un ssev de $E$.
+    \tcblower
+    On a $\ov{F}\neq\0$ car $0_F\in F\subset \ov{F}$. Soient $x,y\in \ov{F}$ et $\l\in\K$.\\
+    On a $\exists (a_n)\in F^\N, ~ x = \lim a_n$ et $\exists (b_n)\in F^\N, ~ y=\lim b_n$.\\
+    On a $(a_n+\l b_n)\to x + \l y$ par théorème, or $a_n+\l b_n \in F$ donc $x+\l y \in \ov{F}$.
+\end{ex}
+
+\begin{defi}{Distance à une partie.}{}
+    Soit $(E,\|\cdot\|)$ un evn, et $A\subset E$ non-vide. Soit $x\in E$.\\
+    La distance de $x$ à $A$ est définie par $d(x,A)=\inf\{\|x-y\|, ~ y \in A\}$.
+    \tcblower
+    Notons $D=\{\|x-y\|, ~ y \in A\}$, on a $D\subset\R_+$ et $A$ non-vide donc $y_0\in A$ puis $\|x-y_0\|\in D$ donc $D\neq\0$.\\
+    On a alors $D$ une partie non-vide de $\R$ et minorée par 0, donc l'inf existe par théorème. 
+\end{defi}
+
+\begin{ex}{}{}
+    Soit $(E,\|\cdot\|)$ un evn et $A\subset E$ non-vide. Montrer que :
+    \begin{equation*}
+        x \in \ov{A} \iff d(x,A) = 0.
+    \end{equation*}
+    \tcblower
+    \boxed{\ra} On a $\exists (a_n) \in A^\N, ~ a_n \to x$. Or $\forall n \in \N, ~ 0 \leq d(x,A)\leq \|x-a_n\|$, puis par encadrement, $d(x,A)=0$.\\
+    \boxed{\la} On a $d(x,A)=0$ donc $\exists (\a_n)\in \{\|x-y\|\}^\N$ telle que $\lim \a_n = \inf \{\|x-y\|, ~ y \in A\}=0$.\\
+    Donc $\forall n \in \N, ~ \a_n\in D$, donc $\exists y_n \in A, ~ \a_n = \|x-y_n\|$.\\
+    On a donc $\lim \|x-y_n\|=0$ donc $y_n\to x$ donc $x\in\ov{A}$.
+\end{ex}
+
+\begin{ex}{}{}
+    Soit $(E,\|\cdot\|)$ un evn, $a\in E$ et $r>0$.
+    \begin{enumerate}
+        \item $\accentset{\circ}{B'(a,r)}=B(a,r)$ et $\ov{B'(a,r)}=B'(a,r)$.
+        \item $\ov{B(a,r)}=B'(a,r)$ et $\accentset{\circ}{B(a,r)}=B(a,r)$.
+        \item $\Fr(B(a,r))=\Fr(B'(a,r))=S(a,r)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a déjà $B'(a,r)$ est un fermé en tant que boule fermée, donc $\ov{B'(a,r)}=B'(a,r)$.\\ 
+    \boxed{2.} On a déjà $B(a,r)$ est un ouvert en tant que boule ouverte, donc $\accentset{\circ}{B(a,r)}=B(a,r)$.\\
+    \boxed{\subset} On a $B'(a,r)$ est un fermé, qui contient $B(a,r)$, donc $\ov{B(a,r)}\subset B'(a,r)$.\\
+    \boxed{\supset} Soit $x\in B'(a,r)$ : $\|x-a\|\leq r$. Si $x\in B(a,r)$, alors $x\in\ov{B(a,r)}$.\\
+    Sinon, $x\in S(a,r)$ donc $\|x-a\|=r$. On cherche une suite $(a_n)_{n\in\N}$ de $B(a,r)$ convergente vers $x$.\\
+    $\bullet$ Pour tout $n\in\N^*$, posons $a_n = \frac{1}{n}a + \left( 1 - \frac{1}{n} \right)x$.\\
+    $\hookrightarrow$ $\forall n \geq 1, ~ a_n - a = \left( \frac{1}{n} - 1 \right)(a-x)$ puis $\|a_n - a\|=\left( 1 - \frac{1}{n} \right)\|x-a\|<r$ donc $a_n \in B(a,r)$.\\
+    $\hookrightarrow$ $\forall n \geq 1, ~ a_n - x = \frac{1}{n}(a-x)$ puis $\|a_n-x\|=\frac{1}{n}\|a-x\|=\frac{r}{n}\to0$, donc $a_n\to x$.\\
+    On a bien $x\in \ov{B(a,r)}$ par caractérisation.\\
+    \boxed{3.} Évident car $\Fr(A)=\ov{A}\setminus{\acc{A}}=S(a,r)$, et on utilise 1. et 2.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{Densité.}{}
+    Soit $(E,\|\cdot\|)$ un evn et $A\subset E$. On dit que $A$ est dense ssi l'une des propositions est vraie :
+    \begin{enumerate}
+        \item $\ov{A}=E$.
+        \item $\forall x \in E, ~ \exists (a_n) \in A^\N, ~ \lim a_n = x$.
+        \item $\forall O \subset E$ ouvert non-vide de $E$, \quad $O\cap A \neq \0$.
+        \item $\forall x \in E, ~ \forall r > 0, ~ B(x,r) \cap A \neq \0$
+    \end{enumerate}
+    Ces équivalences viennent des théorèmes \ref{thm:caradh} et \ref{thm:seqadh}.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    $\Q$ et $\R\setminus\Q$ sont denses dans $\R$.\\
+    \bf{Remarque.} Tout intervalle ouvert non vide de $\R$ contient une infinité de rationnels.
+    \tcblower
+    Soient $a,b\in\R$ tels que $a<b$. Montrons que $]a,b[\cap\Q\neq\0$.\\
+    \bf{Analyse.} Soient $p,q\in\Z\times\N^*$ tels que $p\land q = 1$ et $a<\frac{p}{q}<b$, alors $aq<p<bq$.\\
+    Il suffit de choisir $q$ tel que $bq-aq>1$ donc $q>\frac{1}{b-a}$.\\
+    \bf{Synthèse.} Choisissons un entier $q$ tel que $q>\frac{1}{b-a}$, possible car $b-a>0$.\\
+    Puis on choisit un entier $p$ entre $aq$ et $bq$ : $\lf aq \rf + 1$.\\
+    On a bien $\lf aq \rf \leq aq < p$ donc $aq < p < aq + 1$ donc $a<\frac{p}{q}<a+\frac{1}{q}$ donc $a<\frac{p}{q}<b$.\\
+    $\bullet$ Cherchons un irrationnel : $\sqrt{2}\in\R\setminus\Q$ puis $\exists x \in \Q, ~ \frac{a}{\sqrt{2}} < x < \frac{b}{\sqrt{2}}$, puis $a<x\sqrt{2}<b$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\subsection{Compacité.}
+
+\begin{defi}{Compacité.}{}
+    Soit $(E,\|\cdot\|)$ un evn et $K\subset E$.
+    \begin{center}
+        $K$ est compact ssi de toute suite d'éléments de $K$, on peut extraire une suite convergente dans $K$.
+    \end{center}
+    \bf{Remarque.} L'ensemble vide et les singletons sont compacts.
+\end{defi}
+
+\begin{ex}{}{}
+    Les segments de $\R$ sont compacts.
+    \tcblower
+    Soit $[a,b]$ un segment de $\R$ et $(u_n)_{n\in\N}\in[a,b]^\N$. Alors $\forall n \in \N, ~ a \leq u_n \leq b$ :  la suite est bornée.\\
+    Ainsi, par théorème de Bolzano-Weierstraß, on peut extraire de $(u_n)_{n\in\N}$ une suite convergente de limite $l\in[a,b]$.  
+\end{ex}
+
+\begin{prop}{}{}
+    Soit $(E,\|\cdot\|)$ un evn. Toute partie finie de $E$ est compacte.
+    \tcblower
+    Soit $K=\{a_1,...,a_p\}$ une partie finie de $E$, de cardinal $p$.\\
+    Soit $(u_n)_{n\in\N}\in K^\N$ et $\forall i \in \lb1,p\rb, ~ F_i=\{n\in\N, ~ u_n = a_i\}$. On a $\N=F_1\sqcup...\sqcup F_p$.\\
+    On a $\exists i_0 \in \lb1,p\rb, ~ F_{i_0}$ de cardinal infini, car sinon $\N$ est fini.\\
+    Ainsi, on pose $\phi(0)=\min F_{i_0}$, ... puis $\phi(k+1)=\min F_{i_0} \setminus \{\phi(0),...,\phi(k)\}$ strictement croissante.\\
+    Alors $(u_{\phi(n)})_{n\in\N}$ est constante égale à $a_{i_0}$, elle converge vers $a_{i_0}\in K$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $(E,\|\cdot\|)$ un evn. Toute partie compacte est fermée et bornée.\\
+    \bf{Remarque.} La réciproque est fausse en dimension infinie.
+    \tcblower
+    Soit $K$ une partie compacte de $E$. Montrons que $K$ est fermée par caractérisation séquentielle.\\
+    Soit $(u_n)_{n\in\N}\in K^\N$ convergente de limite $l$. Il existe $\phi:\N\to\N$ strictement croissante et $l'\in K$ tq $u_{\phi(n)}\to l'$.\\
+    Or $u_{\phi(n)}\to l$ donc $l=l'$ par unicité de la limite, puis $l\in K$.\\
+    Par contraposée, supposons $K$ non borné, montrons que $K$ n'est pas compact. Alors $\forall M > 0, ~ \exists x \in K, ~ \|x\|>M$.\\
+    Alors $\forall n \in \N^*, ~ \exists x_n \in K, ~ \|x_n\|>n$. On a construit la suite $(x_n)$.\\
+    Alors $\forall \phi : \N \to \N$ strictement croissante, $\forall n \in \N^*, ~ \|x_{\phi(n)}\|>\phi(n)\geq n$, donc $\|x_{\phi(n)} \| \to +\infty$.\\
+    Aucune suite extraite de $(x_n)_{n\in\N}$ n'est bornée, donc aucune suite extraite ne converge, donc $K$ n'est pas compacte.
+\end{prop}
+
+\begin{ex}{}{}
+    Soit $\|\cdot\|$ une norme sur $\R[X]$ définie par $\|P\|=\max(|a_k|, ~ k \in \N)$.\\
+    Soit $S=\{P \in E, ~ \|P\|=1\}$ la sphère unité, $S$ est fermée et bornée.\\
+    Vérifions que $S$ est non-compacte.
+    \tcblower
+    Pour tout $n\in\N$, posons $P_n=1+X+...+X^n$, on a $\|P_n\|=1$ donc $(P_n)_n\in S^\N$.\\
+    On a $n \neq m$ (par exemple $n<m$) implique $\|P_m - P_n\|=1$, donc $\forall \phi, ~ n \neq m \ra \|P_{\phi(m)} - P_{\phi(n)}\|=1$.\\
+    Supposons par l'absurde qu'il existe $l\in E, ~ P_{\phi(n)}\to l$. Alors $\exists N \in \N, ~ \forall n \in \N, ~ n\geq N \ra \|P_{\phi(n)}-l\|<\frac{1}{4}$.\\
+    Donc $n,m>N\ra \|P_{\phi(m)-P_{phi(n)}}\|\leq \|P_{\phi(n)} - l\| + \|P_{\phi(m)} - l\| < \frac{1}{2} \ra 1 < \frac{1}{2}$, ...
+\end{ex}
+
+\begin{prop}{$\star$}{}
+    Soit $(E,\|\cdot\|)$ un evn, $K$ un compact et $F$ fermé tel que $F\subset K$, alors $F$ est compact.
+    \tcblower
+    Soit $(u_n)\in F^\N$, alors $\forall n \in \N, ~ u_n \in K$. Or $K$ compact, donc $\exists \phi, \exists l \in K, ~ u_{\phi(n)}\to l$.\\
+    Puis $l=\lim u_{\phi(n)}\in F$ car $F$ est fermé et $u_{\phi(n)}\in F$, donc $F$ compact.
+\end{prop}
+
+\begin{ex}{}{}
+    Soit $(E,\|\cdot\|)$ un evn.
+    \begin{enumerate}
+        \item Soit $K\subset E$ un compact. $\leftindex^CK$ est-il compact ? 
+        \item Soient $K_1,K_2$ deux compacts. $K_1\cap K_2$ est-il compact ?
+        \item Soit $(K_i)_{i\in I}$ une famille de compacts. $\bigcap K_i$ est-il compact ?
+        \item Soient $K_1,K_2$ deux compacts. $K_1\cup K_2$ est-il compact ?
+        \item Soit $(K_i)_{i\in I}$ une famille de compacts. $\bigcup K_i$ est-il compact ?
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Puisque $K$ est borné, $\leftindex^CK$ ne l'est pas, sauf si $E=\{0\}$ car un ev n'est pas borné.\\
+    \boxed{2.} On a $K_1\cap K_2 \subset K_1$, fermé comme intersection, on utilise la proposition précédente.\\
+    \boxed{3.} Si $I$ est vide, $\0$ est compact, sinon $\bigcap K_i$ est un fermé, inclus dans l'un des $K_i$, c'est un compact.\\
+    \boxed{4.} Soit $(u_n)\in(\K_1\cup K_2)^\N$, $F_1=\{n\in\N, ~ u_n\in K_1\}$ et $F_2=\{n\in\N, ~ u_n \in K_2\}$..\\
+    On a $F_1\cup F_2 = \N$, donc $F_1$ ou $F_2$ est infini, par exemple $F_1$. On a alors $(u_{\phi(n)})\in K_1^\N$ extraite.\\
+    Puis $K_1$ compact donc on peut extraire une suite $(u_{\phi\circ\psi(n)})$ convergente dans $K_1$, donc convergente dans $K_1\cup K_2$.\\
+    \boxed{5.} Non, par exemple : $\bigcup_{n\in\Z}[n,n+1]=\R$ pas un compact car non-borné.\\
+    \bf{Remarque.} On peut généraliser 2. et 4. par récurrence.
+\end{ex}
+
+\begin{prop}{Produit de compacts. $\star$}{}
+    Soit $(E_i, \|\cdot\|_i)_{i\leq n}$ des evn, $K_i$ un compact de $E_i$ pour tout $i$, et $E=E_1\times...\times E_n$ l'evn produit.
+    \begin{center}
+        \fbox{$K=K_1\times...\times K_n$ est un compact de $E$.}
+    \end{center}
+    \tcblower
+    Par récurrence sur $n$.\\
+    \bf{Initialisation.} Soient $E=E_1\times E_2$, $K_1$ compact de $E_1$, $K_2$ compact de $E_2$, $K=K_1\times K_2$.\\
+    Soit $(a_n)_{n\in\N}\in K^\N$. Alors $\forall n \in \N, \exists (x_n, y_n) \in K_1 \times K_2, ~ a_n = (x_n, y_n)$.\\
+    On effectue un procédé d'extraction diagonale :\\
+    --- $K_1$ est compact : $\exists \phi, ~ \exists l \in K_1, ~ x_{\phi(n)}\to l_1$.\\
+    --- $K_2$ est compact, et $(y_{\phi(n)})\in K_2^\N$, donc $\exists \psi, ~ \exists l_2 \in K_2, ~ y_{\phi\circ\psi(n)}\to l_2$.\\
+    Puis $x_{\phi\circ\psi(n)}\to l_1$ en tant que suite extraite de $(x_{\phi(n)})$, donc $a_{\phi\circ\psi(n)}\to(l_1,l_2)$, puis $K_1\times K_2$ compact.\\
+    \bf{Hérédité.} Soit $n\in\N$, supposons que $\forall E_1,...,E_n$, $\forall K_1,...,K_n$, $K_1\times...\times K_n$ est compact de $E_1\times...\times E_n$.\\
+    Soient $E_1,...,E_{n+1}$ des evn et $K_i$ compact de $E_i$ pour tout $i$. Alors :\\
+    --- $K_1\times ... \times K_n$ est un compact de $E_1\times...\times E_n$ par hypothèse.\\
+    --- $K_n+1$ est un compact de $E_{n+1}$.\\
+    D'après la propriété au rang 2, $K_1\times...\times K_{n+1}$ est compact de $E_1\times...\times E_{n+1}$.\\
+    On conclut par récurrence.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $(E,\|\cdot\|)$ un evn. Soit $K\subset E$ un compact et $(u_n)_n\in K^\N$.\\
+    Alors $(u_n)$ converge ssi $(u_n)_n$ admet une unique valeur d'adhérence.
+    \tcblower
+    \boxed{\ra} Si $(u_n)_n$ converge vers $l$, alors $\Val((u_n))=\{l\}$.\\
+    \boxed{\la} Supposons que $\Val(u_n)=\{l\}$. Par l'absurde, on suppose que $\exists \e > 0, ~ \forall N \in \N, ~ \exists n \geq N, ~ \|u_n - l\| > \e$.\\
+    Équivalent à $\exists \e > 0, ~ \{n \in \N, ~ \|u_n - l\| > \e\}$ est infini puis $\exists\e>0, ~ \exists \phi , ~ \forall n \in \N, ~ \|u_{\phi(n)}-l\|>\e$.\\
+    Comme $K$ est compact, $\exists \psi, ~ u_{\phi\circ\psi(n)}\to l' \in K$, donc $l'\neq l$, puis $l'\in \Val(u_n)$, absurde.
+\end{prop}
+
+\begin{ex}{}{}
+    Soit $(E,\|\cdot\|)$ un evn et $(u_n)_nn\in E^\N$ convergente vers $l\in E$. Montrer que $K=\{u_n, ~ n\in\N\}\cup\{l\}$ est un compact.
+    \tcblower
+    \bf{Idée.} Pour $(v_n)\in K^\N$, en extraire une suite convergente dans $K$. 
+\end{ex}
+
+\section{Khôlles.}
+
+\begin{exercice}{(Martin)}{}
+    Soit $E$ un evndf, $f\in\L(E)$ tel que $\forall x \in E, ~ \|f(x)\|\leq\|x\|$.\\
+    Montrer que $E=\Ker(f-\id)\oplus\Im(f-\id)$.
+    \tcblower
+    Soit $x\in\Ker(f-\id)\cap\Im(f-\id)$, alors $\exists y \in E, ~ x = f(y)-y$, or $f(x)-x=0$ donc $x=f(x)$.\\
+    Par récurrence sur $n\in\N^*$, on pose $\P_n$ : << $f^n(x+y) = (n+1)x-y$ >>.\\
+    \bf{Initialisation.} $f(x+y)=f(x)+f(y)=f(y)+x=2x-y$. Donc $\P_1$ est vraie.\\
+    \bf{Hérédité.} Soit $n\in\N$, on suppose $\P_n$.
+    \begin{align*}
+        f^{n+1}(x+y)&=f^{n+1}(x)+f^{n+1}(y)=x+f^n(f(y))\\
+        &=x+f^n(x+y)=x+(n+1)x-y\\
+        &=(n+2)x-y
+    \end{align*}
+    Par récurrence, $\forall n \in \N, ~ \P_n$.\\
+    Soit $n\in\N$, $\|f^n(y)\|\leq\|y\|$ (récurrence facile) puis $\|f^{n-1}(x+y)\|\leq\|y\|$.\\
+    Alors $\|nx+y\|\leq\|y\|$ et $n\|x\|\leq2\|y\|$. Puis $\|x\|\leq\frac{2}{n}\|y\|\to0$ donc $x=0$ par séparation.\\
+    Alors $E=\rg(f-\id)+\dim\Ker(f-\id)$, puis par caractérisation, $E=\Ker(f-\id)\oplus\Im(f-\id)$.
+\end{exercice}
+
+\pagebreak
+
+\begin{exercice}{(Morgan)}{}
+    Soit $E\subset\R^\N$ le $\R$-ev des suites réelles bornées. Pour $u\in E$, on définit :
+    \begin{equation*}
+        \|u\|=\sum_{n=0}^{+\infty}\frac{|u_n|}{2^n}
+    \end{equation*}
+    Vérifier que $\|\cdot\|$ définit une norme et montrer que $A=\{u\in E, ~ \forall n \in \N, ~ u_n \in [0,1]\}$ est compact.
+    \tcblower
+    La série est bien définie : pour $u\in E$, $|u_n|$ est bornée donc $\exists M > 0, ~ \frac{|u_n|}{2^n}\leq\frac{M}{2}$.\\
+    Par comparaison (positifs) à une série convergente comme série géométrique, la série converge.\\
+    \bf{Séparation.} Supposons $\|u\|=0$, alors $\sum_{n=0}^{+\infty}\frac{|u_n|}{2^n}=0$, donc $\forall n \in \N, ~ \frac{|u_n|}{2^n}=0$ puis $u_n=0$, donc $u_n=0_E$.\\
+    \bf{Homogénéité, Inégalité triangulaire.} [...]\\
+    \bf{Compact.} Soit $(u^k)\in A^\N$. Montrons que $A$ est compact.\\
+    On a $(u_n^0)=(u_0^0,u_1^0,...)\in[0,1]^\N$ d'après Bolzano-Weierstraß : $\exists \phi_0$ strct. crs. $u^0_{\phi_0(n)}\to u^0\in\R$.\\
+    On a $(u_{\phi_0(n)^1})=(u_{\phi_0(0)^1}, u_{\phi_0(1)^1}, ...)\in [0,1]^\N$, d'après Bolzano-Weierstraß : $\exists \phi_1$ strct. crs. $u_{\phi_0\circ\phi_1(n)}^1\to u^1\in\R$.\\
+    (...) 
+\end{exercice}
+
+\vspace*{-0.7cm}
+
+\begin{exercice}{(Etienne)}{}
+    Soit $f:\R\to\R$ de classe $\m{C}^0$. Soit $K$ un compact. Montrer que :
+    \begin{equation*}
+        f^{-1}(K) \nt{ est compact} \iff \lim_{x\to\pm\infty}|f(x)|=+\infty.
+    \end{equation*}
+    \tcblower
+    \boxed{\ra} Par l'absurde, on suppose que $\lim_{x\to\pm\infty}|f(x)|\neq \infty$.\\
+    Si $f(x)\to l \in \R_+$ en l'infini, alors : $\forall \e>0, ~ \exists M \geq 0, ~ \forall x \geq M, ~ |f(x)-l|\leq \e$.\\
+    Donc $f(x)\in[l-\e,l+\e], ~ \forall x \geq M$, donc $f^{-1}([l-\e,l+\e])=[M,+\infty[$, absurde.\\
+    \boxed{\la} Supposons que $\lim_{x\to\pm\infty}|f(x)|=+\infty$, et soit $K$ un compact non-vide.\\
+    Si $\lim_{x\to\pm\infty}f(x)=+\infty$ (ou $-\infty$) spdg, alors, par continuité, il existe $x_0\in\R, ~ f(x_0)=\min_\R f$ (TBA).\\
+    --- Si $\forall x \in K, ~ x < x_0$, alors $f^{-1}(K)=\0$, compact.\\
+    --- Sinon, $\exists x \in K, ~ x \geq x_0$, soit $x_0=\min(K)\et x_1=\max(K)$, puis [...]. 
+\end{exercice}
+
+\vspace*{-0.7cm}
+
+\begin{exercice}{(Tom)}{}
+    On munit $M_n(\R)$ du produit défini par $(A\mid B)=\Tr(A^\top B)$.
+    \begin{enumerate}
+        \item Montrer que la base canonique $(E_{i,j})_{1\leq i,j \leq n}$ de $M_n(\R)$ est orthonormée.
+        \item Montrer que $S_n(\R)$ et $A_n(\R)$ sont supplémentaires orthogonaux.
+        \item Montrer que $\forall A \in M_n(\R)$, $\Tr(A)\leq\sqrt{n}\sqrt{\Tr(A^\top A)}$ et préciser le cas d'égalité.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $E_{i,j}$ avec $i,j\in\lb1,n\rb$. Alors $(E_{i,j}\mid E_{j,i})=\Tr(E_{j,i}E_{i,j})=\Tr(E_{j,j})=1$.\\
+    Soient $E_{i,j},E_{k,l}$ avec $(i,j)\neq(k,l)$. Alors $(E_{i,j}\mid E_{k,l})=\Tr(\d_{i,k}E_{j,l})=\d_{i,k}\Tr(E_{j,l})$\\
+    \boxed{2.} Soit $M\in M_n(\R)$, alors $M=\frac{M+M^\top}{2}+\frac{M-M^\top}{2}$.\\
+    Soient $A\in S_n(\R)$ et $B\in A_n(\R)$. Alors $(A\mid B) = \Tr(A^\top B)=\Tr(AB)=\Tr(B^\top A^\top)=-\Tr(BA)$ donc $2\Tr(AB)=0$ puis $(A\mid B)=0$.\\
+    \boxed{3.} On a $|(I_n\mid A)|\leq\sqrt{(I_n \mid I_n)}\sqrt{(A\mid A)}$ puis $\Tr(I_n^\top A) \leq \sqrt{\Tr(I_n)}\sqrt{\Tr(A^\top A)}$ puis $\Tr(A)\leq\sqrt{n}\sqrt{\Tr(A^\top A)}$.\\
+    Supposons $A=\l I_n$, alors $\Tr(A)=\l n$ puis $\sqrt{n}\sqrt{\Tr(A^\top A)}=\sqrt{n}\sqrt{\Tr(\l^2 I_n)}=|\l|n$.
+\end{exercice}
+
+\begin{exercice}{(Florian)}{}
+    Déterminer l'adhérence de $A=\{(x,\cos\left( \frac{1}{x} \right)) \mid x\in\R, ~ x > 0\}$.
+    \tcblower
+    Conjecture : $\{(0,y), ~ y \in [-1,1]\}\cup\{(x,\cos(\frac{1}{x})), ~ x > 0\}$.
+\end{exercice}
+
+\begin{exercice}{(Florian)}{}
+    \small Soit $A$ une partie de $\R$. Un point $x\in\R$ est dit d'accumulation de $A$ si tout voisinage $x$ dans $\R$ privé de $x$ rencontre $A$. Montrer que si $A$ est bornée et n'admet qu'un seul point d'accumulation, alors il existe une bijection entre $\N$ et $A$.
+\end{exercice}
+
+\begin{exercice}{(Enzo)}{}
+    Soit $A\in M_n(\R)$ telle que $A^\top A=I_n$ et $\Ker(A-I_n)=\{0\}$.
+    \begin{enumerate}
+        \item Étudier la convergence de $u_p=\frac{1}{p+1}\left( I_n + ... + A^p \right)$.
+        \item La suite $(A^p)_p$ est-elle convergente ?
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $\|A\|=\sqrt{\Tr(A^\top A)}$.
+    \begin{equation*}
+        v_n := \frac{1}{p+1}\left( A - I_n \right)\sum_{k=0}^pA^k = \frac{1}{p+1}\left( A^{p+1} - I_n \right)
+    \end{equation*}
+    Or $\Tr((A^p)^\top A^p)=\Tr((A^{p-1})^\top A^\top A A^{p-1})=\Tr(I_n)=n$. Donc :
+    \begin{equation*}
+        \|v_n\|\leq\frac{1}{p+1}\|A^{p+1}\|+\|I_n\| \leq \frac{2\sqrt{n}}{p+1} \to_{p\to+\infty} 0
+    \end{equation*}
+    Ensuite, $\|(A-I)^{-1}v_p\|\leq\|(A-I_n)^{-1}\|\|v_p\|\leq\|(A-I_n)^{-1}\|\frac{2\sqrt{n}}{p+1}\to_{p\to+\infty}0$.\\
+    Alors $\|u_p\|\to 0$ puis $u_p\to0$.\\
+    \boxed{2.} [...]
+\end{exercice}
+
+\begin{exercice}{(Daouda)}{}
+    Soit $f\in\m{C}^1([0,1],\R)$.
+    \begin{enumerate}
+        \item Montrer que $f\mapsto|f(0)| + \int_0^1|f(t)|\dt = \|f\|$ est une norme.
+        \item Montrer que $\|f\|\leq\|f\|_\infty$.
+    \end{enumerate}
+    (Fait en classe.)
+\end{exercice}
+
+\end{document}

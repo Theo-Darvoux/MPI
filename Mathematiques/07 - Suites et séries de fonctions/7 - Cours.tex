@@ -1,0 +1,705 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{7}
+\def\pagetitle{Suites et séries de fonctions.}
+
+\input{setup.tex}
+
+\begin{document}
+
+\input{title.tex}
+
+\thispagestyle{fancy}
+
+\section{Suites de fonctions.}
+
+\subsection{Modes de convergence.}
+
+\begin{defi}{Convergence simple. $\star$}{}
+    Pour tout $n\in\N$, soit $f_n:A\subset E \to F$ et $f:A\subset E \to F$.\\
+    On dit que $(f_n)_n$ converge simplement vers $f$ sur $A$ ssi $\forall x \in A, ~ \lim\limits_{n\to+\infty} f_n(x) = f(x)$.\\[-0.14cm]
+    Alors $f$ est appelée limite simple de la suite $(f_n)_n$.
+\end{defi}
+
+\begin{defi}{Convergence uniforme. $\star$}{}
+    Pour tout $n\in\N$, soit $f_n:A\subset E \to F$ et $f:A\subset E \to F$.\\
+    On dit que $(f_n)_n$ converge uniformément vers $f$ sur $A$ ssi $(f_n-f)$ bornée sur $A$ et $\lim\limits_{n\to+\infty} \|f_n - f\|_\infty = 0$.\\[-0.14cm]
+    Alors $f$ est appelée limite uniforme de la suite $(f_n)_n$.
+\end{defi}
+
+\begin{prop}{$\CU \ra \CS$. $\star$}{}
+    La convergence uniforme sur $A$ implique la convergence simple sur $A$.
+    \tcblower
+    Soit $(f_n)_n$ convergeant uniformément vers une fonction $f$ sur $A$.\\
+    $\hookrightarrow$ $\forall \e > 0, ~ \exists N \in \N, ~ \forall x \in A, ~ \forall n \geq N, ~ \|f(x) - f_n(x)\| \leq \e$ ($\CU$).\\
+    $\hookrightarrow$ $\forall x \in A, ~ \forall \e > 0, ~ \exists N \in \N, ~ \forall n \geq N, ~ \|f(x) - f_n(x)\|\leq \e$ $(\CS)$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $f_n:A\subset E \to F$, et $f:A\subset E \to F$.
+    \begin{equation*}
+        f_n \cu f \iff \exists (\a_n)\in\R^\N, ~ \sup\|f_n(x)-f(x)\|\leq\a_n, \nt{ où } \lim \a_n = 0
+    \end{equation*}
+    \tcblower
+    \boxed{\ra} Prendre $\a_n=\|f_n-f\|=\sup\|f_n(x)-f(x)\|$.\\
+    \boxed{\la} Par encadrement.
+\end{prop}
+
+\begin{ex}{}{}
+    $\forall n \in \N, ~ \forall x \in \R, ~ f_n(x)=x^n$, converge simplement ssi $|x|\leq1$.\\
+    Or il n'y a pas convergence uniforme car $\|f_n-f\|=\sup_{[-1,1]}|f_n(x)-f(x)|=1\not\to0$.
+\end{ex}
+
+\begin{prop}{}{}
+    Soit $f_n:A\subset E \to F$, et $f:A\subset E \to F$.
+    \begin{center}
+        $f_n$ ne converge pas uniformément vers $f$ sur $A$ ssi $\exists (x_n)_n \in A^\N, ~ \|f_n(x_n)-f(x_n)\|\not\to0$.
+    \end{center}
+    \tcblower
+    \boxed{\la} Par contraposée, supposons que $f_n\cu f$ sur $A$ : $\|f_n-f\|_\infty\to0$.\\
+    Soit $(x_n)\in A^\N$, on a $\|f_n(x_n)-f(x_n)\|_F\leq\|f_n-f\|_\infty\to0$, par encadrement, $f_n(x)-f(x)\to0$.
+\end{prop}
+
+\begin{ex}{}{}
+    Soit $f_n$ telle que $f_n(x)=\left( 1-\frac{x^2}{n} \right)^n$ pour $|x|\leq\sqrt{n}$, et $f_n(x)=0$ sinon.\\
+    Étudier la convergence simple de $(f_n)_{n\in\N^*}$.
+    \tcblower
+    On discute de la convergence de $(f_n(x))_n$ suivant le paramètre $x$.\\
+    Soit $x\in\R$, àpdcr, $n\geq x^2$ donc $\sqrt{n}\geq|x|$ et $f_n(x)=\left( 1-\frac{x^2}{n} \right)^n$.\\
+    Puis, $(1-\frac{x^2}{n})^n=e^{n\ln(1-x^2/n)}\to e^{-x^2}$ par \bf{continuité} de exp.\\
+    On vient de montrer que $f_n\to f$ sur $\R$. 
+\end{ex}
+
+\vspace*{-0.5cm}
+
+\begin{ex}{}{}
+    $\forall n \in \N, ~ \forall x \in \R, ~ f_n(x)=\frac{x}{n}$.\\
+    Convergence simple ? Elle converge simplement vers la fonction nulle.\\
+    Convergence uniforme ? On a $f_n(n)-f(n)=1\not\to0$ donc non.\\
+    Mais convergence uniforme sur $[-a,a]$ pour $a>0$ : $\|f_n-f\|\leq\frac{a}{n}\to0$.
+\end{ex}
+
+\vspace*{-0.5cm}
+
+\begin{ex}{}{}
+    Soit $f_n(x)=e^{-nx}\sin(nx)$ pour $n\in\N$ et $x\in\R_+$.\\
+    Convergence simple ? si $x>0, ~ f_n(x)\to0$, si $x=0$, alors $f_n(0)=0$, donc $f_n$ cs $0$.\\
+    Convergence uniforme ? $f_n(\frac{1}{n})-f(\frac{1}{n})=e^{-1}\sin(1)\not\to0$.\\
+    Soit $a>0$, sur $[a,+\infty]$ ? $f_n(x)-f(x)=e^{-nx}\sin(nx)\leq e^{-na}$, donc $\|f_n-f\|_\infty\leq e^{-na} \to 0$
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\subsection{Propriétés conservées par passage à la limite.}
+
+En général, les propriétés algébriques sont conservées par passage à la limite simple.\\
+La croissance, la convexité, la périodicité, la parité sont conservées par passage à la limite simple.\\
+Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$-lipschitzienne.
+
+\begin{thm}{$\star$}{}
+    Soient $f_n:A\subset E\to F$ avec $E,F$ evn, $a\in\acc{A}$ et $f:A\to F$.\\
+    Si $\forall n \in \N, ~ f_n$ est continue en $a$ et $f_n\cu f$ sur $A$, alors $f$ est continue en $a$.
+    \tcblower
+    Par hypothèse, $f_n\cu f$. Ainsi, $\exists N \in \N, ~ \forall n \geq N, ~ \|f_n-f\|_\infty^A\leq\e$.\\
+    De plus, $\forall n \in \N, ~ f_n$ est continue en $a$, donc $\exists \a>0, ~ \forall x \in A, ~ \|x-a\|<\a \ra \|f_n(x)-f_n(a)\|\leq \e$.\\
+    Par conséquent, pour tout $x\in A$, si $\|x-a\|_E < \a$, alors :
+    \begin{align*}
+        \|f(x)-f(a)\|_F &= \|f(x)+f_n(x)-f_n(x)+f_n(a)-f_n(a) - f(a)\|\\
+        &\leq \|f(x) - f_n(x)\| + \|f_n(x) - f_n(a)\| + \|f_n(a) - f(a)\|\\
+        &\leq 2\|f - f_n\|_\infty^A + \e \leq 3\e
+    \end{align*}
+    C'est la définition de $f$ continue en $a$.
+\end{thm}
+
+\vspace*{-0.5cm}
+
+\begin{corr}{}{}
+    Soit $\forall n \in \N, ~ f_n:I\subset\R\to\K$ et $f:I\subset\R\to\K$.\\
+    Si $\forall n \in \N, ~ f_n$ est continue sur tout segment de $I$ et $f_n\cu f$ sur $I$, alors $f$ est continue sur $I$.
+    \tcblower
+    Soit $a\in I$, si $a\in\accentset{\circ}{I}$, alors c'est le cas précédent.\\
+    Si $a\in\nt{Fr}(I)$, alors $\exists b \in I, ~ a < b$, on applique le théorème sur $[a,b]$.
+\end{corr}
+
+\vspace*{-0.5cm}
+
+\begin{ex}{}{}
+    Pour $x\in[0,1]$ et $n\in\N$, on pose $f_n(x)=x^n$.\\
+    On a vu que $f_n\cs f$ sur $[0,1]$ avec $f(x)=0$ si $x\in[0,1[$ et $f(1)=1$.\\
+    On a $\forall n \in \N, ~ f_n$ est continue sur $[0,1]$ et $f$ n'est pas continue sur $[0,1]$ donc il n'y a pas CU sur $[0,1]$. 
+\end{ex}
+
+\vspace*{-0.5cm}
+
+\begin{thm}{Double limite. (Admis)}{}
+    Soit $f_n:A\subset E \to F$ avec $E,F$ evn, $a \in \ov{A}$ et $f:A\subset E \to F$.\\
+    Si $f_n\cu f$ sur $A$ et $\ds \forall n \in \N, ~ \lim_{x\to a}f_n(x)=\l_n\in F$, alors $\l_n$ converge vers $\l$ et $\ds \lim_{x\to a}f(x)=\l$.
+\end{thm}
+
+\vspace*{-0.4cm}
+
+\begin{thm}{$\star$}{}
+    Soit $f_n:[a,b]\subset\R\to\K$ et $f:[a,b]\to\K$ cpm telles que $f_n\cu f$ sur $[a,b]$, alors $\ds\int_a^b f_n(x)\dx\to\int_a^bf(x)\dx$.
+    \tcblower
+    On a :
+    \begin{align*}
+        \left|\int_a^bf_n(x)\dx - \int_a^bf(x)\dx\right| & = \left|\int_a^bf_n(x)-f(x)\dx\right| \leq \int_a^b\left|f_n(x)-f(x)\right|\dx \leq (b-a)\|f_n - f\|_\infty^{[a,b]}
+    \end{align*}
+    Par encadrement, on a le résultat.
+\end{thm}
+
+\begin{thm}{$\star$}{}
+    Soit $f_n:I\subset\R\to\K$ de classe $\m{C}^1$ sur $I$ et $f,g:I\to\K$ telles que $f_n\cs f$ et $f_n'\cu g$ sur $I$ (tout segment de $I$).\\
+    Alors $f$ et $\m{C}^1$ sur $I$ et $f'=g$ puis $f_n\cu f$ sur tout segment de $I$.
+    \tcblower
+    Soit $a\in I$. Posons :
+    \begin{equation*}
+        \forall n \in \N, ~ \forall x \in I, ~ F_n(x) = \int_a^xf_n'(t)\dt ~\et~ G(x) = \int_a^xg(t)\dt. 
+    \end{equation*}
+    Elles sont bien définies car $\forall n \in \N, ~ f_n'$ est continue sur $I$, et $g$ est continue sur $I$ par théorème.\\
+    Par le théorème précédent : $\forall x \in I, ~ f_n'$ $\CU$ vers $g$ sur $[a,x[$, donc $F_n$ $\CU$ vers $G$.\\
+    $\hookrightarrow$ Par TFA, $\forall x \in I, ~ F_n(x) \to f(x) - f(a)$, et par unicité de la limite, $G(x)=f(x)-f(a)$.\\
+    Ainsi, $f$ est de classe $\cursive{C}^1$ sur $I$, car $G$ l'est, et $f'=G'=g$.\\
+    Vérifions maintenant que $f_n$ $\CU$ vers $f$ sur $I$. Soit $[\a,\b]\subset I$, et $x\in[\a,\b]$.
+    \begin{align*}
+        |f_n(x) - f(x)| &= |F_n(x) + f_n(a) - G(x) - f(a)| \leq |F_n(x) - G(x)| + |f_n(a) - f(a)| \\
+        &\leq \|F_n - G\|_\infty^{[\a,\b]} + |f_n(a) - f(a)|.
+    \end{align*}
+\end{thm}
+
+\vspace*{-0.4cm}
+
+\begin{thm}{}{}
+    Soit $f_n:I\subset\R\to\K$ de classe $\m{C}^p$ sur $I$, $f:I\to\K$ et $g_i:I\to\K$ pour $i\in\lb1,p\rb$.\\
+    Si $f_n\cs f$, $f_n'\cs g_1$, ..., $f_n^{(p)}\cu g_p$ sur $I$, alors $f$ est $\m{C}^p$ sur $I$ et $f^{(p)}=g_p$.
+    \tcblower
+    Par récurrence sur $p$, avec le théorème précédent.
+\end{thm}
+
+\vspace*{-0.4cm}
+
+\section{Théorèmes d'approximation.}
+
+\begin{rappel}{}{}
+    Soit $f:[a,b]\subset\R\to\K$. On dit que $f$ est en escalier sur $[a,b]$ ssi il existe une subdivision $\s=\{x_0,...,x_n\}$ de $[a,b]$ telle que $f$ est constante sur tout intervalle ouvert $]x_i,x_{i+1}[$.\\
+    On note $\E([a,b],\K)$ l'ensemble des fonctions en escalier sur $[a,b]$.
+\end{rappel}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{}{}
+    $\E([a,b],\K)$ est une $\K$-algèbre.
+    \tcblower
+    C'est une sous-algèbre de $(\F(a,b),+,\times,\cdot)$.\\
+    $\hookrightarrow$ $1\in\E([a,b],\K)$.\\
+    $\hookrightarrow$ Stable par produit et combinaisons linéaires.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{thm}{Approximation de Weierstraß. $\star$}{}
+    Soit $f$ continue par morceaux sur $[a,b]$. Elle est limite uniforme d'une suite de fonctions en escalier.
+    \tcblower
+    \bf{Cas $f$ continue sur $[a,b]$.}\\
+    On a alors $f$ uniformément continue sur $[a,b]$ par le théorème de Heine.\\
+    Ainsi, en posant $\e>0$, on a $\exists \a>0, ~ \forall (x,y) \in [a,b], ~ |x-y|<\a \ra |f(x)-f(y)|\leq \e$.\\
+    $\hookrightarrow$ On prend $N\in\N$ tel que $\frac{b-a}{N}<\a$, c'est possible car $\frac{b-a}{n}\to0$.\\
+    On pose alors $\forall k \in \lb 0, N \rb, ~ x_k = a + k\frac{b-a}{N}$, on définit alors $\phi$ comme :
+    \begin{equation*}
+        \phi(x) = \begin{cases}
+            f(x_k) & \nt{si} ~ x \in [x_k, ~ x_{k+1}[ ~ \nt{pour} ~ k \in \lb 0, N-1 \rb\\
+            f(b) & \nt{si} ~ x = b
+        \end{cases}
+    \end{equation*}
+    Alors $\phi\in\E([a,b],\K)$, et pour $x\in[a,b]$:\\
+    $\hookrightarrow$ Si $x=b$, alors $f(b)-\phi(b)=0$.\\
+    $\hookrightarrow$ Sinon, $\exists k \in \lb1,N-1\rb, ~ x \in [x_k, x_{k+1}[$, or $|x-x_k|\leq\frac{b-a}{N}<\a$ donc $|f(x)-\phi(x)|\leq\e$.\\
+    \fbox{Bilan: $\forall x \in [a,b], ~ |f(x)-\phi(x)|\leq \e$.}\n
+    \bf{Cas $f$ continue par morceaux sur $[a,b]$.}\\
+    Soit $\s=(x_0,...,x_n)$ subdivision de $[a,b]$ adaptée à $f$, et pour $k\in\lb0,n-1\rb, ~ f_k = f_{|]x_k,x_{k+1}[}$.\\
+    On les prolonge par continuité en leurs bornes, elles sont alors continues sur $[x_k,x_{k+1}]$.\\
+    Pour $\e>0$, d'après la partie précédente, on peut trouver $\phi_i\in\E([x_k,x_{k+1}],\K)$ telle que $\|f_k-\phi\|_{\infty}^{[x_k,x_{k+1}]}\leq\e$.
+    \begin{equation*}
+        \phi(x) = \begin{cases}
+            \phi_k(x) & \nt{si} ~ x \in ]x_k, x_{k+1}[ ~ \nt{pour} ~ k \in \lb0,n-1\rb\\
+            f(x_k) & \nt{si} ~ x = x_k ~ \nt{pour} ~ k \in \lb0,n-1\rb
+        \end{cases}
+    \end{equation*}
+    Cette fonction répond au problème.
+\end{thm}
+
+\begin{app}{Lemme de Riemann-Lebesgue.}{}
+    Soit $f:[a,b]\to\K$ continue par morceaux. Montrer que :
+    \begin{equation*}
+        \lim_{\l\to+\infty}\int_a^bf(t)e^{i\l t}\dt = 0.
+    \end{equation*} 
+    \tcblower
+    \bf{Cas des fonctions en escalier}.\\
+    Soit $\phi\in\E([a,b],\K).$ Il existe $\s = \{x_0,...,x_n\}$ subdivision de $[a,b]$ telle que $\forall i, \forall x \in ]x_i,x_{i+1}[, ~ \exists \a_i \in \R, ~ \phi(x)=\a_i$.
+    \begin{equation*}
+        \int_a^b\phi(t)e^{i\l t}\dt = \sum_{j=0}^{n-1}\int_{x_j}^{x_{j+1}}\a_je^{i\l t} = \sum_{j=0}^{n-1}\a_j\left[ \frac{e^{i\l t}}{i\l} \right]_{x_j}^{x_{j+1}}
+    \end{equation*}
+    En passant à la valeur absolue :
+    \begin{equation*}
+        \left|\int_a^b\phi(t)e^{i\l t}\dt\right| \leq \sum_{j=0}^{n-1}\frac{|\a_j|}{|\l|}\left|e^{i\l x_{j+1}} - e^{i\l x_j}\right| \leq \frac{1}{|\l|}\left( \sum_{i=0}^{n-1}2|\a_j| \right) \xrightarrow[\l\to+\infty]{} 0
+    \end{equation*}
+    \bf{Cas des fonctions continues par morceaux.}\\
+    Soit $\e>0, ~ \exists \phi \in \E([a,b],\K), ~ \|f-\phi\|_\infty^{[a,b]}\leq\e$ d'après le théorème d'approximation de Weierstraß. Ainsi :
+    \begin{equation*}
+        \int_a^bf(t)e^{i\l t}\dt = \int_a^b(f(t)-\phi(t))e^{i\l t}\dt + \int_a^b\phi(t)e^{i\l t}\dt
+    \end{equation*}
+    En passant à la valeur absolue :
+    \begin{equation*}
+        \left|\int_a^bf(t)e^{i\l t}\dt\right| \leq (b-a)\underbrace{\|f - \phi\|_{\infty}^{[a,b]}}_{\leq\e} + \underbrace{\left|\int_a^b\phi(t)e^{i\l t}\dt\right|}_{\xrightarrow[\l\to+\infty]{}0}.
+    \end{equation*}
+\end{app}
+
+\begin{defi}{Polynômes de Bernstein.}{}
+    Soient $f:[0,1]\to\K$, $n\in\N^*$, on pose le $n^{\nt{ème}}$ polynôme de Bernstein associé à $f$ :
+    \begin{equation*}
+        B_n(f)=\sum_{k=0}^n\binom{n}{k}f\left( \frac{k}{n} \right) X^k(1-X)^{n-k} \in \K[X]
+    \end{equation*}
+\end{defi}
+
+\begin{ex}{}{}
+    --- $B_n(1)=1$ (binôme de Newton).\\
+    --- $B_n(x)=X$ (binôme et formule du pion).\\
+    --- $B_n(x^2)=\left(1-\frac{1}{n}\right)X^2+\frac{1}{n}X$.
+\end{ex}
+
+\begin{exercice}{}{}
+    Soit $f$ continue de $[a,b]$ dans $\R$ telle que $\forall n \in \N, ~ \int_a^bt^nf(t)\dt=0$. Montrer que $f=0$.
+    \tcblower
+    Soit $P=\sum_{k=0}^Na_kX^k\in\R[X]$, on a $\int_a^bP(t)f(t)\dt=\sum_{k=0}^Na_k\int_a^bt^kf(t)\dt=0$.\\
+    On a $f$ continue sur $[a,b]$ donc par théorème de Weierstraß, $\exists (P_n)\in\R[X]^\N, ~ P_n\cu f$ sur $[a,b]$.
+    \begin{equation*}
+        \forall n \in \N, ~ \int_a^bf^2(t)\dt=\int_a^b(f(t)-P_n(t))f(t)\dt + \int_a^bP_n(t)f(t)
+    \end{equation*}
+    Puis :
+    \begin{equation*}
+        0 \leq \int_a^bf^2(t)\dt \leq \int_a^b|f(t)-P_n(t)||f(t)|\dt\leq\underbrace{\|f-P_n\|_\infty^{[a,b]}}_{\to0}\underbrace{\int_a^b|f(t)|\dt}_{\nt{cste}}
+    \end{equation*}
+    Par passage à la limite, $\int_a^bf^2(t)\dt=0$ puis ($f^2\geq0$ et continue sur $[a,b]$) $f=0$.
+\end{exercice}
+
+\pagebreak
+
+\begin{thm}{Weierstraß. (non-exigible)}{}
+    Soit $f:[a,b]\to\K$ continue, alors $f$ est limite uniforme d'une suite de polynômes.
+    \tcblower
+    Supposons d'abord $a=0$ et $b=1$. Soit $f:[0,1]\to\K$ continue. Vérifions que $B_n(f)\cu f$. Soit $x\in[0,1]$.
+    \begin{equation*}
+        B_n(f)(x)-f(x) = \sum_{k=0}^n\binom{n}{k}\left( f\left( \frac{k}{n} \right) - f(x)\right)x^k(1-x)^{n-k}.
+    \end{equation*}
+    Soit $\e>0$, on a $f$ continue sur $[a,b]$, donc par théorème de Heine, uniformément continue sur $[a,b]$.
+    \begin{equation*}
+        \exists \a > 0, ~ \forall (x,y)\in[a,b]^2, ~ |x-y| < \a \ra |f(x)-f(y)|\leq\e.
+    \end{equation*}
+    De plus, $f$ est continue sur $[a,b]$, donc bornée : $\exists M > 0, ~ \forall x \in [a,b], ~ |f(x)| \leq M$.
+    \begin{equation*}
+        \forall x \in [0,1], ~ |B_n(f)(x)-f(x)| \leq \sum_{k=0}^n\binom{n}{k}\left|f\left( \frac{k}{n} \right) - f(x) \right| x^k (1-x)^k.
+    \end{equation*}
+    Soit $x\in[0,1]$, on pose $I_n=\{k\in\lb0,n\rb, ~ \left|\frac{k}{n}-x\right| < \a\}$ et $J_n = \lb0,n\rb \setminus I_n$.\\
+    On découpe la somme en deux (type Cesàro) :
+    \begin{align*}
+        |B_n(f)(x)-f(x)| &\leq \sum_{k\in I_n}\binom{n}{k}\underbrace{\left| f\left( \frac{n}{k} \right)-f(x) \right|}_{\leq\e}x^k(1-x)^{n-k} + \sum_{k\in J_n}\binom{n}{k}\underbrace{\left|f\left( \frac{n}{k} \right)  - f(x) \right|}_{\leq2M} x^k(1-x)^{n-k}\\
+        &\leq\e\sum_{k\in I_n}\binom{n}{k}x^k(1-x)^{n-k} + 2M \sum_{k \in J_n}\binom{n}{k}x^k(1-x)^{n-k}\\
+        &\leq \e + 2M\sum_{k=0}^n\1_{\left|\frac{k}{n}-x\right|\geq\a}\binom{n}{k}x^k(1-x)^{n-k}\\
+        &\leq\e + 2M\sum_{k=0}^n\frac{\left( \frac{k}{n}-x \right)^2}{\a^2}\binom{n}{k}x^k(1-x)^{n-k}\\
+        &\leq\e + \frac{2M}{\a^2}\left[ B_n(x^2) + B_n(x) + B_n(1) \right]\\
+        &\leq \e + \frac{2M}{\a^2}\frac{x-x^2}{n} \leq \e + \frac{M}{2\a^2n}
+    \end{align*}
+    Par passage au sup : $\|B_n(f)-f\|_{\infty}^{[0,1]}\leq\e+\frac{M}{2\a^2 n}$, et $\exists n_0\in\N, ~ \forall n \geq n_0, ~ \frac{M}{2\a^2n} \leq \e$.\\
+    Alors $\forall n \geq n_0, ~ \|B_n(f)-f\|_\infty^{[0,1]}\leq2\e$.\\
+    Retournons au cas $f$ continue sur $[a,b]$. Posons $g(t)=f(tb+(1-t)a)$ avec $0\leq t \leq 1$, continue.\\
+    Réciproquement, si $x=tb+(1-t)a$, alors $t(b-a)=x-a$ puis $t=\frac{x-a}{b-a}$ donc $f(x)=f(tb+(1-t)a)=g(t)$.\\
+    Alors $f(x)=g(\frac{x-a}{b-a})$, puis d'après ce qui précède, pour $\e >0, ~ \exists P \in \K[X], ~ \|g-P\|_\infty^{[0,1]}\leq\e$.\\
+    On pose $Q(X)=P(\frac{X-a}{b-a})\in\K[X]$ par composée de deux polynômes. On vérifie que $Q$ convient.\\
+    Alors $\left|f(x)-Q(x)\right|=\left|g(\frac{x-a}{b-a})-P(\frac{x-a}{b-a})\right|\leq\sup|g(t)-P(t)|\leq\e$ donc $\|f-Q\|_\infty^{[a,b]}\leq\e$. 
+\end{thm}
+
+\section{Séries de fonctions.}
+
+\subsection{Modes de convergence.}
+
+\begin{defi}{}{}
+    Une série de fonctions est une série dont le terme général est une fonction $u_n:I\subset\R\to\K$.\\
+    Notons $\ds S_n = \sum_{k=0}^nu_k$ les sommes partielles de la série, alors $(S_n)$ est une suite de fonctions de $I$ dans $\K$.\\
+    Par définition, $\sum u_n$ converge simplement sur $I$ ssi la suite $(S_n)$ converge simplement sur $I$.
+    \begin{equation*}
+        \forall x \in I, ~ S_n(x) \xrightarrow[n\to+\infty]{} S(x). 
+    \end{equation*} 
+    Ainsi, par définition, $\ds S(x)=\sum_{n=0}^{+\infty}u_n(x)$.\\
+    De plus, $\sum u_n$ converge uniformément sur $I$ ssi $(S_n)$ converge uniformément sur $I$.
+    \begin{equation*}
+        \|S_n-S\|_\infty^I \xrightarrow[n\to+\infty]{}0.
+    \end{equation*}
+    En notant $R_n=S - S_n$, on a $\|R_n\|_\infty^I \xrightarrow[n\to+\infty]{}0$ i.e. $R_n\cu 0$ sur $I$.
+\end{defi}
+
+\begin{defi}{Convergence simple, uniforme.}{}
+    Soit $u_n:I\subset\R\to\K$.
+    \begin{enumerate}
+        \item $\sum u_n$ converge simplement ssi $\forall x \in I, ~ \sum u_n(x)$ converge.\\
+        On note alors $\ds S(x)=\sum_{n=0}^{+\infty}u_n(x)$, $\ds R_n(x)=\sum_{k=n+1}^{+\infty}u_k(x)$ pour tout $x\in I$.\\
+        $R_n\cs0$ sur $I$ automatiquement.
+        \item $\sum u_n$ converge uniformément sur $I$ ssi $R_n\cu0$ sur $I$.
+    \end{enumerate}
+\end{defi}
+
+\begin{ex}{}{}
+    \begin{enumerate}
+        \item $\forall n \in \N, ~ \forall x \in \R, ~ u_n(x)=x^n$, $\sum u_n$ converge simplement ? uniformément ? sur quoi ?
+        \item $\forall n \in \N, ~ \forall x \in \R_+^*, ~ u_n(x)=\frac{(-1)^n}{n+x}$ converge simplement ? uniformément ? sur quoi ?
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On reconnaît une série géométrique, elle converge ssi $x\in]-1,1[$, donc CS sur $]-1,1[$.\\
+    $\forall x \in ]-1,1[, ~ S(x)=\frac{1}{1-x}$ et $R_n(x)=\frac{x^{n+1}}{1-x}$. $R_n\xrightarrow[x\to1]{}+\infty$ donc pas convergence uniforme sur $]-1,1[$.\\
+    \boxed{2.} À $x$ fixé, $n\mapsto\frac{1}{n+x}$ décroît vers 0, donc CSSA : $\sum u_n(x)$ converge, donc $\sum u_n$ converge simplement sur $\R_+^*$.\\
+    D'après le CSSA, $|R_n(x)|\leq\frac{1}{n+1+x}\leq\frac{1}{n+1}$ puis $\|R_n\|_\infty^{\R_+^*}\leq\frac{1}{n+1}\xrightarrow[n\to+\infty]{}0$. Donc $R_n\cu0$ sur $\R_+^*$.\\
+    Ainsi, $\sum u_n$ converge uniformément sur $]0,+\infty[$. 
+\end{ex}
+
+\begin{defi}{Convergence absolue, convergence normale.}{}
+    Soit $u_n:I\subset\R\to\K$ pour tout $n\in\N$.
+    \begin{enumerate}
+        \item $\sum u_n$ converge absolument sur $I$ ssi $\forall x \in I, ~ \sum|u_n(x)|$ converge.
+        \item $\sum u_n$ converge normalement sur $I$ ssi $\forall n \in \N, ~ u_n$ bornée sur $I$ et $\sum\|u_n\|_\infty^I$ converge.
+    \end{enumerate}
+\end{defi}
+
+\begin{prop}{}{}
+    \begin{equation*}
+        \texttt{CN} \ra \texttt{CA} \ra \texttt{CS} \quad \et \quad \texttt{CN} \ra \texttt{CU} \ra \texttt{CS}.
+    \end{equation*}
+    \tcblower
+    On sait déjà que $\texttt{CU} \ra \texttt{CS}$ (cours suite de fonctions) et $\texttt{CA} \ra \texttt{CS}$ (cours séries numériques).\\
+    \boxed{\texttt{CN}\ra\texttt{CA}} Soit $u_n:I\subset\R\to\K$ pour $n\in\N$. On suppose $\sum u_n$ convergente normalement sur $I$.\\
+    Soit $x\in I$ : $|u_n(x)|\leq\|u_n\|_\infty^I$ et par TCSTG+, $\sum|u_n(x)|$ converge donc $\sum u_n$ converge absolument sur $I$.\\
+    \boxed{\texttt{CN}\ra\texttt{CU}} Posons $\ds R_n(x)=\sum_{k=n+1}^{+\infty}u_k(x)$ et $\ds \tilde{R_n}=\sum_{k=n+1}^{+\infty}\|u_k\|_\infty^I$ bien défini car $\sum u_n$ $\texttt{CN}$ sur $I$.
+    \begin{equation*}\forall n \in \N, ~ \forall N\in\N, ~ \forall x \in I, ~ N\geq n+1 \ra \left|\sum_{k=n+1}^Nu_k(x)\right|\leq\sum_{k=n+1}^N\left|u_k(x)\right|\end{equation*}
+    Par passage à la limite, $\ds \forall n \in \N, ~ \forall x \in I, ~ |R_n(x)|\leq\sum_{k=n+1}^{+\infty}|u_k(x)|$.\\
+    Or $\forall k \geq n+1, ~ \forall x \in I, ~ |u_k(x)|\leq\|u_k\|_\infty^I$, on somme terme à terme de $k=n+1$ à $N\geq n+1$, puis on passe à la limite :
+    \begin{equation*}
+        \sum_{k=n+1}^{\infty}|u_k(x)| \leq \sum_{k=n+1}^{\infty}\|u_k\|_{\infty}^I = \tilde{R_n}.
+    \end{equation*}
+    Finalement, $\forall n \in \N, ~ \forall x \in I, ~ |R_n(x)|\leq\tilde{R_n}$ puis $\|R_n\|_\infty^I\leq\tilde{R_n}\xrightarrow[n\to+\infty]{}0$.\\
+    Ainsi, $R_n\cu0$ sur $I$ donc $\sum u_n$ converge uniformément sur $I$.
+\end{prop}
+
+\begin{ex}{}{}
+    Soit $u_n=\frac{1}{n^x}$ pour $n\geq1, ~ x\in\R$. $\sum u_n$ converge simplement ? uniformément ? sur quoi ?
+    \tcblower
+    À $x$ fixé, on reconnaît une série de Riemann. On sait que $\sum\frac{1}{n^x}$ converge ssi $x>1$.\\
+    Ainsi, $\sum u_n$ converge simplement sur $]1,+\infty[$. Notons $\zeta(x)=\sum_{n=1}^\infty\frac{1}{n^x}$ pour $x>1$.\\
+    \texttt{CN} sur $]1,+\infty[$ ? Pour $n\in\N^*$ fixé, $\|u_n\|_\infty^{]1,\infty[}=\sup|u_n(x)|=\frac{1}{n}$, il n'y a pas convergence normale.\\
+    \texttt{CN} sur $[a,+\infty[$ ? Pour $n\in\N^*$ fixé, $\|u_n\|_\infty^{]a,+\infty[}=\frac{1}{n^a}$ donc $\sum u_n$ $\texttt{CN}$ sur $]1,+\infty[$.\\
+    Puis $\sum u_n$ converge uniformément sur $[a,+\infty[$ pour $a>1$.\\
+    \texttt{CU} sur $]1,+\infty[$ ? $\forall x > 1, ~ R_n(x)=\sum_{k=n+1}^{\infty}\frac{1}{k^x}$.\\
+    On revient à une comparaison série-intégrale pour évaluer le reste (cpm décroissante):
+    \begin{equation*}
+        \forall k \in \N^*, ~ \frac{1}{(k+1)^x} \leq \int_k^{k+1}\frac{\dt}{t^x} \leq \frac{1}{k^x}.
+    \end{equation*}
+    Soit $n\in\N$ fixé, $x>1$ fixé, on somme :
+    \begin{equation*}
+        \sum_{k=n+1}^N\frac{1}{(k+1)^x}\leq\int_{n+1}^{N+1}\frac{\dt}{t^x}\leq\sum_{k=n+1}^N\frac{1}{k^x}
+    \end{equation*}
+    \begin{equation*}
+        \frac{1}{1-x}\left( \frac{1}{(N+1)^{x-1}} - \frac{1}{(n+1)^{x-1}} \right) \leq \sum_{k=n+1}^N\frac{1}{k^x} \quad (x-1>0).
+    \end{equation*}
+    par passage à la limite : $\forall x > 1 : ~ \frac{1}{(x-1)}\frac{1}{(n+1)^{x-1}}\leq R_n(x)$.\\
+    Par minoration : $\lim_{x\to1^*}R_n(x)=+\infty$, donc $R_n$ n'est pas bornée sur $]1,+\infty[$.\\
+    Donc $R_n\not\cu0$ sur $]1,+\infty[$ puis $\sum u_n$ ne converge pas unifomément sur $]1,+\infty[$.
+\end{ex}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{}{}
+    Soit $u_n:I\subset\R\to\K$.
+    \begin{enumerate}
+        \item $\sum u_n ~ \CS$ sur $I$ $\ra$ $u_n\cs0$ sur $I$.
+        \item $\sum u_n ~ \CU$ sur $I$ $\ra$ $u_n\cu0$ sur $I$. 
+    \end{enumerate}
+    Le 2. peut être un moyen par contraposée de montrer que $u_n$ ne converge pas uniformément sur $I$ en trouvant une suite $(x_n)$ de $I$ telle que $u_n(x_n)\not\to0$.
+    \tcblower
+    \boxed{1.} Soit $x\in I$ fixé. Par hyp, $\sum u_n(x)$ converge, donc $u_n(x)\to0$ comme t.g. de série convergente, donc $u_n\to0$.\\
+    \boxed{2.} Par hyp, $R_n\cu0$ sur $I$. On remarque que $\forall n \in \N^*, ~ \forall x \in I, ~ u_n(x)=R_{n-1}(x)-R_n(x)$.\\
+    Puis $|u_n(x)|\leq|R_{n-1}(x)|+|R_n(x)|\leq\|R_{n-1}\|_\infty^I+\|R_n\|_\infty^I$ par sup : $\|u_n\|_\infty^I\leq\|R_{n-1}\|_\infty^I+\|R_n\|_\infty^I \to 0 + 0$.\\
+    Par encadrement, $\|u_n\|_\infty^I\to0$ i.e. $u_n\cu0$ sur $I$.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\subsection{Continuité, dérivation des séries de fonctions.}
+
+\begin{thm}{Continuité.}{}
+    Soit $u_n:I\subset\R\to\K$ continue sur $I$ pour tout $n\in\N$. On suppose que $\sum u_n$ $\CS$ sur $I$.\\
+    Alors si $\sum u_n$ converge uniformément sur $I$, $S$ est continue sur $I$.
+    \tcblower
+    Par hypothèse, $S_n\cu S$ sur $I$, or $\forall n \in \N, ~ S_n$ est continue sur $I$ comme somme finie de fonctions continues.\\
+    Alors $S$ est continue sur $I$ par théorème.
+\end{thm}
+
+\vspace*{-0.4cm}
+
+\begin{ex}{}{}
+    Soit $S(x)=\sum_{n=1}^\infty\frac{1}{n^2+x^2}$ avec $x$ à déterminer.\\
+    Donner le domaine de définition de $S$, vérifier qu'elle y est paire, continue et donner ses variations.
+    \tcblower
+    Soit $x\in\R$ fixé. $\frac{1}{n^2+x^2}\sim\frac{1}{n^2}$ par TCSTG+, $\sum\frac{1}{n^2+x^2}\sim\sum\frac{1}{n^2}$ donc convergentes.\\
+    Son domaine de définition est $\R$, et $\forall x \in \R, ~ \sum\frac{1}{n^2+(-x)^2}=\sum\frac{1}{n^2+x^2}=S(x)$ donc paire.\\
+    Continuité : $u_n(x)=\frac{1}{n^2+x^2}$ on a $|u_n(x)|\leq\frac{1}{n^2}$ donc $\|u_n\|_\infty^\R\leq\frac{1}{n^2}$ donc $\sum u_n$ $\CN$ puis $\CU$.\\
+    Par théorème : $\forall n \in \N, ~ u_n$ continue sur $\R$, et $\sum u_n \cu S$ donc $S$ continue sur $\R$.\\
+    Soient $0\leq x\leq y$, alos $\forall n \in \N^*, ~ \frac{1}{x^2+n^2}\geq\frac{1}{n^2+y^2}$.\\
+    Alors $S(x)\geq S(y)$ en sommant et passage à la limite.\\
+    Cherchons la somme de $S$ : $S=\frac{1}{1+x^2}+\frac{1}{2^2+x^2}+...+\to0$ ??\\
+    On va utiliser une comparaison série-intégrale :
+    \begin{equation*}
+        t\mapsto \frac{1}{t^2+x^2}, ~ \nt{cpm, décroissante sur } [1,\infty[
+    \end{equation*}
+    \begin{equation*}
+        \frac{1}{(k+1)^2+x^2} \leq \int_k^{k+1}\frac{\dt}{t^2+x^2}\leq\frac{1}{k^2+x^2}
+    \end{equation*}
+    \begin{equation*}
+        \sum_{k=1}^N\frac{1}{(k+1)^2+x^2} \leq \int1^{N+1}\frac{\dt}{t^2+x^2}\leq\sum_{k=1}^N\frac{1}{k^2+x^2}
+    \end{equation*}
+    Donc $S(x)-\frac{1}{1+x^2}\leq\frac{\pi}{2x}-\frac{1}{x}\arctan(\frac{1}{x})\leq S(x)$.\\
+    Puis $\frac{\pi}{2x}-\frac{1}{x}\arctan(\frac{1}{x})\leq S(x) \leq \frac{1}{1+x^2}+\frac{1}{x}\arctan(\frac{1}{x})$.\\
+    Déjà, $S(x)\to0$, mais aussi $S(x)\sim\frac{\pi}{2x}$
+\end{ex}
+
+\begin{thm}{Double limite. (Admis)}{}
+    Soit $u_n:I\subset\R\to\K$ et $\ds a\in\ov{I}$ (adhérence de $I$).\\
+    Si $\forall n \in \N, ~ \lim_{x\to a} u_n(x)=\l_n \in \R$ et $\sum u_n ~ \CU$ sur $I$, on notera $S(x)$ la somme,\\
+    Alors : $\sum \l_n$ converge et $\lim_{x\to a}S(x)=\sum^{+\infty}_{n=0} \l_n$. 
+\end{thm}
+
+\begin{ex}{}{}
+    On reprend l'exemple précédent.\\
+    On pose $u_n(x)=\frac{1}{n^2+x^2}$. $\forall n \in \N, ~ \lim_{x\to+\infty}u_n(x)=0:=\l_n$.\\
+    De plus, $\sum u_n$ $\CN$ donc $\CU$ sur $\R$, et $+\infty\in\ov{\R}$, donc $S$ admet $\sum\l_n=0$ en l'infini. 
+\end{ex}
+
+\pagebreak
+
+\begin{ex}{}{}
+    Soit $F(x)=\sum_{n=0}^{\infty}e^{-x\sqrt{n}}$.
+    \begin{enumerate}
+        \item Quel ensemble de définition ?
+        \item Variations de $F$ ?
+        \item Continuité de $F$ sur son ensemble de définition ?
+        \item Limites aux bornes ?
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Montrons qu'elle est définie sur $]0,+\infty[$.\\
+    Soit $x>0$. $e^{-x\sqrt{n}}=o(\frac{1}{n^2})$ par cc. puis par comparaison à une série de Riemann, la série converge.\\
+    Si $x=0$, le terme général vaut 1 donc la série diverge grossièrement.\\
+    Si $x<0$, $e^{-x\sqrt{n}}\to+\infty$ donc la série diverge grossièrement.\\
+    \boxed{2.} Soient $0<x\leq y$. Pour $n\in\N$, $-x\sqrt{n}\geq-y\sqrt{n}$ donc $e^{-x\sqrt{n}}\geq e^{-y\sqrt{n}}$.\\
+    On somme terme-à-terme et on passe à la limite : $F(x)\geq F(y)$ donc décroissante.\\
+    \boxed{3.} On applique le théorème de continuité des séries de fonctions.\\
+    $\forall n \in \N, ~ u_n$ est continue sur $]0,+\infty[$, et $\sum u_n$ $\CU$ sur $]0,+\infty[$, donc $F$ continue sur $]0,+\infty[$.\\
+    En effet, pour $a>0$, $\|u_n\|_\infty^{[a,+\infty[}=\sup\left| e^{-x\sqrt{n}} \right| = e^{-a\sqrt{n}}$ terme général d'une série convergente.\\
+    Alors $\sum u_n ~ \CN$ donc $\CU$ sur $[a,+\infty[$ pour tout $a>0$. A fortiori, $\sum u_n$ $\CU$ sur tout segment de $]0,+\infty[$.\\
+    \boxed{4.} $F$ est décroissante, minorée par $1$, donc admet des limites finies ou infinies aux bornes.\\
+    Théorème de double limite en l'infini : $\forall n \in \N^*, ~ \lim_{x\to+\infty}u_n(x)=0$ et $\lim_{x\to+\infty}u_0(x)=1$.\\
+    On a $\sum u_n$ $\CU$ sur $[2,+\infty[$ donc $\lim_{x\to+\infty}F(x)=1$.\\
+    On conjecture que la limite en 0 est infinie. $\forall n \in \N, ~ \forall x > 0, ~ \sqrt{n}\leq n$ puis $e^{-x\sqrt{n}}\geq e^{-xn}$.\\
+    Ainsi : $\forall x > 0, ~ F(x) \geq \sum_{n=0}^{\infty}(e^{-x})^n=\frac{1}{1-e^{-x}}\to_{x\to0}+\infty$.\\
+    Par minoration, $F(x)$ tend vers $+\infty$ en $0$. 
+\end{ex}
+
+\begin{thm}{Dérivation des séries de fonctions.}{}
+    Soit $u_n:I\subset\R\to\K$ pour tout $n\in\N$. On suppose $\sum u_n$ $\CS$ sur $I$.\\
+    Si $\forall n \in \N, ~ u_n$ est $\m{C}^1$ sur $I$ et $\sum u_n'$ $\CU$ sur $I$, alors $S$ est $\m{C}^1$ sur $I$ et $\forall x \in I, ~ S'(x)=\sum^{\infty}_{k=0} u_n'(x)$.\\
+    \bf{Remarque.} Ce n'est pas la linéarité de la dérivation.
+    \tcblower
+    $\forall n \in \N, ~ S_n$ est $\m{C}^1$ sur $I$ et $\forall x \in I, ~ S_n'(x)=\sum_{k=0}^n u_k'(x)$ par linéarité de la dérivation.\\
+    Puis $\forall n \in \N, ~ S_n$ $\m{C}^1$ sur $I$, $S_n\cs S$ sur $I$ par hypothèse, $(S_n')$ $\CU$ sur $I$ par hypothèse.\\
+    Donc, par théorème, $S$ est $\m{C}^1$ sur $I$ et $\forall x \in I, ~ S'(x)=\lim_{n\to+\infty}S'_n(x)=\sum_{n=0}^{\infty}u_n'(x)$.
+\end{thm}
+
+\begin{ex}{}{}
+    Soit $S(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{n+x}$ pour $x>0$.
+    \begin{enumerate}
+        \item Montrer que $S$ est continue sur $\R_+^*$.
+        \item Montrer que $S$ est $\m{C}^1$ sur $\R_+^*$ et déterminer $S'(x)$ pour tout $x>0$.
+        \item Donner le sens de variation de $S$.
+        \item Calculer $S(x+1)+S(x)$ pour tout $x>0$.
+        \item Limites aux bornes et équivalents aux bornes de $S$.
+    \end{enumerate}
+    \tcblower
+    On pose $u_n(x)=\frac{(-1)^n}{n+x}$ pour $n\in\N, ~ x\in\R_+^*$.\\
+    \boxed{1.} À $n$ fixé, $u_n$ est continue sur $\R_+^*$. Par CSSA, $|R_n|\leq\frac{1}{n+1+x}\leq\frac{1}{n+1}$, puis $\|R_n\|_\infty\leq\frac{1}{n+1}\to0$.\\
+    Par théorème de continuité, $S$ est continue sur $\R_+^*$.\\
+    \boxed{2.} On applique le théorème de dérivation des séries de fonctions.\\
+    $\forall n \in \N, ~ u_n$ est $\m{C}^1$ sur $\R_+^*$, et $u'_n(x)=\frac{(-1)^{n+1}}{(n+x)^2}$. De plus, $\sum u_n ~ \CS$ sur $\R_+^*$ d'après 1.\\
+    Enfin, $\sum u'_n ~ \CU$ sur $\R_+^*$, par CSSA : $|R'_n|\leq\frac{1}{(n+1+x)^2}\leq\frac{1}{(n+1)^2}$, donc $\|R_n\|_\infty\to0$, $\CU$.\\
+    Donc $S$ est $\m{C}^1$ sur $\R_+^*$ et $\forall x > 0, ~ S'(x)=\sum\frac{(-1)^{n+1}}{(n+x)^2}$.\\
+    \boxed{3.} D'après le CSSA, $S'(x)$ est du signe de son premier terme, ici négatif, donc $S$ décroît.\\
+    \boxed{4.} $S(x+1)+S(x)=\sum_{n=0}^\infty\frac{(-1)^n}{n+1+x}+\sum_{n=0}^\infty\frac{(-1)^n}{n+x}=\sum_{n=0}^\infty\frac{(-1)^n}{n+x}-\sum_{n=1}^\infty\frac{(-1)^n}{n+x}=\frac{1}{x}.$\\
+    \boxed{5.} Par CSSA, $\frac{1}{x}\geq S(x) \geq 0$ donc $S(x)\to_{x\to+\infty}0$ par encadrement.\\
+    Un équivalent en l'infini : $\forall x > 0, ~ S(x+1)+S(x)=\frac{1}{x}$ et décroissante.\\
+    Ainsi, $S(x+1)\leq S(x)$ donc $\frac{1}{x}\leq 2S(x)\leq \frac{1}{x-1}$ donc $S(x)\sim_{+\infty}\frac{1}{2x}$.\\
+    $\forall x > 0, ~ S(x+1)+S(x)=\frac{1}{x}$ et $S(x+1)\to_{x\to0} S(1)$ par continuité de $S$ en 1.\\
+    Donc $S(x)=\frac{1}{x}-S(x+1)\to_{x\to0} +\infty$, et $S(x)\sim_0 \frac{1}{x}$.
+\end{ex}
+
+\begin{prop}{}{}
+    Soient $u_n:I\subset\R\to\K$ et $p\in\N^*$. On suppose que $\sum u_n$ $\CS$ sur $I$.\\
+    Si $\forall n \in \N, ~ u_n \in \m{C}^p(I)$, $\forall k \in \lb0,p-1\rb, ~ \sum u_n^{(k)} ~ \CS$ sur $I$, et $\sum u_n^{(p)} ~ \CU$ sur $I$.\\
+    Alors $S$ est $\m{C}^p$ sur $I$ et $\forall x \in I, ~ S^{(p)}(x)=\sum u_n^{(p)}(x)$.
+\end{prop}
+
+\pagebreak
+
+\begin{ex}{Zeta de Riemann.}{}
+    $\zeta(x)$ converge ssi $x>1$ donc son domaine de définition est égal à $]1,+\infty[$.\\
+    Pour $1 < x \leq y$, ~ $\forall n \geq 1, ~ \frac{1}{n^x}\geq \frac{1}{n^y}$ donc $S(x)\geq S(y)$ : elle est décroissante.\\
+    On pose $u_n(x)=\frac{1}{n^x}$, par théorème de continuité des séries de fonctions :\\
+    --- $\forall n \geq 1, ~ u_n$ est continue sur $]1,\infty[$, $\sum u_n$ $\CU$ sur $]1,+\infty[$, donc $\zeta$ est continue sur $]1,+\infty[$.\\
+    On a $\|u_n\|_\infty = \frac{1}{n^a}$ t.g. d'une série convergente, donc la série converge normalement, puis uniformément.\\
+    Par théorème de double limite, $u_1(x)\to 1$ et $\forall n \geq 2, ~ u_n(x)\to0$, donc $zeta(x)\to1$.\\
+    On a $u_n$ $\m{C}^1$ sur $]1,+\infty[$ et $\forall x > 1, ~ u'_n(x)=-\frac{\ln(x)}{n^x}$, $\sum u_n$ $\CS$ sur $]1,+\infty[$ et $\sum u'_n$ $\CU$ sur $]1,+\infty[$.\\
+    En effet, $\sum u_n'$ converge normalement (série de Bertrand) donc converge uniformément.\\
+    Donc $\zeta$ est $\m{C}^1$ et $\forall x > 1, ~ \zeta'(x)=-\sum\frac{\ln(n)}{n^x}$.\\
+    Soit $p\geq1$. $\forall n \geq 1, ~ u_n$ est $\m{C}^p$ sur $],+\infty[$ : $\forall k \in \lb 1,p\rb, ~ \forall x > 1, ~ u_n^{(k)}(x)=\frac{(-\ln(n))^k}{n^x}$.\\
+    $\forall k \in \lb0,p-1\rb$, $\sum u_n^{(k)}$ $\CS$ sur $]1,+\infty[$, $\sum u_n^{(p)}$ $\CU$ sur $]1,+\infty[$.\\
+    Soit $a>1$, $|u_n^{(p)(x)}|=\frac{\ln^p(n)}{n^x}\leq\frac{\ln^p(n)}{n^a}$ convergente (bertrand).\\
+    Passage au sup : $\|u_n^{(p)}\|_\infty^{[a,+\infty[} \leq \frac{\ln^p(n)}{n^a}$, par TCSTG+, $\sum \|u_n^{(p)}\|_\infty^{[a,+\infty]}$ converge, $\sum u_n^{(p)} ~ \CN$. 
+\end{ex}
+
+\begin{ex}{Zeta de Riemann alternée.}{}
+    Posons $f(x)=\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n^x}$, on rappelle qu'elle est définie sur $]0,+\infty[$.\\
+    Vérifions que $f$ est continue sur $]0,+\infty[$, on pose $u_n(x)=\frac{(-1)^{n+1}}{n^x}$ pour $n\geq1$ et $x>0$.\\
+    On applique le théorème de continuité des séries de fonctions :\\
+    $\forall n \geq 1, ~ u_n$ est continue sur $]0,+\infty[$, $\sum u_n$ $\CU$ sur $]0,+\infty[$, donc $f$ est continue sur $]0,+\infty[$.\\
+    Par CSSA, $|R_n(x)|\leq\frac{1}{(n+1)^x}$, $\forall a > 0, ~ \forall x \geq a, ~ |R_n(x)|\leq \frac{1}{(n+1)^a}$ donc $\|R_n\|_\infty^{[a,\infty[}\to0$ donc $\CU$ sur $[a,+\infty[$.\\
+    On a $\forall n \geq 1, ~ u_n$ $\m{C}^1$ sur $]0,+\infty[$ et $u_n'(x)=(-1)^{n+1}\frac{(-\ln(n))}{n^x}$, $\sum u_n$ $\CS$, et $\sum u'_n$ $\CU$ sur $]0,\infty[$.\\
+    Alors $f$ est $\m{C}^1$ sur $]0,+\infty[$ et $\forall x > 0, ~ f'(x)=\sum_{n=1}^{+\infty}(-1)^n\frac{\ln(n)}{n^x}$.\\
+    Soit $a>0$, $\sum u'_n$ vérifie le CSSA, $|u_n'(x)|=\frac{\ln(n)}{n^x}\to 0$, on pose $\a_n=\frac{\ln(n)}{n^x}$.\\
+    Posons $\phi(t)=\frac{\ln t}{t^x}$, $\phi'(t)=\frac{1}{t^{x+1}}+(\ln t)(-xt^{-x-1})=\frac{1-x\ln t}{t^{x+1}}$.\\
+    Donc $\phi'(t)$ du signe de $(1-x\ln t)$, négatif pour $t\geq e^{1/x}$, donc $\phi$ décroissante apdcr donc $\a_n$ aussi.\\
+    Par CSSA, $|R_n(x)|\leq|u_{n+1}'(x)|\leq\frac{\ln(n+1)}{(n+1)^x}\leq\frac{\ln(n+1)}{(n+1)^a}$.\\
+    Par passage au sup, $\|R_n\|_\infty^{[a,\infty[}\leq\frac{\ln(n+1)}{(n+1)^a}\to0$ pour $(a>0)$.\\
+    Donc $\sum u_n'$ $\CU$ sur $[a,\infty[$ pour tout $a>0$, donc $\sum u_n'$ $\CU$ sur tout segment de $]0,+\infty[$.\\
+    Vérifions $f$ $\m{C}^p$ pour tout $p\in\N$. Soit $p\in\N^*$. On a :\\
+    $\forall k \in \lb1,p\rb, ~ u_n^{(k)}(x)=(-1)^{n+1}\frac{(-1)^k\ln^k(n)}{n^x}$ pour tout $x>0$ et $\forall k \in \lb0,p-1\rb, ~ \sum u_n^{(k)}$ $\CS$ sur $]0,+\infty[$ (CSSA).\\
+    Et $\sum u_n^{(p)}$ $\CU$ sur $]0,+\infty[$, donc $f$ est $\m{C}^p$ sur $]0,+\infty[$ et $\forall p \in \N, ~ f^{(p)}(x)=\sum(-1)^{n+1+p}\frac{\ln^p(n)}{n^x}$.\\
+    On pose $\a_n=\frac{\ln^p(n)}{n^x}$ pour $x\geq a > 0$ fixé, on vérifie $\a_n\to 0$ et $\a_n$ décroissante àpdcr pour pour $\m{C}^1$.\\
+    Donc d'après le CSSA, $|R_n(x)|\leq \a_{n+1} \leq \frac{\ln^p(n+1)}{(n+1)^a}$ puis $\|R_n\|_{\infty}^{[a,\infty[}\leq\frac{\ln^p(n+1)}{(n+1)^a}\to 0$ puis $R_n\cu0$.\\
+    Théorème de la double limite : $\lim f(x)=1$. Soit $x>0$, montrons $2f(x)-1=...$.
+    \begin{align*}
+        \sum_{n=1}^{+\infty}(-1)^{n+1}\left( \frac{1}{n^x} - \frac{1}{(n+1)^a} \right) &= \sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^x} - \sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^{x+1}}.\\
+        &=\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n^x} - \sum_{n=2}^{\infty}\frac{(-1)^n}{n^x}\\
+        &= \sum_{n=1}^\infty\frac{(-1)^{n+1}}{n^x} + \sum_{n=2}^{\infty}\frac{(-1)^{n+1}}{n^x}\\
+        &= 2\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^x} - 1 = 2f(x)-1.
+    \end{align*}
+    Posons $\a_n=\frac{1}{n^x}-\frac{1}{(n+1)^x}$, $\forall n \geq 1, ~ 2f(x)-1=\sum_{n=1}^\infty(-1)^{n+1}\a_n$.\\
+    Vérifions le CSSA : $\a_n \to 0$ clair et $\phi(t):=\frac{1}{t^x}-\frac{1}{(t+1)^x}$.\\
+    Calculer $\phi'(t)$ et vérifier $\phi'(t)\leq 0$ pour $t$ assez grand, alors $\phi$ est décroissante pour $t$ assez grand.\\
+    En particulier, $\a_{n+1}=\phi(n+1)\leq \phi(n) = \a_n$ àpdcr, $\a_n\to0$ en décroissant àpdcr... (à détailler).\\
+    Donc $\lim_{x\to 0} (2f(x) - 1) = 0$ donc $f(x)\to\frac{1}{2}$.
+\end{ex}
+
+\begin{thm}{Intégration terme-à-terme sur un segment.}{}
+    Soit $u_n:[a,b]\to\K$ cpm sur $[a,b]$. On suppose que $\sum_{n\geq0} u_n$ $\CS$ sur $[a,b]$ et $\sum_{n=0}^\infty u_n$ cpm sur $[a,b]$.\\
+    Si $\sum_{n\geq0} u_n$ $\CU$ sur $[a,b]$, alors $\ds\int_a^b\sum_{n=0}^\infty u_n(x) \dx = \sum_{n=0}^\infty\int_a^b u_n(x)\dx$.
+    \tcblower
+    Par hypothèse, $S_n \to S$ sur $[a,b]$.\\
+    Donc (théorème suite de fonctions) $\int_a^b S_n(x)\dx \to \int_a^b S(x)\dx$.\\
+    Or par linéarité de l'intégrale : $\int_a^b S_n(x)\dx = \sum \int_a^b u_k(x)\dx$ puis par unicité de la limite :
+    \begin{equation*}
+        \sum_{n=0}^\infty\int_a^b u_n(x)\dx = \int_a^b S(x)\dx = \int_a^b\left( \sum_{n=0}^\infty u_n(x) \right) \dx
+    \end{equation*}
+\end{thm}
+
+\begin{ex}{}{}
+    \begin{enumerate}
+        \item On pose $\ds S=\sum_{n=0}^\infty\frac{1}{2^n(n+1)}$.\\
+        Justifier que $S$ est bien définie.
+        \item Écrire $\ds\int_0^\frac{1}{2}\frac{\dt}{1-t}$ sous forme de série.
+        \item En déduire $S=2\ln 2$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $\frac{1}{2^n(n+1)}=o\left(\frac{1}{2^n}\right)$ donc converge par TCSTG+ (série géométrique).\\
+    \boxed{2.} $\forall t \in ]-1,1[$, $\sum_{n=0}^\infty t^n = \frac{1}{1-t}$, donc : 
+    \begin{equation*}
+        \int_0^\frac{1}{2}\frac{\dt}{1-t}=\int_0^\frac{1}{2}\sum_{n=0}^\infty t^n\dt\overset{(*)}{=}\sum_{n=0}^\infty \int_0^\frac{1}{2}t^n\dt = \sum_{n=0}^\infty\left[ \frac{t^{n+1}}{n+1} \right]_0^{\frac{1}{2}}=\frac{S}{2}.
+    \end{equation*}
+    (*) : On pose $\forall t \in [0,\frac{1}{2}], ~ \forall n \in \N, u_n(t)=t^n$, montrons que $\sum_{n\geq0} u_n$ converge uniformément sur $[0,\frac{1}{2}]$.\\
+    $\hookrightarrow$ Convergence normale : $\|u_n\|_\infty^{[0,\frac{1}{2}]}=\frac{1}{2^n}$ terme général de série convergente, donc $\CN$ donc $\CU$.\\
+    On conclut par théorème d'intégration terme-à-terme.\\
+    \boxed{3.} $\ds\int_0^\frac{1}{2}\frac{\dt}{1-t}=-\left[ \ln|1-t| \right]_0^\frac{1}{2}=\ln(2)$, puis $S=2\ln(2)$.
+\end{ex}
+
+\begin{ex}{}{}
+    Soit $n\geq 1$. Montrer que :
+    \begin{equation*}
+        \int_0^{2\pi}\frac{e^{in\theta}}{1-2e^{i\theta}}\nt{d}\theta = -\frac{\pi}{2^{n-1}}.
+    \end{equation*}
+    \tcblower
+    On essaie de l'écrire sous forme de série en utilisant la formule $\frac{1}{1-z}=\sum_{n=0}^\infty z^n$ pour $|z|<1$.
+    \begin{equation*}
+        \frac{e^{in\theta}}{1-2e^{i\theta}} = -\frac{e^{in\theta}}{2e^{i\theta}} \frac{1}{1-\frac{e^{-i\theta}}{2}} = -\frac{e^{in\theta}}{2e^{i\theta}}\sum_{p=0}^{\infty}\left(\frac{e^{-i\theta}}{2}\right)^p
+    \end{equation*}
+    Remplaçons dans l'intégrale :
+    \begin{equation*}
+        \int_0^{2\pi}\frac{e^{in\theta}}{1-2e^{i\theta}} = \int_0^{2\pi} \sum_{p=0}^{\infty}\left( -\frac{e^{i(n-p-1)\theta}}{2^{p+1}} \right) \nt{d}\theta\overset{(*)}{=}-\sum_{p=0}^{\infty}\frac{1}{2^{p+1}}\int_0^{2\pi}e^{i(n-p-1)\theta}\nt{d}\theta
+    \end{equation*}
+    Si $p\neq n-1$, l'intégrale est nulle en primitivant, sinon, elle vaut $2\pi$. Il reste :
+    \begin{equation*}
+        \int_0^{2\pi}\frac{e^{in\theta}}{1-2e^{i\theta}}\nt{d}\theta = \underbrace{0}_{p\neq n-1}-\frac{2\pi}{2^n} = -\frac{\pi}{2^{n-1}}.
+    \end{equation*}
+    (*) Posons $\forall \theta \in [0,2\pi], ~ \forall p \in \N, ~ u_p(\theta)=-\frac{e^{i(n-1-p)\theta}}{2^{p+1}}$. Vérifions que $\sum u_p$ $\CU$ sur $[0,2\pi]$.\\
+    $\hookrightarrow$ $\forall p \in [0,2\pi], ~ \forall p \in \N, ~ |u_p(\theta)|=\frac{1}{2^{p+1}}$, donc $\|u_p\|_\infty^{[0,2\pi]}=\frac{1}{2^{p+1}}$, donc $\CN$ donc $\CU$.
+\end{ex}
+
+\section{Exercices de Khôlles.}
+
+\begin{thm}{}{}
+    Pour $A_n=\sum_{k=0}^na_k$,
+    \begin{equation*}
+        \sum_{n=0}^{+\infty}A_nx^n = \left( \sum_{n=0}^{+\infty}x^n \right)\left( \sum_{n=0}^{+\infty}a_nx^n \right).
+    \end{equation*}
+\end{thm}
+
+\begin{exercice}{CCINP 18}{}
+    On pose $\forall n \in \N^*, ~ \forall x \in \R, ~ u_n(x)=\frac{(-1)^n}{n}x^n$ et $S(x)=\sum_{n=1}^{\infty}u_n(x)$.
+    \begin{enumerate}
+        \item Donner le domaine de définition de $S$.
+        \item Étudier la convergence normale puis uniforme de la série qui définit $S$ sur $D$.
+        \item Est-elle convergente uniformément sur $[0,1]$ ?
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Notons $R$ le rayon de convergence de la série entière $S$.
+    \begin{equation*}
+        \left|\frac{(-1)^{n+1}}{n+1}\cdot\frac{n}{(-1)^n}\right| = \frac{n}{n+1} \to 1
+    \end{equation*}
+    D'après le critère de d'Alembert, $R=\frac{1}{1}=1$. Définie en 1, mais pas en -1. Donc $D=]-1,1]$.\\
+    Par Abel Radial, $S$ est continue sur $D$.\\
+    \boxed{2.} $\|u_n\|_\infty^{]-1,1]}\geq|u_n(1)|\geq\frac{1}{n}$ puis par TCSTG+, $\sum\|u_n\|_\infty^{]1,1]}$ diverge.\\
+    Supposons que $\sum u_n$ converge uniformément sur $]-1,1]$, alors d'après le théorème de double limite en -1, la série harmonique converge, absurde.\\
+    \boxed{3.} $\forall x \in [0,1]$, $\sum u_n(x)$ est une série alternée. Posons $R_n$ son reste d'ordre $n$.
+    \begin{equation*}
+        |R_n|\leq|u_n| \ra |R_n|\to0
+    \end{equation*}
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $(a_n)_n\in\C^\N$. On considère $f:x\mapsto\sum_{k=0}^{+\infty} a_nx^n$ de rayon de convergence $R>0$. Calculer :
+    \begin{equation*}
+        I:=\int_0^{2\pi}\left|f(re^{i\theta})\right|^2d\theta
+    \end{equation*}
+    Pour $r\in]0,R[$.
+    \tcblower
+    Soit $r\in D(0,R)$.
+    \begin{align*}
+        I &= \int_0^{2\pi}f(re^{i\theta})\ov{f(re^{i\theta})}d\theta = \int_0^{2\pi}f(re^{i\theta})\ov{\sum_{k=0}^{+\infty}}(re^{i\theta})^ka_kd\theta\\
+        &= \int_0^{2\pi}f(re^{i\theta})\sum_{k=0}^{+\infty}r^ke^{-ki\theta}\ov{a_k}d\theta=\int_0^{2\pi}\left( \sum_{k=0}^{+\infty}r^ke^{i\theta l}a_k \right)\left( \sum_{k=0}^{+\infty}r^ke^{-ki\theta}\ov{a_k} \right)d\theta\\
+        &= \int_0^{2\pi}\sum_{n=0}^{+\infty}\left( \sum_{k=0}^{+\infty} a_k\ov{a_{n-k}} e^{i\theta(2k-n)}\right)r^{2n}d\theta = \sum_{n=0}^n\sum_{k=0}^na_k\ov{a_{n-k}}\left( \int_0^{2\pi}e^{i\theta(2k-n)}d\theta \right)r^{2n}\\
+        &= ... = \left( \sum_{n=0}^{+\infty}a_n\ov{a_n}r^{2n} \right)2\pi.
+    \end{align*} 
+\end{exercice}
+
+\end{document}

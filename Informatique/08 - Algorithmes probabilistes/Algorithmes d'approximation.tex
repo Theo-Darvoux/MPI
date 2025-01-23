@@ -1,0 +1,114 @@
+\documentclass[french, 11pt]{article}
+
+\input{setup.tex}
+
+\def\chapitre{8}
+\def\pagetitle{Algorithmes probabilistes.}
+
+\begin{document}
+
+\input{title.tex}
+
+\renewcommand*{\E}{\mathbb{E}}
+\renewcommand*{\P}{\mathbb{P}}
+
+\begin{ex}{Vérification de produit.}{}
+    \bf{Instance:} $(A,B,C)\in\M_n(\Z/2\Z)^3$ \hspace*{2em} \bf{Question:} Est-ce que $AB=C$ ?\\
+    On propose un algorithme probabiliste : choisir un vecteur $X\in\M_{n,1}(\Z/2\Z)$ aléatoire, et comparer $ABX$ et $CX$.\\
+    On cherche à étudier $\P(ABX=CX\mid AB\neq C)$. L'algorithme est en $O(n^2)$.\\
+    On considère $AB\neq C$, alors $AB-C=D\neq0$, donc il existe $d_{i,j}=1$.\\
+    On a $ABX=CX \iff DX = 0$, et $DX=\left( \sum_{j=1}^n d_{i,j}X_{i,j} \right)_{i\in\lb1,n\rb}$.\\
+    On s'intéresse à la somme où intervient $d_{i,j}$ : $\sum_{k=1}^nd_{i,k}X_k$.\\
+    Alors $\P(DX=0)\leq\P(\sum_{k=1}^nd_{i,k}X_k)=0$, on définit $y$ tel que $\sum_{k=1}^nd_{i,k}X_k=y+d_{i,j}X_j$.\\
+    Si $y=0$, alors $y+d_{i,j}X_j = 0 \iff X_j = 0$. Sinon, $y+d_{i,j}X_j=0\iff X_j=1$.
+    \begin{align*}\vspace*{-0.7cm}
+        \P(\sum_{k=1}^nd_{i,k}X_k=0) &= \P(y+d_{i,j}X_j=0) = \P(y=0)\P(y+ d_{i,j}X_j=0\mid y=0)+ \P(y\neq0)\P(y+d_{i,j}X_j=0\mid y\neq0)\\[-0.5cm]
+        &=\P(y=0)\P(X_j=0) + \P(y\neq0)\P(X_j=1) = \frac{1}{2}\P(y=0)+\frac{1}{2}\P(y\neq0)=\frac{1}{2}.
+    \end{align*}
+    Si la réponse attendue est oui, l'algorithme est correct, sinon, il a moins d'une chance sur deux de faire erreur.\\
+    Si on répète l'algorithme $k$ fois et qu'on renvoie faux ssi il a répondu faux à chaque appel, la probabilité d'erreur est inférieure à $\frac{1}{2^k}$. C'est toujours un algorithme en $O(n^2)$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{}{}
+    Cet algorithme est de type \bf{Monte-Carlo}, c'est une classe d'algorithmes qui possèdent une probabilité bornée de renvoyer une mauvaise solution. 
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{}{}
+    Il existe une autre classe d'algorithmes probabilistes : \bf{Las Vegas}. Ceux-ci renvoient toujours le résultat attendu mais leur temps d'éxecution suit une variable aléatoire.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Le tri rapide avec choix aléatoire du pivot est un algorithme de Las Vegas.
+    \tcblower
+    \small
+    On analyse la complexité moyenne du tri rapide.\\
+    On sait que dans le pire des cas, il s'agit de $O(n^2)$, et dans le cas moyen de $O(n\log n)$.\\
+    On considère un tableau $\T$ à trier et $\T'$ sa version triée. On mesure $X$ le nombre de comparaisons.\\
+    La complexité du tri rapide est proportionnelle à son nombre de comparaisons.\\
+    On note $X_{i,j}$ le nombre de fois qu'ont été comparés le $i^{\nt{ème}}$ élément et $j^{\nt{ème}}$ élément de $\T'$.\\
+    Lorsqu'une comparaison est réalisée, elle implique forcément le pivot. Donc $X_{i,j}\in\{0,1\}$.\\
+    Le cas 0 est obtenu lorsqu'ils ont été séparés dans deux tableaux différents.
+    \begin{equation*}
+        X=\sum_{1\leq i,j \leq n}X_{i,j} \et \E(X) = \sum_{1\leq i,j \leq n}\E(X_{i,j}) = \sum_{1\leq i,j \leq n} \P(X_{i,j}=1)
+    \end{equation*}
+    $X_{i,j}$ vaut 1 lorsque $\T'[i]$ ou $\T'[j]$ est le premier pivot choisi parmi les $\T'[k]$ où $k\in\lb i,j\rb$.\\
+    Puisque ce choix est fait uniformément, $\P(X_{i,j}=1)=\frac{2}{|\lb i, j\rb|}=\frac{2}{j-i+1}$.
+    \begin{equation*}
+        \E(X) = \sum_{i=1}^n\sum_{j=i+1}^n\frac{2}{j-i+1} = \sum_{i=1}^n\sum_{k=1}^{n-i}\frac{2}{k+1}\leq2\sum_{i=1}^n H_n \leq 2n\log n.
+    \end{equation*}
+\end{ex}
+
+\begin{prop}{Lien entre Las Vegas et Monte-Carlo}{}
+    Soit $P$ un problème que l'on sait résoudre à l'aide d'un algorithme Las Vegas. Cet algorithme a une complexité moyenne en $f(n)$ où $n$ est la taille de l'instance. On peut fixer $T$ un temps de fin de calcul, on lance l'algorithme pendant un temps $T$ et s'il n'a pas fini de s'exécuter, on renvoie n'importe quelle valeur.
+    \begin{equation*}
+        \P(\nt{bonne réponse}) \geq \P(\nt{fin avant }T) 
+    \end{equation*}
+    Si on note $X$ la variable aléatoire que suit le temps d'exécution de l'algorithme de Las Vegas.\\
+    On veut être sûr que l'évènement $X\geq T$ se produise, $T$ doit donc dépendre de $f(n)$. En posant $T=\a f(n)$ :
+    \begin{equation*}
+        \P(X\geq T) \leq \frac{\E(X)}{\a f(n)} = \frac{1}{\a} \quad (\nt{Markov})
+    \end{equation*}
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{Calcul de la médiane.}{}
+    On cherche à calculer la médiane d'un tableau $\T$ à $n$ éléments. On définit $(Y_i)_{i\leq n}$ une famille de variables de Bernoulli de paramètre $n^{-1/4}$.
+    On restreint $\T$ aux éléments tels que $Y_i = 1$, on note $\T'$ cette restriction, si $|\T'|\geq\frac{2}{3}n^{3/4}$, on renvoie Erreur 1. Sinon on trie $\T'$.\\
+    On choisit alors les éléments $\lf \frac{1}{2}n^{3/4}-\sqrt{n} \rf$ et $\lf \frac{1}{2}n^{3/4} + \sqrt{n}\rf$, qu'on note $d$ et $u$.\\
+    Si le rang de $d$ dans $\T$ est supérieur à $\frac{n}{2}$, ou celui de $u$ est inférieur à $\frac{n}{2}$, on renvoie Erreur 2.\\
+    On trie les éléments de $\T$ compris entre $d$ et $u$ ($\T''$), s'il y en a plus de $\frac{4}{3}n^{3/4}$, on renvoie Erreur 3.\\
+    Sinon on renvoie l'élément  $\left\lf\frac{n}{2}\right\rf-r_d$. Pour connaître le rang de $d$ et $u$, il n'est pas nécessaire de trier, il suffit de parcourir $\T$ et de compter le nombre d'éléments inférieurs. Si l'algorithme ne renvoie pas d'erreur, il renvoie la médiane en temps linéaire.\\
+    On peut borner la probabilité de renvoyer une erreur par une constante $p<1$, on construit l'algorithme Las Vegas relançant l'algorithme à chaque erreur. Le temps d'exécution est proportionnel au nombre d'essais nécessaires pour ne pas avoir d'erreurs, le nombre d'essais suit donc une loi géométrique.\\
+    Son espérance est $\frac{1}{p}$, en moyenne, on exécute l'algorithme $\frac{1}{p}$ fois, la complexité en moyenne est en $O(\frac{n}{p})=O(n)$.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Pour transformer un algorithme de Monte-Carlo en Las Vegas, on le répète jusqu'à avoir la bonne réponse. Cette construction n'a de sens que si le test qui détermine si une répponse est bonne se fait rapidement. Pour la vérification du produit de matrices, le test serait en $O(n^3)$, rendant l'algorithme probabilisite inutile.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{Lien entre algorithmes d'approximations et algorithmes probabilistes.}{}
+    \bf{Instance.} Une formule sous FNC dont les clauses sont de taille 3, et de variables distinctes.\\
+    \bf{Solution.} Une valuation.\\
+    Fonction à maximiser : nombre de clauses valuées à vrai.\\
+    Étudions le nombre de clauses satisfaites par une valuation aléatoire.
+    \tcblower
+    On note $C_i=1$ si la $i^{\nt{ème}}$ clause est satisfaite. On s'intéresse à $\sum C_i$.\\
+    On a $\P(C_i=1)=1-\P(C_i=0)=1-\frac{1}{8}=\frac{7}{8}$, donc $\E(\sum C_i)=\frac{7n}{8}$.\\
+    Il existe donc une valuation satisfaisant $\frac{7}{8}$ème des clauses, lorsque $n<8$, la formule est satisfiable.\\
+    Ici, $f(s_{\nt{OPT}})\leq n$, on peut répéter l'algorithme jusqu'à obtenir une valuation qui satisfait $\frac{7n}{8}$ des clauses.\\
+    Alors $\frac{7}{8}f(s_{\nt{OPT}})\leq f(s_A)\leq f(s_{\nt{OPT}})$. Si on demande à satisfaire $\frac{3}{4}$ clauses, on a une probabilité de succès supérieure à $\frac{1}{2}$. En effet, si $X$ compte le nombre de clauses non-satisfaites, alors $\E(X)=\frac{n}{8}$.\\
+    Donc $\P(\sum C_i \geq \frac{6n}{8})=P(X<\frac{2n}{8})\geq\frac{1}{2}$, il faudra donc en moyenne 2 essais pour trouver une valuation qui satisfait $\frac{6n}{8}$ clauses.
+\end{defi}
+
+\end{document}

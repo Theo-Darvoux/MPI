@@ -1,0 +1,735 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{5}
+\def\pagetitle{Séries numériques.}
+
+\input{setup.tex}
+
+\begin{document}
+
+\input{title.tex}
+
+\thispagestyle{fancy}
+
+Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
+
+\section{Généralités.}
+
+\begin{defi}{Série.}{}
+    Soit $(u_n)_{n\in\N}\in E^\N$. La série de terme général $(u_n)_{n\in\N}$, notée $\sum u_n$ est la suite $(S_n)_{n\in\N}$ définie par :
+    \begin{equation*}
+        \forall n \in \N, \quad S_n = \sum_{k=0}^n u_k.
+    \end{equation*}
+    Alors $S_n$ est appelée somme partielle de la série $\sum u_n$.
+\end{defi}
+
+\begin{defi}{Convergence d'une série.}{}
+    Soit $\sum u_n$ une série de terme général $(u_n)$. On note $(S_n)$ les sommes partielles.
+    \begin{center}
+        $\sum u_n$ converge ssi la suite des sommes partielles $(S_n)_{n\in\N}$ converge.
+    \end{center}
+    En cas de convergence, on notera la limite $\sum_{n=0}^{\infty}u_n$.\\
+    On définit de plus le reste $R_n$ de la série : $R_n=S-S_n$ où $S=\sum_{n=0}^\infty u_n$ et $S_n=\sum_{k=0}^nu_k$.
+\end{defi}
+
+\begin{prop}{Condition nécessaire de convergence.}{}
+    Si une série converge, alors son terme général tend vers 0, réciproque fausse.
+    \tcblower
+    Soit $\sum u_n$ convergente vers $S\in E$ et $S_n=\sum_{k=0}^nu_k$. Alors $u_{n+1}=S_{n+1}-S_n\to S-S = 0$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $\sum u_n$ et $\sum v_n$ deux séries convergentes de $E$ et $\l\in\K$.\\
+    Alors $\sum(u_n +\l v_n)$ converge et $\sum_{n=0}^\infty(u_n+\l v_n) = \sum_{n=0}^\infty u_n + \l\sum_{n=0}^\infty v_n$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Deux séries qui diffèrent par un nombre fini de termes sont de mêmes natures.
+    \tcblower
+    Soient $(u_n)\in E^\N$ et $(v_n)\in E^\N$ tels que $\exists N \in \N, ~ \forall n \geq N, ~ u_n = v_n$.\\
+    On pose $S_n =\sum_{k=0}^nu_k$ et $T_n =\sum_{k=0}^n v_k$ pour tout $n\in\N$.\\
+    Alors $\forall n \geq N, ~ S_n - T_n = \sum_{k=0}^{N-1}(u_k-v_k)=c$.\\
+    Donc $S_n=T_n+c$, donc $(S_n)$ cv $\iff (T_n)$ cv et $\lim S_n = \lim T_n + c$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    La suite $(u_n)_{n\in\N}\in E^\N$ et la série $\sum(u_{n+1}-u_n)$ sont de mêmes natures.
+    \tcblower
+    En effet, $\forall n \in \N, ~ \sum_{k=0}^n(u_{k+1} - u_k)=u_{n+1}-u_0$. Notons $S_n = \sum_{k=0}^n(u_{k+1}-u_k)$ la somme partielle.\\
+    Alors $\forall n \in \N, ~ S_n = u_{n+1}-u_0$ puis $(S_n)_{n\in\N}$ et $(u_n)_{n\in\N}$ sont de mêmes natures.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{Produit de Cauchy.}{}
+    Soit $(A,\times,+,\cdot)$ une algèbre normée. Soit $(u_n)_{n\in\N}\in A^\N$ et $(v_n)_{n\in\N}\in A^\N$.\\
+    La série produit de Cauchy des deux séries $\sum u_n$ et $\sum v_n$ est la série $\sum w_n$ telle que :
+    \begin{equation*}
+        \forall n \in \N, \quad w_n = \sum_{k=0}^nu_kv_{n-k}=\sum_{i+j=n}u_iv_j.
+    \end{equation*}
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\section{Séries à termes réels positifs.}
+
+\begin{prop}{}{8}
+    Soit $\sum u_n$ une série à terme général positif. Notons $\forall n \in \N, ~ S_n = \sum_{k=0}^n u_k$. On a deux cas possibles :\\
+    $\bullet$ $(S_n)_{n\in\N}$ est majorée et $\sum u_n$ converge.\\
+    $\bullet$ $(S_n)_{n\in\N}$ est non-majorée et $S_n\to+\infty$. Alors $\sum^{+\infty}_{n=0} u_n = +\infty$.\\
+    Dans tous les cas, l'objet $\sum_{n=0}^{+\infty}u_n$ est bien défini.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{thm}{Comparaison des séries à termes positifs.}{}
+    Soient $\sum u_n$ et $\sum v_n$ deux séries de \bf{termes positifs}. On suppose que $\forall n \in \N, ~ u_n \leq v_n$.
+    \begin{equation*}
+        \sum v_n \nt{ converge} \ra \sum u_n \nt{ converge} \quad\et\quad \sum u_n \nt{ diverge} \ra \sum v_n \nt{ diverge}.
+    \end{equation*}
+    \tcblower
+    $\sum v_n \nt{ cv.} \iff \sum_{k=0}^n v_k \nt{ cv.} \ra \sum_{k=0}^n v_k \nt{ bornée} \ra \sum_{k=0}^n u_k \nt{ bornée} \ra \sum u_n \nt{ cv.}$ d'après $\ref{prop:8}$
+\end{thm}
+
+\begin{thm}{Comparaison des suites à termes positifs.}{}
+    Soient $\sum u_n$ et $\sum v_n$ deux séries à \bf{termes positifs}, ou positifs apdcr.
+    \begin{enumerate}
+        \item Si $u_n \underset{+\infty}{=}O(v_n)$ et $\sum v_n$ converge, alors $\sum u_n$ converge.
+        \item Si $u_n \underset{+\infty}{=}o(v_n)$ et $\sum v_n$ converge, alors $\sum u_n$ converge.
+        \item Si $u_n \underset{+\infty}{\sim}v_n$ alors $\sum u_n$ et $\sum v_n$ sont de mêmes natures.
+        \begin{enumerate}
+            \item En cas de divergence, $S_n \underset{+\infty}{\sim} T_n$ (équivalence des sommes partielles).
+            \item En cas de convergence, $R_n \underset{+\infty}{\sim} R'_n$ (équivalence des restes).
+        \end{enumerate}
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $\exists M \geq 0 , ~ \forall n \in \N, ~ 0 \leq u_n \leq Mv_n$, on revient à la proposition précédente.\\
+    \boxed{2.} $u_n = \e_nv_n$ avec $\e_n\to0$ donc bornée.\\
+    \boxed{3.} On a $u_n\underset{+\infty}{=}O(v_n)$ et $v_n\underset{+\infty}{=}O(u_n)$. On admet la suite du résultat.
+\end{thm}
+
+\begin{prop}{Séries de Riemann}{}
+    \begin{equation*}
+        \sum\frac{1}{n^\a} \nt{ converge} \iff \a>1.
+    \end{equation*}
+    \tcblower
+    Soit $\g\in\R$.
+    \begin{align*}
+        (n+1)^\g-n^\g &= n^\g(1+\frac{1}{n})^\g-n^\g=n^\g\left(1+\frac{\g}{n}+o\left(\frac{1}{n}\right)\right)-n^\g=\g n^{\g-1}+o(n^{\g-1})
+    \end{align*}
+    Donc $(n+1)^\g-n^\g\sim\g n^{\g-1}$. Or $\frac{1}{n^\a}\sim\frac{1}{1-\a}\left( (n+1)^{1-\a} - n^{1-\a} \right)$.\\
+    Par théorème de comparaison (\bf{termes positifs}), leurs séries sont de mêmes natures.\\
+    La deuxième est de même nature que $(n^{1-\a})_{n\in\N}$ car téléscopique, donc converge pour $\a>1$.\\
+    On étudie le cas $\a=1$ (série harmonique). On a $\ln(n+1)-\ln(n)=\ln(1+\frac{1}{n})=\frac{1}{n}+o(\frac{1}{n})\sim\frac{1}{n}$.\\
+    On a alors $\sum\frac{1}{n}$ et $\sum\left(\ln(n+1)-\ln(n)\right)$ de mêmes natures, puis $\sum\frac{1}{n}\sim\ln(n)$, divergentes.
+\end{prop}
+
+\begin{prop}{Série harmonique.}{}
+    Pour $n\in\N$, soit $H_n=\sum \frac{1}{n}$. Alors $H_n\sim\ln(n)$ et $H_n=\ln(n)+\g+o(1)$ où $\g$ est la constante d'Euler.
+    \tcblower
+    On vient de voir que $\ln(n+1)-\ln(n)\sim\frac{1}{n}$ et que $\sum\frac{1}{n}$ diverge.\\
+    Notons $T_n=\sum_{k=0}^n\ln(n+1)-\ln(n)=\ln(n+1)$ par téléscopage.\\
+    Par théorème de comparaison (\bf{termes positifs}) : $H_n\sim T_n$, puis $\ln(n+1)=\ln(n)+\ln(1+\frac{1}{n})\sim \ln(n)$.\\
+    On pose $u_n=H_n-\ln(n)$. On a $u_{n+1}-u_n = \frac{1}{n+1}-\ln(n+1)+\ln(n)=\frac{1}{n}\frac{1}{(1+\frac{1}{n})}-\ln(1+\frac{1}{n})=-\frac{1}{2n^2}+o(\frac{1}{n^2})$.\\
+    On a donc $u_{n+1}-u_n\sim-\frac{1}{2n^2}$. Par théorème de comparaison, $u_{n+1}-u_n$ converge.\\
+    On note $\g=\lim u_n$, on a alors $H_n=\ln n + u_n = \ln n + \g + o(1)$.\\
+    On peut étudier $v_n = H_n - \ln(n) - \g$, et trouver un équivalent...
+\end{prop}
+
+\begin{prop}{Reste d'une série de Riemann convergente.}{}
+    Soit $\sum \frac{1}{n^\a}$ avec $\a>1$. On note $R_n$ le reste d'ordre $n$, alors $R_n \sim \frac{1}{\a-1}\frac{1}{n^{\a-1}}$.
+    \tcblower
+    On utilise le théorème de comparaison des séries à \bf{termes positifs} (cas de convergence).
+    \begin{equation*}
+        (n+1)^\g - n^\g \sim \g n^{\g - 1} = \frac{\g}{n^{1-\g}}
+    \end{equation*} 
+    On pose $\g=1-\a<0$, donc $\frac{1}{n^\a}\sim \frac{1}{1-\a}((n+1)^{1-\a}-n^{1-\a})$.\\
+    On note $R_n$ le reste associé à $\frac{1}{n^\a}$ et $R'_n$ associé à $\frac{1}{1-\a}((n+1)^{1-\a}-n^{1-\a})$, on a $R_n\sim R'_n$.
+    \begin{equation*}
+        R'_n = \frac{1}{1-\a}\sum_{k=n+1}^\infty\left( \frac{1}{(k+1)^{\a-1}}-\frac{1}{k^{\a-1}} \right)=\frac{1}{1-\a}\left( -\frac{1}{(n+1)^{\a-1}} \right)=\frac{1}{(\a-1)(n+1)^{\a-1}}.
+    \end{equation*}
+    Puis $R_n\sim R'_n \sim \frac{1}{(\a-1)n^{\a-1}}$, en effet, $(n+1)^{\a-1}\sim n^{\a-1}$.
+\end{prop}
+
+\begin{ex}{Nature de $\sum \left[ e - \left( 1 + \frac{1}{n} \right)^n \right]$.}{}
+    On a déjà que $\lim \left( 1 + \frac{1}{n} \right)^n = e$ : $(1+\frac{1}{n})^n=e^{n\ln(1+\frac{1}{n})}=e^{1-\frac{1}{2n}+o(\frac{1}{n})}\to e$ par continuité de $\exp$.\\
+    Le terme général de la série tend vers 0, elle n'est pas grossièrement divergente. On pose $u_n$ le t.g. de la série.\\
+    On a $u_n=e-ee^{-\frac{1}{2n}+o(\frac{1}{n})}=e(1-e^{-\frac{1}{2n}+o(\frac{1}{n})})=e\left( 1-1+\frac{1}{2n}-o(\frac{1}{n}) \right)\sim \frac{e}{2n}$.\\
+    Ainsi, $\sum u_n$ et $\sum \frac{e}{2n}$ sont de mêmes natures (théorème de comparaison à \bf{termes positifs}), ici divergentes...
+\end{ex}
+
+\begin{prop}{Séries de Bertrand. (HP)}{}
+    \begin{equation*}
+        \sum \frac{1}{n^\a(\ln n)^\b} \nt{ converge} \iff \left[ \a > 1, ~ \ou ~ (\a = 1 ~ \et ~ \b > 1) \right]
+    \end{equation*}
+    \tcblower
+    L'idée est de comparer le terme général de la série au terme général d'une série de Riemann.\\
+    \boxed{\a>1} Soit $\g\in]1,\a[$, puis $\frac{1}{n^\a(\ln n)^\b}=o\left( \frac{1}{n^\g} \right)$ car $\frac{n^\g}{n^\a(\ln n)^\b}=\frac{n^{\g-a}}{(\ln n)^\b}\to0$ par CC.\\
+    Alors $\sum \frac{1}{n^\g}$ converge puisque $\g>1$ donc par théorème de comparaison des séries à \bf{termes positifs} :
+    \begin{equation*}
+        \forall \b \in \R, ~ \sum \frac{1}{n^\a(\ln n)^\b} \nt{ converge}.
+    \end{equation*}
+    \boxed{\a<1} Soit $\g \in ]\a,1[$, puis $\frac{1}{n^\a(\ln n)^\b} \geq \frac{1}{n^\g}$ apdcr car $\frac{n^\g}{n^\a\ln(n)^\b}=\frac{n^{\g-a}}{(\ln n)^\b}\to+\infty$ par CC.\\
+    Or $\sum\frac{1}{\g}$ diverge puisque $\g<1$, donc par théorème de comparaison des séries à \bf{termes positifs} :
+    \begin{equation*}
+        \forall \b \in \R, ~ \sum \frac{1}{n^\a(\ln n)^\b} \nt{ diverge}.
+    \end{equation*}
+    \boxed{\a=1, \b=1} Vérifions que $\sum \frac{1}{n\ln n}$ diverge.\\
+    On a $t\mapsto \frac{1}{t\ln t}$ est cpm décroissante de $[3,+\infty[$ dans $\R_+$.
+    \begin{equation*}
+        \frac{1}{n\ln n} \geq \int_n^{n+1} \frac{\dt}{t \ln t} \geq \frac{1}{(n+1)\ln(n+1)}\sim \int_n^{n+1}\frac{\dt}{t\ln t}=\ln(\ln(n+1))-\ln(\ln(n))
+    \end{equation*}
+    par théorème de comparaison, $\sum \frac{1}{n\ln n}$ de même nature que $\sum \ln(\ln n)$ divergente.
+\end{prop}
+
+\vspace*{0.4cm}
+
+\begin{ex}{Théorème de Césaro.}{}
+    Soit $(u_n)_{n\in\N}$ une suite réelle et $v_n=\frac{u_0+...+u_n}{n+1}$ sa moyenne de Césaro. Si $u_n\to l$, alors $v_n \to l$.
+    \tcblower
+    Supposons que $\forall n \in \N, ~ u_n \geq 0$, et soient $S_n = \sum_{k=0}^n u_k$, $v_n=\frac{S_n}{n+1}$.\\
+    Supposons que $u_n \to l \neq 0$, alors $u_n \sim l$. Alors $\sum l$ est divergente grossièrement.\\
+    D'après le théorème de comparaison des séries à \bf{termes positifs}, on a $S_n \sim (n+1)l$, puis $v_n=\frac{S_n}{n+1}\to l$.\\
+    Le cas $l=0$ est facile en se ramenant au cas précédent.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{rappel}{Séries géométriques.}{}
+    Soit $a\in \R$, $\sum a^n$ converge ssi $|a|<1$ et :
+    \begin{equation*}
+        \sum_{n=0}^\infty a^n = \frac{1}{1-a}, \quad \sum_{k=n+1}^\infty a^k = \frac{a^{n+1}}{1-a}.
+    \end{equation*}
+    \tcblower
+    Si $|a|\geq1$, la série diverge grossièrement.\\
+    Sinon, $(1-a)\sum_{k=0}^na^k=\sum_{k=0}^na^k-\sum_{k=0}^na^{k+1}=1-a^{n+1}\to1$ donc $S_n\to\frac{1}{1-a}$.\\
+    Puis $\sum_{n+1}^\infty a^k = a^{n+1}\left( \sum_{k=0}^\infty a^k \right)=\frac{a^{n+1}}{1-a}$.
+\end{rappel}
+
+\section{Étude générale des séries.}
+
+\subsection{Convergence absolue.}
+
+\begin{defi}{}{}
+    Soit $(u_n)_{n\in\N}\in E^\N$, alors $\sum u_n$ est absolument convergente (AC) ssi $\sum|u_n|$ converge.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item Soit $(u_n)\in\R^\N, ~ \sum u_n$ converge absolument $\ra$ $\sum u_n$ converge.
+        \item Soit $(z_n)\in\C^\N, ~ \sum z_n$ converge absolument $\ra$ $\sum z_n$ converge.
+        \item Soit $E$ un $\K$-evdf, $B=(e_1,...,e_n)$ une base de $E$, $\|\cdot\|$ une norme sur $E$.\\
+        Soit $(u_n)\in E^\N$. Alors $\sum u_n$ converge absolument $\ra$ $\sum u_n$ converge.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $(u_n)\in\R^\N$. On pose $u_n^+$ la partie positive de $u_n$, et $u_n^-$ sa partie négative.\\
+    On a $\forall n \in \N, ~ u_n^+ + u_n^- = |u_n|$, et $u_n^+-u_n^-=u_n$. On a aussi $0\leq u_n^+,u_n^- \leq |u_n|$.\\
+    Par hypothèse, $\sum |u_n|$ converge, donc par comparaison, $\sum u_n^+$ et $\sum u_n^-$ convergent, puis $\sum u_n$ converge (somme).\\
+    \boxed{2.} Soit $(z_n)\in\C^\N$. On pose $a_n=\Re(z_n)$ et $b_n=\Im(z_n)$. On a $|z_n|^2=a_n^2+b_n^2$.\\
+    De plus, $\forall n \in \N, ~ |a_n|\leq|z_n|$ et $|b_n|\leq|z_n|$. Par hypothèse, $\sum|z_n|$ converge.\\
+    Par comparaison, $\sum |a_n|$ et $\sum |b_n|$ convergent, donc $\sum a_n$ et $\sum b_n$ aussi par $\boxed{1}$, $\sum z_n$ converge par somme.\\
+    \boxed{3.} On rappelle la définition de $\|\cdot\|$. Soit $x\in E, ~ x = \sum_{i=1}^px_ie_i$ et $\|x\|=\max|x_i|$.\\
+    Soit $(u_n)\in E^\N$, $\forall n \in \N, ~ u_n = \sum_{i=1}^pu_n^ie_i$, donc $\|u_n\|=\max|u_n^i|$, or $\sum\|u_n\|$ converge, donc $\forall i, ~ \sum|u_n^i|$ cv.\\
+    D'après \boxed{1} et \boxed{2}, $\sum u_n^i$ converge, puis $\sum u_n$ converge.
+\end{prop}
+
+\begin{ex}{}{}
+    \begin{enumerate}
+        \item $\sum \frac{\sin n}{n^2+1}$ converge car absolument convergente.
+        \item $\sum\frac{(-1)^n}{n^2}$ converge car absolument convergente, ou CSSA.
+    \end{enumerate}
+\end{ex}
+
+\begin{prop}{Série exponentielle.}{}
+    \begin{enumerate}
+        \item Soit $z\in\C$, $\sum\frac{z^n}{n!}$ est absolument convergente, donc convergente.\\
+        On peut noter $\exp(z)=\sum\frac{z^n}{n!}$, c'est une définition possible de l'exponentielle complexe.
+        \item Soit $E$ une $\K$-algèbre normée par $\|\cdot\|$, $B=(e_1,...,e_n)$ une base de $E$, et $A\in E$.\\
+            Alors $\sum\frac{A^n}{n!}$ est absolument convergente, donc convergente. On peut la noter $\exp(A)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $\forall n \geq 0, ~ \left|\frac{z^n}{n!}\right| = \frac{|z|^n}{n!}$, terme général d'une série convergente par D'Alembert.\\
+    \boxed{2.} Par récurrence sur $n$, montrons $\P_n$ : << $\|A^n\|\leq\|A\|^n$ >>.\\
+    \bf{Initialisation.} Vraie.\\
+    \bf{Hérédité.} Soit $n\in\N$ tel que $\P(n)$. Alors $\|A^{n+1}\|=\|A^n\cdot A\|\leq\|A^n\|\|A\|\leq \|A\|^{n+1}$.\\
+    Par récurrence, $\forall n \in \N, \left\|\frac{A^n}{n!}\right\| \leq \frac{\|A\|^n}{n!}$ terme général d'une série convergente.\\
+    Par théorème de comparaison des séries à \bf{termes positifs}, $\sum\frac{A^n}{n!}$ converge absolument, donc converge.
+\end{prop}
+
+\begin{exi}{Lemme d'Abel}{}
+    Soit $(u_n)\in\R^\N$ et $(v_n)\in\C^\N$. On note $V_n = \sum_{k=0}^n v_k$.\\
+    Si $(u_n)$ décroit vers 0 et que $(V_n)$ est bornée, alors $\sum u_n v_n$ converge.
+    \tcblower
+    On a $\forall n \in \N, ~ v_n = V_n - V_{n-1}$, en posant $V_{-1}=0$.
+    \begin{align*}
+        S_n &= \sum_{k=0}^nu_kv_k=\sum_{k=0}^nu_k(V_k - V_{k-1})
+             =\sum_{k=0}^nu_kV_k-\sum_{k=1}^nu_kV_{k-1}\\
+            &=\sum_{k=0}^nu_kV_k - \sum_{k=0}^{n-1}u_{k+1}V_k = \sum_{k=0}^{n-1}(u_k-u_{k+1})V_k + u_nV_n
+    \end{align*}
+    On a $(u_nV_n)$ converge car $\exists M > 0, ~ |V_n|\leq M$ et $|u_nV_n|\leq M|u_n|\to 0$, puis, par encadrement, $u_nV_n\to0$.\\
+    Or $|(u_k-u_{k+1})V_k|\leq(u_k-u_{k+1})M$, puis $\sum_{k\geq0}(u_k-u_{k+1})$ converge car téléscopique\\
+    Par comparaison (positif), $\sum |(u_k-u_{k+1})V_k|$ converge, donc $\sum(u_k-u_{k+1})V_k$ converge.\\
+    Donc $(S_n)$ converge par somme.\\
+    \bf{Remarque.} On retrouve le critère spécial des séries alternées avec $v_n=(-1)^n$.\\
+    \bf{Remarque.} Étude des séries $\sum\frac{e^{in\theta}}{n^\a}$ avec $\a\in\R$ et $\theta\in\R$.\\
+    \boxed{\a>1} Alors $\left|\frac{e^{in\theta}}{n^\a}\right|=\frac{1}{n^\a}$, série de Riemann convergente, donc $\sum\frac{e^{in\theta}}{n^\a}$ converge absolument, donc converge.\\
+    \boxed{\a<1} Alors la série est grossèrement divergente, avec $\left|\frac{e^{in\theta}}{n^\a}\right|=\frac{1}{n^\a}\to+\infty$ si $\a<0$, et vers 1 si $\a=0$.\\
+    \boxed{0<\a\leq1} La série n'est pas absolument convergente, on utilise le lemme en posant $u_n=\frac{1}{n^\a}$ et $v_n=e^{in\theta}$.\\
+    On a $(u_n)$ décroissante vers 0, et $V_n = e^{i\theta}\sum_{k=0}^{n-1}(e^{i\theta})^k$.\\
+    $\bullet$ Si $e^{i\theta}=1$, alors $\frac{e^{in\theta}}{n^\a}=\frac{1}{n^\a}$ diverge comme série de Riemann.\\
+    $\bullet$ Si $e^{i\theta}\neq1$, alors $V_n=...$ donc $|V_n|\leq\frac{1}{|\sin\frac{\theta}{2}|}$, donc convergente.
+\end{exi}
+
+\begin{prop}{Produit de Cauchy de deux series absolument convergentes.}{}
+    Soit $(u_n)\in\K^\N$ et $(v_n)\in\K^\N$ telles que $\sum u_n$ et $\sum v_n$ absolument convergentes.
+    \begin{equation*}
+        \sum_{n=0}^{\infty} w_n = \left( \sum_{n=0}^{\infty} u_n \right) \left( \sum_{n=0}^{\infty} v_n \right).
+    \end{equation*}
+    \tcblower
+    Supposons dans un premier temps que $\forall n \in \N, ~ u_n \in \R_+$ et $v_n\in\R_+$.\\
+    Notons $S_n=\sum_{k=0}^n u_k$, $T_n = \sum_{k=0}^n v_n$ et $U_n = \sum_{k=0}^n w_k$. Par hypothèse, $(S_n)$ et $(T_n)$ convergent.\\
+    Elles sont donc bornées : $\exists M \in \R_+, ~ \forall n \in \N, ~ 0 \leq S_n, T_n \leq M$.
+    \begin{equation*}
+        U_n = \sum_{k=0}^n\left( \sum_{\substack{i+j=k\\i,j\in\N}} u_iv_j \right)=\sum_{\substack{i+j\leq n\\i,j\in\N}}u_iv_i.
+    \end{equation*}
+    puis $i+j\leq n \ra \left[ i \leq n \et j \leq n \right]$ donc $U_n \leq \sum_{0\leq i,j \leq n}u_iv_j=S_nT_n$.\\
+    Alors $U_n \leq M^2$, et $(U_n)$ est croissante et majorée donc est convergente, donc $\sum w_n$ est convergente.
+    \begin{equation*}
+        \sum_{i,j\leq n}u_i v_j \leq \sum_{i+j\leq 2n}u_iv_j \leq \sum_{i,j\leq 2n}u_iv_j ~~\nt{donc}~~ S_nT_n \leq U_{2n} \leq S_{2n}T_{2n}
+    \end{equation*}
+    Or $S_n\to S$ et $T_n\to T$, donc $U_{2n}\to ST$ par encadrement, puis $U_n\to ST$ car on sait que $(U_n)$ est convergente.
+    \begin{equation*}
+        \sum_{n=0}^\infty w_n = \left( \sum_{n=0}^\infty u_n \right)\left( \sum_{n=0}^\infty v_n \right)
+    \end{equation*}
+\end{prop}
+
+\begin{app*}{}{}
+    Montrons que $\forall(x,y)\in\R^2$, $e^x\cdot e^y=e^{x+y}$.
+    \tcblower
+    Soient $x,y\in\R$. On a $e^x$ et $e^y$ sont absolument convergentes, donc leur produit de Cauchy l'est :
+    \begin{equation*}
+        w_n=\sum_{k=0}^n\frac{x^k}{n!}\frac{y^{n-k}}{(n-k)!}=\frac{1}{n!}\sum_{k=0}^n\binom{n}{k}x^ky^{n-k}=\frac{(x+y)^n}{n!}
+    \end{equation*}
+    Par théorème : $\sum w_n$ converge absolument, et :
+    \begin{equation*}
+        \sum_{n=0}^{+\infty}w_n = \left( \sum_{n=0}^{+\infty}\frac{x^n}{n!} \right)\left( \sum_{n=0}^{+\infty}\frac{y^n}{n!} \right) ~~\nt{donc}~~ e^{x+y}=e^x\cdot e^y.
+    \end{equation*} 
+\end{app*}
+
+\subsection{Théorèmes de comparaison.}
+
+\begin{prop}{Critère de D'Alembert. $\star$}{}
+    Soit $(u_n)_{n\in\N}$ une suite réelle strictement positive telle que $\left(\frac{u_{n+1}}{u_n}\right)$ converge vers $l\in\R$.
+    \begin{enumerate}
+        \item Si $\lim\frac{u_{n+1}}{u_n}>1$, alors $\sum u_n$ diverge grossièrement.
+        \item Si $\lim\frac{u_{n+1}}{u_n}<1$, alors $\sum u_n$ converge.
+        \item Si $\lim\frac{u_{n+1}}{u_n}=1$, alors on ne peut rien dire.
+    \end{enumerate}
+    \tcblower
+    \boxed{l>1} Soit $k\in]1,l[$ : $\exists N \in \N, ~ \forall n \geq N, ~ \frac{u_{n+1}}{u_n} \geq k$ donc $u_{n+1}\geq ku_n$. Récurrence : $\forall n \geq N, ~ u_n \geq k^{n-N}u_N$.\\
+    Par théorème de comparaison : $\sum k^{n-N}u_N$ diverge donc $\sum u_n$ diverge.\\
+    \boxed{l<1} Soit $k\in]l,1[$ : $\exists N \in \N, ~ \forall n \geq N, ~ \frac{u_{n+1}}{u_n}\leq k$ donc $u_{n+1}\leq ku_n$. Récurrence : $\forall n \geq N, ~ u_n \leq k^{n-N}u_N$.\\
+    Par théorème de comparaison, $\frac{u_n}{k^N}k^n$ converge donc $\sum u_n$ converge.
+\end{prop}
+
+\begin{ex}{}{}
+    \begin{enumerate}
+        \item $\forall p \in \N, ~ \sum\frac{n^p}{n!}$ converge.
+        \item $\forall x \in \R, ~ \sum\frac{|x|^n}{n!}$ converge.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $\forall n \in \N, ~ u_n=\frac{n^p}{n!}>0$ et $\frac{u_{n+1}}{u_n}=\left( 1 + \frac{1}{n} \right)^p\frac{1}{n+1}\to0$ donc $\sum u_n$ converge.\\
+    \boxed{2.} $\forall n \in \N, ~ \forall x \in \R, ~ u_n=\frac{|x|^n}{n!}>0$ et $\frac{u_{n+1}}{u_n}=\frac{|x|}{n+1}\to0$ donc $\sum u_n$ converge (vers $e^x$).
+\end{ex}
+
+\begin{prop}{}{}
+    Soit $(u_n)\in\K^\N$ et $(\a_n)\in\R_+^\N$.
+    \begin{enumerate}
+        \item On suppose $u_n\underset{+\infty}{=}O(\a_n)$ et $\sum\a_n$ converge.\\
+        Alors $\sum u_n$ converge absolument, et $R_n\underset{+\infty}{=}O(R'_n)$ $R_n=\sum_{k=n+1}^\infty u_k$, $R'_n=\sum_{k=n+1}^\infty\a_k$.
+        \item On suppose $u_n\underset{+\infty}{=}o(\a_n)$ et $\sum \a_n$ converge.\\
+        Alors $\sum u_n$ converge absolument, et $R_n\underset{+\infty}{=}o(R'_n)$.
+    \end{enumerate}
+    \tcblower
+    Preuve déjà faite pour les séries à terme général positif.
+    \begin{equation*}
+        u_n = O(\a_n) \iff \left( \frac{u_n}{\a_n} \right)_{n\in\N} \nt{ bornée}.
+    \end{equation*}
+    \begin{equation*}
+        u_n = o(\a_n) \iff \left( \frac{u_n}{\a_n} \right)_{n\in\N} \to 0
+    \end{equation*}
+    On admet les résultats sur les restes.
+\end{prop}
+
+\begin{ex}{}{}
+    \begin{equation*}
+        u_n = O\left( \frac{1}{n^2} \right) \ra \sum u_n \nt{ CA} \ra \sum u_n \nt{ CV}.
+    \end{equation*}
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $f:[-1,1]\to\R$ de classe $\m{C}^3$, et $u_n=n\left( f\left( \frac{1}{n} \right) - f\left( -\frac{1}{n} \right) \right)-2f'(0)$.\\
+    Montrer que $\sum u_n$ converge et dominer son reste $R_n$.
+    \tcblower
+    Formule de Taylor-Young car $f$ est $\m{C}^3$:
+    \begin{equation*}
+        f(x)=f(0)+xf'(0)+\frac{x^2}{2}f''(0)=\frac{x^3}{6}f'''(0) + o(x^3).
+    \end{equation*}
+    On a alors $f\left( \frac{1}{n} \right) = f(0)+\frac{1}{n}f'(0)+\frac{1}{2n^2}f''(0)+\frac{1}{6n^3}f'''(0)+o(\frac{1}{n^3})$\\
+    Et : $f\left( -\frac{1}{n} \right) = f(0)-\frac{1}{n}f'(0)+\frac{1}{2n^2}f''(0)-\frac{1}{6n^3}f'''(0)+o(\frac{1}{n^3})$.\\
+    Alors $f\left( \frac{1}{n} \right) - f\left( -\frac{1}{n} \right) = \frac{2}{n}f'(0) + \frac{1}{3n^3}f'''(0)+o(\frac{1}{n^3})$.\\
+    Alors $u_n = \frac{1}{3n^2}f'''(0)+o\left( \frac{1}{n^2} \right) = O\left( \frac{1}{n^2} \right)$.\\
+    Par théorème de comparaison, $\sum u_n$ converge absolument donc converge.\\
+    Puis $R_n=O(R_n')$, or $R_n'\sim\frac{1}{(2-1)n^{2-1}}$ (Riemann) donc $R'_n\sim\frac{1}{n}$ puis $R_n=O(\frac{1}{n})$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\subsection{Critère spécial des séries alternées.}
+
+\begin{prop}{Critère spécial des séries alternées.}{}
+    Soit $\sum u_n$ une série alternée (i.e. alternée en signe).\\
+    Si $|u_n|$ tend en décroissante vers 0, alors $\sum u_n$ converge.\\
+    De plus, $S_n$ et $R_n$ sont du signe du premier terme de leur somme, et $|R_n|\leq|u_{n+1}|$.
+    \tcblower
+    SPDG, $u_0>0$. Vérifions que $(S_{2n})$ et $(S_{2n+1})$ sont adjacentes.\\
+    $\bullet$ $S_{2n+1}-S_{2n}=u_{2n+1}\to0$.\\
+    $\bullet$ $S_{2(n+1)}-S_{2n}=S_{2n+2}-S_{2n}=u_{2n+2}+u_{2n+1}\leq 0$ donc $(S_{2n})$ décroit.\\
+    $\bullet$ $S_{2(n+1)+1}-S_{2n+1}=S_{2n+3}-S_{2n+1}=u_{2n+2}+u_{2n+3}\geq0$ donc $(S_{2n+1})$ croissante..\\
+    Par théorème, $(S_{2n})$ et $(S_{2n+1})$ convergent vers la même limite $S$, donc $(S_n)\to S$ puis $\sum u_n$ converge.\n
+    On a $R_{2n}=S-S_{2n}$ donc $R_{2n}\leq0$ puis $R_{2n+1}=S-S_{2n+1}\geq0$, ils sont en effet du bon signe.\\
+    Puis $S_{2n+1}\leq S \leq S_{2n}$ donc $|R_{2n}|\leq S_{2n} - S_{2n+1}=-u_{2n+1}=|u_{2n+1}|$.\\
+    Enfin, $S_{2n+1}\leq S \leq S_{2n+2}$ donc $|R_{2n+1}|\leq S_{2n+2}-S_{2n+1}=|u_{2n+2}|$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{Série harmonique alternée.}{}
+    \begin{equation*}
+        \sum\frac{(-1)^n}{n} \nt{ converge.}
+    \end{equation*}
+    \tcblower
+    C'est une série alternée, et $|u_n|=\frac{1}{n}$ décroit vers 0, donc la série converge.\\
+    On a $S_{2n+1}=-1+\frac{1}{2}+...-\frac{1}{2n+1}=-H_{2n+1}+H_n=-(\ln(2n+1)+\g)+(\ln n + \g) + o(1) = \ln\left( \frac{n}{2n+1} \right) + o(1) \to -\ln 2$.
+\end{ex}
+
+\begin{ex}{Met en défaut le théorème de comparaison pour des séries à termes non positifs.}{}
+    \begin{equation*}
+        u_n = \frac{(-1)^n}{\sqrt{n}+(-1)^n} \qquad v_n = \frac{(-1)^n}{\sqrt{n}}.
+    \end{equation*}
+    \tcblower
+    Vérifions que $u_n \sim v_n$. On a $\frac{v_n}{u_n}=\frac{\sqrt{n} + (-1)^n}{\sqrt{n}}=1+\frac{(-1)^n}{\sqrt{n}}\to 1$ donc $v_n \sim u_n$.\\
+    Or $\sum v_n$ converge par CSSA car $|v_n|=\frac{1}{\sqrt{n}}\to0$ en décroissant. Montrons que $\sum u_n$ diverge.
+    \begin{equation*}
+        u_n = \frac{(-1)^n}{\sqrt{n}\left( 1 + \frac{(-1)^n}{\sqrt{n}} \right)} = \frac{(-1)^n}{\sqrt{n}}\left( 1-\frac{(-1)^n}{\sqrt{n}} + \frac{1}{n} + o(\frac{1}{n})\right) = \frac{(-1)^n}{\sqrt{n}} - \frac{1}{n} + \frac{(-1)^n}{n\sqrt{n}} + o(\frac{1}{n\sqrt{n}}).
+    \end{equation*}
+    On a $\sum \frac{1}{n}$ diverge, $\sum \frac{(-1)^n}{n\sqrt{n}}$ converge par CSSA, $\sum\frac{(-1)^n}{\sqrt{n}}$ converge, donc $\sum u_n$ diverge.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{Produit de Cauchy de deux séries convergentes mais qui diverge.}{}
+    Soit $u_n=v_n=\frac{(-1)^n}{\sqrt{n}}$. On a $\sum u_n$ cv.\\
+    Calculer le produit de Cauchy de $\sum u_n$ et $\sum v_n$ et vérifier qu'il diverge.
+    \tcblower
+    On a $w_n = \sum_{k=1}^{n-1} \frac{(-1)^n}{\sqrt{k}\sqrt{n-k}}$. Soit $f(x)=\sqrt{x\sqrt{n-x}}$ pour $x\in[0,n]$.\\
+    Donc $\forall k \in \lb1,n-1\rb$, on a $f(k)\leq f(\frac{n}{2})=\frac{n}{2}$, puis $\frac{1}{f(k)}=\frac{1}{\sqrt{k}\sqrt{n-k}}\geq\frac{2}{n}$.\\
+    Puis $|w_n|=\sum_{k=1}^{n-1}\frac{1}{\sqrt{k}\sqrt{n-k}}\geq\frac{2(n-1)}{n}\to2$. Donc $\sum w_n$ diverge grossièrement.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\subsection{Comparaison série-intégrale.}
+
+\begin{lemme}{}{}
+    Soient $0 \leq u_n \leq v_n \leq w_n$ telles que $u_n \sim w_n$. Alors $u_n \sim v_n$.
+    \tcblower
+    \phantom{a}
+    \begin{equation*}
+        1 \leq \frac{v_n}{u_n} \leq \frac{w_n}{u_n} \to 1 ~\nt{donc}~ \frac{v_n}{u_n}\to1
+    \end{equation*}
+\end{lemme}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $f$ continue par morceaux, décroissante et à valeurs réelles positives.
+    \begin{equation*}
+        \forall n \in \N, ~ f(n) \geq \int_n^{n+1}f(t)\dt \geq f(n+1).
+    \end{equation*}
+    De plus, si $f(n+1)\sim f(n)$, alors $f(n)\sim\int_n^{n+1}f(t)\dt$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    On a $t\mapsto\frac{1}{t}$ est continue par morceaux et décroissante sur $]0,+\infty[$ à valeurs positives.
+    \begin{equation*}
+        \forall n \geq 1, ~ \frac{1}{n} \geq \int_n^{n+1}\frac{\dt}{t}\geq \frac{1}{n+1} \quad \frac{1}{n}\sim \frac{1}{n+1}.
+    \end{equation*}
+    On retrouve que $\frac{1}{n}\sim\int_n^{n+1}\frac{\dt}{t}=\ln(n+1)-\ln(n)$.
+\end{ex}
+
+\begin{ex}{}{}
+    On retrouve l'équivalent du reste de Riemann d'une suite convergente : $R_n=\sum_{k=n+1}^\infty\frac{1}{k^\a}$ avec $\a>1$.
+    \tcblower
+    On a $t\mapsto \frac{1}{t^\a}$ décroissante et continue par morceaux sur $]0,+\infty[$.
+    \begin{equation*}
+        \forall n \geq 1 ,~ \frac{1}{n^\a}\geq\int_n^{n+1}\frac{\dt}{t}\geq\frac{1}{(n+1)^\a}.
+    \end{equation*}
+    Or $\frac{1}{n^\a}\sim\frac{1}{(n+1)^\a}$ donc :
+    \begin{equation*}
+        \frac{1}{n^\a} \sim \int_n^{n+1}\frac{\dt}{t^\a} = \left[ \frac{t^{1-\a}}{1-\a} \right]_n^{n+1} = \frac{(n+1)^{1-\a}-n^{1-\a}}{1-\a}.
+    \end{equation*}
+    Par théorème de comparaison pour les séries à termes positifs :
+    \begin{equation*}
+        R_n \sim \frac{1}{1-\a}\sum_{k=n+1}^\infty\left( (k+1)^{1-\a}-k^{1-\a} \right)=\frac{1}{(\a-1)(n+1)^{\a-1}}\sim\frac{1}{(\a-1)n^{\a-1}}
+    \end{equation*}
+\end{ex}
+
+\begin{ex}{}{}
+    Montrons que $\ln(n!)\sim n\ln(n)$.
+    \tcblower
+    On a $t\mapsto\ln(t)$ continue par morceaux et croissante sur $[1,+\infty[$, donc $\forall n \geq 1, ~ \ln(n) \leq \int_n^{n+1}\ln(t)\dt\leq\ln(n+1)$.\\
+    On a $\ln(n+1)\sim\ln(n)$ déjà vu, donc $\ln(n)\sim\int_n^{n+1}\ln(t)\dt$, puis $\sum \ln(n)$ diverge grossièrement donc par thm de comparaison il y a équivalence des sommes partielles.
+    \begin{equation*}
+        \ln(n!) = \sum_{k=1}^n\ln(k)\sim\sum_{k=1}^n\int_k^{k+1}\ln(t)\dt=\int_1^{n+1}\ln(t)\dt=\left[ t\ln t - t \right]_1^{n+1}
+    \end{equation*} 
+    donc $\ln(n!)\sim(n+1)\ln(n+1)-(n+1)+1\sim n\ln(n)$.
+\end{ex}
+
+\begin{ex}{}{}
+    Étudier la convergence de la série $\sum u_n$ avec :
+    \begin{equation*}
+        \forall n \in \N, ~ u_{2n}=-\sh\left( \frac{1}{2n} \right), ~ u_{2n+1}=\sin\left( \frac{1}{2n+1} \right).
+    \end{equation*}
+    \tcblower
+    On note $S_n=\sum_{k=1}^nu_k$ et $v_n = (u_{n-1} + u_n)$.
+    \begin{equation*}
+        S_{2n}=\left( \sin 1 - \sh \frac{1}{2} \right) + ... + \left( \sin\frac{1}{2n-1} - \sh\frac{1}{2n} \right) = \sum_{k=1}^nv_k.
+    \end{equation*}
+    On a $\sh(x)= x + \frac{x^3}{3!} + o(x^3)$ et $\sin(x)= x - \frac{x^3}{3!} + o(x^3)$, donc $v_n\underset{+\infty}{\sim}\frac{1}{4n^2}$.\\
+    Donc $\sum v_n$ converge, donc $(S_{2n})$ converge vers $S$, or $S_{n+1}=S_{2n} + \sin\left(\frac{1}{2n}\right)\to S$, donc $S_n\to S$, et $\sum u_n$ converge.
+\end{ex}
+
+\section{Familles sommables de réels positifs.}
+
+\begin{defi}{Famille sommable de réels positifs.}{}
+    Soit $I$ un ensemble d'indices dénombrable. Soit $(u_i)_{i\in I}$ une famille de réels positifs indexée par $I$.\\
+    La famille $(u_i)$ est sommable ssi $X=\{\sum_{i\in J}u_i, ~ J\subset I, ~ J ~ \nt{fini}\}$ est majoré. Alors $\sum u_i = \sup X$.
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $(u_n)_{n\in\N}$ une suite de réels positifs. La famille $(u_n)$ est sommable ssi $\sum u_n$ converge.
+    \tcblower
+    \boxed{\ra} Soit $n\in\N$, $J=\lb0,n\rb$ est une partie finie de $\N$.\\
+    On note $M=\sup X$, on a $M<\infty$, donc $S_n$ croissante majorée par $M$, donc convergente par passage à la limite.\\
+    \boxed{\la} Supposons $\sum u_n$ convergente. Soit $J\subset \N$ fini, $\exists N \in \N, ~ J \subset \lb0,N\rb$.\\
+    Ensuite, $\sum_{i\in J} u_n \leq \sum_{i=0}^Nu_i = S_N \leq S$, donc $X$ majoré par $S$.
+\end{prop}
+
+\begin{thm}{Comparaison.}{}
+    Soit $I$ dénombrable et $(u_i)_{i\in I}$, $(v_i)_{i\in I}$ deux familles de réels positifs, $\forall i \in I, ~ u_i \leq v_i$.\\
+    Alors $(v_i)_{i\in I}$ sommable $\ra$ $(u_i)_{i\in I}$ sommable et si les familles sont sommables, $\sum u_i \leq \sum v_i$.
+    \tcblower
+    Supposons $(v_i)$ sommable, alors $\{\sum v_i, ...\}$ majoré par $M$. Soit $J\subset I$ fini, alors $\sum_{i\in J}u_i \leq \sum_{i\in J}v_i \leq M$.\\
+    Donc $\{\sum u_i\}$ majoré par $M$, c'est la définition de $(u_i)$ sommable, puis $\forall J \subset I, ~ \sum_{i\in J} u_i \leq \sum_{i\in J} v_i \leq \sum_{i\in I}v_i$.\\
+    Par passage au sup, $\sum u_i \leq \sum v_i$.
+\end{thm}
+
+\begin{thm}{Sommation par paquets.}{}
+    Soit $I$ un ensemble d'indices dénombrable et $(u_i)_{i\in I}$ une famille de réels positifs. Supposons $I=\bigsqcup_{n\in \N}I_n$.\\
+    Alors $(u_i)_{i\in I}$ est sommable ssi $\forall n \in \N, ~ (u_i)_{i\in I_n}$ est sommable  et $\left(\sum_{i\in I_n}u_i\right)$ sommable.
+    \begin{equation*}
+        \sum_{i\in I}u_i = \sum_{n\in\N}\left( \sum_{i\in I_n} u_i \right)
+    \end{equation*}
+\end{thm}
+
+\begin{prop}{Série commutativement convergente.}{}
+    Soit $(u_n)_{n\in\N}$ une suite de réels positifs et $\s$ une permuation de $\N$.\\
+    Alors $\sum_{n\in\N}u_n$ et $\sum_{n\in\N}u_{\s(n)}$ sont de mêmes natures et égales en cas de convergence.
+    \tcblower
+    Soit $I=\N$, $I_n=\{\s(n)\}$, $I=\bigsqcup_{n\in\N}I_n$ car $\s$ est bijection.\\
+    Sommation par paquets : $(u_n)_{n\in\N}$ est sommable ssi $\forall n \in \N, ~ (u_i)_{i\in\{\s(n)\}}$ sommable et $(u_{\s(n)})_{n\in\N}$ sommable.\\
+    Donc $(u_n)_n$ sommable ssi $(u_{\s(n)})_n$ sommable puis $\sum u_n$ cv ssi $\sum u_{\s(n)}$ cv. 
+\end{prop}
+
+\begin{thm}{Fubini.}{}
+    Soit $(u_{n,m})_{n,m\in\N}$ une famille de réels positifs doublement indicée.\\
+    On a $(u_{n,m})$ sommable ssi une des deux conditions suivantes est vérifiée :
+    \begin{enumerate}
+        \item $\forall n \in \N ,~ \sum_{m=0}^\infty u_{nm}<\infty ~\et~ \sum_{n=0}^\infty\left( \sum_{m=0}^\infty u_{n,m} \right) < \infty$.
+        \item $\forall m \in \N, ~ \sum_{n=0}^\infty u_{nm}<\infty ~\et~ \sum_{m=0}^\infty\left( \sum_{n=0}^\infty u_{n,m}\right) < \infty$.
+    \end{enumerate}
+    Dans ce cas, on a :
+    \begin{equation*}
+        \sum_{n=0}^\infty\left( \sum_{m=0}^\infty u_{n,m} \right) = \sum_{m=0}^\infty\left( \sum_{n=0}^\infty u_{n,m} \right)
+    \end{equation*}
+    \tcblower
+    Si $\forall n \in \N, ~ \a_n\geq0$, $(\a_n)$ sommable ssi $\sum \a_n$ converge ssi $\sum \a_n < \infty$.\\
+    On utilise le théorème de sommation par paquets avec $I=\N\times\N$ :\\
+    --- Si $I_n=\{(n,p), ~ p \in \N\}$, alors $I=\bigsqcup_{n\in\N} I_n$.\\
+    Alors $(u_{n,m})$ sommable ssi $\forall n \in \N, ~ (u_{n,m})$ et $\sum u_{n,m}$ sommables ssi $\sum_m u_{n,m}<\infty$ et $\sum_n\sum_m u_{n,m}<\infty$.\\
+    --- Si $I_n=\{(p,m),n ~ p \in \N\}$, alors $I=\bigsqcup_{n\in\N}I_n$, $(u_{n,m})$ sommable ssi $\forall m, \sum_n u_{n}<\infty$ et $\sum_m\sum_n u_n < \infty$.\\
+    On a bien $(1)\iff(2)\iff (u_{n,m})$ sommable.
+\end{thm}
+
+\begin{ex}{}{}
+    Les familles suivantes sont-elles sommables ?
+    \begin{enumerate}
+        \item $\left(\frac{1}{p^2q^2}\right)$ pour $p,q\in\N^*$.
+        \item $\left( \frac{1}{p^2+q^2} \right)$ pour $p,q\in\N^*$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $p\in\N^*$ fixé.
+    \begin{equation*}
+        \sum_{q=1}^\infty \frac{1}{p^2q^2} = \frac{1}{p^2}\sum_{q=1}^\infty\frac{1}{q^2} = \frac{S}{p^2}.
+    \end{equation*}
+    \begin{equation*}
+        \sum_{p=1}^\infty\left( \sum_{q=1}^\infty\frac{1}{p^2q^2} \right) = \sum_{p=1}^\infty\frac{S}{p^2}=S^2.
+    \end{equation*}
+    Par Fubini, la famille est sommable.\\
+    \boxed{2.} Posons $u_{p,q}=\frac{1}{p^2+q^2}$. Soient $p,q\in\N^*$, $p^2+q^2\leq(p+q)^2$ donc $u_{p,q}\geq\frac{1}{(p+q)^2}:=v_{p,q}$.
+    \begin{align*}
+        (v_{p,q})_I \nt{ sommable } &\iff \forall n \geq 1, ~ (v_{p,q})_{I_n} \nt{ sommable et } \left( \sum_{p,q\in I_n} v_{p,q} \right) \nt{ sommable}.\\
+        &\iff \forall n \geq 1, ~ \sum_{p+q=n}\frac{1}{(p+q)^2}<\infty \et \sum_{n=1}^\infty\left( \sum_{p+q=n}\frac{1}{(p+q)^2} \right) < \infty
+    \end{align*}
+    Or $\forall n \geq 1, ~ \sum\limits_{p+q=n}\frac{1}{(p+q)^2}=\frac{n-1}{n^2}$ et $\sum\frac{n-1}{n^2}$ diverge donc $(v_{p,q})$ n'est pas sommable.
+\end{ex}
+
+\begin{ex}{}{}
+    \begin{enumerate}
+        \item Pour $|x|<1$ et $m\in\N^*$, calculer $\ds\sum_{n=1}^\infty x^{nm}$.
+        \item Montrer que $\ds\forall x \in ]-1,1[, ~ \sum_{n=1}^\infty\frac{x^n}{1-x^n}=\sum_{n=1}^\infty d(n)x^n$ où $d(n)$ est le nombre de diviseurs de $n$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $x^{nm}=(x^m)^n$, série géométrique donc convergente et $\sum x^{nm}=\frac{x^m}{1-x^m}$.\\
+    \boxed{2.} Soit $x\in]-1,1[$. On a $\sum\frac{x^n}{1-x^n}$ converge absolument.
+    \begin{equation*}
+        \sum_{n=1}^\infty\frac{x^n}{1-x^n} = \sum_{n=1}^{\infty}\left( \sum_{m=1}^\infty x^{nm} \right).
+    \end{equation*}
+    Sommation par paquets (on suppose $x\geq0$ provisoirement).\\
+    On pose $I=\N^*\times\N^*$ et $I_p=\{(n,m)\in I, ~ nm = p\}$ : $I=\bigsqcup I_p$.
+    \begin{equation*}
+        \sum_{n=1}^\infty\left( \sum_{m=1}^\infty x^{nm}\right)=\sum_{p=1}^\infty\left( \sum_{n,m\in I_p} x^{nm} \right) = \sum_{p=1}^\infty\left( |I_p|x^p \right) ~:~ |I_p|=d(p).
+    \end{equation*}
+    En effet, on choisit $n$ diviseur de $p$ puis $m=\frac{p}{n}$. Alors $\sum_{n=1}^\infty\frac{x^n}{1-x^n}=\sum_{n=1}^\infty d(n)x^n$.
+\end{ex}
+
+\begin{prop}{Retour sur le produit de Cauchy.}{}
+    Soit $(u_n)_{n\in\N}$ et $(v_n)_{n\in\N}$ deux familles de réels positifs.\\
+    On suppose que $\sum u_n < \infty$ et $\sum v_n < \infty$. On pose $w_n=\sum u_kv_{n-k}$. Considérons $(u_nv_m)_{n,m}$.
+    \begin{equation*}
+        \forall n \in \N, ~ \sum_{n=0}^\infty u_nv_m = v_m\left( \sum_{n=0}^\infty u_n \right) < \infty ~\et~ \sum_{m=0}^\infty\left( m\sum_{n=0}^\infty u_n \right) = \left( \sum_{n=0}^\infty u_n \right)\left( \sum_{m=0}^\infty v_n \right) < \infty.
+    \end{equation*}
+    Puis $(u_nv_m)_{n,m}$ est sommable donc on somme par paquets : $I_p=\{(n,m)\in \N\times\N, ~ n+m=p\}$.
+    \begin{align*}
+        &\sum_{(n,m)\in I}u_nv_m = \sum_{p=0}^\infty\left( \sum_{(n,m)\in I_p} u_nv_m\right)\\
+        \ra& \left( \sum_{n=0}^\infty u_n \right)\left( \sum_{m=0}^\infty v_m \right) = \sum_{p=0}^\infty\left( \sum_{n+m=p} u_nv_m \right).
+    \end{align*}
+    On a bien $\sum w_n<\infty$ donc $\sum w_p$ converge.
+\end{prop}
+
+\pagebreak
+
+\section{Khôlles.}
+
+\begin{exercice}{Espace $l^2(\N)$.}{}
+        Posons $l^2(\N)=\{(u_n)_n\in\R^\N ,~ \sum u_n^2 ~ \nt{converge}\} = \{(u_n)_n \in \R^\N, ~ \sum u_n^2 < +\infty\}$.
+        \begin{enumerate}
+            \item Montrer que $l^2(\N)$ est un $\R$-espace vectoriel.
+            \item On pose $\|(u_n)\|=\sqrt{\sum u_n^2}$. Montrer que $\|\cdot\|$ est une norme sur $l^2(\N)$.
+        \end{enumerate}
+        \tcblower
+        \boxed{1.} Vérifions que c'est un sous-espace vectoriel de $(\R^\N,+,\cdot)$.\\
+        --- $0\in l^2(\N)$.\\
+        --- Soient $(u_n)\in l^2(\N), ~ (v_n)\in l^2(\N), \l\in\R$.\\
+        On a $\forall n \in \N, ~ (u_n + \l v_n)^2 = u_n^2 + 2\l u_n v_n + \l^2 v_n^2$.\\
+        On a $u_n^2$ t.g. série convergente, $\l^2vn^2$ t.g. série convergente et $|u_nv_n|\leq\frac{1}{2}(u_n^2+v_n^2)$ donc t.g. ...\\
+        Alors $\sum (u_n + \l v_n)^2$ converge par opérations. 
+\end{exercice}
+
+\begin{exercice}{(Ibrahim)}{}
+    Soit $\a\in\Q$.
+    \begin{enumerate}
+        \item Montrer que $\exists c>0, ~ \forall (p,q)\in\Z\times\N^*, ~ \a\neq\frac{p}{q}\ra d(\a,\frac{p}{q})\geq\frac{c}{q}$.
+        \item Montrer que $\ds\sum_{k\geq0}\frac{(-1)^k}{k!}$ est irrationnelle.
+        \item Montrer que $\ds\sum_{k\geq0}\frac{1}{(k!)^2}$ est irrationnelle.
+    \end{enumerate}
+    \tcblower
+    On a $\a\in\Q$ donc $\exists a,b\in\Z\times\N^*$ tels que $\a=\frac{a}{b}$.\\
+    \boxed{1.} On cherche $c$ tel que $|aq-pb|\geq cb$. On pose $A=\{|aq-pb|, ~ q\in\Z, ~ p\in\N^*\}$.\\
+    On pose $n_0=\min(A)$. Supposo,ns que $n_0=0$, alors $\exists (p,q)\in\Z\times\N^*, ~ aq=pb$ donc $\a=\frac{p}{q}$, absurde.\\
+    Donc $n_0>0$. On pose $c=\frac{n_0}{b}$.\\
+    \boxed{2.} $\ds\sum_{k\geq0}\frac{(-1)^k}{k!}$ converge par CCSA. Notons $S$ sa limite et $S_n$ ses sommes partielles. On suppose $S$ rationnelle.\\
+    On a $n!S_n\in\Z$ et d'après le 1. $\exists c > 0, ~ |S-S_n|\geq\frac{c}{n!}$ car $S\neq S_n$. Or $\frac{c}{n!}\leq|S-S_n|\leq\frac{1}{(n+1)!}$.\\
+    Ainsi, $\forall n \in \N, ~ c \leq \frac{1}{n+1}$ donc par passage à la limite, $c\leq0$, absurde.\\
+    \boxed{3.} La série converge par d'Alembert. Supposons qu'elle est rationnelle. On la note $S$.\\
+    On remarque que $(n!)^2S_n\in\Q$. D'après 1. $\exists c>0, ~ \frac{c}{(n!)^2}\leq|S-S_n|$.\\
+    Donc $\forall k \geq n+1, ~ \frac{1}{(k!)^2} \leq \frac{1}{(n+1)!}\times\left( \frac{1}{n+1} \right)^{k-n-1}$ par récurrence.\\
+    Alors $R_n \leq \frac{1}{(n+1)!^2}\sum_{k=n+1}^{+\infty}\left( \frac{1}{n+1} \right)^{k-n-1}\leq \frac{1}{(n+1)!^2}\frac{1}{1-\frac{1}{n+1}}$.\\
+    Donc $c\leq\frac{1}{(n+1)^2}\frac{1}{1-\frac{1}{n+1}}$ pour $n\geq1$.\\
+    En passant à la limite, $c\leq0$, absurde.
+\end{exercice}
+
+\pagebreak
+
+\begin{exercice}{(Yvan)}{}
+    Soit $(u_n)\in(R_+^*)^\N$. Soit $l\in]0,1[$.
+    \begin{enumerate}
+        \item Montrer que $\frac{u_{n+1}}{u_n}\to l \ra \sum_{n\geq0}u_n$ converge.
+        \item Donner la nature de $\ds\sum_{n\geq1}\frac{n!}{n^n}$.
+        \item Donner la nature de $\ds\sum_{n\geq0}\ln\left( 1 + \frac{(-1)^n}{n^\a} \right)$ pour $\a>0$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Fait en DM.\\
+    \boxed{2.} 
+    \begin{align*}
+        \frac{u_{n+1}}{u_n} = \frac{n^n}{(n+1)^n} = e^{-n\ln(1+\frac{1}{n})} \sim e^{-1} < 1.
+    \end{align*}
+    \boxed{3.}
+    On a $\a>0$ donc $\frac{1}{n^\a}\to0$ donc :
+    \begin{align*}
+        \ln\left( 1 + \frac{(-1)^n}{n^\a} \right) = \frac{(-1)^n}{n^a} - \frac{1}{2n^{2\a}} + o\left( \frac{1}{n^{2\a}} \right).
+    \end{align*}
+    Pour $\a>1$, la série est absolument convergente donc convergente.\\
+    Sinon, $-\frac{1}{2n^{2\a}}+o\left( \frac{1}{n^{2\a}} \right)\sim-\frac{1}{2n^{2\a}}$ converge ssi $\a>\frac{1}{2}$.\\
+    Donc la série converge ssi $\a>\frac{1}{2}$.
+\end{exercice}
+
+\vspace*{-0.4cm}
+
+\begin{exercice}{}{}
+    Pour $n\in\N, ~ u_n = \ds\sum_{k=n}^{+\infty}\frac{(-1)^k}{k}$, étudier la convergence de $\sum u_n$.
+    \tcblower
+    $u_n$ est bien définie par CSSA et car c'est le reste d'une série convergente, donc $|u_n|\to0$.
+    \begin{align*}
+        |u_{n+1}|-|u_n|&=\left|\sum_{k=n+1}^{+\infty}\frac{(-1)^k}{k}\right|-\left|\sum_{k=n}^{+\infty}\frac{(-1)^k}{k}\right|\\
+        &=\left|(-1)^{n+1}\sum_{k=n+1}^{+\infty}\frac{(-1)^{k-n-1}}{k}\right|-\left|(-1)^n\sum_{k=n}^{+\infty}\frac{(-1)^{k-n}}{k}\right|\\
+        &=\sum_{k=n+1}^{+\infty}\frac{(-1)^{k-n-1}}{k}-\sum_{k=1}^{+\infty}\frac{(-1)^{k-n}}{k}\\
+        &=\sum_{k=n}^{+\infty}(-1)^{k-n}\left( \frac{1}{k+1} - \frac{1}{k} \right)\\
+        &=(-1)^{n+1}\sum_{k=n}^{+\infty}\frac{(-1)^k}{k(k+1)} = (-1)^{n+1}(-1)^n\sum_{k=n}^{+\infty}\frac{(-1)^k}{k(k+1)}
+    \end{align*}
+    Donc $\sum u_n$ converge par CSSA car $(u_n)$ change de signe.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $(a_n)_{n\geq1}\in\R^\N$ telle que $\sum a_n$ converge.
+    \begin{enumerate}
+        \item Montrer que si $\a>\frac{1}{2}$, alors $\sum\frac{\sqrt{a_n}}{n^\a}$ converge.
+        \item Que dire pour $\a=\frac{1}{2}$ ?
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $|ab|\leq\frac{1}{2}(a^2+b^2)$, donc $\frac{\sqrt{a_n}}{n^\a}\leq\frac{1}{2}(a_n + \frac{1}{n^{2\a}})$. Par TCSTG+, $\sum\frac{\sqrt{a_n}}{n^{\a}}$ converge.\\
+    \boxed{2.} $a_n=\frac{1}{n\ln^2(n)}$.
+\end{exercice}
+
+\end{document}

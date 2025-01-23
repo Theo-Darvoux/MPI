@@ -1,0 +1,715 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{11}
+\def\pagetitle{Fonctions Vectorielles.}
+
+\input{setup.tex}
+
+\renewcommand*{\D}{\cursive{D}}
+
+\begin{document}
+
+\input{title.tex}
+
+\section{Révisions.}
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Déterminer toutes les fonctions $f:\R\to\R$ continues en 0 telles que $\forall x \in \R, ~ f(2x)=f(x)$.
+        \item Déterminer toutes les fonctions $f:\R\to\R$ dérivables en 0 telles que $\forall x \in \R, ~ f(2x)=2f(x)$. 
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Par récurrence simple : $\forall n \in \N, ~ \forall x \in \R, ~ f(x)=f(\frac{x}{2^n}) \xrightarrow[n\to+\infty]{} f(0)$.\\
+    Par continuité de $f$ en zéro et par unicité de la limite, $f(x)=f(0)$ pour tout $x\in\R$.\\
+    Donc $f$ est constante, et réciproquement, toutes les fonctions constantes conviennent.\\
+    \boxed{2.} On spécifie en zéro pour obtenir $f(0)=2f(0)$ donc $f(0)=0$.
+    \begin{equation*}
+        \forall x \in \R^*, ~ f(2x)=2f(x) \iff \forall x \in \R^*, ~ \frac{f(2x)}{2x} = \frac{f(x)}{x}
+    \end{equation*}
+    Par récurrence simple, $\forall n \in \N, ~ \forall x \in \R^*, ~ \frac{f(x)}{x}=\frac{f(x/2^n)}{x/2^n}$. Soit $x\neq0$ fixé.
+    \begin{equation*}
+        \forall n \in \N, ~ \frac{f(x)}{x} = \frac{f(x/2^n)}{x/2^n} = \frac{f(x/2^n)-f(0)}{x/2^n-0}\xrightarrow[n\to+\infty]{}f'(0).
+    \end{equation*}
+    Par unicité de la limite, $\frac{f(x)}{x}=f'(0)$ i.e. $f(x)=f'(0)x$, y compris si $x=0$.\\
+    Donc $\exists a \in \R, ~ \forall x \in \R, ~ f(x)=ax$ avec $a=f'(0)$.\\
+    Réciproquement, toutes les fonctions $x\mapsto ax$ sont solutions.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $f:I\subset\R\to\R$ de classe $\cursive{C}^n$ sur $I$.\\
+    Soient $a_1,...,a_n$ $n$ zéros distincts de $f$. Montrer que $\forall x \in I, ~ \exists c \in I, ~ f(x)=\frac{f^{(n)}(c)}{n!}\prod_{i=1}^n(x-a_i)$.
+    \tcblower
+    Si $x\in\{a_1,...,a_n\}$, toutes les valeurs de $c$ conviennent.\\
+    Sinon, posons $\forall t \in I, ~ \phi(t)=f(t)-A(t-a_1)...(t-a_n)$ avec $A\in\R$ choisie telle que $\phi(x)=0$.\\
+    Il suffit de prendre $A=\frac{f(x)}{(x-a_1)...(x-a_n)}$.\\
+    On a $\phi$ de classe $\cursive{C}^n$ sur $I$ car $f$ l'est et que $t\mapsto(t-a_1)...(t-a_n)$ polynomiale.\\
+    On a $\forall i \in \lb1,n\rb, ~ \phi(a_i)=f(a_i)=0$ et $\phi(x)=0$ par choix de $A$.\\
+    On applique le théorème de Rolle, $\phi$ s'annule en $n+1$ points distincts de $I$ donc $\phi^{(n)}$ s'annule au moins une fois sur $I$.\\
+    Donc $\exists c \in I, ~ \phi^{(n)}(c)=0$, or $\forall t \in I, ~ \phi(t)=f(t)-A(t-a_1)...(t-a_n)$.\\
+    Donc $\phi^{(n)}(t)=f^{(n)}(t)-An!$, puis $A=\frac{f^{(n)}(c)}{n!}$ en évaluant en $c$.\\
+    Enfin, $\phi(x)=0$, i.e. $f(x)=A(x-a_1)...(x-a_n)=\frac{f^{(n)}(c)}{n!}(x-a_1)...(x-a_n)$.
+\end{exercice}
+
+\vspace*{-0.7cm}
+
+\section{Dérivabilité des fonctions vectorielles.}
+
+\begin{defi}{}{}
+    Une fonction vectorielle est une fonction de la variable réelle à valeurs dans un evdf par restriction du programme.\\
+    \bf{Rappel.} Toutes les normes sont équivalentes en dimension finie.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\subsection{Dérivabilité en un point.}
+
+\begin{defi}{}{}
+    Soit $I$ un intervalle de $\R$, $a\in\accentset{\circ}{I}$ et $E$ un $\K$-evdf.\\
+    $f$ est dérivable en $a$ ssi $\frac{f(x)-f(a)}{x-a}$ admet une limite quand $x\to a$.\\
+    Cette limite, si elle existe, est notée $f'(a)$.
+    Le vecteur dérivé en $a$, s'il existe, est défini par $f'(a)=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}$.\\
+    On peut définir la dérivée à gauche et à droite en $a$...
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $f:I\subset \R \to E$ et $a\in\accentset{\circ}{I}$.\\
+    Alors $f$ est dérivable en $a$ ssi $f$ est dérivable à gauche et à droite en $a$ et $f_g'(a)=f_d'(a)$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $f:I\subset \R \to E$, $a\in\accentset{\circ}{I}$ et $E$ un $\K$-evdf.\\
+    $f$ est dérivable en $a$ ssi $f$ admet un DL à l'ordre 1 en $a$ : $f(a+h)=f(a)+hv+h\e(h)$ 
+    \tcblower
+    \boxed{\la} Par hypothèse, $f(a+h)=f(a)+hv+h\e(h)$ avec $v\in E$ et $\e(h)\to0_E$.\\
+    Puis $\forall h \neq 0, ~ \frac{f(a+h)-f(a)}{h}=v+\e(h)\to v$, donc $f$ est dérivable en $a$ et $f'(a)=v$.\\
+    \boxed{\ra} Par hypothèse, $\frac{f(x)-f(a)}{x-a}$ admet une limite quand $x\to a$.\\
+    Donc $f'(a)=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}=\lim_{h\to 0}\frac{f(a+h)-f(a)}{h}$.\\
+    Posons $\e(h)=\frac{f(a+h)-f(a)}{h}-f'(a)$. ($\forall h \neq 0 \nt{ tq } a+h\in I$).\\
+    On a bien $f(a+h)-f(a)=hf'(a)+h\e(h)$, de plus, $\e(h)\to_{h\to 0}f'(a)-f'(a)=0$.\\
+    Donc $f$ admet un DL à l'ordre 1 en $a$ avec $v=f'(a)$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $f:I\subset\R\to E$, $a\in\accentset{\circ}{I}$.\\
+    Si $f$ est dérivable en $a$, alors $f$ est continue en $a$.
+    \tcblower
+    Si $f$ est dérivable, alor $f$ admet un DL à l'ordre 1 en $a$ : $f(a+h)=f(a)+hv+h\e(h)$.\\
+    Alors $\lim_{h\to0} f(a+h)=f(a)+0+0=f(a)$, donc $f$ est continue en $a$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $f:I\subset\R\to E$, avec $E$ un $\K$-evdf de dimension $n$, $\B=(e_1,...,e_n)$ base de $E$ et $a\in\accentset{\circ}{I}$.\\
+    Soient $f_1,...,f_n$ les applications coordonnées de $f$, alors $f$ est dérivable en $a$ ssi $\forall i \in \lb1,n\rb$, $f_i$ dérivable en $a$.
+    \tcblower
+    On a $\forall x \in I, ~ f(x)=f_1(x)e_1 + ... + f_n(x)e_n$.
+    \begin{equation*}
+        \frac{f(x)-f(a)}{x-a}= \frac{1}{x-a}(f(x)-f(a)) = \frac{f_1(x)-f_1(a)}{x-a}e_1 + ...+ \frac{f_n(x)-f_n(a)}{x-a}e_n
+    \end{equation*}
+\end{prop}
+
+\subsection{Dérivabilité sur un intervalle \texorpdfstring{$I$}{Lg}.}
+
+\begin{defi}{}{}
+    Soit $I$ un intervalle de $\R$, $E$ un $\K$-evdf et $f:I\to E$.\\
+    Alors $f$ est dérivable sur $I$ ssi $f$ est dérivable en tout point de $I$.\\
+    Si $f$ est dérivable sur $I$, on définit la fonction dérivée, notée $f'$.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $I$ un intervalle de $\R$, $E$ un $\K$-evdf et $f:I\to E$.\\
+    Si $f$ est dérivable sur $I$, alors $f$ est continue sur $I$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $I$ un intervalle de $\R$, $E$ un $\K$-evdf de dimension $n$, $\B=(e_1,...,e_n)$ une base de $E$.\\
+    Soit $f:I\to E$, et $f_1,...,f_n$ ses applications coordonnées.\\
+    Alors $f$ est dérivable sur $I$ ssi $\forall i \in \lb1,n\rb$, $f_i$ est dérivable sur $I$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Pour $t\in\R$, on pose $f(t)=(\sin t, t + e^t, \cos t)$.\\
+    Alors $f$ est dérivable sur $\R$ et $\forall t \in \R, ~ f'(t)=(\cos t, 1 + e^t, -\sin t)$.
+    \begin{equation*}
+        \forall t \in \R, ~ f(t) = \begin{pmatrix}e^t & t^2 & 0 \\ t+t^3 & 0 & \sh(t)\end{pmatrix} \ra f'(t) = \begin{pmatrix}e^t & 2t & 0 \\ 1+3t^2 & 0 & \ch(t)\end{pmatrix}
+    \end{equation*}
+\end{ex}
+
+\begin{defi}{}{}
+    Soit $f:I\subset\R\to E$ avec $E$ un $\K$-evdf.\\
+    Alors $f$ est $\cursive{C}^1$ sur $I$ ssi $f$ est dérivable sur $I$ et $f'$ est continue sur $I$.
+\end{defi}
+
+\subsection{Opérations sur les fonctions \texorpdfstring{$\cursive{C}^1$}{Lg}.}
+
+\begin{prop}{}{}
+    Soit $I$ un intervalle de $\R$, $E$ un $\K$-evdf, $f,g:I\to E$ et $\l\in\K$.\\
+    Si $f$ et $g$ sont $\cursive{C}^1$ sur $I$, alors $f+\l g$ aussi et $(f+\l g)' = f' + \l g'$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $I$ un intervalle de $\R$, $E$ et $F$ deux $\K$-evdf. Soit $f:I\to E$ et $L\in\L(E,F)$.\\
+    Alors $L\circ f : I \to f$, $f\in\cursive{C}^1(I)\ra L\circ f \in \cursive{C}^1(I)$ et $(L \circ f)' = L\circ f'$.
+    \tcblower
+    Soit $a\in I$. $(L\circ f)(a+h)=L(f(a+h))=L(f(a)+hf'(a)+h\e(h))$ avec $\e(h)\to 0_E$.\\
+    Puis par linéarité : $(L\circ f)(a+h)=L(f(a))+hL(f'(a))+hL(\e(h))=(L\circ f)(a)+h(L\circ f')(a)+h\e'(h)$.\\
+    Avec $\e'(h)=L(\e(h))\to 0$ car $L$ est continue en 0 (linéaire en dimension finie).\\
+    On a montré que $L\circ f$ admet un DL à l'ordre 1 en $a$, donc $(L\circ f)'=L\circ f'$.\\
+    Enfin, $(L\circ f)'$ est continue sur $I$ comme composée de deux fonctions continues sur $I$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $f(t)=M(t)$ pour tout $t\in I$, avec $M=(m_{i,j}(t))\in\M_n(\K)$. Alors :
+    \begin{equation*}
+        L : \begin{cases}\M_n(\K) &\to \quad \K \\ M & \mapsto \quad \Tr(M)\end{cases} \quad \nt{ est linéaire.}
+    \end{equation*}
+    Alors $f$ est $\cursive{C}^1$ sur $I$ alors $t\mapsto \Tr(M)(t)$ est encore $\cursive{C}^1$ sur $I$ et $(\Tr(M))'=\Tr(M')$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{Produit de fonctions de classe $\cursive{C}^1$}{}
+    Soit $I$ un intervalle de $\R$, $E,F,G$ des $\K$-evdf.\\
+    Soient $f:I\to E$, $g:I\to F$ et $B:E\times F \to G$ bilinéaire.\\
+    Si $f$ et $g$ sont de classe $\cursive{C}^1$ sur $I$, alors $B(f,g)$ est $\cursive{C}^1$ sur $I$ et $(B(f,g))'=B(f',g)+B(f,g')$.
+    \tcblower
+    Soit $a\in I$, \begin{align*}
+        B(f(a+h),g(a+h))&=B(f(a)+hf'(a)+h\e_1(h), g(a)+hg'(a)+h\e_2(h))\\
+        &=B(f(a),g(a)) + hB(f'(a),g(a)) + hB(f(a),g'(a)) + h\e(h)
+    \end{align*}
+    \small{Avec $\e(h)=B(f(a),\e_2(h))+hB(f'(a),g'(a))+hB(f'(a),\e_2(h))+hB(\e_1(h),g(a))+hB(\e_1(h),g'(a))+hB(\e_1(h),\e_2(h))\to0$.}
+    \normalsize Finalement, $B(f(a+h),g(a+h))=B(f(a),g(a))+hv+h\e(h)$ avec $\e(h)\to0$ et $v=B(f'(a),g(a))+B(f(a),g'(a))$.\\
+    Donc $B(f,g)$ admet un DL à l'ordre 1 en $a$ i.e. $B(f,g)$ dérivable en $a$.\\
+    De plus, $(B(f,g))'(a)=v=B(f'(a),g(a))+B(f(a),g'(a))$. Ceci est vrai pour tout $a\in I$.\\
+    Enfin, $f',g,f,g'$ sont toutes continues sur $I$, donc $B(f',g)+B(f,g')$ est continue sur $I$, donc $\cursive{C}^1$
+\end{prop}
+
+\begin{app}{}{}
+    \begin{enumerate}
+        \item Soit $E$ un $\K$-evdf, $B:(x,\l)\mapsto \l x$, $B$ est bilinéaire (axiome).
+        \item $f:t\mapsto f(t)$ et $\l:t\mapsto \l(t)$ $\cursive{C}^1$, alors $t\mapsto \l(t)f(t)$ $\cursive{C}^1$.
+        \item Soit $E$ euclidien, $F=E$, $G=\R$, alors $(x,y)\mapsto \langle x,y\rangle$ est bilinéaire.
+    \end{enumerate}
+\end{app}
+
+\begin{ex}{}{}
+    Soit $A:I\to\M_n(\K), ~ t\mapsto A(t)$, $\cursive{C}^1$ sur l'intervalle $I$. Calculer $(A^k)'$ pour tout $k\in\N$.
+    \tcblower
+    Déjà, $\forall k \in \N, ~ A^k$ est $\cursive{C}^1$ comme produit de fonctions $\cursive{C}^1$.\\
+    Puis $(A^2)'=A'A+AA'$, $(A^3)'=A'A^2 + AA'A + A^2A'$.\\
+    Donc $\forall k \in \N^*, ~ (A^k)' = \sum_{i=0}^{k-1}A^iA'A^{k-1-i}$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $E_1,...,E_n$ et $F$ des $\K$-evdf, et $I$ un intervalle de $\R$.\\
+    Pour tout $i\in\lb1,n\rb$, on pose $f_i:I\to E$ de classe $\cursive{C}^1$ sur $I$ et :
+    \begin{equation*}
+        M : \begin{cases}E_1\times...\times E_n \quad \to \quad F \\ t \quad \mapsto \quad M(f_1(t),...,f_n(t))\end{cases} \quad n\nt{-linéaire}.
+    \end{equation*}
+    Alors $M(f_1,...,f_n)$ est de classe $\cursive{C}^1$ sur $I$ et :
+    \begin{equation*}
+        (M(f_1,...,f_n))' = M(f_1',...,f_n) + ... + M(f_1,...,f_i',...,f_n) + ... + M(f_1,...,f_n')
+    \end{equation*}
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{corr}{}{}
+    Soit $I$ un intervalle de $\R$, $A:I\to\M_n(\K)$ de classe $\cursive{C}^1$ sur $I$.\\
+    Notons $C_1,...,C_n$ les vecteurs colonnes de $A$, alors $\det(A)$ est $\cursive{C}^1$ sur $I$.
+    \begin{equation*}
+        (\det A)' = \det(C_1',...,C_n) + ... + \det(C_1,...,C_i',...,C_n) + ... + \det(C_1,...,C_n').
+    \end{equation*}
+\end{corr}
+
+\vspace*{-0.7cm}
+
+\begin{exercice}{}{}
+    Soit $n\in\N^*$. Calculer, pour tout $x\in \R$ :
+    \begin{equation*}
+        D_n(x) = \begin{vmatrix}x & 1 & 0 & ... & ... & 0 \\ \frac{x^2}{2!} & \ddots & \ddots & & & \vdots \\ \vdots & \ddots & \ddots & \ddots & & \vdots \\ \vdots & & \ddots & \ddots & \ddots & 0 \\ \vdots & & & \ddots & \ddots & 1 \\ \frac{x^n}{n!} & \dots & \dots & \dots & \frac{x^2}{2!} & x \end{vmatrix}
+    \end{equation*}
+    \tcblower
+    On a $\forall x \in \R, ~ \forall n \in \N^*, ~ D_n(x)=\det(A_n)(x)$ donc $D_n$ est $\cursive{C}^1$ sur $\R$.\\
+    Alors $\forall x \in \R, ~ D_n'(x)=\sum\det(C_1(x),...,C_i'(x),...,C_n(x))$; or $C_1'=C_2, ~ C_2'=C_3, ~ ..., ~ C_{n-1}'=C_n$.
+    Donc $D_n'(x)=\det(C_2(x),C_2(x),...) + \det(C_1(x),C_3(x),C_3(x),...) + ... + \det(C_1(x), ..., C_{n-1}(x),C'_n(x))$.\\
+    Finalement, en enlevant les déterminants nuls, $D'_n(x)=\det(C_1(x),...,C_n'(x))=\Delta_{n,n}=D_{n-1}(x)$.\\
+    En posant $\forall x \in \R, ~ D_0(x)=1, ~ \forall n \geq 1, ~ \forall x \in \R, ~ D_n'(x)=D_{n-1}(x)$.\\
+    De plus, $\forall n\geq 1, ~ \forall x \in \R, ~ D_n(x)=\sum_{\s\in S_n}\e(\s)\prod_{i=1}^n a_{\s(i),i}$, c'est un polynôme en $x$.\\
+    Puis par récurrence sur $n$, $\deg(D_n)\leq n$, vrai pour $n=0$ et $n=1$ puis $D_n'=D_{n-1}\in\R_{n-1}[X]$ donc $D_n\in\R_n[X]$.\\
+    Puis par la formule de Taylor, $\forall n \geq 1, ~ D_n=\sum_{k=0}^n\frac{D_n^{(k)}(0)}{k!}X^k$.\\
+    Or $D_n'=D_{n-1}, ~ D''=D_{n-2}, ~ ..., ~ D_n^{(k)}=D_{n-k}$ pour $k\leq n$.\\
+    Donc $\forall k \leq n, ~ D_n^{(k)}(0)=D_{n-k}(0)=0$ si $k<n$, sinon c'est égal à 1. Finalement, $D_n(x)=\frac{x^n}{n!}$.
+\end{exercice}
+
+\subsection{Dérivées successives.}
+
+\begin{prop}{}{}
+    Soient $f,g:I\to E$ avec $E$ un $\K$-evdf et $I$ un intervalle de $\R$, et $\l\in\K$.
+    \begin{enumerate}
+        \item $\forall n \in \N, ~ f,g\in\cursive{C}^n(I) \ra (f+\l g) \in \cursive{C}^n(I) \et (f+\l g)^{(n)}=f^{(n)}+\l g^{(n)}$.
+        \item $f,g \in \cursive{C}^{\infty}(I) \ra (f+\l g)\in\cursive{C}^{\infty}(I)$.
+    \end{enumerate}
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $f:I\to E$ avec $I$ un intervalle de $\R$ et $E$ un $\K$-evdf, et $L\in\L(E,F)$.
+    \begin{enumerate}
+        \item $\forall n \in \N,~f\in\cursive{C}^n(I)\ra L\circ f\in\cursive{C}^n(I) \et (L\circ f)^{(n)}=L\circ f^{(n)}$.
+        \item $f\in\cursive{C}^\infty(I) \ra L\circ f \in \cursive{C}^{\infty}(I)$.
+    \end{enumerate}
+    \tcblower 
+    Par récurrence sur $n$. Vrai pour $n=0$, $n=1$.\\
+    Soit $n\in\N$ tel que $\P(n)$. Soit $f\in\cursive{C}^{n+1}(I)$, alors $f'$ est $\cursive{C}^n(I)$.\\
+    Par hypothèse, $L\circ f'\in\cursive{C}^n(I)$ et $(L\circ f')^{(n)}=L\circ (f')^{(n)}=L\circ f^{(n+1)}$.\\
+    Puis d'après $\P(1), ~ (L\circ f')=(L\circ f)'$, donc $(L\circ f)'\in\cursive{C}^n(I)$ i.e. $(L\circ f)\in \cursive{C}^n(I)$.\\
+    Alors $(L\circ f)^{(n+1)}=((L\circ f)')^{(n)}=(L\circ f')^{(n)}=L\circ f^{(n+1)}$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{Formule de Leibniz}{}
+    Soient $E,F,G$ des $\K$-evdf, et $I$ un intervalle de $\R$.\\
+    Soit $f:I\to E, ~ g:I\to F, ~ B:E\times F \to G; ~ (x,y)\mapsto B(x,y)$ bilinéaire.
+    \begin{enumerate}
+        \item $\forall n \in \N, ~ f,g\in\cursive{C}^n(I) \ra B(f,g)\in\cursive{C}^n(I) \et B(f,g)^{(n)}=\sum_{k=0}^n\binom{n}{k}B(f^{(k)},g^{(n-k)})$.
+        \item $f,g\in\cursive{C}^{\infty}(I)\ra B(f,g)\in\cursive{C}^{\infty}(I)$.
+    \end{enumerate}
+    \tcblower
+    Par récurrence sur $n$. Vrai pour $n=0$, $n=1$.\\
+    Soit $n\in\N$ tel que $\P(n)$. Soient $f,g\in\cursive{C}^{n+1}(I)$, alors $f,g\in\cursive{C}^1(I)$ et $B(f,g)'=B(f',g)+B(f,g')$.\\
+    Puis $f',g,f,g'\in\cursive{C}^n(I)$, et par hypothèse : $B(f',g),B(f,g')\in\cursive{C}^n(I)$.\\
+    Par combinaisons linéaires, $B(f,g)'\in\cursive{C}^n(I)$ i.e. $B(f,g)\in\cursive{C}^{n+1}(I)$, puis $B(f,g)^{(n+1)}=(B(f,g)^{(n)})'$.
+    \begin{align*}
+        B(f,g)^{(n+1)} &= (B(f,g)^{(n)})' = \left( \sum_{k=0}^n\binom{n}{k}B(f^{(k)}, g^{(n-k)}) \right)'\\
+        &=\sum_{k=0}^n\binom{n}{k}\left( B(f^{(k)}, g^{(n-k)}) \right) ' = \sum_{k=0}^n\binom{n}{k}(B(f^{(k+1)},g^{(n-k)}) + B(f^{(k)}, g^{(n+1-k)}))\\
+        &=\sum_{k=0}^n\binom{n}{k}B(f^{(k+1)},g^{(n-k)})+\sum_{k=0}^n\binom{n}{k}B(f^{(k)},g^{(n+1-k)})\\
+        &=\sum_{k=1}^{n+1}\binom{n}{k-1}B(f^{(k)}, g^{(n-k+1)}) + \sum_{k=0}^n\binom{n}{k}B(f^{(k)},g^{(n+1-k)})\\
+        &=\sum_{k=1}^n\left( \binom{n}{k-1} + \binom{n}{k} \right)B(f^{(k)},g^{(n+1-k)}) + B(f^{(n+1)}, g^{(0)}) + B(f^{(0)}, g^{(n+1)})\\
+        &=\sum_{k=1}^n\binom{n+1}{k}B(f^{(k)},g^{(n+1-k)}) + B(f^{(n+1),g}) + B(f,g^{(n+1)})\\
+        &=\sum_{k=0}^{n+1}\binom{n+1}{k}B(f^{(k)},g^{(n+1-k)}).
+    \end{align*} 
+\end{prop}
+
+\begin{ex}{}{}
+    Calculer les dérivées successives de $f_n:x\mapsto x^{n-1}\ln(x)$.
+    \tcblower
+    Déjà, $f_n$ est $\cursive{C}^{\infty}$ sur $]0,+\infty[$ comme produit de deux fonctions $\cursive{C}^\infty$.\\
+    Posons $u:x\mapsto x^{n-1}$. Alors $\forall k > n-1, ~ u^{(k)}(x)=0$ et $\forall k \in \lb0,n-1\rb, ~ u^{(k)}(x)=\frac{(n-1)!}{(n-1-k)!}x^{n-1-k}$.\\
+    Posons $v:x\mapsto \ln(x)$. Alors $\forall k \in \N^*, ~ \ln^{(k)}(x)=(-1)^{k-1}\frac{(k-1)!}{x^k}$.
+    \begin{align*}
+        f_n^{(n)}(x)&=\sum_{k=0}^n\binom{n}{k}u^{(k)}(x)v^{(n-k)}(x)=\sum_{k=0}^{n-1}\binom{n}{k}\frac{(n-1)!}{(n-1-k)!}x^{n-1-k}(-1)^{n-k-1}\frac{(n-k-1)!}{x^{n-k}}\\
+        &=\sum_{k=0}^{n-1}\binom{n}{k}(n-1)!(-1)^{n-k-1}x^{-1}=\frac{(n-1)!}{x}\left(-\sum_{k=0}^{n}\binom{n}{k}(-1)^{n-k}+1\right) = \frac{(n-1)!}{x}. 
+    \end{align*}
+\end{ex}
+
+\section{Intégration vectorielle.}
+
+\subsection{Généralités.}
+
+\begin{defi}{}{}
+    Soit $E$ un $\K$-evdf de dimension $n$, $\B=(e_1,...,e_n)$ base de $E$.\\
+    Soit $I=[a,b]$ un segment de $\R$, et $f:I\to E$ cpm sur $I$. Notons $f_1,...,f_n$ les applications coordonnées.
+    \begin{equation*}
+        \int_a^b f \nt{ est le \bf{vecteur} } \int_a^b f = \sum_{i=1}^n\left( \int_a^b f_i \right)e_i.
+    \end{equation*} 
+    Il ne dépend pas de la base choisie (admis).
+\end{defi}
+
+\begin{defi}{Conventions.}{}
+    Soit $f:[a,b]\to E$ cpm sur $[a,b]$.
+    \begin{equation*}
+        \int_a^a f = 0 \et \int_b^a f = -\int_a^b f.
+    \end{equation*}
+\end{defi}
+
+\begin{exercice}{}{}
+    Soit $\B'(e_1',...,e_n')$ une autre base de $E$, et $f_1',...,f_n'$ les nouvelles applications coordonnées, alors :
+    \begin{equation*}
+        \sum_{i=1}^n\left( \int_a^b f_i \right)e_i = \sum_{i=1}^n\left( \int_a^bf'_i \right)e_i'.
+    \end{equation*}
+\end{exercice}
+
+\begin{ex}{}{}
+    \begin{equation*}
+        f(t) = \begin{pmatrix}t&2t&t^3\\0&e^t&1\end{pmatrix} \quad \ra \quad \int_0^1f(t)\dt = \begin{pmatrix}\int_0^1t\dt & \int_0^1(2t)\dt & \int_0^1t^3\dt \\ 0 & \int_0^1e^t\dt & 1\end{pmatrix}.
+    \end{equation*}
+\end{ex}
+
+\begin{prop}{Linéarité de l'intégrale.}{}
+    Soient $f,g:[a,b]\to E$ cpm sur $[a,b]$ et $\l\in\K$.
+    \begin{equation*}
+        \int_a^b(f+\l g) = \int_a^b f + \l\int_a^bg.
+    \end{equation*}
+\end{prop}
+
+\begin{prop}{Chasles.}{}
+    Soit $f:[a,b]\to E$ cpm sur $[a,b]$ et $c\in[a,b]$.
+    \begin{equation*}
+        \int_a^b f = \int_a^c f + \int_c^b f.
+    \end{equation*}
+\end{prop}
+
+\begin{thm}{}{}
+    Soit $f:[a,b]\subset\R\to E$ avec $E$ un $\K$-evdf, cpm sur $[a,b]$, et $L\in\L(E,F)$. Alors $L\circ f$ est cpm sur $[a,b]$ et :
+    \begin{equation*}
+        \int_a^b L\circ f = L\left( \int_a^b f \right)
+    \end{equation*} 
+    \tcblower
+    Vérifions $L\circ f$ cpm sur $[a,b]$.\\
+    Par hypothèse, $\exists \s=\{x_0,...,x_n\}$ subdivision de $[a,b]$ telle que
+    \begin{center}
+        $f_{|]x_i,x_{i+1}[}$ est continue et prolongeable par continuité sur $[x_i,x_{i+1}]$.
+    \end{center}
+    Or $L\in\L(E,F)$ et $\dim E < \infty$, donc $L$ est continue sur $E$.\\
+    Donc $L\circ f_{|]x_i,x_{i+1}[}$ est continue par composition et prolongeable par continuité sur $[x_i,x_{i+1}]$.\\
+    Vérifions maintenant l'égalité des intégrales.\\
+    Soit $n=\dim E$, $\B=(e_1,...,e_n)$ base de $E$; $p=\dim F$ et $\B'=(e_1',...,e_p')$ base de $F$.
+    \begin{equation*}
+        \Mat_{\B,\B'}(L) = (m_{i,j}) \ra \forall i \in \lb1,n\rb, ~ L(e_i) = \sum_{j=1}^p m_{j,i}e_j'
+    \end{equation*}
+    \begin{align*}
+        L\left( \int_a^b f \right) &= L\left( \sum_{i=1}^n e_i \int_a^b f_i \right) = \sum_{i=1}^n\left( \int_a^b f_i \right)L(e_i) = \sum_{i=1}^n \left( \int_a^b \right)\left( \sum_{j=1}^p m_{j,i}e_j' \right)\\
+        &= \sum_{j=1}^p\left( \sum_{i=1}^n \left( \int_a^b  f_i\right) m_{j,i} \right)e_j'
+    \end{align*}
+    Or :
+    \begin{equation*}
+        L\circ f(t) = L\left( \sum_{i=1}^n f_i(t)e_i \right) = \sum_{j=1}^p\left( \sum_{i=1}^n f_i(t) m_{j,i} \right)e_j'
+    \end{equation*}
+    Donc :
+    \begin{equation*}
+        \int_a^b L\circ f = \sum_{i=1}^p\left( \int_a^b \sum_{i=1}^n f_i(t) m_{i,j}\dt \right)e_j' = \sum_{j=1}^p\left( \sum_{i=1}^n \left( \int_a^b f_i\right)m_{i,j} \right)e_j'.
+    \end{equation*}
+    On a bien l'égalité.
+\end{thm}
+
+\begin{prop}{}{}
+    Soit $f:[a,b]\to E$ cpm sur $[a,b]$ avec $E$ un $\K$-evdf muni d'une norme $\|\.\|$.
+    \begin{equation*}
+        \left\|\int_a^b f\right\| \leq \int_a^b\|f\| \leq (b-a)\sup\|f(t)\|
+    \end{equation*}
+    \tcblower
+    En effet, $\|f\|$ est encore cpm sur $[a,b]$ avec la même subdivision adaptée à $f$, car $\|\.\|$ est 1-lipschitzienne.\\
+    Déjà, $\int_a^b \|f\|$ est bien définie, puis $f$ cpm sur un segment donc bornée, donc la deuxième inégalité est triviale.\\
+    Pour la première inégalité : si $f$ est constante sur $[a,b]$, alors c'est trivial.\\
+    Si $f$ est en escalier sur $[a,b]$, soit $\s=\{x_0,...,x_n\}$ adaptée : $\forall i \in \lb0,n-1\rb, ~ f_{|]x_i,x_{i+1}[}=\l_i\in E$.
+    \begin{equation*}
+        \int_a^b f = \sum_{i=0}^{n-1}\int_{x_i}^{x_{i+1}}f = \sum_{i=0}^{n-1}(x_{i+1}-x_i)\l_i.
+    \end{equation*}
+    Alors :
+    \begin{equation*}
+        \left\|\int_a^b f \right\| = \left\|\sum_{i=0}^{n-1}(x_{i+1}-x_i)\l_i\right\| \leq \sum_{i=0}^{n-1}(x_{i+1}-x_i)\|\l_i\| \leq \sum_{i=1}^{n-1}\int_{x_i}^{x_{i+1}}\|f\| = \int_a^b\|f\|
+    \end{equation*}
+    Cas général : si $f$ est cpm sur $[a,b]$, d'après le théorème de Weierstraß, $f$ est limite uniforme d'une suite de fonctions en escalier sur $[a,b]$.
+    \begin{equation*}
+        \phi_n \overset{cu}{\to} f \nt{ sur } [a,b] \quad (i.e. \|\phi_n-f\|_{\infty}^{[a,b]}\to 0).
+    \end{equation*}
+    En effet, $\forall t \in [a,b], ~ \left|\|\phi_n\|(t) - \|f\|(t)\right|\leq\|\phi_n(t)-f(t)\| \leq \|\phi_n - f\|_{\infty}^{[a,b]}$.\\
+    Par passage au sup : $\|\|\phi_n\|-\|f\|\|_{\infty}^{[a,b]}\leq\|\phi_n-f\|_{\infty}^{[a,b]}$.\\
+    Par encadrement : $\|\|\phi_n\|-\|f\|\|_{\infty}^{[a,b]}\to 0$ i.e. $\|\phi_n\|\overset{cu}{\to}\|f\|$ sur $[a,b]$.
+    \begin{equation}
+        \forall n \in \N, ~ \left\|\int_a^b\phi_n\right\| \leq \int_a^b \|\phi_n\| \quad (\nt{résultat précédent})
+    \end{equation}
+    Or $\phi_n \overset{cu}{\to} f$ sur $[a,b]$ donc par thm, $\int_a^b\phi_n \to \int_a^b f$.\\
+    De même, $\|\phi_n\|\overset{cu}{\to} \|f\|$ sur $[a,b]$ donc $\int_a^b\|\phi_n\| \to \int_a^b \|f\|$.\\
+    Par passage à la limite dans (1) et en utilisant la continuité de l'application norme :
+    \begin{equation*}
+        \left\|\int_a^b f\right\| \leq \int_a^b\|f\|.
+    \end{equation*}
+\end{prop}
+
+\begin{thm}{Sommes de Riemann.}{}
+    Soit $f$ cpm sur $[a,b]$ à valeurs dans $E$. Alors :
+    \begin{equation*}
+        \lim_{n\to+\infty}\frac{b-a}{n}\sum_{k=0}^n f\left( a + k\frac{b-a}{n} \right) = \int_a^b f(t)\dt
+    \end{equation*}
+\end{thm}
+
+\pagebreak
+
+\begin{ex}{}{}
+    Calculer :
+    \begin{equation*}
+        \lim_{n\to+\infty} n\sum_{k=0}^n\frac{1}{k^2+n^2}.
+    \end{equation*}
+    \tcblower
+    Soit $n\in\N^*$.
+    \begin{equation*}
+        n\sum_{k=0}^n\frac{1}{k^2+n^2} = \frac{1}{n}\sum_{k=0}^n\frac{1}{1+\left( \frac{k}{n} \right)^2} = \frac{1}{n}\sum_{k=0}^nf\left( \frac{k}{n} \right).
+    \end{equation*}
+    On reconnait une somme de Riemann, et $f:x\mapsto \frac{1}{1+x^2}$ est cpm sur $[0,1]$, donc par théorème :
+    \begin{equation*}
+        \lim_{n\to+\infty}\frac{1}{n}\sum_{k=0}^nf\left( \frac{k}{n} \right) = \int_0^1 f = \left[ \arctan x \right]_0^1 = \frac{\pi}{4}.
+    \end{equation*}
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\subsection{Intégrales fonctions de la borne supérieure.}
+
+\begin{prop}{}{}
+    Soit $f:I\to E$ continue sur $I$, $E$ un $\K$-evdf et $I$ un intervalle borné de $\R$. Soit $a\in I$.
+    \begin{equation*}
+        \forall x \in I, ~ F(x) = \int_a^x f(t)\dt, ~ \nt{ alors } F\in\cursive{C}^1(I) \et F'(x)=f(x).
+    \end{equation*}
+    \tcblower
+    Montrons que $\frac{F(x_0+h)-F(x_0)}{h}\xrightarrow[h\to 0]{}f(a)$, avec $x_0\in I$. On prend $\|\.\|$ une norme quelconque de $E$.
+    \begin{equation*}
+        F(x_0 + h) - F(x_0) = \int_a^{x_0+h}f(t)\dt - \int_a^{x_0}f(t)\dt = \int_{x_0}^{x_0+h}f(t)\dt.
+    \end{equation*}
+    Soit $\e>0$, $f$ est continue en $x_0$, donc $\exists \eta > 0, ~ \forall t \in [x_0-\eta,x_0+\eta], ~ \|f(t)-f(x_0)\|<\e$.\\
+    Si $h\in]0,\eta[$, alors $\forall t \in [x_0, x_0+h]n ~ |t-x_0|\leq h<\a$ puis $\|f(t)-f(x_0)\|<\e$. Puis :
+    \begin{equation*}
+        \left\|\frac{F(x_0+h) - F(x_0)}{h} - f(x_0)\right\| = \frac{1}{h}\left\|\int_{x_0}^{x_0+h}f(t)-f(x_0)\dt\right\| \leq \frac{1}{h}\int_{x_0}^{x_0+h}\left\|f(t)-f(x_0)\right\|\dt < \e.
+    \end{equation*}
+    Finalement, $\forall t > 0, ~ \exists \eta > 0, ~ |h| < \eta \ra \left\| \frac{F(x_0 + h) - F(x_0)}{h}-f(x_0)\right\| < \e$.\\
+    Donc $F'(x_0)=f(x_0)$ puis $F\in\cursive{C}^1(I)$ et $F(a)=0$, c'est une primitive de $F$ s'annulant en $a$.\\
+    \bf{Unicité.} Soit $G$ une autre primitive de $f$ s'annulant en $a$.\\
+    Alors $(F-G)'=0$, donc $F-G$ est constante, alors $\forall x \in I, ~ F(x)-G(x)=F(a)-G(a)=0$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{corr}{}{}
+    Soit $f:[a,b]\to E$ continue sur $[a,b]$, $E$ un $\K$-evdf et $F$ une primitive de $f$ sur $[a,b]$. Alors $\int_a^b f = F(b)-F(a)$.
+    \tcblower
+    Déjà, toute fonction continue sur un intervalle borné de $\R$ possède une primitive. Soit $F$ une primitive de $f$ sur $[a,b]$, et $\forall x \in [a,b], ~ G(x)=\int_a^xf(t)\dt$, alors $G$ est la primitive de $f$ qui s'annule en $a$, puis $(G-F)'=G'-F'=f-f=0$ sur $[a,b]$ donc $G-F$ est constante sur $[a,b]$.\\
+    En particulier, $G(b)-F(b)=G(a)-F(a)$ i.e. $\in_a^b f = G(b) = F(b) - F(a)$.
+\end{corr}
+
+\begin{corr}{}{}
+    Soient $u$ et $v$ de classe $\cursive{C}^1$ sur $I$ et à valeurs dans $J$. Soit $f$ continue sur $I$.\\
+    On pose $\forall x \in I, ~ F(x)=\int_{u(x)}^{v(x)}f(t)\dt$, elle est $\cursive{C}^1(I)$ et $\forall x \in I, ~ F'(x)=v'(x)f(v(x))-u'(x)f(u(x))$.
+    \tcblower
+    Soit $a\in J$ et $\forall x \in J, ~ G(x)=\in_a^x f(t)\dt$.\\
+    Alors $\forall x \in I, ~ F(x)=\int_a^{v(x)}f(t)\dt-\int_a^{u(x)}f(t)\dt=G(v(x))-G(u(x))$ (Chasles).\\
+    Donc $F=G\circ v - G\circ u$, or $u,v\in\cursive{C}^1(I)$ et $G\in\cursive{C}^1(J)$ donc $F$ est $\cursive{C}^1$ sur $I$.\\
+    Et $F'=(G'\circ v)\times v' - (G'\circ u)\times u'=(f\circ v)\times v' - (f\circ u)\times u'$. 
+\end{corr}
+
+\begin{ex}{}{}
+    Trouver toutes les fonctions $f$ continues sur $\R$ telles que
+    \begin{equation*}
+        \forall x \in \R, ~ f(x) + \int_0^x(x-t)f(t)\dt = 1.
+    \end{equation*}
+    \tcblower
+    \bf{Analyse.} Soit $f$ une fonction qui convient.
+    \begin{equation*}
+        \forall x \in \R, ~ f(x) + \int_0^x(x-t)f(t)\dt = 1 \iff f(x) + x\underbrace{\int_0^xf(t)\dt}_{F(x)} - \underbrace{\int_0^xtf(t)\dt}_{G(x)} = 1
+    \end{equation*}
+    On dérive car $f$ est dérivable comme somme : $f(x)=1-xF(x)+G(x)$ puis $f'(x)=-F(x)$.\\
+    Donc $f'$ est à nouveau dérivable : $f''(x)=-f(x)$, donc $f$ est solution de $y''+y=0$, $y(0)=1$, $y'(0)=0$.\\
+    Donc par unicité du problème de Cauchy, $f=\cos$.\\
+    \bf{Synthèse.} La fonction $\cos$ convient.
+\end{ex}
+
+\begin{prop}{}{}
+    Soient $u:[a,b]\to E$, $v:[a,b]\to F$ de classes $\cursive{C}^1$, et $B:E\times F\to G$ bilinéaire. Alors :
+    \begin{equation*}
+        \int_a^b B(u', v) = \left[ B(u, v) \right]_a^b - \int_a^b B(u, v')\dt
+    \end{equation*}
+    \tcblower
+    On sait que $B(u,v)$ est $\cursive{C}^1$ sur $[a,b]$ et par la formule de Leibniz :
+    \begin{equation*}
+        B(u,v)' = B(u',v) + B(u,v') \ra \int_a^b B(u,v)' = \int_a^b B(u',v) + \int_a^b B(u,v')
+    \end{equation*}
+    Puis par le théorème fondamental de l'analyse :
+    \begin{equation*}
+        \int_a^b B(u,v)' = \left[ B(u,v) \right]_a^b. \ra \int_a^b B(u',v) = \left[ B(u,v) \right]_a^b - \int_a^b B(u,v').
+    \end{equation*}
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $u,v\in\cursive{C}^1$ par morceaux et continues sur $[a,b]$, à valeurs dans $\R$. Alors $\int_a^bu'v = \left[ uv \right]_a^b - \int_a^b uv'$.
+    \tcblower
+    Par hypothèse, $\exists \s = \{x_0, ..., x_n\}$ subdivision de $[a,b]$ tq $\forall i \in \lb0,n-1\rb, ~ u_{|]x_i,x_{i+1}[}$ soit $\cursive{C}^1$ sur $[x_i,x_{i+1}]$.\\
+    On peut supposer que $\s$ est adaptée à $u$ et à $v$ en prenant la réunion des deux subdivisions adaptées à $u$ et $v$.\\
+    Notons $u_i$ et $v_i$ les restrictions de $u$ et $v$ à $[x_i,x_{i+1}]$, qui sont $\cursive{C}^1$ par hypothèse. Par IPP :
+    \begin{equation*}
+        \int_a^b u'v = \sum_{i=0}^{n-1} \int_{x_i}^{x_{i+1}}u_i'v_i = \sum_{i=0}^{n-1}\left(\left[ u_iv_i \right]_{x_i}^{x_{i+1}} - \int_{x_i}^{x_{i+1}}u_iv_i' \right) = \sum_{i=0}^{n-1}\left( \left[ u_iv_i \right]_{x_i}^{x_{i+1}} -  \int_a^b uv'\right).
+    \end{equation*} 
+    Puis, en posant $u(x_i^+)=\lim_{x\to x_i^+}u(x)=u(x_i)$ par continuité :
+    \begin{align*}
+        \sum_{i=0}^{n-1} [u_iv_i]_{x_i}^{x_{i+1}}&=\sum_{i=0}^{n-1}\left( u(x_{i+1}^-)v(x_{i+1}^-) - u(x_i^+)v(x_i^+) \right)=\sum_{i=0}^{n-1}\left(u(x_{i+1})v(x_{i+1})-u(x_i)v(x_i)\right)\\
+        &=u(b)v(b)-u(a)v(a).
+    \end{align*}
+\end{exercice}
+
+\begin{exercice}{Lemme de Riemann-Lebesgue.}{}
+    Soit $f\in\cursive{C}^1([a,b],\R)$. Montrer que :
+    \begin{equation*}\lim_{n\to+\infty}\int_a^b f(t)\cos(nt)\dt=0.\end{equation*}
+    \tcblower
+    Par IPP, puisque $f$ et $\frac{\sin(nt)}{n}$ sont $\cursive{C}^1$ sur $[a,b]$ :
+    \begin{align*}
+        \left|\int_a^bf(t)\cos(nt)\dt\right|&\leq \left|\frac{1}{n}\left[ f(t)\sin(nt) \right]_a^b\right| + \left|\frac{1}{n}\int_a^b f'(t)\sin(nt)\dt\right|\\
+        &\leq \frac{1}{n}\left( |f(b)| + |f(a)| \right) + \frac{1}{n}\int_a^b\left|f'(t)\right|\dt \xrightarrow[n\to+\infty]{} 0.
+    \end{align*}
+\end{exercice}
+
+\begin{thm}{Inégalité des accroissements finis.}{}
+    Soient $f:[a,b]\to E$ et $\phi:[a,b]\to\R$ de classe $\cursive{C}^1$ telles que $\forall t \in ]a,b[, ~ \|f'(t)\|\leq\phi'(t)$.\\
+    Alors $\|f(b)-f(a)\|\leq \phi(b)- \phi(a)$.
+\end{thm}
+
+\pagebreak
+
+\subsection{Formules de Taylor.}
+
+\begin{thm}{Taylor avec reste intégral.}
+    Soit $f\in\cursive{C}^{n+1}([a,b],E)$.
+    \begin{equation*}
+        f(b) = \sum_{k=0}^n\frac{(b-a)^k}{k!}f^{(k)}(a) + \int_a^b\frac{(b-t)^n}{n!}f^{(n+1)}(t)\dt.
+    \end{equation*}
+    \tcblower
+    Par récurrence sur $n$.\\
+    \bf{Initialisation.} Soit $f\in\cursive{C}^1([a,b])$, $\int_a^b f'(t)\dt = \left[ f(t) \right]_a^b = f(b) - f(a) \ra f(b) = f(a) + \int_a^b f'(t)\dt$.\\
+    \bf{Hérédité.} Soit $f\in\cursive{C}^{n+1}([a,b])$. Par hypothèse de récurrence :
+    \begin{align*}
+        f(b) = \sum_{k=0}^n \frac{(b-a)^k}{k!}f^{(k)}(a) + \int_a^b\frac{(b-t)^n}{n!}f^{(n+1)}(t)\dt.
+    \end{align*}
+    Par IPP, puisque $f^{(n+1)}$ et $\frac{(b-t)^n}{n!}$ sont $\cursive{C}^1$, alors pour $B:(\l,x)\mapsto \l x$ bilinéaire :
+    \begin{align*}
+        \int_a^b \frac{(b-t)^n}{n!}f^{(n+1)}(t)\dt &= \left[ - \frac{(b-t)^{n+1}}{(n+1)!} f^{(n+1)}(t)\right]_a^b - \int_a^b\frac{(b-t)^{n+1}}{(n+1)!}f^{(n+2)}(t)\dt\\
+        &=\frac{(b-a)^{n+1}}{(n+1)!}f^{(n+1)}(a) + \int_a^b\frac{(b-t)^{n+1}}{(n+1)!}f^{(n+2)}(t)\dt
+    \end{align*}
+    On a le résultat.
+\end{thm}
+
+\vspace*{-0.7cm}
+
+\begin{thm}{}{}
+    Soit $f\in\cursive{C}^{n+1}([a,b],E)$ et $\|\.\|$ une norme sur $E$.
+    \begin{equation*}
+        \left\| f(b) - \sum_{k=0}^n\frac{(b-a)^k}{k!}f^{(k)}(a)\right\| \leq \frac{(b-a)^{n+1}}{(n+1)!}\left\| f^{(n+1)} \right\|_{\infty}^{[a,b]}
+    \end{equation*}
+    \tcblower
+    Déjà $f\in\cursive{C}^{n+1}$ donc $\|f^{(n+1)}\|$ est continue de $[a,b]$ dans $\R$ donc par TBA, $\|f^{(n+1)}\|_\infty^{[a,b]}$ bien défini.\\
+    Puis on utilise le théorème de Taylor avec reste intégral, et on majore le reste.
+\end{thm}
+
+\begin{exercice}{}{}
+    Montrer que $\forall x \geq 0, ~ \forall n \in \N, ~ e^x \geq 1 + x + \frac{x^2}{2!} + ... + \frac{x^n}{n!}$.
+    \tcblower
+    L'exponentielle est $\cursive{C}^{\infty}$ sur $\R$ donc on utilise Taylor avec reste intégral :
+    \begin{align*}
+        \forall n \in \N, ~ \forall x \geq 0, ~ e^x &= \sum_{k=0}^n \frac{x^k}{k!}e^{(k)}(0) + \int_0^x\frac{(x-t)^n}{n!}e^{(n+1)}(t)\dt= \sum_{k=0}^n\frac{x^k}{k!} + \int_0^x\frac{(x-t)^n}{n!}e^t\dt
+    \end{align*}
+    Le reste est plus grand que 0 par positivité de l'intégrale, donc $e^x \geq 1 + ... + \frac{x^n}{n!}$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Montrer que $\forall x > 0 ~ x-\frac{x^2}{2}\leq\ln(1+x)\leq x$.
+        \item Montrer que $\forall x \in \R, ~ |\sin x| \leq |x|$.
+        \item Montrer que $\forall x \in [0,\frac{\pi}{2}[, ~ \sin x \geq \frac{2}{\pi}x$.
+        \item Montrer que $\forall x \geq 0, ~ x - \frac{x^3}{3!} \leq \sin x \leq x - \frac{x^3}{3!} + \frac{x^5}{5!}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $\ln''(x)=-\frac{1}{x^2}<0$ pour tout $x>0$, donc $\ln$ est concave donc le graphe est sous sa tangente en 1.\\
+    Ainsi, $\ln(1+x)\leq (1+x) - 1 = x$. On écrit ensuite la formule de Taylor avec reste intégral :
+    \begin{equation*}
+        \ln(1+x) = x - \frac{x^2}{2} + \int_0^x \frac{(x-t)^2}{2!}\frac{2}{(1+t)^3}\dt=x-\frac{x^2}{2}+\int_0^x\frac{(x-t)^2}{(1+t)^3}\dt\geq x-\frac{x^2}{2}.
+    \end{equation*}
+    \boxed{2.} Théorème des accroissements finis :
+    \begin{equation*}
+        \forall x,y \in \R ~ |\sin x - \sin y| \leq |x-y|\sup|\sin'(t)| \leq |x-y|.
+    \end{equation*}
+    Donc $\sin$ est $1$-lipschitzienne, puis avec $y=0$, $|\sin x| \leq |x|$.\\
+    \boxed{3.} On a $\sin''(x)=-\sin(x)\leq0$ sur $[0,\frac{\pi}{2}]$, i.e. $\sin$ est concave sur $[0,\frac{\pi}{2}]$, elle est au dessus de ses cordes.\\
+    En particulier, elle est au dessus ce celle reliant $0$ et $\frac{\pi}{2}$ : $\forall x \in [0,\frac{\pi}{2}], ~ \sin(x)\geq\frac{2}{\pi}x$.\\
+    \boxed{4.} 
+\end{exercice}
+
+\vspace*{-0.7cm}
+
+\begin{thm}{Formule de Taylor-Young.}{}
+    Soit $f$ de classe $\cursive{C}^{n+1}$ sur un voisinage de $a$, à valeurs dans $E$, un $\K$-evndf.
+    \begin{equation*}
+        f(x) = \sum_{k=0}^n\frac{(x-a)^k}{k!}f^{(k)}(a) + (x-a)^n\e(x); ~ \nt{avec} ~ \e(x) \xrightarrow[x\to a]{} 0_E.
+    \end{equation*}
+    En particulier, si $f$ est $\cursive{C}^{\infty}$ au voisinage de $a$, $f$ admet un DL à tout ordre en $a$.
+    \tcblower
+    Soit $f\in\cursive{C}^n$ sur un voisinage de $a$. On peut donc écrire la formule de Taylor avec reste intégral :
+    \begin{align*}
+        f(x) &= \sum_{k=0}^{n-1}\frac{(x-a)^k}{k!}f^{(k)}(a) + \int_a^x\frac{(x-t)^{n-1}}{(n-1)!}f^{(n)}(t)\dt\\
+        &= \sum_{k=0}^{n-1}\frac{(x-a)^k}{k!}f^{(k)}(a) + \int_a^x \frac{(x-t)^{n-1}}{(n-1)!}\left( f^{(n)}(t) - f^{(n)}(a) \right)\dt + \int_0^x \frac{(x-t)^{n-1}}{(n-1)!}f^{(n)}(a)\dt\\
+        &= \sum_{k=0}^{n}\frac{(x-a)^k}{k!}f^{(k)}(a) + \underbrace{\int_a^x\frac{(x-t)^{n-1}}{(n-1)!}\left( f^{(n)}(t) - f^{(n)}(a) \right)\dt}_{A(x)}
+    \end{align*}
+    Soit $\e>0$. Comme $f^{(n)}$ est continue en $a$, $\exists \eta > 0, ~ \forall x \in [a-\eta,a+\eta], ~ \|f^{(n)}(x)-f^{(n)}(a)\| \leq \e$.\\
+    Donc $\forall x \in [a-\eta,a+\eta], ~ \forall t \in [a,x], ~ \|f^{(n)}(t) - f^{(n)}(a)\|\leq\e$. Puis :
+    \begin{equation*}
+        |x-a| \leq h \ra \|A(x)\| \leq \int_a^x \frac{|x-t|^{n-1}}{(n-1)!}\|f^{(n)}(t) - f^{(n)}(a)\|\dt\leq \e\int_a^x\frac{(x-t)^{n-1}}{(n-1)!}\dt = \e\frac{|x-a|^n}{n!}.
+    \end{equation*}
+    On a montré que : $\ds \forall \e > 0, ~ \exists \eta > 0 ~ |x-a|<\eta \ra \frac{\|A(x)\|}{|x-a|^n} \leq \frac{\e}{n!}$, donc $\ds \lim_{n\to\infty}\frac{A(x)}{(x-a)^n}=0$.\\
+    On a bien $A(x)=o(x-a)^n$.
+\end{thm}
+
+\section{Exercices de Khôlles.}
+
+\renewcommand*{\H}{\cursive{H}}
+\renewcommand*{\N}{\cursive{N}}
+
+\begin{exercice}{}{}
+    On note $\N=\{M\in\M_n(\K), ~ M^n = 0\}$ pour $n\geq 2$. Soit $\H$ un hyperplan de $\M_n(\K)$.\\
+    Montrer que $\GL_n(\K)\cap\H\neq\0$.
+    \tcblower
+    On suppose par l'absurde que $\GL_n(\K)\cap\H=\0$. Alors $I_n\notin\H$, donc $\M_n(\K)=\H\oplus\Vect(I_n)$.\\
+    Soit $N\in\N$, alors $\exists A \in \H, ~ N=A+\l I_n$. Puis il existe $T\in\T_n^+(\K), ~ N=PTP^{-1}=A+\l I_n$.\\
+    Alors $A=P(T-\l I_n)P^{-1}$, donc $\l=0$ car $A\notin\GL_n(\K)$. Donc $N=A\in\H$.\\
+    On a $\exists \phi \in \L(\M_n(\K),\K), ~ \H=\Ker(\phi)$. Et pour $i\neq j$, $E_{i,j}\in\N$.
+    \begin{equation*}
+        C=\begin{pmatrix}0&1&&(0)\\&\ddots\ddots&&\\(0)&&\ddots&1\\1&&&0\\\end{pmatrix}=\left( \sum_{i=1}^{n-1}E_{i,i+1} \right) + E_{n,1}.
+    \end{equation*}
+    Alors $\phi(C)=\sum_{i=1}^{n-1}\phi(E_{i,i+1})+\phi(E_{n,1})=0$ car $\N\subset\H$.\\
+    Puis $C\in\GL_n(\K)$ donc $C\in\H\cap\GL_n(\K)$ donc $\H\cap\GL_n(\K)\neq\0$.
+\end{exercice}
+
+\renewcommand*{\N}{\mathbb{N}}
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Pour $u\circ v = v\circ u$, montrer que $v(E_\l(u))\subset E_\l(u)$.
+        \item Soit $E$ un $\K$-evdf et $u\in\L(E)$ diagonalisable. Déterminer $\dim C_u$ où $C_u=\{v\in\L(E), ~ uv=vu\}$
+        \item Déterminer $\dim E$ où $E=\{u\in\L(\M_n(\R)), ~ \forall M \in \M_n(\R), ~ u(M^\top)=(u(M))^\top\}$.
+    \end{enumerate}
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $G$ un sous-groupe borné de $\GL_n(\C)$. 
+    \begin{enumerate}
+        \item Montrer que les valeurs propres des matrices de $G$ sont de module $1$.
+        \item Montrer que si $G\subset B(I_n,\sqrt{2})$, alors $G$ est trivial.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $A\in G$, $\exists P \in \GL_n(\C), ~ T\in\T_n^+(\C), ~ A=PTP^{-1}$ et $M$ la borne de $G$ pour la norme $\|\cdot\|_1$.\\
+    Alors $A^k=PT^kP^{-1}\in G$ car $G$ est un groupe.
+    \begin{equation*}
+        \sum_{i=1}^n\sum_{j=1}^n\left|[A^k]_{i,j}\right|\leq M \ra \sum_{\l\in\Sp(A)}|\l^k|\leq M \ra \forall k \in \N, ~ \forall \l \in \Sp(A), ~ |\l|^k\leq M.
+    \end{equation*}
+    Donc $|\l|\leq1$ et $|\l^{-1}|\leq1$ donc $1\leq|\l|$ donc $|\l|=1$.\\
+    \boxed{2.} Supposons $G\subset B(I_n,\sqrt{2})$. Soit $\l\in\Sp(\l)$ et $X$ une valeur propre.\\
+    Alors $|1-\l|\|X\|=\||\l-1|X\|=\|(A-I_n)X\|\leq\abs A-I_n\abs \|X\|<\sqrt{2}\|X\|$ car $|1-\l|<\sqrt{2}$ et $\forall k \in \N, ~ |1-\l^k|<\sqrt{2}$.\\
+    Supposons $\l\neq1$, on a $|\l|=1$ donc $\exists \theta\in]0,\pi], ~ \l=e^{i\theta}$.\\
+    Donc $|1-e^{ik\theta}|=2|\sin\frac{k\theta}{2}|=2\sin\frac{k|\theta|}{2}$. On prend $p\in[\frac{\pi}{2|\theta|},\frac{3\pi}{2|\theta|}]$ entier, alors $|1-\l^p|\geq\sqrt{2}$, absurde.
+\end{exercice}
+
+\end{document}

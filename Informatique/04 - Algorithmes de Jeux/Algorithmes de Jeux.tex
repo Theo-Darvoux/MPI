@@ -1,0 +1,160 @@
+\documentclass[french, 11pt]{article}
+
+\input{/home/theo/MP2I/setup.tex}
+
+\def\chapitre{4}
+\def\pagetitle{Algorithmes de Jeux.}
+
+\newcommand*{\Attr}{\nt{Attr}}
+
+\begin{document}
+
+\input{/home/theo/MP2I/title.tex}
+
+On se limite au cas des jeux d'accessibilité à deux joueurs.
+
+\begin{defi}{Jeu.}{}
+    Un jeu peut être vu comme un graphe où chaque sommet est un état possible du jeu.\\
+    Les arcs correspondent alors aux coups jouables.
+\end{defi}
+
+\vspace*{-0.3cm}
+
+\begin{defi}{Arène.}{}
+    On parle d'arène lorsqu'on a :\\
+    --- Un graphe $G=(S,A)$.\\
+    --- Deux ensembles $S_1$ et $S_2$ partitionnant $S$.\\
+    Lorsqu'on est sur un sommet de $S_i$, c'est au joueur $i$ de jouer.\\
+    Le jeu se termine lorsqu'aucun des joueurs ne peut jouer.\\
+    Pour savoir qui a gagné, on définit trois ensembles de sommets, un pour chaque joueur et un pour les nulles.\\
+    On parle de jeu d'accessibilité car l'issue de la partie est entièrement déterminée par l'état final.
+\end{defi}
+
+\vspace*{-0.3cm}
+
+\begin{defi}{Partie.}{}
+    Une partie depuis un sommet $s_0$ est un chemin de $s_0$ à un état de fin de partie.
+\end{defi}
+
+\vspace*{-0.3cm}
+
+\begin{defi}{Stratégie.}{}
+    Une \bf{stratégie} pour le joueur $i$ est une fonction $f_i$ de $S_i$ vers $S$ telle que $\forall s \in S_i, ~ (s_i, f_i(s_i))\in A$.\\
+    Si les deux joueurs ont une stratégie $f_i$, une partie selon ces stratégies depuis $s_0$ est :\\
+    $\hookrightarrow$ Un chemin $(s_i)\in S^\N$ tel que $\forall i \in \N, ~ (s_{i+1}) = f_i(s_i)$ si $s_i \in S_i$.\\
+    Une stratégie est dite \bf{gagnante} depuis $s_0$ si quelque soit la stratégie de l'autre joueur, une partie selon ces stratégies mène à la victoire.\\
+    Un sommet $s$ est une configuration gagnante pour le joueur $i$ s'il possède une stratégie gagnante depuis $s_0$.
+\end{defi}
+
+\vspace*{-0.3cm}
+
+\begin{defi}{Attracteur.}{}
+    On note $\Attr_k^i$ l'\bf{attracteur} du joueur $i$ de rang $k$ :
+    \begin{equation*}
+        \Attr_{k+1}^i=\Attr_k^i\cup\{s\in S_i\mid\exists t \in \Attr_k^i\et(s,t)\in A\}\cup\{s\in S_j\mid \forall(s,t)\in A, ~ t\in\Attr_k^i\}.
+    \end{equation*}
+    Et $\Attr_0^i=\{s\in S_i\mid d_+(s)=0\}$.\n
+    \bf{Calcul de l'attracteur.}\\
+    \begin{algorithm}[H]
+        \caption{Calcul de l'attracteur.}
+        \Entree{$G,S_i,S_j,i$}
+        $\Attr \gets \{s \in S_i \mid d_+(s)=0\}$.\\
+        \Tq{$\Attr$ a été modifié}{
+            Mettre à Jour $\Attr$.
+        }
+        \Retour{$\Attr$}.
+    \end{algorithm}
+    À chaque itération, le cardinal de $\Attr$ augmente. S'il reste constant, l'algorithme termine. Il est borné par $|S|$.\\
+    \bf{Correction.} Invariant de boucle : $\Attr$ n'est composé que de positions gagnantes.\\
+    Cet invariant donne l'inclusion de $\Attr$ dans l'ensemble des positions gagnantes.\\
+    Puisque la condition de la boucle est vérifiée à la fin, on peut en déduire qu'aucune position gagnante n'est prédécesseur d'un sommet de $\Attr$.\\
+    \bf{Complexité.} Initialisation en $O(|A|+|S|)$, mise-à-jour en $O(|A|+|S|)$, boucle en $O(|S|(|A|+|S|))$.\n
+    \bf{Comment accélérer la construction de $\Attr$ ?}\\
+    $\hookrightarrow$ Premier cas : $G$ est acyclique.\\
+    On peut construire un tri topologique. En considérant les sommets selon cet ordre, on a la garantie que tous ses successeurs ont déjà été traités. Pour chacun des sommets, on teste si on doit l'ajouter. Si un sommet est une position gagnante, il sera bien ajouté lors de son traitement. La complexité est en $O(|S|+|A|)$.\\
+    $\hookrightarrow$ Deuxième cas : $G$ est cyclique.\\
+    On réalise un parcours en profondeur depuis les sommets sans prédecesseurs. Pour les sommets de $S_i$, on les ajoute et on fait un appel récursif sur ses voisins. Pour les sommets de $S_j$, on veut le rajouter si tous ses prédécesseurs ont été ajoutés. On augmente $T[s]$ de 1 où $T$ est un tableau indiquant le nombre de prédécesseurs ajoutés.
+    \begin{algorithm}[H]
+        \caption{Calcul de l'attracteur.}
+        \Entree{$G,S_i,S_j,i$}
+        $d\gets$ Tableau des degrés.\\
+        $T\gets$ Tableau indiquant le nombre de prédécesseurs ajoutés.\\
+        $\Attr \gets$ Tableau renvoyé.\\
+        Deja\_traités $\gets$ Tableau des sommets traités.\\
+        $G'\gets$ graphe transposé.\\
+        \PourCh{$s\in S$}{
+            \Si{$d(s)=0$}{
+                Parcours en profondeur dans $G'$.
+            }
+        }
+        \Retour{$\Attr$}.
+    \end{algorithm}
+    Complexité en $O(|S|+|A|)$. On a donc une méthode permettant pour n'importe quel jeu de savoir si on est dans un position gagnante, et si oui, quel coup jouer.
+\end{defi}
+
+\begin{ex}{Jeu de Nim.}{}
+    On définit $N_n$ comme le jeu à $n$ batons où chaque joueur peut retirer $1,2$ ou $3$ batons à la fois, chacun son tour. Celui qui retire le dernier baton a gagné.\\
+    Pour $N_n$, le premier joueur a une stratégie gagnante ssi $n\not\equiv0[4]$.
+    \tcblower
+    La stratégie du joueur 1 est de retirer $k$ batons dans l'état $4n'+k$. Par récurrence :\\
+    \bf{Initialisation.} Supposons $n'=0$ et $k\in\lb1,3\rb$. La stratégie nous fait retirer tous les batons. Le joueur 1 l'emporte.
+    \bf{Hérédité.} Supposons la propriété vraie jusqu'au rang $n$. Quelque soit le nombre de batons que l'on retire, c'est comme si le joueur 2 était le premier joueur dans jeu à $n$ moins le nombre de batons retirés. Par hypothèse, il a une stratégie gagnante.\\ Sinon, on retire $k$ batons $n\equiv k[4]$, et par hypothèse, le joueur 2 n'a pas de stratégie gagnante. Quel que soit le nombre de batons qu'il retire, on aura un nombre total non divisible par 4. Par hypothèse de récurrence, la stratégie proposée est gagnante.
+    Par hypothèse de récurrence, le joueur 2 n'a pas de stratégie gagnante.
+\end{ex}
+
+\begin{defi}{Algorithme Min-Max.}{}
+    \begin{algorithm}[H]
+        \caption{Min-Max.}
+        \Entree{Configuration $c$, heuristique $h$, joueur $i$, profondeur $p$.}
+        \Si{$p=0$}{
+            \Retour{$h(c)$}.
+        }\Sinon{
+        $c'\gets$ successeur de $c$.\\
+         \Si{c'est à $i$ de jouer}{
+            \Retour{max(\texttt{Min-Max}($c'$, $h$, $i$, $p-1$))}.
+         }\Sinon{
+            \Retour{min(\texttt{Min-Max}($c'$, $h$, $i$, $p-1$))}.
+         }
+        }
+    \end{algorithm}
+    Pour trouver ce qui semble être le meilleur coup depuis $c$, il suffit de calculer argmax(Min-Max(c',h,i,p)).\\
+    Où argmax($f(i)$) est le $i\in I$ tel que $f(i)$ soit maximal.\\
+    En pratique, le nombre de noeuds à considérer est souvent exponentiel en $p$.\\
+    L'objectif est donc d'optimiser le calcul des différentes valeurs pour pouvoir augmenter la profondeur d'étude.\\
+    Pour le calcul d'un min, si on trouve une valeur inférieure au dernier min, on peut arrêter le calcul.\\
+    Pour le calcul d'un max, si on trouve une valeur supérieure au dernier max, on peut attêter le calcul.\\
+    On explore l'arbre seulement partiellement sans perdre en qualité de calcul.\\
+    Le temps d'exécution varie en fonction du nombre de fois où l'on élimine des branches, on parle d'élagage $\a-\b$.\\
+    On doit faire attention pour l'implémenter car il faut connaître des valeurs dans une autre partie de l'arbre.\\
+    \begin{algorithm}[H]
+        \caption{Élagage.}
+        \Entree{$c,h,i,p,a,b$}
+        \Si{$p=0$}{
+            \Retour{$h(c)$}
+        }\Si{c'est au joueur $i$ de jouer}{
+            maxi $\gets-\infty$.\\
+            \PourCh{$c'$ successeur de $c$}{
+                maxi $\gets$ \texttt{max}(maxi, \texttt{Elagage}$(c',h,i,p-1,$maxi$,b)$).\\
+                \Si{maxi $> b$}{
+                    \Retour{maxi}.
+                }
+            }
+            \Retour{maxi}.
+        }\Sinon{
+            mini $\gets+\infty$.\\
+            \PourCh{$c'$ successeur de $c$}{
+                mini $\gets$ \texttt{min}(mini, \texttt{Elagage}$(c',h,i,p-1,a,$mini$)$).\\
+                \Si{mini < a}{
+                    \Retour{mini}.
+                }
+            }
+            \Retour{mini}.
+        }
+    \end{algorithm}
+    Alors $a$ et $b$ indiquent l'intervalle $[a,b]$ dans lequel on cherche une valeur.\\
+    La qualité de l'élagage dépend de l'ordre dans lequel on considère les successeurs.\\
+    On aimerait pouvoir les traiter dans un ordre qui maximise le nombre de branches coupées.\\
+    On peut trier les successeurs selon l'heuristique, on peut affiner l'heuristique pour avoir une meilleure analyse...
+\end{defi}
+
+\end{document}

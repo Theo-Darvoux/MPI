@@ -1,0 +1,685 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{6}
+\def\pagetitle{Espaces Vectoriels Normés.}
+
+\input{setup.tex}
+
+\begin{document}
+
+\input{title.tex}
+
+\thispagestyle{fancy}
+
+\section{Limites, continuité.}
+
+\subsection{Limites.}
+
+\begin{defi}{}{}
+    Soient $(E,\|\cdot\|_E),(F,\|\cdot\|_F)$ deux evn, $A\subset E$, $f:A\to F$, $a\in\ov{A}$ et $l\in F$.
+    \begin{center}
+        $f$ admet une limite $l$ en $a$ ssi $\forall \e > 0, ~ \exists \a > 0, ~ \forall x \in A, ~ \|x-a\|_E < \a \ra \|f(x)-l\|_F < \e$.
+    \end{center}
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $f:A\subset E \to F$, $a\in\ov{A}$ et $l\in F$.
+    \begin{equation*}
+        \lim_{x\to a}f(x) = l \iff \forall V \in \m{V}(l), ~ \exists W \in \m{V}(a) ~ f(W\cap A)\subset V.
+    \end{equation*}
+    \tcblower
+    \boxed{\ra} Soit $V\in\m{V}(l)$ : $\exists r > 0, ~ B(l,r)\subset V$, puis par hypothèse, $\exists \a > 0, ~ \forall x \in A, ~ \|x-a\|_E<\a\ra\|f(x)-l\|_F<r$.\\
+    On pose $W=B(a,\a)$. On a $W$ voisinage de $A$ et pour $x\in W\cap A$, $f(x)\in B(l,r)\subset V$.\\
+    \boxed{\la} Soit $\e>0$, $V=B(l,\e)$ : $\exists W \in \m{V}(a), ~ f(W\cap A)\subset V$. Puis $\exists \a > 0, ~ B(a,\a)\subset W$.\\
+    On a $x\in A$ et $\|x-a\|_E<\a\ra x \in A \cap B(a,\a)\subset A \cap W \ra f(x)\in f(A\cap W)\subset V \ra \|f(x)-l\|_F<\e$.
+\end{prop}
+
+\pagebreak
+
+\begin{prop}{Caractérisation séquentielle de la limite.}{}
+    Soit $f:A\subset E\to F$, $a\in\ov{A}$ et $l\in F$.
+    \begin{equation*}
+        \lim_{x\to a}f(x) = l \iff \left[ \forall (u_n)_n \in A^\N, ~ \lim_{x\to+\infty}u_n = a \ra \lim_{n\to+\infty}f(u_n) = l \right].
+    \end{equation*}
+    \bf{Remarque.} Si $a\notin\ov{A}$, aucune suite d'éléments de $A$ ne converge vers $a$, il n'y a plus de contrainte sur la définition.
+    \tcblower
+    \boxed{\ra} Soit $(u_n)_n \in A^\N$ telle que $\lim u_n = a$. Soit $\e>0$, $\exists \a > 0, ~ \forall x \in A, ~ \|x-a\|_E < \a \ra \|f(x)-l\|_F \leq \e$.\\
+    Ensuite, $\exists N\in\N, ~ \forall n \in \N, ~ n\geq N \ra \|u_n-a\|_E < \a$, donc $n\geq N \ra \|f(u_n)-l\|_F<\e$. Donc $f(u_n)\to l$.\\
+    \boxed{\la} Par contraposée, supposons $\exists \e > 0, ~ \forall \a > 0, ~ \exists x \in A, ~ \|x-a\|_E < \a ~\et~ \|f(x)-l\|_F \geq \e$.\\
+    Alors $\exists \e > 0, ~ \forall n \in \N^*, ~ \exists x_n \in A, ~ \|x_n-a\|_E<\frac{1}{n} ~\et~ \|f(x_n)-l\|\geq\e$.\\
+    On a construit une suite $(x_n)_n$ d'éléments de $A$ telle que $\lim x_n=a$ et $f(x_n)\not\to l$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{Opérations sur les limites.}{}
+    \begin{enumerate}
+        \item $f,g:A\subset E \to F$, $a\in \ov{A}$, $l_1,l_2\in F$, $\l\in\K$.\\
+        Si $f$ admet $l_1$ pour limite en $a$, $g$ admet $l_2$ pour limite en $a$, $(f + \l g)$ admet $l_1+\l l_2$ comme limite en $a$.
+        \item $f,g:A\subset \to F$ avec $F$ une algèbre normée, $a\in\ov{A}$, $l_1,l_2\in F$.\\
+        Si $f$ admet $l_1$ pour limite en $a$, $g$ admet $l_2$ pour limite en $a$, $(fg)$ admet $l_1l_2$ comme limite en $a$.
+        \item $f:A\subset E \to F$, $g:B\subset F \to G$, $a\in\ov{A}$, $l\in F$, $l'\in G$.\\
+        Si $f$ admet $l$ pour limite en $a$, et $g$ admet $l'$ pour limite en $l$, alors $g\circ f$ admet une limite $l'$ en $a$.
+    \end{enumerate}
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{Continuité en un point.}{}
+    Soit $f:A\subset E\to F$ et $a\in A$.
+    \begin{center}
+        $f$ est continue en $a$ $\iff$ $\lim_{x\to a}f(x)=f(a)$.
+    \end{center}
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{Opérations sur les fonctions continues.}{}
+    Une combinaison linéaire de fonctions continues en $a$ est continue en $a$.\\
+    Un produit de fonctions continues en $a$ est continue en $a$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{Continuité sur un ensemble.}{}
+    Soit $f:A\subset E \to F$. On a $f$ continue sur $A$ ssi $f$ est continue en $a$ pour tout $a\in A$.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{thm}{}{}
+    Soient $E$ et $F$ deux evn, $A\subset E$. On note $\m{C}^0(A,F)$ l'ensemble des fonctions continues de $A$ dans $F$.\\
+    On a $\m{C}^0(A,F)$ est un espace-vectoriel, et si $F$ est une algèbre normée, alors $\m{C}^0(A,F)$ est une algèbre.
+\end{thm}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $(E,\|\cdot\|)$ un evn et $f:x\mapsto\|x\|$ continue sur $E$.\\
+    Alors $\forall a \in E, ~ \lim a_n = a \ra \lim \|a_n\| = \|a\|$.
+    \tcblower
+    Soit $a\in E$. On vérifie la caractérisation séquentielle de la continuité en $a$ :\\
+    Soit $(a_n)$ convergeant vers $a$, on a $\forall n \in \N, ~ |\|a_n\|-\|a\||\leq\|a_n-a\|\to0$ donc par encadrement $\|a_n\|\to\|a\|$.
+\end{ex}
+
+\begin{prop}{}{}
+    Soient $f,g:E\to F$ continues sur $E$, et $A$ une partie dense dans $E$. Si $f,g$ coïncident sur $A$, alors $f=g$.
+    \tcblower
+    Soit $x\in E$. On a $\ov{A}=E$ donc $\exists (a_n) \in A^\N, ~ \lim a_n = x$. On a $\forall n \in \N, ~ f(a_n)=g(a_n)$ par hypothèse.\\
+    On a $f$ et $g$ continues sur $E$ donc sur $x$ donc $f(x)=g(x)$ par passage à la limite.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{Continuité dans un espace produit.}{}
+    Soit $f:A\subset E \to F_1\times ... \times F_p$, et $f(x)=(f_1(x),...,f_p(x))$.\\
+    On a $f$ continue sur $A$ ssi $\forall i \in \lb1,p\rb, ~ f_i$ continue sur $A$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $f(x,y)=\left( \frac{1+x^2+y^2}{x^2+y^2}\sin(x^2+y^2), \frac{x^2y}{x^2+y^2} \right)$ si $(x,y)\neq(0,0)$, sinon $f(0,0)=(1,0)$.\\
+    La fonction $f$ est-elle continue ?
+    \tcblower
+    On a $f_2(x,y)=\frac{x^2}{x^2+y^2}|y|\leq|y|\to 0$ donc $f_2(x,y)\to 0$.\\
+    On a $f_1(x,y)=(1+x^2+y^2)\frac{\sin(x^2+y^2)}{x^2+y^2}$ et $\frac{\sin X}{X}\to 1$ donc $f_1(x,y)\to1$.\\
+    Donc $f$ continue en $(0,0)$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $(A,+,\times,\cdot)$ une algèbre normée. Les fonctions polynomiales sur $A$ sont continues.
+    \tcblower
+    Soit $P:A\to A$ une fonction polynomiale. Alors $\exists n \in \N, ~ (a_0,...,a_n)\in\K^{n+1}, ~ \forall x \in A, ~ P(x)=\sum_{k=0}^n a_kx^k$.\\
+    Or $\id_A$ est trivialement continue, puis par produit, $\forall k \in \N, ~ x\mapsto x^k$ est continue.\\
+    Enfin, $P$ est continue comme combinaison linéaire d'applications continues.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\subsection{Continuité uniforme.}
+
+\begin{defi}{}{}
+    Soit $f:A\subset E \to F$. Alors $f$ est uniformément continue sur $A$ ssi
+    \begin{equation*}
+        \forall \e > 0, ~ \exists \a > 0, ~ \forall (x,y) \in A^2, ~ \|x-y\| < \a \ra \|f(x)-f(y)\|\leq \e.
+    \end{equation*}
+    \bf{Remarque.} Uniformément continue implique continue.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{Caractérisation par les suites.}{}
+    Soit $f:A\subset E\to f$. Alors $f$ est uniformément continue sur $A$ ssi
+    \begin{equation*}
+        \forall (u_n)\in A^\N, ~ \forall (v_n) \in A^\N, ~ \lim(u_n-v_n) = 0 \ra \lim(f(u_n) - f(v_n)) = 0.
+    \end{equation*}
+    \tcblower
+    \boxed{\la} Par contraposée, supposons $\exists \e > 0, \forall \a > 0, \exists(x,y)\in A^2, \|x-y\|<\a \et \|f(x)-f(y)\|>\e$.\\
+    Donc $\exists \e > 0, ~ \forall n \in \N, ~ \exists (x_n,y_n)\in A^2, ~ \|x-y\|<\frac{1}{n} \et \|f(x_n)-f(y_n)\| > \e$.\\
+    Alors $\|x_n-y_n\|\to0$ et $\|f(x_n)-f(y_n)\|\not\to0$.
+\end{prop}
+
+\begin{ex}{}{}
+    Soit $f:x\mapsto ax+b$. Elle est uniformément continue sur $\R$.
+    \tcblower
+    Soient $(u_n)\in\R^\N$ et $(v_n)\in\R^\N$ tels que $u_n-v_n\to0$. Alors $f(u_n)-f(v_n)=a(u_n-v_n)\to0$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $f:x\mapsto x^2$. Elle n'est pas uniformément continue.
+    \tcblower
+    Soit $u_n=n$ et $v_n=n+\frac{1}{n}$. Alors $v_n-u_n\to0$ et $f(v_n)-f(u_n)\to2$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{thm}{Heine.}{}
+    Toute fonction continue sur un compact y est uniformément continue.
+    \tcblower
+    Soit $f:K\subset E\to F$ continue sur $K$. On suppose par l'absurde que $f$ n'est pas uniformément continue.\\
+    Alors $\exists \e > 0, \forall n \in \N, \exists(x_n,y_n)\in K^2, \|x_n-y_n\|<\frac{1}{n} \et \|f(x_n)-f(y_n)\|>\e$.\\
+    Alors $\|x_n-y_n\|\to0$, $K$ est compact, on peut extraire de $(x_n)$ une suite $(x_{\phi(n)})$ convergente vers $l\in K$.\\
+    Alors $y_{\phi(n)}$ converge vers $l$ car $y_{\phi(n)}=x_{\phi(n)}-(x_{\phi(n)}-y_{\phi(n)})$. Puis $f$ est continue en $l\in K$.\\
+    Alors $f(x_{\phi(n)})\to f(l)$ et $\|f(x_{\phi(n)}) - f(y_{\phi(n)})\| \to 0 < \e$.
+\end{thm}
+
+\vspace*{-0.7cm}
+
+\subsection{Fonctions lipschitziennes.}
+
+\begin{defi}{}{}
+    Soit $f:A\subset E \to F$. Alors $f$ est lipschitzienne sur $A$ ssi
+    \begin{equation*}
+        \exists k \geq 0, ~ \forall (x,y) \in A^2, ~ \|f(y)-f(x)\| \leq k\|y-x\|.
+    \end{equation*}
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $f:A\subset E \to F$.
+    \begin{center}
+        $f$ lipschitzienne sur $A$ $\ra$ $f$ uniformément continue sur $A$ $\ra$ $f$ continue sur $A$.
+    \end{center}
+    \tcblower
+    Supposons $f$ lipschitzienne sur $A$ : $\exists k \geq 0, ~ \forall (x,y)\in A, ~ \|f(y)-f(x)\|\leq k\|y-x\|$.\\
+    Soit $(u_n)\in A^\N$ et $(v_n)\in A^\N$ telles que $\lim(u_n-v_n)=0$, alors $\|f(v_n)-f(u_n)\|\leq k\|v_n - u_n\| \to 0$.\\
+    Alors par encadrement, $\lim(f(v_n)-f(u_n))=0$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    L'application norme est $1$-lipschitzienne.\\
+    Les applications coordonnées sont lipschitziennes.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item Une combinaison linéaire de fonctions lipschitziennes est lipschitzienne.
+        \item Un produit de fonctions lipschitziennes est lipschitzienne.
+        \item Une composée de fonctions lipschitziennes est lipschitzienne.
+    \end{enumerate}
+\end{prop}
+
+\begin{ex}{}{}
+    Soit $A\subset E$ non-vide et $x\in E$. On a $d(x,A)=\inf\{\|x-y\|, ~ y \in A\}$.\\
+    On sait que $d(x,A)=0 \iff x \in \ov{A}$. Vérifions que $x\mapsto d(x,A)$ est lipschitzienne.
+    \tcblower
+    Soit $(x,y)\in A^2$. $\forall z \in A, ~ d(x,A) \leq \|x-z\| \leq \|x-y\| + \|y-z\|$.\\
+    Alors $\forall z \in A, ~ d(x,A) - \|x-y\| \leq \|y-z\|$. Par passage à l'inf : $d(x,A)-\|x-y\|\leq d(y,A)$.\\
+    Donc $d(x,A) - d(y,A) \leq \|x-y\|$. Par symétrie, $d(y,A)-d(x,A)\leq\|y-x\|$.\\
+    Donc $|d(x,A)-d(y,A)|\leq\|x-y\|$. Elle est 1-lipschitzienne.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\section{Lien avec la topologie.}
+
+\begin{thm}{}{}
+    \begin{enumerate}
+        \item L'image réciproque d'un fermé par une application continue est un fermé.
+        \item L'image réciproque d'un ouvert par une application continue est un ouvert.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $F'$ fermé de $E'$ et $F=f^{-1}(F')$. Montrons que $F$ est un fermé de $E$ par caractérisation.\\
+    Soit $(x_n)\in F^\N$ telle que $x_n\to l$. Montrons que $l \in F$. $\forall n \in \N, ~ x_n \in F$ donc $f(x_n) \in F'$.\\
+    Or $f$ est continue en $l$ donc $\lim f(x_n) = f(l) \in F'$ car $F'$ fermé. Donc $l\in F$.\\
+    \boxed{2.} Soit $O'$ un ouvert de $E'$ et $O=f^{-1}(O')$. Montrons que $O$ est ouvert de $E$.\\
+    On a $\leftindex^CO=\leftindex^C(f^{-1}(O'))=f^{-1}(\leftindex^CO')$ c'est un fermé de $E$ avec $\boxed{1}$ donc $O$ est ouvert de $E$.\\
+    \warning Les images directes d'ouverts (resp. de fermés), mêmes par des applications continues, ne sont pas nécessairement ouverts (resp. fermés).
+\end{thm}
+
+\begin{app}{}{}
+    Soit $f:E\to\R$ continue sur $E$. Alors pour tout $\a\in\R$ :\\
+    --- $\{x \in E, ~ f(x) \geq \a\}$ est un fermé de $E$ : $f^{-1}([\a,+\infty[)$\\
+    --- $\{x \in E, ~ f(x) > \a\}$ est un ouvert de $E$ : $f^{-1}(]\a,+\infty[)$.\\
+    --- $\{x \in E, ~ f(x) = a\}$ est un fermé de $E$ : $f^{-1}(\{\a\})$.\\
+    --- $\{x \in E, ~ f(x) \leq \a\}$ est un fermé de $E$ : $f^{-1}(]-\infty,\a])$.\\
+    --- $\{x \in E, ~ f(x) < \a\}$ est un ouvert de $E$ : $f^{-1}(]-\infty,\a[)$.
+\end{app}
+
+\begin{ex}{}{}
+    $\{(x,y)\in\R^2, ~ y > x - 2\}$ est un ouvert de $\R^2$ : $f(x,y)=y-x+2$ est polynôme donc continue.
+\end{ex}
+
+\begin{thm}{L'image directe d'un compact est un compact.}{}
+    Soit $f:E\to F$ continue sur $E$. Alors $K$ compact de $E$ implique $f(K)$ compact de $F$.
+    \tcblower
+    Soit $K$ un compact, soit $(y_n)\in f(K)^\N$. On a $\forall n \in \N, ~ \exists x_n \in K, ~ y_n = f(x_n)$.\\
+    Or $K$ compact : $\exists \phi, ~ x_{\phi(n)}\to l \in K$ et $f$ continue en $l$ donc $f(x_{\phi}(n))\to f(l) \in f(K)$.
+\end{thm}
+
+\begin{corr}{}{}
+    Soit $f$ continue sur un compact $K$ de $(E,\|\cdot\|)$ à valeurs réelles. Alors $f$ est bornée et atteint ses bornes.
+    \tcblower
+    On sait que $f(K)$ est un compact de $\R$, en particulier, $f(K)$ est fermé borné, donc $f$ est bornée sur $K$.\\
+    Notons $M=\sup\{f(x), ~ x\in K\}$, bien défini car $f$ à valeurs réelles, et partie non-vide de $\R$ majorée.\\
+    On a $M\in\ov{f(K)}$ et $f(K)$ est fermé donc $M\in f(K)$ donc $\exists x_0 \in K, ~ f(x_0)=M$.\\
+    Donc la borne sup est atteinte, de même pour la borne inférieure.\\
+    \warning L'image réciproque d'un compact n'est pas forcément compact : $0^{-1}(\{0\})=\R$ pas compact.
+\end{corr}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{Points fixes.}{}
+    Soit $(E,\|\cdot\|)$ un evn, $K\subset E$ compact et $f:K\to K$ telle que $\forall (x,y)\in K^2, ~ x\neq y \ra \|f(y)-f(x)\|<\|y-x\|$.\\
+    Montrer que $f$ admet un unique point fixe.
+    \tcblower
+    \bf{Unicité.} Soient $\a,\b$ deux points fixes de $f$. Par l'absurde, supposons que $\a\neq\b$.\\
+    Alors $\|f(\a)-f(\b)\|<\|\a-\b\|$ donc $\|\a-\b\|<\|\a-\b\|$, absurde.\\
+    \bf{Existence.} Posons $\phi:x\mapsto\|f(x)-x\|$ continue par composition car $f$ lipschitzienne.\\
+    Elle est continue sur un compact, à valeurs réelles, elle est donc bornée et atteint ses bornes.\\
+    Notons $m=\min\{\phi(x), ~ x \in K\}$, atteint en un point $x_0\in K$. Par l'absurde, si $m$ est non-nul, il est strictement positif, puis $f(x_0)\neq x_0$ donc $\|f(f(x_0))-f(x_0)\|<\|f(x_0)-x_0\|$ puis $\phi(f(x_0))<\phi(x_0)$ contredit la déf. de $m$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{Connexité par arcs.}{}
+    Soient $(E,\|\cdot\|)$ et $A\subset E$.
+    \begin{center}
+        $A$ est connexe par arcs ssi $\forall(x,y)\in A^2, ~ \exists \phi : t \mapsto \phi(t)$ continue sur $[0,1]$ telle que $\phi(0)=x$ et $\phi(1)=y$.
+    \end{center}
+    Il existe un chemin continu dans $A$ qui relie $x$ à $y$.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{}{}
+    Soient $(E,\|\cdot\|)$ un evn et $A\subset E$. On définition une relation d'équivalence $\cursive{R}$ sur $A$ par
+    \begin{center}
+        $x \cursive{R} y$ ssi il existe un chemin continu dans $A$ entre $x$ et $y$
+    \end{center}
+    \bf{Remarque.} Les connexes par arcs sont les parties avec une seule classe d'équivalence.
+    \tcblower
+    --- Soit $x\in A$, on a $\forall t \in [0,1], ~ \phi(t)=x$ continue à valeurs dans $A$ donc $x\cursive{R}x$.\\
+    --- Soit $(x,y)\in A^2$, soit $\phi$ continue sur $[0,1]$, telle que $\phi(0)=x$ et $\phi(1)=y$, $\psi(t)=\phi(1-t)$ fonctionne : $y\cursive{R}x$.\\
+    --- Soit $(x,y,z)\in A^3$, alors $\g$ : $\phi(2t)$ sur $[0,1/2]$ et $\psi(2t)$ sur $[1/2,1]$ fonctionne : $x\cursive{R}z$.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{thm}{Image continue d'un connexe par arcs.}{}
+    Soit $(E,\|\cdot\|)$, $(F,\|\cdot\|)$ deux evn, $A\subset E$ connexe par arcs et $f:A\subset E \to F$ continue sur $A$.\\
+    Alors $f(A)$ est une partie connexe par arcs de $F$.
+    \tcblower
+    Soient $(x',y')\in f(A)^2$, il existe $(x,y)\in A^2$ tels que $x'=f(x)$ et $y'=f(y)$. Soit $\phi$ chemin continu entre $x$ et $y$.\\
+    On pose $\g = f \circ \phi$, continue sur $[0,1]$ par composition, et $\g(0)=f(x)=x'$ et $\g(1)=f(y)=y'$.
+\end{thm}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{}{}
+    Soit $(E,\|\cdot\|)$ un evn, on dit que $A\subset E$ est étoilé ssi $\exists a \in A, ~ \forall x \in A, ~ [a,x]\subset A$.
+\end{defi}
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item Soit $(E,\|\cdot\|)$ un evn, alors $A$ convexe implique $A$ connexe par arcs.
+        \item Soit $(E,\|\cdot\|)$ un evn, alors $A$ étoilé implique $A$ connexe par arcs. 
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $(x,y)\in A^2$, on pose $\phi:t\mapsto(1-t)x+ty$ continue sur $[0,1]$ et $\phi(0)=x$ et $\phi(1)=y$.\\
+    \boxed{2.} Convexe entre $x$ et $a$ puis entre $a$ et $y$.
+\end{prop}
+
+\begin{prop}{}{}
+    Les parties connexes par arcs de $R$ sont exactement les intervalles. Soit $I\subset \R$.
+    \begin{center}
+        $I$ intervalle $\iff$ $I$ convexe $\iff$ $I$ connexe par arcs.
+    \end{center}
+    \tcblower
+    $\bullet$ Soit $I$ un intervalle de $\R$, on choisit le cas $]a,b]$.
+    Soit $(x,y)\in I^2, \et \l \in [0,1]$, on a $a<x\leq b$ et $a<y\leq b$ puis $a<x\leq \l x + (1-\l)y \leq y < b$.\\
+    On a donc $\l x + (1-\l y) \in ]a,b]$.\\
+    $\bullet$ Les parties convexes sont toujours connexes par arcs.
+\end{prop}
+
+\begin{thm}{Valeurs Intermédiaires.}{}
+    Soit $f:I\to\R$ continue sur l'intervalle $I$.\\
+    Soit $(x,y)\in I^2$. Alors toutes les valeurs entre $f(x)$ et $f(y)$ sont atteintes par $f$.
+    \tcblower
+    On a $I$ connexe par arcs comme intervalle, et $f$ est continue sur $I$, donc $f(I)$ est connexe par arcs de $\R$.\\
+    On a donc $f(I)$ un intervalle de $\R$. Donc $\forall (x,y) \in I^2, ~ [f(x),f(y)]\subset f(I)$ (SPDG $f(x)\leq f(y)$).
+\end{thm}
+
+\begin{ex}{}{}
+    Montrer que $\GL_n(\R)$ est un ouvert de $M_n(\R)$ non connexe par arcs.
+    \tcblower
+    On munit $M_n(\R)$ de la norme usuelle : $\forall A \in M_n(\R), ~ \|A\|=\sqrt{\Tr(A^\top A)}$.\\
+    $\bullet$ C'est un ouvert : $f:A\mapsto \det(A)$ est continue sur $M_n(\R)$ et $\GL_n(\R)=f^{-1}(\R^*)$.\\
+    Donc $\GL_n(\R)$ est un ouvert comme image réciproque d'un ouvert par une fonction continue.\\
+    $\bullet$ Par l'absurde, supposons $\GL_n(\R)$ connexe par arcs.\\
+    Alors $f(\GL_n(\R))$ est aussi connexe par arcs comme image continue d'un connexe par arcs.\\
+    Alors $\R^*$ est connexe par arcs... absurde. Donc $\GL_n(\R)$ n'est pas connexe par arcs.\\
+    $\bullet$ Il n'est pas fermé : on pose $\forall p \in \N^*, ~ A_p=\frac{1}{p}I_n\in\GL_n(\R)$.\\
+    Or $A_p \to 0$, et $0\notin\GL_n(\R)$, donc ce n'est pas un fermé.\\
+    $\bullet$ Non-borné : on pose $\forall p \in \N^*, ~ A_p=pI_n\in\GL_n(\R)$. Et $\|A_p\|=\sqrt{np^2}=p\sqrt{n}\to+\infty$. 
+\end{ex}
+
+\pagebreak
+
+\begin{ex}{Composantes connexes.}{}
+    Soit $(E,\|\cdot\|)$ un evn.
+    \begin{enumerate}
+        \item Montrer qu'une réunion de parties connexes par arcs, d'intersection non-vide, est encore connexe par arcs.
+        \item Une intersection de parties connexes par arcs est-elle connexe par arcs ?
+        \item Soit $A\subset E$ et $x\in A$. Montrer qu'il existe une plus grande partie connexe par arcs de $A$ contenant $x$.
+        \item Montrer que $C(x)=\{y \in A, ~ x \et y \nt{ peuvent être joints par un chemin continu dans } A\}$.
+        \item Donner les composantes connexes par arcs de $\R^*$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $(C_i)_{i\in I}$ une famille de connexes par arcs de $A$ d'intersection non-vide. Soit $x$ dans l'intersection.\\
+    Soient $(a,b)\in\bigcup C_i$. Alors $\exists i_0,j_0 \in I, ~ a\in C_{i_0} \et b\in C_{j_0}$.\\
+    On joint $a$ et $x$ par un chemin continu dans $C_{i_0}$ et $x$ et $b$ par un chemin continu dans $C_{j_0}$.\\
+    On joint $a$ et $b$ par un chemin continu dans $C_{i_0}\cap C_{j_0}$, donc $a$ et $b$ sont dans la même composante connexe par arcs.\\
+    \boxed{2.} Une intersection de connexes par arcs n'est pas forcément connexe par arcs (deux croissants).\\
+    \boxed{3.} Soit $C$ la réunion de toutes les parties connexes par arcs contenant $x$.\\
+    Donc $C$ est connexe par arcs d'après \boxed{1}, et contient $x$, et est maximale pour l'inclusion.\\
+    \boxed{4.\subset} Soit $y\in C(x)$, c'est une partie connexe par arcs, donc $x\cursive{R}y$.\\
+    \boxed{4.\supset} $\{y\in A, ~ x \cursive{R}y\}$ est une partie de $A$ contenant $x$ et connexe par arcs, donc dans $C(x)$.\\
+    \boxed{5.} Deux classes d'équivalence : $]-\infty,0[$ et $]0,+\infty[$.
+\end{ex}
+
+\begin{ex}{}{}
+    Soit $I$ un intervalle de $\R$, $f:I\to\R$, continue et injective.\\
+    On pose $F(x,y)=f(y)-f(x)$ définie sur $I^2$ et $C=\{(x,y)\in I^2, ~ x<y\}$.
+    \begin{enumerate}
+        \item Montrer que $C$ est connexe par arcs dans $\R^2$.
+        \item Montrer que $F(C)$ est inclus dans $\R^*_+$ ou $\R^*_-$.
+        \item En déduire que $f$ est strictement monotone.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soient $x,y\in C$, $x',y'\in C$ et $\l\in[0,1]$, on a $(\l x + (1-\l) x', \l y + (1-\l) y') \in I^2$ et $\l y + (1-\l)y > \l x + (1-\l)x'$.\\
+    Donc $C$ est convexe, puis connexe par ars.\\
+    \boxed{2.} Vérifions que $F$ est continue sur $I^2$. On a $(x,y)\mapsto x$ et $(x,y)\mapsto y$ continues sur $I$ car lipschitziennes.\\
+    De plus, $f$ est continue sur $I$, donc par composition, $F$ est continue sur $I^2$.\\
+    Ainsi, $F(C)$ est un connexe par arcs de $\R$ en tant qu'image continue d'un connexe par arcs.\\
+    Les connexes par arcs de $\R$ sont les intervalles, donc $F(C)$ est un intervalle.\\
+    On a $0\notin F(C)$ car sinon, il existe $x,y\in C, ~ F(x,y)=0$ puis $x<y$ et $f(x)=f(y)$ contredit $f$ injective.\\
+    Donc $F(C)$ est inclus dans $\R^*_+$ ou $\R^*_-$.\\
+    \boxed{3.} Si $F(C)\subset\R_+^*$, alors $\forall (x,y) \in I^2, ~ x < y \ra f(y) - f(x) > 0$, donc $f$ croissante strictement.\\
+    Si $F(C)\subset\R_-^*$, alors $f$ décroissante strictement.
+\end{ex}
+ 
+\pagebreak
+
+\section{Cas des applications linéaires et multilinéaires.}
+
+\begin{thm}{continues.}{calc}
+    Soit $f\in\L(E,F)$, il y a équivalence entre :
+    \begin{itemize}
+        \item $f$ est lipschitzienne sur $E$.
+        \item $f$ est continue sur $E$.
+        \item $f$ est continue en $0_E$.
+        \item $f$ est bornée sur la boule unité fermée.
+        \item $\exists C > 0$ tel que $\forall x \in E, ~ \|f(x)\|\leq C\|x\|$.
+    \end{itemize}
+    \tcblower
+    \boxed{1\ra2} Cours.\\
+    \boxed{2\ra3} Trivial.\\
+    \boxed{3\ra4} Par hypothèse : $\exists \a > 0, ~ \forall x \in E, ~ \|x\|_E \leq \a \ra \|f(x)\|_F \leq 1$. Soit $y\in B'(0,1)$.\\
+    On a $\|y\|_E\leq1$, donc $\|\a y\| = |\a|\|y\| \leq \a$ donc $\|f(\a y)\|_F\leq 1$ puis $\a\|f(y)\|_F \leq 1$ et $\|f(y)\|_F\leq\frac{1}{\a}$.\\
+    \boxed{4\ra5} Par hypothèse, $\exists M > 0, ~ \forall y \in B'(0,1), ~ \|f(y)\|_F\leq M$. Soit $x\in E$ non nul.
+    \begin{equation*}
+        \frac{x}{\|x\|_E} \in B'(0,1) \ra \left\|f\left( \frac{x}{\|x\|} \right)\right\|_F = \frac{1}{\|x\|_E}\left\|f(x)\right\|_F \leq M
+    \end{equation*}
+    Alors $\forall x \in E, ~ \|f(x)\| \leq M\|x\|$.\\
+    \boxed{5\ra1} Par hypothèse, $\exists C \geq 0, ~ \forall x \in E, ~ \|f(x)\|_F\leq C\|x\|_E$. Soit $(x,y)\in E^2$.\\
+    On a $\|f(y)-f(x)\|_F=\|f(y-x)\|_F\leq C\|y-x\|_E$ donc $f$ est $C$-lipschitzienne.
+\end{thm}
+
+\vspace*{-0.7cm}
+
+\begin{nota}{}{}
+    On notera $\L_c(E,F)$ l'ensemble des applications linéaires continues de $E$ dans $F$.\\
+    Alors $(\L_c(E),+,\circ,\cdot)$ est une $\K$-algèbre en tant que sous-algèbre de $(\L(E),+,\circ,\cdot)$.
+\end{nota}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $E=C([0,1],\R)$, muni de $\|\cdot\|:f\mapsto\int_0^1|f(t)|\dt$. Montrer que $\phi : f \mapsto \int_0^1f(t)\dt\in\L_c(E,\R)$. 
+    \tcblower
+    On a $\phi$ linéaire par linéarité de l'intégrale. Soit $f\in E$.
+    \begin{equation*}
+        |\phi(f)| = \left|\int_0^1f(t)\dt\right| \leq \int_0^1|f(t)|\dt = \|f\|.
+    \end{equation*}
+    On conclut avec le cinquième point du théorème \ref{thm:calc}.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $E=\{(u_n)_n \in \R^\N, ~ (u_n)_n \nt{ converge}\}$ muni de la norme $\|\cdot\|_{\infty}$. Montrer que $L:(u_n)\mapsto\lim u_n$ est continue sur $E$.
+    \tcblower
+    On a $L$ linéaire par linéarité de la limite. Soit $(u_n)_n \in \R^\N$.
+    \begin{equation*}
+        |L(u_n)| = \left|\lim u_n\right| \leq \|u_n\|_\infty
+    \end{equation*}
+    En effet, on passe à la limite dans $\forall n \in \N, ~ |u_n|\leq\|u_n\|$. On conclut avec le cinquième point du théorème \ref{thm:calc}.
+\end{ex}
+
+\begin{ex}{}{}
+    Soit $E=\R[X]$ muni de la norme $\|\cdot\|_\infty$. Montrer que $D:P\mapsto P'$ n'est pas continue .
+    \tcblower
+    Par l'absurde, supposons que $\exists C > 0, ~ \forall P \in E, \|D(P)\|_\infty \leq C\|P\|_\infty$.\\
+    On pose $P_n = X^n$, donc $\|P_n\|_\infty=1$, et $D(P_n)=nX^{n-1}$, donc $\|D(P_n)\|_\infty=n$. Ainsi, $\forall n \geq 1, ~ n \leq C$, absurde.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{Normes subordonnées.}{}
+    Soit $f\in\L_c(E,F)$, on définit la norme subordonnée par
+    \begin{equation*}
+        \abs f \abs = \sup_{x\neq0}\left\{\frac{\|f(x)\|_F}{\|x\|_E}\right\}.
+    \end{equation*}
+    On a aussi $\forall f \in \L_c(E,F), ~ \forall x \in E, ~ \|f(x)\|_F \leq \abs f \abs \cdot \|x\|_E$ et $\abs f \abs$ plus petite constante vérifiant cette propriété.
+    \tcblower
+    Soit $f\in\L_c(E,F)$. le sup existe car ensemble non-vide et majoré de $\R$ (\ref{thm:calc}).\\
+    Soit $x\in E$ tel que $\|x\|_E=1$, alors $\|f(x)\|=\frac{\|f(x)\|}{\|x\|}\leq\abs f \abs$, par passage au sup : $M\leq \abs f \abs$.\\
+    Soit $x\in E$ non nul, alors $\left\|\frac{x}{\|x\|}\right\|=1$, donc $\|f\left( \frac{x}{\|x\|}  \right) \leq M$ i.e. $\frac{\|f(x)\|}{\|x\|}\leq M$, par passage au sup, $\abs f \abs \leq M$.\\
+    --- Séparation : $\abs f \abs = 0 \ra \forall x \in E, ~ \| f(x) \| \leq \abs f \abs\cdot\|x\|=0 \ra \|f(x)\|=0 \ra f(x)=0\ra f=0$.\\
+    --- Homogénéité : $\abs \l f \abs = \sup \|(\l f)(x)\| = \sup |\l|\|f(x)\| = |\l| \sup \|f(x)\| = |\l| \abs f \abs$.\\
+    --- I.T. : $\|(f+g)(x)\|\leq\|f(x)\|+\|g(x)\|\leq \abs f \abs\cdot\|x\| + \abs g \abs\cdot\|x\|$, passage au sup...
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    La norme  d'une matrice est la norme subordonnée de son alca.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    $(\L_c(E),+,\circ,\cdot)$ munie de $\abs\cdot\abs$ est une algèbre normée :
+    \begin{equation*}
+        \forall f, g \in \L_c(E), ~ \abs g \circ f \abs \leq \abs g \abs \cdot \abs f \abs.
+    \end{equation*}
+    \tcblower
+    Soient $f,g\in\L_c(E)$, alors $\forall x \in E, ~ \|(g\circ f)(x)|\leq \abs g \abs \cdot \|f(x)\| \leq \abs g \abs \cdot \abs f \abs \cdot \|x\|$. Alors $\abs g\circ f \abs \leq \abs g \abs \cdot \abs f \abs$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soit $B:E\times F \to G$ bilinéaire. Les propositions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $B$ est continue sur $E\times F$.
+        \item $B$ est continue en $(0_E,0_F)$.
+        \item $\exists C \geq 0, ~ \forall (x,y)\in E\times F, ~ \|f(x,y)\|_G \leq C\|x\|_E\|y\|_F$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1\ra 2} Trivial.\\
+    \boxed{2\ra 3} Par hypothèse, $\exists \a > 0, \forall (x,y) \in E \times F, ~ \|(x,y)\|\leq\a \ra \|B(x,y)\| \leq 1$.\\
+    Soit $(x,y)\in E\times F$ tels que $x\neq0$ et $y\neq0$. Alors $\|\frac{\a x}{\|x\|}\|\leq \a$ et $\|\frac{\a y}{\|x\|}\|\leq \a$.\\
+    Ainsi, $\|B( \frac{\a x}{\|x\|}, \frac{\a y}{\|y\|} )\leq 1$, or $B( \frac{\a x}{\|x\|}, \frac{\a y}{\|y\|} ) = \frac{\a}{\|x\|}B(x,\frac{\a y}{\|y\|})=\frac{\a^2}{\|x\|\|y\|}B(x,y)$. Finalement, $\|B(x,y)\|\leq\frac{1}{\a^2}\|x\|\|y\|$.\\
+    \boxed{3\ra1} On a $ad-bc=a(d-c)+(a-b)c$. $B(x,y)-B(x_0,y_0)=B(x,y-y_0)+B(x-x_0,y_0)$.\\
+    Puis $\|B(x,y)-B(x_0,y_0)\|\leq \|B(x,y-y_0)\|+\|B(x-x_0,y_0)\|\leq C\|x\|\|y-y_0\|+C\|x-x_0\|\|y_0\|$.\\
+    Tend vers 0 quand $(x,y)\to(x_0,y_0)$ par encadrement. Donc $\lim B(x,y)\to B(x_0,y_0)$.
+\end{prop}
+
+\begin{ex}{}{}
+    \begin{enumerate}
+        \item Soit $E$ un $\K$-ev et $B:(\l,x)\mapsto \l x$ bilinéaire et continue sur $\K\times E$.
+        \item Soit $E$  réel, et $\langle x, y\rangle$ est bilinéaire et continue sur $E^2$.
+        \item Soit $A$ une algèbre normée et $B:(x,y)\mapsto x\times y$ est bilinéaire et continue sur $A^2$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $\forall \l \in \K, ~ \forall x \in E, ~ \|B(\l,x)\| = \|\l x\| = |\l|\|x\| \leq C|\l|\|x\|$ avec $C=1$.\\
+    En particulier, si $\l_n \to \l$ et $x_n \to x$, alors $\l_n x_n \to \l x$.\\
+    \boxed{2.} $\forall (x,y) \in E^2, ~ |B(x,y)|=|\langle x,y \rangle | \leq \|x\|\|y\|$.\\
+    En particulier, si $x_n \to x$ et $y_n \to y$ alors $\langle x_n, y_n \rangle \to \langle x, y \rangle$.\\
+    \boxed{3.} $\forall (x,y) \in A^2, ~ \|B(x,y)\|=\|x\times y\|\leq\|x\|\|y\|$ donc $C=1$ convient.\\
+    En particulier, si $A_n \to A$ et $B_n \to B$, alors $A_nB_n \to AB$. 
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $f:E_1\times ... \times E_n \to F$ qui est $n$-linéaire.
+    \begin{align*}
+        f \nt{ est continue sur } E_1\times...\times E_n \iff& \exists C \geq 0, ~ \forall (x_1,...,x_n)\in E_1\times...\times E_n\\
+        &\|f(x_1,...,x_n)\| \leq C\|x_1\|_1 ... \|x_n\|_n
+    \end{align*}
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $E$ un evn, $\phi$ une forme linéaire non-nulle sur $E$.
+    \begin{enumerate}
+        \item Montrer que $\phi$ est continue sur $E$ ssi $\Ker\phi$ est fermé.
+        \item Soit $H$ un  de $E$, montrer que $H$ est fermé ou dense dans $E$.
+        \item En déduire que $\phi$ est non continue ssi $\Ker\phi$ est dense.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.\ra} On a $\Ker \phi = \phi^{-1}(\{0\})$, image réciproque d'un fermé par $\phi$ continue, donc fermé.\\
+    \boxed{1.\la} Par , supposons $\phi$ non-continue en $0$ : $\exists \e > 0, ~ \forall n \in \N, ~ \exists x_n \in E, ~ \|x_n\|<\frac{1}{n} \et |\phi(x_n)|>\e$.\\
+    On a $\phi$ linéaire non-nulle, alors $\exists a \in E, ~ \phi(a) \neq 0$. On pose $v_n=\frac{x_n}{\phi(x_n)}-\frac{a}{\phi(a)}$, alors $\phi(v_n)=0$.\\
+    On a $\|v_n+\frac{a}{\phi(a)}\|=\frac{\|x_n\|}{|\phi(x_n)|}\leq\frac{\|u_n\|}{\e}\leq\frac{1}{n\e}\to0$, par encadrement, $v_n\to-\frac{a}{\phi(a)}$.\\
+    Or $\phi(-\frac{a}{\phi(a)})=-1\neq0$. On a bien montré que $\Ker\phi$ n'est pas fermé.\\
+    \boxed{2.} On a $H\subset \ov{H} \subset E$, supposons $H$ non fermé. Soit $a\in\ov{H}\setminus H$, alors $E=H\oplus\Vect(a)$.\\
+    Soit $x\in E, ~ \exists y \in H, ~ \exists \l \in \K, ~ x = y + \l a \in \ov{H}$ car $H\subset\ov{H}$. Donc $E=\ov{H}$, donc $H$ est dense.\\
+    \boxed{3.} Avec \boxed{1} et \boxed{2}. 
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\section{Cas de la dimension finie.}
+
+\begin{thm}{Bolzano-Weierstraß}{}
+    Soit $E$ un $\K$-evdf. De toute suite bornée de $E$, on peut extraire une suite convergente.
+    \tcblower
+    On note $n$ la dimension de $E$, et $\B=(e_1,...,e_n)$ une base de $E$.\\
+    On munit $E$ de la norme associée à $\B$, définie par $\|x\|=\max(|x_i|)$.\\
+    On rappelle qu'une suite de $E$  ssi toutes ses suites coordonnées convergent.\\
+    Soit $(u_p)\in E^\N$ bornée, alors $\forall p \in \N, ~ u_p = \sum_{i=1}^nu_p^ie_i$.\\
+    Donc $\forall i \in \lb1,n\rb, ~ (u_p^i)_p$ est une suite bornée de $\K$.\\
+    D'après Bolzano-Weierstraß dans $\K$, et de l'extraction diagonale, on peut extraire de $(u_n)_n$ une suite convergente.
+\end{thm}
+
+\vspace*{-0.4cm}
+
+\begin{thm}{Caractérisation des compacts en dimension finie.}{}
+    Soit $E$ un evndf, $K\subset E$ est compact ssi il est fermé et borné.
+    \tcblower
+    \boxed{\ra} Toujours vrai.\\
+    \boxed{\la} Supposons $K$ fermé e. Soit $(u_n)_n\in K^\N$.\\
+    Puisque $K$ est borné, $(u_n)_n$ est bornée, puis $\exists \phi, ~ u_{\phi(n)}\to l\in E$, or $K$ fermé donc $l\in K$.
+\end{thm}
+
+\begin{ex}{}{}
+    On considère l'application $f:\R\to\R$ définie par $f(0)=1$ et pour $x\neq0, ~ f(x)=\frac{\sin x}{x}$.\\
+    On pose $A=\{x\in\R, ~ f(x) = 0\}$ et $B=\{x \in \R, ~ f(x) \geq 1/2\}$.\\
+    $A$ et $B$ sont-elles des parties  de $\R$ ?
+    \tcblower
+    La partie $A$ n'est pas  : $\forall k \in \Z^*, ~ k\pi \in A$, donc non compact.\\
+    On a $B=f^{-1}([\frac{1}{2},+\infty[)$ donc image réciproque d'un fermé, et $B$ borné, donc compact.
+\end{ex}
+
+\begin{thm}{Équivalence des normes en dimension finie.}{}
+    Soit $E$ un $\K$-evdf. Toutes les normes sur $E$ sont équivalentes.
+    \tcblower
+    Soit $n$ la dimension de $E$ et $\B=(e_1,...,e_n)$ une base de $E$. On munit $E$ de $\|x\|_\infty = \max|x_i|$.\\
+    Il suffit de montrer (par transitivité) que toutes les normes y sont équivalentes.\\
+    Soit $\|\cdot\|$ une norme sur $E$. Soit $x\in E$, alors $x=\sum_{i=1}^nx_ie_i$.
+    \begin{equation*}
+        \|x\| \leq \sum_{i=1}^n\|x_ie_i\| = \sum_{i=1}^n|x_i|\|e_i\|\leq\sum_{i=1}^n\|x\|_\infty\|e_i\|=\|x\|_\infty\sum_{i=1}^n\|e_i\|.
+    \end{equation*}
+    On note $b$ la somme des $\|e_i\|$, alors $b\in\R_+^*$, on a trouvé $b>0$ tel que $\|x\|\leq b\|x\|_\infty$.\\
+    On pose $f:x\mapsto\|x\|$. Alors $\forall x,y\in E, ~ |f(x)-f(y)|=|\|x\|-\|y\||\leq\|x-y\|\leq b\|x-y\|_\infty$.\\
+    Ainsi, $f$ est lipschitzienne sur $E$, donc continue. Posons $S=\{x\in E, ~ \|x\|_\infty = 1\}$. \\
+    Puisque $E$ est de dimension finie, alors $S$ est compact car fermé borné, et une fonction continue sur un compact à valeurs réelles est bornée et atteint ses bornes. En particulier, $f$ atteint son minimum $x_0$ sur la sphère.\\
+    On a déjà $\|x_0\|_\infty = 1$ donc $x_0\neq0_E$. Soit $x\in E$ non nul, alors $\frac{x}{\|x\|_\infty}\in S$, donc $f\left( \frac{x}{\|x\|_\infty} \right)\geq f(x_0)$.\\
+    Ainsi, $\left\|\frac{x}{\|x\|_\infty}\right\|\geq\|x_0\|$, puis par homogénéité, $\frac{\|x\|}{\|x\|_\infty}\geq\|x_0\|$, i.e. $\|x_0\|\|x\|_\infty\leq\|x\|$.\\
+    Alors $a>0$ car $x_0\neq0_E$, on a trouvé $a>0$ et $b>0$ tels que $\forall x \in E, ~ a\|x\|_\infty\leq\|x\|\leq b\|x\|_\infty$.\\
+    On a bien $\|\cdot\|\sim\|\cdot\|_\infty$.
+\end{thm}
+
+\pagebreak
+
+\begin{thm}{Continuité des applications linéaires en dimension finie.}{}
+    \begin{enumerate}
+        \item Une application linéaire de $E$ evndf dans $F$ evn est forcément continue, et $\L(E,F)=\L_c(E,F)$.
+        \item Une application multilinéaire sur un produit d'evn de dimensions finies est forcément continue.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $n$ la dimension de $E$ et $\B=(e_1,...,e_n)$ base de $E$. Toutes les normes sont équivalentes sur $E$.\\
+    Soit $\|\cdot\|_\infty$ associée à $\B$ et $f\in\L(E,F)$. Soit $x\in E, ~ x = \sum_{i=1}^nx_ie_i$, et $f(x)=\sum_{i=1}^nx_if(e_i)$.
+    \begin{equation*}
+        \|f(x)\|_F \leq \sum_{i=1}^n\|x_if(e_i)\|_F = \sum_{i=1}^n|x_i|\cdot\|f(e_i)\|_F \leq \|x\|_{\infty}\sum_{i=1}^n\|f(e_i)\|_F
+    \end{equation*}
+    On pose $C$ la somme des $\|f(e_i)\|_F$, constante ne dépendant pas de $x$, alors $\forall x \in E, ~ \|f(x)\|_F \leq C\|x\|_\infty$.\\
+    Par caractérisation, $f$ est continue (\ref{thm:calc}).\\
+    \boxed{2.} Dans le cas bilinéaire :\\
+    Vérifions la continuité de $B$ en utilisant la caractérisation des applications bilinéaires continues.\\
+    On note $n$ la dimension de $E$, $p$ la dimension de $F$, $\B_1=(e_1,...,e_n)$ base de $E$ et $\B_2=(e'_1,...,e'_p)$ base de $F$.\\
+    On munit $E\times F$ de la norme produit associée aux bases $\B_1$ et $\B_2$.
+    \begin{equation*}
+        (x,y) \in E \times F, ~ \|(x,y)\|_\infty := \max((\|x\|_E, \|y\|_F)) ~ \|x\|_E = \max|x_i| \et \|y\|=\max|y_i|.
+    \end{equation*}
+    On a $\dim(E\times F)=pn$, donc toutes les normes de $E\times F$ sont équivalentes.\\
+    Il suffit de vérifier que $B$ est continue pour la norme $\|\cdot\|_\infty$.\\
+    Soit $(x,y)\in E\times F$, $B(x,y)=\sum_{\substack{1\leq i \leq n\\1\leq j \leq p}}x_iy_jB(e_i,e'_j)$.\\
+    Puis $\|B(x,y)\|_G\leq\sum|x_i||y_j|\|B(e_i,e'_j)\|$, or $|x_i|\leq\|x\|_E$ et $|y_j|\leq\|y\|_F$.\\
+    Donc $\|B(x,y)\|_G \leq \sum\|x\|_E\|y\|_F\|B(e_i,e'_j)\|_G=C\|x\|_E\|y\|_F$.
+\end{thm}
+
+\begin{thm}{$\star$}{}
+    Soit $E$ un evn, $F$ un sev de $E$ de dimension finie, alors $F$ est forcément fermé.
+    \tcblower 
+        Supposons que $E$ soit de dimension finie et soit $F$ un sev de $F$, de supplémentaire $G$.\\
+        On note $p$ le projecteur sur $G$ parallèlement à $F$. Alors $p\in\L(E)$, $p^2=p$, $\Ker p = F$, $\Im p = G$.\\
+        On a $p$ continue sur $E$, car linéaire en dimension finie, puis $F=p^{-1}(\{0\})$ est fermé en tant qu'image réciproque d'un fermé par $p$ continue.
+\end{thm}
+
+\end{document}

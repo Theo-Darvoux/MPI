@@ -1,0 +1,1186 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{1}
+\def\pagetitle{Structures d'Algèbre.}
+
+\input{setup.tex}
+
+\begin{document}
+
+\input{title.tex}
+
+\thispagestyle{fancy}
+
+\section{Groupes.}
+
+\subsection{Révisions.}
+
+\begin{defi}{Groupe.}{}
+    Un \bf{groupe} est un couple $(G,\times)$ tel que $G$ est un ensemble et $\times$ une l.c.i. associative, de neutre noté $e$, telle que tout élément de $G$ admet un inverse.\\
+    \bf{Remarque:} Si la loi est commutative, on la notera plutôt $+$.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Montrer que:
+    \begin{enumerate}
+        \item L'élément neutre d'un groupe est unique.
+        \item Soit $E$ un ensemble muni d'une l.c.i. associative et unifère. Montrer que
+        \begin{equation*}
+            \forall x \in E, ~ (\exists y,z \in E ~ : ~ yx = xz = e) \ra y = z.
+        \end{equation*}
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soient $e,e'$ deux neutres, on a $ee'=e$ et $ee'=e'$, donc $e=e'$.\\
+    \boxed{2.} Soient $x\in E$ et $y,z\in E$ tels que $yx=xz=e$, donc $yxz=y\cancel{e}=\cancel{e}z$ donc $y=z$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{}{}
+    Soit $(G,\times)$ un groupe. Soient $(a,b)\in G$. L'équation $ax=b$ admet une unique solution $a^{-1}b$.
+    \tcblower
+    \bf{Analyse.} Soit $x\in G$ tel que $ax=b$. On a $\cancel{a^{-1}a}x=a^{-1}b$ donc $x=a^{-1}b$. On a l'unicité.\\
+    \bf{Synthèse.} On a $a^{-1}b\in G$ car l.c.i. et $a(a^{-1}b)=\cancel{(aa^{-1})}b=b$.
+\end{prop}
+
+\begin{ex}{}{}
+    \begin{itemize}
+        \item $AM=B$ avec $A,B\in\GL_n(\R)$. Solution unique : $A^{-1}B$.
+        \item $f\circ g = h$ avec $f,h$ bijections de $\R$ dans $\R$. Solution unique : $f^{-1}\circ h$.
+    \end{itemize}
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{exi}{}{}
+    Soit $(G,\times)$ un groupe tel que $\forall x \in G, ~ x^2=e$. Montrer que $G$ est commutatif.
+    \tcblower
+    Soient $x,y\in G$. On a $xyxy=(xy)^2=e$ donc $x(xyxy)y=xy$ donc $(xx)yx(yy)=xy$ donc $yx=xy$.
+\end{exi}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Soit $f$ un morphisme de groupe de $(G,\times)$ dans $(G',\cdot)$.
+    \begin{enumerate}
+        \item On note $e$ le neutre de $G$, $e'$ celui de $G'$. Montrer que $f(e)=e'$.
+        \item Soit $x\in G$. Montrer que $f(x)^{-1}=f(x^{-1})$.
+        \item Montrer que $f$ est injective ssi $\Ker f = \{e\}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $f(e)\cdot f(e)=f(ee)=f(e)$ donc $f(e)=e'$ en multipliant par $f(e)^{-1}$.\\
+    \boxed{2.} On a $f(x)f(x^{-1})=f(xx^{-1})=f(e)=e'$ donc $f(x)^{-1}=f(x^{-1})$.\\
+    \boxed{3.} Supposons $f$ injective. Soit $x\in\Ker f$. On a $f(x)=e'$ et $f(e)=e'$ donc $x=e$.\\
+    Supposons $\Ker f=\{e\}$. Soient $x,y\in G$ tels que $f(x)=f(y)$. On a $f(x)f(y)^{-1}=e'$ donc $xy^{-1}=e$ donc $x=y$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    \begin{enumerate}
+        \item La signature est un morphisme de $(S_n,\circ)$ dans $(\{-1,1\},\times)$.
+        \item L'exponentielle est un morphisme de $(\R,+)$ dans $(\R^*_+,\times)$.
+        \item Le déterminant est un morphisme de $(\GL_n(\R),\times)$ dans $(\R^*_+,\times)$.
+    \end{enumerate}
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Construction de tables de groupe de petit cardinal.\\
+    $\bullet$ Pour $n=2$ : $G=\{e,a\}$ avec $a\neq e$.  
+    \begin{center}
+        \begin{tabular}{c|cc}
+            $\times$ & $e$ & $a$ \\
+            \hline
+            $e$ & $e$ & $a$ \\
+            $a$ & $a$ & $e$
+        \end{tabular} \hspace*{1cm}
+        \begin{tabular}{c|cc}
+            $\times$ & $1$ & $-1$ \\
+            \hline
+            $1$ & $1$ & $-1$ \\
+            $-1$ & $-1$ & $1$
+        \end{tabular}
+    \end{center}
+    En effet, si $a^2=a$, alors $a=e$ en multipliant par $a^{-1}$, impossible.\\
+    Ainsi, il existe un seul groupe à deux éléments; le groupe $(\{-1,1\},\times)$ est aussi un groupe à deux éléments...\\
+    On peut expliciter l'isomorphisme de $(G,\times)$ dans $(\{-1,1\},\times)$ qui à 1 associe $e$ et $-1$ associe $a$.\\
+    $\bullet$ Pour $n=3$, on pose $G=\{e,a,b\}$ avec $a\neq b \neq e$.
+    \begin{center}
+        \begin{tabular}{c|ccc}
+            $\times$ & $e$ & $a$ & $b$\\
+            \hline
+            $e$ & $e$ & $a$ & $b$\\
+            $a$ & $a$ & $b$ & $e$\\
+            $b$ & $b$ & $e$ & $a$
+        \end{tabular}
+        \hspace*{1cm}
+        \begin{tabular}{c|ccc}
+            $\times$ & $1$ & $j$ & $j^2$\\
+            \hline
+            $1$ & $1$ & $j$ & $j^2$\\
+            $j$ & $j$ & $j^2$ & $1$\\
+            $j^2$ & $j^2$ & $1$ & $j$
+        \end{tabular}
+    \end{center}
+    Si $ab=a$, alors $b=e$, impossible donc $ab=ba=e$. Si $a^2=e$, alors $a=b$, impossible.\\
+    Si $a^2=a$, alors $a=e$, impossible... donc $a^2=b$. De même pour $b^2$.\\
+    Il y a donc un seul groupe à trois éléments, on peut donner l'exemple de $(\{1,j,j^2\},\times)$.\\
+    \bf{Rappels:} $j=e^{2i\pi/3}=-\frac{1}{2}+i\frac{\sqrt{3}}{2}$, $j^3=1$, $1+j+j^2=0$...\\
+    On pose l'isomorphisme qui à 1 associe $e$, $j$ associe $a$, et $j^2$ associe $b$.
+\end{ex}
+
+\subsection{Sous-groupes d'un groupe.}
+
+\begin{defi}{Sous-groupe.}{}
+    Soit $(G,\times)$ un groupe et $H\subset G$. On dit que $(H,\times)$ est un \bf{sous-groupe} de $(G,\times)$ si c'est un groupe.
+\end{defi}
+
+\begin{prop}{Caractérisation des sous-groupes.}{}
+    Soit $(G,\times)$ un groupe et $H\subset G$. On a $(H,\times)$ sous-groupe de $(G,\times)$ ssi :
+    \begin{itemize}
+        \item $e\in H$.
+        \item $\forall x,y \in H, ~ xy^{-1}\in H$.
+    \end{itemize}
+\end{prop}
+
+\begin{prop}{$\star$}{inter}
+    Une intersection non-vide de sous-groupes de $(G,\times)$ est un sous-groupe de $(G,\times)$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $(G,\times)$ un groupe et $H,K$ deux sous-groupes de $(G,\times)$.\\
+    Alors $H\cup K$ est un sous-groupe de $(G,\times)$ ssi $H\subset K$ ou $K\subset H$.
+    \tcblower
+    \boxed{\ra} Supposons que $H\cup K$ est un sous-groupe de $(G,\times)$.\\
+    On suppose par l'absurde qu'il existe $h\in H\setminus K$ et $k\in K\setminus H$.\\
+    Puisque $h,k\in H\cup K$ et que c'est un groupe, on a $hk\in H\cup K$.\\
+    Si $hk\in H$, alors $k=h^{-1}(hk)\in H$, absurde. Sinon $hk\in K$, alors $h=(hk)k^{-1}\in K$, absurde.\\
+    \boxed{\la} Supposons que $H\subset K$, alors $H\cup K=K$ qui est sous-groupe de $G$. 
+\end{prop}
+
+\begin{defi}{Groupe produit.}{}
+    Soient $(G,\times)$ et $(G',\cdot)$ deux groupes. On définit une loi sur le produit cartésien $G\times G'$ par:
+    \begin{equation*}
+        \forall (x,x')\in G\times G', ~ \forall (y,y')\in G\times G' \quad (x,x')\oldstar(y,y')=(x\times y,x'\cdot y')
+    \end{equation*}
+    Alors $(G\times G', \oldstar)$ est un groupe, appelé \bf{groupe produit} de $G$ et $G'$.
+\end{defi}
+
+\begin{ex}{}{}
+    Soit $H$ un sous-groupe de $(G,\times)$ et $H'$ un sous-groupe de $(G',\cdot)$.\\
+    Montrer que $H\times H'$ est un sous-groupe de $(G\times G', \oldstar)$.
+    \tcblower
+    On a $H\times H'\subset G\times G'$ car $H\subset G$ et $H'\subset G'$.\\
+    On a $(e,e')\in H\times H'$ car $e\in H$ et $e'\in H'$, c'est le neutre de $(G,G')$.\\
+    Soient $(x,x'),(y,y')\in H\times H'$. On a $(x,x')\oldstar(y,y')=(xy,x'y')\in H\times H'$ car $xy\in H$ et $x'y'\in H'$.\\
+    De plus, $(x,x')^{-1}=(x^{-1},x'^{-1})\in H\times H'$ car $x^{-1}\in H$ et $x'^{-1}\in H'$.\\
+    C'est bien un sous-groupe de $(G\times G',\oldstar)$ par caractérisation.
+\end{ex}
+
+\pagebreak
+
+\begin{exi}{}{}
+    Soit $(G,\times)$ un groupe et $n\geq3$.
+    \begin{enumerate}
+        \item Soit $x\in G$. On pose $C(x)=\{y\in G \mid yx=xy\}$, appelé commutant de $x$.
+        \item On note $Z(G)=\{x\in G \mid \forall y \in G, ~ xy=yx\}$, appelé centre de $G$.
+        \item Montrer que $Z(S_n,\circ)=\{\id\}$.
+        \item Montrer que $Z(\GL_n(\R),\times)=\{\l I_n, ~ \l \in \R^*\}$.
+    \end{enumerate}
+    Montrer que ce sont des sous-groupes de $(G,\times)$.
+    \tcblower
+    \boxed{1.} Soit $x\in G$. On a bien $C(x)\in G$ et $e\in C(x)$.\\
+    Soient $y,z\in C(x)$. On a $x(yz)=yxz=(yz)x$ donc $yz\in C(x)$. Et $yx=xy$ donc $x=y^{-1}xy$ donc $xy^{-1}=y^{-1}x$.\\
+    \boxed{2.} $x\in Z(G)\iff \forall y \in G, ~ x \in C(y) \iff x \in \bigcap_{y\in G}C(y)$. Donc $Z(G)=\bigcap_{y\in G}C(y)$ : \ref{prop:inter}.\\
+    \boxed{3.\subset} Soit $\s\in Z(S_n)$. Supposons par l'absurde que $\s\neq\id$ : $\exists a,b\in\lb1,n\rb ~ : ~ \s(a)=b$ et $a\neq b$.\\
+    On prend $c\in\lb1,n\rb\setminus\{a,b\}$. On a $\s(b~c)(a)=\s(a)=b$ et $(b~c)\s(a)=c$ donc $\s$ ne commute pas avec $(b~c)$.\\
+    Or $\s\in Z(S_n)$, ce qui est absurde donc $\s=\id$.\\
+    \boxed{3.\supset} On a bien que $\id$ commute avec toutes les permutations, donc $Z(S_n,\circ)=\{\id\}$.\\
+    \boxed{4.\subset} Soit $A\in Z(\GL_n(\R))$. Soient $i,j\in\lb1,n\rb$, soient $k,l\in\lb1,n\rb$.
+    \begin{equation*}
+        [AE_{i,j}]_{k,l}=\sum_{s=1}^na_{km,s}\e_{s,l}=\d_{l,j}a_{k,i}; \quad [E_{i,j}A]_{k,l}=\sum_{s=1}^n\e_{k,s}a_{s,l}=\d_{k,i}a_{j,l}.
+    \end{equation*}
+    Définition de $\e$ : $\e_{a,b}=1\iff a=i$ et $b=j$.\\
+    On a donc $\d_{l,s}a_{k,i}=\d_{k,i}a_{j,l}$.\\
+    Pour $(l,k)=(j,i) ~:~ a_{i,i}=a_{j,j}$; Pour $k=i, ~ l\neq j ~:~ a_{j,l}=0$.\\
+    Donc les coefficients sur la diagonale sont tous égaux, les autres sont nuls. On a $A=a_{1,1}I_n$.\\
+    \bf{Remarque.} On a $A(I_n+E_{i,j})=(I_n+E_{i,j})A$ donc $A+AE_{i,j}=A+E_{i,j}A$ donc $AE_{i,j}=E_{i,j}A$.\\
+    \boxed{4.\supset} Triviale.
+\end{exi}
+
+\begin{thm}{Sous-groupes de $\Z$. $\star$}{}
+    Les sous-groupes de $(\Z,+)$ sont exactement les $n\Z,n\in\N$.\\
+    Il y a unicité de l'écriture : $n\Z=m\Z\ra n=m$, $(n,m\in\N)$.
+    \tcblower
+    \bf{Unicité.} Pour $n,m\in\N$, supposons $n\Z=m\Z$. Alors $n\mid m$ et $m\mid n$, donc $m=n$ car positifs.\\
+    \bf{Existence.} Les ensembles $n\Z$ $(n\in\N)$ sont bien des sous-groupes de $\Z$ (facile !).\\
+    Réciproquement, soit $H$ un sous-groupe de $\Z$. Si $H=\{0\}$, alors $H=0\Z$, c'est bon.\\
+    Sinon, $H\cap\N^*$ est non-vide, minoré par 0, on pose $n$ son minimum. Vérifions que $H=n\Z$.\\
+    \boxed{\supset} On a $n\in H$, et puisque $H$ est stable par addition, il contient tous les multiples de $n$. Donc $n\Z\subset H$.\\
+    \boxed{\subset} Soit $h\in H$, par \bf{division euclidienne} : $\exists (q,r)\in\Z\times\N \mid h = nq+r$ et $r<n$.\\
+    On a donc $r=h-nq\in H$, et par définition de $n$, $r=0$, car $0\leq r<n$. On a bien $h=nq\in n\Z$.
+\end{thm}
+
+\pagebreak
+
+\begin{ex}{}{}
+    Soit $G=\left\{ \begin{pmatrix} 1 & a & b \\ 0 & 1 & c \\ 0 & 0 & 1\end{pmatrix}, ~ a,b,c\in\R \right\}$.\\
+    Montrer que $(G,\times)$ est un groupe. Déterminer $Z(G)$ et vérifier que c'est un sous-groupe de $(G,\times)$.
+    \tcblower
+    \boxed{1.} Montrons que $(G,\times)$ est un sous-groupe de $(\GL_3(\R),\times)$.\\
+    Toute matrice de $G$ est inversible comme triangulaire à coefficient diagonaux non nuls. Donc $G\subset\GL_3(\R)$.\\
+    L'identité appartient à $G$, dans le cas particulier $a=b=c=0$.\\
+    Soient $A=\begin{pmatrix}1&a&b\\0&1&c\\0&0&1\end{pmatrix}$ et $B=\begin{pmatrix}1&a'&b'\\0&1&c'\\0&0&1\end{pmatrix}$ dans $G$.
+    \begin{equation*}
+        AB=\begin{pmatrix}
+            1 & a+a' & b + ac' + b' \\
+            0 & 1 & c+c' \\
+            0 & 0 & 1
+        \end{pmatrix}\in G; \quad A^{-1}= \begin{pmatrix}
+            1 & -a & ac-b \\
+            0 & 1 & -c \\
+            0 & 0 & 1
+        \end{pmatrix} \in G.
+    \end{equation*}
+    Par caractérisation, c'est un sous-groupe de $(\GL_3(\R),\times)$.\\
+    \boxed{2.} \bf{Analyse.} Soit $A\in Z(G)$ et $B\in G$. On a:
+    \begin{equation*}
+        AB=BA ~~\nt{donc}~~ \begin{pmatrix}
+            1&a+a'&b+ac'+b'\\
+            0&1&c+c'\\
+            0&0&1
+        \end{pmatrix}= \begin{pmatrix}
+            1&a+a'&b+a'c+b'\\
+            0&1&c+c'\\
+            0&0&1
+        \end{pmatrix}
+    \end{equation*}
+    Donc $ac'=a'c$ pour tout $a',c'\in\R$, on choisit $(1,0)$ et $(0,1)$ donc $a=c=0$ donc $A=\begin{pmatrix}.
+        1&0&b\\
+        0&1&0\\
+        0&0&1
+    \end{pmatrix}$ pour $b\in\R$.\\
+    \bf{Synthèse.} Soit $A$ de cette forme pour $b\in\R$. Soit $B\in G$.
+    \begin{equation*}
+        AB=\begin{pmatrix}
+            1&a'&b+b'\\
+            0&1&c'\\
+            0&0&1
+        \end{pmatrix} \quad\nt{et}\quad BA=\begin{pmatrix}
+            1&a'&b+b'\\
+            0&1&c'\\
+            0&0&1
+        \end{pmatrix} \quad\nt{donc}\quad AB=BA.
+    \end{equation*}
+    \bf{Conclusion.} $Z(G) =\left\{ \begin{pmatrix}
+    1&0&x\\
+    0&1&0\\
+    0&0&1
+    \end{pmatrix}, ~ x \in \R \right\}$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\subsection{Groupe engendré par une partie.}
+
+\begin{defi}{Groupe engendré. $\star$}{}
+    Soit $(G,\times)$ un groupe et $A\subset G$.\\
+    Il existe un plus petit sous-groupe de $G$ qui contient A, appelé \bf{sous-groupe engendré} par $A$, noté $\langle A\rangle $.\\
+    \bf{Notation.} Si $A=\{a\}$ un singleton, on notera $\langle a\rangle $ au lieu de $\langle \{a\}\rangle $.
+    \tcblower
+    \bf{Existence.} On note $\cursive{H}=\{H, ~ \nt{sous-groupe de G} \mid A\subset H\}$, donc $G\in \cursive{H}$.\\
+    On pose $H_0=\bigcap_{H\in\cursive{H}}H$ l'intersection de tous les sous-groupes de $G$ qui contiennent $A$.\\
+    On a $H_0$ un sous-groupe de $G$ en tant qu'intersection non-vide de sous-groupes de $G$.\\
+    De plus, $A\subset H_0$ car $\forall H \in \cursive{H}, ~ A\subset H$.\\
+    Enfin, $H_0$ est le plus petit car par définition, tout sous-groupe $H$ de $G$, $H\in\cursive{H}$ donc $H_0\subset H$.
+\end{defi}
+
+\begin{defi}{Itérés.}{}
+    Soit $(G,\times)$ un groupe et $a\in G$. Les \bf{itérés} de $a$ sont définis par récurrence par :
+    \begin{itemize}
+        \item $a^0=e$ (neutre de $G$).
+        \item $\forall n \in \N, ~ a^{n+1}=a\times a^n$.
+    \end{itemize}
+    puis $\forall n \in \N, ~ a^{-n}=(a^{-1})^{n}$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{thm}{}{}
+    Soit $(G,\times)$ un groupe et $a\in G$. Alors $\langle a\rangle =\{a^n,n\in\Z\}$.
+    \tcblower
+    \boxed{\subset} Posons $H=\{a^n, n\in \Z\}$, montrons que c'est un sous-groupe de $G$ qui contient $a$.\\
+    Il contient effectivement $a$ car $a^1\in H$, $H\subset G$ et $H\neq\0$ et stable par produit.\\
+    De plus, $\forall n \in \Z ~ (a^n)^{-1}=a^{-n}\in H$, on a bien $\langle a\rangle ~\subset H$.\\
+    \boxed{\supset} On a bien $a\in\langle a\rangle $, stable par produit et inverse donc $\forall n \in \Z, ~ a^n \in\langle a\rangle $.
+\end{thm}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{Ordre d'un élément. $\star$}{}
+    Soit $(G,\times)$ un groupe. L'\bf{ordre} de $a\in G$ est le cardinal fini ou infini de $\langle a\rangle $, noté $o(a)$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\bf{Exemple:} $(\U_3,\times)$, on a $\langle j\rangle=\{1,j,j^2,...\}$ donc $o(j)=3$; $\langle j^2 \rangle=\{1,j^2,j^4=j,...\}$ donc $o(j^2)=3$.\\
+\bf{Remarque:} Un élément est le neutre si et seulement si il est d'ordre 1.
+
+\begin{thm}{Structure de l'ensemble des itérés.}{22}
+    Soit $(G,\times)$ un groupe de neutre $e$ et $a\in G$.
+    \begin{enumerate}
+        \item Si $a$ est d'ordre infini, alors $\forall m,n\in\Z, ~ m\neq n \ra a^m \neq a^n$.
+        \item Si $a$ est d'ordre fini $p$, alors $\langle a \rangle = \{e,a,...,a^{p-1}\}$.
+    \end{enumerate}
+    \tcblower
+    En effet, si tous les itérés de $a$ sont distincts, alors $o(a)=|\langle a\rangle|=+\infty$.\\
+    Sinon, $\exists n,m\in\N, ~ n<m ~\et~ a^n=a^m$. Notons $E=\{k\in\N^*,~a^k=e\}$.\\
+    On a $m-n\in E$ car $a^{m-n}=e$ donc $E\neq\0$. C'est une partie non-vide de $\N^*$. Il admet un minimum $p$.\\
+    $\bullet$ Montrons que les itérés de $a$ jusqu'à l'ordre $p$ sont distincts.\\
+    \hspace*{0.3cm}Supposons que $\exists k<h \in \lb0,p-1\rb, ~ a^k=a^h$. Alors $a^{k-h}=e$, or $0\leq k-h<p$. Absurde.\\
+    $\bullet$ Montrons que $\langle a \rangle = \{e,a,...,a^{p-1}\}$.\\
+    \boxed{\supset} Trivial.\\
+    \boxed{\subset} Soit $n\in\Z$. On a $\exists (q,r)\in\Z\times\N, ~ n=qp+r$ et $r<p$ donc $a^n=a^{pq}a^r=a^r\in\{e,a,...,a^{p-1}\}$ car $r<p$.\\
+    En particulier, $o(a)=|\langle a \rangle|=p$.
+\end{thm}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{$\star$}{}
+    Soit $(G,\times)$ un groupe de neutre $e$ et $a\in G$ d'ordre $p\in\N$. Alors $\forall n \in \Z, ~ a^n=e\iff p \mid n$.
+    \tcblower
+    \boxed{\la} Supposons $\exists q\in\Z, ~ n=pq$. Alors $a^n=(a^p)^q=e$.\\
+    \boxed{\ra} Supposons $a^n=e$. Alors $\exists (q,r)\in\Z\times\N, ~ n=pq+r$ et $r<p$ donc $a^n=(a^p)^qa^r=a^r=e$ et $r=0$ $(r<p)$.\\
+    Ainsi, $p\mid n$ car $r=0$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    \begin{enumerate}
+        \item $(\Z,+)$, on a $o(3)=+\infty$.
+        \item $(\U_3,\times)$, on a $o(j)=o(j^2)=3$.
+    \end{enumerate}
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    \begin{enumerate}
+        \item Montrer que $(\GL_2(\Z),\times)$ est un groupe.
+        \item On pose $A=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$ et $B=\begin{pmatrix}0&-1\\1&-1\end{pmatrix}$.\\
+        Calculer l'ordre de $A$, de $B$ et de $AB$. Conclusion ?
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} C'est un sous-groupe de $\GL_2(\R)$...\\
+    \boxed{2.} On peut étudier l'ensemble des itérés de ces matrices.
+    \begin{align*}
+        &A^2=\begin{pmatrix}-1&0\\0&-1\end{pmatrix}; \quad A^3=\begin{pmatrix}0&1\\-1&0\end{pmatrix}; \quad A^4=\begin{pmatrix}1&0\\0&1\end{pmatrix}.\\
+        &B^2=\begin{pmatrix}-1&1\\-1&0\end{pmatrix}; \quad B^3=\begin{pmatrix}1&0\\0&1\end{pmatrix}.
+    \end{align*}
+    Ainsi, $o(A)=4$; $o(B)=3$.\n
+    On peut montrer que $\forall n \in \N, ~ (AB)^n=\begin{pmatrix}(-1)^n&n(-1)^{n+1}\\0&(-1)^n\end{pmatrix}$ par récurrence.\\
+    Deux arguments possibles: $n\neq m\ra (AB)^n\neq(AB)^m$ ou bien $n\neq0\ra(AB)^n\neq I_2$.\\
+    Desquels on déduit que $o(AB)=+\infty$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    Soit $(G,\times)$ un groupe, et $x,y\in G$ tels que $xy=yx$.\\
+    On suppose $x$ et $y$ d'ordre finis $p$ et $q$ respectivement tels que $p\land q = 1$.\\
+    Montrer que $xy$ est encore d'ordre fini, et que $o(xy)=pq$.
+    \tcblower
+    On a $\langle x \rangle = \{e,x,...,x^{p-1}\}$ et $x^n=e\iff p\mid n$; $\langle y \rangle = \{e,y,...,y^{q-1}\}$ et $y^n=e\iff q\mid n$.\\
+    Comme $x$ et $y$ commutent, on a $\forall k \in \Z, ~ (xy)^k=x^ky^k$.\\
+    $\bullet$ On a bien $(xy)^{pq}=(x^p)^q(y^q)^p=e$. Alors par théorème, $xy$ est d'ordre fini, et cet ordre divise $pq$.\\
+    $\bullet$ On a $(xy)^k=e\ra x^ky^k=e \ra \cancel{(x^k)^p}(y^k)^p=e$ donc $y^{kp}=e$ donc $q \mid kp$. Or $p\land q=1$ donc $q\mid k$.\\
+    Par symétrie, on a $p\mid k$. On a donc $p\mid k, ~ q \mid k$ et $p\land q=1$, alors $pq\mid k$.\\
+    On a bien $o(xy)=pq$ et $\langle xy \rangle = \{e,xy,...,(xy)^{pq-1}\}$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{Partie génératrice. $\star$}{}
+    Soit $(G,\times)$ un groupe et $A\subset G$. Si $G=\langle A \rangle$, on dit que $A$ est une \bf{partie génératrice} de $G$.\\
+    On peut aussi dire que $A$ \bf{engendre} $G$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    Le groupe $(S_n,\circ)$ des permutations d'ordre $n$ est engendré par l'ensemble des transpositions.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{Groupe monogène. $\star$}{}
+    Soit $(G,\times)$ un groupe. On dit que $G$ est \bf{monogène} si et seulement si $\exists a \in G ~\nt{tel que}~ G = \langle a \rangle$.\\
+    \warning Il n'y a pas forcément unicité du générateur.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    \begin{itemize}
+        \item $(\Z,+)$ est engendré par $1$, et par $-1$.
+        \item $(\U_3,\times)$ est engendré par $j$, et par $j^2$, mais pas 1.
+    \end{itemize}
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{Groupe cyclique.}{}
+    Un \bf{groupe cyclique} est un groupe monogène à cardinal fini.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{thm}{$\star$}{}
+    Soit $(G,\times)$ un groupe de cardinal fini $n\in\N$.
+    \begin{enumerate}
+        \item L'ordre de tout élément de $G$ divise $n$.
+        \item Le $n^{\nt{ème}}$ itéré de tout élément de $G$ est le neutre.
+    \end{enumerate}
+    \bf{Remarque.} $G$ est monogène ssi $\exists a \in G \mid o(a)=n$. Peut servir à montrer que $G$ est cyclique.
+    \tcblower
+    \boxed{1.} Conformément au programme, la démonstration se limite au cas $G$ commutatif.\\
+    Soit $a\in G$, on note $p$ son ordre. Trivialement, on a $p\leq n$. En posant la bijection $x\mapsto ax$, on a :
+    \begin{equation*}
+        \prod_{x\in G}x=\prod_{x\in G}(ax)=a^{n}\prod_{x\in G}x.
+    \end{equation*}
+    Enfin, $\prod_{x\in G}x$ est inversible ($G$ est un groupe) donc en multipliant par l'inverse : $a^{n}=e$, puis $p\mid n$ par thm.\\
+    \boxed{2.} Fait ci-dessus.\\
+    Justifions la remarque : soit $a\in G$ tel que $o(a)=n$.\\
+    Alors $\langle a \rangle \subset G$ et $|\langle a\rangle|=n<\infty$ donc $\langle a \rangle = G$. (et $G$ est bien cyclique!)
+\end{thm}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    Soit $(G,\times)$ un groupe fini de cardinal $p$ premier. Alors $p$ est un groupe cyclique.
+    \tcblower
+    Soit $a\in G$, tel que $a\neq e$. On a $o(a)\mid p$ d'après le théorème précédent, d'où $o(a)=p$.\\
+    Donc $G=\langle a \rangle$. En fait $G$ est engendré par n'importe lequel de ses éléments distincts de $e$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    Quels sont les groupes d'ordre 5 à isomorphisme près ?
+    \tcblower
+    Soit $(G,\times)$ d'ordre 5 (premier), alors $G$ est cyclique : $\exists a \in G, ~ G=\langle a \rangle$, avec $a^5=e$.\\
+    On connaît donc la table de $G$, il est isomorphe à $(\U_5,\times)$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\subsection{Groupe \texorpdfstring{$\Z/n\Z$}{Lg}.}
+
+\begin{defi}{Congruence.}{}
+    Soit $n\in\N^*$. On définit la congruence modulo $n$ sur $\Z$ par :
+    \begin{equation*}
+        \forall (x,y)\in\Z^2 \quad x \equiv y[n] \iff \exists k \in \Z \mid x=y+kn.
+    \end{equation*}
+    C'est une relation d'équivalence sur $\Z$, qui a exactement $n$ classes d'équivalence.\\
+    On notera $\Z/n\Z$ l'ensemble : $\Z/n\Z=\{[0],[1],...,[n-1]\}$, où chacun des éléments est un ensemble infini.\\
+    On le munit d'une loi notée $\ov{+}$ définie par :
+    \begin{equation*}
+        \forall (x,y) \in \Z^2 \quad [x]~\ov{+}~[y]:=[x+y].
+    \end{equation*}
+\end{defi}
+
+\vspace*{0.2cm}
+
+\begin{prop}{}{}
+    $(\Z/n\Z,\ov{+})$ est un groupe commutatif et cyclique de cardinal $n$.
+    \tcblower
+    La loi est bien définie. Soient $x,x',y,y'\in\Z$ tels que $[x]=[x']$ et $[y]=[y']$.\\
+    On a $x\equiv x'[n]$ et $y\equiv y'[n]$ donc $x+y\equiv x'+y'[n]$.\\
+    Vérifions maintenant que c'est un groupe abélien, $\ov{+}$ est une l.c.i. associative et commutative, de neutre $[0]$.\\
+    Tout élément est inversible : $\forall x \in \Z, ~ [x]^{-1}=[-x]$.\\
+    Enfin, $\Z/n\Z$ est engendré par $[1]$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{thm}{Structure des groupes monogènes. $\star$}{}
+    Soit $(G,\times)$ un groupe monogène, engendré par $a\in G$.
+    \begin{enumerate}
+        \item Si $G$ est de cardinal infini, alors $(G,\times)$ est isomorphe à $(\Z,+)$.
+        \item Si $|G|=n\in\N^*$, alors $(G,\times)$ est isomorphe à $(\Z/n\Z,\ov{+})$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On suppose $G$ de cardinal infini. Alors les itérés de $a$ sont tous distincts (\ref{thm:22}).\\
+    On pose $f:n\mapsto a^n$, c'est un isomorphisme de $\Z$ dans $G$ (\ref{thm:22}).\\
+    \boxed{2.} On suppose $|G|=n\in\N^*$, alors $G=\{e,a,...,a^{n-1}\}$, et $a^n=e$ (\ref{thm:22}).\\
+    On pose $f:[k]\mapsto a^k$, c'est un isomorphisme de $\Z/n\Z$ dans $G$.\\
+    Soient $x,y\in\Z ~ [x]=[y]$, donc $\exists k\in\Z ~ x=y+kn$, puis $a^x=a^y(a^n)^k=a^y$, donc $f([x])=f([y])$, bien déf.\\
+    Soient $x,y\in\Z$, on a $f([x]\ov{+}[y])=f([x+y])=a^{x+y}=a^xa^y$, c'est bien un morphisme.\\
+    Soit $x\in G$, $\exists k\in\Z$ tel que $x=a^k$ puis $x=f([k])$, donc $f$ est surjectif. Or $|G|=|\Z/n\Z|$ d'où bijectif.
+\end{thm}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{Groupe de Klein.}{}
+    On appelle groupe de Klein le groupe produit $\Z/2\Z\times\Z/2\Z$. Donner la table de ce groupe.
+    \tcblower
+    On a:
+    \begin{center}
+        \begin{tabular}{c|cccc}
+            $\ov{+}$ & $([0],[0])$ & $([0],[1])$ & $([1],[0])$ & $([1],[1])$\\
+            \hline
+            $([0],[0])$ & $([0],[0])$ & $([0],[1])$ & $([1],[0])$ & $([1],[1])$\\
+            $([0],[1])$ & $([0],[1])$ & $([0],[0])$ & $([1],[1])$ & $([1],[0])$\\
+            $([1],[0])$ & $([1],[1])$ & $([1],[1])$ & $([0],[0])$ & $([0],[1])$\\
+            $([1],[1])$ & $([1],[1])$ & $([1],[0])$ & $([0],[1])$ & $([0],[0])$
+        \end{tabular}
+    \end{center}
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{$\star$}{}
+    \begin{enumerate}
+        \item Quels sont les ordres des éléments de $(\Z/6\Z,\ov{+})$ ?
+        \item (*) Soit $n\in\N^*$. Quels sont les générateurs de $(\Z/n\Z,\ov{+})$ ?
+    \end{enumerate} 
+    \tcblower
+    \boxed{1.} $o([0])=1$, $o([1])=6$, $o([2])=3$, $o([3])=2$, $o([4])=3$, $o([5])=6$.\\
+    \boxed{2.} Montrons que $[k]$ engendre $(\Z/n\Z,\ov{+})$ ssi $k\land n=1$.\\
+    \boxed{\ra} En particulier, $[1]$ est itéré de $[k]$. Donc $\exists u\in\Z, ~ [1]=u[k]=[ku]$, puis $1\equiv ku[n]$.\\
+    Ainsi, $\exists v \in \Z, ~ ku+nv=1$, et d'après la relation de Bezout, $k\land n=1$.\\
+    \boxed{\la} Par hypothèse : $\exists u,v \in \Z, ~ ku+nv=1$, donc $ku\equiv 1[n]$ donc $[ku]=[1]$ donc $[1]$ est itéré de $[k]$.\\
+    Puis toute classe est un itéré de $[1]$ donc toute classe est itéré de $[k]$ par transitivité.
+\end{ex}
+
+\section{Compléments sur les anneaux.}
+
+\subsection{Anneaux.}
+
+\begin{rappel}{Anneau.}{}
+    Un anneau est un ensemble $A$ muni de deux lois $+$ et $\times$ telles que
+    \begin{itemize}
+        \item $(A,+)$ groupe abélien, de neutre $0$.
+        \item $\times$ l.c.i. associative, de neutre 1.
+        \item $\times$ distributive par rapport à $+$.
+    \end{itemize}
+\end{rappel}
+
+\begin{rappel}{Caractérisation des sous-anneaux.}{}
+    Soit $(A,+,\times)$ et $B\subset A$. On a $(B,+,\times)$ est un sous-anneau ssi :
+    \begin{itemize}
+        \item $1_A\in B$.
+        \item $\forall x,y \in B, ~ x-y\in B$.
+        \item $\forall x,y \in B, ~ xy\in B$.
+    \end{itemize}
+    \bf{Remarque:} le seul sous-anneau de $\Z$, c'est $\Z$.
+\end{rappel}
+
+\begin{rappel}{Morphisme d'anneaux.}{}
+    Soit $f:(A,+,\times)\to(A',+,\times)$. C'est un morphisme d'anneaux ssi :
+    \begin{itemize}
+        \item $f(1_A)=1_{A'}$.
+        \item $\forall x,y \in A^2, \quad f(x+y)=f(x)+f(y)$.
+        \item $\forall x,y \in A^2, \quad f(xy)=f(x)f(y)$.
+    \end{itemize}
+\end{rappel}
+
+\begin{defi}{Anneau commutatif.}{}
+    Un anneau $(A,+,\times)$ est dit commutatif si $\times$ est commutative.
+\end{defi}
+
+\begin{defi}{Inversibles.}{}
+    Soit $(A,+,\times)$ un anneau. L'ensemble des inversibles, noté $U(A)$ est l'ensemble des inversibles pour $\times$.
+\end{defi}
+
+\begin{rappel}{Groupe des inversibles.}{}
+    Soit $(A,+,\times)$. Alors $(U(A),+,\times)$ est un groupe, appelé groupe des inversibles.\\
+    Soient $a,b\in U(A)$. Alors $(ab)^{-1}=b^{-1}a^{-1}$.
+\end{rappel}
+
+\begin{defi}{Intégrité.}{}
+    Un anneau $(A,+,\times)$ est intègre ssi il n'admet pas de diviseurs de $0$ :
+    \begin{equation*}
+        \forall (x,y) \in A^2, ~ xy = 0 \ra x = 0 ~\ou~ y = 0.
+    \end{equation*}
+\end{defi}
+
+\begin{ex}{Anneau de Gauss.}{}
+    Soit $G=\{a+ib, ~ (a,b)\in\Z^2\}$.
+    \begin{enumerate}
+        \item Montrer que $(G,+,\times)$ est un anneau commutatif, appelé anneau des entiers de Gauss.
+        \item Déterminer $U(G)$. 
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Vérifions que c'est un sous-anneau de $(\C,+,\times)$.\\
+    --- $1=1+i0\in G$; $a+ib-a'-ib'=(a-a')+i(b-b')\in G$; $(a+ib)(a'+ib')=(aa'-bb')+i(ab'+ab)$.\\
+    \boxed{2.} Soit $a+ib\in U(G)$, et $c+id$ son inverse. On passe au module (au carré):
+    \begin{equation*}
+        (a^2+b^2)(c^2+d^2)=1
+    \end{equation*}
+    D'où $a^2+b^2=1$, puis $a^2=0$ et $b^2=1$; ou $a^2=1$ et $b^2=0$, ie : $(a,b)\in\{(1,0),(-1,0),(0,1),(0,-1)\}$.\\
+    Ces couples sont tous inversibles, ce sont exactement les inversibles de $G$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    Déterminer les morphismes d'anneaux de $(\C,+,\times)$ dans lui-même qui laissent $\R$ invariant.
+    \tcblower
+    \bf{Analyse.} Soit $\phi$ endomorphisme de $(\C,+,\times)$ tel que $\forall x \in \R, ~ \phi(x)=x$.\\
+    Soit $z=a+ib\in\C$, alors $\phi(z)=\phi(a)+\phi(i)\phi(b)=a+\phi(i)b$. Or $\phi(i)^2=\phi(-1)=-1$ donc $\phi(i)\in\{i,-i\}$.\\
+    Si $\phi(i)=i$, alors $\phi(z)=z$, puis $\phi=\id_\C$; Si $\phi(i)=-i$, alors $\phi(z)=\ov{z}$, puis $\phi$ est la conjugaison.\\
+    \bf{Synthèse.} On a bien que l'identité et la conjugaison sont de tels morphismes.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{Anneau produit.}{}
+    Soient $(A,+,\times)$ et $(B,+,\times)$ deux anneaux. On munit $A\times B$ des lois produits.\\
+    Alors $(A\times B, +, \times)$ est un anneau, appelé anneau produit, et $U(A\times B)=U(A)\times U(B)$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\subsection{Divisibilité, Idéaux.}
+
+\begin{defi}{Corps.}{}
+    Un corps est un anneau dont tous les éléments non nuls sont inversibles.\\
+    Si $(K,+,\times)$ est un corps, alors $U(K)=K^*$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    $(\Z,+,\times)$ est un anneau mais pas un corps.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Un corps est un anneau intègre.
+    \tcblower
+    Soit $(K,+,\times)$ un corps. Soit $(a,b)\in\K^2$ tel que $a\times b=0_K$.\\
+    Si $a\neq0_K$, alors $a$ est inversible et $b=0_K$ en multipliant par $a^{-1}$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{Idéal. $\star$}{}
+    Soit $(A,+,\times)$ un anneau commutatif, et $I\subset A$. On dit que c'est un idéal de $A$ ssi :
+    \begin{enumerate}
+        \item $(I,+)$ est un sous-groupe de $(A,+)$.
+        \item $\forall a \in A, ~ \forall x \in I \quad a\times x \in I$ (propriété d'absorption).
+    \end{enumerate}
+\end{defi}
+
+\begin{ex}{Idéaux triviaux.}{}
+    $\{0\}$ et $A$ sont les idéaux triviaux de $A$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{$\star$}{}
+    Les idéaux de $(\Z,+,\times)$ sont exactement les $n\Z$, où $n\in\N$.
+    \tcblower
+    Soit $I$ un idéal de $(\Z,+,\times)$, alors $(I,+)$ est sous-groupe de $(\Z,+)$ donc est de la forme $n\Z$.\\
+    De plus, $\forall a \in \Z, ~ \forall b \in I = n\Z$, ~ $ab\in n\Z$, c'est bien un idéal. 
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{$\star$}{}
+    Soit $(A,+,\times)$ un anneau commutatif et $I$ un idéal de $A$, alors $I=A \iff 1_A\in I$.
+    \tcblower
+    \boxed{\ra} Supposons $A=I$. $1_A\in A$ et $A=I$ donc $1_A\in I$.\\
+    \boxed{\la} Supposons $1_A\in I$. On a bien $I\subset A$. Soit $x\in A$, on a $x=1_A x$ donc $x\in I$. 
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Les seuls idéaux d'un corps commutatif $K$ sont les deux idéaux triviaux, $\{0\}$ et $K$.
+    \tcblower
+    Soit $I$ un idéal non nul, montrons que $I=K$.\\
+    Soit $x\in I$ non nul, on a $x^{-1}\in K$ car corps, donc $xx^{-1}\in I$ donc $1\in I$ donc $I=K$.
+\end{ex}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{Stabilité des idéaux.}{}
+    \begin{enumerate}
+        \item Une intersection non-vide d'idéaux est un idéal.
+        \item Une réunion d'idéaux n'est jamais un idéal, sauf si l'un est inclus dans l'autre.
+        \item Une somme d'idéaux est un idéal.
+    \end{enumerate}
+    \tcblower
+    Soit $(A,+,\times)$ un anneau et $I,J$ deux idéaux de $A$.\\
+    \boxed{3.} On a $(I+J,+)$ est un sous-groupe de $A$.\\
+    $\bullet$ On a $0=0_I+0_J$ donc $0\in I+J$, non-vide.\\
+    $\bullet$ $\forall (a,b),(c,d)\in I + J, ~ (a+b)-(c+d)=(a-c)+(b-d)\in I + J$.\\
+    $\bullet$ Soient $a+b\in I+J$ et $x\in A$. Alors $(a+b)x=ax+bx\in I + J$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{Diviseurs, multiples dans un anneau.}{}
+    Soit $(A,+,\times)$ un anneau commutatif, et $a,b\in A$.
+    \begin{equation*}
+        a \nt{ divise } b \iff \exists c \in A, ~ b = ac.
+    \end{equation*}
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{}{}
+    Un anneau est dit principal ssi tous ses idéaux sont engendrés par un seul élément.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    $(\Z,+,\times)$ est principal : tout idéal de $(\Z,+,\times)$ s'écrit $n\Z=(n)$ pour $n\in\N$.
+\end{ex}
+
+\begin{prop}{Idéal engendré par un élément. $\star$}{}
+    Soit $(A,+,\times)$ un anneau commutatif et $a\in A$.\\
+    Il existe un plus petit idéal de $A$ qui contient $a$, appelé idéal engendré par $a$, noté $(a)$.\\
+    De plus, cet idéal est $aA=\{ab, ~ b\in A\}$.
+    \tcblower
+    Notons $\cursive{I}=\{I \nt{ idéal de } (A,+,\times) ~:~ a\in I\}$. On a $A\in\cursive{I}$ donc $\cursive{I}$ non-vide.\\
+    Posons $I_0=\bigcap_{I\in\cursive{I}}I$, c'est un idéal de $A$ comme intersection non-vide d'idéaux de $A$, puis $a\in I_0$.\\
+    On a $I_0$ est bien un idéal de $A$ qui contient $a$ et c'est le plus petit (par construction).\\
+    \boxed{\supset} $I_0$ est un idéal contenant $a$, donc $\forall b \in A, ~ ab\in I_0$, donc $aA\in I_0$.\\
+    \boxed{\subset} $aA$ est un idéal qui contient $a$, donc $I_0\subset aA$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{PGCD de deux éléments de $\Z$. $\star$}{}
+    Soit $a,b\in\Z$ non tous les deux nuls. On pose $I=\{au+bv,~u,v\in\Z\}$, c'est un idéal de $\Z$ non-nul.\\
+    Donc $\exists d \in \N^*, ~ I = d\Z$, c'est par définition le PGCD de $a$ et $b$.\\
+    De plus $d\mid a$ et $d \mid b$, et $c\mid a \et c\mid b \ra c \mid d$.
+    \tcblower
+    C'est un idéal comme somme de $(a)$ et $(b)$, idéaux.\\
+    Alors $\exists d \in \N, ~ I = d\Z$, et $d\neq0$ car $a$ ou $b$ non nul.\\
+    Enfin, $(a)\subset (a) + (b) = (d)$ donc $d \mid a$; $(b)\subset (d)$, donc $d\mid b$.\\
+    Soit $c$ diviseur commun de $a$ et $b$. $d\in (a)+(b)$ donc $\exists u,v \in \Z^2 ,~ d=au+bv$ (Bezout).\\
+    Ainsi, $[c\mid a \et c \mid b] \ra c \mid au + bv = d$. 
+\end{defi}
+
+\subsection{Anneau \texorpdfstring{$\Z/n\Z$}{Lg}.}
+
+\begin{defi}{}{}
+    On munit l'ensemble $\Z/n\Z$ d'une loi $\ov{\times}$, définie par :
+    \begin{equation*}
+        \forall k,l \in \Z \quad [k]\ov{\times}[l]=[kl]
+    \end{equation*} 
+\end{defi}
+
+\vspace*{-0.4cm}
+
+\begin{thm}{}{}
+    $(\Z/n\Z,\ov{+},\ov{\times})$ est un anneau commutatif.
+\end{thm}
+
+\vspace*{-0.4cm}
+
+\begin{thm}{$\star$}{}
+    Soit $n\in\N^*$, $k\in\Z$.
+    \begin{center}
+        $[k]$ est inversible dans $\Z/n\Z$ ssi $k\land n = 1$.
+    \end{center}
+    \tcblower
+    \boxed{\ra} Supposons $k\land n = 1$, $\exists u,v \in \Z, ~ ku+nv=1$. Alors $[ku]+[nv]=[1]$, puis $[k][u]+[n][v]=[1]$.\\
+    Or $[n]=0$ donc $[k][u]=1$, donc $[k]$ est inversible d'inverse $[u]$.\\
+    \boxed{\la} Supposons $[k]$ inversible : $\exists l \in \Z, ~ [k][l]=[1]$, donc $[kl]=[1]$, donc $\exists v \in \Z, ~ kl-nv=1$.\\
+    Ainsi, $k\land n = 1$.
+\end{thm}
+
+\begin{ex}{}{}
+    Quels sont les inversibles de $\Z/15\Z$ ? Calculer les inverses.
+    \tcblower
+    On a $U(\Z/15\Z)=\{[1],[2],[4],[7],[8],[11],[13],[14]\}$.\\
+    On a $[1]^{-1}=[1]$, $[2]^{-1}=[8]$, $[4]^{-1}=[4]$, $[7]^{-1}=[13]$, $[8]^{-1}=[2]$, $[11]^{-1}=[11]$, $[13]^{-1}=[7]$, $[14]^{-1}=[14]$.
+\end{ex}
+
+\begin{prop}{$\star$}{}
+    Soit $n\in\N^*$. Les propositions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $(\Z/n\Z,+,\times)$ est un corps.
+        \item $(\Z/n\Z,+,\times)$ est un anneau intègre.
+        \item $n$ est premier. 
+    \end{enumerate}
+    \tcblower
+    \boxed{1\ra2} Toujours vrai.\\
+    \boxed{2\ra3} Par contraposée. Supposons $n$ non premier, alors $n=pq$ avec $2\leq p,q \leq n-1$.\\
+    On passe aux classes : $[n]=0=[p][q]$ et $[p]\neq0$ et $[q]\neq0$ donc l'anneau n'est pas intègre. \\
+    \boxed{3\ra1} Soit $n$ premier. $\forall k \in \lb1,n-1\rb, ~ k \land n = 1$, donc $[k]$ est inversible.\\
+    Tout élément non nul de $\Z/n\Z$ est donc inversible, c'est un corps.
+\end{prop}
+
+\begin{defi}{Fonction d'Euler. $\star$}{}
+    Soit $n\in\N^*$, on note $\phi(n)=|\{k\in\lb1,n-1\rb, ~ k \land n = 1\}|$.\\
+    \bf{Remarques.} $\phi(n)=|U(\Z/n\Z)|$, et $\phi(n)$ est le nombre de générateurs de $(\Z/n\Z,+)$.
+\end{defi}
+
+\begin{thm}{chinois. $\star$}{}
+    Soient $n,m\in\N^*$ tels que $n\land m=1$.\\
+    Alors les deux anneaux $(\Z/(nm)\Z,+,\times)$ et $(\Z/n\Z\times\Z/m\Z,+,\times)$ sont isomorphes.\\
+    De plus, $\phi(nm)=\phi(n)\phi(m)$ : $\phi$ est multiplicative.
+    \tcblower
+    Posons $f:(\Z/(nm)\Z,+,\times)\to(\Z/n\Z\times\Z/m\Z,+,\times)$; $\ov{x}\mapsto(\tilde{x},\hat{x})$.\\
+    Avec $\ov{x}$ dans $\Z/(nm)\Z$, $\tilde{x}$ dans $\Z/n\Z$ et $\hat{x}$ dans $\Z/m\Z$.\\
+    Vérifions que c'est un morphisme d'anneaux :\\
+    --- $f(\ov{1})=(\tilde{1},\hat{1})$, $f$ envoie le neutre sur le neutre.\\
+    --- $\forall (x,y) \in \Z^2, ~ f(\ov{x}+\ov{y})=f(\ov{x+y})=(\tilde{x+y},\hat{x+y})=(\tilde{x}+\tilde{y},\hat{x}+\hat{y})=(\tilde{x},\hat{x})+(\tilde{y},\hat{y})=f(\ov{x})+f(\ov{y})$.\\
+    --- $\forall (x,y) \in \Z^2, ~ f(\ov{x}\ov{y})=...=f(\ov{x})f(\ov{y})$.\\
+    Vérifions que $f$ est bijective :\\
+    Soit $(x,y)\in\Z^2 \mid f(\ov{x})=f(\ov{y})$. Alors $(\tilde{x},\hat{x})=(\tilde{y},\hat{y})$ puis $\tilde{x}=\tilde{y}$ et $\hat{x}=\hat{y}$.\\
+    Ainsi, $n \mid (x-y)$ et $m \mid (x-y)$ or $n\land m = 1$ donc $nm \mid (x-y)$, i.e. : $\ov{x}=\ov{y}$.\\
+    On a bien $f$ injective, et par égalité des cardinaux, $f$ est bijective.
+\end{thm}
+
+\begin{prop}{$\star$}{}
+    Les groupes $(U(\Z/(nm)\Z),\times)$ et $(U(\Z/n\Z),\times)\times(U(\Z/m\Z),\times)$ sont isomorphes.
+    \tcblower
+    On a toujours $f:(\Z/(nm)\Z,\times)\to(\Z/n\Z\times\Z/m\Z,\times)$, $\ov{x}\mapsto(\tilde{x},\hat{x})$.\\
+    En effet, si $\ov{a}\in U(\Z/(nm)\Z)$, alors $x\land(nm)=1$ : $\exists (u,v)\in\Z^2, ~ ux+v(nm)=1$ (Bézout).\\
+    D'où $ux+(vn)m=1$ donc $x\land m=1$ et $ux+(vm)n=1$ donc $x\land n = 1$.\\
+    Alors $\tilde{x}\in U(\Z/n\Z,\times)$ et $\hat{x}\in U(\Z/m\Z,\times)$.\\
+    Alors $f(\ov{x})=(\tilde{x},\hat{x})\in U(\Z/n\Z\times \Z/m\Z,+,\times)$.\\
+    Enfin, $f$ reste un morphisme, injectif par restriction de morphisme injectif.\\
+    Puis $f$ reste surjective : tout élément de l'ensemble d'arrivée admet un antécédent par $f$ (bijective) et cet antécédent est forcément dans $U(\Z/(nm)\Z,\times)$.\\
+    On a donc $|U(\Z/(nm)\Z)|=|U(\Z/n\Z)\times U(\Z/m\Z)|$ d'où $\phi(nm)=\phi(n)\phi(m)$.
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{lemme}{}{}
+    Soit $n\in\N^*$ et $k\in\N^*$. Le nombre de multiples de $k$ compris entre $1$ et $n$ est égal à $\left\lfloor\frac{n}{k}\right\rfloor$. 
+    \tcblower
+    Un multiple de $k$ s'écrit sous la forme $ku$, $u\in\Z$.\\
+    On a $1\leq ku\leq n \iff 1\leq u\leq \frac{n}{k}$.\\
+    Ainsi, le nombre de multiples de $k$ compris entre $1$ et $n$ est $\left\lf\frac{n}{k}\right\rf$.
+\end{lemme}
+
+\vspace*{-0.7cm}
+
+\begin{prop}{Calcul de $\phi$. $\star$}{}
+    \begin{enumerate}
+        \item Soit $p$ premier et $\a\in\N^*$, alors $\phi(p^\a)=p^\a-p^{\a-1}=p^{\a-1}(p-1)$.
+        \item Soit $n\in\N\setminus\{0,1\}$ alors $n=p_1^{\a_1}...p_r^{\a_r}$. On a:
+        \begin{equation*}
+            \phi(n)=n\left(1-\frac{1}{p_1}\right)...\left(1-\frac{1}{p_r}\right).
+        \end{equation*}
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $\phi(p)=p-1$ car $p$ est premier.\\
+    Le seul diviseur premier de $p^\a$, c'est $p$. Les entiers non premiers avec $p^\a$ sont donc multiples de $p$.\\
+    D'après le lemme, $\phi(p^\a)=p^\a-\left\lf\frac{p^\a}{p}\right\rf=p^{\a-1}(p-1)$.\\
+    \boxed{2.} Par multiplicativité de $\phi$, et par récurrence facile sur $r$ :
+    \begin{align*}
+        \phi(n)&=\phi(p_1^{\a_1})...\phi(p_r^{\a_r})=(p_1^{\a_1}-p_1^{\a_1-1})...(p_r^{\a_r}-p_r^{\a_r-1}) \quad (\in\N)\\
+        &=p_1^{\a_1}\left(1-\frac{1}{p_1}\right)...p_r^{\a_r}\left(1-\frac{1}{p_r}\right)=p_1^{\a_1}...p_r^{\a_r}\left( 1-\frac{1}{p_1} \right)...\left( 1-\frac{1}{p_r} \right)\\
+        &=n\left( 1-\frac{1}{p_1} \right)...\left( 1-\frac{1}{p_r} \right).
+    \end{align*} 
+\end{prop}
+
+\vspace*{-0.7cm}
+
+\begin{ex}{}{}
+    Calculons les premières valeurs de $\phi$...
+    \begin{enumerate}
+        \item $\phi(1)=1$ (convention)
+        \item $\phi(2)=1$ (premier)
+        \item $\phi(3)=2$ (premier)
+        \item $\phi(4)=\phi(2^2)=4\left( 1-\frac{1}{2} \right)=2$.
+        \item $\phi(1515)=\phi(3\times 5\times 101)=1515\left( 1-\frac{1}{3} \right)\left( 1-\frac{1}{5} \right)\left( 1-\frac{1}{101} \right)=800$.
+    \end{enumerate}
+\end{ex}
+
+\begin{ex}{}{}
+    Montrer que $\phi(n)$ est pair pour $n\geq3$ et résoudre $\phi(n)=\frac{n}{3}$.
+    \tcblower
+    \boxed{1.} Soit $n\geq3$.\\
+    --- Si $n=2^\a$, avec $\a\geq2$, alors $\phi(n)=2^{\a}-2^{\a-1}=2^{\a-1}$ donc $\phi(n)\in2\N$.\\
+    --- Sinon, $n$ possède un nombre premier impair, noté $p_1$ dans sa décomposition en facteurs premiers.\\
+    Alors $n=p_1^{\a_1}...p_r^{\a_r}$, donc $\phi(n)=n\left( 1-\frac{1}{p_1} \right)...\left( 1 - \frac{1}{p_r} \right)=\frac{n}{p_1...p_r}(p_1-1)...(p_r-1)$.\\
+    Or $p_1-1\in 2\N$ car $p_1$ impair, c'est fini.\\
+    \boxed{2.} On cherche l'ensemble des $n\in\N^*$ tels que $n=3\phi(n)$, donc $n$ est multiple de $3$.\\
+    D'après la question 1, $\phi(n)$ est pair donc $n$ est également un multiple de $2$.\\
+    On prend la décomposition de $n$ : $2^\a 3^\b p_1^{\a_1}...p_r^{\a_r}$ avec $\a\geq1$ et $\b\geq1$, et $p_1,...,p_r\geq5$ (si $r\geq0$).
+    \begin{align*}
+        n=3\phi(n) &\iff 2^\a3^\b p_1^{\a_1}...p_r^{\a_r}=3n\left( 1-\frac{1}{2} \right)\left( 1-\frac{1}{3} \right)...\left( 1 - \frac{1}{p_r} \right)\\
+        &\iff 1 = \cancel{3\left( 1-\frac{1}{2} \right)\left( 1-\frac{1}{3} \right)}\left( 1-\frac{1}{p_1} \right)...\left( 1-\frac{1}{p_r} \right)\\
+        &\iff p_1...p_r=(p_1-1)...(p_r-1)
+    \end{align*}
+    Donc $r=0$, donc $n=2^\a3^\b$ avec $\a\geq1$ et $\b\geq1$.\\
+    \bf{Synthèse.} Soit $n=2^\a3^\b$ avec $\a,\b\in\N^*$.
+    \begin{align*}
+        \phi(n)&=\phi(2^\a)\phi(3^\b) \quad \nt{car } 2\land 3 = 1.\\
+        &=(2^\a-2^{\a-1})(3^\b-3^{\b-1})=2^{\a-1}\times 2 \times 3^{\b-1} = \frac{1}{3}n
+    \end{align*}
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    On cherche à résoudre : $\begin{cases}
+        x \equiv 1[5]\\
+        x \equiv 4[7]
+    \end{cases}$.\\
+    Le théorème chinois garantit qu'il n'y a qu'une seule solution modulo 35. Ici, 11 convient.\\
+    L'ensemble des solutions est donc $\{11 + 35k, ~ k\in\Z\}$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{thm}{d'Euler. $\star$}{}
+    Soit $n\geq1$, $a\in\Z$ premier avec $n$. Alors $a^{\phi(n)}\equiv1[n]$.
+    \tcblower
+    On rappelle que si $(G,\times)$ est un groupe multiplicatif fini de cardinal $n$, alors $\forall a \in G, ~ a^n = e$.\\
+    On se place dans $(U(\Z/n\Z),\times)$, alors $|U(\Z/n\Z)|=\phi(n)$, et $[a]$ est inversible dans $\Z/n\Z$.\\
+    On a donc $[a]\in U(\Z/n\Z)$ donc $[a]^{\phi(n)}=[1]$, d'où $a^{\phi(n)}\equiv 1[n]$.
+\end{thm}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{Petit théorème de Fermat.}{}
+    Soit $p$ premier, alors $\forall a \in \Z, ~ a^{p}\equiv a[p]$.\\
+    Si $a$ est premier avec $p$, alors $a^{p-1}\equiv1[p]$.
+    \tcblower
+    On a $\phi(p)=p-1$, on applique le théorème d'Euler, puis $a^p\equiv a[p]$ est vrai si $a$ est multiple de $p$ car $0\equiv0[p]$, mais aussi s'il n'est pas multiple de $p$ car $a^{p-1}\equiv1[p]\ra a^p\equiv a[p]$.\n
+    On peut en faire une preuve directe par récurrence sur $a$. 
+\end{prop}
+
+\vspace*{-0.5cm}
+
+\begin{ex}{}{}
+    Calculer le reste de $5^{2022}$ par 7.
+    \tcblower
+    D'après le théorème d'Euler, $5^6\equiv1[7]$, or $2022\equiv0[6]$ donc $5^{2022}\equiv1[7]$.
+\end{ex}
+
+\vspace*{-0.5cm}
+
+\begin{ex}{}{}
+    On note $d(n)$ le nombre de diviseurs de $n$, et $\s(n)$ la somme des diviseurs de $n$.
+    \begin{enumerate}
+        \item Calculer $d(n)$ et montrer que $d$ est multiplicative.
+        \item Montrer que $\s$ est multiplicative.
+        \item On dit que $n$ est un entier parfait ssi $n$ est la somme de ses diviseurs stricts : $\s(n)=2n$.\\
+        Montrer que si $2^p-1$ est premier, alors $2^{p-1}(2^p-1)$ est un entier parfait.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $n\geq2$, $n=p_1^{\a_1}...p_r^{\a_r}$ sa décomposition en facteurs premiers.\\
+    Les diviseurs de $n$ sont exactement les entiers de la forme $p_1^{\b_1}...p_r^{\b_r}$ avec $0\leq\b_i\leq\a_i$.\\
+    Donc $d(n)=(\a_1+1)...(\a_n+1)$.\\
+    Soient $n,m\in\N^*$ premiers entre-eux : $n=p_1^{\a_1}...p_r^{\a_r}$ et $m=p_{r+1}^{\a_{r+1}}...p_r^{\a_s}$ avec $p_i$ premiers distincts.\\
+    Alors $d(nm)=(1+\a_1)...(1+\a_r)(1+\a_{r+1})...(1+\a_s)=d(n)d(m)$.\\
+    \boxed{2.} Si $p$ premier, $\s(p)=1+p$, sinon soit $n\geq2$ : $n=p_1^{\a_1}...p_r^{\a_r}$.
+    \begin{equation*}
+        \s(n)=\sum_{i_1=0}^{\a_1}p_1^{i_1}...\sum_{i_r=0}^{\a_r}p_r^{i_r}=\prod_{i=1}^r\frac{1-p_i^{\a_i+1}}{1-p_i}
+    \end{equation*}
+    On montre ensuite que $\s$ est multiplicative comme pour $d$.\\
+    \boxed{3.} Soit $p\in\N$ tel que $2^p-1$ est premier. On note $n=2^{p-1}(2^p-1)$, en décomposition en facteurs premiers.\\
+    Alors : $\s(n)=\s(2^{p-1})\s(2^p-1)=(2^p-1)2^p=2 \times 2^{p-1}(2^p-1)=2n$.
+\end{ex}
+
+\vspace*{-0.5cm}
+
+\begin{prop}{Théorème chinois généralisé.}{}
+    Soit $p\in\N^*\setminus\{1\}$, et $n_1,...,n_p$ premiers deux-à-deux. Alors :
+    \begin{equation*}
+        \Z/(n_1...,n_p)\Z \iso \Z/n_1\Z\times...\times\Z/n_p\Z.
+    \end{equation*}
+    \tcblower
+    \bf{Initialisation.} Vraie par théorème chinois.\\
+    \bf{Hérédité.} Soient $n_1,...,n_{p+1}$ premiers deux-à-deux. Par HR : $\Z/(n_1...n_p)\Z\iso\Z/n_1\Z\times...\times\Z/n_p\Z$.\\
+    D'autre part, $n_1\land n_{p+1}=1$, ..., $n_p\land n_{p+1}=1$ donc $(n_1...n_p)\land n_{p+1}=1$.\\
+    Donc par HR au rang 2, $\Z/(n_1...n_{p+1})\Z\iso\Z_{n_1...n_p}\Z\times\Z/n_{p+1}\Z\iso\Z/n_1\Z\times...\times\Z/n_{p+1}\Z$.
+\end{prop}
+
+\pagebreak
+
+\section{Khôlles, exercices supplémentaires...}
+
+\setexercicecounter{86}
+
+\begin{exercice}{CCINP $\star$}{86}
+    \begin{enumerate}
+        \item Soit $(a,b,p)\in\Z^3$. Prouver que : si $p\land a=1$ et $p\land b=1$, alors $p\land(ab)=1$.
+        \item Soit $p$ un nombre premier.
+        \begin{enumerate}
+            \item Prouver que $\forall k \in \lb1,p-1\rb, ~ p$ divise $\binom{p}{k}k!$ puis en déduire que $p$ divise $\binom{p}{k}$.
+            \item Prouver que : $\forall n \in \N, ~ n^p\equiv n[p]$.
+            \item En déduire, pour tout entier naturel $n$, que $p$ ne divise pas $n\ra n^{p-1}\equiv1[p]$.
+        \end{enumerate}
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Supposons $p\land a = 1$ et $p\land b=1$.\\
+    D'après Bézout : $\exists (u,v)\in\Z^2 ~ au+pv=1$ et $\exists (u',v')\in\Z^2, ~ bu'+pv'=1$.\\
+    Alors $ab(uu')+p(auv'+bvu'+p^2vv')=1$, donc d'après Bézout, $p\land(ab)=1$.\\
+    \boxed{2.a)} Soit $k\in\lb1,p-1\rb$. On a $\binom{p}{k}k!=\frac{p!}{(p-k)!}=p(p-1)...(p-k+1)$ donc $p\mid\binom{p}{k}k!$.\\
+    On a $\forall k \in \lb 1, p-1\rb, ~ p \land k = 1$, d'où $p\land k! = 1$. Lemme de Gauss : $p\mid \binom{p}{k}$.\\
+    \boxed{2.b)} On note $\m{P}_n$ : << $n^p\equiv n[p]$ >> pour $n\in\N$.\\
+    \bf{Initialisation.} On a $0\equiv0[p]$.\\
+    \bf{Hérédité.} Soit $n\in\N$ tel que $n^p\equiv n[p]$. On a bien $\m{P}_{n+1}$ :
+    \begin{equation*}
+        (n+1)^p=\sum_{k=0}^p\binom{p}{k}n^k\equiv\binom{p}{0}n^0+\binom{p}{p}n^p[p]\equiv n+1[p].
+    \end{equation*}
+    On conclut par récurrence...\\
+    \boxed{2.c)} Soit $n\in\N$ tel que $p\nmid n$. On a $p\land n=1$. Or $n^p\equiv n[p]$ donc $p\mid n^p-n=n(n^{p-1}-1)$.\\
+    Lemme de Gauss : $p\mid (n^{p-1}-1)$ donc $n^{p-1}\equiv1[p]$.
+\end{exercice}
+
+\setexercicecounter{94}
+
+\begin{exercice}{CCINP $\star$}{}
+    \begin{enumerate}
+        \item Énoncer le théorème de Bézout dans $\Z$.
+        \item Soient $a,b,c\in \N$ tels que $a\land b = 1$. Montrer que $[a \mid c \et b \mid c] \iff ab \mid c$.
+        \item On considère le système $(S):\begin{cases} x &\equiv \quad 6[17] \\ x &\equiv \quad 4[15]\end{cases}$ dans lequel l'inconnue $x$ appartient à $\Z$.
+        \begin{enumerate}
+            \item Déterminer une solution particulière $x_0$ de $(S)$ dans $\Z$.
+            \item Déduire des questions précédentes la résolution dans $\Z$ du système $(S)$.
+        \end{enumerate}
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soient $a,b\in \Z$. On a $a\land b = 1 \iff \exists (u,v)\in\Z, ~ au+bv=1$.\\
+    \boxed{2.\ra} Supposons $a\mid c$ et $b\mid c$. On a $\exists u,v \in \Z, ~ au+bv=1$, et $\exists p,q \in \Z, ~ c=ap=bq$.\\
+    On a alors $cau+cbv=c$ donc $ab(qu+pv)=c$ donc $ab\mid c$.\\
+    \boxed{2.\la} Supposons $ab\mid c$, alors $\exists p \in \Z, ~ c = abp$ donc $a\mid c$ et $b\mid c$.\\
+    \boxed{3.a)} $x$ solution $\iff$ $\exists k,k' \in \Z, ~ x = 6 + 17k$ et $15k'-17k=2$.\\
+    On a $17=15+2$ et $15=2\times7+1$ donc $1=15-2\times7$ puis $1=15-7\times (17 - 5)=8\times15-7\times17$.\\
+    Donc $15\times16 - 17\times 14 = 2$, donc $x_0=6+17\times14=244$ est solution particulière.\\
+    \boxed{3.b)} $x$ est solution $\iff \begin{cases}x-x_0 &\equiv \quad 0[17]\\ x-x_0 &\equiv \quad 4[15]\end{cases} \iff 17\times15 \mid x-x_0\iff \exists k \in \Z, ~ x = 244 + 255k$.
+\end{exercice}
+
+\setexercicecounter{112}
+
+\begin{exercice}{CCINP $\star$}{}
+    Soit $n\in\N^*$ et $E$ un ensemble possédant $n$ éléments.
+    \begin{enumerate}
+        \item Déterminer le nombre $a$ de couples $(A,B)\in(\P(E))^2$ tels que $A\subset B$.
+        \item Déterminer le nombre $b$ de couples $(A,B)\in(\P(E))^2$ tels que $A\cap B=\0$.
+        \item Déterminer le nombre $c$ de triplets $(A,B,C)\in(\P(E))^2$ deux-à-deux disjoints tels que $A\cup B\cup C=E$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On utilise des unions disjointes pour décomposer l'ensemble :
+    \begin{equation*}
+        \{(A,B)\in\P(E)^2, ~ A \subset B\} = \bigcup_{k=0}^n\bigcup_{B \in \P_k(E)}\bigcup_{A\in \P(B)}\{(A,B)\}.
+    \end{equation*}
+    \begin{equation*}
+        c=\sum_{k=0}^n\binom{n}{k}\sum_{i=0}^k\binom{k}{j} = \sum_{k=0}^n\binom{n}{k}2^k = 3^n.
+    \end{equation*} 
+    \boxed{2.} On a $\{(A,B)\in\P(E)^2, ~ A\cap B = \0\}=\{(A,B)\in\P(E)^2, ~ A\subset \ov{B}\}$, donc $b=a=3^n$.\\
+    \boxed{3.} Avec la condition $A\cap B = \0$, on n'a qu'un seul choix pour $C$ : $C=E\setminus A \setminus B$, donc $c=b=a=3^n$.
+\end{exercice}
+
+\vspace*{-0.7cm}
+
+\setexercicecounter{1}
+
+\begin{exercice}{Colle.}{}
+    \begin{enumerate}
+        \item Soit $G$ un groupe et $x\in G$ un élément d'ordre fini $n$.\\
+        Si $d\geq1$, montrer que l'ordre de $x^d$ est $n/(n\land d)$.
+        \item Soit $G$ un groupe d'ordre $2p$ où $p\geq3$ est un nombre premier. Montrer que $G$ admet un élément d'ordre $p$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Montrons que $o(x^d) = n/(n\land p)$.\\
+    On a $\left(x^d\right)^{\frac{n}{n\land p}} = (x^n)^{\frac{d}{n\land p}}=e$ donc $o(x^d) \mid \frac{n}{n\land p}$.\\
+    On a $(x^{do(x^d)})=e$ d'où $n \mid do(x^d)$ car $x^{n}=e$. Alors $\frac{n}{n\land d}\mid \frac{do(x^d)}{n\land d}$.\\
+    Or $\frac{n}{n\land d} \land \frac{d}{n\land d} = 1$ donc $\frac{n}{n\land d}\mid o(x^d)$ (lemme de gauss).\\
+    On a donc $o(x^d)=\frac{n}{n\land d}$ par antisymétrie de $\mid$.\\
+    \boxed{2.} Soit $x\in G$, on a $o(x)\mid|G|$ donc $o(x)\in\{1,2,p,2p\}$.\\
+    Si $o(x)=1$, alors $x=e$, on exclut ce cas. Si $o(x)=p$, c'est bon.\\
+    Si $o(x)=2p$, alors $o(x^2)=\frac{2p}{2p\land 2}=p$ donc $x^2$ est d'ordre $p$.\\
+    Supposons que tous les éléments de $G$, sauf le neutre, sont d'ordre 2. On va montrer que c'est absurde.\\
+    On a $\forall x,y\in G, ~ x^2=y^2=e$ d'où $x=x^{-1}$ puis $xy=yx$, donc $G$ est abélien.\\
+    On munit $G$ d'une structure d'espace vectoriel sur $\Z/2\Z$, avec $0\cdot x = e$, $1\cdot x=x$ pour $x\in G$.\\
+    On donc $G$ fini : de dimension finie $q$, puis $G$ est isomorphe à $(\Z/2\Z)^q$, donc $|G|=2^q$.\\
+    Or $|G|=2p=2^q$, ce qui est absurde car $p\geq3$. Donc il existe un élément d'ordre $2p$ ou d'ordre $p$.  
+\end{exercice}
+
+\vspace*{-0.7cm}
+
+\begin{exercice}{Victor.}{}
+    Soit $(A,+,\times)$ un anneau commutatif.\\
+    Si $I$ est un idéal, alors montrer que $\sqrt{I}=\{x\in A, ~ \exists n \in \N, ~ x^n \in I\}$ est un idéal.
+    \tcblower
+    Soit $x \in \sqrt{I}$ et $a\in A$. Montrons que $ax\in\sqrt{I}$.
+    \begin{equation*}
+        (ax)^n = a^nx^n \in I \ra ax \in \sqrt{I}
+    \end{equation*}
+    On a $x,y\in\sqrt{I}$, montrons que $x-y\in\sqrt{I}$, i.e. $(x-y)^n\in I$ avec $n\in\N$.\\
+    On a $(x-y)=\sum_{k=0}^n\binom{n}{k}x^k(-y)^{n-k}$ car $x,y$ commutent.
+\end{exercice}
+
+\begin{exercice}{Martin.}{}
+    \begin{enumerate}
+        \item Calculer $|U(\Z/2^n\Z)|$.
+        \item Montrer que $(U(\Z/2^n\Z), \ov{\times})$ est cyclique ssi $n\leq2$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $|U(\Z/2^n\Z)|=\phi(2^n)=2^{n-1}$.\\
+    \boxed{2.\la} Si $n=1$, $U(\Z/2\Z)=\{\ov{1}\}$, et $U(\Z/4\Z)=\{\ov{1},\ov{3}\}$, ce sont bien des générateurs.\\
+    \boxed{2.\ra} Supposons que $(U(\Z/2^n\Z),\ov{\times})$ soit cyclique pour $n>2$.\\
+    Par théorème, $\exists \phi : U(\Z/2^n\Z,\ov{\times}) \to (\Z/(2^{n-1})\Z,\ov{+})$.\\
+    Dans $\Z/2^{n-1}\Z$, seul $\ov{2^{n-2}}$ est d'ordre 2, et dans $U(\Z/2^n\Z)$, $\ov{2^{n-1}-1}$ et $\ov{2^n-1}$.\\
+    Ils sont bien premiers avec $2^n$, donc ils appartiennent à $\Z/2^n\Z$.\\
+    --- $\ov{2^{n-1}-1}^2=\ov{2^{2n-2}-2\times2^{n-1}+1}=\ov{2^{2n-2}-2^n+1}=\ov{1}$.\\
+    --- $\ov{2^n-1}^2=\ov{2^{2n}-2^{n+1}+1}=\ov{1}$.\\
+    Ils sont bien d'ordre 2.\\
+    On a $\phi$ un isomorphisme de $(A,\times)$ dans $(B,\times)$, si $x\in A, ~ o(x)=p \ra o(\phi(x))=p$.
+    \begin{center}\fbox{L'ordre est conservé par isomorphisme !!!}\end{center}
+    Il y a donc le même nombre d'élément d'ordre $p$ dans $A$ que dans $B$, d'où l'absurdité.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{Anaïs.}{}
+    Soit $G$ un groupe abélien d'ordre $n$. Soit $(a,b)\in G^2$ tel que $o(a)=o(b)=p$ avec $p$ premier.\\
+    On note $H=\langle a\rangle$, $K=\langle b\rangle$ et $HK=\{hk, ~ (h,k) \in H\times K\}$. On suppose $b\notin\langle a\rangle$.
+    \begin{enumerate}
+        \item Montrer que $HK$ est un sous-groupe de $G$ et calculer $|HK|$.
+        \item En déduire qu'il y a au moins $p^2-1$ éléments d'ordre $p$ dans $G$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $x\in H\cap K$, par théorème, $o(x)\mid p$, or $p$ est premier donc :\\
+    --- Si $o(x)=1$, on a $x=e$.\\
+    --- Si $o(x)=p$, on a $\langle x \rangle = H$ et $\langle x \rangle = K$, or $b\in K$ et $b\notin H$, donc $x=e$.\\
+    On pose $\phi:H\times K \to HK$, telle que $\phi(h,k)=hk$, surjective par construction.\\
+    Or $\phi$ est un morphisme de groupes, on va donc montrer que $\Ker(\phi)=\{e\}$.\\
+    Soit $(h,k)\in H\times K$, tel $\phi(h,k)=e$, alors $hk=e$ donc $h=k^{-1}$ donc $h\in H\cap K$ donc $h=k=e$.\\
+    Donc $\phi$ est bijective, on a $|HK|=|H||K|=p^2$.\\
+    \boxed{2.} On montre que tous les éléments de $HK$, sauf le neutre, sont d'ordre $p$.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{Ibrahim}{}
+    Soit $(k,+,\times)$ un corps et $G$ un sous-groupe fini de $(k^*,\times)$.
+    \begin{enumerate}
+        \item Montrer que si $d\geq1$ est un entier, alors dans $k^*$, il y a soit $0$, soit $\phi(d)$ éléments d'ordre $d$.
+        \item En déduire que $G$ est cyclique.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Supposons que $\exists a \in k^*, ~ o(a)=d$. On a : $\langle a \rangle \iso \Z/d\Z$.\\
+    Il y a $\phi(d)$ éléments d'ordre $d$ dans $\Z/d\Z$, donc $\phi(d)$ dans $\langle a \rangle$ par isomorphisme.\\
+    Vérifions qu'il n'y en a pas d'autres. Les éléments d'ordre $d$ sont racines de $P=X^d-1\in k[X]$.\\
+    C'est un polynôme de degré $d$, il possède au plus $d$ racines.\\
+    Les éléments d'ordre $d$ sont exactement les itérés de $a$, il y en a $\phi(d)$.\\
+    \boxed{2.} On admet que $n=\sum_{d\mid n}\phi(d)$. Notons $n=|G|$, on pose $\O_d=\{x\in G, ~ o(x)=d\}$.\\
+    Montrons que $\O_n\neq0$. On a que les $(\O_d)_{d\mid n}$ partitionnent $G$, donc $n=\sum_{d\mid n}|\O_d|$ et $n=\sum_{d\mid n}\phi(d)$.\\
+    Alors $\forall d \mid n, ~ |\O_d|\in\{0,\phi(d)\}$. On a $\sum_{d\mid n}\phi(d)-|\O_d|=0$, donc $|\O_n|=\phi(n)\geq1$.\\
+    Il existe donc un élément d'ordre $n$. C'est la définition d'un groupe cyclique.
+\end{exercice}
+
+\end{document}

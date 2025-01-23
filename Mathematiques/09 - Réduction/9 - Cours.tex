@@ -1,0 +1,1074 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{9}
+\def\pagetitle{Réductions.}
+
+\input{setup.tex}
+
+\begin{document}
+
+\input{title.tex}
+
+\thispagestyle{fancy}
+
+\section{Polynômes d'endomorphismes et de matrices.}
+
+\begin{defi}{}{}
+    Soit $E$ un $\K$-ev, $P=\sum a_nX^n \in \K[X]$ et $u\in\L(E)$.
+    \begin{equation*}
+        P(u) = a_0 \Id_E + a_1u + ... + a_nu^n.
+    \end{equation*}
+    \bf{Remarque.} $\forall P \in \K[X], ~ \forall u \in \L(E), ~ P(u) \in \L(E)$ car $(\L(E),+,\circ,\cdot)$ est une $\K$-algèbre.
+\end{defi}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{Règles de calcul.}{}
+    Soit $E$ un $\K$-ev, $u\in\L(E)$, $P,Q\in\K[X]$, $\l\in\K$.
+    \begin{enumerate}
+        \item $(P+\l Q)(u) = P(u) + \l Q(u)$.
+        \item $(P\times Q)(u)=P(u)\circ Q(u)$.
+    \end{enumerate}
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{nota}{}{}
+    L'ensemble des polynômes en $u$ : $\K[u]=\{P(u), ~ P\in\K[X]\}$.
+\end{nota}
+
+\vspace*{-0.4cm}
+
+\begin{defi}{}{}
+    Soit $P\in\K[X]$. On dit que c'est un \bf{polynôme annulateur} de $u$ ssi $P(u)=0_{\L(E)}$.
+\end{defi}
+
+\vspace*{-0.4cm}
+
+\begin{thm}{}{}
+    Soit $E$ un $\K$-ev et $u\in\L(E)$. On pose $\phi:P\mapsto P(u)$.
+    \begin{enumerate}
+        \item C'est un morphisme d'algèbre.
+        \item $\Im(\phi)=\K[u]$ est une algèbre commutative.
+        \item $\Ker(\phi)$ est un idéal de $\K[X]$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Trivial.\\
+    \boxed{2.} $\Im(\phi)=\K[u]$ est une algèbre comme image d'algèbre par un morphisme d'algèbre.\\
+    \boxed{3.} $\Ker(\phi)$ est un idéal comme noyau d'un morphisme d'algèbre.
+\end{thm}
+
+\vspace*{-0.4cm}
+
+\begin{rappel}{}{}
+    Tout idéal non-nul de $\K[X]$ est engendré par un unique polynôme unitaire.
+\end{rappel}
+
+\vspace*{-0.4cm}
+
+\begin{defi}{}{}
+    Soit $E$ un $\K$-ev, $I$ l'idéal des polynômes annulateurs de $u$, si $I\neq(0)$, alors $I$ est engendré par un unique polynôme unitaire noté $\Pi_u$ appelé polynôme minimal de $u$.
+\end{defi}
+
+\vspace*{-0.4cm}
+
+\begin{ex}{}{}
+    Soit $E$ un $\K$-ev et $u$ une homothétie non-nulle de $E$, alors $X-\l$ annule $u$.\\
+    Donc $\Pi_u$ existe, aucun polynôme constant non nul n'annule $u$, donc $\Pi_u = X - \l$.
+\end{ex}
+
+\vspace*{-0.4cm}
+
+\begin{ex}{}{}
+    Soit $u$ projecteur de $E$ non-trivial, alors $u^2=u$ et $P=X^2-X$ est annulateur de $u$.
+\end{ex}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{$\star$}{}
+    Soit $E$ un $\K$-ev et $u\in \L(E)$ tels que $\Pi_u$ bien défini.\\
+    Alors $\deg\Pi_u \geq 1 \et \left[ \deg \Pi_u = 1 \iff u \nt{ homothétie} \right]$.
+    \tcblower
+    Supposons $\Pi_n=\l\in\K$ par l'absurde, alors $\l\neq0$ car $\Pi_u\neq0_{\K[X]}$ puis $\Pi_u(u)=\l \Id_E \neq 0$, donc $\deg(\Pi_u)\geq1$.\\
+    On a $u$ homothétie $\ra$ $\exists \l \in \K, ~ \Pi_n = X - \l$ donc $\Pi_u(u)=0 \ra u-\l\Id_E = 0 \ra u = \l\Id_E$ homothétie.
+\end{prop}
+
+\begin{prop}{Structure de $\K[u]$. $\star$}{}
+    Soit $E$ un $\K$-ev et $u\in\L(E)$.
+    \begin{enumerate}
+        \item Si $u$ possède un polynôme annulateur non-nul, on note $d=\deg \Pi_u\in\N^*$.\\
+        Alors $\K[u]$ est une $\K$-algèbre de dimension $d$, et $(\Id_E, u, ..., u^{d-1})$ en est une base.
+        \item Sinon, $\K[u]$ est une $\K$-algèbre de dimension infinie, et $(u^n)_{n\in\N}$ est famille libre de $\K[u]$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On sait déjà que $(\K[u],+,\circ,\cdot)$ est une $\K$-algèbre.\\
+    On pose $\B=(\Id_E,u,...,u^{d-1})$, c'est une famille de vecteurs de $\K[u]$.\\
+    \bf{Libre.} Soient $(\l_0,..,\l_{d-1})\in\K^d, ~ \l_0\Id_E+...+\l_{d-1}u^{d-1}=0_{L(E)}$. C'est un polynôme de degré strictement inférieur à $d$ et annulant $u$, il est donc nul, donc $\forall k \in \lb0,d-1\rb, ~ \l_k=0$.\\
+    \bf{Génératrice.} Soit $v\in\K[u]$, $\exists P \in \K[X], ~ v=P(u)$, puis $P=\Pi_uQ + R$, ~ $Q,R\in\K[X]$, $\deg(R)<d$.\\
+    Puis $P(u)=\cancel{\Pi_u(u)}\circ Q(u) + R(u) = R(u) \in \Vect(\Id_E,u,...,u^{d-1})$ car $\deg(R)<d$.\\
+    C'est donc une base de $\K[u]$, qui est alors de dimension $d$.\\
+    \boxed{2.} Soit $n\in\N$ et $(\l_0,...,\l_n)\in\K^{n+1}, ~ \l_0\Id_E+...+\l_n u^n = 0_{\L(E)}$.\\
+    Alors $\l_0 + \l_1 X + ... + \l_n X^n$ annule $u$, il est donc nul, donc $\forall k \in \lb0,n\rb, ~ \l_k=0$.
+\end{prop}
+
+\begin{prop}{$\star$}{}
+    Soit $E$ un $\K$-evdf, alors tout endomorphisme de $E$ admet un polynôme minimal.
+    \tcblower
+    Soit $u\in\L(E)$, et $n$ la dimension de $E$, alors $\dim(\L(E))=n^2$ donc toute famille libre de $\L(E)$ est de cardinal inférieur à $n^2$.
+    En particulier, $(\Id_E, u, ..., u^{n^2})$ est une famille de $n^2+1$ vecteurs de $\L(E)$, elle est liée.\\
+    Alors $\exists (\l_0,...,\l_{n^2})\in\K$, tels que $\l_0\Id_E+...\l_{n^2}u^{n^2}=0_E$. On pose $P=\l_0 + ... + \l_{n^2}X^{n^2}$.\\
+    On pose un polynôme minimal $\Pi_u$ et et $\deg \Pi_u \leq n^2$.
+\end{prop}
+
+\begin{defi}{Polynôme matriciel.}{}
+    Soit $P=(a_nX^n)_n\in\K[X]$, et $A\in M_n(\K)$ pour $n\in\N^*$.
+    \begin{equation*}
+        P(A)=a_0 I_n + a_1 A + ... + a_NA^N \in M_n(\K)
+    \end{equation*}
+\end{defi}
+
+\begin{prop}{}{}
+    Toute matrice non-nulle $A$ admet un polynôme minimal noté $\Pi_A$.
+    \tcblower
+    Propriétés :
+    \begin{enumerate}
+        \item $\Pi_A$ est le polynôme de plus bas degré qui annulle $A$.
+        \item $P(A)=0_{M_n(\K)}\ra \Pi_A \mid P$.
+        \item $\K[A]$ est une algèbre commutative de $(M_n(\K),+,\times,\cdot)$, $\K[A]=\Vect(I_n,A,...,A^{d-1})$.
+        \item $\deg \Pi_A = 1 \iff \exists \l \in \K, ~ A = \l I_n$.
+    \end{enumerate}
+\end{prop}
+
+\begin{ex}{}{}
+    Soient $A=\begin{pmatrix}1&2\\-1&1\end{pmatrix}, ~ B=\begin{pmatrix}0&1&-1\\2&0&4\\1&1&1\end{pmatrix}$. Déterminer $\Pi_A$ et $\Pi_B$.
+    \tcblower
+    On a:
+    \begin{equation*}
+        A^2=\begin{pmatrix}
+            -1 & 4 \\ -2 & -1
+        \end{pmatrix}=2A - 3I_2.
+    \end{equation*}
+    Donc $\deg(\Pi_A)=2$, donc $\Pi_A=X^2-2X+3$.
+    \begin{equation*}
+        B^2 = \begin{pmatrix}
+           1 & -1 & 3 \\ 4 & 6 & 2 \\ 3 & 2 & 4
+        \end{pmatrix}
+    \end{equation*}
+\end{ex}\vspace*{-0.4cm}
+
+\pagebreak
+
+\begin{prop}{Inverses.}{}
+    \begin{enumerate}
+        \item $u\in\L(E)$, admettant un polynôme minimal, alors $u\in \GL(E)\iff \Pi_u(0)\neq0$ puis $u^{-1}\in\K[u]$.
+        \item $A\in M_n(\K)$ admettant un polynôme minimal, alors $A\in\GL_n(\K)\iff \Pi_A(0)\neq0 \et A^{-1}\in\K[A]$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.\ra} Notons $\Pi_u=a_0+...+a_nX^n$, par l'absurde, sq $a_0=0$, alors $\Pi_u(u)=0_{\L(E)}\ra a_1u + ... + a_nu^n=0_{\L(E)}$.\\
+    On compose à gauche par $u^{-1}$ donc $a_1\Id+...+a_nu^{n-1}=0_{\L(E)}$. $P=a_1+...+a_nX^{n-1}$ est un polynôme annulateur de $u$, non nul, et $\deg(P)<n$, contredit la minimalité de $\Pi_u$.\\
+    \boxed{1.\la} Notons $\Pi_u=a_0+...+a_nX^n$, $a_n\neq0$, alors $\Pi_u(u)=0_{\L(E)}\ra a_0\Id_E+...+a_nu^n=0_{\L(E)}$.\\
+    Ainsi, $a_1u + ... + a_nu^n = -a_0\Id_{\L(E)}$ puis en posant $v=-\left( \frac{a_1}{a_0}\Id_E + ... + \frac{a_n}{a_0}u^{n-1} \right)$, $u\circ v= v \circ u = \Id_{\L(E)}$.\\
+    On a montré que $u\in\GL(E)$ et $u^{-1}=v\in\K[u]$
+\end{prop}
+
+\vspace*{-0.5cm}
+
+\begin{ex}{}{}
+    Soit $A=\begin{pmatrix}1&0&2\\0&-1&3\\1&1&1\end{pmatrix}$, vérifier que $A\in\GL_3(\R)$, calculer $A^{-1}$.
+    \tcblower
+    On a $\det(A)=-2$, donc $A\in\GL_3(\R)$.
+    \begin{equation*}
+        A^2 = \begin{pmatrix}
+            3 & 2 & 4 \\ 3 & 4 & 0 \\ 2 & 0 & 6
+        \end{pmatrix}; \quad A^3 = \begin{pmatrix}
+            7 & 2 & 16 \\ 3 & -4 & 21 \\ 8 & 6 & 10
+        \end{pmatrix}
+    \end{equation*}
+    On peut trouver que $A^3=A^2+6A-2I_3$, donc $(I,A,A^2,A^3)$ est une famille liée.\\
+    Donc $\Pi_A = 2 - 6X - X^2 + X^3$, et $\Pi_A(0)\neq0$, donc on retrouve $A\in\GL_3(\R)$.\\
+    $A^{-1}=-\left( -3A - \frac{1}{2}A^2 + \frac{1}{2}I_3 \right)$. 
+    \begin{equation*}
+        A^{-1} = \begin{pmatrix} 2 & -1 & -1 \\ -3/2 & 1/2 & 3/2 \\ -1/2 & 1/2 & 1/2  \end{pmatrix}; \quad \nt{Com}(A) = \begin{pmatrix}-4&3&1\\2&-1&-1\\2&-3&-1\end{pmatrix} 
+    \end{equation*}
+\end{ex}
+
+\vspace*{-0.5cm}
+
+\begin{ex}{}{}
+    Soit $E$ un $\K$-ev et $u\in\L(E)$ tel que $u^2-3u^3+u^5=0_{\L(E)}$. Est-ce que $u\in\GL(\K)$ ?
+    \tcblower
+    On a $P=X^2-3X^3+X^5$ un polynôme annulateur de $u$, et $P(0)=0$, or on ne peut pas conclure car on ne sait pas si c'est le polynôme minimal.\\
+    Si on suppose de plus que $u$ est inversible, alors $\Id - 3u + u^3 = 0_{\L(E)}$, donc $\Pi_u \mid (1-3X+X^3)$.
+\end{ex}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    Soit $E$ un $\K$-evdf, $u\in\L(E)$, $P\in\K[X]$. Montrer que :
+    \begin{equation*}
+        P(u) \in \GL(E) \iff P\land \Pi_u = 1.
+    \end{equation*}
+    \bf{Rappel.} $\ov{k}\in\U(\Z/n\Z)$ ssi $k \land n = 1$.
+    \tcblower
+    \boxed{\la} Supposons $P\land \Pi_u = 1$ : $\exists U,V \in \K[X], ~ PU + \Pi_uV=1$ puis $P(u)\circ U(u)=\Id_E$. Donc $P(u)^{-1}=U(u)$.\\
+    \boxed{\ra} Supposons $v=P(u)$ inversible, alors $v^{-1}\in\K[v]\subset\K[u]$ puis $\exists U \in \K[X], ~ P(u)^{-1}=v^{-1}=U(u)$.\\ Puis $P(u)\circ U(u)=\Id_E\ra(PQ-1)=0_{\L(E)}\ra \Pi_u \mid (PU-1) \ra \exists V \in \K[X], ~ PU-1=P_uV$.\\ Donc $\exists (U,V)\in\K[X]^2, ~ PU-\Pi_uV=1$ et par bézout, $P\land \Pi_u = 1$.
+\end{exercice}
+
+\vspace*{-0.5cm}
+
+\begin{app}{}{}
+    Soit $A\in M_N(\K)$, on cherche à calculer $A^n$ pour $n\in\N$.\\
+    On fait la division euclidienne de $P$ par $\Pi_A$ : $P=\Pi_AQ+R$ avec $\deg(R)<\deg(\Pi_A)$.\\
+    Alors $P(A)=\Pi_A(A)Q(A)+R(A)=R(A)$.
+\end{app}
+
+\vspace*{-0.6cm}
+
+\begin{ex}{}{}
+    Soit $A\in M_N(\K)$ tel que $\Pi_A=(X-1)(X-2)$. Calculer $A^n$ pour tout $n\in\N$.
+    \tcblower
+    On a $\deg(\Pi_A)=2$, donc $\K[A]=\Vect(I_N, A)$, donc $\forall n \in \N, ~ \exists (\a_n, \b_n)\in\K^2, ~ A^n = \a_nI_n + \b_nA$.\\
+    Puis $X^n=(X-1)(X-2)Q_n+R_n$ avec $Q_n,R_n\in\K[X]$ et $\deg(R_n)<2$, donc $R_n$ de la forme $a_nX+b_n$.\\
+    On évalue en 1 et en 2 : $a_n+b_n=1$ et $2^n=2a_n+b_n$ donc $a_n=2^n-1$ et $b_n=2-2^n$.\\
+    Alors $A^n=\Pi_n(A)Q_n(A)+R_n(A)=R_n(A)=(2^n-1)A+(2-2^n)I_N$.
+\end{ex}
+
+\vspace*{-0.6cm}
+
+\begin{ex}{}{}
+    Soit $A\in M_n(\K)$, telle que $\Pi_A=(X-1)(X-2)$ et $A^n=\a_nI_N+\b_nA+\g_nA^2$. Déterminer $\a_n,\b_n,\g_n$. 
+\end{ex}
+
+\vspace*{-0.6cm}
+
+\begin{exercice}{}{}
+    Calculer pour tout $n\in\N$ :
+    \begin{equation*}
+        A^n=\begin{pmatrix}
+            2 & 1 & -1 \\ 0 & 2 & 1 \\ 0 & 0 & 2
+        \end{pmatrix}^n
+    \end{equation*}
+    \tcblower
+    On a $A-2I_3=$ nilpotente d'ordre 3, donc $(A-2I_3)^3=0_{M_3(\R)}$ : $P=(X-2)^3$ est un polynôme annulateur de $A$.\\
+    $\Pi_A$ est un diviseur de $P$ donc $\Pi_A\in\{1,(X-2),(X-2)^2,(X-2)^3\}$.\\
+    Forcément, $\Pi_A=(X-2)^2$, puis $\forall n \in \N, ~ X^n = \Pi_A Q_n + R_n$ avec $\deg(R_n)\leq 2$.\\
+    Alors $R_n=a_n+b_nX+c_nX^2$, avec $(a_n,b_n,c_n)\in\R^3$ pour $n\in\N$.\\
+    On évalue en 2: $2^n=a_n+2b_n+4c_n$, on dérive et on évalue en 2 : $n2^{n-1}=b_n+4c_n$.\\
+    On rédérive, on évalue en 2 : $n(n-1)2^{n-1}=2c_n$.\\
+    Donc $c_n=n(n-1)2^{n-2}$, $b_n=(2n-n^2)2^{n-1}$ et $a_n=2^n-2b_n-4c_n=...$\\
+    On aurait aussi pu utiliser le binome de newton.
+\end{exercice}
+
+\section{Sous-espaces stables.}
+
+\begin{rappel}{}{}
+    Soit $E$ un $\K$-ev, $F$ ssev de $E$, et $u:E\to E$. On dit que $F$ est stable par $u$ ssi $u(F)\subset F$.
+\end{rappel}
+
+\begin{prop}{}{puf}
+    Soit $u\in\L(E)$, $F$ stable par $u$ et $P\in\K[X]$. Alors :
+    \begin{equation*}
+        \forall x \in F, ~ P(u)(x) = P(u_F)(x).
+    \end{equation*}
+    \tcblower
+    Par récurrence sur $k\in\N$, $\forall x \in F, ~ u_F^k(x)=u^k(x)$.\\
+    Puis $P=\sum_{k=0}^N a_kX^k$ et $P(u_F)(x)=\sum_{k=0}^N a_k u_F^k(x)=\sum_{k=0}^N a_ku^k(x)=P(u)(x)$.
+\end{prop}
+
+\begin{prop}{$\star$}{div}
+    Soit $E$ un $\K$-ev, $u\in\L(E)$, $F$ stable par $u$.\\
+    On suppose que $u$ possède un polynôme minimal $\Pi_u$.\\
+    Alors l'endomorphisme induit $u_F$ aussi et $\Pi_{u_F} \mid \Pi_u$.
+    \tcblower
+    D'après la remarque précédente, $\forall x \in F, ~ \Pi_u(u)(x)=\Pi_u(u_F)(x)$ donc $\Pi_u(u_F)=0_{\L(F)}$.\\
+    Donc $u$ possède un polynôme annulateur $\Pi_u$ non-nul, donc $u_F$ possède un polynôme minimal et $\Pi_{u_F}\mid \Pi_u$.
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $E$ un $\K$-ev, $F$ et $G$ deux ssev de $E$ tels que $E=F\oplus G$.\\
+    Soit $u\in\L(E)$ tel que $F$ et $G$ soient stables par $u$. On suppose que $\Pi_u$ existe.\\
+    Montrer que $\Pi_u=\PPCM(\Pi_{u_F},\Pi_{u_G})$.
+    \tcblower
+    Les deux endomorphismes induits $u_F$ et $u_G$ admettent des polynômes minimaux, $\Pi_{u_F}\mid \Pi_u$ et $\Pi_{u_G} \mid \Pi_u$.
+    Soit $P$ un multiple de $\Pi_{u_F}$ et de $\Pi_{u_G}$, $\exists (U,V) \in \K[X]^2, ~ P = U\Pi_{u_F} = V\Pi_{u_G}$ puis $P(u)=U(u)\circ \Pi_{u_F}(u)=V(u)\circ \Pi_{u_G}(u)$.\\
+    Soit $x\in E$. $\exists!(y,z)\in F\times G, ~ x=y+z$ :
+    \begin{align*}
+        P(u)(x) &= P(u)(y) + P(u)(z) = U(u)\left( \Pi_{u_F}(u)(y) \right) + V(u)\left( \Pi_{u_G}(u)(z) \right)\\
+        &= U(u)\left( \Pi_{u_F}(u_F)(y) \right) + V(u)\left( \Pi_{u_G}(u_G)(z) \right)\\
+        &= U(u)(0_F) + V(u)(0_F) = 0_E.
+    \end{align*}
+    Donc finalement, $P(u)=0_{\L(E)}$, puis $\Pi_u\mid P$.
+\end{exercice}
+
+\pagebreak
+
+\begin{prop}{$\star$}{}
+    Soit $E$ un $\K$-ev, et $u,v\in\L(E)$.
+    \begin{enumerate}
+        \item Si $u\circ v = v \circ u$, alors $\Ker u$ et $\Im u$ sont stables par $v$.
+        \item Si $u\circ v=v\circ u$, alors $\forall P \in \K[X], ~ P(u)\circ v = v \circ P(u)$ donc $\Ker(P(u))$ et $\Im(P(u))$ sont stables par $v$.
+        \item $\forall P \in \K[X], ~ \Im(P(u))$ et $\Ker(P(u))$ sont stables par $u$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Déjà vu.\\
+    \boxed{2.} Supposons $u\circ v = v \circ u$, alors par récurrence, $\forall k \in \N, ~ u^k\circ v = v \circ u^k$.\\
+    Soit $P=\sum_{k=0}^Na_kX^k\in\K[X]$, alors $P(u)\circ v =\sum_{k=0}^Na_k(u^k\circ v) = \sum_{k=0}^N a_k(v\circ u^k) = v\circ P(u)$.\\
+    \boxed{3.} Appliquer \boxed{2.} avec $u=v$.
+\end{prop}
+
+\begin{ex}{}{}
+    Soit $E$ un $\K$-ev. Soit $u\in\L(E)$ admettant un polynôme minimal $\Pi_u$.
+    \begin{enumerate}
+        \item Dans $\C$, montrer que $u$ admet une droite stable.
+        \item Dans $\R$, montrer que $u$ admet une droite ou un plan stable.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $\deg(\Pi_u)\geq1$ et $\Pi_u\in\C[X]$ donc par d'Alembert-Gauss, $\exists Q \in \K[X], ~ \Pi_u = (X-\a)Q$.\\
+    On a $\deg(Q)<\deg(\Pi_u)$ et $Q\neq0$ donc $Q$ n'annule pas $u$, i.e. $Q(u)\neq0_{\L(E)}~:~\exists x \in E, ~ y = Q(u)(x)\neq 0_E$.\\
+    Puis $\Pi_u = (X-\a)Q \ra \Pi_u(u)=(u-\a\Id_E)\circ Q(u) \ra 0_E = (u-\a\Id)(Q(u)(x)) \ra u(y)=\a y$.\\
+    Donc $\Vect(y)$ est une droite stable par $u$.\\
+    \boxed{2.} De même, $\deg(\Pi_u)\geq1$ et $\Pi_u\in\R[X]$.\\
+    $\hookrightarrow$ Si $\Pi_u$ admet une racine réelle $\a\in\R$, on procède exactement comme dans le cas précédent.\\
+    $\hookrightarrow$ Sinon, $\deg(\Pi_u)\geq2$, il admet un diviseur $P$ de degré 2 : $\exists Q \in \R[X], ~ \Pi_u = PQ$.\\
+    On $Q\neq0$ et $\deg(Q)<\deg(\Pi_u)$ donc $Q(u)\neq0_{\L(E)}$, $\exists x \in E, ~ y=Q(u)(x)\neq0$.\\
+    Puis $\Pi_u=PQ\ra\Pi_u(u)=P(u)\circ Q(u)\ra (P(u)\circ Q(u))(x)=P(u)(Q(u)(x))=0_E$.\\ Or $P=aX^2+bX+c$ avec $a\neq0$. Donc $P(u)(y)=0$ avec $y\neq0_E$.\\
+    Alors $P(u)(y)=0\iff au^2(y)+bu(y)+cy=0_E$ donc $\Vect(y, u(y))$ est stable par $u$.
+\end{ex}
+
+\begin{thm}{Décomposition des noyaux}{}
+    Soit $E$ un $\K$-ev, $u\in\L(E)$, $P,Q\in\K[X]$ tels que $P\land Q=1$. Alors $\Ker~(PQ)(u)=\Ker~P(u) \oplus \Ker~Q(u)$.\\
+    De plus, tous ces sous-espaces sont stables par $u$.
+    \tcblower
+    Par hypothèse, $\exists (U,V)\in\K[X]^2, ~ PU+QV=1$, puis $P(u)\circ U(u)+Q(u)\circ V(u) = \Id_E$.\\
+    Puis $(U(u)\circ P(u))(x) + (V(u)\circ Q(u))(x)=x$ i.e. $U(u)(\underbrace{P(u)(x)}_{0_E})+V(u)(\underbrace{Q(u)(x)}_{0_E})=x$, donc $x=0_E$.\\
+    \boxed{\subset} Soit $x\in \Ker(PQ)(u)$. On note $y=U(u)(P(u)(x))$ et $z=V(u)(Q(u)(x))$ donc $x=y+z$.\\
+    On a $Q(u)(y)=(U(u) \circ (PQ)(u))(x) = U(u)(0_E)=0_E$, donc $y\in\Ker(Q(u))$. (même raisonnement pour $z$)\\
+    \boxed{\supset} Soit $x=y+z\in\Ker(P(u))+\Ker(Q(u))$.\\
+    Alors $(PQ)(u)(x)=(PQ)(u)(y)+(PQ)(u)(z)=Q(u)(P(u)(y))+P(u)(Q(u)(z))=0_E$.
+\end{thm}
+
+\vspace*{-0.5cm}
+
+\begin{ex}{}{}
+    Soit $E$ un $\K$-ev et $u\in\L(E)$.
+    \begin{enumerate}
+        \item $\Ker(u^2-\Id_E)=\Ker(u-\Id_E)\oplus\Ker(u+\Id_E)$, avec $P=X-1$ et $Q=X+1$ premiers entre-eux.
+        \item $\Ker(u^2-5u+6\Id_E)=\Ker(u-2\Id_E) \oplus \Ker(u-3\Id_E)$.
+        \item $\Ker(u^6 - u^5)=\Ker(u^5)\oplus\Ker(u-\Id_E)$ avec $P=X^5$ et $Q=(X-1)$.
+    \end{enumerate}
+\end{ex}
+
+\vspace*{-0.5cm}
+
+\begin{thm}{Généralisation.}{}
+    Soit $E$ un $\K$-ev, $u\in\L(E)$, $P_1,...,P_n\in\K[X]$ premiers entre-eux deux-à-deux.
+    \begin{equation*}
+        \Ker((P_1...P_n)(u))=\bigoplus_{i=1}^n\Ker(P_i(u)).
+    \end{equation*}
+    \tcblower
+    $E_1\oplus...\oplus E_n$ ssi $\forall (x_1,...,x_n)\in E_1\times...\times E_n, ~ x_1+...+x_n=0\ra x_1=...=x_n=0$.\\
+    Montrons le théorème par récurrence sur $n$. Le cas de base est déjà fait.\\
+    \bf{Hérédité.} Soit $n\in\N$ tel que $\P_n$. Soient $P_1,...,P_{n+1}$ des polynômes premiers entre-eux deux à deux.\\
+    En particulier, $P_{n+1}\land P_1=1,...,P_{n+1}\land P_n = 1 \ra P_{n+1} \land (P_1...P_n)=1$.\\
+    D'après $\P_2$, $\Ker((P_1...P_{n+1})(u))=\Ker((P_1...P_n)(u))\oplus\Ker(P_{n+1}(u))$.\\
+    Puis d'après $\P_n$ : $\Ker((P_1...P_n)(u))=\bigoplus_{i=1}^n\Ker(P_i(u))$.\\
+    On a bien $\Ker((P_1...P_{n+1})(u))=\bigoplus_{i=1}^{n+1}\Ker(P_i(u))$.
+\end{thm}
+
+\vspace*{-0.5cm}
+
+\begin{app}{}{}
+    Soit $E$ un $\K$-ev, $u\in\L(E)$ et $P\in\K[X]$ polynôme non-nul annulateur de $u$.\\
+    On décompose $P$ en polynômes irréductibles : $P=P_1^{\a_1}...P_n^{\a_n}$. Alors :
+    \begin{equation*}
+        \Ker(P(u))=\bigoplus_{i=1}^n\Ker(P_i^{\a_i}(u)).
+    \end{equation*}
+    Or $P(u)=O_{\L(E)}$ donc $\Ker(P(u))=E$, donc finalement :
+    \begin{equation*}
+        E=\bigoplus_{i=1}^n\Ker(P_i^{\a_i}(u)).
+    \end{equation*}
+\end{app}
+
+\vspace*{-0.5cm}
+
+\begin{ex}{}{}
+    Soit $E$ un $\K$-ev, $p$ un projecteur et $s$ une symétrie.\\
+    Par définition, $p,s\in\L(E)$, $p^2=p$ et $s^2=\Id_E$.\\
+    Alors $P=X^2 - X$ est un polynôme annulateur de $p$, minimal si $p\neq0_E$ et $p\neq\Id_E$.\\
+    Et $Q=X^2-1$ est un polynôme annulateur de $s$, minimal si $s \neq \Id_E$ et $s\neq -\Id_E$.\\
+    On applique le théorème de décomposition des noyaux car $P=X(X-1)$ et $X\land(X-1)=1$:
+    \begin{equation*}
+        E = \Ker(P(p)) = \Ker(p) \oplus \Ker(p-\Id_E)
+    \end{equation*}
+    Et $Q=(X-1)(X+1)$ et $(X-1)\land(X+1)=1$ :
+    \begin{equation*}
+        E = \Ker(Q(s))=\Ker(s+\Id_E) \oplus \Ker(s-\Id_e).
+    \end{equation*}
+\end{ex}
+
+\vspace*{-0.5cm}
+
+\begin{app}{}{}
+    Soit sur $\R$ :
+    \begin{equation*}
+        (E) ~ : ~ y'' - 5y' + 6y = 0.
+    \end{equation*}
+    On noste $S$ l'ensemble des solutions de $E$, ssev de $\cursive{C}^2(\R,\R)$.\\
+    On connaît une base de $S$ en résolvant $r^2-5r+6=(r-2)(r-3)=0$.\\
+    Alors $S=\Vect(x\mapsto e^{2x}, x\mapsto e^{3x})$, et $\dim(S)=2$.
+    \tcblower
+    Posons $\ds D:\begin{cases} \cursive{C}^{\infty}(\R,\R) &\to \quad \cursive{C}^{\infty}(\R,\R)\\ y &\mapsto \quad y'\end{cases} \in \L(\cursive{C}^{\infty}(\R,\R))$.\\
+    On a $S$ stable par $D$, notons $D_S$ l'endomorphisme induit par $D$ sur $S$.\\
+    Posons $P=X^2-5X+6$, polynôme annulateur de $D_S$ : $\forall y \in S, ~ P(D_S)(y)=y''-5y'+6y=0$.\\
+    Or $P=(X-2)(X-3)$ et $(X-2)\land(X-3)=1$ donc $S=\Ker(D_S - 2\Id_S)\oplus \Ker(D_S-3\Id_S)$.\\
+    Or $y\in\Ker(D_S-\l\Id_S) \iff y \in S \et y'=\l y \iff y\in S\et y(x)=Ke^{\l x}$.\\
+    Finalement, $S=\Vect(x\mapsto e^{2x})\oplus\Vect(x\mapsto e^{3x})$.
+\end{app}
+
+\begin{defi}{}{}
+    Soit $E$ un $\K$-ev et $u\in\L(E)$.\\
+    On dit que $\l\in\K$ est \bf{valeur propre} de $u$ ssi $\exists x \in E, ~ u(x)=\l x$.\\
+    On dit que $x$ est \bf{vecteur propre} de $u$ associé à la valeur propre $\l$.\\
+    On note $\Sp(u)$ l'ensemble des valeurs propres de $u$ (\bf{spectre} de $u$).\\
+    Pour $\l\in\Sp(u)$, on note $E_{\l}=\Ker(u-\l\Id_E)$ le \bf{sous-espace propre} associé à $\l$.\\
+    De manière générale, l'équation $u(x)=\l x$ est appelée \bf{équation aux éléments propres}.
+\end{defi}
+
+\vspace*{-0.6cm}
+
+\begin{ex}{}{}
+    Soit $u$ une homothétie : $\exists \a \in \K, ~ u = \a\Id_E$.\\
+    Pour $x\neq 0$, $\l\in \K$ : $u(x)=\l x \iff (\a - \l)x = 0_E \iff \a - \l = 0_K$.\\
+    Alors $\a$ est la seule valeur propre possible et $E_{\a}=E\neq(0)$.
+\end{ex}
+
+\vspace*{-0.6cm}
+
+\begin{ex}{}{}
+    Soit $\forall (x,y) \in \R^2, ~ u(x,y)=(2x-y,x)$, $u\in\L(R^2)$.
+    \begin{equation*}
+        \begin{cases}2x-y=\l x\\x=\l y\end{cases}  \iff \begin{cases} (2-\l)x - y = 0 \\ x - \l y = 0\end{cases} \iff \begin{pmatrix}{2-\l}&-1\\1&-\l\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}0\\0\end{pmatrix}\iff X \in \Ker A
+    \end{equation*} ;
+    Il existe une solution $X$ non nulle ssi $\Ker(A)\neq(0)$ ssi $A\notin\GL_2(\R)$ ssi $\det(A)=0$.\\
+    Or $\det(A)=-\l(2-\l)+1=(\l-1)^2$ donc $\det(A)=0$ ssi $\l = 1$ donc $(x,y)\in E_1 \iff x=y$. $E_1=\Vect((1,1))$
+\end{ex}
+
+\vspace*{-0.6cm}
+
+\begin{ex}{}{}
+    Soit $E=\cursive{C}^{\infty}(\R,\R)$, $T:f\mapsto g$ où $\forall x \in \R, ~ g(x)=f'(x)-xf(x)$.\\
+    Pour $\l\in\R$, $\forall x \in \R$, $f(f_1+\l f_2)(x)=(f_1+\l f_2)'(x)-x(f_1+\l f_2)(x)=...=(T(f_1)+\l T(f_2))(x)$.\\
+    Équation aux éléments propres : $T(f)=\l f$ avec $\l\in\R$, et $f\in E$ non-nul.\\
+    Donc $\forall x \in \R, ~ f'(x)-xf(x)=\l f(x)$ puis $f'(x)=(\l+x)f(x)$.\\
+    Alors $\exists K \in \R, ~ \forall x \in \R, ~ f(x)=Ke^{\l x + \frac{x^2}{2}}$, donc $\Sp(T)=\R$, et $E_\l=\Vect(x\mapsto e^{\l x + \frac{x^2}{2}})$.
+\end{ex}
+
+\vspace*{-0.6cm}
+
+\begin{prop}{}{}
+    Soit $u\in\L(E)$, et $\l\in\Sp(u)$. Alors $E_\l$ est stable par $u$ et l'endomorphisme induite $u_\l$ est une homothétie.
+    \tcblower
+    On a $u$ et $u-\l\Id_E$ commutent donc $\Ker(u-\l\Id_E)$ et $\Im(u-\l\Id_E)$ sont stables par $u$.
+\end{prop}
+
+\vspace*{-0.6cm}
+
+\begin{prop}{}{}
+    Soit $E$ un $\K$-ev, $\l\in\K$ tels que $u(x)=\l x$.
+    \begin{enumerate}
+        \item $\forall k \in \N, ~ u^k(x)=\l^kx$.
+        \item $\forall P \in \K[X], ~ P(u)(x)=P(\l)x$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Par récurrence sur $k$, pour $k=0$, $x=x$ et pour $k=1$, $u(x)=\l x$.\\
+    \bf{Hérédité.} Supposons $P(k)$. $u^{k+1}(x)=u(u^k(x))=u(\l^k x = \l^k u(x)=)  = \l^{k+1}x$.\\
+    \boxed{2.} $P(u)(x)=\sum_{k=0}^N a_ku^k(x) = \sum_{k=0}^N a_k(\l^kx)=x\sum_{k=0}^N a_k \l^k=xP(\l)$.
+\end{prop}
+
+\begin{prop}{$\star$}{}
+    Soit $E$ un $\K$-ev et $u\in\L(E)$.
+    \begin{enumerate}
+        \item Soit $P\in\K[X]$ annulateur de $u$, non-nul. Alors $\l\in\Sp(u)\ra P(\l)=0_\K$.
+        \item Soit $\Pi_u$ minimal de $u$, alors $\l\in\Sp(u)\iff \Pi_u(\l)=0_\K$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $l\in\Sp(u)$, et $x$ vecteur propre associée à $\l$  : $u(x)=\l x$.\\
+    D'après le thm précédent, $P(u)(x)=P(\l)x$. Or $P(u)=0$ puis $P(\l)x=0$ puis $P(\l)=0$.\\
+    \boxed{2.} On a $\Pi_u$ annulateur de $u$ donc $\l\in\Sp(u)\ra \Pi_u(\l)=0$.\\
+    Réciproquement, soit $\l$ racine de $\Pi_u$ : $\exists Q \in \K[X], ~ \Pi_u=(X-\l)Q$.\\
+    Puis $\Pi_u(u)=(u-\l\Id_E)\circ Q(u) \ra 0_E = (u - \l \Id_E)(Q(u)(x))$, on prend $x$ tel que $Q(u)(x)\neq0$.\\
+    Finalement, $u(x)=\l x$, donc $\l\in\Sp(u)$.
+\end{prop}
+
+\vspace*{-0.6cm}
+
+\begin{ex}{}{}
+    Soit $E$ un $\K$-ev, $u\in\L(E)$ tel que $u^2-5u+6\Id_E=0_{\L(E)}$.
+    \begin{itemize}
+        \item $P=X^2-5X+6$ est annulateur non-nul de $u$, $S_p(u)\subset\{2,3\}$.
+        \item $Q=(X^2-5X+6)(X-44)$ est aussi annulateur de $u$, $S_p(u)\subset\{2,3,44\}$. 
+    \end{itemize}
+    Si on suppose que $u$ n'est pas homothétie, alors $\deg(\Pi_u)\geq2$ et $\Pi_u\mid P$.\\
+    Alors $\Pi_u=P=(X-2)(X-3)$ puis $\Sp(u)=\{2,3\}$.
+\end{ex}
+
+\begin{ex}{}{}
+    Soit $E$ un $\K$-ev, $p$ une projection, $s$ une symétrie et $u$ endo. nilpotent d'ordre $k$.\\
+    Si $p$ n'est pas une homothétie, $\Pi_p=(X-1)X$ donc $\Sp(p)=\{0,1\}$, et $E_0=\Ker(p)$, $E_1=\Im(p)$. \\
+    Si $s$ n'est pas une homothétie, $\Pi_s=(X-1)(X+1)$ donc $\Sp(s)=\{-1,1\}$, $E_1=\Ker(s-\Id_E)$, $E_{-1}=\Ker(s+\Id_E)$.\\
+    On a $u^p=0_{\L(E)}$ et $u^{p-1}\neq0_{\L(E)}$ donc $\Pi_u=X^p$ et $\Sp(u)=\{0\}$ et $E_0=\Ker(u)$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{$\star$}{}
+    Soit $E$ un $\K$-ev avec $u\in\L(E)$.
+    \begin{enumerate}
+        \item Soit $\l_1,...,\l_p$ des valeurs propres distinctes de $u$. Alors $E_{\l_1}\oplus ... \oplus E_{\l_n}$.
+        \item Soit $x_1,...,x_p$ des vecteurs propres associés à des valeurs propres distinctes, alors $(x_1,...,x_p)$ est libre.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $(x_1,...,x_p)\in E_{\l_1}\times...\times E_{\l_p}, ~ x_1 + ... + x_p = 0_E ~ (1); ~ \forall i \in \lb1,p\rb, ~ u(x_i)=\l_i x_i$ par déf. de $E_{\l_i}$.\\
+    Alors $\l_1x_1 + ... + \l_px_p = 0_E ~ (2)$ en appliquant $u$, puis $\l_p(1)-(2)=(\l_p-\l_1)x_1+...+(\l_p-\l_{p-1})x_{p-1}=0_E$.\\
+    Montrons le résultat par récurrence sur $p$ : pour $p=1$, RAS.\\
+    Soit $p\in\N$ tel que $\P(n-1)$. Soient $x_1+...+x_p=0_E$. Alors $(\l_p-\l_1)x_1+...(\l_p-\l_{p-1})x_{p-1}=0_E$.\\
+    Par hypothèse, $(\l_p-\l_1)x_1 = ... = (\l_p - \l_{p-1})x_{p-1}=0_E$, or $\forall i \in \lb0,p-1\rb, ~ \l_p-\l_i\neq0$.\\
+    Donc $x_1=...=x_{p-1}=0_E$ puis $x_p=-(x_1+...+x_{p-1})=0_E$ d'où $\P(p)$.\\
+    \boxed{2.} Soit $(x_1,...x_p)$ vecteurs propres de $u$ associés à des valeurs propres $\l_1,...,\l_p$ distinctes.\\
+    Soit $(\a_1,...,\a_n)\in\K^p, ~ \a_1x_1+...+\a_px_p = 0_E$, alors $\forall i \in \lb1,p\rb, ~ \a_ix_i = 0_E$ et $x_i\neq0$ car $\vp$ donc $\a_i=0_\K$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{$\star$}{}
+    Soit $E$ un $\K$-evdf de dimension $n\in\N^*$, $u\in\L(E)$.\\
+    Alors $u$ possède au plus $n$ valeurs propres distinctes.
+    \tcblower
+    On note $\l_1,...,\l_p$ des valeurs propres distinctes de $u$. Alors $E_{\l_1}\oplus...\oplus E_{\l_p}\subset E$.
+    \begin{equation*}
+        \sum_{i=1}^p\dim(E_{\l_i}) \leq n ~ \et ~ \forall i \in \lb1,p\rb, ~ \dim(E_{\l_i})\geq 1 \ra p \leq n.
+    \end{equation*}
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    Soit $A\in M_n(\K)$. $\l\in\K$ est valeur propre de $A$ ssi $\exists X \in M_{n,1}(\K)$ non-nul tel que $AX=\l X$.\\
+    On note $E_\l = \Ker(A-\l I_n)=\{X\in M_{n,1}(\K),  ~AX=\l X\}$.
+    Les valeurs propres de $A$ sont incluses dans l'ensemble des racines de tout polynôme annulateur. Les valeurs propress de $A$ sont exactement racines du polynôme annulateur $\Pi_A$. Une matrice de $M_n(\K)$ possède $n$ valeurs propres distinctes.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\subsection{En dimension finie.}
+
+\begin{rappel}{}{}
+    Soit $E$ un $\K$-evdf, $\B=(e_1,...,e_n)$ base de $E$, $u\in\L(E)$, $A=\Mat_\B(u)\in M_n(\K)$.
+    \begin{itemize}
+        \item $\l\in\Sp(u) \iff \det(u-\l\Id_E)=0 \iff \rg(u-\l\Id_E)<n$.
+        \item $\l\in\Sp(u) \iff \det(A-\l I_n)=0 \iff \rg(A-\l I_n)<n$.
+        \item $\l\notin\Sp(A)\iff (A-\l I_n) \in \GL_n(\K)$.
+    \end{itemize}
+\end{rappel}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{Polynôme caractéristique.}{}
+    Soit $A\in M_n(\K)$. On pose $\forall \l \in \K, ~ P(\l)=\det(\l I_n-A)$.\\
+    $P$ est un polynôme de degré $n$, unitaire, noté $\X_A$ appelé polynôme caractéristique de $A$.\\
+    De plus, $\X_A = X^n-(\Tr(A))X^{n-1}+...+(-1)^n\det(A)$.
+    \tcblower
+    Soit $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}\in M_2(\K)$.
+    \begin{equation*}
+        P(\l)=\det(\l I_2 - A) = \det\begin{pmatrix}\l - a & - b \\ -c & \l - d\end{pmatrix} = (\l-a)(\l-d)-bc=\l^2-(a+d)\l+ad-bc.\\
+    \end{equation*}
+    Soit $A=\begin{pmatrix}1&0&4\\2&-1&1\\1&1&2\end{pmatrix}\in M_3(\K)$.
+    \begin{align*}
+        P(\l)&=\det\begin{pmatrix}\l-1&0&-4\\-1&\l+1&-1\\-1&-1&\l-2\end{pmatrix} = (\l-1)\det\begin{pmatrix}\l+1&-1\\-1&\l-2\end{pmatrix}-4\det\begin{pmatrix}-2&\l+1\\-1&-1\end{pmatrix}\\
+        &= (\l-1)(\l^2-\l-3) - 4(\l+3) = \l^3 - 2\l^2 - 6\l + 9 
+    \end{align*}
+    Cas général : on note $B=\l I_n-A$, $A=(a_{i,j})$ et $B=(b_{i,j})$.
+    \begin{equation*}
+        \X_A(\l) = \det(B) = \sum_{\s \in S_n}\e(\s)(\l\d_{\s(1),1}-a_{\s(1),1})...(\l\d_{\s(n),n}-a_{\s(n),n}).
+    \end{equation*}
+    Donc $\X_A$ est bien un polynôme en $\l$.
+    \begin{align*}
+        \X_A&=\sum_{\s\in S_n}\e(\s)(\d_{\s(1),1}X-a_{\s(1),1})...(\d_{\s(n),n}X-a_{\s(n),n})\\
+        &=(X-a_{1,1})...(X-a_{n,n}) + \sum_{\s\neq\Id\in S_n}\e(\s)(\d_{\s(1),1}X-a_{\s(1),1})...(\d_{\s(n),n}X-a_{\s(n),n}).
+    \end{align*}
+    On remarque que si $\s\neq\Id$, alors $\exists i \in \lb1,n\rb$ tel que $\s(i)\neq i$, puis forcément, $\exists j \in \lb1,n\rb, ~ j \neq i, ~ \s(j)\neq j$.\\
+    Donc $\forall \s \in S_n, ~ \s\neq\Id, ~ \deg(Q_\s)\leq n-2$ puis $\deg\left( \sum_{\s\neq\Id\in S_n}\e(\s)Q_\s \right)\leq n-2$.\\
+    Finalement :
+    \begin{align*}
+        \X_A &= (X-a_{1,1})...(X-a_{n,n})+R \quad \deg(R)\leq n-2\\
+        &= X^n - (a_{1,1}+...+a_{n,n})X^{n-1} + T \quad \deg(T)\leq n-2\\
+        &= X^n - \Tr(A)X^{n-1} + T \quad \deg(T) \leq n-2
+    \end{align*}
+    Il reste à déterminer le coefficient constant noté $a_0$, or $a_0=\X_A(0)=\det(0I_n-A)=(-1)^n\det(A)$.
+\end{defi}
+
+\begin{prop}{$\star$}{}
+    Soit $A\in M_n(\K)$, les valeurs propres de $A$ sont exactement les racines du polynôme caractéristique.
+    \tcblower
+    $\l\in\Sp(A) \iff A-\l I_n \notin \GL_n(\K) \iff \det(A-\l I_n) = (-1)^n\X_A(\l) = 0 \iff \X_A(\l) = 0$.
+\end{prop}
+
+\begin{ex}{Matrices triangulaires supérieures.}{}
+    Soit $A=(a_{i,j})\in T_n^+(\K)$.
+    \begin{equation*}
+        \X_A = \det\begin{pmatrix}
+            \l - a_{1,1} & \dots & \\
+            & \ddots & \vdots \\
+            (0) & & \l - a_{n,n}
+        \end{pmatrix} = (\l-a_{1,1})...(\l-a_{n,n}).
+    \end{equation*}
+    Déteminer les éléments propres de $A=\begin{pmatrix}1&2&1\\0&-1&2\\0&0&3\end{pmatrix}$. $\Sp(A)=\{1,-1,3\}$.\\
+    $AX=X\iff \begin{cases}x+2y+z=x\\-y+2z=y\\3z=z\end{cases}\iff (x,y,z)=(x,0,0)$, $E_1=\Ker(A-I_3)=\Vect((1,0,0))$.\\
+    $AX=3X \iff \begin{cases} x+2y+z=3x\\-y+2z=3y\\3z=3z \end{cases} \iff \begin{cases} x=z\\ z=2y \\ z=z \end{cases}, ~ E_3=\Ker(A-3I_3)=\Vect(2,1,2)$.\\
+    $AX=-X \iff \begin{cases}x+2y+z=-x \\ -y + 2z = -y \\ 3z = -z\end{cases} \iff \begin{cases}x=-y \\ z=0 \\ z=0\end{cases}, ~ E_{-1}=\Ker(A+I_3)=\Vect(1,-1,0)$.
+\end{ex}
+
+\begin{prop}{Nombre de valeurs propres.}{}
+    Soit $A\in M_n(\K)$.
+    \begin{enumerate}
+        \item $A$ possède au plus $n$ valeurs propres distinctes.
+        \item Si $\K=\C$, $A$ possède au moins une valeur propre.
+        \item Si $\K=\R$, on peut avoir $\Sp(A)=\0$, mais $\Sp_\C A \neq \0$.\\
+        Si $\l\in\C\setminus\R$ est valeur propre de $A$, alors $\ov{\l}$ aussi.
+    \end{enumerate}
+    \tcblower
+    On remarque déjà que $A\in M_n(\K)\ra \X_A \in \K[X]$.\\
+    \boxed{1.} $\X_A$ est de degré $n$ donc possède au plus $n$ racines distinctes. Donc au plus $n$ valeurs propres distinctes.\\
+    \boxed{2.} $\X_A\in\C[X]$ et $\deg\X_A\geq1$, d'après le théorème de D'Alembert-Gauss, $\X_A$ possède au moins une racine.\\
+    \boxed{3.} Si $A=$\tiny{$\begin{pmatrix}0&1\\-1&0\end{pmatrix}$}\normalsize, alors $\X_a(\l)=\l^2+1$ n'admet pas de racines réelles : $\Sp(A)=\{i,-i\}$.\\
+    Soit $\l\C$ valeur propre de $A\in M_n(\R)$. Alors $\X_A(\l)=0$ donc $\X_A(\ov{\l})=0$ i.e. $\ov{\l}$ vecteur propre de $A$.\\
+    De plus, $AX=\l X$ donc $\ov{AX}=\ov{\l X}$ i.e. $A\ov{X}=\ov{\l X}$ donc $\ov{X}$ vecteur propre associé à $\ov{\l}$.
+\end{prop}
+
+\begin{defi}{}{}
+    Soit $A\in M_n(\K)$ et $\l\in\Sp(A)$. La multiplicité de la valeur propre $\l$ est sa multiplicité en tant que racine de $\X_A$.
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $A\in M_n(\R)$, $\l\in\C\setminus\R$ valeur propre de $A$ de multiplicité $\a\in\N^*$.\\
+    Alors $\ov{\l}$ est encore valeur propre de $A$ avec la même multiplicité $\a$.
+\end{prop}
+
+\begin{prop}{$\star$}{}
+    Soit $A\in M_n(\K)$ tel que $\X_A$ scindé dans $\K[X]$.\\
+    On note $\l_1,...,\l_n$ les racines de $\X_A$. Alors :
+    \begin{equation*}
+        \Tr(A)=\sum_{i=1}^n\l_i \quad\et\quad \det(A)=\prod_{i=1}^n\l_i.
+    \end{equation*}
+    \tcblower
+    D'une part, $\X_A=(X-\l_1)...(X-\l_n)$ unitaire; et $\X_A=X^n-(\Tr(A))X^{n-1}+...+(-1)^n\det(A)$.\\
+    D'après les relations coefficients-racines, $\X_A=X^n-\left( \sum_{i=1}^n\l_i \right)X^{n-1}+...+(-1)^n\l_1...\l_n$.\\
+    Par identification, $\Tr(A)=\sum\l_i$  et $\det(A)=\l_1...\l_n$.
+\end{prop}
+
+\begin{ex}{}{}
+    Quels sont les éléments propres de :
+    \begin{equation*}
+        A=\begin{pmatrix}
+            0&1&1&1\\1&0&1&1\\1&1&0&1\\1&1&1&0
+        \end{pmatrix}\in M_4(\R).
+    \end{equation*}
+    \tcblower
+    $C_1\gets C_1 + (C_2+C_3+C_4)$, factoriser $(\l-3)$ puis $L_i \gets L_i - L_1$.
+    \begin{align*}
+        \X_A(\l) &= \det\begin{pmatrix}\l&-1&-1&-1\\-1&\l&-1&-1\\-1&-1&\l&-1\\-1&-1&-1&\l\end{pmatrix}=\det\begin{pmatrix}\l-3&-1&-1&-1\\\l-3&\l&-1&-1\\\l-3&-1&\l&-1\\\l-3&-1&-1&\l\end{pmatrix}\\
+        &=(\l-3)\det\begin{pmatrix}1&-1&-1&-1\\0&\l+1&0&0\\1&0&\l+1&0\\0&0&0&\l+1\end{pmatrix}=(\l-3)(\l+1)^3
+    \end{align*}
+    Donc $\X_A=(X-3)(X+1)^3$. On a bien $\Tr(A)=0=-3+1+1+1$.\\
+    Alors $\Sp(A)=\{3,-1\}$, $3$ est valeur propre simple, et $-1$ est triple.\\
+    $AX=3X\iff\begin{cases}b+c+d=3a\\a+c+d=3b\\a+b+d=3c\\a+b+c=3d\end{cases}\iff a=b=c=d$. Donc $E_3=\Vect((1,1,1,1))$.\\
+    $AX=-X\iff a+b+c+d=0$. Donc $E_{-1}=\Vect((1,0,0,-1), (0,1,0,-1), (0,0,1,-1))$.
+\end{ex}
+
+\begin{ex}{}{}
+    Même exercice avec $\begin{pmatrix}5&0&-1\\1&4&-1\\-1&0&5\end{pmatrix}$ et $\begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}$.
+
+\end{ex}
+
+\begin{exercice}{}{}
+    Soit $A=(a_{i,j})\in M_n(\C)$ et $\l$ une valeur propre de $A$.\\
+    On pose $\ds r_i=\sum_{\substack{1 \leq j \leq n \\ j \neq i}}|a_{i,j}|$. Montrer que $\ds \l \in \bigcup_{i=1}^{\infty}B'(a_{i,i}, r_i)$.
+    \tcblower
+    On a $\exists X \in M_{n,1}(\C)$ non nulle tel que $AX=\l X$. Soit $i_0\in\lb1,n\rb, ~ |x_{i_0}|=\max_{\lb1,n\rb}|x_i|>0$.
+    \begin{align*}
+        AX=\l X &\iff \begin{cases} a_{1,1}x_1 + ... + a_{1,n}x_n = \l x_1 \\ \hspace*{0.4cm} \vdots \hspace*{3.5cm}\vdots \\ a_{n,1}x_1 + ... + a_{n,n}x_n = \l x_n \end{cases} \ra a_{i_0,1}x_1 + ... + a_{i_0,n}x_n = \l x_{i_0}\\
+        &\iff (a_{i_0,i_0}-\l)x_{i_0} = -\sum_{\substack{1\leq j \leq n\\ j \neq i_0}}a_{i_0,j}x_j\\
+        &\ra |\l - a_{i_0,i_0}||x_{i_0}| \leq \sum_{\substack{1\leq j \leq n \\ j \neq i_0}}|a_{i_0,j}|x_j| \leq \sum_{\substack{1\leq j \leq n\\j\neq i_0}}|a_{i_0,j}||x_{i_0}|
+    \end{align*}
+    On simplifie par $|x_{i_0}|>$ : 
+    \begin{equation*}
+        |\l - a_{i_0,i_0}| \leq \sum_{\substack{1 \leq j \leq n \\ j \neq i_0}}|a_{i_0,j}| = r_{i_0}
+    \end{equation*}
+    Donc $\l \in B'(a_{i_0,i_0},r_{i_0})$.
+\end{exercice}
+
+\vspace*{-0.5cm}
+
+\begin{defi}{Rayon spectral.}{}
+    Soit $A\in M_n(\K)$ telle que $\Sp(A)\neq\0$.\\
+    Le rayon spectral de $A$, noté $\p(A)$ est défini par $\p(A)=\max\{|\l|, ~ \l \in \Sp(A)\}$.\\
+    \bf{Remarque.} $\forall \l \in \Sp(A), ~ \l \in B'(0,\p(A))$.
+\end{defi}
+
+\vspace*{-0.5cm}
+
+\begin{exercice}{}{}
+    Soit $A\in M_n(\C)$. Soit $\|\cdot\|$ une norme d'algèbre sur $M_n(\C)$. Montrer que $\p(A)\leq\abs A\abs$.
+    \tcblower
+    Soit $\l\in\Sp(A)$ : $\exists X \in M_{n,1}(\C), ~ AX=\l X$. Et : $\forall Y \in M_{n,1}(\K), ~ \|AY\|\leq\abs A\abs\|Y\|$.\\
+    En particulier, $\|\l X\| = \|AX\| \leq \abs A \abs \|X\|$ puis $|\l|\|X\|\leq\abs A\abs \|X\|$ par homogénéité.\\
+    Puis $|\l|\leq\abs A\abs$ en divisant par $\|X\|>0$. Par passage au max, $\p(A)\leq\abs A\abs$.
+\end{exercice}
+
+\vspace*{-0.5cm}
+
+\begin{prop}{$\star$}{}
+    Soit $A\in M_n(\K)$, alors $\X_{A^\top}=\X_A$. En particulier, $\Sp(A)=\Sp(A^\top)$.
+    \tcblower
+    Soit $\l \in \K$.
+    \begin{equation*}
+        \X_{A^{\top}}(\l) = \det(\l I_n - A^\top) = \det((\l I_n - A)^\top) = \det(\l I_n - A) = \X_A(\l).
+    \end{equation*}
+\end{prop}
+
+\vspace*{-0.5cm}
+
+\begin{prop}{$\star$}{}
+    Soient $A,B\in M_n(\K)$ semblables, alors $\X_A=\X_B$. La réciproque est fausse.
+    \tcblower
+    Supposons $\exists P \in \GL_n(\K), ~ A=PBP^{-1}$, et $\forall \l \in \K, ~ \l I_n - A = P(\l I_n - B)P^{-1}$.\\
+    Alors $\X_A(\l)=\det(\l I_n - A) = \det(P)\times\det(\l I_n - B)\times \det(P^{-1})=\det(\l I_n - B) = \X_B(\l)$.
+\end{prop}
+
+\vspace*{-0.5cm}
+
+\begin{ex}{}{}
+    Soient $A=\begin{pmatrix}1& & (0)\\&\ddots&\\(0)&&1\end{pmatrix}$ et $B=\begin{pmatrix}1&\dots&1\\&\ddots&\vdots\\(0)&&1\end{pmatrix}$, alors $\X_A=(X-1)^n$ et $\X_B=(X-1)^n$, or $A\not\sim B$.
+\end{ex}
+
+\vspace*{-0.5cm}
+
+\begin{prop}{$\star$}{}
+    \begin{enumerate}
+        \item $\GL_n(\K)$ est dense dans $M_n(\K)$.
+        \item Soient $A,B\in M_n(\K)$. Montrer que $\X_{AB}=\X_{BA}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Toutes les normes sont équivalentes en dimension finie. Soit $A\in M_n(\K)$. On pose $\forall p \in \N^*, ~ A_p = A-\frac{1}{p}I_n$.\\
+    On a $\|A_p - A\| = \frac{1}{p}\|I_n\| \to 0$. On a $\det(A_p)=(-1)^n\det(\frac{1}{p}I_n-A)=(-1)^n\X_A(\frac{1}{p})$.\\
+    Or $\X_A$ a au plus $n$ racines, donc àpdcr, $\det(A_p)\neq0$ donc $A_p$ est inversible àpdcr.\\
+    \boxed{2.} Soient $A,B\in M_n(\K)$. $A=\lim A_p$ où $\forall p \in \N, ~ A_p \in \GL_n(\K)$ d'après \boxed{1.}\\
+    Puis $\forall \l \in \K, ~ \forall p \in \N, ~ \det(\l I_n - A_pB)=\det(A_p(\l A_p^{-1} - B))=\det(\l I_n - BA_p)$ (*).\\
+    On passe à la limite : $A_p \to A$ donc $A_pB\to AB$ par continuité de $M\mapsto MB$ (dim. finie).\\
+    Puis $\l I_n - A_pB \to \l I_n - AB$  puis par continuité du déterminant, $\det(\l I_n - A_pB) \to \det(\l I_n - AB)$.\\
+    Enfin, par passage à la limite dans (*), $\det(\l I_n - AB) = \det(\l I_n - BA)$ donc $\forall \l\in\K, ~ \X_{AB}(\l)=\X_{BA}(\l)$.\\
+    Enfin, $\X_{AB}=\X_{BA}$.
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $A\in\GL_n(\K)$. Exprimer $\X_{A^{-1}}$ en fonction de $\X_A$.
+    \tcblower
+    On a :
+    \begin{align*}
+        \X_{A^{-1}}(\l) &= \det(\l I_n - A^{-1}) = \det A^{-1}(\l A - I_n) = \frac{\det(\l A - I_n)}{\det A} \\
+        &= (-1)^n\frac{\l^n}{\det(A)}\det\left(\frac{1}{\l}I_n - A\right)=(-1)^n\frac{\l^n}{\det(A)}\X_A\left( \frac{1}{\l} \right).
+    \end{align*}
+\end{exercice}
+
+\begin{defi}{Endomorphisme cyclique.}{}
+    Soit $E$ un $\K$-evdf de dimension $n$, et $u\in\L(E)$.
+    \begin{center}
+        $u$ est cyclique ssi $\exists x \in E, ~ \B=(x,u(x),...,u^{n-1}(x))$ est une base de $E$.
+    \end{center}
+\end{defi}
+
+\begin{exercice}{}{}
+    Soit $u$ cyclique : $\exists x \in E, ~ \B=(x,u(x),...,u^{n-1}(x))$ est base de $E$.
+    \begin{enumerate}
+        \item Donner la matrice de $u$ dans la base $\B$.
+        \item Montrer que $\Pi_u = \X_u$.
+        \item Soit $v\in \L(E), ~ \Pi_v = \X_v$. Montrer que $v$ est cyclique (difficile).
+    \end{enumerate}
+\end{exercice}
+
+\vspace*{-0.7cm}
+
+\begin{defi}{Matrices compagnon.}{}
+    Une matrice compagnon de $M_n(\K)$ est de la forme :
+    \begin{equation*}
+        \begin{pmatrix}
+            0 & \dots & \dots & \dots & a_0 \\
+            1 & \ddots & & & \vdots \\
+            0 & \ddots & \ddots & & \vdots \\
+            \vdots &  & \ddots & \ddots & \vdots\\
+            0 & \dots & 0 & 1 & a_{n-1}
+        \end{pmatrix}
+    \end{equation*}
+    Avec $a_0,...,a_{n-1}\in\K$.
+\end{defi}
+
+\vspace*{-0.7cm}
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Calculer $\X_C$ pour $C$ matrice compagnon.
+        \item En déduire que tout polynome unitaire degré $n$ est le polynôme caractéristique d'une matrice de $M_n(\K)$.
+        \item Déterminer $\Pi_C$ pour $C$ matrice compagnon.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $C$ une matrice compagnon.\\
+    $L_1 \gets L_1 + \l L_2 + ... + \l^{n-1}L_n$.
+    \begin{align*}
+        \forall \l \in \K, ~ \X_C(\l) =(-1)^{1+n}\a\D_{1,n} = (-1)^{n+1}\a(-1)^{n-1} = \a
+    \end{align*}
+    Avec $\a=\l^n-(a_0+a_1\l+....+a_{n-1}\l^{n-1})$.\\
+    Donc $\X_C(\l)=\l^n-(a_0+a_1\l + ... + a_{n-1}\l^{n-1})$ donc $\X_C=X^n - (a_0 + a_1X + ... +a_{n-1}X^{n-1})$.\\
+    \boxed{2.} Soit $P\in\K[X]$ unitaire de degré $n$. Alors d'après le 1 :
+    \begin{equation*}
+        P=\X_A ~\nt{où}~ A = \begin{pmatrix}0 & \dots & \dots & 0 & -a_0\\ 1 & \ddots & & \vdots & -a_1 \\ 0 & \ddots & \ddots &  & \vdots \\ \vdots & \ddots & \ddots & \vdots & \vdots \\ 0 & \dots & 0 & 1 & -a_{n+1}\end{pmatrix}
+    \end{equation*}
+    \boxed{3.} Notons $u$ l'endomorphisme canoniquement associé à $C$, $\B_C=(e_1,...,e_n)$ base canonique de $\K^n$.\\
+    Alors $C=\Mat_{BC}(u)$ i.e. $u(e_1) = e_2$, $u(e_2) = e_3$, ..., $u(e_n)=a_0e_1 + ... + a_{n-1}u(e_{n-1})$.\\
+    On en déduit par récurrence que $\forall k \in \lb1,n\rb, ~ e_k = u^{k-1}(e_1)$. Donc $\B_C=(e_1,u(e_1),u^2(e_1),...,e^{n-1}(e_1))$.\\
+    $\bullet$ Vérifions déjà que $(\Id_E,u,...,u^{n-1})$ est une famille libre de $\L(E)$.\\
+    Soient $\a_0,...,\a_{n-1}\in\K^n, ~ \a_0\Id_E + \a_1u_1 + ... + \a_{n-1}u^{n-1} = 0_{\L(E)}$.\\
+    On évalue en $e_1$ : $\a_0e_1 + \a_1u(e_1) + ... + \a_{n-1}u^{n-1}(e_1)=0_E$ or $\B_C$ est libre donc $\a_0=...=\a_{n-1}=0_\K$.\\
+    Il n'y a aucune liaison non triviale entre les itérés de $u$ jusqu'au rang $n-1$ donc $\deg(\Pi_u)\geq n$.\\
+    $\bullet$ Vérifions que $\Pi_u=\X_u=X^n-(a_0 + a_1 X + ... + a_{n-1}X^{n-1})$, i.e. $u^n=a_0\Id_E+...+a_{n-1}u^{n-1}:=Q(u)$.\\
+    On sait déjà que c'est vrai pour $e_1$, puis $\forall k \in \lb1,n-1\rb, ~ u^n\circ u^k = Q(u)\circ u^k$ puis $u^n(u^k(e_1))=Q(u)(u^k(e_1))$.\\
+    Donc l'égalité est vraie pour tous les vecteurs de la base, puis $\Pi_C = \Pi_u = \X_u = \X_c$.
+\end{exercice}
+
+\begin{prop}{$\star$}{}
+    Soit $E$ un $\K$-evdf de dimension $n$, $u \in \L(E)$ et $F$ un sous-espace vectoriel de $E$ stable par $u$ de dimension $p$.\\
+    Notons $u_F$ l'endomorphisme induit : $u_F : F\to F, ~ x\mapsto u(x)$.
+    \begin{enumerate}
+        \item $\Pi_{u_F} \mid \Pi_u$.
+        \item $\X_{u_F} \mid \X_u$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Déjà fait (\ref{prop:div}).\\
+    \boxed{2.} Soit $\B_F=(e_1,...,e_p)$ base de $F$, donc famille libre de $E$, on la complète en $\B=(e_1,...,e_n)$ base de $E$.
+    \begin{equation*}
+        \Mat_\B(u) = \begin{pmatrix} A & \Big| & C \\ \hline (0) & \Big| & D \end{pmatrix} \ra \forall \l \in \K, ~ \Mat_\B(\l\Id_E-u) = \begin{pmatrix} \l I_p - A & \Big| & -C \\ \hline (0) & \Big| & \l I_{n-p} - D \end{pmatrix}
+    \end{equation*}
+    Où $A=\Mat_{\B_F}(u_F)\in \M_p(\K)$, $C\in \M_{p,n-p}(\K)$ et $D\in \M_{n-p}(\K)$. Puis :
+    \begin{equation*}
+        \X_u(\l) = \det\begin{pmatrix}\l I_p - A & \Big| & -C \\ \hline (0) & \Big| & \l I_{n-p} - D \end{pmatrix} = \det(\l I_p - A)\det(\l I_{n-p}-D).
+    \end{equation*}
+    i.e. $\X_u(\l) = \X_{u_F}(\l)\det(\l I_{n-p}-D)$, on a bien $\X_F \mid \X_u$.
+\end{prop}
+
+\begin{prop}{$\star$}{}
+    Soit $E$ un $\K$-evdf de dimension $n$ et $u\in\L(E)$.\\
+    Soit $\l$ valeur propre de $u$ de multiplicité $n_\l \in \N^*$, alors $1 \leq \dim(E_\l) \leq n_{\l}$.
+    \tcblower
+    On a $E_\l = \Ker(u - \l\Id_E)$ est un sous-espace vectoriel de $E$ stable par $u$, et $\dim E_\l \geq 1$ car $E_\l\neq(0)$.\\
+    Puis $\X_u = (X-\l)^{n_\l}Q$ avec $Q(\l)\neq0$. Notons $u_\l=u_{|E\l}$ l'endomorphisme induit.\\
+    On sait que $u_\l$ est une homothétie de rapport $\l$ : $\forall x \in E_\l, ~ u_{\l}(x) = \l(x)$.\\
+    Donc $\X_{u_\l} = (X-\l)^{\dim E_\l}$, puis $\X_{u_\l} \mid \X_u$ d'après le théorème précédent, donc $\dim(E_\l) \leq n_\l$.
+\end{prop}
+
+\pagebreak
+
+\begin{thm}{Cayley-Hamilton. $\star$}{}
+    \begin{enumerate}
+        \item Soit $A\in M_n(\K)$, alors $\X_A(A)=0_{\M_n(\K)}$.
+        \item Soit $E$ un $\K$-evdf et $u\in\L(E)$, alors $\X_u(u)=0_{\L(E)}$ et $\Pi_u(u)=0_{\L(E)}$.
+    \end{enumerate}
+    \vspace*{0.25cm}
+    \begin{center}
+        \fbox{Le polynôme caractéristique est un polynôme annulateur. Il est divisé par le polynôme minimal.}
+    \end{center}
+    \tcblower
+    (Non-exigible).\\
+    On a $(1) \iff (2)$ et $\X_u(u) = 0_{\L(E)} \iff \Pi_u \mid \X_u$.\\
+    Montrons que $\X_u(u) = 0_{\L(E)}$. Soit $x\in E$.\\
+    $\hookrightarrow$ Vérifions que $F=\Vect(u^k(x), ~ k\in\N)$ est stable par $u$.\\
+    Soit $y \in F,~\exists N \in \N, ~ \exists (a_0, ..., a_N) \in \K^{N+1}, ~ y = a_0x + ... a_Nu_n(x)$ puis $u(y)=a_0u(x)+...+a_Nu^{N+1}(x)\in F$.\\
+    $\hookrightarrow$ Cherchons une base de $F$, soit $p$ le plus petit entier tel que $(x, u(x), ..., u^p(x))$ soit liée, existe car dim. finie.\\
+    Par définition de $p$, $\B=(x,u(x),...,u^{p-1}(x))$ est libre de $F$, vérifions qu'elle est génératrice.\\
+    Déjà, $u^p(x)\in\Vect(x,u(x),...,u^{p-1}(x))$ puis par récurrence, $\forall k \geq p, ~ u^k(x) \in \Vect(x,u(x),...,u^{p-1}(x))$.\\
+    Finalement, $\forall k \in \N, ~ u^k(x) \in \Vect(x, u(x), ..., u^{p-1}(x))$ donc $F\subset\Vect(\B)$. Donc $\B$ base de $F$, donc $\dim F = p$.\\
+    $\hookrightarrow$ Soit $x\in F$ donc $\forall k \in \lb0,p\rb, ~ u^k(x)=u^k_F(x)$ donc $\B=(x,u_F(x),...,u_F^{p-1}(x))$.\\
+    Par définition, $u_F$ est un endomorphisme cyclique, on a vu que $\X_{u_F}=\Pi_{u_F}$ donc $\X_{u_F}(u_F)=0_{\L(F)}$.\\
+    D'autre part, $\X_{u_F} \mid \X_u$ donc $\exists Q \in \K[X], ~ \X_u = X_{u_F}Q$, puis $\X_u(u)=Q(u)\circ \X_{u_F}(u)$.\\
+    Puis, $\X_u(u)(x)=_{(*)}Q(u)\left( \X_{u_F}(u)(x) \right)=Q(u) \circ \left(X_{u_F}(u_F)(x)\right) = Q(u)(0_E) = 0_E$.\\
+    (*) Rappel : (\ref{prop:puf}).
+\end{thm}
+
+\begin{corr}{$\star$}{}
+    Soit $A\in M_n(\K)$. On suppose $\X_A$ scindé : $\X_A = (X-\l_1)^{\a_1}...(X-\l_p)^{\a_p}$ avec $\a_1+...+\a_p=n, ~ \a_i\geq1$.\\
+    Alors $\Pi_A = (X-\l_1)^{\g_1}...(X-\l_p)^{\g_p}$ avec $\forall i \in \lb1,p\rb, ~ 1\leq \g_i \leq \a_i$.
+    \tcblower
+    Par théorème de Cayley-Hamilton, $\forall i \in \lb1,p\rb, ~ \g_i \leq \a_i$.\\
+    Et puisque les valeurs propres de $A$ sont racines de $\Pi_A$ : $\forall i \in \lb1,p\rb, ~ \g_i \geq 1$.
+\end{corr}
+
+\begin{ex}{}{}
+    Pour $A\in M_n(\K)$ telle que $\X_A=(X-1)^2(X-2)$, on a $\Pi_A=(X-1)(X-2)$ ou bien $\Pi_A=(X-1)^2(X-2)$.\\
+    Il suffit, pour déterminer $\Pi_A$ de calculer $(A-I_3)(A-2I_3)$, plus simple que d'étudier les liaisons entre $I_3,A,...$.
+\end{ex}
+
+\begin{defi}{Sous-espaces caractéristiques.}{}
+    Soit $A\in M_n(\K)$, on suppose $\X_A$ scindé : $\X_A = (X-\l_1)^{\a_1}...(X-\l_p)^{\a_p}$ avec $\a_1+...+\a_p = n$ et $\a_i\geq1$.\\
+    On pose $\forall i \in \lb1,p\rb, ~ F_i = \Ker(A - \l_i I_n)^n$, espace caractéristique associé à la valeur propre $\l_i$.
+\end{defi}
+
+\pagebreak
+
+\begin{prop}{$\star$}{}
+    Soit $E$ un $\K$-evdf de dimension $n$ et $u\in\L(E)$ tel que $\X_u$ est scindé.\\
+    On note $\X_u=(X-\l_1)^{\a_1}...(X-\l_p)^{\a_p}$ avec $\a_1+...+\a_p=n$ et $\a_i \geq 1$.\\
+    On note $E_i=\Ker(u - \l_i\Id_E)$ sous-espaces propres et $F_i=\Ker(u-\l_i\Id_E)^n$ sous-espace caractéristiques associés.\\
+    On a $\forall i \in \lb1,p\rb, ~ E_i,F_i$ sont stables par $u$ et $E_i \subset F_i$ et $\dim F_i = \a_i$.
+    \tcblower
+    Déjà, $E_i$ et $F_i$ sont stables par $u$ car $(u-\l_i\Id_E)^k$ commute avec $u$ pour tout $k\in\N$.\\
+    Puis, $E_i \subset F_i$ (noyaux emboités) : $\forall f \in \L(E), \forall k \in \N, ~ \Ker f^k \subset \Ker f^{k+1}$.\\
+    Il reste à montrer que $\forall i \in \lb1,p\rb, ~ \dim F_i = \a_i$. $F_i$ est stable par $u$, on note $u_i$ l'endomorphisme induit.\\
+    Alors $(u-\l_i \Id_E)^{\a_i}=P_i(u)\in\K[u]$ en posant $P_i=(X-\l_i)^{\a_i}$.\\
+    Donc $\forall x \in F_i, ~ P_i(u_i)(x)=0_{F_i}, ~ P_i$ est aussi annulateur de $u_i$ : $\Sp(u_i)\subset\{$ racines de $P_i\}=\{\l_i\}$.\\
+    Donc $\X_{u_i}=(X-\l_i)^{\dim F_i}$ ($\deg \X_{u_i}=\dim F_i$). Or $\X_{u_i}\mid \X_u$ donc $\forall i \in \lb1,p\rb, ~ \dim F_i \leq \a_i$.\\
+    D'autre part, $\X_u$ est un polynôme annulateur de $u$ (Cayley-Hamilton).\\
+    D'après décomposition des noyaux, $E=\Ker(\X_u(u))=\Ker(u-\l_1\Id)^{\a_1}\oplus...\oplus\Ker(u-\l_p\Id)^{\a_p}=F_1\oplus...\oplus F_p$.\\
+    On passe aux dimensions : $\dim E = \sum_{i=1}^p\dim F_i$, d'autre part, $\dim E = \deg \X_u = \sum \a_i$\\
+    Donc $\sum_{i=1}^p(\a_i-\dim F_i) = 0 \ra \forall i \in \lb1,p\rb,~ \dim F_i = \a_i$ car somme de positifs.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $A\in M_n(\R)$. On peut considérer que $A\in M_n(\C)$.\\
+    $\bullet$ $\forall \l \in \K, ~ \X_A(\l)=\det(\l I_n - A)$.\\
+    $\X_A$ est le même si $A\in M_n(\R)$ ou $A\in M_n(\C)$. $\X_A\in\R[X]$ mais si $\K=\C$, on examinera les racines dans $\C$.\\
+    $\bullet$ Notons $\Pi_A^\R$ le polynôme minimal de $A\in M_n(\R)$.\\
+    Pour $A\in M_n(\C), ~ \Pi_A^\R$ est un polynôme annulateur de $A$, alors $\Pi_A^\C\mid\Pi_A^\R$ (à priori); en fait $\Pi_A^\C=\Pi_A^\R$.
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $K$ un compact de $\M_{n,1}(\C)$.\\
+    On note $\s(K)=\{\l $ vp des matrices de $K$ $\}$.
+    \begin{enumerate}
+        \item Montrer que $\s(K)$ est un compact.
+        \item Que dire si $K$ est fermé ?
+    \end{enumerate}
+    \tcblower
+    \fbox{Borné.} On a $\exists M \geq , ~ \forall A \in K, ~ \abs A \abs \leq M$.
+    Soit $\l\in\s(K)$ et $A\in K$ tel que $\l\in\Sp(A)$.\\
+    Alors $\exists X \neq 0$ telle que $AX=\l X$. Donc $\abs A\abs \|X\| \geq \| AX \| = |\l|\|X\|$.\\
+    Donc $|\l| \leq \abs A \abs \leq M$.\\
+    \fbox{Fermé.} Soit $(u_n)\in\s(K)^\N$ telle que $u_n\to \l$.\\
+    Alors $\forall n \in \N, ~ \exists A_n \in K^\N, ~ \exists X_n\neq 0, ~ A_nX_n = u_nX_n$.\\
+    On suppose SPDG que $X_n$ est unitaire. Alors $\exists \phi$ strict. croissante tq $A_{\phi(n)}\to A\in K$ : $A_{\phi(n)}X_{\phi(n)}=u_{\phi(n)}X_{\phi(n)}$.\\
+    Puis $\exists \psi$ strict. croissante telle que $X_{\phi\circ\psi(n)}\to X\in S(0,1)$ compact car dim.finie.\\
+    Alors $A_{\phi\circ\psi(n)}X_{\phi\circ\psi(n)}=u_{\phi\circ\psi(n)}X_{\phi\circ\psi(n)}$ puis $AX=\l X$ avec $\l\in\s(K)$ et $\s(K)$ compact.\\
+    \boxed{2.} $K=\{M \in \M_n(\C), ~ \det(M)=1\}=\det^{-1}\{1\}$ avec $\det$ continue. Montrons $\s(K)=\C^*$.\\
+    \boxed{\supset} Soit $\l\in\C^*$, on pose $M=\Diag(\l,1/\l,1,...,1)$, alors $\det(M)=1, M\in K$ et $\l\in\Sp(M)$ donc $\l\in\s(K)$.\\
+    \boxed{\subset} $0$ n'est pas vp de $M\in K$ car $M\in\GL_n(\C)$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $E$ un $\R$-evdf de dimension $n$.\\
+    Soit $f\in\L(E), ~ \Sp(f)=\{\l_1,...,\l_n\}$ tous distincts.
+    \begin{enumerate}
+        \item On pose $\phi:P\mapsto (P(\l_1),...,P(\l_n))$. Montrer que c'est un isomorphisme de $\R_{n-1}[X]$ vers $\R^n$.
+        \item Soit $g\in\L(E)$ tel que $fg=gf$.
+        \begin{enumerate}
+            \item Montrer que les ssep de $f$ sont stables par $g$ et que tout vecteur propre de $f$ est vecteur propre de $f$ est vecteur propre de $g$.
+            \item Montrer qu'il existe une base de vecteurs propres communs à $f$ et $g$.
+            \item Montrer qu'il existe un unique polynôme $P\in\R_{n,1}[X], ~ g=P(f)$.
+        \end{enumerate}
+        \item Montrer que le commutant de $f$ est ssev de $\L(E)$ et en déterminer la dimension.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $\phi$ est déjà bien linéaire : $\phi\in\L(\R_{n-1}[X],\R^n)$.\\
+    Soit $P\in\Ker\phi$, alors $\forall i \in \lb1,n\rb, ~ P(\l_i)=0$, $P$ admet $n$ racines et est de degré $<n$.\\
+    Ainsi, $P=0_{\R[X]}$, donc $\phi$ est injective, c'est un isomorphisme.\\
+    \boxed{2.a)} Notons $\forall i \in \lb1,n\rb, ~ E_{\l_i}=\Ker(f-\l_i\Id_E)$, $E_{\l_i}$ est stable par $g$.\\
+    On a $\forall i \in \lb1,n\rb, ~ \dim E_{\l_i}=1$; $\exists x_i \in E_{\l_i}, ~ E_{\l_i}=\Vect(x_i)$.\\
+    Alors $g(x_i)\in E_{\l_i}=\Vect(x_i)$ i.e. $\exists \mu_i \in \R, ~ g(x_i)=\mu_ix_i$.\\
+    \boxed{2.b)} $'(x_1,...,x_n)$ est une base de $\vp$ associés à des vp distincts de $f$ car $f$ dz.\\
+    Ce sont aussi des $\vp$ d'après $2.a)$\\
+    \boxed{2.c)} Notons $A=\Mat_\B(f)$, $B=\Mat_\B(g)$ avec $\B=(x_1,...,x_n)$.
+    \begin{equation*}
+        A= \begin{pmatrix}\l_1 & & (0) \\ & \ddots & \\ (0) & & \l_n\end{pmatrix}; \qquad B = \begin{pmatrix}\mu_1 & & (0) \\ & \ddots & \\ (0) &  & \mu_n\end{pmatrix}.
+    \end{equation*}
+    D'après $1.$, $\exists!P\in\R_{n-1}[X], ~ \phi(P)=(\mu_1,...,\mu_p)$.
+    \begin{equation*}
+        B = \begin{pmatrix}P(\l_1) & & \\ & \ddots & \\ & & P(\l_n) \end{pmatrix} = P(A).
+    \end{equation*}
+    Donc $g=P(f)$.\\
+    \boxed{3.} Notons $C(f)$ le commutant de $f$. Soit $g\in C(f)$.\\
+    D'après $2.c)$, $\exists ! P\in\R_{n-1}[X], ~ g=P(f)$.
+\end{exercice}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    Soient $A_1,...,A_n$ $n$ matrices nilpotentes de $\M_n(\C)$ commutant deux-à-deux. Calculer $\prod_{i=1}^n A_i$.
+    \tcblower
+    Par récurrence, montrons que $\prod_{i=1}^nA_i = 0$.\\
+    \bf{Initialisation.} La seule matrice nilpotente de $\M_1(\C)$ est la matrice nulle.\\
+    \bf{Hérédité.} Soit $n\in\N$, $A_1,...,A_n$ nilpotentes de $\M_n(\C)$ commutant deux-à-deux. On suppose $\P_k$ pour $k<n$.
+    On note $u_1,...,u_n$ les endomorphismes canoniquement associés à $A_1,...,A_n$.\\
+    Soit $\B_1=(e_1,...,e_p)$ une base du noyau de $u_1$, qu'on complète en $\B=(e_1,...,e_n)$ base de $\K^n$. Alors :
+    \begin{equation*}
+        \Mat_\B(u_1)=\begin{pmatrix}(0) & \Big| & (*) \\ \hline (0) & \Big| & (*)\end{pmatrix}
+    \end{equation*}
+    Le noyau de $u_1$ est stable par tous les $u_i$ car ils commutent deux-à-deux. Ainsi, pour $i\in\lb1,p\rb$ :
+    \begin{equation*}
+        \Mat_\B(u_i) = \begin{pmatrix}(*) & \Big| & (*) \\ \hline (0) & \Big| & M_i\end{pmatrix}.
+    \end{equation*}
+    Or les matrices $M_i$ sont encore nilpotentes car $\Mat_\B(u_i)^n = (PA_iP^{-1})^n = PA_i^nP^{-1} = 0_n$.\\
+    Elles commutent aussi deux-à-deux, et sont de taille strictement inférieure à $n$ car $\Ker u_1 \neq (0)$.\\
+    Donc par hypothèse de récurrence, $\prod_{i=2}^n M_i=0$,  puis :
+    \begin{equation*}
+        \Mat_\B(u_2\circ...\circ u_n) = \begin{pmatrix}(*) & \Big| & (*) \\ \hline (0) & \Big| & (0)\end{pmatrix}
+    \end{equation*}
+    Puis :
+    \begin{equation*}
+        \Mat_\B(u_1\circ ... \circ u_n) = \Mat_{\B}(u_1)\Mat_\B(u_2\circ...\circ u_n) = \begin{pmatrix}(0) & \Big| & (*) \\ \hline (0) & \Big| & (*)\end{pmatrix}\begin{pmatrix}(*) & \Big| & (*) \\ \hline (0) & \Big| & (0)\end{pmatrix}=0_n
+    \end{equation*}
+\end{exercice}    
+
+\pagebreak
+
+\begin{exercice}{}{}
+    Soient $A,B,C\in\M_n(\K)$ telles que $AC=CB$. On note $r=\rg(C)$.\\
+    Montrer que $\deg(\X_A\land\X_B)\geq r$.
+    \tcblower
+    On a $\exists Q,P \in \GL_n(\K), ~ C=PJ_RQ$, donc $APJ_rQ=PJ_rQB$.\\
+    Alors $(P^{-1}AP)J_r = J_r(QBQ^{-1})$, on note $A'=P^{-1}AP$ et $B'=QBQ^{-1}$.
+    \begin{equation*}
+        J_r = \begin{pmatrix}I_r & \Big| & 0_{r,n-r} \\ \hline 0_{n-r,r} & \Big| & 0_{n-r,n-r}\end{pmatrix}; \quad A' = \begin{pmatrix}A'_1 & \Big| & A'_2 \\ \hline A'_3 & \Big| & A'_4\end{pmatrix}; \quad B'=\begin{pmatrix} B'_1 & \Big| & B'_2 \\ \hline B'_3 & \Big| & B'_4\end{pmatrix}.
+    \end{equation*}
+    Alors :
+    \begin{equation*}
+        A'J_r = \begin{pmatrix}A'_1 & \Big| & (0) \\ \hline A'_3 & \Big| & (0)\end{pmatrix}; \quad J_rB' = \begin{pmatrix}B'_1 & \Big| & B'_3 \\ \hline (0) & \Big| & (0)\end{pmatrix}.
+    \end{equation*}
+    Alors $A'_1 = B'_1$, $A'_3 = B'_3=0$.
+    \begin{equation*}
+        A' = \begin{pmatrix}A'_1 & \Big| & A'_2 \\ \hline (0) & \Big| & A'_4 \end{pmatrix}; \quad B' = \begin{pmatrix}B'_1 & \Big| & B'_2 \\ \hline B'_3 & \Big| & B'_4\end{pmatrix}.
+    \end{equation*}
+    Donc $\X_{B'}(\l) = \det(\l I_n - A') = \begin{pmatrix}\l I_n - A_1' & \Big| & -A'_2 \\ \hline (0) & \Big| & \l I_n - A'_4\end{pmatrix}=\X_{A_1}(\l)\X_{A'_4}(\l)$.\\
+    Et $\X_{B'}(\l)=\X_{B'_1}(\l)\X_{B'_4}(\l)$.\\
+    Alors $\X_{A'_1}=\X_{B'_1}$ puis $\X_{A_n'} \mid \X_A$ et $\X_{A'_1} \mid \X_B$.\\
+    Donc $\deg \X_{A_1'}=r$ et $\X_{A'_1} \mid (\X_A \land \X_B)$ donc $\deg(\X_A \land \X_B)\geq r$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $A\in\M_n(\R)$. On a $\X_A(\l)=\l^n-\Tr(A)\l^{n-1}+...+a_1\l + (-1)^n\det(A)$. Montrer que $a_1=(-1)^{n-1}\Tr(\Com A)$.
+    \tcblower
+    On a :
+    \begin{equation*}
+        \X_A(\l) = \det(\l E_1 - C_1, \l E_2 - C_2,...,\l E_n - C_n)
+    \end{equation*}
+    Donc $a_1=\det(E_1, - C_2, ..., - C_n) + \det(-C_1, E_2, -C_3, ..., -C_n) + ... + \det(-C_1,...,C_{n-1},E_n)$.\\
+    Donc $a_1=(-1)^{n-1}\left(\det(E_1,C_2,...,C_n)+\det(C_1,E_2,...,C_n)+...+\det(C_1,...,C_{n-1},E_n)\right)$.\\
+    Donc $a_1=(-1)^{n-1}\left(\D_{1,1}+\D_{2,2}+...+\D_{n,n}\right)=(-1)^{n-1}\Tr(\Com A)$.
+\end{exercice}
+
+\end{document}
