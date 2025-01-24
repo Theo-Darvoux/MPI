@@ -11,7 +11,11 @@
 
 \thispagestyle{fancy}
 
+\vspace*{-0.8cm}
+
 \section{Suites de fonctions.}
+
+\vspace*{-0.4cm}
 
 \subsection{Modes de convergence.}
 
@@ -21,11 +25,15 @@
     Alors $f$ est appelée limite simple de la suite $(f_n)_n$.
 \end{defi}
 
+\vspace*{-0.8cm}
+
 \begin{defi}{Convergence uniforme. $\star$}{}
     Pour tout $n\in\N$, soit $f_n:A\subset E \to F$ et $f:A\subset E \to F$.\\
     On dit que $(f_n)_n$ converge uniformément vers $f$ sur $A$ ssi $(f_n-f)$ bornée sur $A$ et $\lim\limits_{n\to+\infty} \|f_n - f\|_\infty = 0$.\\[-0.14cm]
     Alors $f$ est appelée limite uniforme de la suite $(f_n)_n$.
 \end{defi}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{$\CU \ra \CS$. $\star$}{}
     La convergence uniforme sur $A$ implique la convergence simple sur $A$.
@@ -34,6 +42,8 @@
     $\hookrightarrow$ $\forall \e > 0, ~ \exists N \in \N, ~ \forall x \in A, ~ \forall n \geq N, ~ \|f(x) - f_n(x)\| \leq \e$ ($\CU$).\\
     $\hookrightarrow$ $\forall x \in A, ~ \forall \e > 0, ~ \exists N \in \N, ~ \forall n \geq N, ~ \|f(x) - f_n(x)\|\leq \e$ $(\CS)$.
 \end{prop}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     Soit $f_n:A\subset E \to F$, et $f:A\subset E \to F$.
@@ -50,6 +60,8 @@
     Or il n'y a pas convergence uniforme car $\|f_n-f\|=\sup_{[-1,1]}|f_n(x)-f(x)|=1\not\to0$.
 \end{ex}
 
+\vspace*{-0.2cm}
+
 \begin{prop}{}{}
     Soit $f_n:A\subset E \to F$, et $f:A\subset E \to F$.
     \begin{center}
@@ -59,6 +71,8 @@
     \boxed{\la} Par contraposée, supposons que $f_n\cu f$ sur $A$ : $\|f_n-f\|_\infty\to0$.\\
     Soit $(x_n)\in A^\N$, on a $\|f_n(x_n)-f(x_n)\|_F\leq\|f_n-f\|_\infty\to0$, par encadrement, $f_n(x)-f(x)\to0$.
 \end{prop}
+
+\vspace*{-0.2cm}
 
 \begin{ex}{}{}
     Soit $f_n$ telle que $f_n(x)=\left( 1-\frac{x^2}{n} \right)^n$ pour $|x|\leq\sqrt{n}$, et $f_n(x)=0$ sinon.\\
@@ -70,7 +84,7 @@
     On vient de montrer que $f_n\to f$ sur $\R$. 
 \end{ex}
 
-\vspace*{-0.5cm}
+\vspace*{-0.2cm}
 
 \begin{ex}{}{}
     $\forall n \in \N, ~ \forall x \in \R, ~ f_n(x)=\frac{x}{n}$.\\
@@ -79,7 +93,7 @@
     Mais convergence uniforme sur $[-a,a]$ pour $a>0$ : $\|f_n-f\|\leq\frac{a}{n}\to0$.
 \end{ex}
 
-\vspace*{-0.5cm}
+\vspace*{-0.2cm}
 
 \begin{ex}{}{}
     Soit $f_n(x)=e^{-nx}\sin(nx)$ pour $n\in\N$ et $x\in\R_+$.\\
@@ -88,7 +102,7 @@
     Soit $a>0$, sur $[a,+\infty]$ ? $f_n(x)-f(x)=e^{-nx}\sin(nx)\leq e^{-na}$, donc $\|f_n-f\|_\infty\leq e^{-na} \to 0$
 \end{ex}
 
-\vspace*{-0.8cm}
+\pagebreak
 
 \subsection{Propriétés conservées par passage à la limite.}
 
@@ -111,7 +125,7 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
     C'est la définition de $f$ continue en $a$.
 \end{thm}
 
-\vspace*{-0.5cm}
+\vspace*{-0.8cm}
 
 \begin{corr}{}{}
     Soit $\forall n \in \N, ~ f_n:I\subset\R\to\K$ et $f:I\subset\R\to\K$.\\
@@ -121,7 +135,7 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
     Si $a\in\nt{Fr}(I)$, alors $\exists b \in I, ~ a < b$, on applique le théorème sur $[a,b]$.
 \end{corr}
 
-\vspace*{-0.5cm}
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Pour $x\in[0,1]$ et $n\in\N$, on pose $f_n(x)=x^n$.\\
@@ -129,14 +143,14 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
     On a $\forall n \in \N, ~ f_n$ est continue sur $[0,1]$ et $f$ n'est pas continue sur $[0,1]$ donc il n'y a pas CU sur $[0,1]$. 
 \end{ex}
 
-\vspace*{-0.5cm}
+\vspace*{-0.8cm}
 
 \begin{thm}{Double limite. (Admis)}{}
     Soit $f_n:A\subset E \to F$ avec $E,F$ evn, $a \in \ov{A}$ et $f:A\subset E \to F$.\\
     Si $f_n\cu f$ sur $A$ et $\ds \forall n \in \N, ~ \lim_{x\to a}f_n(x)=\l_n\in F$, alors $\l_n$ converge vers $\l$ et $\ds \lim_{x\to a}f(x)=\l$.
 \end{thm}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{thm}{$\star$}{}
     Soit $f_n:[a,b]\subset\R\to\K$ et $f:[a,b]\to\K$ cpm telles que $f_n\cu f$ sur $[a,b]$, alors $\ds\int_a^b f_n(x)\dx\to\int_a^bf(x)\dx$.
@@ -195,7 +209,7 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
     $\hookrightarrow$ Stable par produit et combinaisons linéaires.
 \end{prop}
 
-\vspace*{-0.4cm}
+\pagebreak
 
 \begin{thm}{Approximation de Weierstraß. $\star$}{}
     Soit $f$ continue par morceaux sur $[a,b]$. Elle est limite uniforme d'une suite de fonctions en escalier.
@@ -225,14 +239,12 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
             f(x_k) & \nt{si} ~ x = x_k ~ \nt{pour} ~ k \in \lb0,n-1\rb
         \end{cases}
     \end{equation*}
-    Cette fonction répond au problème.
 \end{thm}
 
+\vspace*{-0.8cm}
+
 \begin{app}{Lemme de Riemann-Lebesgue.}{}
-    Soit $f:[a,b]\to\K$ continue par morceaux. Montrer que :
-    \begin{equation*}
-        \lim_{\l\to+\infty}\int_a^bf(t)e^{i\l t}\dt = 0.
-    \end{equation*} 
+    Soit $f:[a,b]\to\K$ continue par morceaux. Montrer que $\lim_{\l\to+\infty}\int_a^bf(t)e^{i\l t}\dt = 0$.
     \tcblower
     \bf{Cas des fonctions en escalier}.\\
     Soit $\phi\in\E([a,b],\K).$ Il existe $\s = \{x_0,...,x_n\}$ subdivision de $[a,b]$ telle que $\forall i, \forall x \in ]x_i,x_{i+1}[, ~ \exists \a_i \in \R, ~ \phi(x)=\a_i$.
@@ -337,6 +349,8 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
     En notant $R_n=S - S_n$, on a $\|R_n\|_\infty^I \xrightarrow[n\to+\infty]{}0$ i.e. $R_n\cu 0$ sur $I$.
 \end{defi}
 
+\vspace*{-0.8cm}
+
 \begin{defi}{Convergence simple, uniforme.}{}
     Soit $u_n:I\subset\R\to\K$.
     \begin{enumerate}
@@ -346,6 +360,8 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
         \item $\sum u_n$ converge uniformément sur $I$ ssi $R_n\cu0$ sur $I$.
     \end{enumerate}
 \end{defi}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     \begin{enumerate}
@@ -359,6 +375,8 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
     D'après le CSSA, $|R_n(x)|\leq\frac{1}{n+1+x}\leq\frac{1}{n+1}$ puis $\|R_n\|_\infty^{\R_+^*}\leq\frac{1}{n+1}\xrightarrow[n\to+\infty]{}0$. Donc $R_n\cu0$ sur $\R_+^*$.\\
     Ainsi, $\sum u_n$ converge uniformément sur $]0,+\infty[$. 
 \end{ex}
+
+\vspace*{-0.8cm}
 
 \begin{defi}{Convergence absolue, convergence normale.}{}
     Soit $u_n:I\subset\R\to\K$ pour tout $n\in\N$.
@@ -386,6 +404,9 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
     Finalement, $\forall n \in \N, ~ \forall x \in I, ~ |R_n(x)|\leq\tilde{R_n}$ puis $\|R_n\|_\infty^I\leq\tilde{R_n}\xrightarrow[n\to+\infty]{}0$.\\
     Ainsi, $R_n\cu0$ sur $I$ donc $\sum u_n$ converge uniformément sur $I$.
 \end{prop}
+
+\vspace*{-0.8cm}
+
 
 \begin{ex}{}{}
     Soit $u_n=\frac{1}{n^x}$ pour $n\geq1, ~ x\in\R$. $\sum u_n$ converge simplement ? uniformément ? sur quoi ?
@@ -428,7 +449,7 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
     Par encadrement, $\|u_n\|_\infty^I\to0$ i.e. $u_n\cu0$ sur $I$.
 \end{prop}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \subsection{Continuité, dérivation des séries de fonctions.}
 
@@ -440,7 +461,7 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
     Alors $S$ est continue sur $I$ par théorème.
 \end{thm}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Soit $S(x)=\sum_{n=1}^\infty\frac{1}{n^2+x^2}$ avec $x$ à déterminer.\\
@@ -479,8 +500,6 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
     On pose $u_n(x)=\frac{1}{n^2+x^2}$. $\forall n \in \N, ~ \lim_{x\to+\infty}u_n(x)=0:=\l_n$.\\
     De plus, $\sum u_n$ $\CN$ donc $\CU$ sur $\R$, et $+\infty\in\ov{\R}$, donc $S$ admet $\sum\l_n=0$ en l'infini. 
 \end{ex}
-
-\pagebreak
 
 \begin{ex}{}{}
     Soit $F(x)=\sum_{n=0}^{\infty}e^{-x\sqrt{n}}$.
@@ -551,8 +570,6 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
     Alors $S$ est $\m{C}^p$ sur $I$ et $\forall x \in I, ~ S^{(p)}(x)=\sum u_n^{(p)}(x)$.
 \end{prop}
 
-\pagebreak
-
 \begin{ex}{Zeta de Riemann.}{}
     $\zeta(x)$ converge ssi $x>1$ donc son domaine de définition est égal à $]1,+\infty[$.\\
     Pour $1 < x \leq y$, ~ $\forall n \geq 1, ~ \frac{1}{n^x}\geq \frac{1}{n^y}$ donc $S(x)\geq S(y)$ : elle est décroissante.\\
@@ -590,10 +607,8 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
     Donc d'après le CSSA, $|R_n(x)|\leq \a_{n+1} \leq \frac{\ln^p(n+1)}{(n+1)^a}$ puis $\|R_n\|_{\infty}^{[a,\infty[}\leq\frac{\ln^p(n+1)}{(n+1)^a}\to 0$ puis $R_n\cu0$.\\
     Théorème de la double limite : $\lim f(x)=1$. Soit $x>0$, montrons $2f(x)-1=...$.
     \begin{align*}
-        \sum_{n=1}^{+\infty}(-1)^{n+1}\left( \frac{1}{n^x} - \frac{1}{(n+1)^a} \right) &= \sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^x} - \sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^{x+1}}.\\
-        &=\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n^x} - \sum_{n=2}^{\infty}\frac{(-1)^n}{n^x}\\
-        &= \sum_{n=1}^\infty\frac{(-1)^{n+1}}{n^x} + \sum_{n=2}^{\infty}\frac{(-1)^{n+1}}{n^x}\\
-        &= 2\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^x} - 1 = 2f(x)-1.
+        \sum_{n=1}^{+\infty}(-1)^{n+1}\left( \frac{1}{n^x} - \frac{1}{(n+1)^a} \right) &= \sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^x} - \sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^{x+1}} =\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n^x} - \sum_{n=2}^{\infty}\frac{(-1)^n}{n^x}\\
+        &= \sum_{n=1}^\infty\frac{(-1)^{n+1}}{n^x} + \sum_{n=2}^{\infty}\frac{(-1)^{n+1}}{n^x} = 2\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^x} - 1 = 2f(x)-1.
     \end{align*}
     Posons $\a_n=\frac{1}{n^x}-\frac{1}{(n+1)^x}$, $\forall n \geq 1, ~ 2f(x)-1=\sum_{n=1}^\infty(-1)^{n+1}\a_n$.\\
     Vérifions le CSSA : $\a_n \to 0$ clair et $\phi(t):=\frac{1}{t^x}-\frac{1}{(t+1)^x}$.\\
@@ -656,13 +671,6 @@ Si toutes les fonctions sont $k$-lipschitziennes, alors la limite simple est $k$
 \end{ex}
 
 \section{Exercices de Khôlles.}
-
-\begin{thm}{}{}
-    Pour $A_n=\sum_{k=0}^na_k$,
-    \begin{equation*}
-        \sum_{n=0}^{+\infty}A_nx^n = \left( \sum_{n=0}^{+\infty}x^n \right)\left( \sum_{n=0}^{+\infty}a_nx^n \right).
-    \end{equation*}
-\end{thm}
 
 \begin{exercice}{CCINP 18}{}
     On pose $\forall n \in \N^*, ~ \forall x \in \R, ~ u_n(x)=\frac{(-1)^n}{n}x^n$ et $S(x)=\sum_{n=1}^{\infty}u_n(x)$.

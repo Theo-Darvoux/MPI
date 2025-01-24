@@ -3,11 +3,11 @@
 \def\chapitre{8}
 \def\pagetitle{Séries entières.}
 
-\input{/home/theo/MP2I/setup.tex}
+\input{setup.tex}
 
 \begin{document}
 
-\input{/home/theo/MP2I/title.tex}
+\input{title.tex}
 
 \thispagestyle{fancy}
 
@@ -40,7 +40,7 @@
     Par abus de notation, on confondra dans tout le chapitre l'écriture $\sum_{n\geq0}a_nx^n$ et $\sum_{n\geq0}(x\mapsto a_nx^n)$.
 \end{nota}
 
-\vspace*{-0.3cm}
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     \begin{itemize}
@@ -54,7 +54,7 @@
     En effet, pour $z\in\C$, $(a_nz^n)$ bornée ssi $\exists M > 0, |a_nz^n|=|a_n||z|^n\leq M$ ssi $(|a_n||z|^n)$ bornée. 
 \end{ex}
 
-\vspace*{-0.3cm}
+\vspace*{-0.8cm}
 
 \begin{thm}{de comparaison.}{}
     Soient $(a_n)_n, (b_n)_n \in (\R_+)^\N$ de rayons de convergence $R_a$ et $R_b$.
@@ -68,7 +68,7 @@
     On remarque que $\sum a_n x^n$ et $\sum \l a_nx^n$ ont même rayon pour tout $\l\in\R^*$, puis par $1$, $R_a \leq R_b$ et $R_b \leq R_a$.
 \end{thm}
 
-\vspace*{-0.3cm}
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     \begin{itemize}
@@ -76,6 +76,8 @@
     \item Pour $n\in\N$, soit $(a_n)\in\R^\N$ telle que $1 \leq a_n \leq n$. Alors $R_a = 1$.
     \end{itemize}
 \end{ex}
+
+\vspace*{-0.8cm}
 
 \subsection{Convergence.}
 
@@ -86,6 +88,8 @@
         \item Si $\K=\C$, alors $D(0,R)=\{z\in \C, ~ |z|<R\}$.
     \end{itemize}
 \end{defi}
+
+\vspace*{-0.8cm}
 
 \begin{thm}{Lemme d'Abel. $\star$}{}
     Soient $(a_n)_n\in\K^\N$ et $z_0\in\C$ tel que $(a_nz_0^n)_n$ bornée.
@@ -117,6 +121,8 @@
     Par TCSTG+, $\sum\|a_nz^n\|_\infty^{B'(0,r)}$ converge, donc convergence normale.
 \end{thm}
 
+\vspace*{-0.8cm}
+
 \begin{ex}{}{}
     \begin{enumerate}
         \item $\forall n \in \N, ~ a_n = 1$, $\sum z^n$, $R=1$.
@@ -124,6 +130,8 @@
         \item $\forall n \in \N^*, ~ a_n = \frac{1}{n^2}$, $R=1$, convergence en $1$ et $-1$.
     \end{enumerate}
 \end{ex}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{Remarques utiles pour le calcul du rayon.}{}
     Soit $(a_n)_n\in\K^\N$, et $R$ le rayon de convergence de $\sum a_nz^n$.
@@ -135,6 +143,8 @@
     \end{enumerate}
 \end{prop}
 
+\vspace*{-0.8cm}
+
 \begin{ex}{}{}
     Soit $a_n$ la $n^{\nt{ème}}$ décimale de $\pi$. Calculer le rayon de convergence de $\sum a_nx^n$.
     \tcblower
@@ -143,7 +153,7 @@
     Donc $\sum a_n$ est grossièrement divergente, donc $R\leq 1$, donc $R=1$ par antisymétrie.
 \end{ex}
 
-\pagebreak
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Soit une série entière $\sum a_nx^n$ de rayon de convergence $R$. Quel est le rayon de convergence de $\sum a_n R^nx^n$ ?
@@ -153,6 +163,8 @@
     $\hookrightarrow$ Si $|x|>1$, alors $|Rx|>R$, puis $\sum a_n(Rx)^n = \sum a_nR^nx^n$ diverge.\\
     Donc $R'=1$.
 \end{ex}
+
+\pagebreak
 
 \begin{thm}{Critère de d'Alembert spécifique aux séries entières.}{}
     Soit $(a_n)_n \in (R_+)^\N$ tel que $a_n\neq0$ àpdcr.
@@ -174,6 +186,8 @@
     Donc $R=\frac{1}{l}$.
 \end{thm}
 
+\vspace*{-0.8cm}
+
 \begin{ex}{}{}
     Déterminer le rayon de convergence des séries suivantes :
     \begin{align*}
@@ -184,7 +198,7 @@
     \end{align*}
 \end{ex}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{defi}{Série lacunaire.}{}
     Une série entière $\sum a_nx^n$ est dite lacunaire ssi $a_n=0$ pour une infinité de $n$.\\
@@ -192,6 +206,8 @@
 \end{defi}
 
 On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3n}$ converge ssi $|x|<3$, donc $R=1$.
+
+\pagebreak
 
 \subsection{Propriétés de la somme.}
 
@@ -206,14 +222,14 @@ On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3
         \int_0^{2\pi}e^{-in\theta}f(re^{i\theta})\nt{d}\theta &= \int_0^{2\pi}e^{-in\theta}\sum_{k=0}^{+\infty}a_k r^ke^{ik\theta} \nt{d}\theta = \int_0^{2\pi}\sum_{k=0}^{+\infty}a_kr^ke^{i(k-n)\theta}\nt{d}\theta\\
         &\overset{(*)}{=}\sum_{k=0}^{+\infty}a_kr^k\int_0^{2\pi}e^{i(k-n)\theta}\nt{d}\theta=2\pi a_n r^n
     \end{align*}
-    (*) On pose $u_k=a_kr^ke^{i(k-n)\theta}$, on vérifie que $\sum_{k\geq}u_k$ $\CU$ sur $[0,2\pi]$.
+    (*) On pose $u_k=a_kr^ke^{i(k-n)\theta}$, on vérifie que $\sum_{k\geq0}u_k$ $\CU$ sur $[0,2\pi]$.
     \begin{equation*}
         \forall \theta \in [0,2\pi], ~ \forall k \in \N, ~ |u_k(\theta)|=|a_k|r^k
     \end{equation*}
     Puis $\|u_k\|_\infty=|a_k|r^k$ terme général d'une série convergente. Enfin, $\CN$ implique $\CU$.
 \end{exercice}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{prop}{}{unicite}
     Soient $(a_n)_n,(b_n)_n\in\K^\N$. 
@@ -227,6 +243,8 @@ On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3
     \end{equation*}
     En particulier, $\sum_{n=0}^{+\infty}a_nx^n=0$ sur un domaine non trivial $D(0,r)$ entraîne $\forall n \in \N, ~ a_n = 0$.
 \end{prop}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Soit $\sum a_nx^n$ une série entière de rayon de convergence $R>0$.
@@ -280,7 +298,7 @@ On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3
     Puis d'après le 1, $\sum \frac{a_n}{n}z^n$ a même rayon de convergence que $\sum a_nz^n$, puis par récurrence pour $p\in \Z$.
 \end{lemme}
 
-\vspace*{-0.5cm}
+\pagebreak
 
 \begin{thm}{Dérivation de séries entières.}{}
     Soit $(a_n)_n\in\R^\N$. On pose $S(x)=\sum^{\infty}a_nx^n$ de rayon de convergence $R$.\\
@@ -330,10 +348,7 @@ On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3
     \end{equation*}
     On sait que $S$ est $\cursive{C}^\infty$ sur $]-1,1[$. On peut dériver terme à terme avec conservation du rayon.
     \begin{equation*}
-        \forall x \in ]-1,1[, ~ \sum_{n=0}^\infty x^n=\frac{1}{1-x}.
-    \end{equation*}
-    \begin{equation*}
-        \forall x \in ]-1,1[, ~ \sum_{n=0}^\infty nx^{n} = \frac{x}{(1-x)^2}.
+        \forall x \in ]-1,1[, ~ \sum_{n=0}^\infty x^n=\frac{1}{1-x}; \qquad \sum_{n=0}^\infty nx^{n} = \frac{x}{(1-x)^2}.
     \end{equation*}
     \begin{equation*}
         \forall x \in ]-1,1[, ~ \sum_{n=0}^\infty n^2x^{n-1}=\frac{x(x+1)}{(1-x)^3}.
@@ -343,6 +358,8 @@ On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3
         \forall x \in ]-1,1[, ~ \sum_{n=0}^\infty\frac{x^{n+1}}{n+1}=-\ln(1-x)+\cancel{C}
     \end{equation*}
 \end{ex}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     \begin{equation*}
@@ -355,7 +372,7 @@ On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3
     Alors $S(x)=\frac{1}{2}\frac{1}{1-ex}-\frac{1}{2}\frac{1}{1-e/x}$.
 \end{ex}
 
-\pagebreak
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     \begin{equation*}
@@ -370,6 +387,8 @@ On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3
     \end{equation*}
     $n^3+4n+1=1+5n+3n(n+1)+5(n-1)(n-2)$ 
 \end{ex}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     \begin{equation*}
@@ -448,6 +467,8 @@ On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3
     On évalue en $0$, $\l=0$. Donc $\forall x \in ]-1,1[$, ~ $S(x)=-\ln(1-x)$.\\
     Par continuité de $\ln$, $\lim_{x\to-1}S(x)=-\ln(2)$ puis par Abel Radial, $S(-1)=-\ln(2)$.
 \end{ex}
+
+\pagebreak
 
 \begin{exercice}{}{}
     \begin{equation*}
@@ -535,6 +556,8 @@ On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3
     Soit $f$ développable en série entière en 0, $\exists r>0, ...$\\
     On sait que $f$ est $\cursive{C}^\infty$ sur $D(0,r)$, donc on peut dériver terme à terme avec conservation du rayon, donc toutes les dérivées de $f$ admettent un développement en série entière en 0, de même pour les primitives.
 \end{prop}
+
+\pagebreak
 
 \begin{prop}{}{}
     Soit $f:V\in \cursive{V}(0) \to \K$ DSE en 0 et telle que $f(0)\neq0$. Alors $\frac{1}{f}$ est DSE en 0.
@@ -632,7 +655,7 @@ On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3
     \end{equation*}
 \end{prop}
 
-\pagebreak
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     Pour tout $z\in\C$ tel que $|z|<1$, on a
@@ -650,6 +673,8 @@ On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3
         \arctan(x)=\sum_{n=0}^\infty(-1)^n\frac{x^{2n+1}}{2n+1}.
     \end{equation*}
 \end{prop}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     Soit $\a\in\R$.
@@ -696,6 +721,8 @@ On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3
     Enfin, $\arccos(x)=\frac{\pi}{2}-\arcsin(x)$.
 \end{prop}
 
+\vspace*{-0.8cm}
+
 \begin{prop}{}{}
     Soit $x\in\R$.
     \begin{equation*}
@@ -708,6 +735,8 @@ On ne peut pas appliquer le critère aux séries lacunaires, mais ici $\sum x^{3
         \argsh'(x) = \frac{1}{\sqrt{1+x^2}}; \qquad \argch'(x) = \frac{1}{\sqrt{x^2-1}}.
     \end{equation*}
 \end{prop}
+
+\vspace*{-0.8cm}
 
 \subsection{Calculs de développements en série entière.}
 
@@ -786,6 +815,8 @@ Pas de compositions, on évite les quotients et les produits. On fait des sommes
     Donc $S=\arctan(1)=\frac{\pi}{4}$.
 \end{ex}
 
+\vspace*{-0.8cm}
+
 \begin{ex}{}{}
     Calculer
     \begin{equation*}
@@ -797,9 +828,13 @@ Pas de compositions, on évite les quotients et les produits. On fait des sommes
     On calcule $f''$ et on évalue en $1/2$.
 \end{ex}
 
+\vspace*{-0.8cm}
+
 \begin{meth}{}{}
     Pour montrer qu'une fonction est $\cursive{C}^\infty$ en zéro, on montre qu'elle admet un DSE en zéro.
 \end{meth}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{$\cursive{C}^\infty$}{}
     Montrer que $f$ est $\cursive{C}^\infty$ sur $\R$.
@@ -814,7 +849,7 @@ Pas de compositions, on évite les quotients et les produits. On fait des sommes
     C'est aussi vrai en zéro, donc $f$ est développable en série entière, donc $f$ est $\cursive{C}^\infty$ en zéro.
 \end{ex}
 
-\vspace*{-0.3cm}
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Montrer que $f$ est $\cursive{C}^\infty$ sur $\R$.
@@ -822,10 +857,7 @@ Pas de compositions, on évite les quotients et les produits. On fait des sommes
         \forall x \neq 0, ~ f(x)=\frac{\sin(x)}{\sh(x)}; \quad f(0)=1.
     \end{equation*}
     \tcblower
-    Elle est $\cursive{C}^\infty$ comme quotient de fonctions $\cursive{C}^\infty$.
-    \begin{equation*}
-        \forall x \neq 0, ~ f(x) = \frac{\left( \frac{\sin x}{x} \right)}{\left( \frac{\sh x}{x} \right)}.
-    \end{equation*}
+    Elle est $\cursive{C}^\infty$ comme quotient de fonctions $\cursive{C}^\infty$ et $\forall x \neq 0, ~ f(x) = \frac{\left( \frac{\sin x}{x} \right)}{\left( \frac{\sh x}{x} \right)}$.\\
     On pose $\forall x \in \R^*, ~ g(x)=\frac{\sin x}{x}$, $g(0)=1$; $h(x)=\frac{\sh x}{x}$, $h(0)=1$; puis $\forall x \in \R, ~ f(x)=\frac{g(x)}{h(x)}$.\\
     Donc $f$ est $\cursive{C}^\infty$ en zéro comme quotient de deux fonctions $\cursive{C}^\infty$ en zéro.
 \end{ex}
@@ -850,6 +882,8 @@ Pas de compositions, on évite les quotients et les produits. On fait des sommes
     \end{equation*}
     terme général d'une série convergente, donc $\sum u_p$ converge normalement puis uniformément sur $[0,2\pi]$.
 \end{ex}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{Équations différentielles.}{}
     Trouver une solution de :
@@ -916,7 +950,5 @@ Pas de compositions, on évite les quotients et les produits. On fait des sommes
     De plus, $\exp$ convexe sur $\R$, car $\exp''=\exp\geq0$ donc $\forall x \in \R, ~ e^x\geq 1+x$.\\
     On peut définir le $\ln$ comme la bijection réciproque de $\exp$, ou comme primitive de $1/x$...
 \end{ex}
-
-\section{Khôlles.}
 
 \end{document}

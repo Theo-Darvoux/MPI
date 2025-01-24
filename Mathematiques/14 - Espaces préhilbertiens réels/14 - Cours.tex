@@ -10,6 +10,7 @@
 \input{title.tex}
 
 \renewcommand*{\D}{\cursive{D}}
+\newcommand*{\SO}{\nt{SO}}
 
 \section{Révisions.}
 
@@ -42,7 +43,7 @@
 \begin{prop}{Cauchy-Schwarz.}{}
     Soit $E$ un espace préhilbertien réel muni d'un produit scalaire $\Lg\cdot,\cdot\Rg$.
     \begin{equation*}
-        \forall (x,y) \in E^2, ~ \left| \Lg x, y \Rg \right|^2 \leq \|x\|\|y\|.
+        \forall (x,y) \in E^2, ~ \left| \Lg x, y \Rg \right| \leq \|x\|\|y\|.
     \end{equation*}
     \tcblower
     Soit $x,y\in E^2$, on pose $P(\l)=\Lg x + \l y, x + \l y \Rg$.\\
@@ -409,7 +410,7 @@
         \left( \forall X,Y \in \M_{n,1}(\R), ~ X^\top A Y = X^\top B Y \right) \ra A = B.
     \end{equation*}
     \tcblower
-    On a $\forall i,j \in \lb1,n\rb, ~ E_j^\top A E_j = a_{i,j} = E_{i}^\top B E_j = b_{i,j}$.
+    On a $\forall i,j \in \lb1,n\rb, ~ E_i^\top A E_j = a_{i,j} = E_{i}^\top B E_j = b_{i,j}$.
 \end{lemme}
 
 \vspace*{-0.7cm}
@@ -480,7 +481,7 @@
     \tcblower
     Déjà, $F\bot F^\bot$, on en déduit $F\oplus F^\bot$, montrons que $E=F+F^\bot$. Soit $\B=(e_1,...,e_n)$ une b.o.n. de $F$.\\
     Soit $x\in E$, $x=\sum_{i=1}^n \Lg x,e_i\Rg e_i + \left( x - \sum_{i=1}^n\Lg x, e_i\Rg e_i \right) = y + (x-y)$, on a bien $y\in F$.\\
-    Of $F=\Vect(e_1,...,e_n)$, donc en montrant $\forall j \in \lb1,n\rb, ~ \Lg x-y, e_j \Rg = 0$, on a $x-y\in F^\bot$.\\
+    Or $F=\Vect(e_1,...,e_n)$, donc en montrant $\forall j \in \lb1,n\rb, ~ \Lg x-y, e_j \Rg = 0$, on a $x-y\in F^\bot$.\\
     Pour $j\in\lb1,n\rb, ~ \Lg x-y, e_j \Rg = \Lg x, e_j \Rg - \Lg y, e_j \Rg$ et $\Lg y, e_j \Rg = \sum_{i=1}^n\Lg x,e_i\Rg\Lg e_i, e_j\Rg=\Lg x,e_j\Rg$.\\
     On a bien $x-y\in F^\bot$ puis $E=F\oplus F^\bot$.
 \end{thm}
@@ -549,7 +550,7 @@
     On a $a\notin H$, donc $\Vect(a)$ est le supplémentaire orthogonal de $H$.\\
     Notons $p_H$ la projection orthogonale sur $H$ et $p_a$ sur $\Vect(a)$.\\
     Alors $\forall x \in E, ~ p_H(x) + p_a(x)=x$, $d(x,H)=\|x-p_H(x)\|$ et $p_a(x)=\frac{\Lg x,a\Rg}{\|a\|^2}a$.\\
-    Donc pour $x\in E, ~ d(x,H)=\|x-p_H(x)\|=\|p_a(x)\|=\frac{|\Lg x,a\Rg}{\|a\|^2}\|a\|=\frac{|\Lg x,a\Rg|}{\|a\|}$.
+    Donc pour $x\in E, ~ d(x,H)=\|x-p_H(x)\|=\|p_a(x)\|=\frac{|\Lg x,a\Rg|}{\|a\|^2}\|a\|=\frac{|\Lg x,a\Rg|}{\|a\|}$.
 \end{prop}
 
 \vspace*{-0.9cm}
@@ -768,6 +769,8 @@
     Elle est symétrique : $AA^\top = A^2 = I_3$ donc $A\in O_3(\R)$, et $\det(A)=-1$ donc $A\notin SO_3(\R)$.
 \end{ex}
 
+\vspace*{-0.8cm}
+
 \begin{prop}{}{}
     Soit $A\in\M_n(\R)$; $A\in O_n(\R)$ ssi ses vecteurs colonnes sont orthonormés dans $\R^n$ euclidien canonique.
     \tcblower
@@ -782,10 +785,189 @@
     Puis même propriété sur les lignes puisque $A\in O_n(\R) \iff A^\top \in O_n(\R)$.
 \end{prop}
 
+\vspace*{-0.8cm}
+
 \begin{prop}{}{}
     $O_n(\R)$ est un compact de $\M_n(\R)$.
     \tcblower
-    Déjà, $\M_n(\R)$ est un $\R$-evdf donc toutes les normes sont équivalentes, on choisit la norme usuelle. 
+    Déjà, $\M_n(\R)$ est un $\R$-evdf donc toutes les normes sont équivalentes, on choisit la norme usuelle.\\
+    \bf{Borné.} $\forall A \in O_n(\R), ~ \|A\|=\sqrt{\Tr(A^\top A)}=\Tr(I_n)=\sqrt{n}$.\\
+    \bf{Fermé} Soit $(A_k)_k$ une suite de matrices orthogonales, convergente de limite $A$.\\
+    On a $\forall k \in \N, ~ A_kA_k^\top=I_n$, or $A\mapsto A^\top$ est continue car linéaire en dimension finie, et $(A,B)\mapsto AB$ aussi car bilinéaire, donc $A_k\to A$ puis $A_k^\top \to A^\top$ puis $A_kA_k^\top \to AA^\top$, puis par unicité de la limite, $AA^\top = I_n$.
 \end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    Soient $A,B\in\M_n(\R)$. Alors $A$ et $B$ sont orthogonalement semblables ssi $\exists P \in O_n(\R), ~ A=PBP^{-1}$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    \begin{equation*}
+        A=\begin{pmatrix}2&1&0\\1&2&1\\0&1&2\end{pmatrix} \et D = \begin{pmatrix}2&0&0\\0&2+\sqrt{2}&0\\0&0&2-\sqrt{2}\end{pmatrix}.
+    \end{equation*}
+    Montrer que $A$ et $D$ sont orthogonalement semblables.
+    \tcblower
+    $E_2 = \Vect(1,0,-1)$ donc $\dim(E_2)=1$; $E_{2+\sqrt{2}}=\Vect(1,\sqrt{2},1)$ donc $\dim(E_{2+\sqrt{2}})=1$.\\
+    Enfin, $E_{2-\sqrt{2}}=\Vect(1,-\sqrt{2},1)$, donc $\dim(E_{2-\sqrt{2}})=1$, donc $2,2-\sqrt{2},2+\sqrt{2}$ sont vp.\\
+    On pose $e_1=(1~0~1)$, $e_2=(1~\sqrt{2}~1)$ et $e_3=(1~-\sqrt{2}~1)$, qui sont orthogonaux. On n'a plus qu'à normaliser.
+\end{ex}
+
+\begin{prop}{}{}
+    Soit $P\in O_n(\R)$.
+    \begin{equation*}
+        \forall X \in \M_{n,1}(\R), ~ \|PX\|=\|X\|
+    \end{equation*}
+    \begin{equation*}
+        \forall X,Y \in \M_{n,1}(\R)^2, ~ \Lg PX, PY\Rg = \Lg X,Y \Rg.
+    \end{equation*}
+    \tcblower
+    $\Lg X,Y\Rg = \sum_{i=1}^nx_iy_i=X^\top Y$ où $X=(x_1~...~x_n)$ et $Y=(y_1~...~y_n)$.\\
+    Soit $(X,Y)\in\M_{n,1}(\R)^2$. $\Lg PX, PY \Rg = (PX)^\top PY = X^\top P^\top PY =X^\top Y = YX^\top = \Lg X,Y\Rg$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soit $A\in O_n(\R)$. Alors $\Sp(A)\subset\{-1,1\}$.
+    \tcblower
+    Soit $\l\in\Sp(A)$ : $\exists X \in \M_{n,1}(\R)$ non nul tel que $AX=\l X$.\\
+    Alors $\|AX\|=|\l|\|X\|$ or $\|AX\|=\|X\|$ donc $\|X\|>0\ra|\l|=1\ra\l\in\{-1,1\}$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien. La matrice de passage $P$ d'une b.o.n. de $E$ à une autre est orthogonale.
+    \tcblower
+    Soit $n$ la dimension de $E$, $\B=(e_1,...,e_n)$ et $\B'=(e'_1,...,e'_n)$ deux b.o.n. de $E$.
+    \begin{equation*}
+        P=\begin{pmatrix}\Lg e'_1,e_1\Rg & ... & \Lg e'_n, e_1\Rg \\ \vdots & & \vdots \\ \Lg e'_1,e_n\Rg & ... & \Lg e'_n, e_n \Rg\end{pmatrix} \nt{ car } \B \nt{ est une b.o.n.}
+    \end{equation*}
+    Donc $\forall i,j \in \lb1,n\rb, ~ [P]_{i,j}=\Lg e'_j, e_i \Rg$ et $[P^\top P]_{i,j}=\sum_{k=1}^nP_{k,i}P_{k,j}=\sum_{k=1}^n\Lg e_k, e'_i \Rg\Lg e_k, e'_j\Rg=\Lg e'_i, e'_j \Rg = \d_{i,j}$.\\
+    Donc $P^\top P = I_n$, et $P\in O_n(\R)$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item Soit $E$ un $\K$-evdf de dimension $n$.\\
+        L'ensemble des formes $n$-linéaires alternées sur $E$ forme un $\K$-ev de dimension 1.
+        \item Soit $\B=(e_1,...,e_n)$ base de $E$, il existe une unique forme $n$-linéaire alternée $\det_\B$ telle que $\det_\B(\B)=1$.
+        \item Soient $\B,\B'$ deux bases de $E$. Alors $\det_\B=(\det_\B \B')\det_{\B'}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Une forme $n$-linéaire alternée sur $E$ est une application $f:(x_1,...,x_n)\mapsto f(x_1,...,x_n)$ telle que $f$ est linéaire par rapport à chacune de ses variables et si $\exists i \neq j, ~ x_i = x_j \ra f(x_1,...,x_n)=0$.\\
+    On sait que $f$ alternée ssi $f$ antisymétrique ssi $\forall \s \in S_n, ~ \forall (x_1,...,x_n) \in E^n, ~ f(x_{\s(1)},....,x_{\s(n)})=\e(\s)f(x_1,...,x_n)$.\\
+    Soit $f$ $n$-linéaire alternée sur $E$ et $\B=(e_1,..,e_n)$ une base de $E$. Soit $(x_1,...,x_n)\in E^n$.
+    \begin{equation*}
+        \forall i \in \lb1,n\rb, ~ x_i = \sum_{j=1}^n x_{i,j}e_j = f\left( \sum_{j_1=1}^n x_{1,j_1}e_{j_1}, ..., \sum_{j_n=1}^n x_{n,j_n}e_{j_n} \right)=\sum_{j_1=1}^n...\sum_{j_n=1}^n x_{1,j_1}...x_{n,j_n}f(e_{j_1},...,e_{j,n})
+    \end{equation*}
+    Puis comme $f$ est alternée, $f(e_{j_1},...,e_{j_n})\neq0_K\ra j_1,...j_n$ tous distincts $\ra(1,...,n)\mapsto(j_1,...,j_n)\in S_n$.\\
+    Finalement, $f(x_1,...,x_n)=\sum_{\s\in S_n}x_{1,\s(1)}...x_{n,\s(n)}\e(\s)f(e_{1},...,e_{n})$ et $\l=f(e_1,...,e_n)$\\
+    On pose $\det_\B(x_1,...,x_n)=\sum_{\s\in S_n}\e(\s)x_{1,\s(1)}...x_{n,\s(n)}$, donc $f=\l\det_\B$; et $\det_\B(\B)=1$.\\
+    \boxed{3.} On a $\exists \l \in \K, ~ \det_\B=\l\det_{\B'}$ donc $\det_\B(\B')=\l\det_{\B'}(\B')=\l$.
+\end{prop}
+
+\begin{defi}{}{}
+    Soit $E$ un $\R$-evdf, $\B$ et $\B'$ deux bases de $E$.
+    \begin{itemize}
+        \item $\B$ et $\B'$ sont de même sens ssi $\det_\B \B'>0$.
+        \item $\B$ et $\B'$ sont de sens contraires sinon.
+    \end{itemize}
+\end{defi}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{}{}
+    Être de même sens définit une relation d'équivalence sur l'ensemble des bases de $E$ un $\R$-evdf.
+    \tcblower
+    \bf{Réflexif.} Soit $\B$ base de $E$, on a $\det_\B\B=1$ donc $\B$ dans le même sens que $\B$.\\
+    \bf{Symétrique.} Soit $\B$ de même sens que $\B'$ : $\det_\B \B'>0$, alors $\det_{\B'}\B=(\det_{\B}\B')^{-1}>0$.\\
+    En effet, $\det_{\B}=\det_{\B}(\B') \det_{\B'}$ donc $1=\det_{\B}(\B')\det_{\B'}(\B)$ donc $\det_{\B'}\B = (\det_{\B'}\B)^{-1}$.\\
+    Donc $\B'$ est dans le même sens que $\B$.\\
+    \bf{Transitif.} Soient $\B,\B'$ dans le même sens et $\B',\B''$ dans le même sens.\\
+    Alors $\det_{\B}\B'' = \det_{\B}\B'\det_{\B'}\B''>0$ donc $\B$ et $\B'$ sont dans le même sens.\\
+    En effet, $\det_\B=(\det_\B\B')\det_{\B'}$ et on évalue en $\B''$.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{defi}{}{}
+    Soit $E$ un $\R$-evdf et $\B_0$ une base quelconque de référence.\\
+    On classe l'ensemble des bases de $E$ en deux classes d'équivalence :
+    \begin{itemize}
+        \item Les bases dans le même sens que $\B_0$, appelées bases directes.
+        \item Les bases dans le sens contraire de $\B_0$, appelées bases indirectes.
+    \end{itemize}
+    << $\R^n$ euclidien canonique orienté >> siginifie que l'on travaille sur $\R^n$ muni du produit scalaire usuel et qu'on a choisi la base canonique comme base de référence.
+\end{defi}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{Produit mixte.}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien orienté et $(x_1,...,x_n)\in E^n$.\\
+    Le produit mixte de $(x_1,...,x_n)$ noté $[x_1,...,x_n]$ est le scalaire défini par $\det_\B(x_1,...,x_n)$ où $\B$ est une b.o.n. orienté quelconque de $E$. Il ne dépend pas de la base $\B$ choisie.
+    \tcblower
+    Soient $\B,\B'$ deux b.o.n directes. On sait que $\det_\B=\l\det_{\B'}$ avec $\l=\det_\B\B'$.\\
+    Or la matrice de passage $P$ de $\B$ à $\B'$ est orthogonale, docn $\det\P\in\{-1,1\}$.\\
+    Puis $\B$ et $\B'$ sont directes, donc dans le même sens, donc $\det(P)>0$, donc $\det(P)=1$, donc $\det_\B=\det_{\B'}$.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{defi}{Produit vectoriel de deux vecteurs.}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien orienté de dimension 3.\\
+    Soit $(x,y)\in E^2$. Le produit vectoriel $x\land y$ est l'unique \bf{vecteur} tel que $\forall z \in E, ~ [x,y,z]=\Lg(x\land y), z\Rg$.
+    \tcblower
+    On pose $\phi:z\mapsto[x,y,z]$, c'est une forme linéaire sur $E$ par trilinéarité de $\det_\B$ puisque $[x,y,z]=\det_\B(x,y,z)$.\\
+    Par théorème de Riesz : $\exists!a\in E, ~ \forall z \in E, ~ \phi(z)=\Lg a,z\Rg$. Ce vecteur $a$ dépend de $(x,y)$, on note $a=(x\land y)$.\\
+    \bf{Généralisation.} Soit $(E,\Lg\.,\.\Rg)$ euclidien orienté de dimension $n$.\\
+    Pour $(x_1,...,x_{n-1})\in E^{n-1}$, alors $x_1\land ... \land x_{n-1}$ est l'unique vecteur tq $\forall z \in E, ~ [x_1,...,x_{n-1},z]=\Lg x_1 \land ... \land x_{n-1},z\Rg$.
+\end{defi}
+
+\begin{prop}{Propriétés du produit vectoriel de deux vecteurs.}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien orienté de dimension 3.
+    \begin{enumerate}
+        \item $\forall (x,y) \in E^2, ~ \Lg x\land y, x\Rg = \Lg x \land y, y \Rg = 0_E$.
+        \item $\forall (x,y) \in E^2, ~ x \land y = 0_E \iff (x,y)$ liée.
+        \item $\forall (x,y) \in E^2, ~ (x,y)$ libre $\ra (x,y,x\land y)$ est une base directe de $E$.
+        \item Pour $x,y\in E$, l'écart angulaire entre $x$ et $y$ est l'unique $\theta\in[0,\pi]$ tq $\Lg x,y\Rg=\|x\|\|y\|\cos\theta$.\\
+        Alors $\|x\land y\|=\|x\|\|y\|\sin\theta$.
+        \item Pour $(x,y)$ famille orthonormée de $E$, $(x,y,x\land y)$ est une b.o.n. directe de $E$.
+        \item Soit $\B=(e_1,e_2,e_3)$ base orthonormée de $E$, et $x=\sum x_ie_i$, $y=\sum y_ie_i$. Alors :
+        \begin{equation*}
+            \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \land \begin{pmatrix}y_1\\y_2\\y_3\end{pmatrix} = \begin{pmatrix}x_2y_3-x_3y_2 \\ x_3y_1 - x_1y_3 \\ x_1y_2 - x_2y_1\end{pmatrix}.
+        \end{equation*}
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soient $x,y\in E$, on a $\forall z \in E, ~ \Lg x \land y, x \Rg=\det_\B(x,y,x)=0_E$ et $\Lg x\land y, y\Rg = \det_\B(x,y,y)=0_E$.\\
+    \boxed{2.\la} Soient $x,y$ liés, alors $\forall z \in E, ~ (x,y,z)$ est liée puis $[x,y,z]=0$ puis $\Lg x\land y, z\Rg=0_E$ puis $x\land y = 0_E$.\\
+    \boxed{2.\ra} Par contraposée, si $(x,y)$ libre, on la complète en $(x,y,z)$ base de $E$ (théorème de la base incomplète).\\
+    Ainsi, $[x,y,z]\neq0$ puisque c'est une base, donc $\Lg x\land y, z \Rg \neq 0$, donc $x\land y \neq 0$.\\
+    \boxed{3.} Soit $(x,y)$ libre, alors $[x,y,x\land y]=\Lg x\land y, x\land y\Rg = \|x\land y\|^2>0$, c'est une base directe.\\
+    \boxed{4.} Pour $x,y$ non nuls, $|\Lg x,y\Rg|\leq\|x\|\|y\|$ puis $\frac{\Lg x,y\Rg}{\|x\|\|y\|}\in[-1,1]$.\\
+    Puis $\cos$ est bijection de $[0,\pi]$ dans $[-1,1]$ donc $\exists!\theta\in[0,\pi]$ tq $\frac{\Lg x,y\Rg}{\|x\|\|y\|}=\cos\theta$.\\
+    Ainsi, $\Lg x,y\Rg = \|x\|\|y\|\cos\theta$. Si $x,y$ orthogonaux, $\theta=\frac{\pi}{2}$. Si $x,y$ liés, $\theta\in\{0,\pi\}$.\\
+    \boxed{6.} $x\land y = \Lg x \land y , e_1\Rg e_1 + \Lg x\land y , e_2\Rg e_2 + \Lg x \land y, e_3\Rg e_3$ car $\B$ est b.o.n.\\
+    Donc $x\land y = [x,y,e_1]e_1 + [x,y,e_2]e_2+[x,y,e_3]e_3$; en développant les produits mixtes, on a le résultat :
+    \begin{equation*}
+        [x,y,e_1] = \det_\B(x,y,e_1) = \begin{vmatrix}x_1 & y_1 & 1 \\ x_2 & y_2 & 0 \\ x_3 & y_3 & 0\end{vmatrix}=x_2y_3-x_3y_2.
+    \end{equation*}
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $A\in\M_n(\R)$ avec $n\geq3$. Montrer que $A=\Com(A)\iff \left[ A = 0 \ou A \in \SO_n(\R) \right]$.
+    \tcblower
+    \boxed{\la} Si $A=0$, trivial. Sinon si $A\in\SO_n(\R)$, $AA^\top=A^\top A=I_n$ et $\det(A)=1$.\\
+    On sait que $A(\Com A)^\top = (\det A)I_n$, donc $A(\Com A)^\top = I_n$, puis $(\Com A)^\top = A^\top = A^{-1}$ donc $A=\Com A$.\\
+    \boxed{\ra} Supposons $A=\Com A$. Si $A\in\GL_n(\R)$, $A(\Com A)^\top = (\det A)I_n$ puis $AA^\top = \det A I_n$ puis $\det(A)^2=\det(A)^n$\\
+    Puis $(\det A)^{n-2}=1$, $\det(A)\in\{-1,1\}$. D'autre part, $AA^\top=\det(A)I_n$ puis $\Tr(AA^\top)=n\det A$ donc $\det(A)>0$.\\
+    Finalement, $\det(A)=1$ puis $AA^\top = I_n$ donc $A\in\SO_n(\R)$.\\
+    Sinon, $\rg(A)<n$ donc $\det(A)=0$ donc $A(\Com A)^\top = 0$ donc $AA^\top = 0$ donc $A=0$
+\end{exercice}
 
 \end{document}
