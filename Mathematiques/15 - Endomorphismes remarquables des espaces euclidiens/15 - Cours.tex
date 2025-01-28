@@ -1,0 +1,312 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{14}
+\def\pagetitle{Espaces préhilbertiens réels.}
+
+\input{setup.tex}
+
+\begin{document}
+
+\input{title.tex}
+
+\renewcommand*{\D}{\cursive{D}}
+\newcommand*{\SO}{\nt{SO}}
+
+\section{Généralités.}
+
+Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
+
+\begin{defi}{}{}
+    Soit $u\in\L(E)$, $u$ est une \bf{isométrie} (ou endomorphisme orthogonal) ssi $\|u(x)\|=\|x\|$.
+\end{defi}
+
+\begin{prop}{}{}
+    Une isométrie est bijective.
+    \tcblower
+    Soit $u$ une isométrie, et $x\in\Ker(u)$, alors $\|x\|=\|u(x)\|=0_\R$ donc $x=0_E$. Donc $u$ est injective.\\
+    Or $\dim E \leq \infty$, et $u\in\L(E)$, donc $u$ injective ssi $u$ bijective.\\
+    \bf{Remarque.} La seule projection bijective est l'identité.
+\end{prop}
+
+\begin{nota}{}{}
+    Notons $O(E)$ l'ensemble des isométries de $E$ et $SO(E)$ l'ensemble des éléments de $O(E)$ de déterminant $1$.
+\end{nota}
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item $(O(E),\circ)$ est un groupe.
+        \item $(SO(E),\circ)$ est un sous-groupe de $(O(E),\circ)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $\Id_E\in O(E)$ donc $O(E)$ non-vide; stable par produit :\\
+    $\forall u,v \in O(E)$, $\forall x \in E, ~ \|(u\circ v)(x)\|=\|u(v(x))\|=\|v(x)\|=\|x\|$ donc $u\circ v \in O(E)$.\\
+    Stable par inverse : pour $u\in O(E)$, $\forall x \in E, ~ \|u^{-1}(x)\|=\|u(u^{-1}(x))\|=\|x\|$ donc $u^{-1}\in O(E)$.\\
+    \boxed{2.} Facile.
+\end{prop}
+
+\begin{thm}{Caractérisation des isométries. (1)}{}
+    Soit $u\in\L(E)$. Les deux propositions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $\forall x \in E, ~ \|u(x)\|=\|x\|$.
+        \item $\forall (x,y) \in E^2, ~ \Lg u(x), u(y)\Rg = \Lg x,y\Rg$.
+    \end{enumerate}
+    \tcblower
+    \boxed{2 \ra 1} Avec $y=x$ : $\|u(x)\|=\|x\|$.\\
+    \boxed{1\ra 2} Soit $(x,y)\in E^2$, alors $\|u(x+y)\|=\|x+y\|$ puis $\|u(x+y)\|=\|u(x)+u(y)\|$.\\
+    Donc $\|x+y\|^2=\|u(x)+u(y)\||^2$ donc $\|x\|^2+2\Lg x,y\Rg + \|y\|^2=\|u(x)\|^2+2\Lg u(x),u(y)\Rg+\|y\|^2$.\\
+    De plus, $\|x\|^2=\|u(x)\|^2$ et $\|y\|^2=\|u(y)\|^2$ donc $2\Lg x,y\Rg = 2\Lg u(x), u(y)\Rg$.\\
+    Finalement, $\Lg x,y \Rg = \Lg u(x), u(y)\Rg$.\\
+    \bf{Remarque.} Pour $x,y\in E$ d'écart angulaire $\theta$ : $\cos\theta=\frac{\Lg x,y \Rg}{\|x\|\|y\|}$ alors $\frac{\Lg u(x),u(y)\Rg}{\|u(x)\|\|u(y)\|}=\frac{\Lg x,y\Rg}{\|x\|\|y\|}$.
+\end{thm}
+
+\vspace*{-0.8cm}
+
+\begin{thm}{Caractérisation des isométries. (2)}{}
+    Soit $u\in \L(E)$. Alors $u$ est une isométrie ssi $u^* = u^{-1}$ ssi $u\circ u^* = u^* \circ u = \Id_E$.
+    \tcblower
+    D'après la proposition précédente, $u\in O(E)\iff \forall (x,y) \in E^2, ~ \Lg u(x),u(y)\Rg=\Lg x,y\Rg$.\\
+    Or par définition de l'adjoint, $\forall (x,y)\in E^2, ~ \Lg x,u(y)\Rg = \Lg u^*(x),y\Rg$.\\
+    Ainsi, $u\in O(E) \iff \forall (x,y)\in E^2, ~ \Lg u^*(u(x)), y \Rg = \Lg x,y\Rg \iff \forall x \in E, ~ u^*(u(x))=x \iff u^*\circ u = \Id_E$.
+\end{thm}
+
+\vspace*{-0.8cm}
+
+\bf{Remarque.} Les isométries font partie des endomorphismes normaux (HP) : $u\in\L(E)$ normal $\iff$ $u\circ u^* = u^* \circ u$.
+
+\begin{thm}{Caractérisation des isométries. (3)}{}
+    Soit $u\in\L(E)$. Les proposition suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $u$ est une isométrie de $E$.
+        \item L'image par $u$ de n'importe quelle b.o.n. de $E$ est une b.o.n. de $E$.
+        \item L'image par $u$ d'une b.o.n. de $E$ est une b.o.n. de $E$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1\ra 2} Pour $u\in O(E)$, et $\B=(e_1,...,e_n)$ b.o.n. de $E$, $\forall i \in \lb1,n\rb, ~ \|u(e_i)\|=\|e_i\|=1$.\\
+    Puis $\forall i,j \in \lb1,n\rb, ~ i\neq j \ra \Lg u(e_i), u(e_j)\Rg = \Lg e_i, e_j \Rg = 0$.\\
+    Donc $\B'=(u(e_1),...,u(e_n))$ est une famille orthonormale de $E$ et $|\B'|=\dim E < \infty$ donc $\B'$ est b.o.n de $E$.\\
+    \boxed{2\ra3} Trivial.\\ 
+    \boxed{3\ra 1} Pour $\B=(e_1,...,e_n)$ b.o.n. de $E$ tq $u(\B)=(e'_1,...,e'_n)$ soit encore b.o.n. de $E$.\\
+    Soit $x\in E$ : $x=\sum_{i=1}^nx_ie_i$, puis $\|x\|^2=\sum_{i=1}^nx_i^2$ car b.o.n. et $u(x)=\sum_{i=1}^nx_iu(e_i)=\sum_{i=1}^nx_ie'_i$.\\
+    Puis $\|u(x)\|^2=\sum_{i=1}^nx_i^2$ car $\B'$ est b.o.n. puis $\forall x \in E, ~ \|x\|=\|u(x)\|$ donc $u\in O(E)$.
+\end{thm}
+
+\vspace*{-0.8cm}
+
+\begin{thm}{Caractérisation des isométries. (4)}{}
+    Soit $u\in\L(E)$. Les propositions suivantes sont équivalentes :
+    \begin{enumerate}
+        \item $u\in O(E)$.
+        \item Soit $\B$ une b.o.n. de $E$, alors $\Mat_\B(u)\in O_n(\R)$.
+        \item Il existe $\B$ une b.o.n. de $E$ telle que $\Mat_\B(u)\in O_n(\R)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1\ra2} $u\circ u^*=\Id_E \iff \Mat_\B(u)\Mat_\B(u)^\top=I_n$ i.e. $\Mat_\B(u)\in O_n(\R)$.\\
+    \boxed{2\ra3} Trivial.\\
+    \boxed{3\ra 1} $\Mat_\B(u)\Mat_\B(u)^\top = I_n \ra u\circ u^* = \Id_E$.
+\end{thm}
+
+\begin{rappel}{}{}
+    Les propriétés démontrées sur les isométries sont les mêmes que celles sur les matrices orthogonales.
+    \begin{equation*}
+        \begin{array}{|c|c|}
+            \hline
+            u \in O(E) & \Mat_\B(u) \in O_n(\R)\\
+            \hline
+            u $ est inversible et $ u^{-1}=u^* & A $ est inversible et $ A^{-1} = A^\top\\
+            \hline
+            \forall x \in E, ~ \|u(x)\|=\|x\| & \forall X \in \M_{n,1}(\R), ~ \|AX\|=\|X\|\\
+            \hline
+            \forall x, y \in E, ~ \Lg u(x), u(y) \Rg = \Lg x,y\Rg & \forall X,Y \in \M_{n,1}(\R), ~ \Lg AX, AY \Rg = \Lg X,Y\Rg\\
+            \hline
+            u $ envoie une b.o.n. sur une b.o.n.$ & $Les colonnes de $ A $ sont orthonormées par le produit scalaire usuel de $ \R^n.\\
+            \hline
+            \Sp(u) \subset \{-1,1\} & \Sp A \subset \{-1,1\}\\
+            \hline 
+        \end{array}
+    \end{equation*}
+\end{rappel}
+
+\begin{prop}{}{}
+    Soit $u\in O(E)$, alors $\det(u)\in\{-1,1\}$.
+    \tcblower
+    Soit $\B$ une b.o.n. de $E$ et $u\in O(E)$, alors $\Mat_\B(u)\in O_n(\R)$ donc $\det(u)=\det(A)\in\{-1,1\}$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $s$ une symétrie de $E$, alors $s$ est une isométrie ssi $s$ est une symétrie orthogonale.
+    \tcblower
+    \boxed{\la} Soit $F=\Ker(s-\Id_E)$ et $x\in E$ : $\exists y\in F, ~ \exists z\in F^\bot, ~ x=y+z$ puis $s(x)=y-z$.\\
+    Ainsi, $\|x\|^2=\|y\|^2+\|z\|^2=\|s(x)\|^2$ avec le théorème de Pythagore.\\
+    \boxed{\ra} Soient $F=\Ker(s-\Id_E)$ et $G=\Ker(s+\Id_E)$. Il s'agit de démontrer que $F\bot G$.\\
+    Soit $x\in F$ et $y\in G$. Alors $s(x+y)=x-y$ et $\|x-y\|=\|s(x+y)\|=\|x+y\|$.\\
+    Donc $\|x-y\|^2=\|x+y\|^2$ donc $\|x\|^2-2\Lg x,y\Rg + \|y\|^2 = \|x\|^2 + 2\Lg x,y \Rg + \|y\|^2$ donc $\Lg x,y \Rg = 0$.
+\end{prop}
+
+\begin{ex}{}{}
+    Soit $u\in\L(E)$ tel que $\forall (x,y) \in E^2, ~ \Lg x,y \Rg = 0 \ra \Lg u(x), u(y) \Rg = 0$.\\
+    Montrer qu'il existe $\l\in\R^*, ~ \forall x \in E, ~ \|u(x)\|=\l\|x\|$.
+    \tcblower
+    \bf{Analyse.} Supposons que $\l$ existe, alors pour $x_0\in S(0,1)$ : $\|u(x_0)\|=\l\|x_0\|=\l$.\\
+    Soient $x,y \in S(0,1)$. $\Lg x+y, x-y \Rg = \|x\|^2+\Lg y,x \Rg - \Lg x,y\Rg - \|y\|^2 = 0$.\\
+    Donc $\Lg u(x+y), u(x-y) \Rg = 0$ donc $\Lg u(x) + u(y), u(x) - u(y) \Rg = 0$ donc $\|u(x)\|^2=\|u(y)\|^2$.\\
+    Soit $x\in E$, si $x=0$, alors $u(x)=\l x$ est vérifié.\\
+    Sinon, $\l = \|u(\frac{x}{\|x\|})\|=\frac{1}{\|x\|}\|u(x)\|$, on a bien $\|u(x)\|=\l\|x\|$.
+\end{ex}
+
+\section{Isométries du plan.}
+
+\begin{prop}{}{11}
+    \begin{equation*}
+        \SO_2(\R) = \left\{ \begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta \end{pmatrix}, ~ \theta\in\R \right\}; \quad R(\theta) = \begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}.
+    \end{equation*}
+    Alors $\forall \theta,\theta'\in\R, ~ R(\theta+\theta')=R(\theta)\times R(\theta')$.
+    \tcblower
+    \boxed{\subset} Soit $A\in\SO_2(\R)$.
+    \begin{equation*}
+        A=\begin{pmatrix}a&b\\c&d\end{pmatrix}; \quad \begin{cases}a^2+c^2 = 1\\b^2+d^2=1\\ab+cd=0\end{cases}
+    \end{equation*}
+    On a $\det(A) = 1 \iff ad-bc = 1$ et $a^2+c^2=1 \ra |a|\leq 1 \ra \exists\theta\in\R, ~ a=\cos\theta$ puis $c=\sin\theta$.\\
+    De même, $d^2+b^2=1$ donc $\exists \theta'\in\R, ~ d=\cos\theta'$ et $b=-\sin\theta'$. On peut supposer $\theta,\theta'\in[0,2\pi[$.\\
+    Il reste $ab+cd = 0$ et $ad-bc=1$ doncc $\sin(\theta-\theta')=0$ et $\cos(\theta-\theta')=1$ donc $\theta=\theta'$.\\
+    \boxed{\supset} $R(\theta)\in O_2(\R)$ et $\det R(\theta)=\cos^2\theta+\sin^2\theta=1$ donc $R(\theta)\in \SO_2(\R)$.\\
+    Soient $\theta,\theta'\in\R$.
+    \begin{equation*}
+        R(\theta)R(\theta')=\begin{pmatrix}\cos\theta\cos\theta'-\sin\theta\sin\theta' & -\cos\theta\sin\theta'-\sin\theta\cos\theta'\\\sin\theta\cos\theta'+\cos\theta\sin\theta'&\cos\theta\cos\theta'-\sin\theta\sin\theta'\end{pmatrix} = \begin{pmatrix}\cos(\theta+\theta')&-\sin(\theta+\theta')\\\sin(\theta+\theta')&\cos(\theta+\theta')\end{pmatrix}=R(\theta+\theta').
+    \end{equation*}
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $R(\theta)\in\SO_2(\R)$ avec $\theta\in[0,2\pi[$.
+    \begin{enumerate}
+        \item Montrer que $R(\theta)$ est diagonalisable ssi $\theta\in\{0,\pi\}$.
+        \item Montrer que $R(\theta)\in\M_2(\C)$ est toujours diagonalisable.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $\X_{R(\theta)}=X^2-\Tr(R(\theta))+\det(R(\theta))=X^2-2\cos\theta X+1$, $\Delta=4(\cos^2\theta-1)\leq 0$.\\
+    Si $\theta\in]0,2\pi[$ et $\theta\neq\pi$, alors $\Delta<0$ et $\X_{R(\theta)}$ n'est pas scindé donc pas diagonalisable.\\
+    Si $\theta=0$, alors $R(\theta)=I_n$ diagonalisable. Si $\theta=\pi$, alors $R(\theta)=-I_2$ diagonalisable.\\
+    \boxed{2.} On a toujours $\X_{R(\theta)}=X^2-2\cos\theta X+1 = (X-e^{i\theta})(X-e^{-i\theta})$.\\
+    Si $\theta\in\{0,\pi\}$, alors $R(\theta)$ est diagonalisable dans $\M_2(\R)$ donc dans $\M_2(\C)$.\\
+    Sinon, $e^{i\theta}\neq e^{-i\theta}$ puis $\X_{R(\theta)}$ est SRS dans $\C[X]$, donc $R(\theta)$ est diagonalisable.
+\end{exercice}
+
+\begin{prop}{Rotation dans un espace orienté.}{}
+    Soit $(E, \Lg\.,\.\Rg)$ euclidien de dimension 2 et orienté.\\
+    Soit $u\in\SO(E)$ et $\B$ une base directe de $E$. Alors $\exists!\theta\in[0,2\pi[, ~ \Mat_\B(u)=R(\theta)$.
+    \tcblower
+    Puisque $\B$ est une b.o.n. de $E$, $\Mat_\B(u)\in O_2(\R)$, et $\det(u)=1$ donc $\det(\Mat_\B(u))=1$.\\
+    Donc $\exists!\theta\in[0,2\pi], ~ \Mat_\B(u)=R(\theta)$.\\
+    Soient $\B,\B'$ deux bases directes de $E$. Notons $P\in \SO_2(\R)$ la matrice de passage de $\B$ à $\B'$.\\
+    Alors $\Mat_\B(u)=P\Mat_{\B'}(u)P^{-1}$, donc $\exists!\theta''\in[0,2\pi[, ~ P=R(\theta'')$.\\
+    Donc $\Mat_\B(u)=P\Mat_{\B'}(u)P^{-1} \iff R(\theta)=R(\theta'')R(\theta')(R(\theta)'')^{-1}=R(\theta')$.
+\end{prop}
+
+\begin{prop}{}{}
+    \begin{equation*}
+        O_2(\R) \setminus \SO_2(\R) = \left\{ \begin{pmatrix}\cos\theta & \sin\theta \\ \sin\theta & -\cos\theta \end{pmatrix}, ~ \theta\in[0,2\pi[ \right\}.
+    \end{equation*}
+    \tcblower
+    \boxed{\subset} Pareil qu'en proposition \ref{prop:11}.\\
+    \boxed{\supset} Soit $S(\theta)=\begin{pmatrix}\cos\theta&\sin\theta \\ \sin\theta & -\cos\theta\end{pmatrix}$.\\
+    On a $\det(S(\theta))=-(\cos^2\theta+\sin^2(\theta))=-1$ donc $S(\theta)\in O_2(\R)\setminus\SO_2(\R)$, et $S(\theta)^2=I_2$.
+\end{prop}
+
+\begin{prop}{}{}
+    $S(\theta)=\begin{pmatrix}\cos\theta&\sin\theta\\\sin\theta&-\cos\theta\end{pmatrix}\in O_2(\R)\setminus\SO_2(\R)$ est diagonalisable pour tout $\theta\in\R$ et $S(\theta)=R(\frac{\theta}{2})\begin{pmatrix}1&0\\0&-1\end{pmatrix}R(\frac{\theta}{2})^{-1}$.
+    \tcblower
+    $\X_{S(\theta)}=X^2-\Tr(S(\theta))X+\det(S(\theta))=(X-1)(X+1)$, donc $\X_{S(\theta)}$ est SRS donc $S(\theta)$ est diagonalisable.\\
+    De plus, par Cayley-Hamilton, $S(\theta)^2=I_n$ donc $S(\theta)$ est une symétrie.
+    \begin{align*}
+        R\left( \frac{\theta}{2} \right)\begin{pmatrix}1&0\\0&-1\end{pmatrix}R\left( \frac{\theta}{2} \right)^{-1} &= \begin{pmatrix}\cos\frac{\theta}{2} & \sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & -\cos\frac{\theta}{2} \end{pmatrix} \begin{pmatrix}\cos\frac{\theta}{2} & \sin\frac{\theta}{2} \\ -\sin\frac{\theta}{2} & \cos\frac{\theta}{2}\end{pmatrix} =\begin{pmatrix}\cos^2\frac{\theta}{2}-\sin^2\frac{\theta}{2} & 2\sin\frac{\theta}{2}\cos\frac{\theta}{2} \\ 2\sin\frac{\theta}{2}\cos\frac{\theta}{2} & -\cos^2\frac{\theta}{2}+\sin^2\frac{\theta}{2}\end{pmatrix}\\
+        &=\begin{pmatrix}\cos\theta & \sin\theta \\ \sin\theta & -\cos\theta \end{pmatrix} = S(\theta).
+    \end{align*}
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $E$ euclidien de dimension 2 et $u\in O(E)\setminus\SO(E)$, $u$ est une symétrie orthogonale par rapport à une droite.
+    \tcblower
+    Soit $\B$ une b.o.n. de $E$, $u$ est isométrie et $\B$ b.o.n. donc $\Mat_\B(u)\in O_2(\R)$, et $\det u=-1$.\\
+    Donc $\exists \theta \in [0,2\pi[, ~ \Mat_\B(u)=S(\theta)$. On a vu $A^2=I_2$ donc $u^2=\Id_E$, c'est une symétrie.\\
+    Or une symétrie est une isométrie ssi c'est une symétrie orthogonale, donc $u$ est une symétrie orthogonale.\\
+    Puis $\det(u)=-1$, donc $u$ n'est pas triviale, donc $u$ est symétrie orthogonale par rapport à $D=\Ker(u-\Id_E)$.
+\end{prop}
+
+\begin{ex}{}{}
+    Soit $E$ euclidien de dimension 2, $u\in\SO(E)$ et $a\in E$ unitaire. On note $\theta$ la mesure d'angle orienté de $u$.\\
+    $\hra$ $\cos\theta=\Lg a, u(a) \Rg$ et $\sin\theta=[a, u(a)]$.
+    \tcblower
+    Soit $\B=(e_1,e_2)$ une b.o.n. directe quelconque de $E$. Alors $a=a_1e_1+a_2e_2$; $\Mat_\B(u)=R(\theta)$.\\
+    Alors $\Lg a, u(a) \Rg  = a_1(\cos\theta a_1 - \sin\theta a_2) + a_2(\sin\theta a_1 + \cos\theta a_2) = \cos\theta\|a\|^2=\cos\theta$.\\
+    Et $[a,u(a)]=\det_\B(a,u(a))=\sin(\theta)(a_1^2+a_2^2)=\sin\theta$.
+\end{ex}
+
+\section{Réduction des isométries.}
+
+\begin{prop}{}{}
+    Soit $u\in O(E)$ et $F$ un sous-espace de $E$ stable par $u$. Alors $u(F) = F$ et $u(F^\bot)\subset F^\bot$.\\
+    De plus, $u_F\in O(F)$ et $u_{F^\bot}\in O(F^\bot)$.
+    \tcblower
+    Notons $n$ la dimension de $E$ et $p$ la dimension de $F$.\\
+    Par hypothèse, $u(F)\subset F$, et $u$ est bijectif donc $\dim u(F) = \dim F$ donc $u(F)=F$.\\
+    Soit $y\in u(F^\bot)$ : $\exists x \in F^\bot, ~ y=u(x)$ et $z\in F$ : $\exists t \in F, ~ z=u(t)$.\\
+    Puis $\Lg y, z \Rg = \Lg u(x), u(t) \Rg = \Lg x,t\Rg = 0$ donc $u(F^\bot)\subset F^\bot$.\\
+    On a $\forall x \in E, ~ \|u(x)\|=\|x\| \ra \forall x \in F, ~ \|u_F(x)\|=\|x\|$, les endomorphismes induits sont toujours isométries.
+\end{prop}
+
+\vspace*{-0.5cm}
+
+\begin{rappel}{Chapitre 9, Exemple 22.}{}
+    Soit $E$ un $\R$-evdf et $u\in\L(E)$. Alors il existe au moins une droite ou un plan stable par $u$.
+\end{rappel}
+
+\vspace*{-0.5cm}
+
+\begin{thm}{Réduction des isométries. $\star$}{}
+    \begin{enumerate}
+        \item Soit $E$ de dimension $n$ et $u\in O(E)$, alors il existe $\B$ telle que $\Mat_\B(u)=\Diag(R(\theta_1),...,R(\theta_s),I_p,-I_q)$.\\
+        Avec $2s+p+q = n$.
+        \item Soit $A\in O_n(\R)$. Alors $A$ est orthogonalement semblable à une matrice de la forme précédente.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Par récurrence forte sur $n$.\\
+    Si $n=1$, alors les seules applications linéaires en dimension 1 sont les homothéties.\\
+    Les seules homothéties qui sont des isométries sont $\pm\Id_E$, le résultat est trivial.\\
+    Si $n=2$, alors $u$ est une isométrie du plan :\\
+    $\hra$ Si $u$ est une rotation, il existe $\B$ b.o.n. de $E$ et $\theta\in\R$ tq $\Mat_\B(u)=R(\theta)$.\\
+    $\hra$ Si $u$ est une symétrie orthogonale selon une droite, il existe $\B$ b.o.n. de $E$ telle que $\Mat_\B(u)=\Diag(1,-1)$.\\
+    Soit $n\geq3$ tel que $\forall k < n$ ... Soit $u\in O(E)$ et $H$ stable par $u$, alors $u(H^\bot)\subset H^\bot$.\\
+    On a $\dim(H)<\dim(E)=n+1$ et $\dim(H^\bot)\leq \dim(E)$, on applique l'hypothèse de récurrence.\\
+    Il existe $\B_1$ base de $H$ et $\B_2$ base de $H^\bot$ tq $\Mat_{\B_1}(u_{|H})$ et $\Mat_{\B_2}(u_{|H^\bot})$ de la bonne forme.\\
+    On pose $\B=\B_1\sqcup \B_2$ qui est b.o.n. de $E$, et $\Mat_\B(u)=\Diag(\Mat_{\B_1}(u_{|H}), \Mat_{\B_2}(u_{|H^\bot}))$.\\
+    Quitte à permuter les vecteurs de $\B$, $\Mat_\B(u)$ a la forme voulue.\\
+    \boxed{2.} Soit $A\in O_n(\R)$, et $u$ son alca. D'après le 1, il existe $\B$ b.o.n. de $E$ telle que $\Mat_\B(u)=...$\\
+    Notons $P$ la matrice de passage de $\B_C$ à $\B$, alors $P\in O_n(\R)$ puis $A=P\Diag(...)P^{-1}$.\\
+    \bf{Remarque.} On peut imposer l'unicité avec $p,q\in\{0,1\}$.
+\end{thm}
+
+\vspace*{-0.5cm}
+
+\begin{corr}{Réduction des matrices de rotation.}{}
+    Soit $A\in\SO_n(\R)$.\\
+    $\hra$ Si $n$ est pair, $A$ est orthogonalement semblable à $\Diag(R(\theta_1),...,R(\theta_s))$ avec $2s=n$.\\
+    $\hra$ Si $n$ est impair, $A$ est orthogonalement semblable à $\Diag(R(\theta_1),...,R(\theta_s),1)$.
+    \tcblower
+    Par le théorème précédent, $A$ est orthogonalement semblable à $\Diag(R(\theta_1),...,R(\theta_s),I_p,-I_q)$.\\
+    Et $\det(A)=(-1)^q$ donc $\det(A)=1\iff q$ pair donc $q=0$ et si $n$ pair, $p=n-2s=0$; sinon $p=1$.
+\end{corr}
+
+\begin{prop}{}{}
+    $\SO_n(\R)$ est connexe par arcs.
+    \tcblower
+    Soit $A\in\SO_n(\R)$. Par théorème de réduction, il existe $P\in O_n(\R)$, ~ $A=P\Diag(R(\theta_1),...,R(\theta_s),I_p)P^{-1}$.\\
+    On pose $\phi:t\mapsto P\Diag(R(t\theta_1),...,R(t\theta_s),I_p)P^{-1}\in\SO_n(\R)$, continue sur $[0,1]$ car tous les coefficients de $\phi(t)$ sont des combinaisons linéaires de $\cos(t\theta_i)$ et $\sin(t\theta_i)$, et $\phi(0)=I_n$, $\phi(1)=A$.
+\end{prop}
+
+\begin{ex}{}{}
+    \begin{enumerate}
+        \item Déterminer les matrices de $O_n(\R)$ diagonalisables.
+        \item Montrer que toutes les matrices de $O_n(\R)$ sont diagonalisables dans $\M_n(\C)$.
+    \end{enumerate}
+\end{ex}
+
+\end{document}

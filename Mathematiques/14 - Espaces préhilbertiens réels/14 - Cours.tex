@@ -12,6 +12,8 @@
 \renewcommand*{\D}{\cursive{D}}
 \newcommand*{\SO}{\nt{SO}}
 
+\vspace*{-0.8cm}
+
 \section{Révisions.}
 
 \begin{defi}{Produit scalaire.}{}
@@ -959,6 +961,8 @@
     \end{equation*}
 \end{prop}
 
+\vspace*{-0.7cm}
+
 \begin{exercice}{}{}
     Soit $A\in\M_n(\R)$ avec $n\geq3$. Montrer que $A=\Com(A)\iff \left[ A = 0 \ou A \in \SO_n(\R) \right]$.
     \tcblower
@@ -969,5 +973,158 @@
     Finalement, $\det(A)=1$ puis $AA^\top = I_n$ donc $A\in\SO_n(\R)$.\\
     Sinon, $\rg(A)<n$ donc $\det(A)=0$ donc $A(\Com A)^\top = 0$ donc $AA^\top = 0$ donc $A=0$
 \end{exercice}
+
+\vspace*{-0.7cm}
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item $D\in O_n(\R)\cap\D_n(\R)\iff D=\Diag(\l_i)$ où $\l_i\in\{-1,1\}$.
+        \item Soit $T\in O_n(\R)\cap T_n^+(\R)$, $T\in O_n(\R)\iff \forall i,j, ~ \Lg C_i, C_j \Rg = \d_{i,j}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{2.} $\|C_1\|^2=\Lg C_1,C_1\Rg = a_{1,1}^2=1 \iff a_{1,1}\in\{-1,1\}$.\\
+    $\Lg C_1,C_2\Rg=a_{1,1}a_{1,2}+0=0\iff a_{1,2}=0$, $\|C_2\|^2=a_{2,2}=1\iff a_{2,2}\in\{-1,1\}$...\\
+    Par récurrence, $\forall i,j \in \lb1,n\rb, ~ a_{i,j}=\pm\d_{i,j}$. (Pareil que la question précédente)
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $A\in O_p(\R)$.
+    \begin{enumerate}
+        \item Montrer que $\Ker(A-I_p)$ et $\Im(A-I_p)$ sont en somme directe orthogonale dans $\R^p$.
+        \item Soit $(A_n)_n\in\M_N(\R)$ et $A\in\M_N(\R)$. Vérifier que $A_n\to A$ ssi $\forall X \in \M_{N,1}(\R), ~ A_nX\to AX$.
+        \item On pose $A_n = \frac{1}{n}\sum_{k=0}^{n-1}A^k$. Déterminer $\lim A_n$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On rappelle que si $F,G$ sont deux ssev de $(E,\Lg\.,\.\Rg)$ préhilbertien réel. Alors $F\bot G \ra F\oplus G$.\\
+    Soit $X\in\Ker(A-I_p)$ et $Y\in\Im(A-I_p)$. Alors $AX=X$ et $\exists Z \in \R^p, ~ Y=AZ-Z$.\\
+    Alors $\Lg X,Y\Rg = \Lg X, AZ\Rg - \Lg X,Z\Rg = \Lg AX, AZ\Rg - \Lg X,Z\Rg = 0$ car $A\in O_p(\R)$.\\
+    Déjà, $\Ker(A-I_p)\oplus\Im(A-I_p)$ puis par théorème du rang, $\R^p=\Ker(A-I_p)\oplus\Im(A-I_p)$.\\
+    \boxed{2.\ra} Par hypothèse, $A_n\to A$ i.e. $\abs A_n-A\abs\to 0$ (toutes les normes sont équivalentes en dim. finie).\\
+    Soit $X\in\R^N$ non nul tq $\|A_nX - AX\| = \|(A_n-A)X\|\leq\abs A_n - A\abs\|X\|\to0$ donc $A_nX\to AX$.\\
+    \boxed{2.\la} Par hypothèse, $\forall X \in \R^N, ~ A_nX\to AX$ donc $\forall i \in \lb1,N\rb, ~ A_nE_i = AE_i$.\\
+    Donc $\forall i,j, ~ [A_n]_{i,j} \to [A]_{i,j}$ donc $A_n\to A$.\\
+    \boxed{3.} Soit $X\in\M_{n,1}(\R)$, par 1 : $X=Y+Z$ donc $AY=Y$ et $Z=AU-U$ ($U\in\R^p$).\\
+    Donc $\forall k \in \N, ~ A^kX=A^kY+A^kZ = Y + A^{k+1}U - A^kU$.\\
+    Alors $A_nX=\frac{1}{n}\sum_{k=0}^{n-1}(Y + A^{k+1}U - A^kU)=Y+\frac{1}{n}(A^nU -U)$.\\
+    Or $A\in O_p(\R)$ donc $\forall n \in \N, ~ A^n \in O_p(\R)$ puis $\forall n \in \N, ~ \forall U \in \R^p, ~ \|A^nU\|=\|U\|$.\\
+    Ainsi, $\forall n \in \N^*, ~ \| A_nX-Y\|=\frac{1}{n}\|A^nU-U\|\leq\frac{1}{n}(\|A^nU\|+\|U\|)=\frac{2\|U\|}{n}\to0$ donc $A_nX\to Y$.\\
+    Or $Y$ est le projeté orthogonal de $X$ sur $\Ker(A-I_p)$. Notons $\B$ la matrice de projection orthogonale sur $\Ker(A-I_p)$, alors $A_n\to \B$ avec le 2.
+\end{exercice}
+
+\section{Khôlles.}
+
+\begin{exercice}{}{}
+    Soit $(H,\Lg\.,\.\Rg)$ un espace préhilbertien, et $T\in\L(H)$ continu et auto-adjoint.\\
+    Montrer que $\abs T \abs = \sup\limits_{\|x\|=1}|\Lg T(x), x \Rg|$.
+    \tcblower
+    On note $C=\sup_{\|x\|=1}|\Lg T(x),x\Rg|$.\\
+    \boxed{\geq} Soit $x\in S(0,1)$. Alors $|\Lg T(x), x \Rg| \leq \|T(x)\|\cancel{\|x\|} \leq \abs T\abs\cancel{\|x\|}$ par Cauchy-Schwarz.\\
+    Par passage au sup, $C \leq \abs T\abs$.\\
+    \boxed{\leq} Soient $x,y\in S(0,1)$ avec $y\neq \pm x$. Alors :\\
+    $\hra$ $\Lg T(x+y), x+y \Rg = \Lg T(x), x\Rg + \Lg T(x), y\Rg + \Lg T(y), x \Rg + \Lg T(y), y \Rg$.\\
+    $\hra$ $\Lg T(x-y), x-y \Rg = \Lg T(x), x\Rg - \Lg T(x), y\Rg - \Lg T(y), x \Rg + \Lg T(y), y \Rg$.\\
+    Par différence : $\Lg T(x+y), x+y\Rg - \Lg T(x-y), x-y \Rg = 2\Lg T(x), y\Rg + 2\Lg T(y), x\Rg = 4\Lg T(x), y \Rg$.\\
+    Donc $4\Lg T(x), y\Rg = \|x+y\|^2\Lg T(\frac{x+y}{\|x+y\|}), \frac{x+y}{\|x+y\|}\Rg + \|x-y\|^2\Lg T(\frac{x-y}{\|x-y\|}), \frac{x-y}{\|x-y\|}\Rg\leq C(\|x+y\|^2 + \|x-y\|^2)$.\\
+    Donc $4\Lg T(x), y \Rg \leq 2C(\|x\|+\|y\|)$ puis $\Lg T(x), y \Rg \leq C$.\\
+    On spécifie en $y=\frac{T(x)}{\|T(x)\|}\in S(0,1)$ (si $\|T(x)\|\neq0$).\\
+    Alors $\frac{1}{\|T(x)\|}\|T(x)\|^2 \leq C$ puis $\|T(x)\|\leq C$ donc par passage au sup, $\abs T\abs \leq C$.\\
+    Si $\|T(x)\|=0$, alors $\|T(x)\|\leq C$ puisque $C\geq0$, puis par passage au sup, $\abs T \abs \leq C$.\\
+    Si $T(x) = \pm x$, c'est trivial.\\
+    Par double-inégalité, $\abs T\abs = C$.
+\end{exercice}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    Soient $u,v\in\R^n$ (canonique euclidien) unitaires et orthogonaux et $f:x\mapsto x+\Lg v,x \Rg u + \Lg u,x\Rg v$.\\
+    Montrer que $f$ est un endomorphisme diagonalisable.
+    \tcblower
+    C'est un endomorphisme (facile).\\
+    $\hra$ $f(u+v)=(u+v)+\Lg v,u\Rg u + \Lg v, v \Rg u + \Lg u, u\Rg v + \Lg u, v\Rg v = 2(u+v)$ et $f(u-v)=0$.\\
+    De plus, $\|u+v\|^2=\|u\|^2+\|v\|^2=\|u-v\|^2\neq0$, donc $u+v$ et $u-v$ sont $\vp$ de $f$, associés aux vp 2 et 0.\\
+    Alors $\forall x \in E, ~ f(x)-x = \Lg v,x\Rg u + \Lg u,x \Rg v$, donc $u^\bot \cap v^\bot \in E_1(f)$, et $\dim u^\bot \cap v^\bot = \dim(\Vect(u)\oplus \Vect(v))^\bot = n-2$.\\
+    Donc $\dim E_1(f)=n-2$, $\dim E_0 \geq 1$ et $\dim E_2(f) \geq 1$, puis $E_0(f)\oplus E_1(f) \oplus E_2(f)\subset \R^n \ra n \leq \dim E_0(f) + \dim E_1(f) + \dim E_2(f) \leq n$.
+    Puis $\dim E_0(f) = \dim E_2(f) = 1$, et $\dim E_1(f)=n-2$ donc $f$ est diagonalisable.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Calculer
+    \begin{equation*}
+        D=\inf_{(a_1,...,a_n) \in \R^n} \int_0^{+\infty} e^{-x}(1+a_1x+...+a_nx^n)^2\dx
+    \end{equation*}
+    \tcblower
+    Soient $a_1,...,a_n\in\R^n$. Posons $f(x)=e^{-x}(1+...+a_nx^n)$ avec $f$ cpm sur $[0,+\infty[$.\\
+    En $+\infty$ : Notons $p=\max\{k \in \lb1,n\rb, ~ a_k \neq 0\}$. S'il n'existe pas, $f$ est intégrable. Sinon $f(x)=o(\frac{1}{n^2})$.\\
+    On a $\Lg f, g \Rg = \int_{\R_+}e^{-x}f(x)g(x)\dx$ définit un produit scalaire sur $\R_n[X]$ :\\
+    $\hra$ Bilinéaire, symétrique; définie positive car $g:x\mapsto e^{-x}f^2(x)$ est continue positive sur $\R_+$ et $\int_{\R_+}g(x)\dx=0$ alors $\forall x, ~ g(x)=0 \ra \forall x, ~ f(x)=0$ donc $f$ est nulle sur par rigidité.\\
+    On note $F=\Vect(X,...,X^n)$ avec $F$ de dimension finie donc $p_F$ projection orthogonale existe
+    \begin{equation*}
+        D=d^2(-1,F) = \Lg -1, -p_F(-1)-1\Rg = \Lg 1, p_F(-1)+1\Rg 
+    \end{equation*}
+    Et $\exists \l_1,...,\l_n \in \R, ~ p_F(-1)=\sum_{i=1}^n\l_ix^i$.
+    \begin{align*}
+        p_F(-1)+1 \in F^\bot &\iff \forall i \in \lb1,n\rb, ~ \Lg p_F(-1) + 1, x^i \Rg = 0\\
+        &\iff \forall i \in \lb1,n\rb, ~ \int_{\R_+}e^{-x}(1+\sum_{k=1} \l_k x^k)x^i\dx = 0\\
+        &\iff \forall i \in \lb1,n\rb, ~ \G(i+1) + \int_{\R_+}e^{-x}\sum_{k=1}^n \l_k x^{i+k}\dx=0\\
+        &\iff \forall i \in \lb1,n\rb, ~ \sum_{k=1}^n\l_k(k+i)! = -i!.
+    \end{align*}
+    On pose (naturellement) $Q(X)=1+\sum_{k=1}^n\l_k\prod_{j=1}^k(X+j)$.
+    \begin{equation*}
+        \forall i,j \in \lb1,n\rb, ~ Q(i) = 1 + \sum_{k=1}^n\l_k\frac{(k+i)!}{i!} = 1+-1=0.
+    \end{equation*}
+    On a $\deg(Q)\leq n$ et $\forall i \in \lb1,n\rb, X-i\mid Q$, et $X-i$ premiers entre eux 2-à-2.\\
+    Donc $\prod_{j=1}^n(X-j)\mid Q$ puis $Q=\a\prod_{j=1}^n(X-j)$.
+    \begin{equation*}
+        d^2(1,p_F(-1)+1) = 1+\sum_{k=1}^na_kk!; \quad \a = \frac{Q(-1)}{\prod_{j=1}^n(-1-j)} = \frac{1}{(-1)^n(n+1)!}.
+    \end{equation*}
+    Puis $d^2(1,p_F(-1)+1)=Q(0)=\frac{(-1)^n}{(n+1)!}(-1)^nn!=\frac{1}{n+1}$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace préhilbertien réel et $\B=(e_1,...,e_n)$ une famille libre unitaire telle que
+    \begin{equation*}
+        \forall x \in E, ~ \|x\|^2 = \sum_{i=1}^n\Lg x, e_i\Rg^2
+    \end{equation*}
+    Montrer que $\B$ est une b.o.n. de $E$.
+    \tcblower
+    On note $p_\B$ le projeté orthogonal sur $\Vect(\B)$. Soit $i\in\lb1,n\rb$.
+    \begin{equation*}
+        1=\|e_i\|^2 = \sum_{j=1}^n\Lg e_i, e_j \Rg^2 = 1 + \sum_{j\neq i}^n\Lg e_i, e_j \Rg^2 \ra \forall j \in \lb1,n\rb, ~ \Lg e_i, e_j\Rg =0.
+    \end{equation*}
+    Donc $\B$ est orthogonale puis orthonormée. Puis :
+    \begin{equation*}
+        p_\B(x) = \sum_{i=1}^n\Lg x,e_i\Rg e_i \ra \|p_\B(x)\|^2 = \sum_{i=1}^n \Lg p_\B(x), e_i\Rg^2 = \sum_{i=1}^n\left( \sum_{j=1}^n \Lg x, e_j \Rg\Lg e_j,e_i\Rg\right)^2 = \sum_{i=1}^n\Lg x,e_i\Rg^2=\|x\|^2.
+    \end{equation*}
+    Donc $x=p_\B(x)+(x-p_\B(x))$ donc $\|x\|^2=\|p_\B(x)\|^2+\|x-p_\B(x)\|^2$.\\
+    Donc $\|x-p_\B(x)\|=0\ra x=p_\B(x)$ puis $x\in\Vect(\B)$ i.e. $E\subset\Vect(\B)$ donc $E=\Vect(\B)$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit le produit scalaire sur $\R_n[X]$ :
+    \begin{equation*}
+        \Lg P, Q \Rg = \int_{-\infty}^{+\infty}P(t)Q(t)e^{-t^2}\dt
+    \end{equation*}
+    \begin{enumerate}
+        \item Vérifier que c'est un produit scalaire.
+        \item Montrer que $u:P\mapsto P''-2XP'$ est un endomorphisme auto-adjoint.
+        \item Soit $(P_k)_k$ l'orthonormée de Schmidt de $(X^k)_{k\in\lb0,n\rb}$. Donner $u(p_k)$ avec $k\in\lb0,n\rb$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soient $P,Q\in\R_n[X]$ et $t\mapsto P(t)Q(t)e^{-t^2}$ cpm sur $\R$.\\
+    Les problèmes de convergence sont localisés en $+\infty$ et $-\infty$.\\
+    \boxed{+\infty} $P(t)Q(t)e^{-t^2}=o\left( \frac{1}{t^2} \right)$, donc l'intégrale est convergente.\\
+    \boxed{-\infty} Pareil.\\
+    \boxed{2.} Montrons que $\Lg u(P),Q\Rg = \Lg P, u(Q)\Rg$.
+    \begin{equation*}
+        \Lg u(P), Q\Rg = \int_{-\infty}^{+\infty}(P''(t)-2tP'(t))Q(t)e^{-t^2}\dt
+    \end{equation*}
+    Étudions $\int_{-\infty}^{+\infty}2tP'(t)Q(t)e^{-t^2}\dt$. On pose $f'(t)=2te^{-t^2}$ et $f(t)=-e^{-t^2}$.\\
+    Et $g(t)=P'(t)Q(t)$, $g'(t)=P''(t)Q(t)+P'(t)Q'(t)$; $f$ et $g$ sont $\cursive{C}^1$ sur $\R$ et $f(t)g(t)=-P'(t)Q'(t)e^{-t^2}\to_{\pm\infty}0$.\\
+    On a $\int_{-\infty}^{+\infty}2tP'(t)Q(t)e^{-t^2}\dt=\left[ -P'(t)Q(t)e^{-t^2} \right]_{-\infty}^{+\infty}+\int_{-\infty}^{+\infty}P''(t)Q(t)e^{-t^2}\dt+\int_{-\infty}^{+\infty}P'(t)Q'(t)e^{-t^2}\dt$.\\
+    C'est égal à $-\int_{-\infty}^{+\infty}P'(t)Q'(t)e^{-t^2}\dt=\Lg P,u(Q)\Rg$ par symétrie des lettres.\\
+    \boxed{3.} Soient $i,k\in\lb0,n\rb$. Si $i>k$, $\Lg u(P_k,P_i)=0$ car $\deg(P_i)=i$; $\deg(P_k)=k$ et $\Vect(P_i)\bot\R_{i-1}[X]\supset\R_k[X]=\Vect(P_{i-1},...,P_0)$.\\
+    Si $i\leq k$, $\Lg u(P_k), P_i \Rg = \Lg P_k, u(P_i)\Rg =0$, $u(P_k) =\sum_{i=0}^n\Lg u(P_k),P_i\Rg P_i=\Lg u(P_k),P_k\Rg P_k$. 
+\end{exercice}
+
 
 \end{document}

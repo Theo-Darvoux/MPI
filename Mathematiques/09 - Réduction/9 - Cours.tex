@@ -123,7 +123,7 @@
 \begin{defi}{Polynôme matriciel.}{}
     Soit $P=(a_nX^n)_n\in\K[X]$, et $A\in M_n(\K)$ pour $n\in\N^*$.
     \begin{equation*}
-        P(A)=a_0 I_n + a_1 A + ... + a_NA^N \in M_n(\K)
+        P(A)=a_0 I_n + a_1 A + ... + a_NA^N \in \M_n(\K)
     \end{equation*}
 \end{defi}
 
@@ -132,9 +132,9 @@
     \tcblower
     Propriétés :
     \begin{enumerate}
-        \item $\Pi_A$ est le polynôme de plus bas degré qui annulle $A$.
-        \item $P(A)=0_{M_n(\K)}\ra \Pi_A \mid P$.
-        \item $\K[A]$ est une algèbre commutative de $(M_n(\K),+,\times,\cdot)$, $\K[A]=\Vect(I_n,A,...,A^{d-1})$.
+        \item $\Pi_A$ est le polynôme de plus bas degré qui annule $A$.
+        \item $P(A)=0_{\M_n(\K)}\ra \Pi_A \mid P$.
+        \item $\K[A]$ est une algèbre commutative de $(\M_n(\K),+,\times,\cdot)$, $\K[A]=\Vect(I_n,A,...,A^{d-1})$.
         \item $\deg \Pi_A = 1 \iff \exists \l \in \K, ~ A = \l I_n$.
     \end{enumerate}
 \end{prop}
@@ -161,7 +161,7 @@
 \begin{prop}{Inverses.}{}
     \begin{enumerate}
         \item $u\in\L(E)$, admettant un polynôme minimal, alors $u\in \GL(E)\iff \Pi_u(0)\neq0$ puis $u^{-1}\in\K[u]$.
-        \item $A\in M_n(\K)$ admettant un polynôme minimal, alors $A\in\GL_n(\K)\iff \Pi_A(0)\neq0 \et A^{-1}\in\K[A]$.
+        \item $A\in \M_n(\K)$ admettant un polynôme minimal, alors $A\in\GL_n(\K)\iff \Pi_A(0)\neq0 \et A^{-1}\in\K[A]$.
     \end{enumerate}
     \tcblower
     \boxed{1.\ra} Notons $\Pi_u=a_0+...+a_nX^n$, par l'absurde, sq $a_0=0$, alors $\Pi_u(u)=0_{\L(E)}\ra a_1u + ... + a_nu^n=0_{\L(E)}$.\\
@@ -217,7 +217,7 @@
 \vspace*{-0.5cm}
 
 \begin{app}{}{}
-    Soit $A\in M_N(\K)$, on cherche à calculer $A^n$ pour $n\in\N$.\\
+    Soit $A\in \M_N(\K)$, on cherche à calculer $A^n$ pour $n\in\N$.\\
     On fait la division euclidienne de $P$ par $\Pi_A$ : $P=\Pi_AQ+R$ avec $\deg(R)<\deg(\Pi_A)$.\\
     Alors $P(A)=\Pi_A(A)Q(A)+R(A)=R(A)$.
 \end{app}
@@ -225,7 +225,7 @@
 \vspace*{-0.6cm}
 
 \begin{ex}{}{}
-    Soit $A\in M_N(\K)$ tel que $\Pi_A=(X-1)(X-2)$. Calculer $A^n$ pour tout $n\in\N$.
+    Soit $A\in \M_N(\K)$ tel que $\Pi_A=(X-1)(X-2)$. Calculer $A^n$ pour tout $n\in\N$.
     \tcblower
     On a $\deg(\Pi_A)=2$, donc $\K[A]=\Vect(I_N, A)$, donc $\forall n \in \N, ~ \exists (\a_n, \b_n)\in\K^2, ~ A^n = \a_nI_n + \b_nA$.\\
     Puis $X^n=(X-1)(X-2)Q_n+R_n$ avec $Q_n,R_n\in\K[X]$ et $\deg(R_n)<2$, donc $R_n$ de la forme $a_nX+b_n$.\\
@@ -236,7 +236,7 @@
 \vspace*{-0.6cm}
 
 \begin{ex}{}{}
-    Soit $A\in M_n(\K)$, telle que $\Pi_A=(X-1)(X-2)$ et $A^n=\a_nI_N+\b_nA+\g_nA^2$. Déterminer $\a_n,\b_n,\g_n$. 
+    Soit $A\in \M_n(\K)$, telle que $\Pi_A=(X-1)(X-2)$ et $A^n=\a_nI_N+\b_nA+\g_nA^2$. Déterminer $\a_n,\b_n,\g_n$. 
 \end{ex}
 
 \vspace*{-0.6cm}
@@ -413,7 +413,7 @@
     \begin{equation*}
         (E) ~ : ~ y'' - 5y' + 6y = 0.
     \end{equation*}
-    On noste $S$ l'ensemble des solutions de $E$, ssev de $\cursive{C}^2(\R,\R)$.\\
+    On note $S$ l'ensemble des solutions de $E$, ssev de $\cursive{C}^2(\R,\R)$.\\
     On connaît une base de $S$ en résolvant $r^2-5r+6=(r-2)(r-3)=0$.\\
     Alors $S=\Vect(x\mapsto e^{2x}, x\mapsto e^{3x})$, et $\dim(S)=2$.
     \tcblower
@@ -448,7 +448,7 @@
     Soit $\forall (x,y) \in \R^2, ~ u(x,y)=(2x-y,x)$, $u\in\L(R^2)$.
     \begin{equation*}
         \begin{cases}2x-y=\l x\\x=\l y\end{cases}  \iff \begin{cases} (2-\l)x - y = 0 \\ x - \l y = 0\end{cases} \iff \begin{pmatrix}{2-\l}&-1\\1&-\l\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}0\\0\end{pmatrix}\iff X \in \Ker A
-    \end{equation*} ;
+    \end{equation*}
     Il existe une solution $X$ non nulle ssi $\Ker(A)\neq(0)$ ssi $A\notin\GL_2(\R)$ ssi $\det(A)=0$.\\
     Or $\det(A)=-\l(2-\l)+1=(\l-1)^2$ donc $\det(A)=0$ ssi $\l = 1$ donc $(x,y)\in E_1 \iff x=y$. $E_1=\Vect((1,1))$
 \end{ex}
@@ -553,9 +553,9 @@
 \vspace*{-0.8cm}
 
 \begin{defi}{}{}
-    Soit $A\in M_n(\K)$. $\l\in\K$ est valeur propre de $A$ ssi $\exists X \in M_{n,1}(\K)$ non-nul tel que $AX=\l X$.\\
-    On note $E_\l = \Ker(A-\l I_n)=\{X\in M_{n,1}(\K),  ~AX=\l X\}$.
-    Les valeurs propres de $A$ sont incluses dans l'ensemble des racines de tout polynôme annulateur. Les valeurs propress de $A$ sont exactement racines du polynôme annulateur $\Pi_A$. Une matrice de $M_n(\K)$ possède $n$ valeurs propres distinctes.
+    Soit $A\in \M_n(\K)$. $\l\in\K$ est valeur propre de $A$ ssi $\exists X \in \M_{n,1}(\K)$ non-nul tel que $AX=\l X$.\\
+    On note $E_\l = \Ker(A-\l I_n)=\{X\in \M_{n,1}(\K),  ~AX=\l X\}$.
+    Les valeurs propres de $A$ sont incluses dans l'ensemble des racines de tout polynôme annulateur. Les valeurs propress de $A$ sont exactement racines du polynôme annulateur $\Pi_A$. Une matrice de $\M_n(\K)$ possède $n$ valeurs propres distinctes.
 \end{defi}
 
 \vspace*{-0.8cm}
@@ -563,7 +563,7 @@
 \subsection{En dimension finie.}
 
 \begin{rappel}{}{}
-    Soit $E$ un $\K$-evdf, $\B=(e_1,...,e_n)$ base de $E$, $u\in\L(E)$, $A=\Mat_\B(u)\in M_n(\K)$.
+    Soit $E$ un $\K$-evdf, $\B=(e_1,...,e_n)$ base de $E$, $u\in\L(E)$, $A=\Mat_\B(u)\in \M_n(\K)$.
     \begin{itemize}
         \item $\l\in\Sp(u) \iff \det(u-\l\Id_E)=0 \iff \rg(u-\l\Id_E)<n$.
         \item $\l\in\Sp(u) \iff \det(A-\l I_n)=0 \iff \rg(A-\l I_n)<n$.
@@ -574,15 +574,15 @@
 \vspace*{-0.8cm}
 
 \begin{defi}{Polynôme caractéristique.}{}
-    Soit $A\in M_n(\K)$. On pose $\forall \l \in \K, ~ P(\l)=\det(\l I_n-A)$.\\
+    Soit $A\in\M_n(\K)$. On pose $\forall \l \in \K, ~ P(\l)=\det(\l I_n-A)$.\\
     $P$ est un polynôme de degré $n$, unitaire, noté $\X_A$ appelé polynôme caractéristique de $A$.\\
     De plus, $\X_A = X^n-(\Tr(A))X^{n-1}+...+(-1)^n\det(A)$.
     \tcblower
-    Soit $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}\in M_2(\K)$.
+    Soit $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}\in \M_2(\K)$.
     \begin{equation*}
         P(\l)=\det(\l I_2 - A) = \det\begin{pmatrix}\l - a & - b \\ -c & \l - d\end{pmatrix} = (\l-a)(\l-d)-bc=\l^2-(a+d)\l+ad-bc.\\
     \end{equation*}
-    Soit $A=\begin{pmatrix}1&0&4\\2&-1&1\\1&1&2\end{pmatrix}\in M_3(\K)$.
+    Soit $A=\begin{pmatrix}1&0&4\\2&-1&1\\1&1&2\end{pmatrix}\in \M_3(\K)$.
     \begin{align*}
         P(\l)&=\det\begin{pmatrix}\l-1&0&-4\\-1&\l+1&-1\\-1&-1&\l-2\end{pmatrix} = (\l-1)\det\begin{pmatrix}\l+1&-1\\-1&\l-2\end{pmatrix}-4\det\begin{pmatrix}-2&\l+1\\-1&-1\end{pmatrix}\\
         &= (\l-1)(\l^2-\l-3) - 4(\l+3) = \l^3 - 2\l^2 - 6\l + 9 
@@ -608,13 +608,13 @@
 \end{defi}
 
 \begin{prop}{$\star$}{}
-    Soit $A\in M_n(\K)$, les valeurs propres de $A$ sont exactement les racines du polynôme caractéristique.
+    Soit $A\in \M_n(\K)$, les valeurs propres de $A$ sont exactement les racines du polynôme caractéristique.
     \tcblower
     $\l\in\Sp(A) \iff A-\l I_n \notin \GL_n(\K) \iff \det(A-\l I_n) = (-1)^n\X_A(\l) = 0 \iff \X_A(\l) = 0$.
 \end{prop}
 
 \begin{ex}{Matrices triangulaires supérieures.}{}
-    Soit $A=(a_{i,j})\in T_n^+(\K)$.
+    Soit $A=(a_{i,j})\in \T_n^+(\K)$.
     \begin{equation*}
         \X_A = \det\begin{pmatrix}
             \l - a_{1,1} & \dots & \\
@@ -641,21 +641,21 @@
     \boxed{1.} $\X_A$ est de degré $n$ donc possède au plus $n$ racines distinctes. Donc au plus $n$ valeurs propres distinctes.\\
     \boxed{2.} $\X_A\in\C[X]$ et $\deg\X_A\geq1$, d'après le théorème de D'Alembert-Gauss, $\X_A$ possède au moins une racine.\\
     \boxed{3.} Si $A=$\tiny{$\begin{pmatrix}0&1\\-1&0\end{pmatrix}$}\normalsize, alors $\X_a(\l)=\l^2+1$ n'admet pas de racines réelles : $\Sp(A)=\{i,-i\}$.\\
-    Soit $\l\C$ valeur propre de $A\in M_n(\R)$. Alors $\X_A(\l)=0$ donc $\X_A(\ov{\l})=0$ i.e. $\ov{\l}$ vecteur propre de $A$.\\
+    Soit $\l\C$ valeur propre de $A\in \M_n(\R)$. Alors $\X_A(\l)=0$ donc $\X_A(\ov{\l})=0$ i.e. $\ov{\l}$ vecteur propre de $A$.\\
     De plus, $AX=\l X$ donc $\ov{AX}=\ov{\l X}$ i.e. $A\ov{X}=\ov{\l X}$ donc $\ov{X}$ vecteur propre associé à $\ov{\l}$.
 \end{prop}
 
 \begin{defi}{}{}
-    Soit $A\in M_n(\K)$ et $\l\in\Sp(A)$. La multiplicité de la valeur propre $\l$ est sa multiplicité en tant que racine de $\X_A$.
+    Soit $A\in \M_n(\K)$ et $\l\in\Sp(A)$. La multiplicité de la valeur propre $\l$ est sa multiplicité en tant que racine de $\X_A$.
 \end{defi}
 
 \begin{prop}{}{}
-    Soit $A\in M_n(\R)$, $\l\in\C\setminus\R$ valeur propre de $A$ de multiplicité $\a\in\N^*$.\\
+    Soit $A\in \M_n(\R)$, $\l\in\C\setminus\R$ valeur propre de $A$ de multiplicité $\a\in\N^*$.\\
     Alors $\ov{\l}$ est encore valeur propre de $A$ avec la même multiplicité $\a$.
 \end{prop}
 
 \begin{prop}{$\star$}{}
-    Soit $A\in M_n(\K)$ tel que $\X_A$ scindé dans $\K[X]$.\\
+    Soit $A\in \M_n(\K)$ tel que $\X_A$ scindé dans $\K[X]$.\\
     On note $\l_1,...,\l_n$ les racines de $\X_A$. Alors :
     \begin{equation*}
         \Tr(A)=\sum_{i=1}^n\l_i \quad\et\quad \det(A)=\prod_{i=1}^n\l_i.
@@ -671,7 +671,7 @@
     \begin{equation*}
         A=\begin{pmatrix}
             0&1&1&1\\1&0&1&1\\1&1&0&1\\1&1&1&0
-        \end{pmatrix}\in M_4(\R).
+        \end{pmatrix}\in \M_4(\R).
     \end{equation*}
     \tcblower
     $C_1\gets C_1 + (C_2+C_3+C_4)$, factoriser $(\l-3)$ puis $L_i \gets L_i - L_1$.
@@ -691,16 +691,16 @@
 \end{ex}
 
 \begin{exercice}{}{}
-    Soit $A=(a_{i,j})\in M_n(\C)$ et $\l$ une valeur propre de $A$.\\
+    Soit $A=(a_{i,j})\in \M_n(\C)$ et $\l$ une valeur propre de $A$.\\
     On pose $\ds r_i=\sum_{\substack{1 \leq j \leq n \\ j \neq i}}|a_{i,j}|$. Montrer que $\ds \l \in \bigcup_{i=1}^{\infty}B'(a_{i,i}, r_i)$.
     \tcblower
-    On a $\exists X \in M_{n,1}(\C)$ non nulle tel que $AX=\l X$. Soit $i_0\in\lb1,n\rb, ~ |x_{i_0}|=\max_{\lb1,n\rb}|x_i|>0$.
+    On a $\exists X \in \M_{n,1}(\C)$ non nulle tel que $AX=\l X$. Soit $i_0\in\lb1,n\rb, ~ |x_{i_0}|=\max_{\lb1,n\rb}|x_i|>0$.
     \begin{align*}
         AX=\l X &\iff \begin{cases} a_{1,1}x_1 + ... + a_{1,n}x_n = \l x_1 \\ \hspace*{0.4cm} \vdots \hspace*{3.5cm}\vdots \\ a_{n,1}x_1 + ... + a_{n,n}x_n = \l x_n \end{cases} \ra a_{i_0,1}x_1 + ... + a_{i_0,n}x_n = \l x_{i_0}\\
         &\iff (a_{i_0,i_0}-\l)x_{i_0} = -\sum_{\substack{1\leq j \leq n\\ j \neq i_0}}a_{i_0,j}x_j\\
         &\ra |\l - a_{i_0,i_0}||x_{i_0}| \leq \sum_{\substack{1\leq j \leq n \\ j \neq i_0}}|a_{i_0,j}|x_j| \leq \sum_{\substack{1\leq j \leq n\\j\neq i_0}}|a_{i_0,j}||x_{i_0}|
     \end{align*}
-    On simplifie par $|x_{i_0}|>$ : 
+    On simplifie par $|x_{i_0}|$ : 
     \begin{equation*}
         |\l - a_{i_0,i_0}| \leq \sum_{\substack{1 \leq j \leq n \\ j \neq i_0}}|a_{i_0,j}| = r_{i_0}
     \end{equation*}
@@ -710,7 +710,7 @@
 \vspace*{-0.5cm}
 
 \begin{defi}{Rayon spectral.}{}
-    Soit $A\in M_n(\K)$ telle que $\Sp(A)\neq\0$.\\
+    Soit $A\in \M_n(\K)$ telle que $\Sp(A)\neq\0$.\\
     Le rayon spectral de $A$, noté $\p(A)$ est défini par $\p(A)=\max\{|\l|, ~ \l \in \Sp(A)\}$.\\
     \bf{Remarque.} $\forall \l \in \Sp(A), ~ \l \in B'(0,\p(A))$.
 \end{defi}
@@ -718,9 +718,9 @@
 \vspace*{-0.5cm}
 
 \begin{exercice}{}{}
-    Soit $A\in M_n(\C)$. Soit $\|\cdot\|$ une norme d'algèbre sur $M_n(\C)$. Montrer que $\p(A)\leq\abs A\abs$.
+    Soit $A\in \M_n(\C)$. Soit $\|\cdot\|$ une norme d'algèbre sur $\M_n(\C)$. Montrer que $\p(A)\leq\abs A\abs$.
     \tcblower
-    Soit $\l\in\Sp(A)$ : $\exists X \in M_{n,1}(\C), ~ AX=\l X$. Et : $\forall Y \in M_{n,1}(\K), ~ \|AY\|\leq\abs A\abs\|Y\|$.\\
+    Soit $\l\in\Sp(A)$ : $\exists X \in \M_{n,1}(\C), ~ AX=\l X$. Et : $\forall Y \in \M_{n,1}(\K), ~ \|AY\|\leq\abs A\abs\|Y\|$.\\
     En particulier, $\|\l X\| = \|AX\| \leq \abs A \abs \|X\|$ puis $|\l|\|X\|\leq\abs A\abs \|X\|$ par homogénéité.\\
     Puis $|\l|\leq\abs A\abs$ en divisant par $\|X\|>0$. Par passage au max, $\p(A)\leq\abs A\abs$.
 \end{exercice}
@@ -728,7 +728,7 @@
 \vspace*{-0.5cm}
 
 \begin{prop}{$\star$}{}
-    Soit $A\in M_n(\K)$, alors $\X_{A^\top}=\X_A$. En particulier, $\Sp(A)=\Sp(A^\top)$.
+    Soit $A\in \M_n(\K)$, alors $\X_{A^\top}=\X_A$. En particulier, $\Sp(A)=\Sp(A^\top)$.
     \tcblower
     Soit $\l \in \K$.
     \begin{equation*}
@@ -739,7 +739,7 @@
 \vspace*{-0.5cm}
 
 \begin{prop}{$\star$}{}
-    Soient $A,B\in M_n(\K)$ semblables, alors $\X_A=\X_B$. La réciproque est fausse.
+    Soient $A,B\in \M_n(\K)$ semblables, alors $\X_A=\X_B$. La réciproque est fausse.
     \tcblower
     Supposons $\exists P \in \GL_n(\K), ~ A=PBP^{-1}$, et $\forall \l \in \K, ~ \l I_n - A = P(\l I_n - B)P^{-1}$.\\
     Alors $\X_A(\l)=\det(\l I_n - A) = \det(P)\times\det(\l I_n - B)\times \det(P^{-1})=\det(\l I_n - B) = \X_B(\l)$.
@@ -755,7 +755,7 @@
 
 \begin{prop}{$\star$}{}
     \begin{enumerate}
-        \item $\GL_n(\K)$ est dense dans $M_n(\K)$.
+        \item $\GL_n(\K)$ est dense dans $\M_n(\K)$.
         \item Soient $A,B\in M_n(\K)$. Montrer que $\X_{AB}=\X_{BA}$.
     \end{enumerate}
     \tcblower
@@ -799,7 +799,7 @@
 \vspace*{-0.7cm}
 
 \begin{defi}{Matrices compagnon.}{}
-    Une matrice compagnon de $M_n(\K)$ est de la forme :
+    Une matrice compagnon de $\M_n(\K)$ est de la forme :
     \begin{equation*}
         \begin{pmatrix}
             0 & \dots & \dots & \dots & a_0 \\
@@ -817,7 +817,7 @@
 \begin{exercice}{}{}
     \begin{enumerate}
         \item Calculer $\X_C$ pour $C$ matrice compagnon.
-        \item En déduire que tout polynome unitaire degré $n$ est le polynôme caractéristique d'une matrice de $M_n(\K)$.
+        \item En déduire que tout polynôme unitaire degré $n$ est le polynôme caractéristique d'une matrice de $M_n(\K)$.
         \item Déterminer $\Pi_C$ pour $C$ matrice compagnon.
     \end{enumerate}
     \tcblower
@@ -878,7 +878,7 @@
 
 \begin{thm}{Cayley-Hamilton. $\star$}{}
     \begin{enumerate}
-        \item Soit $A\in M_n(\K)$, alors $\X_A(A)=0_{\M_n(\K)}$.
+        \item Soit $A\in \M_n(\K)$, alors $\X_A(A)=0_{\M_n(\K)}$.
         \item Soit $E$ un $\K$-evdf et $u\in\L(E)$, alors $\X_u(u)=0_{\L(E)}$ et $\Pi_u(u)=0_{\L(E)}$.
     \end{enumerate}
     \vspace*{0.25cm}
@@ -903,7 +903,7 @@
 \end{thm}
 
 \begin{corr}{$\star$}{}
-    Soit $A\in M_n(\K)$. On suppose $\X_A$ scindé : $\X_A = (X-\l_1)^{\a_1}...(X-\l_p)^{\a_p}$ avec $\a_1+...+\a_p=n, ~ \a_i\geq1$.\\
+    Soit $\A\in M_n(\K)$. On suppose $\X_A$ scindé : $\X_A = (X-\l_1)^{\a_1}...(X-\l_p)^{\a_p}$ avec $\a_1+...+\a_p=n, ~ \a_i\geq1$.\\
     Alors $\Pi_A = (X-\l_1)^{\g_1}...(X-\l_p)^{\g_p}$ avec $\forall i \in \lb1,p\rb, ~ 1\leq \g_i \leq \a_i$.
     \tcblower
     Par théorème de Cayley-Hamilton, $\forall i \in \lb1,p\rb, ~ \g_i \leq \a_i$.\\
@@ -911,12 +911,12 @@
 \end{corr}
 
 \begin{ex}{}{}
-    Pour $A\in M_n(\K)$ telle que $\X_A=(X-1)^2(X-2)$, on a $\Pi_A=(X-1)(X-2)$ ou bien $\Pi_A=(X-1)^2(X-2)$.\\
+    Pour $A\in \M_n(\K)$ telle que $\X_A=(X-1)^2(X-2)$, on a $\Pi_A=(X-1)(X-2)$ ou bien $\Pi_A=(X-1)^2(X-2)$.\\
     Il suffit, pour déterminer $\Pi_A$ de calculer $(A-I_3)(A-2I_3)$, plus simple que d'étudier les liaisons entre $I_3,A,...$.
 \end{ex}
 
 \begin{defi}{Sous-espaces caractéristiques.}{}
-    Soit $A\in M_n(\K)$, on suppose $\X_A$ scindé : $\X_A = (X-\l_1)^{\a_1}...(X-\l_p)^{\a_p}$ avec $\a_1+...+\a_p = n$ et $\a_i\geq1$.\\
+    Soit $A\in \M_n(\K)$, on suppose $\X_A$ scindé : $\X_A = (X-\l_1)^{\a_1}...(X-\l_p)^{\a_p}$ avec $\a_1+...+\a_p = n$ et $\a_i\geq1$.\\
     On pose $\forall i \in \lb1,p\rb, ~ F_i = \Ker(A - \l_i I_n)^n$, espace caractéristique associé à la valeur propre $\l_i$.
 \end{defi}
 
@@ -941,11 +941,11 @@
 \end{prop}
 
 \begin{prop}{}{}
-    Soit $A\in M_n(\R)$. On peut considérer que $A\in M_n(\C)$.\\
+    Soit $A\in\M_n(\R)$. On peut considérer que $A\in\M_n(\C)$.\\
     $\bullet$ $\forall \l \in \K, ~ \X_A(\l)=\det(\l I_n - A)$.\\
-    $\X_A$ est le même si $A\in M_n(\R)$ ou $A\in M_n(\C)$. $\X_A\in\R[X]$ mais si $\K=\C$, on examinera les racines dans $\C$.\\
-    $\bullet$ Notons $\Pi_A^\R$ le polynôme minimal de $A\in M_n(\R)$.\\
-    Pour $A\in M_n(\C), ~ \Pi_A^\R$ est un polynôme annulateur de $A$, alors $\Pi_A^\C\mid\Pi_A^\R$ (à priori); en fait $\Pi_A^\C=\Pi_A^\R$.
+    $\X_A$ est le même si $A\in\M_n(\R)$ ou $A\in\M_n(\C)$. $\X_A\in\R[X]$ mais si $\K=\C$, on examinera les racines dans $\C$.\\
+    $\bullet$ Notons $\Pi_A^\R$ le polynôme minimal de $A\in\M_n(\R)$.\\
+    Pour $A\in\M_n(\C), ~ \Pi_A^\R$ est un polynôme annulateur de $A$, alors $\Pi_A^\C\mid\Pi_A^\R$ (à priori); en fait $\Pi_A^\C=\Pi_A^\R$.
 \end{prop}
 
 \section{Khôlles.}
