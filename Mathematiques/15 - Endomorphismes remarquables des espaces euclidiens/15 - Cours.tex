@@ -20,6 +20,8 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     Soit $u\in\L(E)$, $u$ est une \bf{isométrie} (ou endomorphisme orthogonal) ssi $\|u(x)\|=\|x\|$.
 \end{defi}
 
+\vspace*{-0.8cm}
+
 \begin{prop}{}{}
     Une isométrie est bijective.
     \tcblower
@@ -28,9 +30,13 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     \bf{Remarque.} La seule projection bijective est l'identité.
 \end{prop}
 
+\vspace*{-0.8cm}
+
 \begin{nota}{}{}
     Notons $O(E)$ l'ensemble des isométries de $E$ et $SO(E)$ l'ensemble des éléments de $O(E)$ de déterminant $1$.
 \end{nota}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     \begin{enumerate}
@@ -307,6 +313,202 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
         \item Déterminer les matrices de $O_n(\R)$ diagonalisables.
         \item Montrer que toutes les matrices de $O_n(\R)$ sont diagonalisables dans $\M_n(\C)$.
     \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $A\in O_n(\R)$ : $A\sim \Diag(R(\theta_1),...,R(\theta_s),I_p,-I_q)$ avec $2s+p+q=n$.\\
+    Puis $A$ diagonalisable ssi $\forall i \in \lb1,s\rb, ~ R(\theta_i)$ diagonalisable ssi $s=0$ ssi $A\sim\Diag(1,...,1,-1,...,-1)$ ssi $A^2=I_n$.\\
+    Donc $A$ est diagonalisable ssi son endomorphisme canoniquement associé est une symétrie orthogonale.\\
+    \boxed{2.} On a vu que $\forall \theta \in\R, ~ R(\theta)$ est diagonalisable dans $\M_2(\C)$.\\
+    Donc $\Diag(R(\theta_1),...,R(\theta_s),I_p,-I_q)$ est diagonalisable dans $\M_n(\C)$ donc $A$ aussi.
 \end{ex}
+
+\begin{prop}{Cas de la dimension 3.}{}
+    Soit $E$ euclidien de dimension 3, et $u$ une rotation de $E$ non triviale.\\
+    Alors $1\in\Sp(u)$ et $\dim E_1 = 1$, où $\D=E_1$ est appelé \bf{axe de la rotation}.\\
+    Alors $\cursive{H}=\D^\bot$ est un plan stable par $u$, $u_{|\cursive{H}}$ est une rotation du plan $\cursive{H}$.\\
+    Il existe $\B$ une b.o.n. directe de $E$ telle que $\Mat_\B(u)=\Diag(R(\theta),1)$.
+    \tcblower
+    D'après le théorème de réduction des isométries, il existe $\B=(e_1,e_2,e_3)$ b.o.n. de $E$ tq $\Mat_\B(u)=\Diag(R(\theta),1)$.\\
+    Alors $u(e_3)=e_3$ donc $1\in\Sp(u)$, puis $\dim E_1=1$ donc $\D=\Vect(e_3)$ est axe de la rotation.\\
+    Puis $\cursive{H}=\D^\bot$ est stable par $u$ et $u_{|\cursive{H}}\in O(\cursive{H})$ isométrie du plan non triviale.\\
+    Si $e_3$ est choisi comme vecteur directeur de $\D$, $\B=(e_1,e_2,e_3)$ est directe. Sinon $\B=(e_2,e_1,e_3)$ l'est. 
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $E$ euclidien de dimension 3 et $u\in O(E) \setminus \SO(E)$ isométrie négative.
+    \begin{enumerate}
+        \item Montrer qu'il existe $\B$ une b.o.n. de $E$ telle que $\Mat_\B(u)=\Diag(R(\theta),-1)$.
+        \item Montrer que $u$ est la composée d'une rotation et d'une symétrie orthogonale. On pourra calculer :
+        \begin{equation*}
+            \begin{pmatrix}\cos\theta&-\sin\theta&0\\\sin\theta&\cos\theta&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&0&0\\0&1&0\\0&0&-1\end{pmatrix}
+        \end{equation*}
+        \item Vérifier que $\Tr(u)=2\cos\theta-1$.
+        \item Étudier les cas particuliers  : $\theta=0$ et $\theta=\pi$.
+    \end{enumerate}
+\end{exercice}
+
+\section{Endomorphismes symétries (et antisymétriques).}
+
+\subsection{Généralités.}
+
+\begin{defi}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien et $u\in\L(E)$. On dit que $u$ est \bf{symétrique} (ou \bf{autoadjoint}) ssi $u=u^*$.\\
+    On notera $\m{S}(E)$ l'ensemble des endomorphismes symétriques.
+\end{defi}
+
+\begin{defi}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien et $u\in\L(E)$. On dit que $u$ est \bf{antisymétrique} ssi $u=-u^*$.\\
+    On notera $\m{A}(E)$ l'ensemble des endomorphismes antisymétriques.
+\end{defi}
+
+\begin{prop}{}{}
+    $\m{S}(E)$ et $\m{A}(E)$ sont des $\R$-espace vectoriel.
+    \tcblower
+    \boxed{\m{S}(E)} C'est un sous-espace vectoriel de $\L(E)$ :\\
+    $\hra$ $0\in\m{S}(E)$ et $\forall u,v \in \m{S}(E), ~ \forall \l \in \R, ~ (u+\l v)^* = u^* + \l v^* = u+\l v$.\\
+    \boxed{\m{A}(E)} Pareil.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $u\in\L(E)$.
+    \begin{equation*}
+        u\in \m{A}(E) \iff \forall x \in E, ~ \Lg u(x), x \Rg = 0.
+    \end{equation*}
+    \tcblower
+    \boxed{\ra} $\forall x,y \in E, ~ \Lg u(x), y \Rg = -\Lg x,u(y)\Rg$. Puis $y=x$.\\
+    \boxed{\la} Soient $x,y\in E$ : $\Lg u(x+y), x+y\Rg = 0$ puis $\Lg u(x), y \Rg = - \Lg x, u(y) \Rg$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien et $u\in\L(E)$. Il y a équivalence :
+    \begin{enumerate}
+        \item $u\in S(E)$.
+        \item La matrice de $u$ dans toute b.o.n. de $E$ est symétrique.
+        \item Il existe une b.o.n. de $E$ telle que la matrice de $u$ dans cette base soit symétrique.
+    \end{enumerate}
+    \tcblower
+    \boxed{1\ra 2} Soit $\B$ b.o.n. de $E$, alors $\Mat_\B(u)^\top = \Mat_\B(u^*)$ donc $u=u^* \ra \Mat_\B(u)=\Mat_\B(u)^\top$.\\
+    \boxed{2\ra3} Trivial.\\
+    \boxed{3\ra1} Déjà fait.
+\end{prop}
+
+\begin{lemme}{}{}
+    \begin{equation*}
+        \forall u \in \L(E), ~ \Tr(u^*) = \Tr(u).
+    \end{equation*}
+    \tcblower
+    Soit $\B=(e_1,...,e_n)$ une b.o.n. de $E$. Alors $\Mat_\B(u)=(\Lg u(e_j), e_i \Rg)_{i,j}$.
+    \begin{equation*}
+        \Tr(u) = \sum_{i=1}^n \Lg u(e_i), e_i \Rg = \sum_{i=1}^n \Lg e_i, u^*(e_i)\Rg = \Tr(u^*).
+    \end{equation*}
+    Donc $\Tr(u^*v)=\Tr((u^*v)^*)=\Tr(v^*u)$.
+\end{lemme}
+
+\begin{exercice}{}{}    \begin{equation*}
+        \forall u \in \L(E), ~ \Tr(u^*) = \Tr(u).
+    \end{equation*}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien, on pose $\Lg u,v \Rg=\Tr(u^*v)$ pour $u,v\in\L(E)$.\\
+    Montrer que l'on a défini un produit scalaire sur $\L(E)$. Montrer que $\L(E)=\S(E)\oplus \A(E)$.
+    \tcblower
+    Posons $\phi:(u,v)\mapsto \Tr(u^*v)$.\\
+    $\hra$ Symétrique : lemme.\\
+    $\hra$ Bilinéaire : soient $u,u',v\in\L(E)$ et $\l\in\R$. Alors :
+    \begin{equation*}
+        \phi(u+\l u', v) = \Tr((u+\l u')^*v) = \Tr((u^* + \l u'^*)v) = \Tr(u^*v + \l u'^*v)=\phi(u,v) + \l \phi(u',v). 
+    \end{equation*}
+    $\hra$ Positive : $\phi(u,u) = \Tr(u^*u)=\sum_{i=1}^n\Lg (u^*u)(e_i),e_i \Rg = \sum_{i=1}^n\Lg u(e_i), u(e_i)\Rg = \sum_{i=1}^n\|u(e_i)\|^2\geq0$.\\
+    $\hra$ Définie : $\phi(u,u) = 0 \ra \sum_{i=1}^n\|u(e_i)\|^2=0 \ra \forall i \in \lb1,n\rb, ~ u(e_i)=0_E$, $u$ est nul sur une base donc nul.\\
+    On a déjà $\forall u \in \L(E), ~ u=\frac{u+u^*}{2} + \frac{u-u^*}{2}$ donc $\L(E)=\S(E)+\A(E)$.\\
+    Ensuite, pour $u\in\S(E)$ et $v\in\A(E)$, $\Lg u,v\Rg = \Tr(u^*v) = \Tr(uv)$ et $\Lg v,u\Rg = \Tr(v^*u)=-\Tr(vu)=-\Tr(uv)$. 
+\end{exercice}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien.
+    \begin{enumerate}
+        \item Soit $p$ un projecteur de $E$, $p$ est orthogonal ssi $p$ est autoadjoint.
+        \item Soit $s$ une symétrie de $E$, $s$ est orthogonale ssi $s$ est autoadjointe.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.\ra} Soit $p$ un projecteur orthogonal sur $F$. Soit $(x,y)\in E^2$.\\
+    Alors $\Lg p(x), y \Rg = \Lg p(x), p(y) + (y - p(y)) \Rg = \Lg p(x), p(y)\Rg + 0 = \Lg x, p(y)\Rg$.\\
+    \boxed{1.\la} Soit $p$ un projecteur sur $F$ dans la direction $G$. Vérifions $F\bot G$.\\
+    Soient $x\in F, y\in G$. Alors $\Lg p(x), y \Rg = \Lg x, p(y)\Rg$ donc $\Lg x,y\Rg = \Lg x, 0_E\Rg = 0$, donc $F\bot G$.\\
+    Donc $F\subset G^\bot$, puis $\dim F = \dim G^\bot$ donc $F=G^\bot$.\\
+    \boxed{2.} Notons $p$ le projecteur associé à $s$ : $s+\Id_E = 2p$.\\
+    Alors $s$ est symétrie orthogonale ssi $G=F^\bot$ ssi $p$ est projection orthogonale ssi $p=p^*$.\\
+    Puis $s=2p-Id_E$ donc $s^* = 2p^* - \Id_E = 2p - \Id_E = s$ donc $s$ est autoadjointe.
+\end{prop}
+
+\begin{rappel}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace euclidien. Dans une base quelconque, avec $x,y \in E$ et $X,Y$ les vecteurs associés :
+    \begin{equation*}
+        \Lg x, y \Rg = \sum_{i=1}^n\sum_{j=1}^n x_iy_j\Lg e_i, e_j\Rg = X^\top\Mat(\Lg e_i, e_j \Rg)Y
+    \end{equation*}
+    Dans une base orthonormée, $\Lg x,y\Rg = X^\top Y = \sum_{i=1}^nx_iy_i$. Et pour $u\in\L(E)$ :
+    \begin{equation*}
+        \Lg u(x), y \Rg = X^\top\Mat(u)^\top Y.
+    \end{equation*}
+\end{rappel}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soit $A\in\M_n(\R)$.
+    \begin{enumerate}
+        \item $\left[\forall X,Y \in \M_{n,1}(\R), ~ X^\top A Y = 0 \right]\iff A = 0$.
+        \item $\left[ \forall X \in \M_{n,1}(\R), ~ X^\top A X = 0 \right] \iff A \in \A_n(\R)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On spécifie en $E_i$, $E_j$ : $E_i^\top A E_j = a_{i,j} = 0$ pour tout $i,j\in\lb1,n\rb$.\\
+    \boxed{2.\ra} $\forall x \in \R^n$, $\Lg x, u(x)\Rg=X^\top A X$ donc $u$ est antisymétrique donc $A$ l'est.\\
+    \boxed{2.\la} idem.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien et $u\in\S(E)$. Montrer que $\Ker u = (\Im u)^\bot$.
+    \tcblower
+    Soit $x\in\Ker u$, $y\in\Im u$ : $\exists z \in E, ~ y=u(z)$. Alors $\Lg x,y \Rg = \Lg x, u(z) \Rg = \Lg u(x), z \Rg = 0$. Donc $\Ker u \subset (\Im u)^\bot$.\\
+    Par théorème du rang, $\dim\Ker u = \dim(\Im u)^\bot$, donc $\Ker u = (\Im u)^\bot$.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{Caractérisation des matrices de projection et symétries orthogonales.}{}
+    \begin{enumerate}
+        \item Soit $P\in\M_n(\R)$. C'est une matrice de projection ssi $P^2=P$.\\
+        C'est une matrice de projection orthogonale ssi $P^2=P$ et $P^\top = P$.
+        \item Soit $S\in\M_n(\R)$. C'est une matrice de symétrie ssi $S^2=I_n$.\\
+        C'est une symétrie orthogonale ssi $S^2=I_n$ et $SS^\top=I_n$ ssi $S^2=I_n$ et $S^\top=S$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On note $p$ l'endomorphisme canoniquement associé à $P$. On a vu $p$ orthogonal ssi $p^2=p$ et $p^*=p$.\\
+    Donc $p$ orthogonal ssi $P^2=P$ et $P^\top=P$.\\
+    \boxed{2.} On note $s$ l'endomorphisme canoniquement associé à $S$. On a vu $s$ orthogonal ssi $s^2=I_n$ et $s^*=s$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien, $u\in\S(E)$ et $F$ un sous-espace stable par $u$. Alors $F^\bot$ est stable par $u$.\\
+    De plus, les endomorphismes induits $u_{|F}$ et $u_{|F^\bot}$ sont encore symétriques.
+    \tcblower
+    On rappelle que $F$ est stable par $u$ implique que $F^\bot$ est stable par $u^*$, ici $u=u^*$.
+\end{prop}
+
+\begin{thm}{Théorème spectral.}{}
+    \begin{enumerate}
+        \item Soit $A\in\S_n(\R)$. Alors $A$ est orthogonalement diagonalisable : $\exists P \in \O_n(\R), ~ \exists D \in \D_n(\R), ~ A=PDP^{\top}$.
+        \item Soit $(E,\Lg\.,\.\Rg)$ euclidien et $u\in\S(E)$. Alors $\Sp(u)\subset\R$, $u$ est dz dans une b.o.n. et $E\bigoplus_{\l\in\Sp(u)}E_\l$.
+    \end{enumerate}
+    Il est clair que $1\iff 2$.
+    \tcblower
+    Soit $u\in\S(E)$ et $\l\in\Sp(u)$. Soit $\B$ une b.o.n. de $E$ et $A=\Mat_\B(u)$ : $A\in\S_n(\R)$. Soit $x\in E$ de vecteur $X$.\\
+    Alors $u(x) = \l x \iff AX=\l X$. Montrons que $\l\in \R$ : 
+    \begin{equation*}
+        \ov{X}^\top A X = \ov{X}^\top \l X = \l \ov{X}^\top X = \l \sum_{i=1}^n|x_i|^2.
+    \end{equation*}
+    Or $\ov{X}^\top AX = (A\ov{X})^\top X = \ov{\l}\ov{X}^\top X = \ov{\l} \sum_{i=1}^n |x_i|^2$ donc $\l=\ov{\l}$ donc $\l\in\R$.
+\end{thm}
 
 \end{document}

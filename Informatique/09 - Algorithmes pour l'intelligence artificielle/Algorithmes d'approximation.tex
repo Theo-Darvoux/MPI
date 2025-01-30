@@ -34,8 +34,41 @@
     Étant donné une instance, on la compare à celles du jeu d'entraînement pour déterminer lesquelles lui ressembles le plus. On garde les $k$ plus proches. On renvoie alors l'étiquette la plus représentée parmi ceux-ci. La performance de l'algorithme dépend de la distance choisie pour calculer les plus proches voisins, et de $k$.\\
     Lorsque $k$ est petit, on ne considère que les voisins très proches, on est très sensible aux données d'entraînement.\\
     Il n'y a pas eu de généralisaiton, on parle de sur-apprentissage.\\
-    Lorsque $k$ est trop grand, on cosidère des voisins qui ne sont plus représentatifs, on parle de sous-apprentissage.
+    Lorsque $k$ est trop grand, on considère des voisins qui ne sont plus représentatifs, on parle de sous-apprentissage.
 \end{defi}
 
+\begin{ex}{}{}
+    Étant donné un nouvel élément, comment calculer ses $k$ plus proches voisins ?
+    \tcblower
+    \bf{Première solution.}\\
+    Calculer la distance de notre nouvel élément à chacune des donénes, trier les données selon la distance, renvoyer les $k$ premiers, donc $O(n\log n)$.\\
+    \bf{Seconde solution.}\\
+    On stocke les $k$ meilleurs candidats, et pour chaque nouvel élément, on le compare au moins bon pour décider de le garder ou non.\\
+    Avec un tableau on a une complexité en $O(nk)$. Avec une file de priorité, en $O(n\log k)$.\\
+    En construisant un tas sur toutes les données : $O(n+k\log n)$.
+    \bf{Troisième solution.} En $O(n+k)$...
+\end{ex}
+
+\begin{defi}{En $O(n+k)$.}{}
+    On cherche à écrire un algorithme qui renvoie le $k^{\nt{ème}}$ plus petit élément d'un tableau. Une fois qu'on a cet élément, il suffit de parcourir toutes les données en ne conservant que les plus proches.\\
+    \begin{algorithm}[H]
+        \caption{Algorithme A.}
+        \Entree{$T$ un tableau, $k$ le rang de l'élément recherché.}
+        Couper le tableau en morceaux de taille 5.\\
+        \PourCh{morceau}{Calculer sa médiane.}
+        Construire $T_1$ rassemblant ces médianes.\\
+        Calculer $x$ la médiane de $T_1$ avec $A(T_1,\frac{|T_1|}{2})$.\\
+        Partitionner $T$ en deux tableaux $T'$ et $T''$, où $T''$ contient les éléments plus grands que $x$.\\
+        Si $|T'|=k$, on renvoie $x$, si $|T'|>k$, on renvoie $A(T',k)$, sinon $A(T'', k-|T'|-1)$.\\
+        Si $|T|<5$, on le trie et on renvoie le $k$-ème élément de $T$.
+    \end{algorithm}
+    \tcblower
+    \bf{Terminaison.}\\
+    Chaque appel récursif est réalisé sur un tableau strictement plus petit, les opérations qui ne sont pas des appels récursifs terminent.\\
+    \bf{Correction.}\\
+    Par récurrence sur $|T|$. Pour $|T|<5$ c'est bon.\\
+    Supposons la correction sur tous les tableaux de taille inférieure à $n$. Soit $T$ un tableau de taille $n+1$.\\
+    Chacun des appels récursifs est effectué sur un tableau strictement plus petit.
+\end{defi}
 
 \end{document}
