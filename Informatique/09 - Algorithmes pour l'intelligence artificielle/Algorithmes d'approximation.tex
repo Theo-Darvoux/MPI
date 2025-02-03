@@ -62,13 +62,31 @@
         Si $|T'|=k$, on renvoie $x$, si $|T'|>k$, on renvoie $A(T',k)$, sinon $A(T'', k-|T'|-1)$.\\
         Si $|T|<5$, on le trie et on renvoie le $k$-ème élément de $T$.
     \end{algorithm}
+    On a transformé le problème de trouver les $k$ plus proches voisins en trouver les $k$ plus petits éléments d'un tableau.
     \tcblower
     \bf{Terminaison.}\\
     Chaque appel récursif est réalisé sur un tableau strictement plus petit, les opérations qui ne sont pas des appels récursifs terminent.\\
     \bf{Correction.}\\
     Par récurrence sur $|T|$. Pour $|T|<5$ c'est bon.\\
     Supposons la correction sur tous les tableaux de taille inférieure à $n$. Soit $T$ un tableau de taille $n+1$.\\
-    Chacun des appels récursifs est effectué sur un tableau strictement plus petit.
+    Chacun des appels récursifs est effectué sur un tableau strictement plus petit donc l'appel récursif est correct.\\
+    Les tableaux $T_1$ et $T_2$ contiennent tous les éléments de $T$ sauf $x$.\\
+    --- Si $|T_1|\geq k$, alors le $k$-ième élément de $T$ est aussi celui de $T_1$.\\
+    Dans ce cas-ci l'algorithme renvoie bien le bon élément.\\
+    \bf{Complexité.}\\
+    --- Calcul de la médiane des sous-tableaux : $O(n)$.\\
+    --- Appel récursif sur $T'$ : $C(\frac{n}{5})$ où $C$ est la complexité de l'algorithme.\\
+    --- Partitionner $T$ et $T'$ : $O(n)$.\\
+    --- Appel récursif sur $T'$ ou $T''$ : $C(\max(|T'|,|T''|))\leq C(\frac{7n}{10})$.\\
+    Alors $C(n)\leq C(\frac{n}{5})+C(\frac{7n}{10})+n$.\\
+    Par récurrence, on montre $C(n)\leq \a n$. C'est vrai pour $n=1$.\\
+    Alors $C(n)\leq n(\frac{9}{10}\a + 1)$. On pose $\a=10+C(1)$, alors :\\
+    On a $C(1)\leq\a$, et pour $n\in\N$ tel que $\forall k <n, ~ C(k)\leq\a n$ :\\
+    $C(n)\leq \frac{9\a}{10}n + n \leq 9n + n + \frac{9C(1)}{10}n \leq n(10+\frac{9C(1)}{10})\leq n(10+C(1))\leq n\a$.
 \end{defi}
+
+Méthode des clusters (kd-arbres) pour obtenir les $2$-plus proches voisins (MP2I DS2).\\
+Avec cette méthode, l'entraînement n'est pas superficiel puisqu'il consiste à construire l'arbre kd.\\
+Si le nombre de dimensions est grand, de l'ordre du nombre d'éléments, alors la distance à l'hyperplan est souvent petite. Donc l'algorithme va explorer beaucoup plus de noeuds. On parle de phénomène de la malédiction des grandes dimensions.
 
 \end{document}

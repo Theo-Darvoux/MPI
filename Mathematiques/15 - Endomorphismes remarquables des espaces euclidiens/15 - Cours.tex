@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 
-\def\chapitre{14}
-\def\pagetitle{Espaces préhilbertiens réels.}
+\def\chapitre{15}
+\def\pagetitle{Endomorphismes des espaces euclidiens.}
 
 \input{setup.tex}
 
@@ -496,6 +496,13 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     On rappelle que $F$ est stable par $u$ implique que $F^\bot$ est stable par $u^*$, ici $u=u^*$.
 \end{prop}
 
+\begin{ex}{}{}
+    Soit $u\in\S(E)$ et $\l,\mu\in\Sp(u)$. Si $\l\neq\mu$, alors $E_\l\bot E_\mu$.
+    \tcblower
+    Soient $x\in E_\l$ et $y\in E_\mu$. On a $u(x)=\l x$ et $u(y)=\mu y$, et $\Lg u(x), y \Rg = \Lg x, u(y)\Rg$.\\
+    Donc $\l \Lg x,y\Rg = \mu \Lg x,y\Rg$ donc $(\l - \mu)\Lg x, y \Rg =0_\R$ donc $\Lg x, y \Rg = 0$ donc $E_\l\bot E_\mu$.
+\end{ex}
+
 \begin{thm}{Théorème spectral.}{}
     \begin{enumerate}
         \item Soit $A\in\S_n(\R)$. Alors $A$ est orthogonalement diagonalisable : $\exists P \in \O_n(\R), ~ \exists D \in \D_n(\R), ~ A=PDP^{\top}$.
@@ -508,7 +515,187 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     \begin{equation*}
         \ov{X}^\top A X = \ov{X}^\top \l X = \l \ov{X}^\top X = \l \sum_{i=1}^n|x_i|^2.
     \end{equation*}
-    Or $\ov{X}^\top AX = (A\ov{X})^\top X = \ov{\l}\ov{X}^\top X = \ov{\l} \sum_{i=1}^n |x_i|^2$ donc $\l=\ov{\l}$ donc $\l\in\R$.
+    Or $\ov{X}^\top AX = (A\ov{X})^\top X = \ov{\l}\ov{X}^\top X = \ov{\l} \sum_{i=1}^n |x_i|^2$ donc $\l=\ov{\l}$ donc $\l\in\R$.\\
+    Notons $F=\bigoplus_{\l \in \Sp(u)}E_\l$, c'est un ssev de $E$ stable par $u$, on suppose par l'absurde que $F\subsetneq E$.\\
+    Alors $E=F\oplus F^\bot$ et $F^\bot$ est stable par $u$ car symétrique, et $u_{|F^\bot}$ est symétrique : ses valeurs propres sont réelles.\\
+    Soit $\mu$ une vp de $u_{|F^\bot}$, et $x$ $\vp$ associé, alors $x\in F^\bot\cap F$ donc $x=0_E$, absurde. Donc $F=E$.\\
+    Donc $u$ est diagonalisable par concaténation des b.o.n. de $E_\l$.
 \end{thm}
+
+\begin{ex}{}{}
+    Orthodiagonaliser la matrice :
+    \begin{equation*}
+        A=\begin{pmatrix}
+          2 & 1 & 0 \\ 1 & 2 & 1 \\ 0 & 1 & 2   
+        \end{pmatrix} \in \S_3(\R)
+    \end{equation*}
+    \tcblower
+    D'après le théorème spectral, $A$ est orthogonalement diagonalisable.\\
+    On a $\X_A = (\l-2)\left[ (\l - 2)^2 - 2 \right] = (X - 2)(X - 2 - \sqrt{2})(X - 2 + \sqrt{2})$.\\
+    $E_2=\Vect(1,0,1)$, $E_{2-\sqrt{2}}=\Vect(1,-\sqrt{2},1)$ et $E_{2+\sqrt{2}}=\Vect(1,\sqrt{2},1)$.
+    \begin{equation*}
+        P = \begin{pmatrix}\frac{1}{\sqrt{2}} & \frac{1}{2} & \frac{1}{2} \\ 0 & \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2} \\ -\frac{1}{\sqrt{2}} & \frac{1}{2} & \frac{1}{2}\end{pmatrix}\in O_3(\R)
+    \end{equation*}
+    Puis $A=PDP^\top$ avec $D=\Diag(2,2+\sqrt{2},2-\sqrt{2})$.
+\end{ex}
+
+\begin{ex}{}{}
+    Orthodiagonaliser la matrice :
+    \begin{equation*}
+        A = \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix} \in \S_3(\R)
+    \end{equation*}
+    \tcblower
+    Par théorème spectral, elle est orthogonalement diagonalisable.\\
+    On a $\rg(A)=1$, donc $\dim\Ker A = 2$, donc $0\in\Sp(A)$ et $\dim E_0 = 2$ et $\Tr(A)=3$ donc $3\in\Sp(A)$.\\
+    On a $E_3=\Vect((\frac{1}{\sqrt{3}}, \frac{1}{\sqrt{3}}, \frac{1}{\sqrt{3}}))$ et $E_0=E_3^\bot=\Vect((-1,1,0),(1,1,-2))$...
+\end{ex}
+
+\begin{ex}{}{}
+    \begin{equation*}
+        \begin{pmatrix}
+            i&1\\1&-i 
+        \end{pmatrix} \in \S_3(C)
+    \end{equation*}
+    \tcblower
+    Le thérorème spetral ne s'applique pas ici car $A\notin\S_2(\R)$.\\
+    On a $\X_A=X^2-\Tr(A)X+\det(A)=X^2$, donc $\Sp(A)=\{0\}$, donc $A$ est nilpotente, pas diagonalisable car $A\neq0$.
+\end{ex}
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item Soit $A,B\in\S_n(\R)$ tels que $AB=BA$. Alors $A$ et $B$ sont orthogonalement diagonalisables.
+        \item Pour $u,v\in\S(E)$, si $uv=vu$, alors il existe une b.o.n. commune de $\vp$ de $u$ et $v$.
+    \end{enumerate}
+    \tcblower
+    Soit $u\in \S(E)$. Alors $E=\bigoplus E_{\l}$, et $uv=vu$ implique $\forall \l \in \Sp(u)$, $v(E_\l)\subset E_\l$.\\
+    Notons $v_\l = v_{|E_\l}\in \L(E_\l)$, c'est encore un endomorphisme symétrique : $v_\l\in\S(E_\l)$.\\
+    D'après le théorème spectral, on peut choisir une b.o.n. $\B_\l$ de $E_\l$ constituée de $\vp$ de $v_\l$.\\
+    On pose $\B$ la concaténation des $\B_\l$, c'est une b.o.n. de $E$ et les vecteurs de $\B$ sont des $\vp$ de $v$, mais aussi de $u$.
+\end{prop}
+
+\begin{prop}{Réciproque du théorème spectral.}{}
+    \begin{enumerate}
+        \item Soit $A\in\M_n(\R)$ telle que $A=PDP^{-1}$ avec $P\in\O_n(\R)$ et $D\in\O_n(\R)$, alors $A\in\S_n(\R)$.
+        \item Soit $u\in\L(E)$, si il existe $\B$ b.o.n. de $E$ constituée de $\vp$ de $u$, alors $u\in\S(E)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $A=PDP^{\top}$ donc $A^\top = PD^\top P^\top = A$.\\
+    \boxed{2.} Soit $\B=(e_1,...,e_n)$ une b.o.n. de $E$ telle que $\forall i \in \lb1,n\rb, ~ u(e_i)=\l e_i$.\\
+    Soient $x,y \in E$. $\Lg u(x), y \Rg = \sum_{i=1}^n y_iu(x_i)=\sum_{i=1}^n y_i(\l_i x_i)$ et $\Lg x,u(y)\Rg = \sum_{i=1}^n x_i(\l_i y_i)$.
+\end{prop}
+
+\pagebreak
+
+\begin{exercice}{Rayon spectral.}{}
+    \begin{enumerate}
+        \item Soit $E$ un evdf, $u\in\L(E)$, $p(u)=\max\{|\l|, ~ \l \in \Sp(u)\}$ (rayon spectral). Montrer que $p(u)\leq\abs u \abs$.
+        \item Pour $(E,\Lg\.,\.\Rg)$ un espace euclidien, $u\in\S(E)$, $\a=\min\{\l,\l\in\Sp(u)\}$ et $p=\max\{\l,\l\in\Sp(u)\}$.\\
+        Montrer que $\forall x \in E, ~ \a\|x\|^2 \leq \Lg u(x), x \Rg \leq \b \|x\|^2$.
+        \item Soit $(E,\Lg\.,\.\Rg)$ euclidien et $u\in\S(E)$. Montrer que $p(x)=\abs u\abs$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Supposons que $u$ admet au moins une valeur propre réelle.\\
+    Soit $\l$ une valeur propre de $u$ : $\exists x \in E, ~ u(x)=\l x$ puis $\|u(x)\|=|\l|\|x\|$ puis $|\l|=\frac{\|u(x)\|}{\|x\|}\leq\abs u\abs$.\\
+    Par passage au max : $p(u)\leq\abs u\abs$.\\
+    \boxed{2.} Soit $u\in S(E)$, d'après le théorème spectral, il existe $\B=(e_1,...,e_n)$ b.o.n. de $E$ de $\vp$ de $u$ : $u(e_i)=\l_ie_i$.\\
+    Alors $\forall i \in \lb1,n\rb, ~ \exists \l_i \in \R, ~ u(e_i)=\l_i e_i$. Soit $x\in E$ : $u(x)=\sum_{i=1}^n(\l_i x_i)e_i$.\\
+    Puis $\Lg u(x), x \Rg = \sum_{i=1}^n\l_i x_i^2$ et $\|x\|^2 = \sum_{i=1}^nx_i^2$ car $\B$ est une b.o.n.\\
+    Par choix de $\a$ et $\b$ : $\forall i \in \lb1,n\rb, ~ \a\leq \l_i \leq \b$ puis $\a x_i^2\leq \l_ix_i^2 \leq \b x_i^2$.\\
+    Donc $\a\|x\|^2\leq\Lg u(x), x \Rg \leq \b\|x\|^2$ en sommant.\\
+    \boxed{3.} On a déjà $p(u)\leq\abs u\abs$. Soit $x\in E$ et $\B=(e_1,...,e_n)$ une b.o.n. de $\vp$ de $u$.\\
+    Alors $\|u(x)\|^2=\sum_{i=1}^n(\l_ix_i)^2$ et $\|x\|^2=\sum_{i=1}^nx_i^2$ donc $\|u(x)\|^2\leq p(u)^2\|x\|^2$ donc $\forall x \neq 0, ~ \frac{\|u(x)\|}{\|x\|}\leq p(u)$.\\
+    Par passage au sup, $\abs u \abs \leq p(u)$. Donc $p(u)=\abs u\abs$.
+\end{exercice}
+
+\section{Endomorphismes symétriques positifs.}
+
+\begin{defi}{Endomorphisme symétrique positif.}{}
+    Soit $A\in\S_n(\R)$.
+    \begin{enumerate}
+        \item $A$ est positive ssi $\forall X \in \M_{n,1}(\R), ~ X^\top AX \geq 0$.
+        \item $A$ est définie positive ssi $\forall X \in \M_{n,1}(\R)$ non nul, $X^\top AX>0$.
+    \end{enumerate}
+\end{defi}
+
+\begin{defi}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ un espace euclidien, $u\in\S(E)$.
+    \begin{enumerate}
+        \item $u$ est positive ssi $\forall x \in E, ~ \Lg u(x), x \Rg \geq 0$.
+        \item $u$ est strictement positive ssi $\forall x \in E, ~ x\neq0 \ra \Lg u(x), x \Rg > 0$.
+    \end{enumerate}
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien et $u\in\S(E)$. Il y a équivalence :
+    \begin{enumerate}
+        \item $u$ est positif.
+        \item La matrice de $u$ dans n'importe quelle base de $E$ est positive.
+        \item Il existe une b.o.n. de $E$ telle que la matrice de $u$ dans $E$ soit positive.
+    \end{enumerate}
+    \tcblower
+    \boxed{1\ra2} Soit $\B=(e_1,...,e_n)$ une b.o.n. de $E$ et $A=\Mat_\B(u)$.\\
+    Déjà, $u\in\S(E)$ donc $A\in\S_n(\R)$ et pour $X=(x_i)_i\in\M_{n,1}(\R)$ avec $x=\sum_{i=1}^n x_ie_i$.\\
+    On sait que $\Lg x, u(x)\Rg = X^\top A X$ donc $X^\top AX\geq 0$.\\
+    \boxed{2\ra3} trivial; \boxed{3\ra 1} facile.
+\end{prop}
+
+\begin{nota}{}{}
+    On notera $\S_n^+(\R)$ l'ensemble des matrices symétriques réelles positives.\\
+    On notera $\S_n^{++}(\R)$ l'ensemble des matrices symétriques réelles définies positives.\\
+    On notera $\S^+(E)$ l'ensemble des matrices symétriques de $E$ positives.\\
+    On notera $\S^{++}(E)$ l'ensemble des matrices symétriques de $E$ définies positives. 
+\end{nota}
+
+\begin{prop}{Propriétés topologiques.}{}
+    \begin{enumerate}
+        \item $\S_n(\R)$ est un fermé de $\M_n(\R)$.
+        \item $\S_n^+(\R)$ est un fermé de $\M_n(\R)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $(A_k)_k\in\S_n(\R)^\N$ convergente de limite $A$. Par hypothèse, $\forall k \in \N, ~ A_k^\top = A_k$.\\
+    De plus, la transposition est linéaire en dimension finie, donc continue sur $\M_n(\R)$.\\
+    Par passage à la limite, $A^\top = A$, donc $A\in\S_n(\R)$.\\
+    \boxed{2.} Soit $(A_k)_k\in\S_n^+(\R)^\N$ convergente de limite $A$. Déjà, $A\in\S_n(\R)$ par la question précédente.\\
+    Ensuite, pour $X\in\M_{n,1}(\R)$, on a $\forall k \in \N, ~ X^\top A_k X \geq 0$.\\
+    Puis $M\mapsto X^\top M X$ est continue sur $\M_n(\R)$ car lin. en dimension finie, donc par passage à la limite, $X^\top AX \geq 0$.\\
+    C'est vrai pour tout $X\in\M_{n,1}(\R)$, donc $A\in\S_n^+(\R)$. 
+\end{prop}
+
+\begin{exercice}{}{}
+    Montrer que si $A\in\S_n^+(\R)$, alors $\forall i \in \lb1,n\rb, ~ [A]_{i,i}\geq0$.
+    \tcblower
+    Soit $A=(a_{i,j})_{i,j}\in\S_n^+(\R)$.\\
+    Par hypothèse, $\forall X \in \M_{n,1}(\R)$, $X^\top AX\geq0$. On spécifie en $E_{i_0}$ :
+    \begin{equation*}
+        \forall i_0 \in \lb1,n\rb, ~ E_{i_0}^\top A E_{i_0} = a_{i_0,i_0}\geq 0.
+    \end{equation*}
+    \bf{Remarque.} Si $A\in\S_n^{++}(\R)$, alors $\forall i \in \lb1,n\rb, ~ [A]_{i,i}>0$.
+\end{exercice}
+
+\begin{prop}{Caractérisation des matrices symétriques positives.}{}
+    \begin{enumerate}
+        \item $A \in \S_n^{+}(\R) \iff \Sp A \subset \R_+$
+        \item $A \in \S_n^{++}(\R) \iff \Sp A \subset \R_+^*$ (facile avec 1.)
+        \item $\S_n^{++}(\R)=\S_n^+(\R)\cap\GL_n(\R)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.\ra} Soit $\l\in\Sp(A)$ : $\exists X\in\M_{n,1}(\R), ~ AX=\l X$. Puis $X^\top AX = \l X^\top X = \l \geq 0$ car $A\in\S_n^+(\R)$.\\
+    \boxed{1.\la} $A$ est alors symétrique réelle puis par théorème spectral : $A$ est orthogonalement diagonalisable.\\
+    Ainsi, $\exists P \in \O_n(\R), ~ \exists D \in \D_n(\R), ~ A=PDP^\top$.\\
+    Alors pour $X\in \M_{n,1}(\R), ~ X^\top AX = X^\top PDP^\top X$, on pose $Y=P^{\top}X\in\M_{n,1}(\R)$.\\
+    Alors $X^\top AX = Y^\top DY = \sum_{i=1}^n\l_i y_i^2 \geq 0$, donc $A\in\S_n^+(\R)$.\\
+    \boxed{3.} On rappelle que $A\in\GL_n(\R) \iff 0 \notin \Sp(A)$, puis $A\in\S_n^{++}(\R) \iff \Sp(A) \subset \R_+^*$ ssi $A\in\S_n^+(\R)\cap \GL_n(\R)$
+\end{prop}
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Soit $A\in\M_n(\R)$. Vérifier que $AA^\top\in\S_n^+(\R)$ et $A^\top A \in \S_n^+(\R)$.
+        \item Soit $A\in\GL_n(\R)$. Vérifier que $AA^\top\in\S_n^{++}(\R)$ et $A^\top A\in\S_n^{++}(\R)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Déjà, $(AA^\top)^\top = (A^\top)^\top A^\top = AA^\top$ donc $AA^\top \in \S_n(\R)$; de même, $A^\top A \in \S_n(\R)$.\\
+    Pour $X\in\M_{n,1}(\R), ~ X^\top(AA^\top)X = (X^\top A)A^\top X = (A^\top X)^\top A^\top X = \|A^\top X\|^2 \geq 0$.\\
+    \boxed{2.} Pour $A\in\GL_n(\R)$, $\det(AA^\top)=\det A \det A^\top = \det(A)^2 \neq 0$ : $AA^\top \in \GL_n(\R)$.
+\end{exercice}
 
 \end{document}
