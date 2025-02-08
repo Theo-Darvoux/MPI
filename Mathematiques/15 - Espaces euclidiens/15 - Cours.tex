@@ -505,7 +505,7 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
 
 \begin{thm}{Théorème spectral.}{}
     \begin{enumerate}
-        \item Soit $A\in\S_n(\R)$. Alors $A$ est orthogonalement diagonalisable : $\exists P \in \O_n(\R), ~ \exists D \in \D_n(\R), ~ A=PDP^{\top}$.
+        \item Soit $A\in\S_n(\R)$. Alors $A$ est orthogonalement diagonalisable : $\exists P \in O_n(\R), ~ \exists D \in \D_n(\R), ~ A=PDP^{\top}$.
         \item Soit $(E,\Lg\.,\.\Rg)$ euclidien et $u\in\S(E)$. Alors $\Sp(u)\subset\R$, $u$ est dz dans une b.o.n. et $E\bigoplus_{\l\in\Sp(u)}E_\l$.
     \end{enumerate}
     Il est clair que $1\iff 2$.
@@ -575,7 +575,7 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
 
 \begin{prop}{Réciproque du théorème spectral.}{}
     \begin{enumerate}
-        \item Soit $A\in\M_n(\R)$ telle que $A=PDP^{-1}$ avec $P\in\O_n(\R)$ et $D\in\O_n(\R)$, alors $A\in\S_n(\R)$.
+        \item Soit $A\in\M_n(\R)$ telle que $A=PDP^{-1}$ avec $P\in O_n(\R)$ et $D\in O_n(\R)$, alors $A\in\S_n(\R)$.
         \item Soit $u\in\L(E)$, si il existe $\B$ b.o.n. de $E$ constituée de $\vp$ de $u$, alors $u\in\S(E)$.
     \end{enumerate}
     \tcblower
@@ -681,7 +681,7 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     \tcblower
     \boxed{1.\ra} Soit $\l\in\Sp(A)$ : $\exists X\in\M_{n,1}(\R), ~ AX=\l X$. Puis $X^\top AX = \l X^\top X = \l \geq 0$ car $A\in\S_n^+(\R)$.\\
     \boxed{1.\la} $A$ est alors symétrique réelle puis par théorème spectral : $A$ est orthogonalement diagonalisable.\\
-    Ainsi, $\exists P \in \O_n(\R), ~ \exists D \in \D_n(\R), ~ A=PDP^\top$.\\
+    Ainsi, $\exists P \in O_n(\R), ~ \exists D \in \D_n(\R), ~ A=PDP^\top$.\\
     Alors pour $X\in \M_{n,1}(\R), ~ X^\top AX = X^\top PDP^\top X$, on pose $Y=P^{\top}X\in\M_{n,1}(\R)$.\\
     Alors $X^\top AX = Y^\top DY = \sum_{i=1}^n\l_i y_i^2 \geq 0$, donc $A\in\S_n^+(\R)$.\\
     \boxed{3.} On rappelle que $A\in\GL_n(\R) \iff 0 \notin \Sp(A)$, puis $A\in\S_n^{++}(\R) \iff \Sp(A) \subset \R_+^*$ ssi $A\in\S_n^+(\R)\cap \GL_n(\R)$
@@ -695,7 +695,146 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     \tcblower
     \boxed{1.} Déjà, $(AA^\top)^\top = (A^\top)^\top A^\top = AA^\top$ donc $AA^\top \in \S_n(\R)$; de même, $A^\top A \in \S_n(\R)$.\\
     Pour $X\in\M_{n,1}(\R), ~ X^\top(AA^\top)X = (X^\top A)A^\top X = (A^\top X)^\top A^\top X = \|A^\top X\|^2 \geq 0$.\\
-    \boxed{2.} Pour $A\in\GL_n(\R)$, $\det(AA^\top)=\det A \det A^\top = \det(A)^2 \neq 0$ : $AA^\top \in \GL_n(\R)$.
+    \boxed{2.} Pour $A\in\GL_n(\R)$, $\det(AA^\top)=\det A \det A^\top = \det(A)^2 \neq 0$ : $AA^\top \in \GL_n(\R)$, idem pour $A^\top A$.\\
+    Puis $AA^\top \in \S_n^+(\R)$ avec 1, donc $AA^\top \in \S_n^+(\R)\cap \GL_n(\R)=\S_n^{++}(\R)$.
+\end{exercice}
+
+\begin{exercice}{Matrice de Hilbert.}{}
+    Montrer que les valeurs propres de $H=\left( \frac{1}{i+j-1} \right)_{i,j}\in\M_n(\R)$ sont toutes positives.
+    \tcblower
+    \bf{Ne pas chercher à calculer $\X_H$.}
+    \begin{equation*}
+        H = \begin{pmatrix} 1 & \frac{1}{2} & ... & \frac{1}{n} \\ \frac{1}{2} & \frac{1}{3} & ... & \frac{1}{n+1} \\ \vdots & \vdots & & \vdots \\ \frac{1}{n} & \frac{1}{n+1} & ... & \frac{1}{2n-1}\end{pmatrix}
+    \end{equation*}
+    Déjà, $H$ est symétrique réelle, donc par théorème spectral, les vp de $H$ sont toutes réelles et $H$ est orthodz.\\
+    On sait que $H\in\S_n^+(\R) \iff \Sp(H)\subset\R_+$. Soit $X=(x_i)\in\M_{n,1}(\R)$. On remarque $\int_0^1 t^k\dt = \frac{1}{k+1}$.
+    \begin{align*}
+        X^\top HX = \sum_{i,j} x_ix_j\frac{1}{i+j-1} = \sum_{i,j}x_ix_j \int_0^1t^{i+j-2}\dt = \int_0^1 \sum_{i,j} x_i x_j t^{i-1}t^{j-1}\dt = \int_0^1 \left( \sum_{i=1}^n x_i t^{i-1} \right)^2\dt \geq 0.
+    \end{align*}
+    Donc $\forall X \in \M_{n,1}(\R), X^\top H X \geq 0$ donc $H \in \S_n^+(\R)$. Comme $H\in\S_n^+(\R), ~ H \in \GL_n(\R) \iff H\in\S_n^{++}(\R)$.\\
+    Supposons $X^\top H X = 0$. Montrons que $X=0$. On a $\int_0^1\left( \sum_{i=1}^n x_it^{i-1} \right)\dt=0$.\\
+    C'est une intégrale nulle d'une fonction \bf{continue} positive, donc $\forall t \in [0,1], ~ \sum_{i=1}^n x_it^{i-1} = 0$.\\
+    C'est un polynôme nul sur $[0,1]$, il est nul partout par rigidité. Donc $\forall i \in \lb1,n\rb, ~ x_i = 0$ donc $X=0$.\\
+    Ainsi, $H\in\GL_n(\R)$ donc $H\in\S_n^{++}(\R)$.
+\end{exercice}
+
+\newcommand*{\Gram}{\nt{Gram}}
+
+\begin{exercice}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ préhilbertien réel et $(a_1,...,a_n) \in E^n$.
+    \begin{enumerate}
+        \item Montrer que $\Gram(a_1,...,a_n)\in\S_n^+(\R)$.
+        \item Montrer que $\Gram(a_1,...,a_n)\in\S_n^{++}(\R) \iff (a_1,...,a_n)$ libre.
+        \item Retrouver que $H\in\S_n^{++}(\R)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Déjà, $\Gram(a_1,...,a_n)\in\S_n(\R)$ par symétrie du produit scalaire. Soit $X=(x_i)\in\M_{n,1}(\R)$.\\
+    On a $X^\top\Gram(a_1,...,a_n)X = \sum_{i=1}^n x_i x_j \Lg a_i, a_j \Rg = \Lg \sum_{i=1}^n x_i a_i, \sum_{j=1}^n x_j a_j \Rg = \|\sum_{i=1}^n x_i a_i\|^2 \geq 0$.\\
+    \boxed{2.} $\Gram(a_1,...,a_n)\in\GL_n(\R)$ ssi $(a_1,...,a_n)$ est libre et $\S_n^{++}(\R)=\GL_n(\R)\cap \S_n^{+}(\R)$ donc...\\
+    \boxed{3.} On pose $E=\R[X]$ muni de $\Lg P,A\Rg = \int_0^1 P(t)Q(t)\dt$. On pose $(P_1,...,P_n)$ où $P_i=X^{i-1} ~ : ~ \Lg P_i, P_j \Rg = \frac{1}{i+j-1}$.\\
+    Alors $H=\Gram(P_1,...,P_n)$ puis $H\in\S_n^{++}(\R)$ car $(1,X,...,X^{n-1})$ est libre.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $A\in\S_n^+(\R)$. Est-elle une matrice de Gram ?
+    \tcblower
+    On munit $\R^n$ du produit scalaire usuel.\\
+    Par théorème spectral : $\exists P \in O_n(\R), ~ \exists D \in \D_n(\R), ~ A=PDP^\top$ où $D=\Diag(\l_i)$.\\
+    Soit $\Delta=\Diag(\sqrt{\l_i})$, alors $A=P\Delta^2P^\top = P\D(P\Delta)^\top$ et pour $M=(P\Delta)^\top, ~ A=M^\top M$.\\
+    Notons $v_1,...,v_n$ les colonnes de $M$. Alors $[M^\top M]_{i,j}=\Lg v_i, v_j\Rg$ donc $A=(\Lg v_i, v_j\Rg)$.\\
+    Donc $A=\Gram(v_1,...,v_n)$.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{Inégalité d'Hadamard.}{}
+    Soit $\R^n$ euclidien canonique et $P\in\GL_n(\R)$.
+    \begin{enumerate}
+        \item Soit $\B$ b.o.n. de $\R^n$ telle que $P=\Mat_{\B_c,\B}$.\\
+        On se donne $\cursive{C}$ une orthonormalisée de Schmidt de $\B$ et $Q=\Mat_{\B,\cursive{C}}$.\\
+        Montrer que $PQ \in O_n(\R)$, en déduire $P=OT$ avec $O\in O_n(\R)$ et $T\in\T_n^{++}(\R)$ avec unicité.
+        \item Soit $A\in\M_n(\R)$. Montre que $\det(A)^2 \leq \prod_{i=1}^n \left( \sum_{j=1}^n a_{i,j}^2 \right)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $PQ$ est la matrice de passage de $\B_C$ à $\cursive{C}$, donc $PQ\in\O_n(\R)$ et $P=PQQ^{-1}$. On pose $T=Q^{-1}$.\\
+    Notons $\cursive{C}=(a_1,...,a_n)$ ses colonnes et $\B=(e'_1,...,e'_n)$, alors $Q=(\Lg e'_j, e_i\Rg)_{i,j}$.\\
+    De plus, $\cursive{C}$ est orthonormalisée de Schmidt : $\forall i \in \lb1,n\rb, ~ e'_i \in \Vect(e_1,...,e_n)$ et $\Lg e'_i,e_i\Rg>0$.\\
+    Donc $Q^{-1}$ est triangulaire supérieure réelle à diagonale strictement positive.\\
+    Sq $P=OT=O'T'$, avec $O,O'\in O_n(\R)$, $T,T'\in\T_n^{++}(\R)$ : $(O')^{-1}O=T'T^{-1}$ or $O_n(\R)\cap\T_n^{++}(\R)=\{ I_n\}$ donc $O'=O$ et $T=T'$.\\
+    \boxed{2.} Si $A\notin \GL_n(\R)$, c'est trivial.\\
+    Si $A=OT$, où $O\in O_n(\R)$ et $T\in \T_n^{++}(\R)$, on note $e'_1,...,e'_n$ les colonnes de $A$. C'est une base car $A\in\GL_n(\R)$.\\
+    On note $e_1,...,e_n$ son orthonormalisée de Schmidt, alors \begin{equation*}\det(A)^2=\det(O)^2\det(T)^2=\det(T)^2=\prod_{i=1}^n\Lg e'_i, e_i\Rg^2 \leq \prod_{i=1}^n \|e'_i\|^2\cancel{\|e_i\|^2}=\prod_{i=1}\sum_{j=1}^n a_{j,i}^2\end{equation*}
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{Décomposition polaire.}{}
+    \begin{enumerate}
+        \item Soit $A\in\GL_n(\R)$. Montrer que $A^\top A\in\S_n^{++}(\R)$.\\
+        En déduire que $\exists!(O,S)\in O_n(\R)\times S\in\S_n^{++}(\R)$ tel que $A=OS$.
+        \item Soit $A\in\M_n(\R)$. Montrer que $\exists (O,S)\in O_n(\R)\times \S_n^+(\R), ~ A=OS$. 
+    \end{enumerate}
+    \tcblower 
+    \boxed{1.} On sait déjà que $A^\top A \in \S_n^{++}(\R)$. Supposons qu'il existe $O,S$ tels que $A=OS$.\\
+    Alors $A^\top A = S^\top O^\top O S = S^2$, or toute matrice de $\S_n^{++}(\R)$ possède une unique racine carrée dans $\S_n^{++}(\R)$ donc $S$ est déterminée de manière unique puis $O=AS^{-1}$ aussi.\\
+    Soit alors $S$ l'unique racine de $A^\top A$ dans $\S_n^{++}(\R)$ et $O=AS^{-1}$, alors $O=AS^{-1}\ra OS=A$, $OO^\top = I_n$.\\
+    \boxed{2.} Soit $A\in\M_n(\R)$. Par densité de $\GL_n(\R)$ dans $\M_n(\R)$, $\exists (A_n)\in\GL_n(\R)^\N$ telle que $A_n\to A$.\\
+    On a $\forall k \in \N, ~ \exists O_k \in O_n(\R), ~ \exists S_k \in \S_n^{+}(\R), ~ A_k = O_kS_k$.\\
+    Or $O_n(\R)$ est compact, donc $\exists \phi : \N\to \N$ strictement croissante telle que $O_{\phi(k)}\to O\in O_n(\R)$.\\
+    On a $A_{\phi(k)}\to A$ (extraite), donc $S_{\phi(k)}=O^\top_{\phi(k)}A_{\phi(k)}\to O^\top A$ par continuité de la transposée et du produit.\\
+    Alors $A=OS$ avec $O\in O_n(\R)$ et $S_n^{+}(\R)$ est fermé donc $S=O^\top A\in\S_n^{+}(\R)$.
+\end{exercice}
+
+\begin{exercice}{Racine carrée de matrices symétriques positives.}{}
+    \begin{enumerate}
+        \item Soit $A\in\S_n^+(\R)$. Montrer que $\exists B \in \S_n^+(\R), ~ B^2=A$.
+        \item Soit $A\in\S_n^{++}(\R)$. Montrer que $\exists B \in \S_n^{++}(\R)$ tel que $B^2=A$.
+        \item Montrer l'unicité de $B$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $A$ est symétrique réelle donc par théorème spectral : $\exists P \in O_n(\R), ~ \exists D \in \D_n(\R), ~ A=PDP^\top$.\\
+    De plus, $A\in\S_n^+(\R)$ donc $D=\Diag(\l_i)$ avec $\forall i \in \lb1,n\rb,~\l_i \in \Sp(A) \et \l_i\geq0$.\\
+    On pose $\Delta = \Diag(\sqrt{\l_i})$ et $B=P\Delta P^{-1}$, alors $B^2=P\Delta^2 P^{-1}=A$, $B^\top = B$ et $\Sp(B)\subset\R_+$.\\
+    \boxed{2.} $A\in\S_{n}^{++}(\R)$ donc $A\in\GL_n(\R)$ donc $\l_i\neq0$ donc $\Sp(B)\subset\R_+^*$.\\
+    \boxed{3.} Soit $A\in\S_n^+(\R)$ et $B\in\S_n^+(\R)$ tels que $A=B^2$.\\
+    On a $AB=B^2B=BB^2=BA$ puis $A,B\in\S_n^+(\R)$ : $A=PDP^\top$ et $B=P\Delta P^\top$.\\
+    Puis $B^2=A \iff \Delta^2= D \iff \forall i \in \lb1,n\rb, ~ \mu_i^2=\l_i \iff \forall i \in \lb1,n\rb, ~ \mu_i = \sqrt{\l_i}$.\\
+    Avec $\Sp(A)=\{\l_i\}$ et $\Sp(B)=\{\mu_i\}$. On a donc montré que $B$ est determiné de manière unique.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien et $u\in\S^+(E)$.
+    \begin{enumerate}
+        \item Montrer qu'il existe $v\in\S^+(E)$ tel que $v^2=u$.
+        \item Montrer l'unicité de $v$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Par le théorème spectral, il existe $\B=(e_1,...,e_n)$ base de $E$ de $\vp$ de $u$.\\
+    On pose $v$ tel que $\forall i \in \lb1,n\rb, ~ v(e_i) = \sqrt{\l_i}e_i$. Alors $v^2(e_i)=\l_ie_i=u(e_i)$ donc $v^2=u$.\\
+    De plus, $v\in\S^+(\R)$ par réciproque du théorème spectral.\\
+    \boxed{2.} Soit $v\in\S^+(E)$ tel que $v^2=u$. On reprend $\B=(e_1,...,e_n)$ b.o.n. de $E$.\\
+    Notons $E_{\l_i}=\Ker(u-\l_i\Id_E)$, alors $E=\bigoplus_{\l\in\Sp(u)}E_\l$ et $\forall \l \in \Sp(u), ~ v(E_\l)\subset E_\l$.\\
+    Notons $v_i=v_{|E_{\l_i}}$ induit et diagonalisable. On a $\forall x \in E_{\l_i}, ~ v_i(x)=\l_i x$ alors $X^2-\l_i$ annule $v_i$.\\
+    On a donc $\Sp(v_i)\subset\{-\sqrt{\l_i},\sqrt{\l_i}\}$. Or $v_i\in\S^+(E)$ donc $\Sp(v_i)=\{\sqrt{\l_i}\}$. Or $v_i$ dz donc $v_i=\sqrt{\l_i}\Id_E$.\\
+    Donc tout $v_i$ est determiné uniquement donc $v$ aussi.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $A\in\A_n(\R)$ et $f$ canoniquement associé avec $n\in\N$ impair.
+    \begin{enumerate}
+        \item Montrer que $\forall (x,y) \in E^2, ~ \Lg f(x),y\Rg = -\Lg x,f(y)\Rg$.
+        \item Montrer que $f$ admet 0 comme unique valeur propre réelle.
+        \item Montrer que $I_n-A\in\GL_n(\R)$ et $I_n+A\in\GL_n(\R)$.
+        \item Soit $\B=(I_n-A)^{-1}(I_n+A)$. Montrer que $B\in\SO_n(\R)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Pour $X,Y\in\M_{n,1}(\R), ~ \Lg AX,Y \Rg = (AX)^\top Y = X^\top (-A)Y = -\Lg X,AY \Rg$.\\
+    \boxed{2.} Soit $\l\in\Sp(f)$ : $\exists x \in E^*, ~ f(x) = \l x$. Alors $\Lg f(x),x\Rg = -\Lg x,f(x)\Rg$.\\
+    Alors $\Lg \l x, x \Rg = -\Lg x, \l x \Rg$ puis $\l\|x\|^2 = -\l\|x\|^2$ donc $\l=0$ donc $\Sp(f)\subset\{0\}$.\\
+    On a $\det(A)=\det(A^\top)=(-1)^n\det(A)=-\det(A)=0$ donc $0$ est vp. Donc $\Sp(f)=\{0\}$.\\
+    \boxed{3.} $\X_A(\l)=\det(\l I_n-A)$ et $\l I_n-A\in\GL_n(\R) \iff \X_A(\l)\neq0 \iff \l \notin \Sp(A)$.\\
+    Or $1\notin\Sp(A)$ donc $I_n-A\in\GL_n(\R)$ puis $(I_n-A)^\top=I_n+A$ donc $I_n+A\in\GL_n(\R)$.\\
+    \boxed{4.} $B^\top B=...=I_n$ et $\det(B)=\frac{\det(I_n+A)}{\det(I_n-A)}=\frac{\det(*^\top)}{\det(*)}=1$.
 \end{exercice}
 
 \end{document}

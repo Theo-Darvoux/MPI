@@ -1,0 +1,310 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{16}
+\def\pagetitle{Probabilités.}
+
+\input{setup.tex}
+
+\begin{document}
+
+\input{title.tex}
+
+\section{Dénombrements, dénombrabilité.}
+
+\subsection{Rappels.}
+
+\begin{defi}{}{}
+    Soit $E$ un ensemble non-vide. On dit que $E$ est fini ssi $\exists n \in \N$ et $\phi$ une bijection $\lb 1, n \rb$ sur $E$.\\
+    Alors $n$ est unique, appelé cardinal de $E$.
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $E$ un ensemble fini, partitionné en $p$ sous-ensemble $E_1,...,E_p$, alors $E=\bigsqcup_{i=1}^p E_i$ et $|E|=\sum_{i=1}^p|E_i|$.
+\end{prop}
+
+\begin{exercice}{}{}
+    Montrer que $\sum_{k=0}^n\binom{n}{k}^2 = \binom{2n}{n}$ pour tout $n\in\N$.
+    \tcblower
+    Soit $E$ un ensemble à $2n$ éléments, constitué de $n$ éléments rouges et $n$ éléments noirs. On sait que $\binom{2n}{n}$ est le nombre de parties de $E$ à $n$ éléments. On note $F$ l'ensemble des parties de $E$ à $n$ éléments. Alors pour $F_k$ l'ensemble des parties de $E$ à $k$ éléments rouges et $n-k$ éléments noirs, il est clair que $F=\bigsqcup_{i=0}^n F_i$, puis $|F|=\sum_{i=0}^n|F_i|$ donc $\binom{2n}{n}=\sum_{k=0}^n\binom{n}{k}\binom{n}{n-k}=\sum_{k=0}^n\binom{n}{k}^2$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $E$ un ensemble fini de cardinal $n$.
+    \begin{enumerate}
+        \item Montrer que $|\P(E)|=2^n$.
+        \item Calculer $\sum_{X\subset E}|X|$.
+        \item Quel est le nombre de partitions de $E$ en deux parties ?
+        \item Quel est le nombre de couples $(A,B)\in\P(E)$ où $A\cap B = \varnothing$ ?
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Pour $\P_k$ l'ensemble des parties de $E$ à $k$ éléments, $\P(E)=\bigsqcup_{i=0}^n\P_i(E)$ donc $|\P(E)|=\sum_{i=0}^n|\P_k(E)|=2^n$.\\
+    Les autres questions sont dans les exercices d'oral CCINP.
+\end{exercice}
+
+\subsection{Ensembles dénombrables.}
+
+\begin{defi}{}{}
+    Soit $E$ un ensemble. Il est dit dénombrable ssi $\exists \phi:\N\to E$ bijective.\\
+    \bf{Exemples.} $\N$ avec $\Id_\N$, $\N^*$ avec $n\mapsto n+1$ ou $2\N$ avec $n\mapsto 2n$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Toute partie infinie de $\N$ est dénombrable.
+    \tcblower
+    Soit $A\subset \N$ une partie infinie de $\N$.\\
+    C'est une partie non-vide de $\N$, on pose $\phi(0)=\min A$.\\
+    Par récurrence, on suppose $\phi(0),...,\phi(n)$ construits pour $n\in\N$.\\
+    Puisque $A$ est infinie, $A\setminus\{\phi(0),...,\phi(n)\}$ l'est aussi, et $\phi(n+1)=\min(A\setminus\{\phi(0),...,\phi(n)\})$.\\
+    Alors $\phi$ est bien définie sur $\N$ par récurrence, injective par stricte croissante, surjective facile.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Toute partie infinie d'un ensemble dénombrable est dénombrable.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    Une partie est dite au plus dénombrable si elle est finie ou dénombrable.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{corr}{}{}
+    Toute partie d'un ensemble dénombrable est au plus dénombrable.
+\end{corr}
+
+\vspace*{-0.8cm}
+
+\begin{lemme}{}{}
+    \begin{enumerate}
+        \item S'il existe une injection de $A$ dans $\N$, alors $A$ est au plus dénombrable.
+        \item S'il existe une surjection de $\N$ sur $A$, alors $A$ est au plus dénombrable.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $\phi:A\to\N$ injective, c'est une bijection de $A$ sur $\phi(A)$ et $\phi(A)\subset \N$.\\
+    Donc $\phi(A)$ est au plus dénombrable, donc $A$ l'est aussi.\\
+    \boxed{2.} Soit $\psi:\N\to A$ surjective. Soit $a\in A$, on pose $\phi(a)=\min\psi^{-1}(\{a\})$.\\
+    Alors $(\psi\circ\phi)(a)=a$ pour tout $a\in A$, donc $\phi\circ\phi=\Id_A$ injective donc $\phi$ injective.\\
+    Nous avons construit une injection de $A$ dans $\N$. On est dans le cas du 1.
+\end{lemme}
+
+\pagebreak
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item $\Z$ est dénombrable.
+        \item $\Q$ est dénombrable.
+        \item $\R$ n'est pas dénombrable.
+        \item $\{0,1\}^\N$ est indénombrable.
+    \end{enumerate}
+    \tcblower
+    \boxed{3.} Supposons par l'absurde que $[0,1[$ soit dénombrable, alors $\exists \phi:\N\to[0,1[$ bijective.\\
+    On note les chiffres décimaux : $\phi(0)=0,x_0^0x_1^0...$; $\phi(1)=0,x_0^1x_1^1...$ et $\phi(n)=0,x_0^nx_1^n...$.\\
+    Posons $y=0,y_0...y_n$ avec $y_i\neq x_i^i$ pour tout $i\in\N$, alors $\forall n \in \N, ~ \phi(n)\neq y$ car $y_n\neq x_n^n$.\\
+    Or $y\in[0,1[$, donc $\phi$ n'est pas surjective, absurde. Donc $[0,1[$ est indénombrable.\\
+    Puis $\forall a<b, ~ \phi:\l\mapsto \l a + (1-\l)b$ est bijective de $[0,1[$ dans $]a,b]$, donc $]a,b]$ est indénombrable.\\
+    Donc $\R$ n'est pas dénombrable.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    $\N^2$ est dénombrable.
+    \tcblower
+    On pose $f:(n,p)\mapsto 2^n(2p+1)-1$ de $N^2$ dans $\N$.\\
+    \fbox{Injective.} $f(n,p)=f(n',p') \ra 2^n(2p+1)=2^{n'}(2p'+1) \ra n=n'$ et $p=p'$ par décomp. en facteurs premiers.\\
+    \fbox{Surjective.} Soit $k\in\N$, alors $k+1\in\N^*$.\\
+    $\hra$ Si $k=0$, alors $k=f(0,0)$.\\
+    $\hra$ Sinon, $k+1=2^np_2^{\a_2}...p_r^{\a_r}=2^n(2p+1)$ (facteurs premiers) puis $k=f(n,p)$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{(Admis.)}{}
+    \begin{enumerate}
+        \item Si $E$ et $F$ sont dénombrables, alors $E\times F$ l'est aussi.
+        \item Un produit fini de dénombrables est dénombrable.
+    \end{enumerate}
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Une réunion au plus dénombrable d'ensembles au plus dénombrables est au plus dénombrable.
+\end{prop}
+
+\section{Espaces probabilisés.}
+
+Une expérience aléatoire est une expérience dont le résultat peut varier à chaque essai. On notera $\O$ l'ensemble des résultats possibles de l'expérience, appelé univers. On notera $\w$ un élément de $\O$. Intuitivement, un évènement est une propriété réalisée ou non.
+
+\begin{defi}{}{}
+    Soit $\O$ un univers et $\A\subset\P(\O)$. On dit que $\A$ est une tribu ssi :
+    \begin{equation*}
+        \O \in \A, ~ \forall A \in \A, ~ \ov{A} \in A \et \forall (A_n) \in \A^\N, ~ \bigcup_{n\in\N}A_n\in \A. 
+    \end{equation*}
+    Les éléments d'une tribu sont appelés évènements.
+\end{defi}
+
+\begin{lemme}{Lois de De Morgan.}{}
+    \begin{equation*}
+        \ov{\bigcup_{i\in I} A_i} = \bigcap_{i\in I}\ov{A_i} \et \ov{\bigcap_{i\in I} A_i} = \bigcup_{i\in I}\ov{A_i}.
+    \end{equation*}
+\end{lemme}
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Montrer qu'une intersection de tribus est une tribu.
+        \item Soit $S\in\P(\O)$. Montrer qu'il existe une plus petite tribu qui contient $S$.
+        \item Quelle est la tribu engendrée par le singleton $\{A\}$ ?
+    \end{enumerate}
+\end{exercice}
+
+\begin{defi}{}{}
+    Un espace probabilisable est un couple $(\O, \A)$ où $\O$ est un univers et $A$ une tribu.
+\end{defi}
+
+\begin{defi}{}{}
+    Soit $(\O, \A)$ un espace probabilisable. Une probabilité sur $(\O, \A)$ est une application $\Pr:\A\to\R$ telle que :
+    \begin{equation*}
+        \Pr(\O) = 1, ~ \forall A \in \A, ~ \Pr(A) \geq 0 \et \forall (A_n) \in \A^\N \nt{ incompatibles deux-à-deux } :
+    \end{equation*}
+    \begin{equation*}
+        \sum_{n\in\N}\Pr(A_n) \nt{ converge et } \sum_{n=0}^{\infty}\Pr(A_n) = \Pr(\bigcup_{n\in\N} A_n).
+    \end{equation*}
+\end{defi}
+
+\begin{defi}{}{}
+    Un espace probabilisé est un triplet $(\O,\A,\Pr)$.
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $(\O,\A,\Pr)$ un espace probabilisé.
+    \begin{enumerate}
+        \item $\P(\0)=0$.
+        \item Pour $(A_i)$ une suite finie d'évènements 2-à-2 incompatibles, $\Pr(\bigcup_{i=1}^n A_i)=\sum_{i=1}^n\Pr(A_i)$.
+        \item $A\subset B \ra \Pr(A) \leq \Pr(B)$.
+        \item $\forall A \in \A, ~ \Pr(A) \in [0,1] \et \Pr(\ov{A})=1-\Pr(A)$.
+        \item $\forall (A,B) \in \A^2, ~ \Pr(A\cup B)=\Pr(A)+\Pr(B)-\Pr(A\cap B)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $\sum_{n\geq0}\Pr(\0)$ converge, c'est une constante donc $\Pr(\0)=0$.\\
+    \boxed{2.} On n'à qu'à poser $A_k=\0$ pour $k>n$, toujours 2-à-2 incompatibles.\\
+    \boxed{3.} $\Pr(B)=\Pr(B\setminus A) + \Pr(A) \geq \Pr(A)$.\\
+    \boxed{4.} $\forall A \in \A, ~ \Pr(A)\geq 0$ et $A\subset\O$ donc $\Pr(A)\leq 1$ : $\Pr(A)\in[0,1]$.\\
+    De plus, $\Pr(\O)=\Pr(A\sqcup\ov{A})=\Pr(A)+\Pr(\ov{A})$ donc $\Pr(\ov{A})=1-\Pr(A)$.\\
+    \boxed{5.} $\Pr(A\cup B)=\Pr(A\sqcup(B\setminus A))=\Pr(A)+\Pr(B\setminus A)=\Pr(A)+\Pr(B)-\Pr(A\cap B)$.
+\end{prop}
+
+\begin{defi}{}{}
+    Soit $(\O,\A,\P)$ un espace probabilisé et $A\in\A$.\\
+    On dit que $A$ est presque certain si $\Pr(A)=1$, et qu'il est négligeable si $\Pr(A)=0$.
+\end{defi}
+
+\begin{prop}{Inégalité de Boole.}{}
+    Soit $(\O,\A,\Pr)$ un espace probabilisé et $(A_n)$ une suite d'évènements.
+    \begin{equation*}
+        \Pr(\bigcup_{n\in\N}A_n) \leq \sum_{n\in\N}\Pr(A_n).
+    \end{equation*}
+    \tcblower
+    On définit $B_0=A_0$ et $\forall i \in \N^*, ~ B_{n+1}=A_n \setminus (A_0 \cup ... \cup A_{n-1}) \in \A$.\\
+    Pour $n<m$, $B_n \cap B_m \subset A_n \cap \ov{A_n} = \0$. Et $\forall n \in \N, ~ B_n \subset A_n$ donc $\bigcup_{n\in\N} B_n \subset \bigcup_{n\in\N} A_n$.\\
+    Et $\forall n \in \N, ~ A_n \subset \bigcup_{n=0}^n B_n$ donc $\bigcup_{n\in\N} A_n = \bigcup_{n\in\N} B_n$.\\
+    Puis $\Pr(\bigcup A_n) = \Pr(\bigcup B_n) = \sum_{n=0}^\infty \Pr(B_n)$, or $B_n \subset A_n$ : $\Pr(B_n) \leq \Pr(A_n)$.\\
+    Puis $\sum_{n=0}^{\infty}\P(B_n) \leq \sum_{n=0}^{\infty}\P(A_n)$.
+\end{prop}
+
+\begin{corr}{}{}
+    \begin{enumerate}
+        \item Une réunion d'évènements néglieables est négligeable.
+        \item Une intersection d'évènements presque certains est presque certaine.
+    \end{enumerate}
+\end{corr}
+
+\begin{prop}{Continuité monotone.}{mono}
+    \begin{enumerate}
+        \item Pour $(A_n)\in\A^\N$ croissante, $(\Pr(A_n))_n$ converge vers $\Pr(\bigcup_{n\in\N}A_n)$.
+        \item Pour $(A_n)\in\A^\N$ décroissante, $(\Pr(A_n))_n$ converge vers $\Pr(\bigcap_{n\in\N}A_n)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $(\Pr(A_n))$ est une suite croissante et majorée donc convergente vers $\Pr(A)$.\\
+    Soit $B_0 = A_0$ et $\forall n \in \N, ~ B_{n+1}=A_{n+1}\setminus A_n$ : $\bigcup_{n=0}^{\infty}B_n = \bigcup_{n=0}^\infty A_n$ et les $B_n$ sont 2-à-2 disjoints.\\
+    Donc $\Pr(\bigcup_{n=0}^\infty A_n)=\Pr(\bigcup_{n=0}^{\infty}B_n)=\sum_{n=0}^{\infty}\Pr(B_n)=\sum_{n=0}^{\infty}(\Pr(A_i)-\Pr(A_{i-1}))=\Pr(A)$.\\
+    \boxed{2.} Soit $C_n=\ov{A_n}$. Alors $(C_n)$ est croissante et $\Pr(C_n)\to \Pr(\bigcup_{n=0}^\infty C_n)$.\\
+    Or $\Pr(A_n)=1-\Pr(C_n)$ donc $\lim \Pr(A_n) = 1 - \lim \Pr(C_n) = 1 - \Pr(\bigcup_{n=0}^\infty C_n) = \Pr(\ov{\bigcup_{n=0}^\infty C_n})=\Pr(\bigcap_{n=0}^{\infty}A_n)$.
+\end{prop}
+
+\begin{corr}{}{}
+    Soit $(\O,\A,\Pr)$ un espace probabilisé et $(A_n)_n\in\A^\N$.
+    \begin{enumerate}
+        \item $\lim \Pr(\bigcup_{k=0}^n A_k)=\Pr(\bigcup_{k=0}^\infty A_k)$.
+        \item $\lim \Pr(\bigcap_{k=0}^n A_k) = \Pr(\bigcap_{k=0}^\infty A_k)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $B_n = \bigcup_{k=0}^n A_k$ pour $n\in\N$ : $B_n\subset B_{n+1}$ donc $(B_n)$ est croissante.\\
+    Donc $(\Pr(B_n))_n$ converge vers $\Pr(\bigcup_{n=0}^\infty B_n)$ par \ref{prop:mono}.
+\end{corr}
+
+\begin{exercice}{}{}
+    On lance un dé une infinité de fois. Quelle est la probabilité de tirer au moins un six ?
+    \tcblower
+    On a $\O=\lb1,6\rb^\N$, $\A$ une tribu de $\O$ et $\Pr$ une probabilité adaptée.\\
+    Posons $A$ : << on tire un six >> et $A_n$ : << on tire un six au $n^{\nt{ème}}$ tirage >>.\\
+    Alors $\P(A_n)=\frac{1}{6}$ et $A=\bigcup_{n\in\N} A_n$, donc $\ov{A}=\bigcap_{n\in\N}\ov{A}$ avec $\Pr(\bigcap_{k=0}^n A_k)=\frac{1}{6^n}$ d'où $\Pr(\bigcap_{k=0}^n\ov{A_k})=\left( \frac{5}{6} \right)^n$.\\
+    Par continuité monotone, $\Pr(A)=\lim \Pr(\bigcup_{k=1}^n A_k) = 1 - \Pr(\bigcap_{n\in\N}\ov{A_k})=1$.
+\end{exercice}
+
+\section{Probabilités conditionnelles et indépendantes.}
+
+\begin{defi}{}{}
+    Soit $(\O,\A,\Pr)$ un espace probabilisé et $B\in\A$ non-négligeable.
+    \begin{equation*}
+        \Pr_B : A \mapsto \frac{\Pr(A\cap B)}{\Pr(B)} \nt{ est la probabilité conditionnelle de } B.
+    \end{equation*}
+\end{defi}
+
+\begin{prop}{}{}
+    $\Pr_B$ est une probabilité.
+    \tcblower
+    $\Pr_B(\O) = \frac{\Pr(\O\cap B)}{\Pr(B)}=1$, $\Pr_B(A)=\frac{\Pr(B\cap A)}{\Pr(B)}\geq0$.\\
+    Soit $(A_n)\in\A^\N$ deux-à-deux incompatibles, alors $\Pr_B(\bigcup A_n) = \frac{\sum_{n\in\N}\Pr(B\cap A_k)}{\Pr(B)}=\sum_{n\in\N}\Pr_B(A_n)$
+\end{prop}
+
+\begin{defi}{}{}
+    Soit $(\O,\A,\Pr)$ un espace probabilisé et $A,B\in\A$.
+    \begin{enumerate}
+        \item $A$ et $B$ sont indépendants ssi $\Pr(A\cap B)=\Pr(A)\Pr(B)$ ssi $\Pr_B(A)=\Pr(A)$.
+        \item Soit $(A_i)_{i\in I}$. Ils sont mutuellement indépendants ssi $\forall j \in J$ fini, $\Pr(\bigcap_{j\in J} A_j)=\prod_{j\in J}\Pr(A_j)$. 
+    \end{enumerate}
+\end{defi}
+
+\begin{exercice}{}{}
+    Soit $(\O,\A,\Pr)$ et $(A,B)\in\A^2$. Montrer que $A,B$ indépendants ssi $\ov{A},B$ indépendants.
+    \tcblower
+    \boxed{\ra} $B=B\cap(A\sqcup\ov{A})=(B\cap A)\sqcup(B\cap \ov{A})$ donc $\Pr(B)=\Pr(B\cap A)+\Pr(B\cap \ov{A})$ : $\Pr(B)(1-\Pr(A))=\Pr(B\cap\ov{A})$.\\
+    On a donc $\Pr(B)\Pr(\ov{A})=\Pr(B\cap\ov{A})$, donc $\ov{A}$ et $B$ sont indépendants.
+\end{exercice}
+
+\begin{thm}{}{}
+    Soit $(\O,\A,\Pr)$ un espace probabilisé et $(A_i)_{i\in I}$ une famille de $\A$. On pose $\forall i \in I, ~ B_i \in \{A_i,\ov{A_i}\}$.\\
+    Si $(A_i)_i$ mutuellement indépendants, alors $(B_i)_i$ mutuellement indépendants.
+\end{thm}
+
+\begin{prop}{}{}
+    Soit $(\O,\A,\P)$ un espace probabilisé et $(A_i)\in\A^n$. Alors $\Pr(A_i\cap...\cap A_n)=\P_{A_1\cap...\cap A_{n-1}}(A_n)...\Pr_{A_1}(A_2)\Pr(A_1)$.
+    \tcblower
+    Produit téléscopique :
+    \begin{equation*}
+        \Pr_{A_1\cap...\cap A_{n-1}}(A_n) ... \Pr(A_1) = \prod_{k=2}^n\frac{\Pr(A_1\cap...\cap A_k)}{\Pr(A_1\cap...\cap A_{k-1})}\Pr(A_1) = \Pr(A_1\cap...\cap A_n).
+    \end{equation*}
+\end{prop}
+
+\begin{exercice}{}{}
+    Une urne contient une boule noire et une boule blance indiscernables au toucher. On tire au hasard une des deux boules et on la remet dans l'urne avec deux autres boules de la même couleur. Calculer la probabilité que toutes les boules tirées soient noires.
+\end{exercice}
+
+\end{document}
