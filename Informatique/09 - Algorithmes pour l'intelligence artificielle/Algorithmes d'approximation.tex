@@ -89,4 +89,37 @@ Méthode des clusters (kd-arbres) pour obtenir les $2$-plus proches voisins (MP2
 Avec cette méthode, l'entraînement n'est pas superficiel puisqu'il consiste à construire l'arbre kd.\\
 Si le nombre de dimensions est grand, de l'ordre du nombre d'éléments, alors la distance à l'hyperplan est souvent petite. Donc l'algorithme va explorer beaucoup plus de noeuds. On parle de phénomène de la malédiction des grandes dimensions.
 
+\begin{defi}{}{}
+    Pour mesurer la qualité d'un algorithme d'appretissage supervisé, on utilise un jeu de tests indépendant du jeu d'entraînement. On peut évaluer le taux de réussite de l'algorithme sur une étiquette donnée.
+\end{defi}
+
+\begin{defi}{Arbres de décision.}{}
+    Un arbre de décision est un arbre dont les feuilles sont des étiquettes et les noeuds internes des questions relatives aux données.\\
+    \bf{Exemple.} Clés de détermination pour les arbres (plantes).\\
+    La création de l'arbre constitue donc l'apprentissage. On veut poser des questions dont les réponses séparent bien les différentes étiquettes. Pour mesurer à quel point un ensemble est déséquilibré, on utilise l'entropie de Shannon. Celle-ci mesure la quantité de connaissances que l'on a sur un ensemble :
+    \begin{equation*}
+        H(S) = -\sum_{x\in X} f(x)\log_2(f(x))
+    \end{equation*}
+    où $X$ est l'ensemble des étiquettes, et $f(x)$ la proportion d'étiquettes $x$ dans $S$.\\
+    Dans le cas $|X|=2$, $H$ est minimale en $f(x)\in\{0,1\}$ et maximale en $f(x)=\frac{1}{2}$.\\
+    De plus, $H$ est croissante puis décroissante, et symétrique en $1/2$.\\
+    On veut minimiser $\sum_{S_i}\frac{|S_i|}{|S|}H(S_i)$ où les $S_i$ sont les ensembles partitionnés par une question.
+\end{defi}
+
+\begin{ex}{ID3}{}
+    \begin{algorithm}[H]
+        \Entree{Ensembles $S$ de données et $Q$ de questions}
+        \Si{$Q=\0$}{\Retour{la feuille avec l'étiquette la plus représentée dans $S$.}}
+        \Si{$S=\0$}{\Retour{la feuille avec l'étiquette la plus représentée du parent.}}
+        \Si{$H(S)=0$}{\Retour{la feuille avec la prédiction.}}
+        \Pour{$i$ allant de $0$ à $|Q|-1$}{
+            Calculer $\sum_{S_k}\frac{|S_k|}{|S|}H(S_k)$ pour la question $q_i$;
+        }
+        Choisir $i$ minimisant cette somme.\\
+        \PourCh{$S_k$}{$f_k=$ID3($S_k,Q\setminus\{q_i\}$)}
+        \Retour{Noeud$(q_i,f_1,...,f_k)$}
+    \end{algorithm}
+    Si on a un nombre de coordonnées très élevé, il est probable que l'une des questions soit très bonne.
+\end{ex}
+
 \end{document}
