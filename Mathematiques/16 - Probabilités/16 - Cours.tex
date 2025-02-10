@@ -9,6 +9,8 @@
 
 \input{title.tex}
 
+\vspace*{-0.5cm}
+
 \section{Dénombrements, dénombrabilité.}
 
 \subsection{Rappels.}
@@ -18,15 +20,21 @@
     Alors $n$ est unique, appelé cardinal de $E$.
 \end{defi}
 
+\vspace*{-0.8cm}
+
 \begin{prop}{}{}
     Soit $E$ un ensemble fini, partitionné en $p$ sous-ensemble $E_1,...,E_p$, alors $E=\bigsqcup_{i=1}^p E_i$ et $|E|=\sum_{i=1}^p|E_i|$.
 \end{prop}
+
+\vspace*{-0.8cm}
 
 \begin{exercice}{}{}
     Montrer que $\sum_{k=0}^n\binom{n}{k}^2 = \binom{2n}{n}$ pour tout $n\in\N$.
     \tcblower
     Soit $E$ un ensemble à $2n$ éléments, constitué de $n$ éléments rouges et $n$ éléments noirs. On sait que $\binom{2n}{n}$ est le nombre de parties de $E$ à $n$ éléments. On note $F$ l'ensemble des parties de $E$ à $n$ éléments. Alors pour $F_k$ l'ensemble des parties de $E$ à $k$ éléments rouges et $n-k$ éléments noirs, il est clair que $F=\bigsqcup_{i=0}^n F_i$, puis $|F|=\sum_{i=0}^n|F_i|$ donc $\binom{2n}{n}=\sum_{k=0}^n\binom{n}{k}\binom{n}{n-k}=\sum_{k=0}^n\binom{n}{k}^2$.
 \end{exercice}
+
+\vspace*{-0.8cm}
 
 \begin{exercice}{}{}
     Soit $E$ un ensemble fini de cardinal $n$.
@@ -93,7 +101,7 @@
     Nous avons construit une injection de $A$ dans $\N$. On est dans le cas du 1.
 \end{lemme}
 
-\pagebreak
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     \begin{enumerate}
@@ -145,7 +153,7 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
 \begin{defi}{}{}
     Soit $\O$ un univers et $\A\subset\P(\O)$. On dit que $\A$ est une tribu ssi :
     \begin{equation*}
-        \O \in \A, ~ \forall A \in \A, ~ \ov{A} \in A \et \forall (A_n) \in \A^\N, ~ \bigcup_{n\in\N}A_n\in \A. 
+        \O \in \A, ~ \forall A \in \A, ~ \ov{A} \in \A \et \forall (A_n) \in \A^\N, ~ \bigcup_{n\in\N}A_n\in \A. 
     \end{equation*}
     Les éléments d'une tribu sont appelés évènements.
 \end{defi}
@@ -165,7 +173,7 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
 \end{exercice}
 
 \begin{defi}{}{}
-    Un espace probabilisable est un couple $(\O, \A)$ où $\O$ est un univers et $A$ une tribu.
+    Un espace probabilisable est un couple $(\O, \A)$ où $\O$ est un univers et $\A$ une tribu.
 \end{defi}
 
 \begin{defi}{}{}
@@ -178,9 +186,13 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
     \end{equation*}
 \end{defi}
 
+\vspace*{-0.8cm}
+
 \begin{defi}{}{}
     Un espace probabilisé est un triplet $(\O,\A,\Pr)$.
 \end{defi}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     Soit $(\O,\A,\Pr)$ un espace probabilisé.
@@ -200,10 +212,14 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
     \boxed{5.} $\Pr(A\cup B)=\Pr(A\sqcup(B\setminus A))=\Pr(A)+\Pr(B\setminus A)=\Pr(A)+\Pr(B)-\Pr(A\cap B)$.
 \end{prop}
 
+\vspace*{-0.8cm}
+
 \begin{defi}{}{}
-    Soit $(\O,\A,\P)$ un espace probabilisé et $A\in\A$.\\
+    Soit $(\O,\A,\Pr)$ un espace probabilisé et $A\in\A$.\\
     On dit que $A$ est presque certain si $\Pr(A)=1$, et qu'il est négligeable si $\Pr(A)=0$.
 \end{defi}
+
+\vspace*{-0.9cm}
 
 \begin{prop}{Inégalité de Boole.}{}
     Soit $(\O,\A,\Pr)$ un espace probabilisé et $(A_n)$ une suite d'évènements.
@@ -215,8 +231,10 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
     Pour $n<m$, $B_n \cap B_m \subset A_n \cap \ov{A_n} = \0$. Et $\forall n \in \N, ~ B_n \subset A_n$ donc $\bigcup_{n\in\N} B_n \subset \bigcup_{n\in\N} A_n$.\\
     Et $\forall n \in \N, ~ A_n \subset \bigcup_{n=0}^n B_n$ donc $\bigcup_{n\in\N} A_n = \bigcup_{n\in\N} B_n$.\\
     Puis $\Pr(\bigcup A_n) = \Pr(\bigcup B_n) = \sum_{n=0}^\infty \Pr(B_n)$, or $B_n \subset A_n$ : $\Pr(B_n) \leq \Pr(A_n)$.\\
-    Puis $\sum_{n=0}^{\infty}\P(B_n) \leq \sum_{n=0}^{\infty}\P(A_n)$.
+    Puis $\sum_{n=0}^{\infty}\Pr(B_n) \leq \sum_{n=0}^{\infty}\P(A_n)$.
 \end{prop}
+
+\vspace*{-0.9cm}
 
 \begin{corr}{}{}
     \begin{enumerate}
@@ -224,6 +242,8 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
         \item Une intersection d'évènements presque certains est presque certaine.
     \end{enumerate}
 \end{corr}
+
+\vspace*{-0.9cm}
 
 \begin{prop}{Continuité monotone.}{mono}
     \begin{enumerate}
@@ -238,6 +258,8 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
     Or $\Pr(A_n)=1-\Pr(C_n)$ donc $\lim \Pr(A_n) = 1 - \lim \Pr(C_n) = 1 - \Pr(\bigcup_{n=0}^\infty C_n) = \Pr(\ov{\bigcup_{n=0}^\infty C_n})=\Pr(\bigcap_{n=0}^{\infty}A_n)$.
 \end{prop}
 
+\vspace*{-0.9cm}
+
 \begin{corr}{}{}
     Soit $(\O,\A,\Pr)$ un espace probabilisé et $(A_n)_n\in\A^\N$.
     \begin{enumerate}
@@ -249,6 +271,8 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
     Donc $(\Pr(B_n))_n$ converge vers $\Pr(\bigcup_{n=0}^\infty B_n)$ par \ref{prop:mono}.
 \end{corr}
 
+\vspace*{-0.9cm}
+
 \begin{exercice}{}{}
     On lance un dé une infinité de fois. Quelle est la probabilité de tirer au moins un six ?
     \tcblower
@@ -257,6 +281,8 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
     Alors $\P(A_n)=\frac{1}{6}$ et $A=\bigcup_{n\in\N} A_n$, donc $\ov{A}=\bigcap_{n\in\N}\ov{A}$ avec $\Pr(\bigcap_{k=0}^n A_k)=\frac{1}{6^n}$ d'où $\Pr(\bigcap_{k=0}^n\ov{A_k})=\left( \frac{5}{6} \right)^n$.\\
     Par continuité monotone, $\Pr(A)=\lim \Pr(\bigcup_{k=1}^n A_k) = 1 - \Pr(\bigcap_{n\in\N}\ov{A_k})=1$.
 \end{exercice}
+
+\vspace*{-0.9cm}
 
 \section{Probabilités conditionnelles et indépendantes.}
 
@@ -267,12 +293,16 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
     \end{equation*}
 \end{defi}
 
+\vspace*{-0.9cm}
+
 \begin{prop}{}{}
     $\Pr_B$ est une probabilité.
     \tcblower
     $\Pr_B(\O) = \frac{\Pr(\O\cap B)}{\Pr(B)}=1$, $\Pr_B(A)=\frac{\Pr(B\cap A)}{\Pr(B)}\geq0$.\\
     Soit $(A_n)\in\A^\N$ deux-à-deux incompatibles, alors $\Pr_B(\bigcup A_n) = \frac{\sum_{n\in\N}\Pr(B\cap A_k)}{\Pr(B)}=\sum_{n\in\N}\Pr_B(A_n)$
 \end{prop}
+
+\vspace*{-0.9cm}
 
 \begin{defi}{}{}
     Soit $(\O,\A,\Pr)$ un espace probabilisé et $A,B\in\A$.
@@ -282,6 +312,8 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
     \end{enumerate}
 \end{defi}
 
+\vspace*{-0.8cm}
+
 \begin{exercice}{}{}
     Soit $(\O,\A,\Pr)$ et $(A,B)\in\A^2$. Montrer que $A,B$ indépendants ssi $\ov{A},B$ indépendants.
     \tcblower
@@ -289,22 +321,128 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
     On a donc $\Pr(B)\Pr(\ov{A})=\Pr(B\cap\ov{A})$, donc $\ov{A}$ et $B$ sont indépendants.
 \end{exercice}
 
-\begin{thm}{}{}
+\vspace*{-0.8cm}
+
+\begin{thm}{}{27}
     Soit $(\O,\A,\Pr)$ un espace probabilisé et $(A_i)_{i\in I}$ une famille de $\A$. On pose $\forall i \in I, ~ B_i \in \{A_i,\ov{A_i}\}$.\\
     Si $(A_i)_i$ mutuellement indépendants, alors $(B_i)_i$ mutuellement indépendants.
 \end{thm}
 
-\begin{prop}{}{}
-    Soit $(\O,\A,\P)$ un espace probabilisé et $(A_i)\in\A^n$. Alors $\Pr(A_i\cap...\cap A_n)=\P_{A_1\cap...\cap A_{n-1}}(A_n)...\Pr_{A_1}(A_2)\Pr(A_1)$.
+\vspace*{-0.8cm}
+
+\begin{prop}{Formule des probabilités composées.}{}
+    Soit $(\O,\A,\Pr)$ un espace probabilisé et $(A_i)\in\A^n$. Alors $\Pr(A_i\cap...\cap A_n)=\Pr_{A_1\cap...\cap A_{n-1}}(A_n)...\Pr_{A_1}(A_2)\Pr(A_1)$.
     \tcblower
-    Produit téléscopique :
+    Produit téléscopique : $\Pr_{A_1\cap...\cap A_{n-1}}(A_n) ... \Pr(A_1) = \prod_{k=2}^n\frac{\Pr(A_1\cap...\cap A_k)}{\Pr(A_1\cap...\cap A_{k-1})}\Pr(A_1) = \Pr(A_1\cap...\cap A_n).$
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Une urne contient une boule noire et une boule blanche, indiscernables au toucher. On tire au hasard une des deux boules et on la remet dans l'urne avec deux autres boules de la même couleur. Calculer la probabilité que toutes les boules tirées soient noires.
+    \tcblower
+    Soit $\O=\{0,1\}^\N$, $\A$ une tribu sur $\O$ et $\Pr$ une probabilité sur $(\O,\A)$ modélisant l'exercice.\\
+    Notons $A_n$ : << Tirer une boule noire au $n^{\nt{ème}}$ tirage >> et $A$ : << On ne tire que des boules noires >>.\\
+    Alors $A=\bigcap_{n\in\N^*} A_n$ et $\Pr(A)=\Pr(\bigcap_{k=1}^\infty A_k)$ et les évènements $A_n$ ne sont pas indépendants.\\
+    Par l'énoncé : $\Pr(A_1)=\frac{1}{2}$, $\Pr_{A_1}(A_2) = \frac{3}{4}$, donc $\forall i \in \N\setminus\{0,1\}, ~ \Pr_{A_1\cap...\cap A_{n-1}}(A_n)=\frac{2n-1}{2n}$.\\
+    Par la formule des probabilités composées : $\Pr(\bigcap_{k=1}^{n} A_k)=\frac{(2n-1)!}{2^nn!}=\frac{(2n)!}{2^{2n}(n!)^2}\sim\left( \frac{2n}{e} \right)^{2n}\frac{\sqrt{4n\pi}}{2^{2n}\left( \frac{n}{e} \right)^{2n}2n\pi}=\frac{1}{\sqrt{n\pi}}$.\\[-0.2cm]
+    Donc $\Pr(A)=0$ par passage à la limite.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{Système complet d'évènements.}{}
+    Soit $(\O,\A,\Pr)$ un espace probabilisé et $(A_i)_{i\in I}$ une famille d'évènements.\\
+    Alors $(A_i)_{i\in I}$ est un système complet d'évènements ssi c'est un recouvrement disjoint de $\O$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{Formule des probabilités totales.}{}
+    Soit $(\O,\A,\Pr)$ un espace probabilisé et $(A_i)_{i\in I}$ une famille au plus dénombrable d'évènements non négligeables.\\
+    On suppose que $(A_i)_{i\in I}$ est un système complet d'évènements. Alors :
     \begin{equation*}
-        \Pr_{A_1\cap...\cap A_{n-1}}(A_n) ... \Pr(A_1) = \prod_{k=2}^n\frac{\Pr(A_1\cap...\cap A_k)}{\Pr(A_1\cap...\cap A_{k-1})}\Pr(A_1) = \Pr(A_1\cap...\cap A_n).
+        \forall A \in \A, ~ \Pr(A) = \sum_{i\in I}\Pr_{A_i}(A)\Pr(A_i).
+    \end{equation*}
+    \tcblower
+    Par sigma-additivité et incompatibilité des $A_i$ :
+    \begin{equation*}
+        \Pr(A) = \Pr(A\cap \O) = \Pr\left(\bigsqcup_{i\in I} A\cap A_i \right) = \sum_{i\in I}\Pr(A\cap A_i) = \sum_{i\in I}\Pr(A)\Pr(A_i).
     \end{equation*}
 \end{prop}
 
-\begin{exercice}{}{}
-    Une urne contient une boule noire et une boule blance indiscernables au toucher. On tire au hasard une des deux boules et on la remet dans l'urne avec deux autres boules de la même couleur. Calculer la probabilité que toutes les boules tirées soient noires.
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    On effectue une suite de lancers indépendants d'une pièce équilibrée.\\
+    On note $p_n$ la probabilité de ne pas avoir obtenu 3 piles consécutifs au $n^{\nt{ème}}$ lancer.
+    \begin{enumerate}
+        \item Calculer $p_1$, $p_2$ et $p_3$.
+        \item Exprimer $p_n$ en fonction de $p_{n-1}$, $p_{n-2}$ et $p_{n-3}$ pour $n\geq4$.
+        \item Déterminer $\lim_{n\to+\infty}p_n$.
+    \end{enumerate}
+    \tcblower
+    On pose $\O=\{0,1\}^\N$, on admet qu'il existe $\A$ une tribu sur $\O$ et $\Pr$ une probabilité sur $\O$ modélisant l'exercice.\\
+    On note $A_n$ : << Le tirage ne comporte pas 3 piles consécutifs au $n^{\nt{ème}}$ lancer >>, alors $\forall n \in \N^*, ~ p_n=\Pr(A_n)$.\\
+    \boxed{1.} $p_1=p_2=1$ et $p_3=7/8$.\\
+    \boxed{2.} On note $B_1$ : << le $n^{\nt{ème}}$ tirage se termine par $PPP$ >>, $B_2$ par $F$, $B_3$ par $FP$ et $B_4$ par $FPP$.\\
+    C'est un système complet d'évènements, donc par formule des probabilités totales :
+    \begin{equation*}
+        \Pr(A_n) = \sum_{i=1}^4\Pr(B_i)\Pr_{B_i}(A_n)= \frac{1}{8}\cdot0 + \frac{1}{2}p_{n-1} + \frac{1}{4}p_{n-2} + \frac{1}{8}p_{n-3}.
+    \end{equation*}
+    \boxed{3.} On a $\forall n \in \N^*, ~ A_{n+1} \subset A_n$, donc $(p_n)$ est décroissante, minorée par 0 : elle converge vers $l\in[0,1]$.\\
+    Par passage à la limite, $l=\left(\frac{1}{2} + \frac{1}{4} + \frac{1}{8}\right)l=\frac{7}{8}l$ donc $l=0$. 
+\end{ex}
+
+\vspace*{-0.9cm}
+
+\begin{exercice}{Loi du 0-1 de Borel.}{}
+    Soit $(\O,\A,\Pr)$ un espace probabilisé et $(A_n)_n\in\A^\N$ une suite d'évènements. On pose $A=\bigcap_{p\in\N}\left( \bigcup_{n\geq p} A_n \right)$.
+    \begin{enumerate}
+        \item On suppose que $\sum_{n\geq0}\Pr(A_n)$ converge, montrer que $\Pr(A)=0$.
+        \item On suppose que $\sum_{n\geq0}\Pr(A_n)$ diverge et $(A_n)_n$ mutuellement indépendante, montrer que $\Pr(A)=1$.
+    \end{enumerate}
+    \tcblower
+    Déjà, $A\in\A$ car c'est une intersection dénombrable d'unions dénombrables d'évènements de $\A$.\\
+    On a $\w\in A \iff \forall p \in \N, ~ \exists n \geq p, ~ \w \in A_n \iff |\{n\in\N, ~ \w \in A_n\}|=\infty$.\\
+    \boxed{1.} Notons $B_p = \bigcup_{n\geq p}A_n$ pour $p\in\N$, alors $A=\bigcap_{p\in\N}B_p$.\\
+    On a $B_{p}=B_{p+1} \cup A_p$ donc $(B_p)_p$ est décroissante, puis par continuité monotone : $\Pr(A)=\lim\Pr(B_p)$.\\
+    Puis avec Boole : $\forall p \in \N, ~ \Pr(B_p) = \Pr(\bigcup_{n\geq p}A_n) \leq \sum_{n=p}^{\infty}\Pr(A_n)\xrightarrow[p\to+\infty]{}0$ comme reste d'une série convergente.\\[-0.2cm]
+    De plus, $\Pr(B_p)\geq0$, donc par encadrement : $\Pr(A)=0$.\\
+    \boxed{2.} Notons $C_p = \bigcap_{n\geq p}\ov{A_n}$ pour $p\in\N$, alors $\ov{A}=\bigcup_{p\in\N}C_p$.\\
+    On a $C_p = \ov{A_n}\cap C_{p+1}$ donc $(C_p)_p$ est croissante, puis par continuité monotone : $\Pr(\ov{A})=\lim\Pr(C_p)$.\\
+    Puis $(A_n)$ est mutuellement indépendante donc $(\ov{A_n})$ l'est aussi par \ref{thm:27}.\\
+    Alors pour toute famille finie $I\subset \N$, $\Pr(\bigcap_{n\in I}\ov{{A_n}})=\prod_{n\in I}\Pr(\ov{A_n})$.\\
+    Par corrolaire de la continuité monotone : $\Pr(C_p)=\Pr(\bigcap_{n\geq p}\ov{A_n})=\lim_N\Pr(\bigcap_{n=p}^N\ov{A_n})=\lim_N \prod_{n=p}^N(1-\Pr(A_n))$.\\
+    De plus, pour tout $x\in\R, ~ 1+x\leq e^x$ donc $1-x\leq e^{-x}$ donc $\prod_{n=p}^N\Pr(\ov{A_n})\leq \exp(-\sum_{n=p}^N\Pr(A_n))\to 0$.\\
+    Ainsi, $\forall p \in \N, ~ \Pr(C_p)=0$, et $\Pr(\ov{A})=\lim \Pr(C_p) = 0$ donc $\Pr(A)=1$.
 \end{exercice}
 
+\vspace*{-0.9cm}
+
+\begin{exercice}{}{}
+    On tire un dé équilibré une infinité de fois. Quelle est la probabilité de tirer une infinité de 6 ?
+    \tcblower
+    On pose $\O=\lb1,6\rb^\N$, on admet l'existence de $\A$ et $\Pr$ modélisant l'exercice.\\
+    On note $A_n$ : << tirer un 6 au $n^{\nt{ème}}$ tirage >> pour $n\in\N$. On admet que les $A_n$ sont mutuellement indépendants.\\
+    On a $A=\bigcap_{p\in\N}\bigcup_{n\geq p}A_n$, c'est-à-dire $A$ : << tirer une infinité de 6 >>.\\
+    On est dans le cadre de la loi du 0-1 de Borel :\\
+    $\hra$ $\Pr(A_n)=\frac{1}{6}$ donc $\sum_{n\geq 0}\Pr(A_n)$ diverge grossièrement donc $\Pr(A)=1$. 
+\end{exercice}
+
+\section{Distribution de probabilités discrètes.}
+
+Soit $\O$ un univers. On cherche à construire un espace probabilisé $(\O,\A,\Pr)$ dans les deux cas où $\O$ est fini, ou infini dénombrable.
+
+\subsection{Cas d'un univers fini.}
+
+Pour $\O=\{\w_1,...,\w_N\}$, on pose $\A=\P(\O)$, de cardinal $2^N$. C'est une tribu sur $\O$. On construit $\Pr$ :\\
+\bf{Analyse.} Posons $p_i = \Pr(\{\w_i\})$ pour $i\in\lb1,N\rb$, on veut $\forall i \in \lb1,n\rb, ~ p_i \geq 0$, $\sum_{i=1}^N p_i = 1$.\\
+\bf{Synthèse.} On choisit une famille $(p_i)_{i\in\lb1,N\rb}$ de réels positifs tels que $\sum_{i=1}^Np_i = 1$.\\
+Soit $A\subset\O$. On a $A=\bigsqcup_{\w_i \in A}\{w_i\}$, on pose $\Pr(A)=\sum_{i=1}^N\1_{\w_i\in A}p_i$.\\
+On vérifie que $\Pr$ est une probabilité. Déjà $\Pr:\A\to\R$, $\Pr(\O)=\sum_{i=1}^Np_i=1$, $\Pr(A)\geq0$ comme somme de positifs.\\
+Enfin, pour $(A_n)\in\A^\N$ deux-à-deux incompatibles, on pose $A=\bigcup_{n\in\N}A_n$ de cardinal $p$.
+\begin{equation*}
+    \Pr(A) = \sum_{i=1}^N\1_{\w_i \in A}p_i = \sum_{i=1}^N \sum_{j=1}^p \1_{\w_i \in A_j} p_i = \sum_{j=1}^p\sum_{i=1}^N\1_{\w_i \in A_j}p_i = \sum_{j=1}^p\Pr(A_j).
+\end{equation*}
 \end{document}

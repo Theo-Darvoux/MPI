@@ -122,4 +122,44 @@ Si le nombre de dimensions est grand, de l'ordre du nombre d'éléments, alors l
     Si on a un nombre de coordonnées très élevé, il est probable que l'une des questions soit très bonne.
 \end{ex}
 
+\section*{Apprentissage non-supervisé.}
+
+\begin{ex}{Partitionnement de données.}{}
+    Étant donné un jeu de données, le partitionner en sous-ensembles.
+\end{ex}
+
+\begin{ex}{Réduction des dimensions.}{}
+    Étant donné un jeu de données et un nombre de dimensions $d$, chercher à projeter le jeu de données dans un espace de plus faible dimension.
+\end{ex}
+
+\begin{defi}{}{}
+    Pour l'apprentissage non-supervisé, il n'y a pas spécialement de phase de test puisqu'on ne réalise pas de prédiction.
+\end{defi}
+
+\begin{ex}{Algorithme des $k$ moyennes.}{}
+    \begin{algorithm}[H]
+        \caption{$k$ moyennes.}
+        \Entree{Un jeu de données $S$ et un entier $k$.}
+        $T$ $\gets$ liste de $k$ éléments de $S$.\\
+        \Tq{$T$ a été modifié}{
+        \PourCh{élément de $S$}{
+            Calculer son voisin le plus proche dans $T$.
+        }
+        \PourCh{sous-ensemble ainsi créé}{
+            Calculer le nouveau représentant du sous-ensemble : son barycentre.
+        }}
+    \end{algorithm}
+    Il peut sembler que l'algorithme ne termine jamais, mais ce n'est pas le cas, puisqu'on admet la terminaison.\\
+    (Un variant de boucle est la somme des carrés des distances aux représentants)\\
+    Le choix des $k$ premiers éléments peut avoir une grande incidence sur le résultat.\\
+    On peut choisir le premier élément aléatoirement puis choisir les suivants afin qu'ils soient le plus éloigné des précédents.\\
+    On peut essayer d'étiqueter les sous-ensembles, mais ce n'est pas toujours faisable.\\
+    Si $k$ est trop élevé, on peut avoir des sous-ensembles très proches. Si $k$ est trop faible, on peut avoir des sous-ensembles très hétérogènes. On préfère avoir $k$ trop élevé et unir les groupes proches.\\
+    On peut compresser des images en définissant une palette de $k$ couleurs par cette méthode. 
+\end{ex}
+
+\begin{ex}{Classification hiérarchique ascendante.}{}
+    La classification hiérarchique ascendante consiste à rassembler des sous-ensembles proches successivement jusqu'à avoir un seul sous-ensemble restant. Cela crée un arbre de fusions successives pour lequel on peut choisir la valeur de $k$ après la construction de l'arbre.
+\end{ex}
+
 \end{document}
