@@ -9,9 +9,11 @@
 
 \input{title.tex}
 
-\vspace*{-0.5cm}
+\vspace*{-0.7cm}
 
 \section{Dénombrements, dénombrabilité.}
+
+\vspace*{-0.4cm}
 
 \subsection{Rappels.}
 
@@ -36,7 +38,7 @@
 
 \vspace*{-0.8cm}
 
-\begin{exercice}{}{}
+\begin{exercice}{(CCINP)}{}
     Soit $E$ un ensemble fini de cardinal $n$.
     \begin{enumerate}
         \item Montrer que $|\P(E)|=2^n$.
@@ -44,9 +46,6 @@
         \item Quel est le nombre de partitions de $E$ en deux parties ?
         \item Quel est le nombre de couples $(A,B)\in\P(E)$ où $A\cap B = \varnothing$ ?
     \end{enumerate}
-    \tcblower
-    \boxed{1.} Pour $\P_k$ l'ensemble des parties de $E$ à $k$ éléments, $\P(E)=\bigsqcup_{i=0}^n\P_i(E)$ donc $|\P(E)|=\sum_{i=0}^n|\P_k(E)|=2^n$.\\
-    Les autres questions sont dans les exercices d'oral CCINP.
 \end{exercice}
 
 \subsection{Ensembles dénombrables.}
@@ -445,4 +444,144 @@ Enfin, pour $(A_n)\in\A^\N$ deux-à-deux incompatibles, on pose $A=\bigcup_{n\in
 \begin{equation*}
     \Pr(A) = \sum_{i=1}^N\1_{\w_i \in A}p_i = \sum_{i=1}^N \sum_{j=1}^p \1_{\w_i \in A_j} p_i = \sum_{j=1}^p\sum_{i=1}^N\1_{\w_i \in A_j}p_i = \sum_{j=1}^p\Pr(A_j).
 \end{equation*}
+
+\begin{exercice}{}{}
+    Pour une classe de 36 élèves, quelle est la probabilité que deux élèves aient la même date d'anniversaire ?
+    \tcblower
+    On note $\O=\lb1,365\rb^{36}$, on prend $\A=\P(\O)$ car $\O$ est fini et $\Pr$ adaptée.\\
+    Posons $A$ : << Au moins deux élèves ont le même jour d'anniversaire >>.\\
+    Alors $\ov{A}$ : << Tous les élèves ont des dates d'anniversaires différentes >>.\\
+    On a $\Pr(\ov{A})=\frac{|\ov{A}|}{|\O|}=\frac{365!}{329!\.365^{36}}$ puis $\Pr(A)=1-\Pr(\ov{A})$
+\end{exercice}
+
+\begin{exercice}{}{}
+    On tire au hasard un entier entre 1 et $n$. On note $A$ : << le nombre tiré est premier avec $n$ >>.\\
+    On note $A_i$ : << le nombre tiré est un multiple de $p_i$ >> où $n=p_1^{\a_1}...p_r^{\a_r}$.\\
+    Exprimer $\Pr(a)$ avec $\phi(n)$. Calculer $\Pr(A_i)$ pour $i\in\lb1,r\rb$. Retrouver $\phi(n) = n(1-\frac{1}{p_1})...(1-\frac{1}{p_r})$.
+    \tcblower
+    On pose $\O=\lb1,n\rb$, $\A=\P(\O)$, $\Pr$ adaptée.\\
+    Alors $A=\{k\in\N, ~ k \land n = 1\}$. Alors $\Pr(A)=\frac{|A|}{|\O|}=\frac{\phi(n)}{n}$.\\
+    Puis $\forall i \in \lb1,r\rb, ~ A_i = \{k \in \lb1,n\rb, ~ p_i \mid k\}$ donc $|A_i|=\frac{n}{p_i}$ puis $\Pr(A_i)=\frac{|A_i|}{|\O|}=\frac{1}{p_i}$.\\
+    Vérifions que $\ov{A_1},...,\ov{A_n}$ mutuellement indépendants.
+    \begin{equation*}
+        \ov{A_1} \cap ... \cap \ov{A_i} = \{k \in \lb1,n\rb, ~ k \land p_1 = 1 \et ... \et k\land p_i = 1\}
+    \end{equation*}
+    Donc $\ov{A_1}\cap...\cap\ov{A_i}=\{k\in\lb1,n\rb, ~ k\land (p_1...p_i)=1\}$, donc $\Pr(\ov{A_1}\cap...\ov{A_i})=\frac{\phi(p_1...p_i)}{n}$.\\
+    Puis $A_1\cap ... \cap A_i = \{k\in\lb1,n\rb, ~ p_1 \mid k \et ... \et p_i \mid k\}$.\\
+    Puis si $a\land b = 1$, alors $[a\mid c \et b\mid c] \iff ab \mid c$ donne $A_1\cap ... \cap A_i = \{k\in\lb1,n\rb, ~ p_1...p_i\mid k\}$.\\
+    Puis $\Pr(A_1\cap...\cap A_i) = \frac{|A_1\cap ...\cap A_i|}{|\O|}=\frac{n}{p_1...p_i}=\frac{1}{p_1...p_i}=\Pr(A_1)...\Pr(A_i)$.\\
+    Donc $(A_1,...,A_r)$ est une famille d'évènements mutuellement indépendants.
+    \begin{equation*}
+        A = \bigcap_{i=1}^r\ov{A_i} \ra \Pr(A) = \prod_{i=1}^r \Pr(\ov{A_i}) \ra \frac{\phi(n)}{n} = \prod_{i=1}^r\left( 1 - \frac{1}{p_i} \right).
+    \end{equation*}
+\end{exercice}
+
+\subsection{Cas d'un univers infini dénombrable.}
+
+Par hypothèse, il existe $\phi:\N\to\O$ bijective, on note $\O=\{w_n, ~ n\in\N\}$ avec $\w_n = \phi(n)$ pour $n\in\N$.\\
+On choisit $\A=\P(\O)$ comme tribu. On construit une probabilité $\Pr$ sur $\A$ :\\
+\bf{Analyse.} Posons $p_n=\Pr(\{\w_n\})$ pour $n\in\N$, on veut $p_n\geq0$, $\sum_{n\in\N}p_n=1$.\\
+\bf{Synthèse.} Soit $(p_n)_{n\in\N}\in\R_+^\N$ tel que $\sum_{n=0}^{\infty}p_n=1$. On pose $\Pr(\{\w_n\})=p_n$.\\
+Pour $A\in\A, ~ \Pr(A)=\sum_{n=0}^\infty \1_{A}(\w_n)p_n$. On a $\P(\O)=1$ et $\forall A \in \A, ~ \Pr(A)\geq0$.\\
+Puis $\Pr$ est bien définie comme somme d'une série convergente par TCSTG+. Soit $(A_n)_n$ 2-à-2 incompatibles.
+\begin{align*}
+    \Pr\left( \bigcup_{n\in\N} A_n \right) = \sum_{k=0}^\infty \1_{\bigcup_{n\in\N} A_n}(\w_k)p_k =\sum_{k=0}^\infty\sum_{n=0}^\infty(\1_{A_n}(\w_k)p_k).
+\end{align*}
+On pose $u_{k,n} = \1_{A_n}(\w_k)$. La famille est sommable d'après le théorème de Fubini :
+\begin{equation*}
+    \Pr\left( \bigcup_{n\in\N} A_n \right) = \sum_{n=0}^\infty \sum_{k=0}^\infty \1_{A_n}(\w_k)p_k = \sum_{n=0}^\infty \Pr(A_n).
+\end{equation*}
+On admet que pour un univers infini non-dénombrable, on ne peut pas construire $\Pr$ lorsque $A=\P(\O)$ sur $\O$.
+
+\section{Matrices stochastiques.}
+
+On note $U\in\M_{n,1}(\R)$ dont tous les coefficients valent 1.
+
+\begin{defi}{}{}
+    Soit $A\in\M_n(\K)$, on dit que $A$ est positive ssi $\forall i,j \in \lb1,n\rb, ~ [A]_{i,j}\geq 0$.\\
+    \bf{Remarque.} Le produit de deux matrices positives est positive.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    Soit $A\in\M_n(\R)$ positive. Alors $A$ est stochastique ssi $\forall i \in \lb1,n\rb, ~ \sum_{j=1}^n [A]_{i,j} = 1$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soit $A \in \M_n(\R)$ positive.
+    \begin{equation*}
+        A \nt{ est stochastique } \iff AU=U.
+    \end{equation*}
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Le produit de deux matrices stochastiques est stochastique.
+    \tcblower
+    Pour $A,B\in \M_n(\R)$ stochastiques, $ABU=A(BU)=AU=U$ donc $AB$ est stochastique.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Vérifier que $A$ est stochastique, déterminer $\Sp(A)$, calculer $L=\lim A^n$ et vérifier $L^2=L$ pour $A=\begin{pmatrix} \frac{1}{2} & \frac{1}{4} & \frac{1}{4} \\[0.1cm] \frac{1}{4} & \frac{1}{2} & \frac{1}{4} \\[0.1cm] \frac{1}{4} & \frac{1}{4} & \frac{1}{2} \end{pmatrix}$.
+    \tcblower
+    La matrice $A$ est clairement positive et stochastique. $\X_A(\l) = (\l-1)(\l-\frac{1}{4})^2$.\\
+    On remarque que $A\in\S_3(\R)$ donc elle est orthogonalement diagonalisable donc :\\
+    Il existe $(P,D)\in\O_3(\R)\times D_3(\R), ~ A=PDP^\top$ avec $D=\Diag(1,1/4,1/4)$, alors $A^n=PD^nP^\top$.\\
+    Donc par continuité de $M\mapsto PMP^\top$ en dim. finie, $A^n \to PE_{1,1}P^{\top}:=L$ donc $L^2=L$.
+\end{exercice}
+
+\begin{prop}{$\star$}{}
+    Soit $A\in\M_n(\R)$ stochastique et $\l\in\Sp_\C(A)$, alors $|\l|\leq 1$.
+    \tcblower
+    Soit $X\in\M_{n,1}(\C)$ un $\vp$ associé à $\l$.
+    \begin{equation*}
+        AX=\l X \iff \begin{cases}a_{1,1}x_1 + ... + a_{1,n}x_n = \l x_1 \\ ... \\ a_{n,1}x_1 + ... + a_{n,n}x_n=\l x_n\end{cases}
+    \end{equation*}
+    On note $i_0 \in \lb1,n\rb$ tel que $|x_{i_0}|=\max\{|x_i|, ~ i\in\lb1,n\rb\}$, puisque $X\neq0$, $|x_{i_0}|>0$.\\
+    On filtre la $i_0^{\nt{ème}}$ ligne : $a_{i_0,1}x_{1} + ... + a_{i_0,n}x_n = \l x_{i_0}$.
+    \begin{equation*}
+        |\l||x_{i_0}| \leq \sum_{j=1}^n |a_{i_0,j}x_j| = \sum_{j=1}^n a_{i_0,j}|x_j| \leq |x_{i_0}|\underbrace{\sum_{j=1}^na_{i_0,j}}_{\nt{stochastique}}=|x_{i_0}|.
+    \end{equation*}
+    On divise par $|x_{i_0}|>0$, alors $|\l|\leq 1$.
+\end{prop}
+
+\vspace*{-0.9cm}
+
+\begin{exercice}{}{}
+    Soit $A\in\M_n(\R)$ stohastique strictement positive.
+    \begin{enumerate}
+        \item Soit $\l\in\C$ valeur propre de $A$. Montrer que $|\l|=1\ra \l=1$.
+        \item Montrer qu'une matrice à diagonale strictement dominante est inversible.
+        \item En déduire que $\Ker(A-I_n) = 1$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $X\in\M_{n,1}(\C)$ $\vp$ associé à $\l$ et $i_0\in\lb1,n\rb$ tel que $|x_{i_0}|=\max\{|x_i|, ~ i\in\lb1,n\rb\}$ strictement positif.
+    \begin{align*}
+        AX=\l X &\ra a_{i_0,1}x_1 + ... + a_{i_0,n}x_n = \l x_{i_0} \ra\\
+        &\ra |\l-a_{i_0,i_0}||x_{i_0}| \leq \sum_{j\neq i_0}|a_{i_0,j}||x_j| \leq |x_{i_0}|\sum_{j\neq i_0}a_{i_0,j}
+    \end{align*}
+    En divisant par $|x_{i_0}|>0$, on a $|\l-a_{i_0,i_0}|\leq \sum_{j\neq i_0}a_{i_0,j} := r_{i_0}$.\\
+    On retrouve le résultat : $\l \in \B(a_{i_0,i_0}, r_{i_0})$, disque de Gerschgorin.\\
+    Supposons $|\l|=1$, alors $1-a_{i_0,i_0}=|\l|-|a_{i_0,i_0}|\leq|\l - a_{i_0,i_0}| \leq \sum_{j\neq i_0}a_{i_0,j}=1-a_{i_0,i_0}$ (stochastique).\\
+    Cet chaîne d'inégalités est en réalité une chaîne d'égalités, donc $|\l|-a_{i_0,i_0}=|\l-a_{i_0,i_0}|$.\\
+    En passant au carré : $|\l|^2 - 2a_{i_0,i_0}|l|+a_{i_0,i_0}^2 = (\l-a_{i_0,i_0})\ov{(\l-a_{i_0,i_0})}$.\\
+    Ainsi, puisque $|\l|=1$ : $1-2a_{i_0,i_0}+a_{i_0,i_0}^2 = 1 - 2\Re(a_{i_0,i_0}\l) + a_{i_0,i_0}^2$\\
+    Puis $a_{i_0,i_0}=\Re(a_{i_0,i_0}\l)$ puisque $a_{i_0,i_0}>0$ donc $Re(\l)=1$, et $|\l|=1$ donc $\l=1$.\\
+    \boxed{2.} Soit $A=(a_{i,j})$ à diagonale strictement dominante : $\forall i \in \lb1,n\rb, ~ |a_{i,i}|\geq\sum_{j\neq i}|a_{i,j}|$.\\
+    On peut montrer que $\Ker(A)=0$, même preuve que en question 1 (choisir $X\neq0$ tel que $AX=0$ puis absurde).\\
+    Puis $\Ker(A)=(0)\iff A\in\GL_n(\R)$.\\
+    \boxed{3.} Déjà, $1$ est vp de $A$ donc $\Ker(A-I_n)\neq(0)$ et $\dim\Ker(A-I_n)\geq1$. Mq $\rg(A-I_n)\geq n-1$.
+    \begin{equation*}
+        A-I_n = \begin{pmatrix}a_{1,1}-1 & a_{1,2} & \dots & a_{1,n} \\ a_{2,1} & a_{2,2}-1 & & \vdots \\ \vdots & & \ddots & \vdots \\ a_{n,1} & \dots & \dots & a_{n,n} - 1\end{pmatrix}, \et \forall i \in \lb1,n\rb, ~ a_{i,i} - 1 < 0.
+    \end{equation*}
+    On pourra vérifier que $\tilde{A}$, $A$ privé de sa dernière ligne et colonne, est DSD donc $\tilde{A}\in\GL_{n-1}(\R)$.\\
+    Donc $\rg(\tilde{A})=n-1$ puis $\rg(A-I_n)\geq \rg\tilde{A}=n-1$.
+\end{exercice}
+
 \end{document}

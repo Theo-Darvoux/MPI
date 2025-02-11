@@ -1,0 +1,86 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{17}
+\def\pagetitle{Variables aléatoires.}
+
+\input{setup.tex}
+
+\begin{document}
+
+\input{title.tex}
+
+\vspace*{-0.7cm}
+
+\section{Généralités.}
+
+\begin{defi}{Variable aléatoire discrète.}{}
+    Soit $(\O,\A,\Pr)$ un espace probabilisé et $X:\O\to\R$ une application.\\
+    On dit que $X$ est une \bf{variable aléatoire discrète} (v.a.d.) sur $(\O,\A,\Pr)$ ssi :
+    \begin{enumerate}
+        \item $X(\O)$ est au plus dénombrable.
+        \item $\forall x \in X(\O), ~ X^{-1}(\{x\})\in\A$, noté $(X = x)$.
+    \end{enumerate}
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    On tire un dé à 6 faces deux fois. On note $X$ le plus grand numéro obtenu.\\
+    Si $\w=(1, 5)$, alors $X(\w)=5$; si $\w=(3,2)$, alors $X(\w)=3$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$. Alors $\forall A \subset X(\O), ~ (X \in A)\in\A$.
+    \tcblower
+    Soit $A\in X(\O)$. On a $(X\in A) \iff \exists a \in A, ~ X=a$ donc $(X\in A) = \bigcup_{a\in A}(X=a)\in \A$.\\
+    En effet, c'est un réunion au plus dénombrable d'évènements de $\A$.\\
+    En outre, par $\s$-additivité (les évènements sont 2-à-2 incompatibles) :
+    \begin{equation*}
+        \Pr(X\in A) = \sum_{a\in A}\Pr(X=a).
+    \end{equation*}
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{Cas particuliers.}{}
+    \begin{enumerate}
+        \item $A=[a,+\infty[~\subset\R$ : $(X\in A) = (X\geq a) = \bigcup_{\substack{x\geq a\\x\in X(\O)}}(X=x)$.
+        \item $A=]-\infty,a]~\subset\R$ : $(X \in A) = (X < a) = \bigcup_{\substack{x < a \\ x \in X(\O)}}(X=x)$. 
+    \end{enumerate}
+    Supposons de plus que $X(\O) = \N$, alors $\forall n \in \N, ~ (X\geq n) = \bigcup_{k\geq n}(X=k)=(X=n)\sqcup(X\geq n+1)$.\\
+    Par $\s$-additivité, $\Pr(X\geq n) = \Pr(X=n)+\Pr(X\geq n+1)$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    Soit $(\O,\A,\Pr)$ un espace probabilisé et $A\in\A$. Vérifier que $\1_A$ est une v.a.d. sur $(\O,\A,\Pr)$.
+    \tcblower
+    On a $\1_A(\O)\subset\{0,1\}$ donc au plus dénombrable car fini.\\
+    Puis $(\1_A = 0) = \ov{A} \in \A$ et $(\1_A = 1) = A \in \A$ donc $\forall x \in \1_A(\O), ~ (\1_A = x) \in \A$. C'est une v.a.d. 
+\end{ex}
+
+\begin{exercice}{}{}
+    Soit $(\O,\A,\Pr)$ un espace probabilisé et $N$ une v.a.d. sur cet espace à valeurs dans $\N$.\\
+    On prend $(X_n)_{n\in\N}$ une suite de v.a.d. sur $(\O,\A,\Pr)$, et $Y=X_N$. Montrer que $Y$ est une v.a.d.
+    \tcblower
+    Déjà, $Y:\O\to\R$ avec $Y(\w)=X_{N(\w)}(\w)$, donc $Y(\O)\subset\bigcup_{n\in\N}X_n(\O)$.\\
+    Soit $y\in Y(\O)$, alors $(Y = y) = \bigcup_{n\in\N}(N = n \cap X_n = y)\in\A$.
+\end{exercice}
+
+\begin{defi}{Loi d'une variable aléatoire.}{}
+    Soit $(\O,\A,\P)$ un espace probabilisé et $X$ une v.a.d. sur cet espace.\\
+    On pose $\forall A \in X(\O), ~ \Pr_X(A)=\Pr(X\in A)$ la loi de $X$, c'est une probabilité sur $(X(\O), \P(X(\O)))$.
+    \tcblower
+    Montrons que $\Pr_X$ est bien une probabilité sur $(X(\O), \P(X(\O)))$.\\
+    $\bullet$ $\Pr_X(X(\O))=\Pr(X\in X(\O))=\Pr(\O)=1$.\\
+    $\bullet$ $\forall A \in \P(X(\O))$, $\Pr_X(A)=\Pr(X\in A)\geq 0$.\\
+    $\bullet$ Pour $(A_n)_n\in\P(X(\O))^\N$ 2-à-2 incompatibles.
+    \begin{equation*}
+        \Pr_X(\bigcup_{n\in\N}A_n) = \Pr(X\in\bigcup_{n\in\N}A_n) = \Pr(\bigcup_{n\in\N}(X\in A_n)) = \sum_{n\in\N}\Pr(X\in A_n).
+    \end{equation*}
+\end{defi}
+
+\end{document}
