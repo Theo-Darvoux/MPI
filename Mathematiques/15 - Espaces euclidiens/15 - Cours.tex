@@ -700,7 +700,7 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
 \end{exercice}
 
 \begin{exercice}{Matrice de Hilbert.}{}
-    Montrer que les valeurs propres de $H=\left( \frac{1}{i+j-1} \right)_{i,j}\in\M_n(\R)$ sont toutes positives.
+    Montrer que les valeurs propres de $H=\left( \frac{1}{i+j-1} \right)_{i,j}\in\M_n(\R)$ sont toutes strictement positives.
     \tcblower
     \bf{Ne pas chercher à calculer $\X_H$.}
     \begin{equation*}
@@ -740,7 +740,7 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     \tcblower
     On munit $\R^n$ du produit scalaire usuel.\\
     Par théorème spectral : $\exists P \in O_n(\R), ~ \exists D \in \D_n(\R), ~ A=PDP^\top$ où $D=\Diag(\l_i)$.\\
-    Soit $\Delta=\Diag(\sqrt{\l_i})$, alors $A=P\Delta^2P^\top = P\D(P\Delta)^\top$ et pour $M=(P\Delta)^\top, ~ A=M^\top M$.\\
+    Soit $\Delta=\Diag(\sqrt{\l_i})$, alors $A=P\Delta^2P^\top = P\Delta(P\Delta)^\top$ et pour $M=(P\Delta)^\top, ~ A=M^\top M$.\\
     Notons $v_1,...,v_n$ les colonnes de $M$. Alors $[M^\top M]_{i,j}=\Lg v_i, v_j\Rg$ donc $A=(\Lg v_i, v_j\Rg)$.\\
     Donc $A=\Gram(v_1,...,v_n)$.
 \end{exercice}
@@ -756,7 +756,7 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
         \item Soit $A\in\M_n(\R)$. Montre que $\det(A)^2 \leq \prod_{i=1}^n \left( \sum_{j=1}^n a_{i,j}^2 \right)$.
     \end{enumerate}
     \tcblower
-    \boxed{1.} $PQ$ est la matrice de passage de $\B_C$ à $\cursive{C}$, donc $PQ\in\O_n(\R)$ et $P=PQQ^{-1}$. On pose $T=Q^{-1}$.\\
+    \boxed{1.} $PQ$ est la matrice de passage de $\B_C$ à $\cursive{C}$, donc $PQ\in O_n(\R)$ et $P=PQQ^{-1}$. On pose $T=Q^{-1}$.\\
     Notons $\cursive{C}=(a_1,...,a_n)$ ses colonnes et $\B=(e'_1,...,e'_n)$, alors $Q=(\Lg e'_j, e_i\Rg)_{i,j}$.\\
     De plus, $\cursive{C}$ est orthonormalisée de Schmidt : $\forall i \in \lb1,n\rb, ~ e'_i \in \Vect(e_1,...,e_n)$ et $\Lg e'_i,e_i\Rg>0$.\\
     Donc $Q^{-1}$ est triangulaire supérieure réelle à diagonale strictement positive.\\
@@ -764,6 +764,25 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     \boxed{2.} Si $A\notin \GL_n(\R)$, c'est trivial.\\
     Si $A=OT$, où $O\in O_n(\R)$ et $T\in \T_n^{++}(\R)$, on note $e'_1,...,e'_n$ les colonnes de $A$. C'est une base car $A\in\GL_n(\R)$.\\
     On note $e_1,...,e_n$ son orthonormalisée de Schmidt, alors \begin{equation*}\det(A)^2=\det(O)^2\det(T)^2=\det(T)^2=\prod_{i=1}^n\Lg e'_i, e_i\Rg^2 \leq \prod_{i=1}^n \|e'_i\|^2\cancel{\|e_i\|^2}=\prod_{i=1}\sum_{j=1}^n a_{j,i}^2\end{equation*}
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{Racine carrée de matrices symétriques positives.}{}
+    \begin{enumerate}
+        \item Soit $A\in\S_n^+(\R)$. Montrer que $\exists B \in \S_n^+(\R), ~ B^2=A$.
+        \item Soit $A\in\S_n^{++}(\R)$. Montrer que $\exists B \in \S_n^{++}(\R)$ tel que $B^2=A$.
+        \item Montrer l'unicité de $B$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $A$ est symétrique réelle donc par théorème spectral : $\exists P \in O_n(\R), ~ \exists D \in \D_n(\R), ~ A=PDP^\top$.\\
+    De plus, $A\in\S_n^+(\R)$ donc $D=\Diag(\l_i)$ avec $\forall i \in \lb1,n\rb,~\l_i \in \Sp(A) \et \l_i\geq0$.\\
+    On pose $\Delta = \Diag(\sqrt{\l_i})$ et $B=P\Delta P^{-1}$, alors $B^2=P\Delta^2 P^{-1}=A$, $B^\top = B$ et $\Sp(B)\subset\R_+$.\\
+    \boxed{2.} $A\in\S_{n}^{++}(\R)$ donc $A\in\GL_n(\R)$ donc $\l_i\neq0$ donc $\Sp(B)\subset\R_+^*$.\\
+    \boxed{3.} Soit $A\in\S_n^+(\R)$ et $B\in\S_n^+(\R)$ tels que $A=B^2$.\\
+    On a $AB=B^2B=BB^2=BA$ puis $A,B\in\S_n^+(\R)$ : $A=PDP^\top$ et $B=P\Delta P^\top$.\\
+    Puis $B^2=A \iff \Delta^2= D \iff \forall i \in \lb1,n\rb, ~ \mu_i^2=\l_i \iff \forall i \in \lb1,n\rb, ~ \mu_i = \sqrt{\l_i}$.\\
+    Avec $\Sp(A)=\{\l_i\}$ et $\Sp(B)=\{\mu_i\}$. On a donc montré que $B$ est determiné de manière unique.
 \end{exercice}
 
 \vspace*{-0.8cm}
@@ -783,23 +802,6 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     Or $O_n(\R)$ est compact, donc $\exists \phi : \N\to \N$ strictement croissante telle que $O_{\phi(k)}\to O\in O_n(\R)$.\\
     On a $A_{\phi(k)}\to A$ (extraite), donc $S_{\phi(k)}=O^\top_{\phi(k)}A_{\phi(k)}\to O^\top A$ par continuité de la transposée et du produit.\\
     Alors $A=OS$ avec $O\in O_n(\R)$ et $S_n^{+}(\R)$ est fermé donc $S=O^\top A\in\S_n^{+}(\R)$.
-\end{exercice}
-
-\begin{exercice}{Racine carrée de matrices symétriques positives.}{}
-    \begin{enumerate}
-        \item Soit $A\in\S_n^+(\R)$. Montrer que $\exists B \in \S_n^+(\R), ~ B^2=A$.
-        \item Soit $A\in\S_n^{++}(\R)$. Montrer que $\exists B \in \S_n^{++}(\R)$ tel que $B^2=A$.
-        \item Montrer l'unicité de $B$.
-    \end{enumerate}
-    \tcblower
-    \boxed{1.} $A$ est symétrique réelle donc par théorème spectral : $\exists P \in O_n(\R), ~ \exists D \in \D_n(\R), ~ A=PDP^\top$.\\
-    De plus, $A\in\S_n^+(\R)$ donc $D=\Diag(\l_i)$ avec $\forall i \in \lb1,n\rb,~\l_i \in \Sp(A) \et \l_i\geq0$.\\
-    On pose $\Delta = \Diag(\sqrt{\l_i})$ et $B=P\Delta P^{-1}$, alors $B^2=P\Delta^2 P^{-1}=A$, $B^\top = B$ et $\Sp(B)\subset\R_+$.\\
-    \boxed{2.} $A\in\S_{n}^{++}(\R)$ donc $A\in\GL_n(\R)$ donc $\l_i\neq0$ donc $\Sp(B)\subset\R_+^*$.\\
-    \boxed{3.} Soit $A\in\S_n^+(\R)$ et $B\in\S_n^+(\R)$ tels que $A=B^2$.\\
-    On a $AB=B^2B=BB^2=BA$ puis $A,B\in\S_n^+(\R)$ : $A=PDP^\top$ et $B=P\Delta P^\top$.\\
-    Puis $B^2=A \iff \Delta^2= D \iff \forall i \in \lb1,n\rb, ~ \mu_i^2=\l_i \iff \forall i \in \lb1,n\rb, ~ \mu_i = \sqrt{\l_i}$.\\
-    Avec $\Sp(A)=\{\l_i\}$ et $\Sp(B)=\{\mu_i\}$. On a donc montré que $B$ est determiné de manière unique.
 \end{exercice}
 
 \begin{exercice}{}{}
@@ -835,6 +837,68 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     \boxed{3.} $\X_A(\l)=\det(\l I_n-A)$ et $\l I_n-A\in\GL_n(\R) \iff \X_A(\l)\neq0 \iff \l \notin \Sp(A)$.\\
     Or $1\notin\Sp(A)$ donc $I_n-A\in\GL_n(\R)$ puis $(I_n-A)^\top=I_n+A$ donc $I_n+A\in\GL_n(\R)$.\\
     \boxed{4.} $B^\top B=...=I_n$ et $\det(B)=\frac{\det(I_n+A)}{\det(I_n-A)}=\frac{\det(*^\top)}{\det(*)}=1$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    On pose $A_M=\{X^\top M X, ~ x \in \M_{n,1}(\R), ~ \|X\|=1\}$ avec $M\in\M_n(\R)$. Montrer que $A_M$ est un segment.
+    \tcblower
+    Si $M\in\S_n(\R)$, d'après le théorème spectral, $\exists P\in O_n(\R), ~ \exists D \in \D_n(\R), ~ A_M = PDP^\top$. Avec $D=\Diag(\l_i)$.\\
+    Soit $X\in\M_{n,1}(\R)$ de norme 1. On a $X^\top MX = X^\top PDP^\top X = YDY^\top = \sum_{i=1}^n y_i^2\l_i$.\\
+    On pose $\b = \max(\l_1,...,\l_n)$ et $\a=\min(\l_1,...,\l_n)$ puis :
+    \begin{equation*}
+        \a\sum_{i=1}^ny_i^2 \leq X^\top MX \leq \b\sum_{i=1}^n y_i^2 ~:~ \a\|Y\|^2 \leq X^\top MX \leq \b\|Y\|^2
+    \end{equation*}
+    Donc $\a \leq X^\top M X \leq \b$ car $\|Y\|^2=\|X\|^2=1$ donc $A_M \subset [\a, \b]$.\\
+    Posons $S=\{X \in \M_{n,1}(\R), ~ \|X\|=1\}$, c'est un connexe par arcs, on pose $\phi:X\mapsto X^\top MX$ continue.\\
+    Donc $\phi(S)=A_M$ est connexe par arcs, c'est un segment de $\R$ par caractérisation.\\
+    Puis si $M\in\M_n(\R)$, on a $M=\frac{M^\top + M}{2}+ \frac{M-M^\top}{2}$ donc $X^\top MX = X^\top SX + X^\top AX$.\\
+    Et $\X^\top AX = \Lg X,AX\Rg = \Lg AX,X\Rg = (AX^\top)X = X^\top A^\top X = -X^\top AX$ donc $X^\top AX=0$.\\
+    Donc $X^\top MX = X^\top SX$ donc $A_M = A_S$.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soit $K$ un sous-groupe compact de $\GL_n(\R)$ tel que $O_n(\R)\subset K$. Montrer que $K=O_n(\R)$.
+    \tcblower
+    Soit $M\in K$. Elle est inversible donc par décomposition polaire : $\exists!(\O,S)\in O_n(\R)\times\S_n^+(\R)$ telles que $M=\O S$.\\
+    Alors $S=\O^\top M$, et $M\in K$, $\O^\top \in K$ donc $S\in K$. On note $\Sp(S)=\{\l_1,...,\l_n\}$ tous positifs car $S\in\S_n^+(\R)$.\\
+    On pose $i_\a$ l'indice de $\a$ et $i_\b$ celui de $\b$, alors $\a = E_{i_\a} D E_{i_\a}^\top$ et $\b = E_{i_\b} D E_{i_\b}^\top$.\\
+    On a $\forall k \geq 0, ~ S^k=PD^kP^\top$, avec $D^k=\Diag(\l_1^k,...,\l_n^k)$. $(S^k)_k$ bornée car suite de $K$, borné car compact.\\
+    On peut en extraire $(S^{\phi(k)})_k$ convergente vers $N\in K$. On a $\forall i \in \lb1,n\rb, ~ \l_i \geq 1$ car sinon $N\notin \GL_n(\R)$ :
+    \begin{equation*}
+        N=P\Delta P^\top \quad \nt{avec} \quad \Delta = \Diag(\lim \l_i^{\phi(k)})_i
+    \end{equation*}
+    De plus, $\forall i \in \lb1,n\rb, ~ \l_i \leq 1$ car sinon, $(S^k)$ diverge et n'est donc pas bornée.\\
+    Donc $\forall i \in \lb1,n\rb, ~ \l_i = 1$, donc $S=I_n$ donc $M=\O \in O_n(\R)$.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soit $E$ euclidien, $u\in\S^+(E)$.
+    \begin{enumerate}
+        \item Montrer que $\exists v \in \S^+(E), ~ v^2=u$.
+        \item Montrer que pour $u,v\in\S^{++}(E)$, $\det(u+v)\geq \det(u)+\det(v)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On note $(\l_1,...,\l_n)$ les valeurs propres de de $u$, toutes positives car $u\in\S^+(E)$.\\
+    Par théorème spectral, il existe $(e_1,...,e_n)$ une b.o.n. de vecteurs propres de $u$ : $\forall i \in \lb1,n\rb, ~ u(e_i)=\l_i e_i$.\\
+    On pose $v\in\L(E)$ tel que $v(e_i)=\sqrt{\l_i}e_i$, on a alors $v^2(e_i)=\l_i e_i = v'e_i$ donc $u=v^2$ par égalité sur une base.\\
+    De plus, $v\in\S^+(E)$ car toutes ses vp sont positives.\\
+    \boxed{2.} On pose $w\in\S^{++}(E), ~ w^2 = v$. On a $\det(u+v)=\det(w^2)\det(\id + w^{-1}uw^{-1})$.\\
+    Soit $x\in E, ~ \Lg w^{-1} u w^{-1}(x), x \Rg = \Lg uw^{-1}(x), w^{-1}(x)\Rg \geq 0$ car $w\in\S^{++}(E)$.\\
+    Montrons que pour $s\in\S^+(E)$, $\det(\id + s) \geq 1+\det(s)$. Soit $S=\Mat_\B(s)$.\\
+    Par théorème spectral, $S=PDP^{\top}$ avec $P\in O_n(\R)$ et $D\in\D_n(\R)$.\\
+    $\det(cd+s)=\det(I_n+S)=\det(I_n+PDP^\top)=\et(P(I_n+D)P^\top)=\det(I_n+D)=\prod_{i=1}^n(1+\l_i)\geq 1 + \prod_{i=1}^n\l_i = 1 + \det(s)$.\\
+    On revient en (*) : $\det(u+v)=\det(v)\det(\id + w^{-1}uw^{-1})\geq \det(v)(1+\det(w^{-1}uw^{-1}))=\det(v)+\det(u)$
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $E$ euclidien et $u,v\in\S(E)$ tels que $uv=vu$. Montrer que $u$ et $v$ sont orthogonalement codiagonalisables.
+    \tcblower
+    Soit $\l\in\Sp(u)$. On prend $\B_\l$ une b.o.n. de $E_\l$ de $\vp$ de $v$, qui existe par théorème spectral puisque $v_{|E_\l}\in\Sp(E_\l)$.\\
+    On a $E=\bigoplus_{\l\in\Sp(u)}E_\l$ donc $\B=\bigsqcup_{\l\in\Sp(u)}\B_\l$ est une b.o.n. de $\vp$ de $v$ et de $u$.
 \end{exercice}
 
 \end{document}
