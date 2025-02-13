@@ -83,4 +83,25 @@
     \end{equation*}
 \end{defi}
 
+\begin{defi}{}{}
+    Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$. On dit que $X$ et $Y$ ont même loi, et on note $X\sim Y$ ssi $\Pr_X = \Pr_Y$.\\
+    Alors $X$ et $Y$ ont même probabilité sur tout évènement.
+\end{defi}
+
+\begin{center}{}{}
+    \fbox{$X\sim Y \not\ra \forall \w \in \O, ~ X(\w) = Y(\w)$}
+\end{center}
+
+\begin{prop}{}{}
+    Soit $(\O, A, \Pr)$ un espace probabilisé et $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$.
+    \begin{equation*}
+        (X = Y) \nt{ presque sûr} \ra X \sim Y.
+    \end{equation*}
+    \tcblower
+    Vérifions que $(X=Y)$ est un évènement.
+    \begin{equation*}
+        (X = Y) = \bigcup_{y \in Y(\O)}(X=y\cap Y=y) \in \A.
+    \end{equation*}
+\end{prop}
+
 \end{document}
