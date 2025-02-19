@@ -16,10 +16,14 @@
     En apprentissage machine, on montre à la machine un grand jeu de données d'entraînement, et elle renvoie une fonction pour notre problème. On vérifie la qualité de cette fonction en la comparant à un nouveau jeu de données.
 \end{defi}
 
+\vspace*{-0.4cm}
+
 \begin{defi}{Apprentissage supervisé.}{}
     Dans l'apprentissage supervisé, on utilise un jeu de données étiqueté, chaque élément est composé d'une intance, et d'une étiquette indiquant le résultat attendu.\\
     Un exemple : une image avec un texte la décrivant, ou un temps $t$ et une température. 
 \end{defi}
+
+\vspace*{-0.4cm}
 
 \begin{defi}{}{}
     On distingue deux types de problèmes :
@@ -30,12 +34,16 @@
     On se restreint aux problèmes de classification.
 \end{defi}
 
+\vspace*{-0.4cm}
+
 \begin{defi}{Algorithme des $k$ plus proches voisins.}{}
     Étant donné une instance, on la compare à celles du jeu d'entraînement pour déterminer lesquelles lui ressembles le plus. On garde les $k$ plus proches. On renvoie alors l'étiquette la plus représentée parmi ceux-ci. La performance de l'algorithme dépend de la distance choisie pour calculer les plus proches voisins, et de $k$.\\
     Lorsque $k$ est petit, on ne considère que les voisins très proches, on est très sensible aux données d'entraînement.\\
     Il n'y a pas eu de généralisaiton, on parle de sur-apprentissage.\\
     Lorsque $k$ est trop grand, on considère des voisins qui ne sont plus représentatifs, on parle de sous-apprentissage.
 \end{defi}
+
+\vspace*{-0.4cm}
 
 \begin{ex}{}{}
     Étant donné un nouvel élément, comment calculer ses $k$ plus proches voisins ?
@@ -159,7 +167,15 @@ Si le nombre de dimensions est grand, de l'ordre du nombre d'éléments, alors l
 \end{ex}
 
 \begin{ex}{Classification hiérarchique ascendante.}{}
-    La classification hiérarchique ascendante consiste à rassembler des sous-ensembles proches successivement jusqu'à avoir un seul sous-ensemble restant. Cela crée un arbre de fusions successives pour lequel on peut choisir la valeur de $k$ après la construction de l'arbre.
+    La classification hiérarchique ascendante consiste à rassembler des sous-ensembles proches successivement jusqu'à avoir un seul sous-ensemble restant. Cela crée un arbre de fusions successives pour lequel on peut choisir la valeur de $k$ après la construction de l'arbre.\\
+    On peut définir une distance entre deux sous-ensembles pour déterminer si ils sont proches, en calculant la distance entre leurs barycentres, ou en calculant la moyenne des distances.\\
+    On obtient alors un arbre des fusions appelé \bf{dendogramme}. On peut alors choisir $k$. En biologie, on est amené à construire des arbres phylogénétiques pour classer les espèces en genre, ordres, sous-ordres.
 \end{ex}
+
+\begin{defi}{Qualité du jeu de données.}{}
+    Les algorithmes qu'on a vu sont plus simples que ceux utilisés en pratique. L'avantage qu'ils présente réside dans la simplicité du résultat après apprentissage. La plupart des algorithmes d'apprentissage ne sont pas adaptés à un problème spécifique, c'est le jeu de données qui leur permet de se spécialiser.
+    Un mauvais jeu de données peut être causé par : des erreurs dans le jeu, une taille trop petite, trop de dimensions, un manque de représentativité...\\
+    C'est la grande difficulté dans les méthodes d'apprentissage. La plupart des problèmes de biais viennent des jeux de données.
+\end{defi}
 
 \end{document}

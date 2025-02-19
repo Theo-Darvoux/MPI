@@ -31,7 +31,7 @@
 
 \vspace*{-0.8cm}
 
-\begin{prop}{}{}
+\begin{prop}{$(X\in A)$}{}
     Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$. Alors $\forall A \subset X(\O), ~ (X \in A)\in\A$.
     \tcblower
     Soit $A\in X(\O)$. On a $(X\in A) \iff \exists a \in A, ~ X=a$ donc $(X\in A) = \bigcup_{a\in A}(X=a)\in \A$.\\
@@ -53,7 +53,7 @@
     Par $\s$-additivité, $\Pr(X\geq n) = \Pr(X=n)+\Pr(X\geq n+1)$.
 \end{ex}
 
-\vspace*{-0.8cm}
+\pagebreak
 
 \begin{ex}{}{}
     Soit $(\O,\A,\Pr)$ un espace probabilisé et $A\in\A$. Vérifier que $\1_A$ est une v.a.d. sur $(\O,\A,\Pr)$.
@@ -83,7 +83,7 @@
     \end{equation*}
 \end{defi}
 
-\begin{defi}{}{}
+\begin{defi}{Mêmes lois.}{}
     Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$. On dit que $X$ et $Y$ ont même loi, et on note $X\sim Y$ ssi $\Pr_X = \Pr_Y$.\\
     Alors $X$ et $Y$ ont même probabilité sur tout évènement.
 \end{defi}
@@ -91,6 +91,8 @@
 \begin{center}{}{}
     \fbox{$X\sim Y \not\ra \forall \w \in \O, ~ X(\w) = Y(\w)$}
 \end{center}
+
+\pagebreak
 
 \begin{prop}{}{}
     Soit $(\O, A, \Pr)$ un espace probabilisé et $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$.
@@ -102,6 +104,293 @@
     \begin{equation*}
         (X = Y) = \bigcup_{y \in Y(\O)}(X=y\cap Y=y) \in \A.
     \end{equation*}
+    Vérifions que $X$ et $Y$ ont la même loi. Soit $x\in\R$.
+    \begin{equation*}
+        (X=x) = (X=x \cap X = Y) \sqcup (X=x\cap X\neq Y)
+    \end{equation*}
+    Or $\Pr(X=Y)=1-\Pr(X=Y)=0$ i.e. $X\neq Y$ est négligeable et $(X=x\cap X\neq Y)$ aussi.\\
+    Donc $\Pr(X=x)=\Pr(X=x\cap X=Y) + \cancel{\Pr(X=x\cap X\neq Y)} = \Pr(Y=x\cap X=Y)$ donc $\Pr(X=x)=\Pr(Y=x)$.
 \end{prop}
+
+\begin{exercice}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$. Montrer que $\lim_{\infty}\Pr(X\geq n)=0$.
+    \tcblower
+    Déjà, posons la suite $(u_n)$ telle que $\forall n \in \N, ~ u_n = \Pr(X\geq n)$, décroissante puisque $(X\geq n+1)\subset(X\geq n)$.\\
+    De plus, elle est minorée par zéro, elle converge donc par TLM. Notons $l$ sa limite.\\
+    $\hra$ $(X\geq n) = \bigcup_{k\geq n}(X=k)$ donc $\Pr(X\geq n)=\sum_{k=n}^{\infty}\Pr(X=k)\to0$ en tant que reste de $\sum_{k=0}^\infty\Pr(X=k)=1$.\\
+    $\hra$ Par continuité monotone, puisque $(u_n)$ est décroissante : $\lim\Pr(X\geq n)=\Pr(\bigcap_{n\in\N}(X\geq n))=0$.
+\end{exercice}
+
+\bf{Remarque.} Pour $(\O,\A,\Pr)$ un espace probabilisé et $X$ une v.a.d. sur cet espace, la loi de $X$ est bien définie ssi $\forall x \in X(\O), ~ \Pr(X=x)\geq0$ et $\sum_{x\in X(\O)}\Pr(X=x)=1$.
+
+\begin{exercice}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$. Déterminer la loi de $X$ dans les cas suivants :
+    \begin{enumerate}
+        \item $\forall n \in \N^*, ~ \Pr(X=n)=\frac{2}{n}\Pr(X=n-1)$.
+        \item $\exists k \in ~ ]0,1[, ~ \forall n \in \N, ~ \Pr(X=n)=k\Pr(X\geq n)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Posons $(u_n)$ la suite telle que $\forall n \in \N, ~ u_n = \Pr(X=n)$, alors $\forall n \in \N^*, ~ u_n = \frac{2}{n}u_{n-1}$.\\
+    Alors $\forall n \in \N, ~ u_n = \frac{2^n}{n!}u_0$ (récurrence facile); et $\sum_{n=0}^\infty u_n = \Pr(X\in\N)=1$ donc :
+    \begin{equation*}
+        \sum_{n=0}^{\infty}\frac{2^n}{n!}u_0 = 1 \ra u_0 = e^{-2}.
+    \end{equation*}
+    Finalement, $\forall n \in \N, ~ \Pr(X=n)=\frac{2^n}{n!}e^{-2}$.\\
+    \boxed{2.} Posons $(u_n)$ la suite telle que $\forall n \in \N, ~ u_n=\Pr(X=n)$ et $(v_n)$ telle que $\forall n \in \N, ~ v_n = \Pr(X\geq n)$.\\
+    Alors $\forall n \in \N, ~ u_n = kv_n$ et $(X\geq n) = (X = n)\cup(X\geq n+1)$ donc $v_n=u_n + v_{n+1}=kv_n+v_{n+1}$.\\
+    Ainsi, $v_{n+1}=(1-k)v_n$ donc $\forall n \in \N, ~ v_n=(1-k)^nv_0$, or $v_0=\Pr(X\geq0)=1$ donc $v_n=(1-k)^n$.\\
+    Puis $u_n = kv_n = k(1-k)^n$. C'est une loi de probabilité : $\forall n \in \N, ~ u_k \geq 0$ et $\sum_{n=0}^\infty k(1-k)^n\to\frac{k}{1-(1-k)}=1$.
+\end{exercice}
+
+\begin{prop}{$f(X)$}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ et $f:X(\O)\to\R$. On définit $f(X):w\mapsto f(X(\w))$ de $\O$ dans $\R$.\\
+    Alors $f(X)$ est encore une v.a.d. sur $(\O,\A,\Pr)$.
+    \tcblower
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$. Déjà, $f(X(\O))$ est au plus dénombrable en tant qu'image par une application d'un ensemble au plus dénombrable puis $\forall y \in \R, ~ (f(X)=y) = (X \in f^{-1}(\{y\}))\in\A$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\section{Lois usuelles.}
+
+\begin{defi}{Loi de Bernoulli}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$. On dit que $X$ suit une loi de Bernoulli de paramètre $p\in[0,1]$ ssi :\\[-0.4cm]
+    \begin{equation*}
+        X(\O) = \{0,1\}, ~ \Pr(X=1)=p \et \Pr(X=0) = 1-p.
+    \end{equation*}
+    On note alors $X\sim\B(p)$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\bf{Remarque.} Si $X\sim\B(p)$ alors $X^2=X$ puis $\forall n \in \N^*, ~ X^n = X$.
+
+\begin{prop}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$.
+    \begin{equation*}
+        X \sim \B(p) ~ \nt{avec} ~ p\in[0,1] \iff X=\1_a ~ \nt{avec} ~ A\in\A.
+    \end{equation*}
+    \tcblower
+    \boxed{\la} $(\1_A=1)=A$ et $(\1_A = 0) = \ov{A}$ donc $\1_A\sim\B(p)$ avec $p=\Pr(A)\in[0,1]$.\\
+    \boxed{\ra} Soit $A=(X=1)\in\A$, alors $(X=1)\ra \1_A=1$, sinon $(X=0)\ra\1_A=0$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{Loi binomiale.}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$. On dit que $X$ suit une loi binomiale de paramètres $p\in[0,1]$ et $n\in\N^*$ ssi :\\[-0.3cm]
+    \begin{equation*}
+        X(\O) = \lb0,n\rb, \et \forall k \in \lb0,n\rb, ~ \Pr(X=k) = \binom{n}{k}p^k(1-p)^{n-k}.
+    \end{equation*}
+    On note alors $X\sim \B(n,p)$.
+    \tcblower
+    Vérifions que la loi de $X$ est bien définie :
+    \begin{equation*}
+        \forall k \in \lb0,n\rb, ~ \binom{n}{k}p^k(1-p)^{n-k} \geq 0 \et \sum_{k=0}^n\binom{n}{k}p^k(1-p)^{n-k}=(p+(1-p))^n = 1.
+    \end{equation*}
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{Loi géométrique.}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$. On dit que $X$ suit une loi géométrique de paramètre $p\in~]0,1[$ ssi :\\[-0.3cm]
+    \begin{equation*}
+        X(\O) = \N^* \et \forall k \in \N^*, ~ \Pr(X=k) = p(1-p)^{k-1}.
+    \end{equation*}
+    On note alors $X\sim\cursive{G}(p)$.
+    \tcblower
+    La loi de $X$ est bien définie : $\forall k \in \N^*, ~ p(1-p)^{k-1} \geq 0 \et \sum_{k=1}^\infty p(1-p)^{k-1} = \sum_{k=0}^\infty(1-p)^k = \frac{p}{1-(1-p)}=1$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{inter}{}{}
+    On note $A$ un évènement succès sur $(\O,\A,\Pr)$, on répète des tirages indépendants jusqu'au succès.\\
+    On note $X$ le nombre de tirages pour accéder au premier succès et $B_i$ : << succès au $i^{\nt{ème}}$ tirage >>.\\
+    On a $X$ à valeurs dans $\N^*$ car il faut jouer au moins une fois pour réussir puis $(X=k)=\ov{B_1}\cap...\cap\ov{B_{k-1}}\cap B_k$.\\
+    Les tirages sont indépendants donc la famille $(B_n)_{n\in\N^*}$ est mutuellement indépendante.
+    \begin{equation*}
+        \Pr(X=k)=\Pr(\ov{B_1}) \times ... \times \Pr(\ov{B_{k-1}}) \times \Pr(B_k) = \Pr(\ov{A})\times...\times \Pr(\ov{\ov{A}})\times \Pr(A) = (1-p)^{k-1}p.
+    \end{equation*}
+\end{inter}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N^*$ et $p\in~]0,1[$.
+    \begin{equation*}
+        X \sim \cursive{G}(p) \iff \forall n \in \N, ~ \Pr(X > n) = (1-p)^n 
+    \end{equation*}
+    \tcblower
+    \boxed{\ra} $(X>n) = \bigcup_{k\geq n+1}(X=k)$ indépendants 2-à-2 donc :
+    \begin{equation*}
+        \Pr(X>n) = \sum_{k=n+1}^{\infty} \Pr(X=k) = \sum_{k=n+1}^\infty p(1-p)^{k-1} = p(1-p)^n \sum_{k=0}^\infty(1-p)^k = \frac{p(1-p)^n}{p}=(1-p)^n.\\
+    \end{equation*}
+    \boxed{\la} $\forall n \in \N^*, ~ (X>n-1)=(X=n)\cup(X>n)$ puis $\Pr(X>n-1)=\Pr(X=n)+\Pr(X>n)$.
+    \begin{equation*}
+        \forall n \in \N^*, ~ \Pr(X=n)=\Pr(X>n-1) - \Pr(X>n) = (1-p)^{n-1} - (1-p)^n = p(1-p)^{n-1}
+    \end{equation*}
+    On a bien $X\sim\cursive{G}(p)$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{Lois sans mémoire.}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N^*$ et $p\in~]0,1[$.
+    \begin{equation*}
+        X \sim \cursive{G}(p) \iff \left[ \forall k,n \in \N, ~ \Pr(X>k+n \mid X>n) = \Pr(X>k)\right]
+    \end{equation*}
+    Alors $p=\Pr(X=1)$.
+    \tcblower
+    \boxed{\ra} $\forall k,n \in \N, ~ \Pr(X>k+n\mid X>n) = \frac{\Pr(X>k+n ~ \cap ~ X > n)}{\Pr(X>n)}=\frac{\Pr(X > k + n)}{\Pr(X > n)} = \frac{(1-p)^{k+n}}{(1-p)^n}=(1-p)^k=\Pr(X>k)$.\\
+    \boxed{\la} $\Pr(X>n+1\mid X>n)=\frac{\Pr(X>n+1)}{\Pr(X>n)}=\Pr(X>1)$ par les calculs précédents.\\
+    Donc $\Pr(X>n+1)=\Pr(X>1)\Pr(X>n)=(1-p)\Pr(X>n)$ puis $\forall n \in \N, ~ \Pr(X>n)=(1-p)^n\cancel{\Pr(X>0)}$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ et $\l\in \R_+^*$. On dit que $X$ suit une loi de Poisson de paramètre $\l$ ssi\\[-0.3cm]
+    \begin{equation*}
+        X(\O) = \N \et \forall n \in \N, ~ \Pr(X=n) = e^{-\l}\frac{\l^n}{n!}.
+    \end{equation*}
+    On note alors $X\sim\cursive{P}(\l)$.
+    \tcblower
+    La loi de $X$ est bien définie :
+    \begin{equation*}
+        \forall n \in \N, ~ e^{-\l}\frac{\l^n}{n!} \geq 0 \et \sum_{n=0}^\infty e^{-\l}\frac{\l^n}{n!}=e^{-\l}e^\l = 1.
+    \end{equation*}
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $(X_n)_n$ une suite de v.a.d. sur $(\O,\A,\Pr)$ telle que $\forall n \in \N, ~ X_n \sim \B(n,p_n)$ et $np_n \xrightarrow[n\to+\infty]{}\l>0$.\\
+    Alors $\forall k \in \N, ~ \Pr(X_n = k) \xrightarrow[n\to+\infty]{}e^{-\l}\frac{\l^k}{k!}$.
+    \tcblower
+    Soit $(n,k)\in\N^2$, alors $\Pr(X_n=k)=\binom{n}{k}p_n^k(1-p_n)^{n-k}\sim_{\infty} \frac{n^k}{k!}\cdot\left( \frac{\l}{n} \right)^k\cdot e^{-\l} = e^{-\l}\frac{\l^k}{k!}$.\\
+    On a $(1-p_n)^{n-k}=\frac{(1-p_n)^n}{(1-p_n)^k}\sim_\infty(1-p_n)^n=e^{n\ln(1-p_n)}$ puis $n\ln(1-p_n)\sim-np_n\to-\l$ puis cont. de $\exp$ en -$\l$.
+\end{prop}
+
+\section{Vecteurs aléatoires, couples de variables aléatoires.}
+
+
+\begin{defi}{Vecteur aléatoire.}{}
+    Soit $(X_n)$ une suite de v.a.d. sur $(\O,\A,\Pr)$. Un vecteur aléatoire discret $V$ est une application de $\O$ dans $\R^n$ tel que $V=(X_1,...,X_n)$ où $\forall i \in \lb1,n\rb, ~ X_i$ est une v.a.d. sur $(\O,\A,\Pr)$.
+\end{defi}
+
+\begin{defi}{Loi conjointe.}{}
+    Soient $X,Y$ deux v.a.d. et $V=(X,Y)$. La loi de $V$, ou loi conjointe de $(X,Y)$ est la donnée de :\\
+    $\hra$ $V(\O)$ l'ensemble des valeurs possibles de $V$, et $\Pr((X=x)\cap(Y=y))$ pour tout couple $(x,y)\in X(\O)\times Y(\O)$.
+\end{defi}
+
+\begin{exercice}{}{}
+    Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ données par leur loi conjointe.\\
+    Déterminer $\Pr(X=Y)$, $\Pr(X\geq Y)$, $\Pr(X+Y=a)$.
+    \tcblower
+    \begin{equation*}
+        (X=Y) = \bigcup_{x\in X(\O)}(X=x\cap Y=x) \ra \Pr(X=Y) = \sum_{x\in X(\O)}\Pr(X=x \cap Y=x).
+    \end{equation*} 
+    \begin{equation*}
+        (X\geq Y) = \bigcup_{x\geq y}(X=x\cap Y = y) \ra \Pr(X\geq Y) = \sum_{(x,y)\in V(\O)}\1_{x\geq y}\Pr(X=x\cap Y=y).
+    \end{equation*}
+    \begin{equation*}
+        \Pr(X+Y=a) = \sum_{x\in X(\O)} \Pr(X=x \cap Y=a-x).
+    \end{equation*}
+\end{exercice}
+
+\begin{defi}{Loi marginale.}{}
+    Ce sont les lois de $X,Y$, déduites de celles du couple $(X,Y)$ par :
+    \begin{equation*}
+        \Pr(X=x) = \sum_{y\in Y(\O)}(\Pr(X=x))
+    \end{equation*}
+\end{defi}
+
+\begin{exercice}{}{}
+    Soient $X,Y$ v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$.\\
+    On suppose que $X\sim\cursive{P}(\l)$ où $\l>0$ et que $(Y\mid X=n)\sim \B(n,p)$.\\
+    Déterminer la loi conjointe de $(X,Y)$ et reconnaître la loi marginale de $Y$.
+    \tcblower
+    Par hypothèse, $\forall n \in \N, ~ \Pr(X=n)=e^{-\l}\frac{\l^n}{n!}$ et $\forall k \in \N, ~ \Pr(Y=k\mid X=n)=\binom{n}{k}p^k(1-p)^{n-k}$ si $k\leq n$.\\
+    Alors $\forall k \in \N, ~ \forall n \in \N, ~ \Pr(Y=k \cap X=n) = \Pr(Y=k\mid X=n)\Pr(X=n)=\1_{k\leq n}\binom{n}{k}p^k(1-p)^{n-k}e^{-\l}\frac{\l^n}{n!}$.\\
+    Retrouvons la loi de $Y$ :
+    \begin{align*}
+        \forall k \in \N, ~ \Pr(Y=k) &= \sum_{n=0}^{\infty}\Pr(Y=k \cap X=n) = \sum_{n=k}^\infty \binom{n}{k}p^k(1-p)^{n-k} e^{-\l}\frac{\l^n}{n!}\\
+        &=e^{-\l}\frac{p^k\l^k}{k!}\sum_{n=k}^{\infty}\frac{(1-p)^{n-k}\l^{n-k}}{(n-k)!} = e^{-\l}\frac{(p\l)^k}{k!}\sum_{n=0}^{\infty}\frac{(\l(1-p))^n}{n!}\\
+        &=e^{-\l p}\frac{(\l p)^k}{k!} \ra Y \sim \cursive{P}(\l p).
+    \end{align*}
+\end{exercice}
+
+\begin{prop}{}{}
+    \begin{equation*}
+        X \sim Y ~ \cancel{\ra} ~ X+X \sim X+Y
+    \end{equation*}
+    Exemple : $X\sim\B(1/2)$ et $Y=1-X\sim\B(1/2)$.
+\end{prop}
+
+\section{Indépendance de variables aléatoires discrètes.}
+
+\begin{defi}{}{}
+    Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$, elles sont indépendantes ($X \ind Y$) ssi :
+    \begin{equation*}
+        \forall (x,y) \in X(\O) \times Y(\O), ~ \Pr(X = x \cap Y = y) = \Pr(X=x)\Pr(Y=y).
+    \end{equation*}
+\end{defi}
+
+\begin{thm}{}{}
+    Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$. Elles sont indépendantes ssi :
+    \begin{equation*}
+        \forall A \subset X(\O), ~ \forall B \subset Y(\O), ~ \Pr(X\in A \cap Y \in B) = \Pr(X\in A)\Pr(Y \in B).
+    \end{equation*}
+    \tcblower
+    \boxed{\la} Soit $x\in X(\O)$ et $y\in Y(\O)$. On pose $A=\{x\}\subset X(\O)$ et $B=\{y\}\subset Y(\O)$, puis $(X \subset \{x\}) = (X=x)$.\\
+    \boxed{\ra} Soit $A\subset X(\O)$ et $B\subset Y(\O)$. On a $(X\in A \cap Y \in A) = \bigcup_{\substack{x\in A\\y\in B}}(X=x\cap Y=y)$. Par $\s$-additivité :
+    \begin{equation*}
+        \Pr(X\in A \cap Y \in B) = \sum_{\substack{x\in A\\y\in B}}\Pr(X=x\cap Y=y)=\sum_{\substack{x\in A\\ y \in B}}\Pr(X=x)\Pr(Y=y)
+    \end{equation*}
+    Puis par Fubini positif : $\Pr(X\in A \cap Y \in B) = \sum_{x\in A}\Pr(X=x)\sum_{y\in B}\Pr(Y=y) = \Pr(X\in A)\Pr(Y\in B)$.
+\end{thm}
+
+\begin{defi}{}{}
+    Soient $X_1,...,X_n$ des v.a.d. sur $(\O,\A,\Pr)$. Il y a équivalence :
+    \begin{enumerate}
+        \item Elles sont indépendantes.
+        \item $\forall (x_1,...,x_n) \in (X_1(\O)\times...\times X_n(\O)), ~ \Pr(X_1=x_1 \cap ... \cap X_n=x_n)=\Pr(X_1=x_1)...\Pr(X_n=x_n)$.
+        \item $\forall (A_1,...,A_n) \in (\P(X_1(\O)),...,\P(X_n(\O))), ~ \Pr(X_1\in A_1\cap...\cap X_n\in A_n)=\Pr(X_1\in A_1)...\Pr(X_n\in A_n)$.
+    \end{enumerate}
+    Une famille quelconque est indépendante ssi toute sous-famille finie est indépendante. 
+\end{defi}
+
+\begin{prop}{}{}
+    Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$, $f:X(\O)\to\R$ et $g:Y(\O)\to\R$.\\
+    Alors $X\ind Y \ra f(X) \ind g(Y)$.
+    \tcblower
+    On a $\forall A,B \subset \R, ~ \Pr(f(x)\in A \cap g(y)\in B)=\Pr(X\in f^{-1}(A))\Pr(Y\in g^{-1}(B))=\Pr(f(X)\in A)\Pr(g(Y)\in B)$.
+\end{prop}
+
+\begin{lemme}{Coalitions.}{}
+    Soit $(X_i)_{i\in I}$ une famille de v.a.d. indépendantes sur $(\O,\A,\Pr)$ et $J,K\subset I$ \bf{disjointes}.\\
+    Alors toute fonction de $(X_i)_{i\in J}$ est indépendante de toute fonction de $(X_i)_{i\in K}$.
+\end{lemme}
+
+\begin{prop}{Somme de variables.}{}
+    Soient $X_1,...,X_n$ des v.a.d. indépendantes sur $(\O,\A,\Pr)$.
+    \begin{enumerate}
+        \item Si $\forall i \in \lb1,n\rb, ~ X_i \sim \B(p)$, alors $Z=\sum_{i=1}^n X_i \sim \B(n,p)$.
+        \item Si $\forall i \in \lb1,n\rb, ~ X_i \sim \cursive{P}(\l_i)$, alors $Z=\sum_{i=1}^nX_i \sim \cursive{P}\left( \sum_{i=1}^n \l_i \right)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} MP2I Espaces probabilisés, proposition 54.\\
+    \boxed{2.} Par récurrence sur $n$. Vrai pour $n=1$. Pour $n=2$ :\\
+    Soient $X,Y$ telles que $X\sim\cursive{P}(\l)$ et $Y\sim\cursive{P}(\mu)$, alors $X\ind Y$ et $X+Y$ est à valeurs dans $\N$.\\
+    Alors $(X+Y = n) = \bigcup_{k=0}^n(X = k \cap Y = n - k)$ donc : \begin{equation*} \Pr(X+Y=n)=\sum_{k=0}^n\Pr(X=k)\Pr(Y=n-k)=\frac{e^{-(\l+\mu)}}{n!}\sum_{k=0}^n\binom{n}{k}\l^k\mu^{n-k} = e^{-\l + \mu} \frac{(\l+\mu)^n}{n!} \end{equation*}
+    On reconnaît une loi de Poisson.\\
+    Hérédité : Soient $X_1,...,X_{n+1}$ indépendantes alors par le lemme, $X_1+...+X_n$ et $X_1+...+X_{n+1}$ sont indépendantes.\\
+    D'après la proposition au rang $n$ : $X_1+...+X_n \sim \Pr(\l_1+...+\l_n)$ puis par 2 : $(X_1+...+X_n)+X_{n+1}\sim\cursive{P}((\l_1+...+\l_n) + \l_{n+1})$.
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ telles que $X\ind Y$.
+\end{exercice}
+
+
 
 \end{document}
