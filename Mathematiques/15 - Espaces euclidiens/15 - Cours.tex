@@ -10,7 +10,6 @@
 \input{title.tex}
 
 \renewcommand*{\D}{\cursive{D}}
-\newcommand*{\SO}{\nt{SO}}
 
 \section{Généralités.}
 
@@ -33,7 +32,7 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
 \vspace*{-0.8cm}
 
 \begin{nota}{}{}
-    Notons $O(E)$ l'ensemble des isométries de $E$ et $SO(E)$ l'ensemble des éléments de $O(E)$ de déterminant $1$.
+    Notons $O(E)$ l'ensemble des isométries de $E$ et $\SO(E)$ l'ensemble des éléments de $O(E)$ de déterminant $1$.
 \end{nota}
 
 \vspace*{-0.8cm}
@@ -41,7 +40,7 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
 \begin{prop}{}{}
     \begin{enumerate}
         \item $(O(E),\circ)$ est un groupe.
-        \item $(SO(E),\circ)$ est un sous-groupe de $(O(E),\circ)$.
+        \item $(\SO(E),\circ)$ est un sous-groupe de $(O(E),\circ)$.
     \end{enumerate}
     \tcblower
     \boxed{1.} On a $\Id_E\in O(E)$ donc $O(E)$ non-vide; stable par produit :\\
@@ -59,7 +58,7 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     \tcblower
     \boxed{2 \ra 1} Avec $y=x$ : $\|u(x)\|=\|x\|$.\\
     \boxed{1\ra 2} Soit $(x,y)\in E^2$, alors $\|u(x+y)\|=\|x+y\|$ puis $\|u(x+y)\|=\|u(x)+u(y)\|$.\\
-    Donc $\|x+y\|^2=\|u(x)+u(y)\||^2$ donc $\|x\|^2+2\Lg x,y\Rg + \|y\|^2=\|u(x)\|^2+2\Lg u(x),u(y)\Rg+\|y\|^2$.\\
+    Donc $\|x+y\|^2=\|u(x)+u(y)\|^2$ donc $\|x\|^2+2\Lg x,y\Rg + \|y\|^2=\|u(x)\|^2+2\Lg u(x),u(y)\Rg+\|y\|^2$.\\
     De plus, $\|x\|^2=\|u(x)\|^2$ et $\|y\|^2=\|u(y)\|^2$ donc $2\Lg x,y\Rg = 2\Lg u(x), u(y)\Rg$.\\
     Finalement, $\Lg x,y \Rg = \Lg u(x), u(y)\Rg$.\\
     \bf{Remarque.} Pour $x,y\in E$ d'écart angulaire $\theta$ : $\cos\theta=\frac{\Lg x,y \Rg}{\|x\|\|y\|}$ alors $\frac{\Lg u(x),u(y)\Rg}{\|u(x)\|\|u(y)\|}=\frac{\Lg x,y\Rg}{\|x\|\|y\|}$.
@@ -169,7 +168,7 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     \tcblower
     \boxed{\subset} Soit $A\in\SO_2(\R)$.
     \begin{equation*}
-        A=\begin{pmatrix}a&b\\c&d\end{pmatrix}; \quad \begin{cases}a^2+c^2 = 1\\b^2+d^2=1\\ab+cd=0\end{cases}
+        A=\begin{pmatrix}a&c\\b&d\end{pmatrix}; \quad \begin{cases}a^2+c^2 = 1\\b^2+d^2=1\\ab+cd=0\end{cases}
     \end{equation*}
     On a $\det(A) = 1 \iff ad-bc = 1$ et $a^2+c^2=1 \ra |a|\leq 1 \ra \exists\theta\in\R, ~ a=\cos\theta$ puis $c=\sin\theta$.\\
     De même, $d^2+b^2=1$ donc $\exists \theta'\in\R, ~ d=\cos\theta'$ et $b=-\sin\theta'$. On peut supposer $\theta,\theta'\in[0,2\pi[$.\\
@@ -189,7 +188,7 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     \end{enumerate}
     \tcblower
     \boxed{1.} $\X_{R(\theta)}=X^2-\Tr(R(\theta))+\det(R(\theta))=X^2-2\cos\theta X+1$, $\Delta=4(\cos^2\theta-1)\leq 0$.\\
-    Si $\theta\in]0,2\pi[$ et $\theta\neq\pi$, alors $\Delta<0$ et $\X_{R(\theta)}$ n'est pas scindé donc pas diagonalisable.\\
+    Si $\theta\in~]0,2\pi[$ et $\theta\neq\pi$, alors $\Delta<0$ et $\X_{R(\theta)}$ n'est pas scindé donc pas diagonalisable.\\
     Si $\theta=0$, alors $R(\theta)=I_n$ diagonalisable. Si $\theta=\pi$, alors $R(\theta)=-I_2$ diagonalisable.\\
     \boxed{2.} On a toujours $\X_{R(\theta)}=X^2-2\cos\theta X+1 = (X-e^{i\theta})(X-e^{-i\theta})$.\\
     Si $\theta\in\{0,\pi\}$, alors $R(\theta)$ est diagonalisable dans $\M_2(\R)$ donc dans $\M_2(\C)$.\\
@@ -554,7 +553,7 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     \begin{equation*}
         \begin{pmatrix}
             i&1\\1&-i 
-        \end{pmatrix} \in \S_3(C)
+        \end{pmatrix} \in \S_2(\C)
     \end{equation*}
     \tcblower
     Le thérorème spetral ne s'applique pas ici car $A\notin\S_2(\R)$.\\
@@ -581,7 +580,7 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     \tcblower
     \boxed{1.} $A=PDP^{\top}$ donc $A^\top = PD^\top P^\top = A$.\\
     \boxed{2.} Soit $\B=(e_1,...,e_n)$ une b.o.n. de $E$ telle que $\forall i \in \lb1,n\rb, ~ u(e_i)=\l e_i$.\\
-    Soient $x,y \in E$. $\Lg u(x), y \Rg = \sum_{i=1}^n y_iu(x_i)=\sum_{i=1}^n y_i(\l_i x_i)$ et $\Lg x,u(y)\Rg = \sum_{i=1}^n x_i(\l_i y_i)$.
+    Soient $x,y \in E$. $\Lg u(x), y \Rg = \sum_{i=1}^n \Lg y_i, u(x_i) \Rg =\sum_{i=1}^n \Lg y_i, \l_i x_i \Rg$ et $\Lg x,u(y)\Rg = \sum_{i=1}^n \Lg x_i, \l_i y_i \Rg$.
 \end{prop}
 
 \pagebreak
@@ -597,8 +596,8 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     \boxed{1.} Supposons que $u$ admet au moins une valeur propre réelle.\\
     Soit $\l$ une valeur propre de $u$ : $\exists x \in E, ~ u(x)=\l x$ puis $\|u(x)\|=|\l|\|x\|$ puis $|\l|=\frac{\|u(x)\|}{\|x\|}\leq\abs u\abs$.\\
     Par passage au max : $p(u)\leq\abs u\abs$.\\
-    \boxed{2.} Soit $u\in S(E)$, d'après le théorème spectral, il existe $\B=(e_1,...,e_n)$ b.o.n. de $E$ de $\vp$ de $u$ : $u(e_i)=\l_ie_i$.\\
-    Alors $\forall i \in \lb1,n\rb, ~ \exists \l_i \in \R, ~ u(e_i)=\l_i e_i$. Soit $x\in E$ : $u(x)=\sum_{i=1}^n(\l_i x_i)e_i$.\\
+    \boxed{2.} Soit $u\in S(E)$, d'après le théorème spectral, il existe $\B=(e_1,...,e_n)$ b.o.n. de $E$ de $\vp$ de $u$.\\
+    Alors $\forall i \in \lb1,n\rb, ~ \exists \l_i \in \R, ~ u(e_i)=\l_i e_i$. Soit $x\in E$ : $u(x)=\sum_{i=1}^n\Lg \l_i,  x_i\Rg e_i$.\\
     Puis $\Lg u(x), x \Rg = \sum_{i=1}^n\l_i x_i^2$ et $\|x\|^2 = \sum_{i=1}^nx_i^2$ car $\B$ est une b.o.n.\\
     Par choix de $\a$ et $\b$ : $\forall i \in \lb1,n\rb, ~ \a\leq \l_i \leq \b$ puis $\a x_i^2\leq \l_ix_i^2 \leq \b x_i^2$.\\
     Donc $\a\|x\|^2\leq\Lg u(x), x \Rg \leq \b\|x\|^2$ en sommant.\\
@@ -894,11 +893,117 @@ Ici, $(E,\Lg\.,\.\Rg)$ désignera toujours un espace euclidien.
     On revient en (*) : $\det(u+v)=\det(v)\det(\id + w^{-1}uw^{-1})\geq \det(v)(1+\det(w^{-1}uw^{-1}))=\det(v)+\det(u)$
 \end{exercice}
 
+\section{Khôlles.}
+
 \begin{exercice}{}{}
-    Soit $E$ euclidien et $u,v\in\S(E)$ tels que $uv=vu$. Montrer que $u$ et $v$ sont orthogonalement codiagonalisables.
+    Soit $E$ euclidien, $a\in E$ unitaire et $\forall \a \in \R, ~ f_\a : x \mapsto x + \a \Lg x, a \Rg a$ de $E$ dans $E$.
+    \begin{enumerate}
+        \item Montrer que $\{f_\a, \a\in\R\}$ est stable par composition.
+        \item Calculer $f_\a^p$ pour tout $p\in\N$.
+        \item Montrer que $f_\a\in\GL(E) \iff \a \neq - 1$.
+        \item Montrer que $f_\a \in O(E) \iff \a \in \{0,-2\}$.
+    \end{enumerate}
     \tcblower
-    Soit $\l\in\Sp(u)$. On prend $\B_\l$ une b.o.n. de $E_\l$ de $\vp$ de $v$, qui existe par théorème spectral puisque $v_{|E_\l}\in\Sp(E_\l)$.\\
-    On a $E=\bigoplus_{\l\in\Sp(u)}E_\l$ donc $\B=\bigsqcup_{\l\in\Sp(u)}\B_\l$ est une b.o.n. de $\vp$ de $v$ et de $u$.
+    \boxed{1.} Soient $\a,\b\in\R,x\in E$. On a $f_\a\circ f_\b(x)=f_\a(x+\b\Lg x,a\Rg a) = x + \a \Lg x, a \Rg a + \b\Lg x,a\Rg a + \a\b\Lg x, a \Rg a=f_{\a+\b+\a\b}(x)$.\\
+    \boxed{2.} Montrons par récurrence $\P_p$ : << $f_\a^p = f_{(\a + 1)^p-1}$ >>.\\
+    \bf{Initialisation.} On a $\id = f_{\a}^0 = f_{(\a+1)^0-1}=f_0$.\\
+    \bf{Hérédité.} Soit $p\in\N$ tel que $f_\a^p = f_{(\a+1)^p - 1}$. On a $f_{\a}^{p+1}=f_{(\a+1)^p - 1+\a+\a((\a+1)^p - 1)} = f_{(a+1)^{p+1}-1}$.\\
+    Donc pour tout $p\in\N, ~ \P_p$.\\
+    \boxed{3.} On a $\Ker(f_{-1})=\Vect(a)$ donc $f_{-1}$ n'est pas injective donc pas inversible (contraposée).\\
+    Puis $\forall \a \in \R \setminus\{-1\}, ~ f_{\a}\circ f_{-\frac{\a}{1+\a}} = \id$ car $\a+\b+\a\b=0$ ssi $\b=-\frac{\a}{1+\a}$ donc $f_\a\in\GL(E)$.\\
+    \boxed{4.} Soit $\a\in\R$ tel que $f_\a \in O(E)$. Soit $x\in E$. On a $\|f_\a(x)\|=\|x+\a\Lg x,a\Rg a\|$.\\
+    En particulier, pour $x=a$ : $\|a\|=\|a+\a\cancel{\|a\|}a\| = |(1+\a)|\|a\|$ donc $|1+\a|=1$ donc $\a\in\{0,-2\}$.\\
+    On a $f_0=\id_E$, et pour $x,y\in E, ~ \Lg f_{-2}(x), y \Rg = \Lg x, y \Rg - 2\Lg x, a\Rg \Lg y,a\Rg$ donc $f_\a^* = f_\a$.
+    \begin{align*}
+        f_\a \in O(E) &\iff f_\a^* = f_\a^{-1} \iff f_\a = f_\a^{-1} \iff \a = - \frac{\a}{1+\a} \\
+        &\iff 1 + \a = -1 \ou \a = 0 \iff \a \in \{0,-2\}.
+    \end{align*}
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien, $f\in\L(E)$ et $(P,Q)\in\R[X]^2$ tels que $P\land Q = 1$.\\
+    Montrer que $\Ker(P(f))\bot \Ker(Q(f^*))$.
+    \tcblower
+    Soit $(x,y)\in\Ker(P(f))\times\Ker(Q(f^*))$. Puisque $P\land Q=1$, $\exists (U,V)\in \R[X]^2, ~ PU+QV=1$.
+    \begin{align*}
+        \Lg x,y \Rg &= \Lg \cancel{U(f)\circ P(f)(x)} + Q(f)\circ V(f)(x), y \Rg = \Lg V(f)(x), \cancel{Q(f^*)(y)} \Rg = 0.
+    \end{align*}
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soient $(A,B)\in O_n(\R)^2$. Montrer que $A \sim B \iff \X_A = \X_B$.
+    \tcblower
+    \boxed{\ra} Clair.\\
+    \boxed{\la} Pour $\l\in\R$, $\X_A(\l)=\X_B(\l)$. Par réduction des isométries :
+    \begin{equation*}
+        A\sim \Diag(R(\theta_1), ..., R(\theta_r), I_p, -I_q) \et B\sim\Diag(R(\hat(\theta_1)), ... , R(\hat{\theta_s}), I_{\hat{p}}, -I_{\hat(q)}).
+    \end{equation*}
+    \begin{equation*}
+        \X_A(\l) = \det(\l I_n - A) = (\l-1)^p(\l+1)^q\prod_{k=1}^r\X_{R(\theta_i)}(\l).
+    \end{equation*}
+    Pour $\theta\in~]-\pi,\pi[\setminus\{0\}$, $\X_{R(\theta)}=X^2 - 2X\cos(\theta)+1$.\\
+    Par unicité de la décomposition en facteurs irréductibles, $p=\hat{p}$, $q=\hat{q}$, $r=s$, $\forall i \in \lb1,r\rb, ~ \exists j \in \lb1,r\rg, ~ \theta_i = \pm \theta_j$.\\
+    Donc (?) $\Diag(R(\theta_1),...,-I_q) = \Diag(R(\hat{\theta_1}),...,-I_{\hat{q}})$ et $A\sim ... \sim B$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $A\in\S_n^+(\R)$. Montrer $\exists!B\in\S_n^+(\R), ~ B^2=A$.
+    \tcblower
+    \bf{Existence.} Théorème spectral : $\exists P \in O_n(\R), ~ A=P\Diag(\l_1,...,\l_n)P^{-1}$ où $\Sp(A)=\{\l_1,...,\l_n\}$.\\
+    Posons $B:=P\Diag(\sqrt{\l_1},...,\sqrt{\l_n})P^{-1}$ (existe car $\forall i \in \lb1,n\rb, ~ \l_i \geq 0$).\\
+    Alors $B^2 = A$ et $\forall i \in \lb1,n\rb, ~ \sqrt{\l_i}\geq 0$ donc $B\in\S_n^+(\R)$.\\
+    \bf{Unicité.} Posons $b$ canoniquement associé à $B$. Puisque $B$ commute avec ses itérés, il commute avec $A$.\\
+    Puis $A$ et $B$ sont diagonalisables donc codiagonalisables : $A=PDP^\top \et B=P\Delta P^\top$.\\
+    Donc $B^2=A \iff \Delta^2 = D \iff \forall i \in \lb1,n\rb, ~ \mu_i^2 = \l_i \iff \forall i \in \ln b1,n\rb, ~ \mu_i = \sqrt{\l_i}$ car $B\in\S_n^+(\R)$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $E$ un espace vectoriel euclidien et $u\in\L(E)$ tel que $\Lg x,y \Rg = 0 \ra \Lg u(x), u(y)\Rg = 0$.
+    \begin{enumerate}
+        \item Montrer $\exists k \in \R_+, ~ \forall x \in E, ~ \|u(x)\|=k\|x\|$.
+        \item En déduire que $u$ est la composée d'une homothéthie et d'un endomorphisme diagonal.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Déjà fait.\\
+    \boxed{2.} Soit $h:x\mapsto kx$.\\
+    Si $k=0$, $u=0$, n'importe quelle isométrie fonctionne.\\
+    Si $k\neq0$, $v:x\mapsto \frac{1}{2}u$, alors $\forall x \in E, ~ (h\circ v)(x) = h(\frac{1}{2}u(x))=u(x)$.\\
+    Alors $\|v(x)\|=\frac{1}{2}\|u(x)\|=\frac{1}{2}k\|x\|=\|x\|$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $M\in\S_n(\R)$ telle que $M^p = I_n$ avec $p\in\N^*$. Que dire de $M^2$ ?
+    \tcblower
+    D'après le théorème spectral, $M$ est orthodiagonalisable et $M\sim\Diag(\l_1,...,\l_n)$.\\
+    Alors $M^p \sim \Diag(\l_1^p,...,\l_n^p)$ et $M^p = I_n$ donc $\l_i^p = 1$ puis $\l_i = \pm 1$.\\
+    Puis $M^2 \sim I_n$, la seule matrice semblable à $I_n$ est $I_n$, donc $M^2=I_n$.
+\end{exercice}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    Pour $P,Q\in\R[X]$, on pose
+    \begin{equation*}
+        \Lg P, Q \Rg = \int_0^{+\infty}P(t)Q(t)e^{-t}\dt
+    \end{equation*}
+    et $F=\{P\in \R_n[X], ~ P(0)\}$
+    \begin{enumerate}
+        \item Montrer que $\Lg\.,\.\Rg$ est bien défini et que c'est un produit scalaire.
+        \item Soit $(P_1,...,P_n)$ la b.o.n. de $(1,...,X^n)$ par Gram-Schmidt. Calculer $P_k(0)^2$ pour $k\in\lb0,n\rb$.
+        \item Déterminer une base de $F^\bot$, qu'on exrpimera dans $(P_0,...,P_n)$. En déduire $d(1,F^\bot)$ puis $d(1,F)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Déjà fait dans le chapitre précédent.\\
+    \boxed{2.} Soit $k\in\lb0,n\rb$, alors $\deg(P_k)=k$ et en posant $u(t)=P_k(t)e^{-t}$, $v'(t)P'_k(t)$ (hyp...) :
+    \begin{align*}
+        \Lg P_k, P'_k \Rg &= 0 = \int_0^{+\infty}P_k(t)P'_k(t)e^{-t}\dt =  \left[ P_k^2(t)e^{-t} \right]_0^{+\infty} - \int_0^{+\infty}P_k(t)\left( P'_k(t)e^{-t} - P_k(t)e^{-t} \right)\dt\\
+        &= -P_k^2(0) + \int_0^{+\infty}P_k^2(t)e^{-t}\dt = -P_k^2(0) + \|P_k\|^2 = 1 - P_k^2(0)
+    \end{align*}
+    Donc $P_k^2(0)=1$.
 \end{exercice}
 
 \end{document}

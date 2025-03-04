@@ -103,8 +103,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     Alors $\exists(\l_1,...,\l_p)\in\K^p, ~ x=\sum_{i=1}^p\l_ia_i$ d'où $y=\sum_{i=1}^p\l_if(a_i)$, donc $(f(a_1),...,f(a_p))$ est génératrice.\\
     \boxed{4.} Supposons $f$ bijective, on conclut avec les deux points précédents.\\
     Réciproquement, soit $(a_1,...,a_p)$ génératrice de $E$, on a $(f(a_1),...,f(a_p))$ génératrice de $F$.\\
-    Soit $y\in F$, on a $\exists (\l_1,...,\l_p)\in\K^p$ tels que $y=\sum_{i=1}^p\l_if(a_i)$ puis $y=f(\sum_{i=1}^p\l_ia_i)\in\Im(f)$ donc surjective.\\
-    Injectivité à faire.
+    Soit $y\in F$, on a $\exists (\l_1,...,\l_p)\in\K^p$ tels que $y=\sum_{i=1}^p\l_if(a_i)$ puis $y=f(\sum_{i=1}^p\l_ia_i)\in\Im(f)$ donc surjective.
 \end{prop}
 
 \vspace*{-0.7cm}
@@ -126,7 +125,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 \subsection*{Traduction matricielle.}
 
 \begin{defi}{}{}
-    Soit $A\in M_{n,p}(\K)$. On note $f$ l'application linéaire canoniquement associée à $A$ :
+    Soit $A\in \M_{n,p}(\K)$. On note $f$ l'application linéaire canoniquement associée à $A$ :
     \begin{equation*}
         f : \left\{ \begin{array}{ccc}
             \K^p & \longrightarrow & \K^n \\
@@ -139,11 +138,11 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 
 \begin{prop}{}{}
     \begin{enumerate}
-        \item Soient $A,B\in M_{n,p}(\K)$, alors $\rg(A+B)\leq\rg(A)+\rg(B)$.
-        \item Soit $A\in M_{n,p}(\K)$, et $B\in M_{p,q}(\K)$, alors $\rg(AB)\leq \rg(A)$ et $\rg(AB)\leq \rg(B)$.
-        \item Soient $A\in M_{n,p}(\K)$, et $B\in GL_p(\K)$, alors $\rg(AB)=\rg(A)$.
-        \item Soient $A\in M_{n,p}(\K)$, et $B\in\GL_n(\K)$, alors $\rg(AB)=\rg(B)$.
-        \item Soit $A\in M_{n,p}(\K)$, on a $p=\dim(\Ker A)+\rg(A)$.
+        \item Soient $A,B\in \M_{n,p}(\K)$, alors $\rg(A+B)\leq\rg(A)+\rg(B)$.
+        \item Soient $A\in \M_{n,p}(\K)$, et $B\in\M_{p,q}(\K)$, alors $\rg(AB)\leq \rg(A)$ et $\rg(AB)\leq \rg(B)$.
+        \item Soient $A\in \M_{n,p}(\K)$, et $B\in\GL_p(\K)$, alors $\rg(AB)=\rg(A)$.
+        \item Soient $A\in \M_{n,p}(\K)$, et $B\in\GL_n(\K)$, alors $\rg(AB)=\rg(B)$.
+        \item Soient $A\in \M_{n,p}(\K)$, on a $p=\dim(\Ker A)+\rg(A)$.
     \end{enumerate}
 \end{prop}
 
@@ -301,20 +300,20 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 \section{Calcul Matriciel.}
 
 \begin{prop}{}{}
-    On note $D_n(\K)$ l'ensemble des matrices diagonales de $M_n(\K)$, et $T_n^+(\K)$ celui des triangulaires supérieures.\\
-    Alors $D_n(\K)$ est une sous-algèbre de $M_n(\K)$ de dimension $n$ et $T_n^+(\K)$ également, de dimension $\frac{n(n+1)}{2}$.
+    On note $\cursive{D}_n(\K)$ l'ensemble des matrices diagonales de $\M_n(\K)$, et $\T_n^+(\K)$ celui des triangulaires supérieures.\\
+    Alors $\cursive{D}_n(\K)$ est une sous-algèbre de $\M_n(\K)$ de dimension $n$ et $\T_n^+(\K)$ également, de dimension $\frac{n(n+1)}{2}$.
     \tcblower
     En effet, $A=(a_{i,j})\in D_n(\K)$ ssi $\forall i,j\in\lb1,n\rb, ~ i\neq j \ra a_{i,j}=0_{\K}$.\\
-    --- $I_n\in D_n(\K)$.\\
-    --- $D_n(\K)$ est stable par CL.\\
-    --- $D_n(\K)$ est stable par produit matriciel.\\
-    $(E_{11},...,E_{nn})$ forme une base de $D_n(\K)$.
+    --- $I_n\in \cursive{D}_n(\K)$.\\
+    --- $\cursive{D}_n(\K)$ est stable par CL.\\
+    --- $\cursive{D}_n(\K)$ est stable par produit matriciel.\\
+    $(E_{11},...,E_{nn})$ forme une base de $\cursive{D}_n(\K)$.
 \end{prop}
 
 \vspace*{-0.7cm}
 
 \begin{prop}{}{}
-    Soit $A\in M_{n,p}(\K)$ et $B\in M_{p,n}(\K)$.
+    Soit $A\in\ M_{n,p}(\K)$ et $B\in \M_{p,n}(\K)$.
     \begin{equation*}
         \Tr(AB)=\Tr(BA).
     \end{equation*}
@@ -326,7 +325,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 \end{prop}
 
 \begin{defi}{}{}
-    Soient $A,B\in M_{n,p}(\K)$.
+    Soient $A,B\in \M_{n,p}(\K)$.
     \begin{equation*}
         A \sim B \iff \exists P \in \GL_n(\K), ~ \exists Q \in \GL_p(\K), ~ A = PBQ.
     \end{equation*}
@@ -344,17 +343,17 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
         J_r = \begin{pmatrix}
             I_r & 0_{r,p-r}\\
             0_{n-r,r} & 0_{n-r,p-r}
-        \end{pmatrix} \in M_{n,p}(\K).
+        \end{pmatrix} \in \M_{n,p}(\K).
     \end{equation*}
 \end{defi}
 
 \vspace*{-0.7cm}
 
 \begin{thm}{}{}
-    Soient $A\in M_{n,p}(\K)$ et $r\leq n,p$.
+    Soient $A\in \M_{n,p}(\K)$ et $r\leq n,p$.
     \begin{enumerate}
         \item $\rg(A)=r\iff A\sim J_r$.
-        \item Soient $A,B\in M_p(\K)$, on a $\rg(A)=\rg(B)\iff A \sim B$.
+        \item Soient $A,B\in \M_p(\K)$, on a $\rg(A)=\rg(B)\iff A \sim B$.
     \end{enumerate}
     \tcblower
     \boxed{\la} $\exists (P,Q) \in \GL_n(\K)\times\GL_p(\K), ~ A = PJ_rQ$.\\
@@ -371,7 +370,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 \vspace*{-0.7cm}
 
 \begin{corr}{}{}
-    Soit $A\in M_{n,p}(\K)$. On a $\rg(A^\top)=\rg(A)$.
+    Soit $A\in \M_{n,p}(\K)$. On a $\rg(A^\top)=\rg(A)$.
     \tcblower
     On a $\exists Q,P, ~ A = PJ_rQ$, puis $A^\top = Q^\top J_r^\top P^\top$, donc $\rg(A^\top)=r$.
 \end{corr}
@@ -380,8 +379,8 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 
 \begin{ex}{}{}
     \begin{enumerate}
-        \item Pour $A\in M_n(\Z)$, montrer que $\det(A)\in \Z$.
-        \item Pour $A\in M_n(\C)$, montrer que $\det(\ov{A})=\ov{\det(A)}$.
+        \item Pour $A\in\M_n(\Z)$, montrer que $\det(A)\in \Z$.
+        \item Pour $A\in\M_n(\C)$, montrer que $\det(\ov{A})=\ov{\det(A)}$.
     \end{enumerate}
     \tcblower
     \boxed{1.} Supposons $\forall i \in \lb1,n\rb, ~ a_{i,j}\in\Z$, alors $\det(A)=\sum_{\s\in S_n}\e(\s)\prod_{i=1}^n a_{\s(i),i}\in\Z$.\\
@@ -391,9 +390,9 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 \pagebreak
 
 \begin{prop}{Caractérisation des matrices de rang 1.}{}
-    Soit $A\in M_{n,p}(\K)$.
+    Soit $A\in\M_{n,p}(\K)$.
     \begin{equation*}
-        \rg(A)=1 \iff \exists C \in M_{n,1}(\K), ~ \exists L \in M_{1,p}(\K), ~ A=CL.
+        \rg(A)=1 \iff \exists C \in \M_{n,1}(\K), ~ \exists L \in \M_{1,p}(\K), ~ A=CL.
     \end{equation*}
     \tcblower
     \boxed{\la} Supposons que $A=CL$. Alors $\rg(A)\leq \rg(C)\leq 1$. De plus, $A\neq0$, donc $\rg(A)=1$.\\
@@ -413,13 +412,13 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
             1 & 0 & \cdots & 0
         \end{pmatrix}}_{L'}
     \end{equation*}
-    Donc $A=PC'L'Q$, et $PC'\in M_{n,1}(\K)$, $L'Q\in M_{1,n}(\K)$, on a bien le résultat. 
+    Donc $A=PC'L'Q$, et $PC'\in\M_{n,1}(\K)$, $L'Q\in\M_{1,n}(\K)$, on a bien le résultat. 
 \end{prop}
 
 \vspace*{-0.7cm}
 
 \begin{prop}{Invariants de similitude.}{}
-    Soient $A,B\in M_n(\K)$ semblables. Alors : $\rg(A)=\rg(B), ~ \Tr(A)=\Tr(B)$, et $\det(A)=\det(B)$.
+    Soient $A,B\in\M_n(\K)$ semblables. Alors : $\rg(A)=\rg(B), ~ \Tr(A)=\Tr(B)$, et $\det(A)=\det(B)$.
     \tcblower
     \boxed{1.} Être semblable, c'est être équivalent.\\
     \boxed{2.} $\exists P \in \GL_n(\K), ~ A=P^{-1}BP$ donc $\Tr(A)=\Tr(P^{-1}BP)=\Tr(BPP^{-1})=\Tr(B)$.
@@ -429,12 +428,12 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 
 \begin{ex}{}{}
     \begin{enumerate}
-        \item Vérifier que $S_n(\R)$ et $A_n(\R)$ sont supplémentaires dans $M_(\R)$.
-        \item Montrer que la transposition est une symétrie sur $M_n(\R)$.
-        \item Calculer rang et déterminant de la transposition sur $M_n(\R)$.
+        \item Vérifier que $\S_n(\R)$ et $\A_n(\R)$ sont supplémentaires dans $\M_(\R)$.
+        \item Montrer que la transposition est une symétrie sur $\M_n(\R)$.
+        \item Calculer rang et déterminant de la transposition sur $\M_n(\R)$.
     \end{enumerate}
     \tcblower
-    \boxed{1.} Soit $M\in M_n(\K)$. On a $M=\frac{1}{2}(M-M^\top) + \frac{1}{2}(M+M^\top)$, et $S_n(\R)\cap A_n(\R)=\0$.\\
+    \boxed{1.} Soit $M\in\M_n(\K)$. On a $M=\frac{1}{2}(M-M^\top) + \frac{1}{2}(M+M^\top)$, et $\S_n(\R)\cap\A_n(\R)=\0$.\\
     \boxed{2.} On note $\phi$ la transposition. On a $\phi^2=\id$, c'est une symétrie.\\
     On a $S_n(\R)=\Ker(\phi-\id)$ et $A_n(\R)=\Ker(\phi+\id)$, puis $M_n(\R)=(\Ker \phi - \id) \oplus (\Ker \phi + \id)$.\\
     \boxed{3.} Soit $\B_1$ base de $S_n(\R)$ et $\B_2$ base de $A_n(\R)$. Alors $\B=\B_1\sqcup\B_2$ est base de $\M_n(\R)$.
@@ -447,7 +446,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 \vspace*{-0.7cm}
 
 \begin{prop}{}{}
-    Soient $A,B\in M_n(\K)$ semblables, alors :
+    Soient $A,B\in\M_n(\K)$ semblables, alors :
     \begin{enumerate}
         \item $A^\top\sim B^\top$.
         \item $\forall k \in \N, ~ A^k \sim B^k$.
@@ -466,7 +465,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
             A_{n,1} & \cdots & A_{n,p}
         \end{pmatrix}
     \end{equation*}
-    avec $A_{i,j}\in M_{n_i,p_j}(\K)$.
+    avec $A_{i,j}\in\M_{n_i,p_j}(\K)$.
 \end{defi}
 
 \vspace*{-0.5cm}
@@ -478,7 +477,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 \vspace*{-0.5cm}
 
 \begin{prop}{Produit par blocs.}{}
-    Soient $A\in M_{n,p}(\K)$ et $B\in M_{p,q}(\K)$ données par blocs.
+    Soient $A\in\M_{n,p}(\K)$ et $B\in\M_{p,q}(\K)$ données par blocs.
     \begin{equation*}
         A=\begin{pmatrix}
             A_{1,1} & ... & A_{1,S}\\
@@ -492,10 +491,10 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
             B_{S,1} & ... & B_{S,T}
         \end{pmatrix}
     \end{equation*}
-    Avec $\forall i \in \lb1,r\rb, \forall j \in \lb1,s\rb ~ A_{i,j}\in M_{\a_i,\b_j}(\K)$ et $\forall i \in \lb1,s\rb, \forall j \in \lb1,t\rb, ~ B_{i,j}\in M_{\b_i,\g_j}$.\\
+    Avec $\forall i \in \lb1,r\rb, \forall j \in \lb1,s\rb ~ A_{i,j}\in \M_{\a_i,\b_j}(\K)$ et $\forall i \in \lb1,s\rb, \forall j \in \lb1,t\rb, ~ B_{i,j}\in \M_{\b_i,\g_j}$.\\
     Avec de plus, $\sum\a_i=n$, $\sum\b_i=p$ et $\sum\g_j=q$, alors :
     \begin{equation*}
-        AB=C\in M_{n,q}(\K), \quad C =\begin{pmatrix}
+        AB=C\in \M_{n,q}(\K), \quad C =\begin{pmatrix}
             C_{1,1} & ... & C_{1,T}\\
             \vdots & \ddots & \vdots\\
             C_{R,1} & ... & C_{R,T}
@@ -507,7 +506,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 \vspace*{-0.5cm}
 
 \begin{lemme}{}{}
-    Pour $A\in M_{p,n-p}(\K)$ et $B\in M_{n-p}(\K)$ : 
+    Pour $A\in \M_{p,n-p}(\K)$ et $B\in\M_{n-p}(\K)$ : 
     \begin{equation*}
         \det\begin{pmatrix}I_p&A\\0_{n-p,p}&B\end{pmatrix}=\det(B).
     \end{equation*}

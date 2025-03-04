@@ -387,10 +387,109 @@
     D'après la proposition au rang $n$ : $X_1+...+X_n \sim \Pr(\l_1+...+\l_n)$ puis par 2 : $(X_1+...+X_n)+X_{n+1}\sim\cursive{P}((\l_1+...+\l_n) + \l_{n+1})$.
 \end{prop}
 
+\pagebreak
+
 \begin{exercice}{}{}
-    Soit $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ telles que $X\ind Y$.
+    \begin{enumerate}
+        \item Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ avec $X$ constante presque sûrement. Montrer que $X\ind Y$.
+        \item Soit $X$ v.a.d. sur $(\O,\A,\Pr)$. Montrer que $X\ind X$ ssi $X$ constante presque sûrement.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Par hypothèse, il existe $\l\in\R, ~ \Pr(X=\l)=1$, alors $\forall \mu \neq \l, ~ \Pr(X=\mu)=0$.\\
+    Si $x\neq\l$ et $y\in Y(\O)$, $(X=x\cap Y=y) \subset (X=x)$, négligable : $\Pr(X=x\cap Y=y)=\Pr(X=x)\Pr(Y=y)=0$.\\
+    Sinon, $x=\l$ et $\left((X=\l),(X\neq\l)\right)$ est un s.c.e. donc $\Pr(Y=y)=\Pr(Y=y\cap X=\l)+\cancel{\Pr(Y=y\cap X\neq \l)}.$\\
+    Or $\Pr(X=\l)=1$ donc $\Pr(X=\l)\Pr(y=y)=\Pr(X=\l\cap Y=y)$.\\
+    \boxed{2. \la} Cas particulier de la question précédente.\\
+    \boxed{2. \ra} Par contraposée, on suppose qu'il existe $\l,\mu\in X(\O), ~ \l \neq \mu \et \Pr(X=\l)>0\et \Pr(X=\mu)>0$.\\
+    Alors $\Pr(X=\l\cap X=\mu)=0$ mais $\Pr(X=\l)\Pr(X=\mu)>0$, donc $X$ n'est pas indépendante de $X$.
 \end{exercice}
 
+\vspace*{-0.9cm}
 
+\begin{exercice}{}{}
+    Soient $X,Y$ deux v.a.d. indépendantes sur $(\O,\A,\Pr)$ telles que $X\sim\B(p)$ et $Y\sim\B(q)$.\\
+    Reconnaître la loi de $XY$.
+    \tcblower
+    On a $X(\O)=Y(\O)=\{0,1\}$, $\Pr(X=0)=1-p$, $\Pr(X=1)=p$, $\Pr(Y=0)=1-q$, $\Pr(Y=1)=q$.\\
+    Donc $XY\sim\B(r)$ où $r=\Pr(XY=1)=\Pr(X=1\cap Y=1)=\Pr(X=1)\Pr(Y=1)=pq$.
+\end{exercice}
+
+\vspace*{-0.9cm}
+
+\begin{exercice}{}{}
+    Soient $A,B$ deux évènements sur $(\O,\A,\Pr)$. Montrer que $A\ind B \iff \1_A \ind \1_B$.
+    \tcblower
+    \boxed{\la} $\Pr(A\cap B)=\Pr((\1_A = 1) \cap (\1_B = 1))=\Pr(\1_A=1)\Pr(\1_B=1)=\Pr(A)\Pr(B)$.\\
+    \boxed{\ra} Par hypothèse, $\Pr((\1_A = 1) \cap (\1_B = 1))=\Pr(\1_A=1)\Pr(\1_B=1)$.\\
+    De plus, on a $A\ind B \iff \ov{A}\ind B \iff A \ind \ov{B} \iff \ov{A} \ind \ov{B}$.\\
+    Donc $\Pr(\1_A = 0 \cap \1_B = 1) = \Pr(\ov{A}\cap B) = \Pr(\ov{A})\Pr(B) = \Pr(\1_A = 0)\Pr(\1_B=1)$...
+\end{exercice}
+
+\vspace*{-0.9cm}
+
+\begin{exercice}{}{}
+    Soit $(X_n)_{n\in\N^*}$ une suite de v.a.d. indépendantes sur $(\O,\A,\Pr)$, de mêmes lois que $X$.\\
+    On note $S_n = \ds\sum_{k=1}^n X_k$ pour tout $n\in\N^*$.
+    \begin{enumerate}
+        \item Soit $m\geq n$. Montrer que $S_n$ et $S_{n+m}-S_m$ sont indépendantes et de même loi.
+        \item Montrer que $\forall a \in \R, ~ (S_n \geq na) \subset \bigcup_{k=1}^n (X_k\geq a)$.
+        \item Montrer que $\forall a \in \R, ~ \Pr(X\geq a) = 0 \iff \left[ \forall n \in \N^*, ~ \Pr(S_n \geq na) = 0 \right]$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $S_n = X_1 + ... + X_n$ et $S_{n+m} - S_m = X_{m+1} + ... + X_{n+m}$ avec $m+1>n$.\\
+    Or les $(X_n)$ sont indépendantes donc d'après le lemme des coalitions, $S_n$ et $S_{n+m}-S_m$ sont indépendantes.\\
+    Soit $x\in\R$. $(S_n = x) = (X_1 + ... + X_n = x) = \bigcup_{x_1+...+x_n=x}(X_1=x_1\cap...\cap X_n=x_n)$.\\
+    Alors $\Pr(S_n=x)=\sum_{x_1+...+x_n=x}\Pr(X_1=x_1)...\Pr(X_n=x_n)$ par indépendance.\\
+    Puis $\forall i \in \lb1,n\rb, ~ \Pr(X_i=x_i)=\Pr(X_{m+i}=x_i)$ car mêmes lois donc $\Pr(S_n=x)=\Pr(S_{n+m}-S_m=x)$.\\
+    \boxed{2.} Soit $a\in\R$, $\forall k \in \lb1,n\rb, ~ X_k < a \ra S_n < na$ donc par contraposée, $S_n\geq na \ra \exists k \in \lb1,n\rb, ~ X_k \geq a$.\\
+    Donc $(S_n\geq na) \subset \bigcup_{k=1}^n (X_k \geq a)$.\\
+    \boxed{3.} Soit $a\in\R$.\\
+    \boxed{\la} Pour $n=1$, $\Pr(S_1 \geq a) = 0$ donc $\Pr(X\geq a)=0$.\\
+    \boxed{\ra} Soit $n\in\N^*$, par 2) : $\Pr(S_n\geq na) \leq \Pr(\bigcup_{k=1}^n(X_k\geq a)) \leq \sum_{k=1}^n\Pr(X_k \geq a)=0$.\\
+    Par encadrement, $\Pr(S_n \geq na) = 0$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soient $X\ind Y$ sur $(\O,\A,\Pr)$ telles que $X\sim\cursive{G}(p)$ et $Y\sim\cursive{G}(q)$.\\
+    Quelle est la probabilité que $A=\begin{pmatrix}X&1\\0&Y\end{pmatrix}$ puis $B=\begin{pmatrix}X&-Y\\Y&-X\end{pmatrix}$ soit diagonalisable ?
+    \tcblower
+    \fbox{A.} Vérifions que $(A ~ \nt{diagonalisable})$ est un évènement.\\
+    Pour $w\in\O$, $A$ est diagonalisable ssi $X(\w)\neq Y(\w)$ car alors $\X_A$ est SRS, et puisque si $X(\w)=Y(\w)$, on a $\Sp(A)=\{X(\w)\}$ donc $A$ diagonalisable impliquerait $A=X(\w)I_2$, absurde.\\
+    Donc $(A~\nt{diagonalisable})=(X\neq Y)\in\A$. On a $(X=Y)=\bigcup_{x\in X(\O)}(X=x\cap Y=x)$.\\
+    Donc $\Pr(X=Y)=\sum_{x\in X(\O)}\Pr(X=x)\Pr(Y=x)=\sum_{n=1}^{+\infty}p(1-p)^{n-1}q(1-q)^{n-1} = \frac{pq}{1-(1-p)(1-q)}$.\\
+    Donc $\Pr(A~\nt{diagonalisable})=1-\Pr(X=Y)=\frac{p+q-2pq}{p+q-pq}$.\\
+    \fbox{B.} Soit $\w\in\O$. $B$ est diagonalisable ssi $X(\w)>Y(\w)$ car alors $\X_B$ est SRS, et puisque si $X(\w)<Y(\w)$, on a $\X_B = X^2 - (X(\w)^2 - Y(\w)^2)$ non scindé, et si $X(\w)=Y(\w)$, alors $\X_B = X^2$ donc $B$ est nilpotente donc $B=0$, absurde car la loi géométrique est à valeurs strict. positives.\\
+    Finalement, $(B~\nt{diagonalisable})=(X>Y)$ et $(X>Y)=\bigcup_{y\in Y(\O)}(X>y\cap Y=y)$.\\
+    Donc $\Pr(X>Y)=\sum_{\in Y(\O)}\Pr(X>y)\Pr(Y=y)=\sum_{n=1}^{+\infty}(1-p)^nq(1-q)^{n-1}=\frac{q(1-p)}{1-(1-p)(1-q)}$. 
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soient $X\ind Y$ sur $(\O,\A,\Pr)$ telles que $X\sim\cursive{P}(\l)$ et $Y\sim\cursive{P}(\mu)$.\\
+    Reconnaître la loi de $X$ sachant que $X+Y=n$.
+    \tcblower
+    Il s'agit de calculer $\Pr(X=k\mid X+Y=n)$ pour tout $k\in\N^*$. Soit $k\in\N^*$.
+    \begin{equation*}
+        \Pr(X=k \mid X+Y=n) = \frac{\Pr(X=k \cap X+Y=n)}{\Pr(X+Y=n)} = \frac{\Pr(X=k)\Pr(Y=n-k)}{\Pr(X+Y=n)}.
+    \end{equation*}
+    Si $k>n$, alors $\Pr(X=k\cap X+Y=n)=(X=k\cap Y=n-k)=\0$.\\
+    Sinon, on sait que $X+Y\sim \cursive{P}(\l + \mu)$, donc \begin{equation*}\Pr(X=k\mid X+Y=n)=\frac{e^{-\l}\l^k}{k!}\frac{e^{-\mu}\mu^{n-k}}{(n-k)!}\frac{n!}{e^{-(\l+\mu)}(\l+\mu)^n}=\binom{n}{k}\frac{\l^k\mu^{n-k}}{(\l+\mu)^n}\end{equation*}
+    La loi conditionnelle est une loi binomiale de paramètre $n,p$ avec $p=\frac{\l}{\l+\mu}\in[0,1]$.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soient $X\ind Y$ sur $(\O,\A,\Pr)$ telles que $X\sim\cursive{G}(p)$ et $Y\sim\cursive{G}(q)$.\\
+    Déterminer la loi de $Z=\min(X,Y)$ et la reconnaître.
+    \tcblower
+    Vérifions que $Z$ est une v.a.d. sur $(\O,\A,\Pr)$ et $Z(\O)\in\N$ car $X,Y$ le sont.\\
+    $\hra$ Pour tout $n\in\N, ~ (Z\geq n) = (X\geq n \cap Y \geq n)$, c'est un évènement.\\
+    Puis $(Z\geq n)=(Z = n) \cup (Z \geq n+1)$ donc $(Z=n)$ est un évènement et $Z$ est bien une v.a.d.\\
+    Alors $\Pr(Z = n) = \Pr(Z \geq n) - \Pr(Z \geq n+1) = \Pr(X \geq n)\Pr(Y \geq n) - \Pr(X \geq n+1)\Pr(Y\geq n+1)$ par ind.\\
+    Donc $\Pr(Z=n)=(1-p)^{n-1}(1-q)^{n-1} - (1-p)^n(1-q)^n = \left[ 1 - (1-p)(1-q) \right]\left[(1-p)(1-q)\right]^{n-1}$.\\
+    Donc $Z\sim\cursive{G}(1-(1-p)(1-q))$.
+\end{exercice}
 
 \end{document}

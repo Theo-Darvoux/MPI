@@ -1,0 +1,64 @@
+\documentclass[french, 11pt]{article}
+
+\input{setup.tex}
+
+\def\chapitre{10}
+\def\pagetitle{Déduction naturelle.}
+
+\begin{document}
+
+\input{title.tex}
+
+Le but de ce chapitre est de commencer à formaliser ce qu'est une preuve. On pourrait ainsi essayer d'en générer, ou d'utiliser ce formalisme pour vérifier des preuves. Une preuve au sens usuel est un raisonnement mathématique qui, à partir d'un ensemble d'hypothèses amène à une conclusion. 
+
+\section{Rappels de logique propositionnelle.}
+
+\begin{rappel}{Définition syntaxique.}{}
+    Si $\V$ est un ensemble de variables propositionnelles, on peut définir des formules propositionnelles sur les variables de $\V$ par induction, pour $\phi$ et $\psi$ deux formules propositionnelles :\\
+    $\hra$ $\top$ et $\bot$ sont des formules propositionnelles.\\
+    $\hra$ $x\in\V$ est une formule propositionnelle.\\
+    $\hra$ $\phi \land \psi$ et $\phi \lor \psi$ sont des formules propositionnelles.\\
+    $\hra$ $\lnot\phi$ est une formule propositionnelle.\\
+    On a défini les formules propositionnelles syntaxiquement : on peut simplement reconnaître les formules propositionnelles.
+\end{rappel}
+
+\vspace*{-0.9cm}
+
+\begin{rappel}{Définition sémantique.}{}
+    On associe aux formules propositionnelles une définition sémantique : on leur donne un sens.\\
+    On définit les valuations : application de $\V$ dans $\{0,1\}$, et on l'étend aux formules propositionnelles inductivement:\\
+    $\hra$ Si $\phi=\top$, on pose $v(\phi)=1$ et si $\phi=\bot$, $v(\phi)=0$.\\
+    $\hra$ Si $\phi=x\in\V$, on pose $v(\phi)=v(x)$.\\
+    $\hra$ Si $\phi=\phi_1\land\phi_2$, on pose $v(\phi)= v(\phi_1)v(\phi_2)$.\\
+    $\hra$ Si $\phi=\phi_1\lor\phi_2$, on pose $v(\phi)=v(\phi_1)+v(\phi_2) - v(\phi_1)v(\phi_2)$.\\
+    $\hra$ Si $\phi=\lnot\phi_1$, on pose $v(\phi) = 1 - v(\phi_1)$.
+\end{rappel}
+
+\vspace*{-0.9cm}
+
+\begin{defi}{Modèle.}{}
+    On note $\M(\phi)=\{v:\V\to\{0,1\}, ~ v(\phi)=1\}$, appelé \bf{modèle} de $\phi$. On peut le construire inductivement :\\
+    $\hra$ $\M(\bot)=\0$ et $\M(\top)=\{v:\V\to\{0,1\}\}$.\\
+    $\hra$ $\M(x)=\{v:\V\to\{0,1\}, ~ v(x)=1\}$.\\
+    $\hra$ $\M(\phi_1\land\phi_2)=\M(\phi_1)\cap\M(\phi_2)$.\\
+    $\hra$ $\M(\phi_1\lor\phi_2)=\M(\phi_1)\cup\M(\phi_2)$.\\
+    $\hra$ $\M(\lnot\phi_1)=\ov{\M(\phi_1)}$.\\
+    Si $\M(\phi)\neq\0$, on dit que $\phi$ est \bf{satisfiable}; si $\M(\phi)=\{v:\V\to\{0,1\}\}$, $\phi$ est une \bf{tautologie}.\\
+    On dit que $\phi$ et $\psi$ sont \bf{sémantiquement équivalentes} si $\M(\phi)=\M(\psi)$, on note $\phi\equiv\psi$.
+\end{defi}
+
+\begin{ex}{}{}
+    Puisque $\forall \phi,\psi ~ : ~ \left[(\phi \ra \psi) \equiv (\lnot \phi \lor \psi)\right]$, on peut montrer par induction que pour toute formule $\phi$, il existe une formule $\phi'$ telle que $\phi'\equiv \phi$ et n'utilisant pas le symbole $\ra$.
+\end{ex}
+
+\begin{ex}{}{}
+    Puisque $\lnot(\lnot \phi \land \lnot \psi) \equiv (\phi \lor \psi)$, on peut démontrer que seuls $\land$ et $\lnot$ sont suffisants pour décrire toutes les formules propositionnelles (ou $\lor$ et $\lnot$).
+\end{ex}
+
+Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacente est une tautologie.\\
+-- On peut tester chaque valuation (complexité exponentielle.)\\
+-- 
+
+
+
+\end{document}

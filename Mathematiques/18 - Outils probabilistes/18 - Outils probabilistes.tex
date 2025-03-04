@@ -1,0 +1,246 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{17}
+\def\pagetitle{Variables aléatoires.}
+
+\input{setup.tex}
+
+\renewcommand*{\E}{\mathbb{E}}
+
+\begin{document}
+
+\input{title.tex}
+
+\vspace*{-0.7cm}
+
+\section{Espérance.}
+
+\begin{defi}{Espérance.}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\K$.\\
+    Si $X(\O)$ est dénombrable et que $(x\Pr(X=x))_{x\in X(\O)}$ est sommable, alors $\E(X)=\sum_{x\in X(\O)}x\Pr(X=x)$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\bf{Remarque.} $(x\Pr(X=x))_{x\in X(\O)}$ est sommable ssi $(|x|\Pr(X=x))_{x\in X(\O)}$ est sommable ssi $\sum_{x\in X(\O)}|x|\Pr(X=x)<\infty$.\\
+\bf{Remarque.} On rappelle que si $\sum_{n\geq 0} u_n$ $\CA$, alors $\sum u_n$ est commutativement convergente. 
+
+\begin{ex}{}{}
+    $\bullet$ Si $X$ suit une loi uniforme sur $\{x_1,...,x_n\}$ avec $n\in\N^*$, alors $\E(X)=\sum_{i=1}^n\frac{x_i}{n}=\frac{1}{n}(x_1+...+x_n)$.\\
+    $\bullet$ Si $X\sim\B(p)$, alors $\E(X)=0\cdot\Pr(X=0)+1\cdot\Pr(X=1)=p$.\\
+    $\bullet$ Si $X\sim\B(n,p)$, alors $\E(X)=np$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$. 
+    \begin{enumerate} \item Si $X\sim\cursive{P}(\l)$, alors $\E(X)=\l$. \item Si $X\sim\cursive{G}(p)$, alors $\E(X)=\frac{1}{p}$. \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $X\sim\cursive{P}(\l)$ avec $\l>0$, à valeurs dans $\N$ donc positives.\\
+    On a $(x\Pr(X=x))_{x\in X(\O)}$ est une famille de réels positifs donc $(x\Pr(X=x))$ est sommable ssi $\sum x\Pr(X=x)<\infty$.
+    \begin{equation*} \sum_{x\in X(\O)}x\Pr(X=x)=\sum_{n=0}^{+\infty} n\Pr(X=n)=\sum_{n=0}ne^{-\l}\frac{\l^n}{n!} = \sum_{n=1}^{\infty} ne^{-\l}\frac{\l^n}{n!}=\l e^{-\l} e^l = \l\end{equation*}
+    Donc $X$ admet une espérance et $\E(X)=\l$.\\
+    \boxed{2.} Soit $X\sim\cursive{G}(p)$ avec $p\in]0,1[$, $X$ est à valeurs entières donc positive.\\
+    On a $X$ admet une espérance ssi $(x\Pr(X=x))_{x\in X(\O)}$ est sommable.
+    \begin{equation*}
+        \sum_{x\in X(\O)}x\Pr(X=x) = \sum_{n=1}^{+\infty}n(1-p)^{n-1}p = p\frac{1}{(1-(1-p))^2} = \frac{p}{p^2} = \frac{1}{p}.
+    \end{equation*}
+    Donc $X$ admet une espérance et $\E(X)=\frac{1}{p}$.
+\end{prop}
+
+\bf{Remarque.} Si $X$ est constante presque sûrement égale à $\l$, alors $\E(X)=\l$.
+
+\begin{exercice}{}{}
+    On tire une pièce équilibrée jusqu'à avoir tiré au moins une fois face et au moins une fois pile.
+    \begin{enumerate}
+        \item Montrer qu'il est presque sûr que le jeu s'arrête.
+        \item On note $X$ le nombre de lancers. Montrer que $\E(X)$ existe et la calculer.
+    \end{enumerate}
+    \tcblower
+    Posons $\O=\left(\bigcup_{n\in\N^*}P^n F\right) \cup \left( \bigcup_{n\in\N^*}F^nP \right)\cup F^\N \cup P^\N$.\\
+    On choisit $\A=\P(\O)$ comme tribu et $\Pr$ adapté à l'exercice.\\
+    \boxed{1.} Posons $A$ : << le jeu s'arrête >>, alors $\ov{A}$ : << le jeu ne s'arrête pas >> = $F^\N \cup P^\N$.\\
+    On a $\Pr(\ov{A})\leq \Pr(F^\N)+\Pr(P^\N)$. On note $A_k$ : << tirer face au $k$-ième tirage >>.\\
+    Alors $F^\N = \bigcap_{k\in\N}A_k$ donc par continuité monotone $\Pr(F^\N)=\lim \Pr(\bigcap_{k=1}^n A_k)=\lim\prod_{k=1}^n\Pr(A_k)=\lim\frac{1}{2^n}=0$.\\
+    On a $\Pr(P^\N)=\Pr(F^\N)=0$ donc $\Pr(\ov{A})=0$ donc $\Pr(A)=1$ donc il est presque sûr que le jeu s'arrête.\\
+    \boxed{2.} $X$ est à valeurs dans $\N\bigcup\{\infty\}$. On a déjà $\Pr(X=\infty)=0$.\\
+    Soit $n\in\N$. On a $(X=0)=(X=1)=\0$ puis pour $n\geq2$, $(X=n)=P^{n-1}F\cup F^{n-1}P$.\\
+    Ainsi, $\Pr(X=n)=\Pr(P^{n-1}F)+\Pr(F^{n-1}P)=\frac{1}{2^n} + \frac{1}{2^n} = \frac{1}{2^{n-1}}$.\\
+    La famille $(n\Pr(X=n))_{n\geq2}$ est une famille de réels positifs, $X$ admet une espérance ssi la famille est sommable.
+    \begin{equation*}
+        \sum_{n\geq 2}n\Pr(X=n))=\sum_{n\geq2}\frac{n}{2^{n-1}} = \sum_{n=1}^{\infty}\frac{n}{2^{n-1}} - 1 = \frac{1}{(1-\frac{1}{2})^2} - 1 = 3.
+    \end{equation*}
+    Donc $X$ admet une espérance et $\E(X)=3$.
+\end{exercice}
+
+\begin{prop}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N\cup\{+\infty\}$ telle que $X<\infty$ presque sûrement.
+    \begin{equation*}
+        \E(X) = \sum_{n=1}^{+\infty} \Pr(X\geq n).
+    \end{equation*}
+    \tcblower
+    Déjà, $X$ est à valeurs positives entières donc on peut toujours écrire $\E(X)=\sum_{n=0}^{+\infty}n\Pr(X=n)$.
+    \begin{equation*}
+        \forall n \in \N^*, ~ (X \geq n) = \bigcup_{k\geq n}(X=k) \ra \Pr(X\geq n) = \sum_{k=n}^{+\infty}\Pr(X=k).
+    \end{equation*}
+    Puis par Fubini positif :
+    \begin{equation*}
+        \sum_{n=1}^{+\infty}\Pr(X\geq n)=\sum_{n=1}^{+\infty}\sum_{k=n}^{+\infty}\Pr(X=k) = \sum_{k=1}^{+\infty}\sum_{n=1}^{+\infty}\1_{k\geq n}\Pr(X=k) = \sum_{k=1}^{+\infty}\Pr(X=k)\sum_{n=1}^k1 = \sum_{k=1}^{+\infty}k\Pr(X = k) = \E(X)
+    \end{equation*}
+\end{prop}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$.
+    \begin{enumerate}
+        \item Montrer que $\Pr(X\geq n)\xrightarrow[n\to+\infty]{}0$.\\[-0.5cm]
+        \item Si $X$ admet une espérance, montrer que $\Pr(X\geq n)=_{\infty}o\left( \frac{1}{n} \right)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $(X\geq n)=\bigcup_{k\geq n}(X = k)$, puis $\Pr(X\geq n)=\sum_{k=n}^{+\infty} \Pr(X=k) \to 0$ comme reste de série convergente.\\
+    \boxed{2.} Supposons que $X$ admette une espérance. 
+    \begin{equation*}
+        n\Pr(X\geq n) = n\sum_{k=n}^{+\infty}\Pr(X=k)\leq \sum_{k=n}^{+\infty}k\Pr(X=k).
+    \end{equation*}
+    Puis $\sum_{k=n}^{\infty}k\Pr(X=k)\xrightarrow[n\to+\infty]{}0$ comme reste, donc $n\Pr(X\geq n)\xrightarrow[n\to+\infty]{}0$.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ admettant une espérance, $X$ est centrée ssi $\E(X)=0$.\\
+    On notera $\L^1$ l'ensemble des v.a.d. sur $(\O,\A,\Pr)$ admettant une espérance. 
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{thm}{Théorème de transfert.}{}
+    \begin{enumerate}
+        \item Soient $X,Y$ v.a.d. sur $(\O,\A,\Pr)$ et $f:X(\O)\times Y(\O)\to\R$.
+        \begin{equation*}
+            \E(f(X,Y)) = \sum_{\substack{x\in X(\O)\\y\in Y(\O)}}f(x,y)\Pr(X=x \cap Y=y).
+        \end{equation*}
+        \item Soit $X$ v.a.d. sur $(\O,\A,\Pr)$ et $f:X(\O)\to \R$.
+        \begin{equation*}
+            \E(f(X))=\sum_{x\in X(\O)}f(x)\Pr(X=x).
+        \end{equation*}
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Posons $Z=f(X,Y)$ v.a.d. sur $(\O,\A,\Pr)$.\\
+    On a $Z\in\L^1$ ssi $(|z|\Pr(Z=z))_{z\in Z(\O)}$ est sommable.
+    \begin{equation*}
+        \forall z \in Z(\O), ~ (Z=z)=(f(X,Y)=z)=\bigcup_{f(x,y)=z}(X=x\cap Y=y) 
+    \end{equation*}
+    \begin{equation*}
+        \Pr(Z=z)=\sum_{f(x,y)=z}\Pr(X=x\cap Y=y) = \sum \1_{f(x,y)=z}\Pr(X=x\cap Y=y).
+    \end{equation*}
+    puis $|z|\Pr(Z=z)=\sum|z|\1_{f(x,y)=z}\Pr(X=x\cap Y=y)$
+    \begin{equation*}
+        \E(Z) = \sum_{z\in\R}\left( \sum_{x,y} z\1_{f(x,y)=z} \Pr(X=x\cap Y=y)\right) = \sum_{x,y}f(x,y)\Pr(X=x\cap Y=y).
+    \end{equation*}
+    \boxed{2.} Posons $g(x,y)=f(x)$ pour tout $x\in X(\O)$ et $y\in Y(\O)$.
+    \begin{equation*}
+        \E(f(X)) = \E(g(X,Y)) = \sum_{x,y} g(x,y)\Pr(X=x\cap Y=y) = \sum_{x\in X(\O)}f(x) \left( \sum_{y\in Y(\O)} \Pr(X=x\cap Y=y)\right)
+    \end{equation*}
+    avec $\sum_y \Pr(X=x\cap Y=y) = \Pr(X=x)$ (s.c.e)
+\end{thm}
+
+\begin{prop}{Domination.}{}
+    Soit $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ telles que $|X|\leq Y$ et $Y\in\L^1$, alors $X\in\L^1$.
+    \tcblower
+    Vérifions que $\forall x \in X(\O), ~ \forall y \in Y(\O), |x|\Pr(X=x\cap Y=y)\leq y\Pr(X=x\cap Y=y)$.\\
+    Soit $x\in X(\O)$ et $y\in Y(\O)$.\\
+    $\bullet$ Si $|x|\leq y$, alors $|x|\Pr(X=x\cap Y=y)\leq y\Pr(X=x\cap Y=y)$.\\
+    $\bullet$ Sinon, $|x|>y$ alors $(X=x\cap Y=y)=\0$ par hyp. puis $\Pr(X=x\cap Y=y)=0$ donc l'inégalité est vraie.\\
+    Supposons $Y\in\L^1$. Alors $(y\Pr(X=x\cap Y=y))$ est sommable donc par domination, $|x|\Pr(X=x\cap Y=y)$ est sommable.
+    \begin{equation*}
+        \sum_{x,y}|x|\Pr(X=x\cap Y=y)=\E(|X|).
+    \end{equation*}
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soit $X$ v.a.d. sur $(\O,\A,\Pr)$. On a $X\in\L^1 \iff \E(|X|)<\infty$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ dans $\L^1$.
+    \begin{enumerate}
+        \item \bf{Positivité.} Si $X\geq0$, alors $\E(X)\geq0$, et si $X\geq0$ et $\E(X)=0$, alors $X=0$ presque sûrement.
+        \item \bf{Linéarité.} $\forall \l \in \R, ~ X + \l Y \in \L^1$ et $\E(X+\l Y) = \E(X) + \l\E(Y)$.
+        \item \bf{Croissance.} Si $X\leq Y$, alors $\E(X) \leq \E(Y)$.
+    \end{enumerate} 
+    \tcblower
+    \boxed{1.} Supposons $X\geq0$, alors $\E(X)=\sum x\Pr(X=x)\geq0$ (somme de termes positifs.)\\
+    Supposons $X\geq0$ et $\E(X)=0$, alors $x\Pr(X=x)=0$, donc $\forall x \neq 0, ~ \Pr(X=x)=0$, il reste $\Pr(X=0)=1$.\\
+    \boxed{2.} Soient $X,Y\in\L^1$ et $\l\in\R$. Déjà $|X+\l Y| \leq |X|+|\l||Y|$ donc par domination, $X+\l Y \in \L^1$. Puis :
+    \begin{align*}
+        \E(X+\l Y) &= \sum_{x,y}(x+\l y)\Pr(X=x\cap Y=y) = \sum_{x,y}x\Pr(X=x\cap Y=y) + \l \sum_{x,y}y\Pr(X=x\cap Y=y)\\
+        &= \sum_{x\in X(\O)}x\left( \sum_{y\in Y(\O)} \Pr(X=x\cap Y=y) \right) + \l \sum_{y\in Y(\O)}y\left( \sum_{x\in X(\O)} \Pr(X=x \cap Y=y) \right)\\
+        &= \sum_{x\in X(\O)}x\Pr(X=x) + \l \sum_{y\in Y(\O)}y\Pr(Y=y) = \E(X) + \l\E(Y).
+    \end{align*}
+    \boxed{3.} $X\leq Y \ra Y-X \geq 0 \ra \E(Y-X)\geq 0 \ra \E(Y) - \E(X) \geq 0$
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soient $X,Y\in\L^1$ telles que $X\ind Y$, alors $XY\in \L^1$ et $\E(XY)=\E(X)\E(Y)$.\\
+    Pour $X_1,...,X_n$ indépendantes 2-à-2, $\E(X_1...X_n)=\E(X_1)...\E(X_n)$.
+    \tcblower
+    \begin{equation*}
+        \E(XY)=\sum_{x,y}xy\Pr(X=x\cap Y=y) = \left(\sum_{x\in X(\O)}x\Pr(X=x)\right)\left( \sum_{y\in Y(\O)}y\Pr(Y=y) \right) = \E(X)\E(Y)
+    \end{equation*}
+    Par récurrence sur $n\in\N$, on utilise le lemme des coalitions.
+\end{prop}
+
+\section{Moments d'ordres supérieurs, variance.}
+
+\begin{defi}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ et $n\in\N$.\\
+    On dit que $X$ admet un moment d'ordre $n$ ssi $X^n \in \L^1$ et on note $M_n = \E(X^n)$.
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ admettant un moment d'ordre $n$.\\
+    Alors $X$ admet un moment d'ordre $k$ pour tout $k\in\lb0,n\rb$.
+    \tcblower
+    On remarque que $\forall n \in \N^*, ~ \forall k \leq n, ~ \forall x \in \R, ~   |x|^k \leq 1 + |x|^n$.\\
+    Sq $X$ admet un moment d'ordre $n$ : $|X^n|\in \L^n$, alors $1+|X^n|\in\L^1$ puis $|X^k|\leq 1+|X^n|$ donc $|X^k|\in\L^1$.
+\end{prop}
+
+\begin{defi}{Variance.}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$, elle admet une variance $V(X)=E((X-E(X))^2)$ ssi $X\in \L^2$.
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ admettant un moment d'ordre 2.
+    \begin{equation*}
+        V(X) \geq 0, \et V(X) = 0 \ra X \nt{ constante presque sûre.}
+    \end{equation*}
+    \tcblower
+    Soit $Y=(X-\E(X))^2\geq0$, alors $\E(Y)\geq0$ puis $V(X)\geq0$.\\
+    Puis $V(X)=0\iff\E(Y)=0\iff Y=0 ~ \nt{ps} \iff X = \E(X) ~\nt{ps} \iff X~\nt{cste ps}$.
+\end{prop}
+
+\begin{defi}{Écart-type.}{}
+    L'écart-type de $X$, note $\s(X)$ est défini par $\s(X)=\sqrt{V(X)}$.
+\end{defi}
+
+\begin{prop}{Formule de Koenig-Huygens.}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ admettant un moment d'ordre 2.
+    \begin{enumerate}
+        \item $V(X)=\E(X^2) - (E(X))^2$.
+        \item $\forall a,b \in \R, ~ aX = b$ admet au moment d'ordre 2 et $V(aX+b)=a^2V(X)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $(X-\E(X))^2 = X^2 - \E(X)X + \E(X)^2$ puis par lin. $V(X) = \E(X^2) - 2\E(X)\E(X) + \E(X)^2= \E(X^2) - \E(X)^2$.\\
+    \boxed{2.} $V(aX+b)=\E((aX+b)^2)-(\E(aX+b))^2 = \E(a^2X^2+2abX+b^2)-(a\E(x)+b)^2=a^2V(X)$.
+\end{prop}
+
+\end{document}

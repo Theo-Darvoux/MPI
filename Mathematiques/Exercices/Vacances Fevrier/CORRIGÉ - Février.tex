@@ -1,0 +1,638 @@
+\documentclass[french, 11pt]{article}
+
+\input{setup.tex}
+
+\def\pagetitle{Conseils de Travail / Février.}
+
+\begin{document}
+
+\input{title.tex}
+
+\begin{question}{}{}
+    Montrer que $\ds\binom{2n}{n}=\sum_{k=0}^n\binom{n}{k}^2$ avec une méthode dénombrement et en développant $(1+x)^{2n}=(1+x)^n(1+x)^n$.
+    \tcblower
+    Soit $E$ un ensemble à $2n$ éléments, constitué de $n$ éléments rouges et $n$ éléments noirs.\\
+    On note $F$ l'ensemble des parties de $E$ à $n$ éléments, $F_k$ l'ensemble des parties de $E$ avec $k$ éléments rouges, et $n-k$ éléments noirs.
+    \begin{equation*}
+        F = \bigsqcup_{k=0}^n F_k \ra |F| = \sum_{k=0}^n |F_k| \ra \binom{2n}{n} = \sum_{k=0}^n \binom{n}{k}\binom{n}{n-k} = \sum_{k=0}^n\binom{n}{k}^2.
+    \end{equation*}
+    On développe $(1+x)^{2n}$ avec le binôme de Newton :
+    \begin{equation*}
+        (1+x)^{2n} = \sum_{k=0}^{2n} \binom{2n}{k} x^k
+    \end{equation*}
+    \begin{align*}
+        (1+x)^n(1+x)^n &= \left(\sum_{k=0}^n \binom{n}{k}x^k\right)\left(\sum_{k=0}^n\binom{n}{k}x^k\right) = \sum_{i=0}^n\sum_{j=0}^n \binom{n}{i}\binom{n}{j}x^{i+j}
+    \end{align*}
+    On isole les termes de degré $n$ : 
+    \begin{equation*} \binom{2n}{n}=\sum_{i+j=n}\binom{n}{i}\binom{n}{j}x^n = \sum_{i=0}^n\binom{n}{i}\binom{n}{n-i} = \sum_{i=0}^n\binom{n}{i}^2 \end{equation*}
+\end{question}
+
+\begin{question}{}{}
+    Connaître la définition d'une tribu et d'une probabilité.
+    \tcblower
+    Soit $\O$ un univers et $\A\in\P(\O)$. On dit que $\A$ est une tribu ssi
+    \begin{equation*}
+        \O \in A, ~ \forall A \in \A, ~ \ov{A} \in \A, ~ \forall (A_n)_n\in\A^\N, ~ \bigcup_{n\in\N}A_n \in \A.
+    \end{equation*}
+    Une probabilité sur $(\O,\A)$ est une application $\Pr$ de $\A$ dans $[0,1]$ telle que
+    \begin{equation*}
+        \Pr(\O) = 1, ~ \forall A \in \A, ~ \Pr(A)\geq0 \et \forall (A_n)\in\A^\N ~ \nt{disjoints}, ~ \Pr\left(\bigcup_{n\in\N}A_n\right) = \sum_{n\in\N}\Pr(A_n).
+    \end{equation*}
+\end{question}
+
+\begin{question}{}{}
+    Connaître et savoir démontrer l'inégalité de Boole.
+    \tcblower
+    \bf{Énoncé.} Soit $(\O,\A,\Pr)$ un espace probabilisé et $(A_n)_n \in \A^\N$ une suite d'évènements.
+    \begin{equation*}
+        \Pr\left( \bigcup_{n\in\N} A_n \right) \leq \sum_{n\in\N}\Pr(A_n).
+    \end{equation*}
+    \bf{Preuve.} On pose $B_0 = A_0$ et $\forall n \in \N^*, ~ B_n = A_n \setminus (A_{n-1} \cup ... \cup A_0) \in \A$.\\
+    Alors $B_n\subset A_n$ : $\Pr(B_n)\leq \Pr(A_n)$ et $\bigcup_{n\in\N} B_n \subset \bigcup_{n\in\N} A_n$.\\
+    Or $\forall n \in \N, ~ A_n \subset \bigcup_{k=0}^n B_n$, donc $\bigcup_{n\in\N} A_n \subset \bigcup_{n\in\N} B_n$ donc $\bigcup_{n\in\N} A_n = \bigcup_{n\in\N} B_n$.
+    \begin{equation*}
+        \Pr(\bigcup_{n\in\N} A_n) = \Pr(\bigcup_{n\in\N} B_n) = \sum_{n\in\N}\Pr(B_n) \leq \sum_{n\in\N}\Pr(A_n).
+    \end{equation*}
+\end{question}
+
+\vspace*{-0.5cm}
+
+\begin{question}{}{}
+    Connaître la propriété de continuité monotone et son corollaire.
+    \tcblower
+    Soit $(\O,\A,\Pr)$ un espace probabilisé.
+    \begin{enumerate}
+        \item Soit $(A_n)_{n\in\N}\in\A^\N$ croissante, alors $\Pr(A_n)$ converge vers $\Pr(\bigcup_{n\in\N}A_n)$.
+        \item Soit $(A_n)_{n\in\N}\in\A^\N$ décroissante, alors $\Pr(A_n)$ converge vers $\Pr(\bigcap_{n\in\N}A_n)$.
+    \end{enumerate}
+    Pour $(A_n)_{n\in\N}\in\A^\N$ une suite quelconque de $\A^\N$ :
+    \begin{enumerate}
+        \item $\Pr(\bigcup_{k=0}^nA_k)\xrightarrow[n\to+\infty]{}\Pr(\bigcup_{n=0}^{\infty}A_n)$.
+        \item $\Pr(\bigcap_{k=0}^nA_k)\xrightarrow[n\to+\infty]{}\Pr(\bigcap_{n=0}^{\infty}A_n)$.
+    \end{enumerate}
+\end{question}
+
+\vspace*{-0.5cm}
+
+\begin{question}{}{}
+    Montrer que le produit de deux matrices stochastiques positives est stochastique positive, et que les valeurs propres d'une matrice stochastique sont dans la boule unité.
+    \tcblower
+    Soient $A,B$ deux matrices stochastiques positives. On note $U$ la matrice colonne dont tous les coefficients sont 1.
+    Une matrice $A$ est stochastique positive si et seulement si $AU=U$, et $ABU=A(BU)=AU=U$, donc $AB$ est stochastique positive.
+
+    Soit $X$ un vecteur propre de $A$, et $\l$ la valeur propre associée.
+    \begin{equation*}
+        AX=\l X \iff \begin{cases}a_{1,1}x_1 + ... + a_{1,n}x_n = \l x_1 \\ \dots \\ a_{n,1}x_1 + ... + a_{n,n}x_n = \l x_n\end{cases}
+    \end{equation*}
+    On note $i_0\in\lb1,n\rb$ tel que $|x_{i_0}|=\max\{|x_i|, ~ i\in\lb1,n\rb\}$ et $|x_{i_0}|>0$ car $X\neq0$.\\
+    Alors $a_{i_0,1}x_1 + ... + a_{i_0,n}x_n = \l x_{i_0}$.
+    \begin{equation*}
+        |\l||x_{i_0}| = \left|\sum_{i=1}^na_{i_0,i}x_i\right| \leq \sum_{i=1}^n |a_{i_0,i}||x_i| \leq |x_{i_0}|\sum_{i=1}^n |a_{i_0,i}| = |x_{i_0}|
+    \end{equation*} 
+    En divisant par $|x_{i_0}|>0$, on obtient $|\l|\leq 1$.
+\end{question}
+
+\begin{question}{}{}
+    Connaître la définition d'un ensemble dénombrable et d'un ensemble au plus dénombrable.
+    \tcblower
+    Un ensemble est dit dénombrable s'il est en bijection avec $\N$.\\
+    Un ensemble est dit au plus dénombrable s'il est fini ou dénombrable.
+\end{question}
+
+\vspace*{-0.8cm}
+
+\begin{question}{}{}
+    Montrer que $\Lg\.,\.\Rg$ définit un produit scalaire sur $\R[X]$, où
+    \begin{equation*}
+        \forall P,Q \in \R[X], ~ \Lg P, Q \Rg = \int_{-1}^1\frac{P(t)Q(t)}{\sqrt{1-t^2}}\dt.
+    \end{equation*}
+    Savoir poser $t=\cos u$ dans l'intégrale.
+    \tcblower
+    \bf{Convergence.} Pour $t\in~]-1,1[$, on pose $f(t)=\frac{P(t)Q(t)}{\sqrt{1-t^2}}$, cpm.\\
+    $\hra$ En -1 : $f(t)=\frac{P(t)Q(t)}{\sqrt{1-t}}\frac{1}{\sqrt{1+t}}=_{-1}O\left( \frac{1}{\sqrt{1+t}} \right)$ intégrable par comparaison.\\
+    $\hra$ En 1 : $f(t)=\frac{P(t)Q(t)}{\sqrt{1+t}}\frac{1}{\sqrt{1-t}}=_1O\left( \frac{1}{\sqrt{1-t}} \right)$ intégrable par comparaison.\\
+    Donc l'intégrale converge.\\
+    \bf{Symétrique, bilinéaire.} Immédiat.\\
+    \bf{Positive.} $\Lg P,P\Rg$ est l'intégrale d'une fonction postive sur $]-1,1[$ donc $\Lg P,P\Rg \geq 0$.\\
+    \bf{Définie.} Si $\Lg P,P\Rg = 0$, alors $\forall t \in ]-1,1[, ~ \frac{P^2(t)}{\sqrt{1-t}}=0$ car c'est une fonction positive, continue d'intégrale nulle.
+    Puis $P^2(t)=0$ puis $P(t)=0$, alors $P$ est un polynôme admettant une infinité de racines, c'est le polynôme nul.\\
+    \bf{Changement de variable.} Posons $t=\cos u$, $\cursive{C}^1$ strictement croissant, bijection de $[0,\pi]$ dans $[-1,1]$.
+    \begin{equation*}
+        \int_{-1}^{1}\frac{P(t)Q(t)}{\sqrt{1-t^2}}\dt = -\int_{0}^{\pi}\frac{P(\cos u)Q(\cos u)}{\sqrt{1-\cos^2(u)}}(-\sin u) \du = \int_{0}^\pi P(\cos u)Q(\cos u)\du
+    \end{equation*}
+\end{question}
+
+\vspace*{-0.8cm}
+
+\begin{question}{}{}
+    Montrer qu'une famille finie de vecteurs non nuls, deux-à-deux orthogonaux d'un espace $E$ préhilbertien est libre.
+    \tcblower
+    Soient $(x_1,...,x_n)$ des vecteurs non-nuls et deux-à-deux orthogonaux et $(\l_1,...,\l_n)\in\R^n$ tels que $\sum_{i=1}^n \l_i x_i = 0$.\\
+    Soit $k\in\lb1,n\rb$. On a :
+    \begin{equation*}
+        0 = \Lg 0, x_k \Rg = \left\Lg \sum_{i=1}^n \l_i x_i, x_k \right\Rg = \sum_{i=1}^n \l_i \Lg x_i, x_k\Rg = \l_k 
+    \end{equation*}
+    Donc $\forall k \in \lb1,n\rb, ~ \l_k = 0$, donc la famille $(x_1,...,x_n)$ est bien libre.
+\end{question}
+
+\vspace*{-0.8cm}
+
+\begin{question}{}{}
+    Connaître la définition de l'adjoint de $u\in\L(E)$ et sa matrice dans une b.o.n. de $E$ euclidien.
+    \tcblower
+    L'adjoint de $u$ est l'unique endomorphisme $u^*$ de $E$ tel que $\forall (x,y) \in E^2, ~ \Lg u(x), y\Rg = \Lg x, u^*(y)\Rg$.\\
+    Dans une b.o.n. $\B$ de $E$, $\Mat_{\B}(u^*) = \Mat_\B(u)^\top$.
+\end{question}
+
+\begin{question}{}{}
+    Connaître l'expression du projeté orthogonal sur une droite et sur un hyperplan.
+    \tcblower
+    Soit $x\in E$.\\
+    \bf{Droite.} Notons $\cursive{D}=\Vect(u)$ une droite. Alors $\left( \frac{u}{\|u\|} \right)$ est une b.o.n. de $\cursive{D}$ puis :
+    \begin{equation*}
+        p_\cursive{D}(x) = \left\Lg x, \frac{u}{\|u\|}\right\Rg\frac{u}{\|u\|} = \frac{\Lg x, u \Rg}{\|u\|^2}u
+    \end{equation*}
+    \bf{Hyperplan.} Soit $H$ un hyperplan et $\cursive{D}=\Vect(u)$ une droite orthogonale à l'hyperplan. Alors :
+    \begin{equation*}
+        p_H(x) = x - p_{\cursive{D}}(x) = x - \frac{\Lg x, u\Rg}{\|u\|^2}u.
+    \end{equation*}
+\end{question}
+
+\vspace*{-1cm}
+
+\begin{question}{}{}
+    Connaître l'expression du théorème spectral pour les matrices et les endomorphismes.
+    \tcblower
+    Pour $E$ euclidien (donc réel):
+    \begin{enumerate}
+        \item Soit $M$ une matrice symétrique réelle. Elle est orthodiagonalisable.
+        \item Soit $u\in \S(E)$. Alors $\Sp(u)\subset\R$, et $u$ est diagonalisable dans une b.o.n. de ses vecteurs propres.
+    \end{enumerate}
+\end{question}
+
+\vspace*{-1cm}
+
+\begin{question}{}{}
+    Savoir orthodiagonaliser $A=\begin{pmatrix}2&1&0\\1&2&1\\0&1&2\end{pmatrix}$.
+    \tcblower
+    Soit $\l\in\R$. En développant selon la première colonne :
+    \begin{equation*}
+        \det(\l I_n - A) = \begin{vmatrix}\l - 2 & -1 & 0 \\ -1 & \l-2 & -1 \\ 0 & -1 & \l - 2\end{vmatrix} = (\l-2)((\l-2)^2 - 2)
+    \end{equation*}
+    Alors $\X_A = (X-2)(X-2-\sqrt{2})(X-2+\sqrt{2})$.\\
+    $\hra$ $E_2=\Vect(1,0,1)$; $E_{2+\sqrt{2}}=\Vect(1,\sqrt{2},1)$ et $E_{2-\sqrt{2}}=\Vect(1,-\sqrt{2},1)$.
+    \begin{equation*}
+        A = PDP^\top \quad\nt{avec}\quad P=\begin{pmatrix}\frac{1}{\sqrt{2}} & \frac{1}{2} & \frac{1}{2} \\ 0 & \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2} \\ \frac{1}{\sqrt{2}} & \frac{1}{2} & \frac{1}{2}\end{pmatrix} \in O_3(\R) \et D=\begin{pmatrix}2&0&0\\0&2+\sqrt{2}&0\\0&0&2-\sqrt{2}\end{pmatrix}.
+    \end{equation*}
+    \emph{Ne pas oublier d'orthonormaliser les colonnes de $P$}.
+\end{question}
+
+\vspace*{-1cm}
+
+\begin{question}{}{}
+    Savoir montrer que $\S_n(\R)$ et $\A_n(\R)$ sont orthogonaux pour le produit scalaire usuel sur $\M_n(\R)$.
+    \tcblower
+    On utilise $\Tr(AB)=\Tr(BA)$ et $\Tr((AB)^\top) = \Tr(AB)$.\\
+    Pour $S\in\S_n(\R)$ et $A\in\A_n(\R)$ : $\Tr(S^\top A) = \Tr(SA)$; mais aussi $\Tr(S^\top A) = \Tr(A^\top S) = -\Tr(AS)=-\Tr(SA)$.\\
+    Donc $\Tr(SA)=-\Tr(SA)=0$, donc $\S_n(\R)\bot\A_n(\R)$ pour le produit scalaire usuel.
+\end{question}
+
+\begin{question}{}{}
+    Savoir montrer que $O_n(\R)$ est un groupe multiplicatif, et que si $A\in O_n(\R)$, alors $\det(A)^2=1$.
+    \tcblower
+    \bf{Déterminant.} Soit $A\in O_n(\R)$, alors $AA^\top = I_n$ puis $\det(A)\det(A^\top)=\det(A)^2=1$.\\
+    \bf{Groupe.} Montrons que c'est un sous-groupe de $\GL_n(\R)$. Soient $A,B\in O_n(\R)$.\\
+    $\hra$ $O_n(\R) \subset \GL_n(\R)$ par l'encadré précédent.\\
+    $\hra$ $I_n \in O_n(\R)$ car $I_nI_n^\top = I_n$.\\
+    $\hra$ $AB\in O_n(\R)$ car $AB(AB)^\top=A(BB^\top) A^\top = AA^\top = I_n$.\\
+    $\hra$ $A^{-1}\in O_n(\R)$ car $A^{-1}(A^{-1})^\top = A^{-1}(A^\top)^{-1} = (A^\top A)^{-1} = I_n$.\\
+    C'est un sous-groupe de $\GL_n(\R)$ par caractérisation.
+\end{question}
+
+\vspace*{-0.9cm}
+
+\begin{question}{}{}
+    Connaître le théorème de représentation de Riesz.
+    \tcblower
+    Soit $(E,\Lg\.,\.\Rg)$ un espace euclidien et $\phi\in\L(E,\R)$, alors $\exists!a\in E, ~ \forall x \in E, ~ \phi(x)=\Lg a,x\Rg$.
+\end{question}
+
+\vspace*{-0.9cm}
+
+\begin{question}{}{}
+    Connaître la définition d'une isométrie et savoir montrer les équivalences :\\
+    $\hra$ Conservation de la norme, conservation du produit scalaire, $u^*\circ u = \Id$.
+    \tcblower
+    Soit $u\in\L(E)$. On dit que $u$ est une isométrie ssi $\forall x \in E, ~ \|u(x)\|=x$.\\
+    \boxed{\ra} Supposons que $\forall x \in E, ~ \|u(x)\|=\|x\|$.\\
+    Soient $x,y \in E$. $\|x+y\|^2 = \|u(x) + u(y)\|^2$ donc $\|x\|^2 + 2\Lg x,y \Rg + \|y\|^2 = \|u(x)\|^2 + 2\Lg u(x), u(y)\Rg + \|u(y)\|^2$.\\
+    Donc $\Lg x,y\Rg = \Lg u(x), u(y)\Rg$.\\
+    \boxed{\la} Si $\forall (x,y)\in E^2, ~ \Lg u(x), u(y)\Rg = \Lg x, y\Rg$, alors pour $x=y$, $\|u(x)\|^2=\|x\|^2$ puis $\|u(x)\|=\|x\|$.\\
+    \boxed{\iff} $\forall (x,y)\in E^2, ~ \Lg u(x), u(y)\Rg = \Lg x,y\Rg \iff \Lg u^*u(x), y \Rg = \Lg x, y \Rg \iff u^*u(x)=x \iff u^*u=\Id$.
+\end{question}
+
+\vspace*{-0.9cm}
+
+\begin{question}{}{}
+    Connaître la forme des matrices de $\SO_2(\R)$ et savoir montrer que $\SO_2(\R)$ est un groupe commutatif.
+    \tcblower
+    On a :
+    \begin{equation*}
+        \SO_2(\R) = \left\{\begin{pmatrix}\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta\end{pmatrix}, ~ \theta \in \R\right\}
+    \end{equation*}
+    Montrons que $\SO_2(\R)$ est un sous-groupe de $O_2(\R)$. Soient $A,B\in\SO_2(\R)$.\\
+    $\hra$ $\SO_2(\R)$ est l'ensemble des matrices de $O_2(\R)$ de déterminant 1, donc $\SO_2(\R)\subset O_2(\R)$.\\
+    $\hra$ $AB\in\SO_2(\R)$ car $AB\in O_2(\R)$ et $\det(AB)=\det(A)\det(B)=1\.1=1$.\\
+    $\hra$ $A^{-1}\in\SO_2(\R)$ car $A^{-1}\in O_2(\R)$ et $\det(A^{-1}) = \det(A)^{-1} = 1$.\\
+    Donc $\SO_2(\R)$ est un sous-groupe de $\O_2(\R)$ par caractérisation.
+\end{question}
+
+\pagebreak
+
+\begin{question}{}{}
+    Connaître le théorème de réduction des isométries.
+    \tcblower
+    Soit $E$ un espace euclidien de dimension $n$ et $u\in O(E)$, alors il existe une base $\B$ de $E$ telle que
+    \begin{equation*}
+        \Mat_\B(u) = \begin{pmatrix}R(\theta_1) & & & & (0) \\ & \ddots & & & \\ & &  R(\theta_r) & & \\ & & & I_p &\\ (0) & & & &  -I_q\end{pmatrix} ~\nt{où}~ \forall \theta \in \R, ~  R(\theta) = \begin{pmatrix}\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta\end{pmatrix}.
+    \end{equation*}
+    et $(r,p,q)\in\N^3$, $(\theta_1,...,\theta_r)\in\R^r$.
+\end{question}
+
+\begin{question}{}{}
+    Connaître un exemple de matrice symétrique complexe non diagonalisable.
+    \tcblower
+    On veut une matrice dont le polynôme caractéristique a un discriminant nul. Dans $\M_2(\C)$ : $A=\begin{pmatrix}2 & i \\ i & 0\end{pmatrix}$.\\
+    On a $\X_A=X^2-2X+1=(X-1)^2$ et $E_1 = \Vect(1, i)$, donc $A$ n'est pas diagonalisable, mais est symétrique complexe. 
+\end{question}
+
+\begin{question}{}{}
+    Soit $A\in\S_n(\R)$. Savoir montrer l'équivalence : valeurs propres positives ssi $\forall X \in \M_{n,1}(\R), ~ X^\top AX \geq 0$.
+    \tcblower
+    Par théorème spectral, $A$ est diagonalisable dans une base de ses vecteurs propres : $A=PDP^\top$ avec $P\in O_n(\R)$. 
+    \boxed{\ra} Supposons $\Sp(A)\subset \R_+$. Soit $X\in\M_{n,1}(\R)$, on posera $Y=P^\top X$.
+    \begin{equation*}
+        X^\top AX = X^\top PDP^\top X = (P^\top X)^\top D (P^\top X) = Y^\top DY = \sum_{i=1}^n \l_i y_i^2 \geq 0. 
+    \end{equation*}
+    \boxed{\la} Supposons $\forall X \in \M_{n,1}(\R), ~ X^\top AX \geq 0$, alors pour $\l\in\Sp(A)$ et $X$ un $\vp$ associé :
+    \begin{equation*}
+        X^\top AX = \l X^\top X = \l \geq 0.
+    \end{equation*}
+\end{question}
+
+\pagebreak
+
+\begin{question}{}{}
+    Savoir énoncer et démontrer l'inégalité de Cauchy-Schwarz.\\
+    Savoir l'écrire pour les produits scalaires usuels de $\R^n$, $\M_n(\R)$ et $\cursive{C}^0([a,b])$.
+    \tcblower
+    \bf{Énoncé.} Soit $(E,\Lg\.,\.\Rg)$ un espace préhilbertien réel, et $u,v\in E$, alors $|\Lg u,v \Rg| \leq \|u\|\.\|v\|$.\\
+    \bf{Cas usuels.} Dans l'ordre, $\R^n$, $\M_n(\R)$ puis $\cursive{C}^0([a,b])$ :
+    \begin{equation*}
+        \left(\sum_{i=1}^n x_i y_i\right)^2 \leq \left(\sum_{i=1}^n x_i^2\right)\left( \sum_{i=1}^n y_i^2 \right); \quad \left(\sum_{1\leq i,j \leq n} [A]_{j,i}[B]_{j,i}\right)^2 \leq \left( \sum_{1\leq i,j \leq n} [A]_{j,i}^2 \right)\left( \sum_{1\leq i,j \leq n}[B]_{j,i}^2 \right)
+    \end{equation*}
+    \begin{equation*}
+        \left( \int_a^b f(t)g(t)\dt \right)^2 \leq \left( \int_a^b f(t)^2\dt \right)\left( \int_a^b g(t)^2\dt \right)
+    \end{equation*}
+    \bf{Preuve.} On pose le polynôme $P(\l)=\Lg x + \l y, x + \l y\Rg = \|x\|^2 + 2\l\Lg x, y \Rg + \l^2\|y\|^2$.\\
+    Son discriminant est $4\Lg x,y\Rg^2 - 4\|y\|^2\|x\|^2 = 4(\Lg x,y \Rg^2- \|x\|^2\|y\|^2)\leq 0$ car $P(\l)\geq0$.\\
+    Alors $\Lg x,y \Rg^2 \leq \|x\|^2\|y\|^2$ puis $|\Lg x,y\Rg| \leq \|x\|\|y\|$.
+\end{question}
+
+\begin{question}{}{}
+    Connaître deux caractérisations des projections orthogonales.
+    \tcblower
+    Soit $E$ un espace euclidien et $p$ un projecteur de $E$. Il est orthogonal ssi l'une des deux propositions est vraie :\\
+    \boxed{1.} $\forall x \in E, ~ \|p(x)\|\leq \|x\|$.\\
+    \boxed{2.} $p$ est autoadjoint.
+\end{question}
+
+\begin{question}{}{}
+    Savoir reconnaître une matrice de projection et une matrice de projection orthogonale.
+    \tcblower
+    Soit $P\in\M_n(\R)$. C'est la matrice d'une projection ssi $P^2=P$, de surcroît orthogonale ssi $P^\top = P$.
+\end{question}
+
+\begin{question}{}{}
+    Savoir montrer que $\forall x \geq 0, ~ \forall n \in \N, ~ e^x \geq 1 + x + ... + \frac{x^n}{n!}$.\\
+    En utilisant un DSE ou une formule de Taylor avec reste intégral.
+    \tcblower
+    Soit $n\in\N$.\\
+    \fbox{DSE.} $e^x = \sum_{k=0}^{\infty} \frac{x^k}{k!} = \sum_{k=0}^n \frac{x^n}{k!} + \sum_{k=n+1}^{\infty}\frac{x^k}{k!} \geq \sum_{k=0}^n \frac{x^n}{k!}$.\\
+    \fbox{Taylor.} Sur $[0,x]$ : $e^x = \sum_{k=0}^n\frac{e^0}{k!}x^k + \int_0^x \frac{(x-t)^n}{n!}e^t\dt \geq \sum_{k=0}^n \frac{x^k}{k!}$ (car $\exp\in\cursive{C}^{n+1}([0,x],\R)$).
+\end{question}
+
+\begin{question}{}{}
+    Soit $f\in\cursive{C}^2(I)$ convexe. Montrer qu'elle est sur ses tangentes avec une formule de Taylor intégral.
+    \tcblower
+    Avec la formule de Taylor avec reste intégral à l'ordre 2 sur $I=[a,x]$ avec $a\in \R$.
+    \begin{equation*}
+        f(x) = f(a) + f'(a)(x-a) + \int_a^x (x-t)f''(t)\dt 
+    \end{equation*}
+    Puisque $f$ est convexe, $f''\geq 0$ donc $\forall x \in I, ~ f(x) \geq f(a) + f'(a)(x-a)$, sa tangente en $a$.
+\end{question}
+
+\vspace*{-0.8cm}
+
+\begin{question}{}{}
+    Savoir justifier l'existence de $\ds\int_0^1\ln(t)\dt$ et la calculer.
+    \tcblower
+    Déjà, $\ln$ est cpm sur $]0,1]$, puis pour $a\in~]0,1]$ par croissances comparées :
+    \begin{equation*}
+        \int_a^1 \ln(t)\dt = \left[ t\ln(t)-t \right]_a^1 = a - 1 - a\ln(a) \xrightarrow[a\to0]{} -1.
+    \end{equation*}
+\end{question}
+
+\vspace*{-0.8cm}
+
+\begin{question}{}{}
+    Savoir justifier la convergence de $\ds\int_0^{+\infty}\frac{\sin t}{t}\dt$.
+    \tcblower
+    Soit $f:t\mapsto \frac{\sin t}{t}$, cpm sur $\R_+^*$.\\
+    $\hra$ En zéro, la fonction est prolongeable par continuité et $f(0)=1$.\\
+    $\hra$ On pose $u=-\cos$, $u'=\sin$, $v=\frac{1}{t}$, $v'=-\frac{1}{t^2}$ avec $u,v\in\cursive{C}^1([\frac{\pi}{2},+\infty[)$.\\
+    On a $[uv]_1^{+\infty} = \cos\frac{\pi}{2}=0$, puis par IPP :
+    \begin{equation*}
+        \int_\frac{\pi}{2}^{+\infty}\frac{\sin t}{t}\dt ~ \nt{ est de même nature que } ~ \int_\frac{\pi}{2}^{+\infty}\frac{\cos t}{t^2}\dt
+    \end{equation*} 
+    Et $|g(t)|\leq \frac{1}{t^2}$, donc l'intégrale converge par comparaison à une intégrale de Riemann.
+\end{question}
+
+\vspace*{-0.8cm}
+
+\begin{question}{}{}
+    Savoir déterminer la nature de $\ds\int_2^{+\infty}\frac{\ln t}{t}\dt, ~ \int_2^{+\infty}\frac{\ln t}{t^2}\dt, ~ \int_2^{+\infty}\frac{1}{t\ln t}\dt$.
+    \tcblower
+    \fbox{1.} Pour $t\geq 2$, $\frac{\ln(t)}{t}\geq \frac{1}{t}$, donc l'intégrale diverge en $+\infty$ par comparaison. \\
+    \fbox{2.} Par croissances comparées, $\frac{\ln t}{t^2} = o\left( \frac{1}{t^{3/2}} \right)$, donc l'intégrale converge par comparaison.\\
+    \fbox{3.} On a $\int_2^{+\infty}\frac{1}{t\ln t}\dt = [\ln(\ln t)]_2^{+\infty}$ diverge.
+\end{question}
+
+\pagebreak
+
+\begin{question}{}{}
+    Savoir montrer avec une IPP généralisée que $\forall x > 0, ~ \G(x+1)=x\G(x)$.
+    \tcblower
+    On rappelle la définition de $\G$ (qu'on suppose convergente) :
+    \begin{equation*}
+        \forall x \in \R_+^*, ~ \G(x) = \int_0^{+\infty} t^{x-1}e^{-t}\dt
+    \end{equation*}
+    On pose $u=t^{x}$, $u'=xt^{x-1}$, $v=-e^{-t}$ et $v'=e^{-t}$, avec $u,v\in\cursive{C}^1(\R_+^*)$.\\
+    De plus, $[uv]_0^{+\infty}=0$ par croissances comparées, puis par IPP :
+    \begin{equation*}
+        \G(x+1) = \int_0^{+\infty}t^{x}e^{-t}\dt = \int_0^{+\infty}xt^{x-1}e^{-t}\dt = x\G(x)
+    \end{equation*}
+\end{question}
+
+\vspace*{-0.8cm}
+
+\begin{question}{}{}
+    Connaître le théorème de convergence dominée.
+    \tcblower
+    Soit $(f_n)_n$ une suite de fonctions cpm sur $I$.\\
+    Si $f_n \cs f$ cpm sur $I$ et que $\forall n \in \N, ~ |f_n|\leq \phi$ , avec $\phi:I\to\R_+$ intégrable sur $I$, alors :
+    \begin{equation*}
+        \int_I f_n \xrightarrow[n\to+\infty]{} \int_I f
+    \end{equation*}
+\end{question}
+
+\vspace*{-0.8cm}
+
+\begin{question}{}{}
+    Soit $F(\l)=\int_0^{+\infty} f(t)e^{-\l t}\dt$ avec $f$ continue et bornée sur $\R$.
+    \begin{enumerate}
+        \item Savoir montrer que $F$ est définie puis continue sur $\R_+^*$, puis $\cursive{C}^1(\R_+^*)$.
+        \item Savoir montrer que $\ds\lim_{\l\to+\infty}F(\l)=0$.
+    \end{enumerate}
+    \tcblower
+    On commence par poser $\forall \l \in \R_+^*, ~ \forall t \in \R, ~ g(\l, t)=f(t)e^{-\l t}$.\\
+    \bf{Définie.} Puisque $f$ est bornée, il existe $M>0$ tel que $\forall t \in \R, ~ |f(t)|\leq M$.\\
+    Ainsi, $|g(\l, t)| =_{+\infty} O\left( e^{-\l t} \right)$, l'intégrale converge par comparaison puisque $\l>0$ et $\CA\ra\CV$.\\ 
+    \bf{Continuité.} Déjà, $\forall \l \in \R_+^*, ~ t\mapsto g(\l, t)$ est cpm sur $\R_+^*$.\\
+    Ensuite, $\forall t \in \R, ~ \l \mapsto g(\l, t)$ est continue sur $\R_+$.\\
+    Enfin, $\forall \a \in \R_+^*, ~ \forall \l > \a, ~ \forall t \in \R, ~ |g(\l, t)| \leq Me^{-\a t}$ intégrable et cpm sur $\R_+^*$.\\
+    Par théorème de continuité des intégrales à paramètres, $F$ est continue sur $\R_+^*$.\\
+    \bf{Classe $\cursive{C}^1$.} Déjà, $\forall \l \in \R_+^*, ~ t\mapsto g(\l, t)$ est cpm sur $\R_+$.\\
+    Ensuite, $\forall t \in \R, ~ \l \mapsto g(\l, t)$ est dérivable sur $\R_+$ et $\frac{\6 g}{\6 \l} = -t f(t) e^{-\l t}$, continue sur $\R_+^*$.\\
+    Enfin, $\forall \a \in \R_+^*, ~ \forall \l > \a, ~ \forall t \in \R, ~ |g(\l, t)| \leq t M e^{-\a t} = O\left( e^{-\frac{\a t}{2}} \right)$, intégrable et cpm sur $\R_+^*$.\\
+    Par théorème de dérivation sous le signe intégral, $F$ est $\cursive{C}^1(\R_+^*)$.\\
+    \bf{Limite.} Soit $(\l_n)_{n\in\N}$ une suite strictement positive, divergeant vers $+\infty$.\\
+    On pose pour tout $n\in\N$ : $g_n(t)=g(\l_n, t) \cs \mathbbs{0}$, on a $\forall t > 0, ~ |g_n(t)|\leq Me^{-t}$, intégrable et cpm sur $\R_+^*$.\\
+    Alors par théorème de convergence dominée, $\ds\lim_{\l\to+\infty}F(\l)=\int_0^{+\infty}\zero(t)\dt=0$.
+\end{question}
+
+\begin{question}{}{}
+    Connaître le théorème d'échange série-intégrale.
+    \tcblower
+    Soit $(f_n)_n$ une suite de fonctions cpm sur $I$.\\
+    Si $\sum_{n\in\N} f_n$ $\CS$ vers une fonction cpm sur $I$ et que  $\sum_{n \in \N}\int_I |f_n|$ converge, alors :
+    \begin{equation*}
+        \sum_{n\in \N} \int_I f_n = \int_I \sum_{n\in \N} f_n
+    \end{equation*}
+\end{question}
+
+\begin{question}{}{}
+    Pour tout $n\in\N^*$, on pose $\ds u_n=\int_0^{+\infty}\frac{\dt}{(1+t^2)^n}$.\\
+    Savoir montrer que $(u_n)_n$ décroît vers 0, et étudier les séries $\sum u_n$ et $\sum (-1)^n u_n$.
+    \tcblower
+    \bf{Décroissance.} Déjà, $(u_n)$ est bien définie par comparaison à une intégrale de Riemann.\\
+    Ensuite, $u_{n+1} - u_n = \ds\int_0^{+\infty} \left( \frac{1}{(1+t^2)^{n+1}} - \frac{1}{(1+t^2)^n} \right)\leq 0$ donc $(u_n)$ décroît.\\
+    On pose $f_n(t) = \frac{1}{(1+t^2)^n}\cs0$ sur $\R_+^*$, et $|f_n|\leq\frac{1}{1+t^2}$ intégrable sur $\R_+^*$, donc par TCD, $\lim u_n = \int_{\R_+^*} 0\dt=0$.\\
+    \bf{Séries.} La série $\sum(-1)^nu_n$ converge par CSSA.\\
+    Puis $u_{n+1} = (1-\frac{1}{2n})u_n = \prod_{i=1}^n\left( \frac{2i-1}{2i} \right) \cdot \frac{\pi}{2} = \frac{(2n)!}{4^n(n!)^2}\frac{\pi}{2}\sim \frac{\sqrt{4\pi n}\left( \frac{2n}{e} \right)^{2n}}{4^n2\pi n\left(\frac{n}{e}\right)^{2n}}\frac{\pi}{2}=\frac{\sqrt{\pi n}}{\pi n}\frac{\pi}{2} = \frac{1}{\sqrt{n}}\frac{\sqrt{\pi}}{2}$. \\
+    La série diverge donc par comparaison à une série de Riemann.
+\end{question}
+
+\begin{question}{}{}
+    Écrire sous la forme d'une série : $\ds I_p = \int_0^{+\infty}\frac{t^p}{e^t-1}\dt$ ($p\geq 2$).
+    \tcblower
+    On pose $f_p(t)=\frac{t^p}{e^t-1}$, cpm sur $\R_+^*$.\\
+    $\hra$ En 0 : $f_p(t) \sim \frac{t^p}{t} = t^{p-1}$, or $p>1$, donc c'est un faux problème de convergence.\\
+    $\hra$ En $+\infty$ : $f_p(t)=o\left( \frac{1}{t^2} \right)$ par croissances comparées donc l'intégrale converge.
+    \begin{equation*}
+        \forall x \in ]-1,1[, ~ \frac{1}{1-x} = \sum_{n=0}^{+\infty} x^n \ra \forall t \geq 0, ~ \frac{1}{e^t - 1} = e^{-t}\sum_{n=0}^{+\infty} (e^{-t})^n = \sum_{n=0}^{+\infty} e^{-(n+1)t}.
+    \end{equation*} 
+    Alors avec le changement de variable $u=(n+1)t$, $\cursive{C}^1$, strictement croissant bijection de $\R_+^*$ :
+    \begin{equation*}
+        I_p = \int_0^{+\infty} \sum_{n=0}^{+\infty} t^p e^{-(n+1)t}\dt = \sum_{n=0}^{+\infty}\int_0^{+\infty} t^p e^{-(n+1)t}\dt= \sum_{n=0}^{+\infty}\frac{1}{(n+1)^{p+1}}\int_0^{+\infty} u^p e^{-u}\du = \sum_{n=0}^{+\infty}\frac{p!}{(n+1)^{p+1}}.
+    \end{equation*}
+    Échange série intégrale, avec $g_n(t)=t^p e^{-(n+1)t}$ :\\
+    $\hra$ $\sum g_n$ $\CS$ vers $\frac{t^p}{e^t-1}$ sur $\R_+^*$, cpm.\\
+    $\hra$ $\sum \int |g_n|$ converge vers $\sum_{n=0}^{+\infty}\frac{p!}{(n+1)^{p+1}}$, qui est convergente.
+\end{question}
+
+\pagebreak
+
+\begin{question}{}{}
+    Soit $F(x)=\int_0^{+\infty}\frac{1-\cos(xt)}{t^2}e^{-t}\dt$.\\
+    Montrer que $F$ est définie sur $\R$, $\cursive{C}^2$ sur $\R$, calculer $F''(x)$ puis $F(x)$ pour tout $x\in\R$.
+    \tcblower
+    Montrons que $F$ est continue sur $\R$. On utilise le théorème de continuité des intégrales à paramètres.\\
+    On pose $f(x,t)=\frac{1-\cos xt}{t^2}e^{-t}$ pour $x\in\R_+$, $t\in\R^*_+$.\\
+    Pour $t>0$, $x\mapsto f(x,t)$ est continue sur $[0,+\infty]$;\\
+    On a $\cos 2x=1-2\sin^2(x)$, donc $1-\cos2x=2\sin^2x$, puis $|f(x,t)|=\frac{2\sin^2(\frac{x-t}{2})}{t^2}e^{-t}\leq\frac{2|\frac{x-t}{2}|^2}{t^2}e^{-t}=\frac{x^2}{2}e^{-t}$.\\
+    La majoration dépend de $x$, on fait une domination locale :
+    \begin{equation*}
+        \forall A \geq 0, ~ \forall x \in [0,A], ~ \forall t >0, ~ |f(x,t)|\leq\frac{A^2}{2}e^{-t}=\phi(t).
+    \end{equation*}
+    $\phi$ est cpm et intégrable sur $]0,\infty[$, le théorème s'applique donc $F$ est continue sur $\R_+$ puis sur $\R$ par parité.\\
+    $f$ admet des dérivées premières et secondes par rapport à $x$ :
+    \begin{equation*}
+        \forall x \in \R, ~ \forall t > 0, ~ \frac{\6 f}{\6 x}(x,t) = \frac{t\sin xt}{t^2}e^{-t} = \frac{\sin xt}{t}e^{-t} \et \frac{\6^2 f}{\6 x^2}(x,t)=\cos(xt)e^{-t}.
+    \end{equation*}
+    On a $\forall x \in \R, ~ t\mapsto f(x,t)$ est intégrable sur $]0,+\infty[$.\\
+    On a $\forall x \in \R, ~ t\mapsto\frac{\6 f}{\6 x}(x,t)$ intégrable sur $\R_+^*$ : prolongeable en 0, et $o(\frac{1}{t^2})$ en $+\infty$.\\
+    On a $\forall t > 0, ~ x\mapsto \frac{\6^2 f}{\6 x^2}(x,t)$ continue sur $\R$ et intégrable.\\
+    Par théorème, $F$ est $\cursive{C}^2$ sur $\R$ et on peut dériver sous le signe intégral :
+    \begin{align*}
+        \forall x \in \R, ~ F''(x) &= \int_0^{+\infty}\cos(xt)e^{-t}\dt = \Re\left( \int_0^{+\infty} e^{(ix-1)t}\dt \right)\\
+        &=\Re\left( \frac{e^{(ix-1)t}}{ix-1} \right)_0^{+\infty} = \Re\left(\frac{1}{1-ix}\right) = \frac{1}{1+x^2}
+    \end{align*}
+    On primitive : $F'(x)=\arctan x + C$, or $F'$ est impaire car $F$ est paire, donc $F'(0)=0$ donc $F'(x)=\arctan x$.\\
+    Une primitive d'arctan est $x\arctan x - \frac{1}{2}\ln|1+x^2|+\a$ (par IPP sur $\int \arctan$).\\
+    En évaluant en 0, on obtient $\a=0$, donc $\forall x \in \R, ~ F(x)=x\arctan x - \frac{1}{2}\ln|1+x^2|$.
+\end{question}
+
+\begin{question}{}{}
+    Démontrer le théorème de Riesz puis l'existence et l'unicité de l'adjoint d'un endomorphisme de $E$ euclidien.
+    \tcblower
+    \bf{Preuve.} Soit $\psi$ de $E$ dans $\L(E,\R)$ telle que $\psi:a\mapsto(x\mapsto \Lg a,x \Rg)$.\\
+    Soit $(a,b)\in E^2$, $\l\in\R$, et $x\in E$. Alors $\psi(a+\l b)(x) = \Lg a, x \Rg + \l \Lg b, x\Rg = \psi(a)(x)+\l\psi(b)(x)=(\psi(a)+\l \psi(b))(x)$. \\
+    Soit $a\in\Ker(\psi)$, alors $\psi(a)(a)=\|a\|^2=0$, donc $a=0$, donc $\psi$ est injective.\\
+    Ensuite, $\dim \L(E,\R)=\dim(E)\dim(\R)=\dim(E)$, donc $\psi$ injective ssi $\psi$ surjective ssi $\psi$ bijective.\\
+    Donc $\psi$ est bijection de $E$ dans $\L(E,\R)$. Soit $\phi\in\L(E,\R)$, $\exists!a,~\phi=\psi(a)$ donc $\forall x\in E, ~ \phi(x)=\psi(a)(x)=\Lg a,x\Rg$.\\
+    \bf{Unicité.} Soit $x\in E$ fixé, posons $\phi(y)=\Lg x,u(y)\Rg$, c'est une forme linéaire sur $E$.\\
+    D'après le théorème de représentation de Riesz : $\exists!a\in E, ~ \forall y \in E, ~ \phi(y)=\Lg a,y\Rg$.\\
+    Donc $a$ est fonction de $x$, on notera $a=u^*(x)$, $\forall (x,y) \in E^2, ~ \Lg x,u(y)\Rg=\Lg u^*(x),y\Rg$.
+\end{question}
+
+\begin{question}{}{}
+    Montrer $\Ker(u^*\circ u) = \Ker(u)$ puis $\rg(A^\top A) = \rg(A)$.
+    \tcblower
+    \boxed{\Ker u^*u \supset \Ker u} trivial.\\
+    \boxed{\Ker u^*u \subset \Ker u} Soit $x\in\Ker(u^*\circ u)$ : $u^*\circ u(x)=0$, donc $\|u(x)\|^2=\Lg x, u^*\circ u(x) \Rg = 0$, donc $u(x)=0$.\\
+    \boxed{\rg(A^\top A) = \rg(A)} Soit $A\in\M_n(\R)$, vérifions déjà que $\Ker(A^\top A)=\Ker(A)$. Soit $u$ canoniquement associé à $A$.\\
+    Puis $\Mat_\B(u^*\circ u)=A^\top A$ donc $\Ker(u^*\circ u)=\Ker u \iff \Ker(A^\top A) = \Ker(A)$.\\
+    Par théorème du rang : $n=\rg(A^\top A)+\dim\Ker(A^\top A)=\rg(A)+\dim\Ker(A)$, donc $\rg(A^\top A)=\rg(A)$.\\
+    Puis avec $A^\top$ : $\rg((A^\top)^\top A^\top)=\rg(A^\top)=\rg(A)$ donc $\rg(AA^\top)=\rg(A)$. 
+\end{question}
+
+\vspace*{-0.8cm}
+
+\begin{question}{}{}
+    Montrer que la matrice de passage d'une base de $E$ euclidien à sa b.o.n. de Schmidt est triangulaire supérieur à diagonale strictement positive.
+    \tcblower
+    Soit $\B=(a_1,...,a_n)$ une base de $E$, et $\B'=(e_1,...,e_n)$ orthonormalisée de Schmidt.\\
+    On note $P$ la matrice de passage de $\B$ à $\B'$, et $P^{-1}$ de $\B'$ à $\B$. On exprime $P^{-1}$.
+    \begin{equation*}
+        P^{-1} = \begin{pmatrix} \Lg a_1, e_1 \Rg & \dots & \Lg a_n, e_1 \Rg \\ \vdots & & \vdots \\ \Lg a_1, e_n \Rg & \dots & \Lg a_n, e_n \Rg\end{pmatrix} = \begin{pmatrix}\Lg a_1, e_1 \Rg & \dots & \dots & \Lg a_n, e_1\Rg \\ 0 & \ddots & & \vdots \\ \vdots & \ddots & \ddots & \vdots \\ 0 & \dots & 0 & \Lg a_n, e_n \Rg \end{pmatrix}
+    \end{equation*}
+    En effet, $\forall i \in \lb1,n\rb, ~ a_i \in \Vect(e_1,...,e_i)$ et $\Lg a_i, e_i \Rg > 0$. Donc $P^{-1}$ est triangulaire à diagonale strictement positive, $P$ aussi.
+\end{question}
+
+\vspace*{-0.8cm}
+
+\begin{question}{}{}
+    Montrer que $O_n(\R)$ est compact, $\GL_n(\R)$ dense, $\SO_n(\R)$ connexe par arcs et $\S_n^{+}(\R)$ fermé.
+    \tcblower
+    \boxed{O_n(\R)} Déjà, $\M_n(\R)$ est un $\R$-evdf donc toutes les normes sont équivalentes, on choisit la norme usuelle.\\
+    \bf{Borné.} $\forall A \in O_n(\R), ~ \|A\|=\sqrt{\Tr(A^\top A)}=\Tr(I_n)=\sqrt{n}$.\\
+    \bf{Fermé} Soit $(A_k)_k$ une suite de matrices orthogonales, convergente de limite $A$.\\
+    On a $\forall k \in \N, ~ A_kA_k^\top=I_n$, or $A\mapsto A^\top$ est continue car linéaire en dimension finie, et $(A,B)\mapsto AB$ aussi car bilinéaire, donc $A_k\to A$ puis $A_k^\top \to A^\top$ puis $A_kA_k^\top \to AA^\top$, puis par unicité de la limite, $AA^\top = I_n$.\\
+    \boxed{\GL_n(\R)}  Toutes les normes sont équivalentes en dimension finie. Soit $A\in M_n(\K)$. On pose $\forall p \in \N^*, ~ A_p = A-\frac{1}{p}I_n$.\\
+    On a $\|A_p - A\| = \frac{1}{p}\|I_n\| \to 0$. On a $\det(A_p)=(-1)^n\det(\frac{1}{p}I_n-A)=(-1)^n\X_A(\frac{1}{p})$.\\
+    Or $\X_A$ a au plus $n$ racines, donc àpdcr, $\det(A_p)\neq0$ donc $A_p$ est inversible àpdcr.\\
+    \boxed{\SO_n(\R)} Soit $A\in\SO_n(\R)$. Par théorème de réduction, il existe $P\in O_n(\R)$, ~ $A=P\Diag(R(\theta_1),...,R(\theta_s),I_p)P^{-1}$.\\
+    On pose $\phi:t\mapsto P\Diag(R(t\theta_1),...,R(t\theta_s),I_p)P^{-1}\in\SO_n(\R)$, continue sur $[0,1]$ car tous les coefficients de $\phi(t)$ sont des combinaisons linéaires de $\cos(t\theta_i)$ et $\sin(t\theta_i)$, et $\phi(0)=I_n$, $\phi(1)=A$.\\
+    \boxed{\S_n^+(\R)} Soit $(A_k)_k\in\S_n^+(\R)^\N$ convergente de limite $A$. Déjà, $A\in\S_n(\R)$ par la question précédente.\\
+    Ensuite, pour $X\in\M_{n,1}(\R)$, on a $\forall k \in \N, ~ X^\top A_k X \geq 0$.\\
+    Puis $M\mapsto X^\top M X$ est continue sur $\M_n(\R)$ car lin. en dimension finie, donc par passage à la limite, $X^\top AX \geq 0$.\\
+    C'est vrai pour tout $X\in\M_{n,1}(\R)$, donc $A\in\S_n^+(\R)$. 
+\end{question}
+
+\begin{question}{}{}
+    Démontrer la loi du 0/1 de Borel.
+    \tcblower
+    \bf{Énoncé.} Soit $(\O,\A,\Pr)$ un espace probabilisé et $(A_n)_n\in\A^\N$. On pose $A=\bigcap_{p\in\N}\left( \bigcup_{n\geq p} A_n \right)$.
+    \begin{enumerate}
+        \item Si $\sum_{n\geq0}\Pr(A_n)$ converge, alors $\Pr(A)=0$.
+        \item Si $\sum_{n\geq0}\Pr(A_n)$ diverge et $(A_n)_n$ mutuellement indépendante, alors $\Pr(A)=1$.
+    \end{enumerate}
+    \bf{Preuve.} Déjà, $A\in\A$ car c'est une intersection dénombrable d'unions dénombrables d'évènements de $\A$.\\
+    On a $\w\in A \iff \forall p \in \N, ~ \exists n \geq p, ~ \w \in A_n \iff |\{n\in\N, ~ \w \in A_n\}|=\infty$.\\
+    \boxed{1.} Notons $B_p = \bigcup_{n\geq p}A_n$ pour $p\in\N$, alors $A=\bigcap_{p\in\N}B_p$.\\
+    On a $B_{p}=B_{p+1} \cup A_p$ donc $(B_p)_p$ est décroissante, puis par continuité monotone : $\Pr(A)=\lim\Pr(B_p)$.\\
+    Puis avec Boole : $\forall p \in \N, ~ \Pr(B_p) = \Pr(\bigcup_{n\geq p}A_n) \leq \sum_{n=p}^{\infty}\Pr(A_n)\xrightarrow[p\to+\infty]{}0$ comme reste d'une série convergente.\\[-0.2cm]
+    De plus, $\Pr(B_p)\geq0$, donc par encadrement : $\Pr(A)=0$.\\
+    \boxed{2.} Notons $C_p = \bigcap_{n\geq p}\ov{A_n}$ pour $p\in\N$, alors $\ov{A}=\bigcup_{p\in\N}C_p$.\\
+    On a $C_p = \ov{A_n}\cap C_{p+1}$ donc $(C_p)_p$ est croissante, puis par continuité monotone : $\Pr(\ov{A})=\lim\Pr(C_p)$.\\
+    Puis $(A_n)$ est mutuellement indépendante donc $(\ov{A_n})$ l'est aussi par théorème.\\
+    Alors pour toute famille finie $I\subset \N$, $\Pr(\bigcap_{n\in I}\ov{{A_n}})=\prod_{n\in I}\Pr(\ov{A_n})$.\\
+    Par corrolaire de la continuité monotone : $\Pr(C_p)=\Pr(\bigcap_{n\geq p}\ov{A_n})=\lim_N\Pr(\bigcap_{n=p}^N\ov{A_n})=\lim_N \prod_{n=p}^N(1-\Pr(A_n))$.\\
+    De plus, pour tout $x\in\R, ~ 1+x\leq e^x$ donc $1-x\leq e^{-x}$ donc $\prod_{n=p}^N\Pr(\ov{A_n})\leq \exp(-\sum_{n=p}^N\Pr(A_n))\to 0$.\\
+    Ainsi, $\forall p \in \N, ~ \Pr(C_p)=0$, et $\Pr(\ov{A})=\lim \Pr(C_p) = 0$ donc $\Pr(A)=1$.
+\end{question}
+
+\begin{question}{}{}
+    Montrer que $\R$ ou $\{0,1\}^\N$ n'est pas dénombrable.
+    \tcblower
+    Supposons par l'absurde que $[0,1[$ soit dénombrable, alors $\exists \phi:\N\to[0,1[$ bijective.\\
+    On note les chiffres décimaux : $\phi(0)=0,x_0^0x_1^0...$; $\phi(1)=0,x_0^1x_1^1...$ et $\phi(n)=0,x_0^nx_1^n...$.\\
+    Posons $y=0,y_0...y_n$ avec $y_i\neq x_i^i$ pour tout $i\in\N$, alors $\forall n \in \N, ~ \phi(n)\neq y$ car $y_n\neq x_n^n$.\\
+    Or $y\in[0,1[$, donc $\phi$ n'est pas surjective, absurde. Donc $[0,1[$ est indénombrable.\\
+    Puis $\forall a<b, ~ \phi:\l\mapsto \l a + (1-\l)b$ est bijective de $[0,1[$ dans $]a,b]$, donc $]a,b]$ est indénombrable.\\
+    Donc $\R$ n'est pas dénombrable.
+\end{question}
+
+\begin{question}{}{}
+    Montrer qu'une réunion dénombrable d'ensembles dénombrables est dénombrable.
+    \tcblower
+    Soit $(A_i)_{i \in I}$ des ensembles dénombrables.\\
+    On suppose que les $A_i$ sont non-vides, quitte à supprimer ceux qui sont vides, ce qui ne change pas la réunion.\\
+    Alors pour tout $i\in I$, on pose $f_i$ une bijection de $\N$ dans $A_i$, qui existe puisque $A_i$ est dénombrable.\\
+    On définit alors $\forall (i,n) \in I \times \N, ~ f(i,n) = f_i(n)$, bijection de $I\times \N$ sur $\bigcup_{i\in I}A_i$.\\
+    Puisque $I\times \N$ est dénombrable comme produit cartésien d'ensembles dénombrables, $\bigcup_{i\in I}A_i$ l'est aussi par théorème.
+\end{question}
+
+\begin{question}{}{}
+   Montrer que si $u$ et $v$ commutent et sont autoadjoints, alors il sont codiagonalisables dans une b.o.n.
+   \tcblower
+   Soit $u\in \S(E)$. Alors $E=\bigoplus E_{\l}$, et $uv=vu$ implique $\forall \l \in \Sp(u)$, $v(E_\l)\subset E_\l$.\\
+   Notons $v_\l = v_{|E_\l}\in \L(E_\l)$, c'est encore un endomorphisme symétrique : $v_\l\in\S(E_\l)$.\\
+   D'après le théorème spectral, on peut choisir une b.o.n. $\B_\l$ de $E_\l$ constituée de $\vp$ de $v_\l$.\\
+   On pose $\B$ la concaténation des $\B_\l$, c'est une b.o.n. de $E$ et les vecteurs de $\B$ sont des $\vp$ de $v$, mais aussi de $u$.
+\end{question}
+
+\begin{question}{}{}
+    Montrer que $p$ projecteur est un projecteur orthogonal ssi $\forall x \in E, ~ \|p(x)\|\leq\|x\|$.
+    \tcblower
+    On sait que $p$ est projecteur sur $F=\Im p=\Inv p$ de dimension finie, dans la direction $G=\Ker p$ et $E=F\oplus G$.\\
+    \boxed{\ra} Soit $x\in E, x=p(x)+x-p(x)$ donc $\|x\|^2=\|p(x)\|^2+\|x-p(x)\|^2$ donc $\|p(x)\|\leq\|x\|$.\\
+    \boxed{\la} Soit $x\in F$ et $y\in G$, $\forall \l \in \R, ~ p(x+\l y)=x$, donc $\|x\|\leq \|x+\l y\|$.\\
+    Donc $\|x\|^2\leq \|x\|^2+2\l\Lg x,y\Rg + \l^2\|y\|^2$ puis $\l^2\|y\|^2+2\l\Lg x,y\Rg\geq 0$ donc $\D \leq 0$.\\
+    Or $\D = 4\Lg x, y \Rg^2 \geq 0$ donc $\Lg x, y \Rg = 0$.
+\end{question}
+
+\begin{question}{}{}
+    Montrer que si $A\in\S_n^+(\R)$, alors $\exists!B\in\S_n^+(\R)$ telle que $A=B^2$.
+    \tcblower
+    \bf{Existence.} $A$ est symétrique réelle donc par théorème spectral : $\exists P \in O_n(\R), ~ \exists D \in \D_n(\R), ~ A=PDP^\top$.\\
+    De plus, $A\in\S_n^+(\R)$ donc $D=\Diag(\l_i)$ avec $\forall i \in \lb1,n\rb,~\l_i \in \Sp(A) \et \l_i\geq0$.\\
+    On pose $\Delta = \Diag(\sqrt{\l_i})$ et $B=P\Delta P^{-1}$, alors $B^2=P\Delta^2 P^{-1}=A$, $B^\top = B$ et $\Sp(B)\subset\R_+$.\\
+    \bf{Unicité.} Soit $A\in\S_n^+(\R)$ et $B\in\S_n^+(\R)$ tels que $A=B^2$.\\
+    On a $AB=B^2B=BB^2=BA$ puis $A,B\in\S_n^+(\R)$ : $A=PDP^\top$ et $B=P\Delta P^\top$.\\
+    Puis $B^2=A \iff \Delta^2= D \iff \forall i \in \lb1,n\rb, ~ \mu_i^2=\l_i \iff \forall i \in \lb1,n\rb, ~ \mu_i = \sqrt{\l_i}$.\\
+    Avec $\Sp(A)=\{\l_i\}$ et $\Sp(B)=\{\mu_i\}$. On a donc montré que $B$ est determiné de manière unique.
+\end{question}
+
+\newcommand*{\Gram}{\nt{Gram}}
+
+\begin{question}{}{}
+    Montrer qu'une matrice de Gram est symétrique positive.
+    \tcblower
+    Déjà, $\Gram(a_1,...,a_n)\in\S_n(\R)$ par symétrie du produit scalaire. Soit $X=(x_i)\in\M_{n,1}(\R)$.
+    \begin{equation*} X^\top\Gram(a_1,...,a_n)X = \sum_{i=1}^n x_i x_j \Lg a_i, a_j \Rg = \left\Lg \sum_{i=1}^n x_i a_i, \sum_{j=1}^n x_j a_j \right\Rg = \left\|\sum_{i=1}^n x_i a_i\right\|^2 \geq 0 \end{equation*}
+    Donc une matrice de Gram est symétrique positive.
+\end{question}
+
+\end{document}
