@@ -51,14 +51,215 @@ Le but de ce chapitre est de commencer à formaliser ce qu'est une preuve. On po
     Puisque $\forall \phi,\psi ~ : ~ \left[(\phi \ra \psi) \equiv (\lnot \phi \lor \psi)\right]$, on peut montrer par induction que pour toute formule $\phi$, il existe une formule $\phi'$ telle que $\phi'\equiv \phi$ et n'utilisant pas le symbole $\ra$.
 \end{ex}
 
+\vspace*{-0.8cm}
+
 \begin{ex}{}{}
     Puisque $\lnot(\lnot \phi \land \lnot \psi) \equiv (\phi \lor \psi)$, on peut démontrer que seuls $\land$ et $\lnot$ sont suffisants pour décrire toutes les formules propositionnelles (ou $\lor$ et $\lnot$).
 \end{ex}
 
 Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacente est une tautologie.\\
--- On peut tester chaque valuation (complexité exponentielle.)\\
--- 
+-- On peut tester chaque valuation (complexité exponentielle.)
 
+\section{Déduction naturelle.}
 
+\begin{defi}{}{}
+    On appelle séquent un couple $(\G,\phi)$ où $\G$ est un ensemble de formules et $\phi$ une formule.\\
+    On le note $\G\vdash\phi$, et si $\G=\0$, on notera $\vdash\phi$.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    On appelle règle d'inférence un $(n+1)$-uplet de séquents et on la note : 
+    \begin{center}
+        \begin{prooftree}
+            \AxiomC{$\G_1\vdash\phi_1$}
+            \AxiomC{$\G_2\vdash\phi_2$}
+            \AxiomC{$\cdots$}
+            \AxiomC{$\G_n\vdash\phi_n$}
+            \QuaternaryInfC{$\G\vdash\phi$}
+        \end{prooftree}
+    \end{center}
+    Les $n$ premiers séquents sont les prémisses, le dernier est la conclusion.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{Modus Ponens.}{}
+    On appelle élimination de l'implication la règle d'inférence :
+    \begin{prooftree}
+        \AxiomC{$\G\vdash\phi$}
+        \AxiomC{$\G\vdash\phi\ra\psi$}
+        \BinaryInfC{$\G\vdash\psi$}
+    \end{prooftree}
+    Si avec les hypothèses $\G$ on prouve $\phi$, et que $\phi$ implique $\psi$, alors on peut prouver $\psi$ sous les hypothèses $\G$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    On appelle introduction de l'implication :
+    \begin{prooftree}
+        \AxiomC{$\G, \phi\vdash\psi$}
+        \UnaryInfC{$\G\vdash\phi\ra\psi$}
+    \end{prooftree}
+    Si on arrive à prouver $\psi$ en supposant $\G$ et $\phi$, on arrive à prouver $\phi\ra\psi$ sans supposer $\phi$, seulement $\G$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{Arbre de preuve.}{}
+    Si $\G\vdash\phi$ est un séquent, on appelle arbre de preuve de $\G\vdash\phi$ :\\
+    $\bullet$ Si $\G\vdash\phi$ appartient au systèmé déductif, l'arbre est $\ov{\G\vdash\phi}$.\\
+    $\bullet$ Sinon :
+    \begin{prooftree}
+        \AxiomC{$\G_1\vdash\phi_1$}
+        \AxiomC{$\G_2\vdash\phi_2$}
+        \AxiomC{$\cdots$}
+        \AxiomC{$\G_n\vdash\phi_n$}
+        \QuaternaryInfC{$\G\vdash\phi$}
+    \end{prooftree}
+    C'est une définition par récurrence.
+\end{defi}
+
+\begin{ex}{}{}
+    Trouvons un arbre de preuve pour $\vdash(A\ra B)\ra(B\ra C)\ra(A\ra C)$.
+    \tcblower
+    \begin{prooftree}
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\G\vdash B\ra C$}
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\G\vdash A \ra B$}
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\G\vdash A$}
+        \RightLabel{$\Rightarrow$e}
+        \BinaryInfC{$\G\vdash B$}
+        \RightLabel{$\Rightarrow$e}
+        \BinaryInfC{$\G:= ~ A\ra B, B\ra C, A\vdash C$}
+        \RightLabel{$\Rightarrow$i}
+        \UnaryInfC{$A\ra B, B\ra C \vdash A\ra C$}
+        \RightLabel{$\Rightarrow$i}
+        \UnaryInfC{$A\ra B \vdash (B\ra C)\ra(A\ra C)$}
+        \RightLabel{$\Rightarrow$i}
+        \UnaryInfC{$\vdash(A\ra B)\ra(B\ra C)\ra(A\ra C)$}
+    \end{prooftree}
+\end{ex}
+
+\begin{defi}{}{}
+    On définit d'autres règles d'inférence pour les autres constructeurs logiques :
+    \begin{center}
+        \begin{tabular}{| c | c c c |}
+            \hline&&&\\
+            $\land$ &
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash\phi$}
+                \AxiomC{$\G\vdash\psi$}
+                \RightLabel{$\land_{i}$}
+                \BinaryInfC{$\G\vdash\phi\land\psi$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash\phi\land\phi$}
+                \RightLabel{$\land_{eg}$}
+                \UnaryInfC{$\G\vdash\phi$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash\phi\land\phi$}
+                \RightLabel{$\land_{ed}$}
+                \UnaryInfC{$\G\vdash\psi$}
+            \end{bprooftree}\\&&&\\\hline
+        \end{tabular}
+    \end{center}
+    \vspace*{0.5cm}
+    \begin{center}
+        \begin{tabular}{|c|c c c c|}
+            \hline &&&&\\
+            $\lor$ & 
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash\phi$}
+                \RightLabel{$\lor_{ig}$}
+                \UnaryInfC{$\G\vdash\phi\lor\psi$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash\phi$}
+                \RightLabel{$\lor_{id}$}
+                \UnaryInfC{$\G\vdash\phi\lor\psi$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash\phi\land\phi$}
+                \RightLabel{$\land_{ed}$}
+                \UnaryInfC{$\G\vdash\psi$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash\phi\lor\psi$}
+                \AxiomC{$\G,\phi\vdash \a$}
+                \AxiomC{$\G,\psi\vdash \a$}
+                \RightLabel{$\lor_e$}
+                \TrinaryInfC{$\G\vdash\a$}
+            \end{bprooftree}\\&&&&\\
+            \hline
+        \end{tabular}
+    \end{center}
+        
+\end{defi}
+
+\begin{ex}{}{}
+    Prouvons $\vdash(A\lor B) \ra (B\lor A)$.
+    \begin{prooftree}
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$A\lor B \vdash A\lor B$}
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$A\lor B, A\vdash A$}
+        \RightLabel{$\lor_{id}$}
+        \UnaryInfC{$A\lor B, A\vdash B\lor A$}
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$A\lor B, B\vdash B$}
+        \RightLabel{$\lor_{ig}$}
+        \UnaryInfC{$A\lor B, B\vdash B\lor A$}
+        \TrinaryInfC{$A\lor B \vdash B \lor A$}
+        \RightLabel{$\Rightarrow_i$}
+        \UnaryInfC{$\vdash(A\lor B)\ra(B\lor A)$}
+    \end{prooftree}
+\end{ex}
+
+\begin{ex}{}{}
+    Prouvons $\vdash (A\lor B)\land C \ra (A\land C)\lor (B \land C)$.
+    \tiny
+    \begin{prooftree}
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$(A\lor B) \land C \vdash (A \lor B) \land C$}
+        \UnaryInfC{$(A\lor B)\land C \vdash (A \lor B)$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$(A\lor B)\land C, A \vdash A$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$(A\lor B)\land C, C \vdash (A\lor B)\land C$}
+        \RightLabel{$\land_{ed}$}
+        \UnaryInfC{$(A\lor B)\land C,A \vdash C$}
+        \RightLabel{$\land_{ed}$}
+        \BinaryInfC{$(A\lor B)\land C, A \vdash A \land C$}
+        \UnaryInfC{$(A\lor B)\land C \vdash C, A\vdash (A\land C)\lor (B\land C)$}
+        \AxiomC{$(A\lor B)\land C, B \vdash (A\land C)\lor (B\land C)$}
+        \RightLabel{$\land_{ed}$}
+        \TrinaryInfC{$(A\lor B)\land C \vdash (A\land C)\lor(B\land C)$}
+        \UnaryInfC{$\vdash(A\lor B)\land C \ra (A\land C)\lor(B\land C)$}
+    \end{prooftree}
+\end{ex}
+
+% $\vdash(A\land B)\lor C \ra (A \lor C)\land (B\lor C)$
 
 \end{document}

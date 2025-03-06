@@ -33,7 +33,7 @@
 
 \vspace*{-0.8cm}
 
-\begin{prop}{}{}
+\begin{prop}{}{esp}
     Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$. 
     \begin{enumerate} \item Si $X\sim\cursive{P}(\l)$, alors $\E(X)=\l$. \item Si $X\sim\cursive{G}(p)$, alors $\E(X)=\frac{1}{p}$. \end{enumerate}
     \tcblower
@@ -241,6 +241,115 @@
     \tcblower
     \boxed{1.} $(X-\E(X))^2 = X^2 - \E(X)X + \E(X)^2$ puis par lin. $V(X) = \E(X^2) - 2\E(X)\E(X) + \E(X)^2= \E(X^2) - \E(X)^2$.\\
     \boxed{2.} $V(aX+b)=\E((aX+b)^2)-(\E(aX+b))^2 = \E(a^2X^2+2abX+b^2)-(a\E(x)+b)^2=a^2V(X)$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soient $X,Y\in\L^2$ deux v.a.d. indépendantes sur $(\O,\A,\Pr)$, alors $X+Y\in\L^2$ et $V(X+Y)=V(X)+V(Y)$.
+    \tcblower
+    On a $(X+Y)^2 = X^2 + 2XY + Y^2$ avec $X,Y\in\L^1$ et $|XY|\leq\frac{1}{2}\left( X^2+Y^2 \right)\in\L^1$.\\
+    Par domination, $XY\in\L^1$, donc $(X+Y)^2\in\L^1$. On a $\E(XY)=\E(X)\E(Y)$ par indépendance, puis :
+    \begin{align*}
+        V(X+Y)&=\E((X+Y)^2) - \E(X+Y)^2 = \E(X^2) + 2\E(XY) + \E(Y^2) - \E(X)^2 - 2\E(X)\E(Y) - \E(Y)^2\\
+        &= \E(X^2) - \E(X)^2 + \E(Y^2) - \E(Y)^2 + 2\E(X)\E(Y) - 2\E(X)\E(Y) = V(X) + V(Y).
+    \end{align*}
+    \bf{Généralisation.} On généralise à $X_1,...,X_n$ par récurrence, avec le lemme des coalitions. 
+\end{prop}
+
+\begin{prop}{Espérance et Variance des lois usuelles.}{}
+    \begin{enumerate}
+        \item Soit $X\sim\B(p)$, alors $\E(X)=p$ et $V(X)=p(1-p)$.
+        \item Soit $X\sim\B(n,p)$, alors $\E(X)=np$ et $V(X)=np(1-p)$.
+        \item Soit $X\sim\cursive{P}(\l)$, alors $\E(X)=V(X)=\l$.
+        \item Soit $X\sim\cursive{G}(p)$, alors $\E(X)=\frac{1}{p}$ et $\V(X)=\frac{1-p}{p^2}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $X\sim \B(p)$. $\E(X)=\Pr(X=1)=p$ et $X^2=X$ donc $V(X)=\E(X^2)-\E(X)^2 = p-p^2 = p(1-p)$.\\
+    \boxed{2.} Soit $X_1,...,X_n\sim\B(p)$, alors $X:=X_1+...+X_n\sim\B(n,p)$; $\E(X)=\E(X_1+...+X_n)=\E(X_1)+...+\E(X_n)=np$.\\
+    Puis $V(X)=V(X_1)+...+\V(X_n)=np(1-p)$.\\
+    \boxed{3.} Soit $X\sim\cursive{P}(\l)$. $\E(X)=\l$ $(\ref{prop:esp})$, et $\E(X(X-1))=\sum_{n=0}^\infty n(n-1)\Pr(X=n)=\l^2e^{-\l}e^\l=\l^2$.\\
+    Puis $\E(X^2)=\E(X(X-1)+X)=\E(X(X-1))+\E(X)=\l^2+\l$ puis $V(X)=\E(X^2)-\E(X)^2=(\l^2+\l)-\l^2 = \l$.\\
+    \boxed{4.} Soit $x\sim\cursive{G}(p)$. $\E(X)=\frac{1}{p}$ $(\ref{prop:esp})$ puis $\E(X(X-1))=\sum_{n=1}^{+\infty}n(n-1)\Pr(X=n)=\frac{2p(1-p)}{(1-(1-p))^3}=\frac{2(1-p)}{p^2}$.\\
+    Puis $\E(X^2)=\E(X(X-1)+X)=\frac{2(1-p)}{p^2} + \frac{1}{p}$ puis $V(X)=\E(X^2)-\E(X)^2 = \frac{2(1-p)}{p^2} + \frac{p-1}{p^2} = \frac{1-p}{p^2}$.
+\end{prop}
+
+\begin{defi}{}{}
+    Soit $X\in\L^2$ v.a.d. sur $(\O,\A,\Pr)$, alors $X$ est centrée réduite ssi $\E(X)=0$ et $V(X)=1$.
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $X\in\L^2$ une v.a.d. sur $(\O,\A,\Pr)$ telle que $V(X)\neq 0$, alors $\frac{X-E(X)}{\s(X)}$ est centrée réduite.
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ et $I_X=\{t\in\R, ~ \E(^{tx}) < \infty\}$
+    \begin{enumerate}
+        \item Soit $a<t<b$, montrer que $\forall x \in \R, ~ e^{tx} \leq e^{ax} + e^{bx}$.
+        \item Montrer que $I_X$ est un intervalle qui contient 0.
+        \item Montrer que $\forall x \in \R, ~ \forall n \in \N, ~ \frac{|x^n|}{n!}\leq e^x + e^{-x}$.
+        \item On suppose $0\in I_x$. Montrer que $X$ admet des moments de tout ordre et $\E(e^{tx})=\sum \frac{\E(X^n)}{n!}t$
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $a<t<b$ et $x\in\R$.\\
+    Si $x\geq0$, $tx\leq bx$ donc $e^{tx}\leq e^{bx} \le e^{bx}+e^{ax}$.\\
+    Si $x<0$, alors $tx\leq ax$ puis $e^{tx} \leq e^{ax} \leq e^{ax} + e^{bx}$.\\
+    \boxed{2.} Déjà, $0\in I_X$. Soit $a,b\in I_X$ et $t\in~]a,b[$, alors $e^{tX} \leq e^{aX} + e^{bX}$.\\
+    Puis $e^{aX} \in \L^1$ donc $e^{aX} + e^{bX} \in \L^1$ puis $e^{tx^k} \in \L^1$ par domination donc $t\in I_X$.\\
+    \boxed{3.} Soit $x\in\R$, $n\in\N$ et $e^{|x|}=\sum_{k=0}\frac{|x|^k}{k!}\geq \frac{|x^n|}{n!}$.\\
+    \boxed{4.} Supposons $0\in I_X$ alors $\exists k>0, ~ ]-h,h[\subset I_X$.\\
+    D'après $3$, $\left( \frac{h}{2} \right)^n\frac{|X|^n}{n!}\leq e^{\frac{h}{2}X} + e^{-\frac{h}{2}X}$.\\
+    Par domination, $|X|^n\in\L^1$ donc $X$ admet un moment d'ordre $n$.\\
+    Soit $t\in]-h,h[$.
+    \begin{equation*}
+        \E(e^{tX}) = \sum_{x\in X(\O)} e^{tx}\Pr(X=x) = \sum_{n=0}^{\infty}\sum_{k=0}^{\infty}\frac{t^kkx_n^k}{k!}\Pr(X=x_n) =_{(*)} \sum_{k=0}^{\infty}\frac{t^k}{k!}\sum_{n=0}^\infty x^n = \sum_{n=0}^{\infty}\frac{t^k}{k}\E(X)
+    \end{equation*}
+    \begin{equation*}
+        \sum_{n=0}^{+\infty}\left( \sum_{k=0}^{\infty} |u_{k,n}| \right) = \sum_{n=0}^{+\infty}\sum_{k=0}^{\infty}\frac{|t|^k|x_n|^k}{k!}\Pr(X=x_n)=\E(e^{|tX|}) \leq \E(e^{tX}) + \E(e^{-tX})< \infty. \tag{*}
+    \end{equation*}
+\end{exercice}
+
+\section{Covariance.}
+
+\begin{defi}{}{}
+    Soient $X,Y\in\L^2$. On définit la covariance de $X,Y$ : $\cov(X,Y)=\E\left( \left( X-\E(X) \right) \left( Y - \E(Y) \right)\right)$.
+\end{defi}
+
+\vspace*{-0.2cm}
+
+\begin{prop}{}{}
+    Si $X,Y$ sont deux v.a.d. sur $(\O,\A,\Pr)$. alors $\cov(X,Y)=\E(XY)-\E(X)\E(Y)$
+\end{prop}
+
+\vspace*{-0.2cm}
+
+\bf{Remarque.} $X\ind Y \ra \cov(X,Y) = 0$, réciproque fausse.
+
+\begin{ex}{}{}
+    Soit $a,b\in\R^2$, $a<b$ et $X$ sur $(\O,\A,\Pr)$ suivant la loi uniforme.\\
+    Alors $X^2$ suit la loi uniforme, et $X,X^2$ admettent des moments de tout ordre.\\
+    Puis $\Pr(X=a\cap X^2=b^2)\neq \Pr(X=a)\Pr(X^2=b^2)$, donc $X\not\ind X^2$.\\
+    Puis $\cov(X,X^2)=\E(X^3) - \E(X)\E(X^2)$ or $\E(X^3)=0$ (transfert) et $\E(X=0)$, donc $\cov(X,X^3)=0$.
+\end{ex}
+
+\vspace*{-0.2cm}
+
+\begin{prop}{}{}
+    Soit $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ dans $\L^2$, alors $(X,Y)\mapsto \cov(X,Y)$ est symétrique, bilinéaire et positive.
+    \tcblower
+    $\cov(X,Y)=\E(XY)-\E(X)\E(Y)=\cov(Y,X)$; $\cov(X+\l X',Y)=\E((X+\l X'), Y) - \E(X+\l X')\E(Y)=\cov(X,Y)+\l\cov(X',Y)$.\\
+    Linéaire à gauche et sym. donc bilinéaire. $\cov(X,X)=V(X)\geq0$ et $\cov(X,X)=0\ra V(X)=0\ra X=\cste$ presque surement.
+\end{prop}
+
+\begin{prop}{}{}
+    Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ dans $\L^2$ et $\l\in\R$, alors $V(X+\l Y)=V(X)+2\l\cov(X,Y)+\l^2V(Y)$.\\
+    Pour $X_1,...,X_n$ v.a.d. dans $\L^2$ et $\l_1,...,\l_n\in\R$ :
+    \begin{equation*}
+        V(\sum_{i=1}^n \l_i X_i) = \sum_{i=1}^n \l_i\l_j\cov(X_i,X_j) = \sum_{i=1}^n\l_i^2V(X_i) + 2\sum_{i,j}\l_i\l_j\cov(X_i+X_j).
+    \end{equation*}
+    \tcblower
+    \boxed{1.} \begin{align*} V(X+\l Y) &= \E((X+\l Y)^2) - \E(X+\l Y)^2 \\
+        &= \E(X^2) + 2\l\E(XY) + \l^2\E(Y^2) - \left( \E(X)^2 + 2\l\E(X)\E(Y) + \l^2\E(Y)^2 \right)\\
+        &=V(X) + \cov(X,Y) + V(Y).
+    \end{align*}
 \end{prop}
 
 \end{document}
