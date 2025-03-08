@@ -123,7 +123,7 @@
 \begin{prop}{}{}
     $\N^2$ est dénombrable.
     \tcblower
-    On pose $f:(n,p)\mapsto 2^n(2p+1)-1$ de $N^2$ dans $\N$.\\
+    On pose $f:(n,p)\mapsto 2^n(2p+1)-1$ de $\N^2$ dans $\N$.\\
     \fbox{Injective.} $f(n,p)=f(n',p') \ra 2^n(2p+1)=2^{n'}(2p'+1) \ra n=n'$ et $p=p'$ par décomp. en facteurs premiers.\\
     \fbox{Surjective.} Soit $k\in\N$, alors $k+1\in\N^*$.\\
     $\hra$ Si $k=0$, alors $k=f(0,0)$.\\
@@ -141,7 +141,7 @@
 
 \vspace*{-0.8cm}
 
-\begin{prop}{}{}
+\begin{prop}{(Admis)}{}
     Une réunion au plus dénombrable d'ensembles au plus dénombrables est au plus dénombrable.
 \end{prop}
 
@@ -252,7 +252,7 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
     \tcblower
     \boxed{1.} $(\Pr(A_n))$ est une suite croissante et majorée donc convergente vers $\Pr(A)$.\\
     Soit $B_0 = A_0$ et $\forall n \in \N, ~ B_{n+1}=A_{n+1}\setminus A_n$ : $\bigcup_{n=0}^{\infty}B_n = \bigcup_{n=0}^\infty A_n$ et les $B_n$ sont 2-à-2 disjoints.\\
-    Donc $\Pr(\bigcup_{n=0}^\infty A_n)=\Pr(\bigcup_{n=0}^{\infty}B_n)=\sum_{n=0}^{\infty}\Pr(B_n)=\sum_{n=0}^{\infty}(\Pr(A_i)-\Pr(A_{i-1}))=\Pr(A)$.\\
+    Donc $\Pr(\bigcup_{n=0}^\infty A_n)=\Pr(\bigcup_{n=0}^{\infty}B_n)=\sum_{n=0}^{\infty}\Pr(B_n)=\Pr(A)$.\\
     \boxed{2.} Soit $C_n=\ov{A_n}$. Alors $(C_n)$ est croissante et $\Pr(C_n)\to \Pr(\bigcup_{n=0}^\infty C_n)$.\\
     Or $\Pr(A_n)=1-\Pr(C_n)$ donc $\lim \Pr(A_n) = 1 - \lim \Pr(C_n) = 1 - \Pr(\bigcup_{n=0}^\infty C_n) = \Pr(\ov{\bigcup_{n=0}^\infty C_n})=\Pr(\bigcap_{n=0}^{\infty}A_n)$.
 \end{prop}
@@ -364,9 +364,9 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
         \forall A \in \A, ~ \Pr(A) = \sum_{i\in I}\Pr_{A_i}(A)\Pr(A_i).
     \end{equation*}
     \tcblower
-    Par sigma-additivité et incompatibilité des $A_i$ :
+    Par $\s$-additivité et incompatibilité des $A_i$ :
     \begin{equation*}
-        \Pr(A) = \Pr(A\cap \O) = \Pr\left(\bigsqcup_{i\in I} A\cap A_i \right) = \sum_{i\in I}\Pr(A\cap A_i) = \sum_{i\in I}\Pr(A)\Pr(A_i).
+        \Pr(A) = \Pr(A\cap \O) = \Pr\left(\bigsqcup_{i\in I} A\cap A_i \right) = \sum_{i\in I}\Pr(A\cap A_i) = \sum_{i\in I}\Pr_{A_i}(A)\Pr(A_i).
     \end{equation*}
 \end{prop}
 

@@ -11,7 +11,7 @@
 
 \input{title.tex}
 
-\vspace*{-0.7cm}
+\vspace*{-0.8cm}
 
 \section{Espérance.}
 
@@ -37,6 +37,7 @@
     Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$. 
     \begin{enumerate} \item Si $X\sim\cursive{P}(\l)$, alors $\E(X)=\l$. \item Si $X\sim\cursive{G}(p)$, alors $\E(X)=\frac{1}{p}$. \end{enumerate}
     \tcblower
+    \footnotesize
     \boxed{1.} Soit $X\sim\cursive{P}(\l)$ avec $\l>0$, à valeurs dans $\N$ donc positives.\\
     On a $(x\Pr(X=x))_{x\in X(\O)}$ est une famille de réels positifs donc $(x\Pr(X=x))$ est sommable ssi $\sum x\Pr(X=x)<\infty$.
     \begin{equation*} \sum_{x\in X(\O)}x\Pr(X=x)=\sum_{n=0}^{+\infty} n\Pr(X=n)=\sum_{n=0}ne^{-\l}\frac{\l^n}{n!} = \sum_{n=1}^{\infty} ne^{-\l}\frac{\l^n}{n!}=\l e^{-\l} e^l = \l\end{equation*}
@@ -343,13 +344,284 @@
     Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ dans $\L^2$ et $\l\in\R$, alors $V(X+\l Y)=V(X)+2\l\cov(X,Y)+\l^2V(Y)$.\\
     Pour $X_1,...,X_n$ v.a.d. dans $\L^2$ et $\l_1,...,\l_n\in\R$ :
     \begin{equation*}
-        V(\sum_{i=1}^n \l_i X_i) = \sum_{i=1}^n \l_i\l_j\cov(X_i,X_j) = \sum_{i=1}^n\l_i^2V(X_i) + 2\sum_{i,j}\l_i\l_j\cov(X_i+X_j).
+        V(\sum_{i=1}^n \l_i X_i) = \sum_{i=1}^n \l_i\l_j\cov(X_i,X_j) = \sum_{i=1}^n\l_i^2 V(X_i) + 2\sum_{i\neq j}\l_i\l_j\cov(X_i, X_j).
     \end{equation*}
     \tcblower
     \boxed{1.} \begin{align*} V(X+\l Y) &= \E((X+\l Y)^2) - \E(X+\l Y)^2 \\
         &= \E(X^2) + 2\l\E(XY) + \l^2\E(Y^2) - \left( \E(X)^2 + 2\l\E(X)\E(Y) + \l^2\E(Y)^2 \right)\\
-        &=V(X) + \cov(X,Y) + V(Y).
+        &=V(X) + \cov(X,Y) + \l^2V(Y).
+    \end{align*}
+    \boxed{2.} \begin{align*}
+        V\left( \sum_{i=1}^n \l_i X_i \right) &= \cov\left( \sum_{i=1}^n \l_iX_i, \sum_{j=1}^n\l_jX_j \right) = \sum_{i,j}\l_i\l_j\cov(X_i, X_j)\\
+        &= \sum_{i=1}^n \l_i^2\cov(X_i,X_i) + \sum_{i\neq j}\l_i\l_j\cov(X_i,X_j)\\
+        &=\sum_{i=1}^n \l_i^2V(X_i) + \sum_{i\neq j}\l_i\l_j\cov(X_i,X_j).
     \end{align*}
 \end{prop}
+
+\begin{prop}{Inégalité de Cauchy-Schwarz.}{}
+    Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ dans $\L^2$. Alors :
+    \begin{enumerate}
+        \item Montrer que $|\cov(X,Y)| \leq \s(X)\s(Y)$.
+        \item Montrer que $(\E(XY))^2 \leq \E(X^2)\E(Y^2)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $P(\l)=V(X+\l Y)$.\\
+    \boxed{2.} Soit $P(\l) = \E((X+\l Y)^2)=\E(X^2) + 2\l \E(XY) + \l^2\E(Y^2)\geq0$.\\
+    Puis $\D=4(\E(XY)^2 - \E(X^2)\E(Y^2))$, et $\D\leq 0$ car $P(\l)\geq0$ donc $\E(X,Y)^2 \leq \E(X^2)\E(Y^2)$.\\
+    C'est une égalité ssi $\D=0$ ssi $P$ admet une racine double $\l_0$ ssi $X=-\l_0 Y$ p.s.
+\end{prop}
+
+\begin{exercice}{}{}
+    Soient $X_1,...,X_n$ des v.a.d. sur $(\O,\A,\Pr)$ dans $\L^2$ et $M=(\cov(X_i,X_j))_{i,j}$. Montrer que $M\in\S_n^+(\R)$.
+    \tcblower
+    Déjà, $\cov(X_i,X_j)=\cov(X_j,X_i)\in\R$ donc $M\in\S_n(\R)$. Soit $Y\in\M_{n,1}(\R)$.
+    \begin{align*}
+        Y^\top MY &= \sum_{i,j}y_iy_j\cov(X_i,X_j) = \cov\left(\sum_{i=1}^n y_i X_i, \sum_{j=1}^n y_j X_j \right) = V\left( \sum_{i=1}^n y_i X_i \right) \geq 0.
+    \end{align*}
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $A\in\M_n(\R)$ telle que $A_{i,j}$ sont des variables iid suivent une loi de Rademacher.\\
+    Calculer $\E(\det A)$ et $V(\det A)$.
+    \tcblower
+    Si $X$ suit une loi de Rademacher, $\E(X)=0$, $\E(X^2)=1$ et $V(X)=1$.
+    \begin{equation*}
+        \det(A) = \sum_{\s\in S_n}\e(\s)\prod_{i=1}^n A_{\s(i),i} \ra \E(\det(A)) = \sum_{s\in S_n}\e(r)\E(\prod_{i=1}^nA_{\s(i),i})
+    \end{equation*}
+    Et $\forall \s \in S_n, ~ A_{\s(1),1},...,A_{\s(n),n}$ sont tous distincts donc indépendantes.\\
+    Donc $\E(A_{\s(1),1}...A_{\s(n),}=\E(A_{\s(1),1})...= 0$ puis $\E(\det(A))=0$.
+    \begin{equation*}
+        V(\det(A))=\E((\det(A))^2) - \E((\det(A)))^2 = \E((\det(A))^2).
+    \end{equation*}
+    \begin{equation*}
+        (\det A)^2 = \sum_{\s,s' \in S_n}\e(\s)\e(\s')\prod_{i=1}^n A_{\s(i),i}A_{\s'(i),i}.
+    \end{equation*}
+    Puis :
+    \begin{equation*}
+        \E(\det(A)^2) = \sum_{\s,\s' \in S_n} \e(\s)\e(\s') \E(A_{\s(1),1}... A_{\s(n),n}).
+    \end{equation*}
+    Par le lemme des coalitions, $\forall \s,\s'\in S_n, ~ A_{\s(1),1}A_{\s'(1),1}, ...$ sont indépendantes.
+    \begin{equation*}
+        \E((\det A)^2) = \sum_{\s \in S_n} \E(A_{\s(i),i} A_{\s'(i),i}).
+    \end{equation*}
+    Soit $i\in\lb1,n\rb$. Si $\s(i)\neq\s'(i)$ alors $A_{\s(i),i}$ et $A_{\s'(i),i}$ sont ind. et $\E(A_{\s(i),i}A_{\s'(i),i})=\E(A_{\s(i),i})\E(A_{\s'(i),i})=0$.\\
+    Puis si $\s\neq \s'$ alors $\prod_{i=1}^n\E(A_{\s(i),i}A_{\s'(i),i}) = 0$ car au moins un terme nul. Finalement :
+    \begin{equation*}
+        \E((\det A)^2) = \sum_{\s \in S_n}(\e(\s))^2 \prod_{i=1}^n \E((A_{\s(i),i})^2) + \sum_{\s \neq \s'}0 = n!
+    \end{equation*}
+    Donc $V(\det A) = n!$.
+\end{exercice}
+
+\section{Fonctions génératrices.}
+
+Dans ce paragraphe, on ne considère que des variables aléatoires à valeurs dans $\N$.
+
+\begin{defi}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$. On définit la fonction génératrice de $X$, notée $G_X$ par :
+    \begin{equation*}
+        G_X(t) = \sum_{n=0}^{\infty} t^n\Pr(X=n) = \E(t^X).
+    \end{equation*}
+    \bf{Remarque.} $G_X$ est bien définie pour $t\in\R$ tel que $t^X\in\L^1$.
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$. Alors :
+    \begin{enumerate}
+        \item $G_X$ est définie et $\cursive{C}^\infty$ sur $]-1,1[$.
+        \item $G_X$ est continue sur $[-1,1]$ et $G_X(1)=1$.
+        \item $G_X$ caractérise la loi de $X$ :
+        \begin{equation*} \forall n \in \N, ~ \Pr(X=n) = \frac{G_X^{(n)}(0)}{n!} \end{equation*}
+    \end{enumerate}
+    \tcblower
+    La fonction $G_X$ est une série entière.\\
+    \boxed{1.} Puisque $(\Pr(X=n))_n$ est bornée : $\R\geq 1$ donc $G_X$ est définie et $\cursive{C}^\infty$ sur $]-1,1[$ par dérivation avec conservation du rayon.\\
+    \boxed{2.} $\sum a_n$ et $\sum (-1)^na_n$ convergent donc $G_X$ est definie en 1 et en -1 donc $G_X$ est toujours définie sur $[-1,1]$.
+    \begin{equation*}
+        G_X(1) = \sum_{n=0}^{\infty} \Pr(X=n) = \Pr(X\in\N) = 1.
+    \end{equation*}
+    \boxed{3.} On a vu que $G_X$ est $\cursive{C}^\infty$ sur $]-1,1[$, donc en particulier en 0 et que l'on peut dériver terme-à-terme :
+    \begin{equation*}
+        \forall n \in \N, ~ \Pr(X=N) = \frac{G_X^{(n)}(0)}{n!}
+    \end{equation*}
+\end{prop}
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item Soit $X\sim \B(p)$ alors $G_X(t)=(1-p)+pt$.
+        \item Soit $X\sim \B(n,p)$, alors $G_X(t)=\left[ (1-p) + pt \right]^n$.
+        \item Soit $X\sim\cursive{P}(\l)$, alors $G_X(t)=e^{\l(t-1)}$.
+        \item Soit $X\sim\cursive{G}(p)$, alors $G_X(t)=\frac{pt}{1-(1-p)t}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $G_X$ est un polynôme donc $R=+\infty$ :
+    \begin{equation*}
+        G_X(t) = \sum_{n=0}^\infty t^n\Pr(X=n) = t^0(1-p) + t^1p + 0 = (1-p)+pt.
+    \end{equation*}
+    \boxed{2.} $G_X$ est un polynôme donc $R=+\infty$ :
+    \begin{equation*}
+        G_X(t) = \sum_{k=0}^\infty t^k\Pr(X=k) = \sum_{k=0}^n \binom{n}{k}(pt)^k(1-p)^{n-k} = (pt + (1-p))^n
+    \end{equation*}
+    \boxed{3.} 
+    \begin{equation*}
+        G_X(t) = \sum_{n=0}^{+\infty}t^ne^{-\l}\frac{\l^n}{n!} = e^{-\l}\sum_{n=0}^{+\infty}\frac{(\l t)^n}{n!} = e^{\l(t-1)}.
+    \end{equation*}
+    \boxed{4.}
+    \begin{equation*}
+        G_X(t) = \sum_{n=1}^{+\infty} t^n p(1-p)^{n-1} = pt\sum_{n=1}^{\infty}(t(1-p))^{n-1} = \frac{pt}{1-(1-p)t}
+    \end{equation*}
+\end{prop}
+
+\begin{prop}{}{}
+    \begin{enumerate}
+        \item Soit $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$ telles que $X\ind Y$. Alors $G_{X+Y}=G_X+G_Y$.
+        \item Soient $X_1,...,X_n$ des v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$ indépendantes, alors $G_{X_1+...+X_n}=G_{X_1}...G_{X_n}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Déjà, $X+Y$ est à valeurs dans $\N$ donc $G_{X+Y}$ est bien définie.
+    \begin{equation*}
+        G_{X+Y}(t) = \E(t^{X+Y}) = \E(t^Xt^Y) = \E(t^X)\E(t^Y)=G_XG_Y.
+    \end{equation*}
+    Puisque $t^X$ et $t^Y$ sont indépendantes.
+\end{prop}
+
+\begin{prop}{}{}
+    Soient $X_1,...,X_n$ des v.a.d. sur $(\O,\A,\Pr)$ indépendantes telles que $X_i\sim\cursive{P}(\l_i)$ $\forall i \in \lb1,n\rb$. Alors :
+    \begin{equation*}
+        \sum_{i=1}^n X_i \sim \cursive{P}\left(\sum_{i=1}^n\l_i\right)
+    \end{equation*}
+    \tcblower
+    Puisque $X_1,...,X_n$ sont indépendantes, $G_{X_1+...+X_n}=G_{X_1}\times...\times G_{X_n}$.\\
+    i.e. $G_{X_1+...+X_n}(t) = e^{\l_1(t-1)}\times...\times e^{\l_n(t-1)} = e^{(\l_1+...+\l_n)(t-1)}$ donc $X_1+...+X_n\sim \cursive{P}(\l_1+...+\l_n)$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$. Si $R>1$, alors $X$ admet des moments de tout ordre et :
+    \begin{equation*}
+        \forall n \in \N^*, ~ G_X^{(n)}(1) = \E(X(X-1)...(X-(n-1))).
+    \end{equation*}
+    \tcblower
+    On rappelle que $G_X$ est $\cursive{C}^\infty$ sur $[-1,1]$ et on peut dériver terme-à-terme :
+    \begin{equation*}
+        \forall t \in [-1,1], ~ G'_X(t) = \sum_{n=0}^{+\infty} n\Pr(X=n)t^{n-1}; ~ G''_X(t)=\sum_{n=0}^{+\infty}n(n-1)\Pr(X=n)t^{n-1}; ~ ...
+    \end{equation*}
+    On a $\forall n \in \N, ~ X^n$ à valeurs dans $\N$ donc positive, et $X$ admet un moment d'ordre $n$ ssi $\E(X^n)<\infty$.\\
+    Or $G'_X(1)=\E(X)<\infty$; $G''_X(1)=\E(X(X-1))<\infty$...\\
+    Par théorème de transfert, $\forall n \in \N^*, ~ G_X^{(n)}(1)=\E(X(X-1)...(X-(n-1)))$.
+\end{prop}
+
+\pagebreak
+
+\begin{prop}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$, on suppose $R=1$.
+    \begin{equation*}
+        X\in\L^1 \iff G_X \nt{ dérivable en } 1.
+    \end{equation*}
+    Alors $\E(X)=G'_X(1)$.
+    \tcblower
+    \footnotesize
+    Pour $R>1$, cela a déjà été fait.\\
+    On suppose $R=1$, montrons que $\E(X)<\infty \iff G_X$ dérivable en 1.\\
+    \boxed{\ra} Par théorème de dérivation des séries de fonctions, on pose $\forall t \in [0,1], ~ u_n(t)=\Pr(X=n)t^n$.\\
+    $\hra$ $\forall n \in \N, ~ u_n \in \cursive{C}^1([0,1])$ et $u_n'(t)=n\Pr(X=n)t^{n-1}$.\\
+    $\hra$ $\sum u_n$ converge simplement sur $[0,1]$.\\
+    $\hra$ $\sum u'_n$ $\CN$ puis $\CU$ sur $[0,1]$ : $\|u'_n\|_\infty^{[0,1]}=n\Pr(X=n)$ t.g. d'une série convergente ($\E(X)$).\\
+    On en conclut que $G_X\in\cursive{C}^1([0,1])$, donc que $G_X$ est dérivable en 1, et on dérive terme-à-terme :
+    \begin{equation*}
+        G'_X(1) = \sum_{n=0}^{\infty}u'_n(1) = \E(X).
+    \end{equation*}
+    \boxed{\la} Montrons que la suite $(S_n)$ des sommes partielles de $\E(X)$ converge.\\
+    Par hypothèse, $G_X$ est dérivable en 1 :
+    \begin{equation*}
+        \frac{G_X(t) - G_X(1)}{t - 1} = \frac{1}{t-1}\sum_{n=0}^\infty \Pr(X=n)(t^n - 1) = \sum_{n=0}^{+\infty}\Pr(X=n)(1+t+...+t^{n-1}) \xrightarrow[t\to 1]{} G'_X(1).
+    \end{equation*}
+    et :
+    \begin{equation*}
+        S_n = \sum_{k=0}^nk\Pr(X=k)=\sum_{k=0}^n(1+1+...+1)\Pr(X=k) = \lim_{t\to1}\sum_{k=0}^n\Pr(X=k)(1+t+...+t^{k-1}).
+    \end{equation*}
+    Or :
+    \begin{equation*}
+        \forall t \in [0,1] \sum_{k=0}^n\left( 1 + t + ... + t^{k-1} \right)\Pr(X=k) \leq \sum_{k=0}^{+\infty}\left( 1+t+...+t^{k-1} \right)\Pr(X=k).
+    \end{equation*}
+    Puis par passage à la limite quand $t\to1$ : $S_n \leq G'_X(1)$. Donc $(S_n)$ est bornée : $\E(X)<\infty$ puis $X\in\L^1$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soit $(X_n)_{n\in\N^*}$ une suite de v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$, iid.\\
+    Soit $N$ v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$, indépendante de tous les $X_n$ et $S=\sum_{k=1}^N X_k$.
+    \begin{enumerate}
+        \item Montrer que $G_S = G_N \circ G_{X_1}$.
+        \item Si $N,X_1\in\L^1$, montrer que $S\in\L^1$ et $\E(S)=\E(N)\E(X_1)$.
+    \end{enumerate}
+    \tcblower
+    \footnotesize
+    \boxed{1.} La variable $S$ est toujours à valeurs dans $\N$.
+    \begin{equation*}
+        (S=n) = \bigcup_{k\in\N}\left(\left(N=k\right)\cap \left(\sum_{i=1}^k X_i = n\right)\right) \ra
+        \Pr(S=n)=\sum_{k=0}^{\infty}\Pr\left((N=k)\cap\left( \sum_{i=1}^k X_i = n \right)\right)
+    \end{equation*}
+    Or $N\ind (X_1+...+X_n)$ pour tout $k\in\N^*$ par le lemme des coalitions donc :
+    \begin{equation*}
+        \Pr(S=n) = \sum_{k=0}^\infty \Pr(N=k)\Pr\left( \sum_{i=1}^k X_i = n \right)
+    \end{equation*}
+    \begin{equation*}
+        G_S(t) = \sum_{n=0}^\infty \sum_{k=0}^\infty \left( t^n \Pr(N=k)\Pr\left( \sum_{i=1}^k X_i = n \right) \right) = \sum_{k=0}^{\infty}\Pr(N=k)\left( \sum_{n=0}^{\infty}t^n\Pr\left(\sum_{i=1}^k X_i = n\right) \right) = \sum_{k=0}^\infty \Pr(N=k)G_{\sum_{i=1}^k X_i}(t)
+    \end{equation*}
+    Puis $X_1,...,X_k$ indépendants donc $G_{\sum X_i}=\prod_{i=1}^k G_{X_i}=(G_{X_i})^k$ donc $G_S(t)=\sum_{k=0}^\infty\Pr(N=k)G_{X_1}^k(t)=G_N\circ G_{X_1}(t)$.\\
+    Échange des sommes : $\sum_{n=0}^\infty\left(\sum_{k=0}^\infty|u_{k,n}|\right)=\sum_{n=0}^\infty\left(\sum_{k=0}^\infty|t|^n\Pr(N=k)\Pr(\sum_{i=1}^k X_i = n)\right)=G_S(|t|)<\infty$.\\
+    \boxed{2.} Si $N,X_1$ sont dans $\L^1$, alros $G_n$ et $G_{X_1}$ sont dérivables en 1, puis $G_S$ est dérivable en 1 par composition donc $S\in\L^1$.\\
+    De plus, $\forall t \in [0,1], ~ G_S'(t)=G_{X_1}'(t)G_{N}'(G_{X_1}(t))$. On évalue en 1 : $\E(S)=\E(X_1)G_N'(1)=\E(X_1)\E(N)$.
+\end{exercice}
+
+\section{Inégalités en probabilités.}
+
+\begin{prop}{Markov.}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ telle que $X\geq0$.
+    \begin{equation*}
+        \Pr(X \geq a) \leq \frac{\E(X)}{a}.
+    \end{equation*}
+    \tcblower
+    Soit $a>0$. Posons $A=(X\geq a) \in \A$, $\Pr(X\geq a) = \Pr(A)=\E(\1_A)$, or : $a\1_A \leq X$.\\
+    $\hra$ Si $\1_A = 0$, on a $0\leq X$ toujours vrai.\\
+    $\hra$ Si $\1_A = 1$, on a $a\leq X$ puis $a\1_A \leq X$.\\
+    Par croissance de $\E$ : $\E(a\1_A) \leq \E(X)$ puis $a\E(\1_A) \leq \E(X)$ : $\Pr(A)\leq\frac{\E(X)}{a}$.
+\end{prop}
+
+\begin{corr}{Inégalité de Bienaymé-Tchebychev.}{}
+    Soit $X\in\L^2$ une v.a.d d'espérance $m$ et de variance $\s^2$. Soit $a>0$.
+    \begin{equation*}
+        \forall a > 0, ~ \Pr(|X-m| \geq a) \leq \frac{\s^2}{a^2}.
+    \end{equation*}
+    \tcblower
+    On applique l'inégalité de Markov avec $|X-m|^2 \geq 0$ :
+    \begin{equation*}
+        |X-m|\geq a \iff (X - m)^2 \geq a^2 ~\nt{i.e.}~ (|X_1-m|\geq a) = ((X-m)^2 \geq a) 
+    \end{equation*}
+    puis $\Pr(|X-m|\geq a) = \Pr((X-m)^2 \geq a) \leq \frac{\E((X-m)^2)}{a^2}=\frac{\s^2}{a^2}$.
+\end{corr}
+
+\begin{corr}{Loi faible des grands nombres.}{}
+    Soit $(X_n)_n$ une suite de v.a.d iid dans $\L^2$ d'espérances $m$. On pose $S_n = \sum_{i=1}^n X_i$.
+    \begin{equation*}
+        \forall \e > 0, ~ \lim_{n\to+\infty}\Pr\left( \left| \frac{S_n}{n} - m\right| \geq \e \right) = 0.
+    \end{equation*}
+    \tcblower
+    \begin{equation*}
+        \E\left( \frac{S_n}{n} \right) = \frac{1}{n}\sum_{i=1}^n \E(X_i) = \E(X_1) \et V\left( \frac{S_n}{n} \right) = \frac{1}{n^2}V(S_n) = \frac{1}{n^2}\sum_{i=1}^nV(X_i)=\frac{V(X_1)}{n}.
+    \end{equation*}
+    D'après Bienaymé-Tchebychev : 
+    \begin{equation*}
+        \Pr\left( \left|\frac{S_n}{n} - m \right| \geq \e \right) \leq \frac{V(\frac{S_n}{n})}{\e^2} = \frac{1}{n}\.\frac{V(X_1)}{\e^2} \xrightarrow[n\to+\infty]{}0
+    \end{equation*}
+\end{corr}
+
+\pagebreak
+
+\begin{exercice}{Stone-Weierstraß.}{}
+    Soit $f$ continue sur un segment $[a,b]$ à valeurs réelles. Alors $f$ est limite uniforme sur $[a,b]$ d'une suite de polynômes : $\exists (P_n)_n$ suite de polynômes tels que $P_n\cu f$ sur $[a,b]$.
+    \tcblower
+
+\end{exercice}
 
 \end{document}
