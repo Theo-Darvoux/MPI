@@ -618,10 +618,19 @@ Dans ce paragraphe, on ne considère que des variables aléatoires à valeurs da
 
 \pagebreak
 
-\begin{exercice}{Stone-Weierstraß.}{}
-    Soit $f$ continue sur un segment $[a,b]$ à valeurs réelles. Alors $f$ est limite uniforme sur $[a,b]$ d'une suite de polynômes : $\exists (P_n)_n$ suite de polynômes tels que $P_n\cu f$ sur $[a,b]$.
-    \tcblower
 
+\begin{exercice}{}{}
+    Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ indépendantes telles que $X\sim\cursive{G}(p)$ et $Y\sim\cursive{G}(q)$.\\
+    Calculer $\E(Z)$ et $\E(T)$ avec $Z=\min(X,Y)$ et $T=\max(X,Y)$.
+    \tcblower
+    Pour $n\in\N$, $(Z>n)=(X>n \cap Y > n)$, donc $\Pr(Z>n)=\Pr(X>n)\Pr(Y>n)=(1-p)^n(1-q)^n$.\\
+    On reconnaît une loi géométrique : $Z\sim\cursive{G}(r)$ avec $r=1-(1-p)(1-q)=p+q-pq$ puis $\E(Z)=\frac{1}{r}$.\\
+    Puis $Z+T=X+Y$ donc $T=X+Y-Z$ puis $\E(T)=\E(X)+\E(Y)-\E(z)=\frac{1}{p}+\frac{1}{q}-\frac{1}{r}$.
 \end{exercice}
+
+\begin{exercice}{}{}
+    On tire une permutation de $S_n$ au hasard. Quel est le nombre moyen de points fixes ?
+\end{exercice}
+
 
 \end{document}
