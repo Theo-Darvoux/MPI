@@ -5,13 +5,147 @@
 
 \input{setup.tex}
 
-\renewcommand*{\E}{\mathbb{E}}
-
 \begin{document}
 
 \input{title.tex}
 
+Une équation différentielle d'ordre $n\in\N^*$ est une équation qui exprime la dérivée $n^{\nt{ème}}$ d'une fonction en fonction des dérivées précédentes :
+\begin{equation*}
+    (E) ~ : ~ y^{(n)} = f(y,y', ..., y^{(n-1)})
+\end{equation*}
+avec $y:I\to F$ et $f:F^n \to F$ où $I$ est intervalle de $\R$ et $F$ un evdf.
+
+Par définition, une solution de $E$ est une application $y:I\to F$, $n$ fois dérivables sur $I$ et telle que :
+\begin{equation*}
+    \forall t \in I, ~ y^{(n)}(t) = f(y(t), y'(t), ..., y^{(n-1)}(t)).
+\end{equation*}
+L'équation est dite linéaire si l'ensemble des solutions de $E$ est stable par combinaisons linéaires.
+
+\section{Généralités sur les systèmes différentiels.}
+
+\begin{defi}{}{}
+    Soit $I$ un intervalle de $\R$, $F$ un $\R$-evdf, $a:I\to\L(F)$ continue sur $I$, $b:I\to F$ continue sur $I$.
+    \begin{equation*}
+        (E) ~ : ~ y ' = a(t)(y) + b(t)
+    \end{equation*}
+    Une solution de $E$ est une fonction $y:I\to F$ dérivable sur $I$ telle que $\forall t \in I, ~ y'(t)=a(t)(y(t))+b(t)$.\\
+    \bf{Remarque.} $y$ est $\cursive{C}^1(I)$ comme combinaison linéaire.
+\end{defi}
+
+\begin{prop}{Traduction matricielle.}{}
+    Soit $n$ la dimension de $F$, et $(e_1,...,e_n)$ une base de $F$. Pour tout $t\in I$, on pose :\\
+    $\hra$ $B(t)$ le vecteur des coordonnées de $b(t)\in F$,\\
+    $\hra$ $A(t)$ la matrice de $a(t)$ dans la base $(e_1,...,e_n)$,\\
+    $\hra$ $X(t)$ le vecteur des coordonnées de $y(t)$.
+    \begin{equation*}
+        \forall t \in I, ~ y'(t) = a(t)(y(t)) + b(t) \iff \forall t \in I, ~ X'(t) = A(t)X(t) + B(t)
+    \end{equation*}
+    On notera $E_H$ l'équation différentielle homogène associée : $(E_H) ~ : ~ X'(t) = A(t)X(t)$.\\
+    On notera $S_H$ l'ensemble des solutions de $E_H$, et $S$ l'ensemble des solutions de $E$.
+\end{prop}
+
+\begin{thm}{de Cauchy. (Admis)}{}
+    Soit $I$ un intervalle de $\R$, $n\in\N^*$, $B:I\to\R^n$ et $A:I\to\M_n(\R)$ continues sur $I$.
+    \begin{equation*}
+        (E) ~ : ~ X' = A(t)X + B(t)
+    \end{equation*}
+    Pour $t_0\in I$ et $X_0\in\R^n$, il existe une unique solution $X$ de $E$ vérifiant $X(t_0)=X_0$.\\
+    De plus, $X(t)=X_0+\int_{t_0}^t (A(s)X(s)+B(s))\nt{ds}$.
+\end{thm}
+
+\begin{prop}{Structure de $E_H$.}{}
+    L'ensemble des solutions de $(E_H)$ a une structure d'espace vectoriel de \bf{dimension $n$}.\\
+    Toute base de cet espace est appelé \bf{système fondamental de solutions}, qu'on notera (S.F.).
+    \tcblower
+    L'ensemble des solutions est un $\R$-ev (facile). Exhibons un isomorphisme entre l'espace des solutions et $\R^n$.\\
+    Soit $t_0\in I$, $X\in\R^n$. D'après le théorème de Cauchy, il existe une unique solution de $(E_H)$ telle que $X(t_0)=X_0$.\\
+    Posons alors $\phi:X\mapsto X(t_0)$, de $S_H$ dans $\R^n$, morphisme d'évaluation.\\
+    Par le théorème de Cauchy, $\phi$ est bijective : c'est un isomorphisme donc $\dim S_H = \dim \R^n = n$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $I$ un intervalle de $\R$, $B:I\to\R^n$ et $A:I\to\M_n(\R)$ continues sur $I$.\\
+    L'ensemble des solutions de $E$ est un espace affine de dimension $n$, de direction l'ensemble des solutions de $E_H$ :
+    \begin{equation*}
+        X \nt{ est solution de } (E) \iff \exists (X_P, X_H) \in S\times S_H, ~ X = X_P + X_H.
+    \end{equation*}
+    \tcblower
+    Soit $X$ une solution de $E$ et $X_P$ une solution particulière (il en existe d'après le théorème de Cauchy).\\
+    $\hra$ $X' = A(t)X + B(t)$ et $X'_P = A(t)X_P + B(t)$ pour tout $t \in I$.\\
+    Alors $(X-X_P)' = A(t)(X-X_P) + \cancel{B(t) - B(t)}$ donc $X_H=X-X_P$ est solution de $E_H$.\\
+    Réciproquement, si $X_P$ est solution de $E$ et $X_H$ solution de $E_H$, alors $X_P+X_H$ est solution de $E$.
+\end{prop}
+
+\begin{thm}{Principe de superposition.}{}
+    Soient $B_1,B_2:I\to\R^n$ et $A:I\to\M_n(\R)$ continues sur $I$.
+    \begin{align*}
+        (E_1) ~ : ~ X'(t) = A(t)X(t) + B_1(t); \quad (E_2) ~ : ~ X'(t) = A(t)X(t) + B_2(t) 
+    \end{align*}
+    si $X_1$ est solution de $(E_1)$ et $X_2$ solution de $(E_2)$, alors $X_1+X_2$ est solution de $(E_1) + (E_2)$.
+    \tcblower
+    En effet, $(X_1+X_2)'=X_1' + X_2' = A(t)X_1+B_1(t) + A(t)X_2 + B_2(t) = A(t)(X_1+X_2) + B_1(t)+B_2(t)$.
+\end{thm}
+
+\begin{exercice}{}{}
+    Soit $a\in\R$, $\phi:\R\to\R$ continue et périodique de période $T>0$.
+    \begin{equation*}
+        (E) ~:~ y' + \a y = \phi(t).
+    \end{equation*}
+    Soit $y$ une solution de $(E)$, montrer que $y$ est $T$-périodique ssi $y(0)=y(T)$.
+    \tcblower
+    D'après le théorème de Cauchy, $E$ admet des solutions.\\
+    \boxed{\ra} Évident.\\
+    \boxed{\la} On note $z(t)=y(t+T)$ pour $t\in\R$. Montrons que $z$ est solution de $(E)$.\\
+    Déjà, $z$ est dérivable sur $\R$, puis $\forall t \in \R, ~ z'(t)+\a z(t) = y'(t+T)+\a y(t+T) = \phi(t+T) = \phi(t)$.\\
+    De plus, $z(0)=y(T)=y(0)$, donc $y,z\in S$ et $y(0)=z(0)$, donc $y=z$ par théorème de Cauchy.
+\end{exercice}
+
 \vspace*{-0.8cm}
 
+\begin{exercice}{}{}
+    Pour $t\in\R$, on pose l'équation différentielle $(E)~:~(1+t^2)y'+2ty=1$.
+    \begin{enumerate}
+        \item Résoudre l'équation $(E)$.
+        \item Résoudre le problème de Cauchy $y(1)=1$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $\forall t \in \R, ~ 1+t^2\neq0$, on peut normaliser l'équation : $(E) : y' + \frac{2t}{1+t^2}y = \frac{1}{1+t^2}$.\\
+    On pose $\forall t \in \R, ~ a(t) = \frac{2t}{1+t^2}$ et $b(t)=\frac{1}{1+t^2}$, continues sur $\R$.\\
+    $\hra$ Solution de $E_H$ : $y_h=\l e^{-\ln|1+t^2|}=\frac{\l}{1+t^2}$ pour $\l\in\R$.\\
+    $\hra$ Solution particulière : on pose $y(t)=\frac{\l(t)}{1+t^2}$, donc $y'(t)=\frac{(1+t^2)\l'(t)-2t\l(t)}{(1+t^2)^2}$ puis :
+    \begin{equation*}
+        \frac{(1+t^2)\l'(t)-2t\l(t)}{(1+t^2)^2} + \frac{2t\l(t)}{(1+t^2)^2} = \frac{1}{1+t^2}.
+    \end{equation*}
+    Il reste :
+    \begin{equation*}
+        \frac{\l'(t)}{1+t^2} = \frac{1}{1+t^2} \ra \l' = 1
+    \end{equation*}
+    Puis $\l(t)=t+\a$ avec $\a\in\R$, donc $y=\frac{1}{1+t^2} + \a\frac{1}{1+t^2}$ avec $\a\in\R$.\\
+    \boxed{2.} $y(1)=1 \iff \frac{1}{2} + \frac{\a}{2} = 1 \iff \a = 1 \iff \forall t \in \R, ~ y(t) = \frac{1+t}{1+t^2}$.
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Résoudre $y'=|y|$ sur $\R$.
+    \tcblower
+    Soit $y$ solution, alors $y'\geq0$ sur $\R$, donc $y$ est croissante sur $\R$.\\
+    $\hra$ Supposons que $y$ ne s'annule pas, alors $y$ est continue sur $\R$ et ne s'annule pas : par TVI elle garde un signe constant puis :\\
+    \hspace*{0.3cm} $\hra$ Si $y>0$,  $y=\l e^t$ pour $t\in\R$ et $\l>0$.\\
+    \hspace*{0.3cm} $\hra$ Si $y<0$,  $y=\l e^{-t}$ pour $t\in\R$ et $\l<0$.\\
+    $\hra$ Supposons que $y$ s'annule en $t_0\in\R$, elle est négative sur $]-\infty,t_0[$, positive sur $]t_0,+\infty[$.\\
+    \hspace*{0.3cm} $\hra$ Sur $[t_0,+\infty[$ : $y=\l e^{t}$ avec $\l\geq 0$.\\
+    \hspace*{0.3cm} $\hra$ Sur $]-\infty,t_0]$ : $y=\mu e^{-t}$ avec $\mu\leq 0$.\\
+    Alors $y$ est bien définie sur $\R$ tout entier par morceaux, il faut vérifier que $y$ est dérivable sur $\R$.\\
+    En particulier, $y$ est continue en $t_0$, $\l e^{t_0} = \mu e^{-t_0}=0$ donc $\l=\mu=0$ donc $y=0$.
+\end{exercice}
+
+\section{Exponentielles de matrices et d'endomorphismes.}
+
+\section{Systèmes différentiels linéaires autonomes.}
+
+\section{Équation différentielle linéaire d'ordre \texorpdfstring{$n$}{n}.}
+
+\section{Étude qualitative.}
 
 \end{document}

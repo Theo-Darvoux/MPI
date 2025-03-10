@@ -85,26 +85,28 @@ Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacent
 
 \vspace*{-0.8cm}
 
-\begin{ex}{Modus Ponens.}{}
+\begin{defi}{Élimination de l'implication.}{}
     On appelle élimination de l'implication la règle d'inférence :
     \begin{prooftree}
         \AxiomC{$\G\vdash\phi$}
         \AxiomC{$\G\vdash\phi\ra\psi$}
+        \RightLabel{$\Rightarrow_e$}
         \BinaryInfC{$\G\vdash\psi$}
     \end{prooftree}
     Si avec les hypothèses $\G$ on prouve $\phi$, et que $\phi$ implique $\psi$, alors on peut prouver $\psi$ sous les hypothèses $\G$.
-\end{ex}
+\end{defi}
 
 \vspace*{-0.8cm}
 
-\begin{ex}{}{}
+\begin{defi}{Introduction de l'implication.}{}
     On appelle introduction de l'implication :
     \begin{prooftree}
         \AxiomC{$\G, \phi\vdash\psi$}
+        \RightLabel{$\Rightarrow_i$}
         \UnaryInfC{$\G\vdash\phi\ra\psi$}
     \end{prooftree}
     Si on arrive à prouver $\psi$ en supposant $\G$ et $\phi$, on arrive à prouver $\phi\ra\psi$ sans supposer $\phi$, seulement $\G$.
-\end{ex}
+\end{defi}
 
 \vspace*{-0.8cm}
 
@@ -125,6 +127,7 @@ Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacent
 \begin{ex}{}{}
     Trouvons un arbre de preuve pour $\vdash(A\ra B)\ra(B\ra C)\ra(A\ra C)$.
     \tcblower
+    \vspace*{-1cm}
     \begin{prooftree}
         \AxiomC{}
         \RightLabel{ax}
@@ -148,8 +151,11 @@ Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacent
     \end{prooftree}
 \end{ex}
 
-\begin{defi}{}{}
+\vspace*{-0.9cm}
+
+\begin{defi}{Règles d'inférence.}{}
     On définit d'autres règles d'inférence pour les autres constructeurs logiques :
+    \vspace*{0.2cm}
     \begin{center}
         \begin{tabular}{| c | c c c |}
             \hline&&&\\
@@ -162,13 +168,13 @@ Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacent
             \end{bprooftree}
             &
             \begin{bprooftree}
-                \AxiomC{$\G\vdash\phi\land\phi$}
+                \AxiomC{$\G\vdash\phi\land\psi$}
                 \RightLabel{$\land_{eg}$}
                 \UnaryInfC{$\G\vdash\phi$}
             \end{bprooftree}
             &
             \begin{bprooftree}
-                \AxiomC{$\G\vdash\phi\land\phi$}
+                \AxiomC{$\G\vdash\phi\land\psi$}
                 \RightLabel{$\land_{ed}$}
                 \UnaryInfC{$\G\vdash\psi$}
             \end{bprooftree}\\&&&\\\hline
@@ -176,8 +182,8 @@ Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacent
     \end{center}
     \vspace*{0.5cm}
     \begin{center}
-        \begin{tabular}{|c|c c c c|}
-            \hline &&&&\\
+        \begin{tabular}{|c|c c c|}
+            \hline &&&\\
             $\lor$ & 
             \begin{bprooftree}
                 \AxiomC{$\G\vdash\phi$}
@@ -192,26 +198,76 @@ Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacent
             \end{bprooftree}
             &
             \begin{bprooftree}
-                \AxiomC{$\G\vdash\phi\land\phi$}
-                \RightLabel{$\land_{ed}$}
-                \UnaryInfC{$\G\vdash\psi$}
-            \end{bprooftree}
-            &
-            \begin{bprooftree}
                 \AxiomC{$\G\vdash\phi\lor\psi$}
                 \AxiomC{$\G,\phi\vdash \a$}
                 \AxiomC{$\G,\psi\vdash \a$}
                 \RightLabel{$\lor_e$}
                 \TrinaryInfC{$\G\vdash\a$}
-            \end{bprooftree}\\&&&&\\
+            \end{bprooftree}\\&&&\\
             \hline
         \end{tabular}
     \end{center}
-        
+    \vspace*{0.5cm}
+    \begin{center}
+        \begin{tabular}{|c|c c|}
+            \hline &&\\
+            $\lnot$ & 
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash \lnot \phi$}
+                \AxiomC{$\G\vdash \phi$}
+                \RightLabel{$\lnot_e$}
+                \BinaryInfC{$\G\vdash\bot$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$\G,\phi\vdash\bot$}
+                \RightLabel{$\lnot_{i}$}
+                \UnaryInfC{$\G\vdash\lnot \phi$}
+            \end{bprooftree}\\&&\\
+            \hline
+        \end{tabular}
+    \end{center}
+    
+    \vspace*{0.5cm}
+
+    \begin{center}
+        \begin{tabular}{c c c c}
+            \begin{bprooftree}
+                \AxiomC{}
+                \RightLabel{$\top_i$}
+                \UnaryInfC{$\G\vdash \top$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash \psi$}
+                \RightLabel{aff}
+                \UnaryInfC{$\G,\phi \vdash \psi$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$\G,\lnot\phi\vdash\bot$}
+                \RightLabel{abs}
+                \UnaryInfC{$\G\vdash \psi$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash \bot$}
+                \RightLabel{$\bot_e$}
+                \UnaryInfC{$\G\vdash\phi$}
+            \end{bprooftree}
+        \end{tabular}
+    \end{center}
+    La logique minimale (Lm) est le système composé de ces règles, sauf $\bot_e$ et abs.\\
+    La logique intuitionniste (Li) est le système composé de ces règles, sauf abs.\\
+    La logique classique (Lc) est le système composé de ces règles, sauf $\bot_e$.
 \end{defi}
+
+\vspace*{-0.9cm}
 
 \begin{ex}{}{}
     Prouvons $\vdash(A\lor B) \ra (B\lor A)$.
+    \tcblower
+    \vspace*{-1cm}
     \begin{prooftree}
         \AxiomC{}
         \RightLabel{ax}
@@ -232,13 +288,18 @@ Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacent
     \end{prooftree}
 \end{ex}
 
+\vspace*{-0.9cm}
+
 \begin{ex}{}{}
     Prouvons $\vdash (A\lor B)\land C \ra (A\land C)\lor (B \land C)$.
+    \tcblower
+    \vspace*{-0.5cm}
     \tiny
     \begin{prooftree}
         \AxiomC{}
         \RightLabel{ax}
         \UnaryInfC{$(A\lor B) \land C \vdash (A \lor B) \land C$}
+        \RightLabel{$\land_{eg}$}
         \UnaryInfC{$(A\lor B)\land C \vdash (A \lor B)$}
 
         \AxiomC{}
@@ -252,13 +313,228 @@ Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacent
         \UnaryInfC{$(A\lor B)\land C,A \vdash C$}
         \RightLabel{$\land_{ed}$}
         \BinaryInfC{$(A\lor B)\land C, A \vdash A \land C$}
+        \RightLabel{$\land_{ed}$}
         \UnaryInfC{$(A\lor B)\land C \vdash C, A\vdash (A\land C)\lor (B\land C)$}
-        \AxiomC{$(A\lor B)\land C, B \vdash (A\land C)\lor (B\land C)$}
+        \AxiomC{$\vdots$}
+        \UnaryInfC{$(A\lor B)\land C, B \vdash (A\land C)\lor (B\land C)$}
         \RightLabel{$\land_{ed}$}
         \TrinaryInfC{$(A\lor B)\land C \vdash (A\land C)\lor(B\land C)$}
+        \RightLabel{$\Rightarrow_i$}
         \UnaryInfC{$\vdash(A\lor B)\land C \ra (A\land C)\lor(B\land C)$}
     \end{prooftree}
 \end{ex}
+
+\vspace*{-0.9cm}
+
+\begin{ex}{}{}
+    Montrons que $\lnot P \iff (P \ra \bot)$.
+    \tcblower
+    \vspace*{-1cm}
+    \begin{prooftree}
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\lnot P, P \vdash \lnot P$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\lnot P, P \vdash P$}
+
+        \RightLabel{$\Rightarrow_i$}
+        \BinaryInfC{$\lnot P\vdash P\ra \bot$}
+        \RightLabel{$\Rightarrow_i$}
+        \UnaryInfC{$\vdash\lnot P \ra (P\ra \bot)$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$P\ra \bot,P\vdash P\ra \bot$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$P\ra \bot, P\vdash P$}
+
+        \RightLabel{$\Rightarrow_e$}
+        \BinaryInfC{$P\ra \bot, P \vdash \bot$}
+        \RightLabel{$\lnot_i$}
+        \UnaryInfC{$P\ra \bot \vdash \lnot P$}
+        \RightLabel{$\Rightarrow_i$}
+        \UnaryInfC{$\vdash(P\ra \bot) \ra \lnot P$}
+
+        \RightLabel{$\land_i$}
+        \BinaryInfC{$\vdash \lnot P \iff (P \ra \bot)$}
+    \end{prooftree}
+\end{ex}
+
+\vspace*{-0.9cm}
+
+\begin{ex}{}{}
+    Montrons que $\lnot \top \iff \bot$.
+    \tcblower
+    \vspace*{-1cm}
+    \begin{prooftree}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\lnot \top \vdash \lnot \top$}
+
+        \AxiomC{}
+        \RightLabel{$\top_i$}
+        \UnaryInfC{$\lnot\top \vdash \top$}
+
+        \RightLabel{$\land_e$}
+        \BinaryInfC{$\lnot \top \vdash \bot$}
+        \RightLabel{$\Rightarrow_i$}
+        \UnaryInfC{$\vdash \lnot \top \ra \bot$}
+
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\bot,\top\vdash\bot$}
+        \RightLabel{$\lnot_i$}
+        \UnaryInfC{$\bot \vdash \lnot \top$}
+        \RightLabel{$\Rightarrow_i$}
+        \UnaryInfC{$\vdash \bot \ra \lnot \top$}
+
+        \RightLabel{$\land_i$}
+        \BinaryInfC{$\vdash \lnot \top \iff \bot$}
+    \end{prooftree}
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    Une règle est dite dérivable dans un système déductif si sa conclusion est prouvable dans ce système auquel on a ajouté ses prémisses sous forme d'axiomes. Si un séquent est prouvable à l'aide d'une règle dérivable, il est prouvable sans. L'utilisation de la règle dérivable ne change donc pas quels séquents sont prouvables. On peut donc les utiliser pour raccourcir des arbres de preuves. En effet, si une règle est dérivable et permet de prouver un séquent, celui-ci amet un arbre de preuve qui l'utilise. Chaque occurence de la règle dérivable peut être remplacée par l'arbre prouvant qu'elle est dérivable. On le formaliserait par induction.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    La règle $\bot_e$ est dérivable en logique classique.
+    \begin{prooftree}
+        \AxiomC{$\G\vdash\bot$}
+        \RightLabel{aff}
+        \UnaryInfC{$\G,\lnot\phi\vdash\bot$}
+        \RightLabel{abs}
+        \UnaryInfC{$\G\vdash\phi$}
+    \end{prooftree}
+    Tout séquent de la logique intuitionniste est donc prouvable en logique classique.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Dans Lm, on peut prouver $\G\vdash P\ra \lnot\lnot P$, mais pas $\G\vdash\lnot\lnot P\ra P$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    Deux systèmes déductifs sont dits équivalents si touts les séquents prouvables dans l'un le sont aussi dans l'autre.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{meth}{}{}
+    Pour prouver que deux systèmes $S_1$ et $S_2$ sont équivalents, on montre :\\
+    $\hra$ Que toutes les règles de $S_1$ sont dérivables dans $S_2$.\\
+    $\hra$ Que toutes les règles de $S_2$ sont dérivables dans $S_1$.
+\end{meth}
+
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    On note $\lnot\lnot_e$ la règle suivante :
+    \begin{prooftree}
+        \AxiomC{$\G\vdash\lnot\lnot \phi$}
+        \RightLabel{$\lnot\lnot_e$}
+        \UnaryInfC{$\G\vdash \phi$}
+    \end{prooftree}
+\end{defi}
+
+\begin{prop}{}{}
+    La logique intuitionniste munie de $\lnot\lnot_e$ est équivalente à la logique classique.
+    \tcblower
+    \vspace*{-.5cm}
+    \begin{center}
+        \begin{bprooftree}
+            \AxiomC{}
+            \RightLabel{ax}
+            \UnaryInfC{$\G\vdash\lnot\lnot A$}
+            \RightLabel{aff}
+            \UnaryInfC{$\G,\lnot A \vdash \lnot \lnot A$}
+
+            \AxiomC{}
+            \RightLabel{ax}
+            \UnaryInfC{$\G,\lnot A\vdash \lnot A$}
+
+            \RightLabel{$\lnot_e$}
+            \BinaryInfC{$\G,\lnot A \vdash \bot$}
+            \RightLabel{abs}
+            \UnaryInfC{$\G\vdash A$}
+        \end{bprooftree}
+        \quad\et\quad
+        \begin{bprooftree}
+            \AxiomC{}
+            \RightLabel{ax}
+            \UnaryInfC{$\G,\lnot P\vdash \bot$}
+            \RightLabel{$\lnot_i$}
+            \UnaryInfC{$\G\vdash \lnot\lnot P$}
+            \RightLabel{$\lnot\lnot_e$}
+            \UnaryInfC{$\G\vdash P$}
+        \end{bprooftree}
+    \end{center}
+    Ainsi, $\lnot\lnot_e$ est dérivable en logique classique et abs est dérivable en logique intuitionniste munie de $\lnot\lnot_e$.\\
+    Les deux systèmes sont équivalents puisque les règles $\lnot\lnot_e$, $\bot_e$ et abs sont les seules qui les distinguent.\\
+    Pour dériver abs, on n'a pas utilisé $\bot_e$. La logique minimale munie de $\lnot\lnot_e$ est aussi équivalente à ces systèmes.
+\end{prop}
+
+\begin{exercice}{}{}
+    On définit la règle suivante :
+    \begin{prooftree}
+        \AxiomC{$\G\vdash \lnot Q \ra \lnot P$}
+        \RightLabel{cc}
+        \UnaryInfC{$\G\vdash P\ra Q$}
+    \end{prooftree}
+    Montrer que Li muni de cc est équivalent à Lc. Est-ce aussi le cas de Lm ?
+\end{exercice}
+
+\begin{prop}{}{}
+    En logique classique, on a bien la règle du tiers-exclu :
+    \begin{prooftree}
+        \AxiomC{}
+        \RightLabel{$t_e$}
+        \UnaryInfC{$\G\vdash A\lor \lnot A$}
+    \end{prooftree}
+    \tcblower
+    \vspace*{-1cm}
+    \begin{prooftree}
+        
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\G,\lnot(A\lor\lnot A)\vdash\lnot(A\lor \lnot A)$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\G'\vdash \lnot(A\lor \lnot A)$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\G'\vdash A$}
+        \RightLabel{$\lor_{id}$}
+        \UnaryInfC{$\G'\vdash\lnot A\lor\lnot A$}
+        
+        \RightLabel{$\lnot_e$}
+        \BinaryInfC{$\G,\lnot(A\lor\lnot A),\lnot A\vdash\bot$}
+        \RightLabel{$\lnot_i$}
+        \UnaryInfC{$\G,\lnot(A\lor\lnot A)\vdash \lnot A$}
+        \RightLabel{$\lor_{id}$}
+        \UnaryInfC{$\G,\lnot(A\lor\lnot A)\vdash A\lor \lnot A$}
+
+        \RightLabel{$\lnot_e$}
+        \BinaryInfC{$\G,\lnot(A\lor \lnot A)\vdash \bot$}
+        \RightLabel{abs}
+        \UnaryInfC{$\G\vdash A\lor\lnot A$}
+    \end{prooftree}
+\end{prop}
 
 % $\vdash(A\land B)\lor C \ra (A \lor C)\land (B\lor C)$
 
