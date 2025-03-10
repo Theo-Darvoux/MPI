@@ -134,10 +134,14 @@ Les dérivées partielles de $f$ en $a$ donnent des contraintes sur les valeurs 
     Donc $f$ admet une dérivée partielle en $A$ suivant $E_{i,j}$ et $D_{E_{i,j}}f(A)=(-1)^{i+j}\D_{i,j}=[\Com A]_{i,j}$.
 \end{exercice}
 
+\vspace*{-0.8cm}
+
 \begin{defi}{Point critique.}{}
     Soit $f:U\subset E \to F$ admettant des dérivées partielles en $a\in U$ avec $\B$ base de $E$.\\
     On dit que $a$ est un \bf{point critique} de $f$ ssi $\forall i \in \lb1,n\rb, ~ \6_if(a)=0$.
 \end{defi}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     Soit $f:U\subset E \to \R$ admettant des dérivées partielles en $a\in U$ avec $\B$ base de $E$.\\
@@ -151,6 +155,36 @@ Les dérivées partielles de $f$ en $a$ donnent des contraintes sur les valeurs 
     On pose $a=(a_1,...,a_n)$ et $\forall t \in \cursive{V}(a_i), ~ \phi_i(t)=f(a_1,...,a_{i-1},t,a_{i+1},a_n)$.\\
     Par choix de $a$, $\phi_i$ admet un extremum local en $a_i$, or $\phi_i$ est dérivable en $a_i$ et $\phi'_i(a_i)=\frac{\6 f}{\6 x_i}(a)$.\\
     Par théorème de Rolle, on sait d'ailleurs que $\phi'_i(a_i)=0$ donc $\forall i \in \lb1,n\rb, ~ \frac{\6 f}{\6 x_i}(a)=0$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    On pose pour $(x,y)\in\R^2 ~:~ f(x,y)=x^2-y^2$. Chercher les points critiques de $f$ sur $\R^2$.
+    \tcblower
+    \begin{equation*}
+        \begin{cases}\frac{\6 f}{\6 x}(x,y) = 0  \\ \frac{\6 f}{\6 y} = 0 \end{cases} \iff \begin{cases}
+            2x = 0 \\ -2y = 0 
+        \end{cases} \iff (x,y) = (0,0)
+    \end{equation*}
+    Donc $(0,0)$ est le seul point critique de $f$, mais
+    \begin{equation*}
+        \begin{cases}
+            \forall n \in \N^*, ~ f\left( \frac{1}{n}, 0 \right) = \frac{1}{n^2} > 0 \\ \forall n \in \N^*, ~ f\left( 0, \frac{1}{n} \right) = -\frac{1}{n^2} < 0 
+        \end{cases} \nt{ donc $(0,0)$ n'est pas un extremum local.}
+    \end{equation*}
+\end{ex}
+
+\begin{prop}{Fonctions coercives.}{}
+    Soit $f:E\to\R$ avec $E$ un $\R$-evdf. On suppose $f$ continue sur $E$ et $\lim_{\|x\|\to+\infty}f(x)=+\infty$.\\
+    Alors $f$ admet un minimum sur $E$.
+    \tcblower
+    Par hypothèse, $\forall A \in \R, ~ \exists B \in \R, ~ \forall x \in E, ~ \|x\|>B B \ra f(x)\geq A$.\\
+    Prenons $A=f(0)$ : $\exists R \in \R, ~ \forall x \in E, ~ \|x\|> R\ra f(x)\geq f(0)$.\\
+    Puisque $f$ est continue sur $E$, $f$ est continue sur $B_f(0,R)$, qui est compact comme fermé borné en dim. finie.\\
+    Ainsi, $f$ est continue sur le compact $B_f(0,R)$ et à valeurs réelles donc est minorée sur $B_f(0,R)$ et atteint son minimum $m$. Donc $\exists x_0 \in B_f(0,R), ~ m = f(x_0)$. Soit $x\in E$.\\
+    $\hra$ Si $x\in B_f(0,R)$, alors $f(x) \geq m = f(x_0)$ par choix de $m$/\\
+    $\hra$ Sinon, $\|x\|>R$ et $f(x)\geq f(0)\geq m$.
 \end{prop}
 
 
