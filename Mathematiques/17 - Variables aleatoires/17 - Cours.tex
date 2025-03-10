@@ -492,4 +492,34 @@
     Donc $Z\sim\cursive{G}(1-(1-p)(1-q))$.
 \end{exercice}
 
+\begin{exercice}{}{}
+    Soit $(X,Y)$ un couple de v.a.d. sur $\N^2$ tel que $\forall i,j \in \N, ~ \Pr(X=i\cap Y=j)=\ds\frac{c(i+j)}{i!j!2^{i+j}}$.
+    \begin{enumerate}
+        \item Calculer $c$.
+        \item Exprimer les lois marginales de $X$ et $Y$. Sont-elles indépendantes ?
+        \item Exprimer la loi de $Y$ conditionnée par $X=1$, de $Y-1$ conditionnée par $X=0$.
+        \item Calculer l'espérance de $Z=2^{X+Y}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Puisque $\Pr(\O) = 1$, $\sum_{i,j}\frac{c(i+j)}{i!j!2^{i+j}}=1$.\\
+    On travaille à $i$ fixé dans $\N$, alors, puisque tout est positif :
+    \begin{equation*}
+        \sum_{j=0}^{\infty}\frac{c(i+j)}{i!j!2^{i+j}} = \frac{c}{i!2^i}\left( i\sum_{j=0}^\infty \frac{1}{j!2^j} + \sum_{j=0}^{\infty}\frac{j}{j!2^j} \right) = \frac{c}{i!2^i}\left( ie^{1/2} + \frac{1}{2}e^{1/2} \right)
+    \end{equation*}
+    Donc :
+    \begin{equation*}
+        \sum_{i,j}\frac{c(i+j)}{i!j!2^{i+j}} = c\sum_{i=0}^\infty\frac{1}{i!2^i}\left( ie^{1/2} + \frac{1}{2}e^{1/2}  \right) = ce^{1/2}\sum_{i=0}^\infty\frac{1}{(i-1)!2^i} + \frac{e^{1/2}}{2c}\sum_{i=0}^{\infty}\frac{1}{i!2^{i}}=\frac{e}{2}c+\frac{e}{2}c=ec.
+    \end{equation*}
+    Donc $ec=1$ donc $c=e^{-1}$.\\
+    \boxed{2.} Pour $i\in\N$ :
+    \begin{equation*}
+        (X=i) = \bigsqcup_{j=0}^\infty(X=i\cap Y=j) \ra \Pr(X=i) = \sum_{j=0}^\infty\frac{e^{-1}(i+j)}{i!j!2^{i+j}} = \frac{e^{-1/2}}{i!2^i}\left( i+\frac{1}{2} \right).
+    \end{equation*}
+    Puisque $i$ et $j$ jouent un rôle symétrique dans la loi conjointe, on a $\Pr(X=i)=\Pr(Y=i)$.\\
+    Elles ne sont pas indépendantes : $\Pr(X=0)\Pr(Y=0)=(\frac{1}{2}e^{-1/2})^2\neq0$ et $\Pr(X=0\cap Y=0)=0$.\\
+    \boxed{3.} $\Pr(Y=i\mid X=1)=\frac{e^{-1}(1+i)}{i!2^i}$.\\
+    $\Pr(Y-1=i \mid X=0) = \Pr(Y=i+1 \mid X=0) = \frac{e^{-1}(i+1)}{(i+1)!2^{i+1}}$.\\
+    \boxed{4.} Formule du transfert (chapitre 18).
+\end{exercice}
+
 \end{document}
