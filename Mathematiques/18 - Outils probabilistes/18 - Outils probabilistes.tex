@@ -26,6 +26,7 @@
 \bf{Remarque.} On rappelle que si $\sum_{n\geq 0} u_n$ $\CA$, alors $\sum u_n$ est commutativement convergente. 
 
 \begin{ex}{}{}
+    \small
     $\bullet$ Si $X$ suit une loi uniforme sur $\{x_1,...,x_n\}$ avec $n\in\N^*$, alors $\E(X)=\sum_{i=1}^n\frac{x_i}{n}=\frac{1}{n}(x_1+...+x_n)$.\\
     $\bullet$ Si $X\sim\B(p)$, alors $\E(X)=0\cdot\Pr(X=0)+1\cdot\Pr(X=1)=p$.\\
     $\bullet$ Si $X\sim\B(n,p)$, alors $\E(X)=np$.
@@ -37,7 +38,7 @@
     Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$. 
     \begin{enumerate} \item Si $X\sim\cursive{P}(\l)$, alors $\E(X)=\l$. \item Si $X\sim\cursive{G}(p)$, alors $\E(X)=\frac{1}{p}$. \end{enumerate}
     \tcblower
-    \footnotesize
+    \small
     \boxed{1.} Soit $X\sim\cursive{P}(\l)$ avec $\l>0$, à valeurs dans $\N$ donc positives.\\
     On a $(x\Pr(X=x))_{x\in X(\O)}$ est une famille de réels positifs donc $(x\Pr(X=x))$ est sommable ssi $\sum x\Pr(X=x)<\infty$.
     \begin{equation*} \sum_{x\in X(\O)}x\Pr(X=x)=\sum_{n=0}^{+\infty} n\Pr(X=n)=\sum_{n=0}ne^{-\l}\frac{\l^n}{n!} = \sum_{n=1}^{\infty} ne^{-\l}\frac{\l^n}{n!}=\l e^{-\l} e^l = \l\end{equation*}
@@ -216,7 +217,7 @@
 \end{prop}
 
 \begin{defi}{Variance.}{}
-    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$, elle admet une variance $V(X)=E((X-E(X))^2)$ ssi $X\in \L^2$.
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$, elle admet une variance $V(X)=\E((X-\E(X))^2)$ ssi $X\in \L^2$.
 \end{defi}
 
 \begin{prop}{}{}
@@ -230,13 +231,13 @@
 \end{prop}
 
 \begin{defi}{Écart-type.}{}
-    L'écart-type de $X$, note $\s(X)$ est défini par $\s(X)=\sqrt{V(X)}$.
+    L'écart-type de $X$, noté $\s(X)$ est défini par $\s(X)=\sqrt{V(X)}$.
 \end{defi}
 
 \begin{prop}{Formule de Koenig-Huygens.}{}
     Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ admettant un moment d'ordre 2.
     \begin{enumerate}
-        \item $V(X)=\E(X^2) - (E(X))^2$.
+        \item $V(X)=\E(X^2) - (\E(X))^2$.
         \item $\forall a,b \in \R, ~ aX = b$ admet au moment d'ordre 2 et $V(aX+b)=a^2V(X)$.
     \end{enumerate}
     \tcblower
@@ -261,11 +262,11 @@
         \item Soit $X\sim\B(p)$, alors $\E(X)=p$ et $V(X)=p(1-p)$.
         \item Soit $X\sim\B(n,p)$, alors $\E(X)=np$ et $V(X)=np(1-p)$.
         \item Soit $X\sim\cursive{P}(\l)$, alors $\E(X)=V(X)=\l$.
-        \item Soit $X\sim\cursive{G}(p)$, alors $\E(X)=\frac{1}{p}$ et $\V(X)=\frac{1-p}{p^2}$.
+        \item Soit $X\sim\cursive{G}(p)$, alors $\E(X)=\frac{1}{p}$ et $V(X)=\frac{1-p}{p^2}$.
     \end{enumerate}
     \tcblower
     \boxed{1.} Soit $X\sim \B(p)$. $\E(X)=\Pr(X=1)=p$ et $X^2=X$ donc $V(X)=\E(X^2)-\E(X)^2 = p-p^2 = p(1-p)$.\\
-    \boxed{2.} Soit $X_1,...,X_n\sim\B(p)$, alors $X:=X_1+...+X_n\sim\B(n,p)$; $\E(X)=\E(X_1+...+X_n)=\E(X_1)+...+\E(X_n)=np$.\\
+    \boxed{2.} Soit $X_1,...,X_n\sim\B(p)$; $X:=X_1+...+X_n\sim\B(n,p)$; $\E(X)=\E(X_1+...+X_n)=\E(X_1)+...+\E(X_n)=np$.\\
     Puis $V(X)=V(X_1)+...+\V(X_n)=np(1-p)$.\\
     \boxed{3.} Soit $X\sim\cursive{P}(\l)$. $\E(X)=\l$ $(\ref{prop:esp})$, et $\E(X(X-1))=\sum_{n=0}^\infty n(n-1)\Pr(X=n)=\l^2e^{-\l}e^\l=\l^2$.\\
     Puis $\E(X^2)=\E(X(X-1)+X)=\E(X(X-1))+\E(X)=\l^2+\l$ puis $V(X)=\E(X^2)-\E(X)^2=(\l^2+\l)-\l^2 = \l$.\\
@@ -273,40 +274,17 @@
     Puis $\E(X^2)=\E(X(X-1)+X)=\frac{2(1-p)}{p^2} + \frac{1}{p}$ puis $V(X)=\E(X^2)-\E(X)^2 = \frac{2(1-p)}{p^2} + \frac{p-1}{p^2} = \frac{1-p}{p^2}$.
 \end{prop}
 
+\vspace*{-0.5cm}
+
 \begin{defi}{}{}
     Soit $X\in\L^2$ v.a.d. sur $(\O,\A,\Pr)$, alors $X$ est centrée réduite ssi $\E(X)=0$ et $V(X)=1$.
 \end{defi}
 
-\begin{prop}{}{}
-    Soit $X\in\L^2$ une v.a.d. sur $(\O,\A,\Pr)$ telle que $V(X)\neq 0$, alors $\frac{X-E(X)}{\s(X)}$ est centrée réduite.
-\end{prop}
+\vspace*{-0.5cm}
 
-\begin{exercice}{}{}
-    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ et $I_X=\{t\in\R, ~ \E(^{tx}) < \infty\}$
-    \begin{enumerate}
-        \item Soit $a<t<b$, montrer que $\forall x \in \R, ~ e^{tx} \leq e^{ax} + e^{bx}$.
-        \item Montrer que $I_X$ est un intervalle qui contient 0.
-        \item Montrer que $\forall x \in \R, ~ \forall n \in \N, ~ \frac{|x^n|}{n!}\leq e^x + e^{-x}$.
-        \item On suppose $0\in I_x$. Montrer que $X$ admet des moments de tout ordre et $\E(e^{tx})=\sum \frac{\E(X^n)}{n!}t$
-    \end{enumerate}
-    \tcblower
-    \boxed{1.} Soit $a<t<b$ et $x\in\R$.\\
-    Si $x\geq0$, $tx\leq bx$ donc $e^{tx}\leq e^{bx} \le e^{bx}+e^{ax}$.\\
-    Si $x<0$, alors $tx\leq ax$ puis $e^{tx} \leq e^{ax} \leq e^{ax} + e^{bx}$.\\
-    \boxed{2.} Déjà, $0\in I_X$. Soit $a,b\in I_X$ et $t\in~]a,b[$, alors $e^{tX} \leq e^{aX} + e^{bX}$.\\
-    Puis $e^{aX} \in \L^1$ donc $e^{aX} + e^{bX} \in \L^1$ puis $e^{tx^k} \in \L^1$ par domination donc $t\in I_X$.\\
-    \boxed{3.} Soit $x\in\R$, $n\in\N$ et $e^{|x|}=\sum_{k=0}\frac{|x|^k}{k!}\geq \frac{|x^n|}{n!}$.\\
-    \boxed{4.} Supposons $0\in I_X$ alors $\exists k>0, ~ ]-h,h[\subset I_X$.\\
-    D'après $3$, $\left( \frac{h}{2} \right)^n\frac{|X|^n}{n!}\leq e^{\frac{h}{2}X} + e^{-\frac{h}{2}X}$.\\
-    Par domination, $|X|^n\in\L^1$ donc $X$ admet un moment d'ordre $n$.\\
-    Soit $t\in]-h,h[$.
-    \begin{equation*}
-        \E(e^{tX}) = \sum_{x\in X(\O)} e^{tx}\Pr(X=x) = \sum_{n=0}^{\infty}\sum_{k=0}^{\infty}\frac{t^kkx_n^k}{k!}\Pr(X=x_n) =_{(*)} \sum_{k=0}^{\infty}\frac{t^k}{k!}\sum_{n=0}^\infty x^n = \sum_{n=0}^{\infty}\frac{t^k}{k}\E(X)
-    \end{equation*}
-    \begin{equation*}
-        \sum_{n=0}^{+\infty}\left( \sum_{k=0}^{\infty} |u_{k,n}| \right) = \sum_{n=0}^{+\infty}\sum_{k=0}^{\infty}\frac{|t|^k|x_n|^k}{k!}\Pr(X=x_n)=\E(e^{|tX|}) \leq \E(e^{tX}) + \E(e^{-tX})< \infty. \tag{*}
-    \end{equation*}
-\end{exercice}
+\begin{prop}{}{}
+    Soit $X\in\L^2$ une v.a.d. sur $(\O,\A,\Pr)$ telle que $V(X)\neq 0$, alors $\frac{X-\E(X)}{\s(X)}$ est centrée réduite.
+\end{prop}
 
 \section{Covariance.}
 
@@ -314,13 +292,13 @@
     Soient $X,Y\in\L^2$. On définit la covariance de $X,Y$ : $\cov(X,Y)=\E\left( \left( X-\E(X) \right) \left( Y - \E(Y) \right)\right)$.
 \end{defi}
 
-\vspace*{-0.2cm}
+\vspace*{-0.5cm}
 
 \begin{prop}{}{}
     Si $X,Y$ sont deux v.a.d. sur $(\O,\A,\Pr)$. alors $\cov(X,Y)=\E(XY)-\E(X)\E(Y)$
 \end{prop}
 
-\vspace*{-0.2cm}
+\vspace*{-0.5cm}
 
 \bf{Remarque.} $X\ind Y \ra \cov(X,Y) = 0$, réciproque fausse.
 
@@ -331,7 +309,7 @@
     Puis $\cov(X,X^2)=\E(X^3) - \E(X)\E(X^2)$ or $\E(X^3)=0$ (transfert) et $\E(X=0)$, donc $\cov(X,X^3)=0$.
 \end{ex}
 
-\vspace*{-0.2cm}
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     Soit $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ dans $\L^2$, alors $(X,Y)\mapsto \cov(X,Y)$ est symétrique, bilinéaire et positive.
@@ -340,11 +318,13 @@
     Linéaire à gauche et sym. donc bilinéaire. $\cov(X,X)=V(X)\geq0$ et $\cov(X,X)=0\ra V(X)=0\ra X=\cste$ presque surement.
 \end{prop}
 
+\vspace*{-0.8cm}
+
 \begin{prop}{}{}
     Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ dans $\L^2$ et $\l\in\R$, alors $V(X+\l Y)=V(X)+2\l\cov(X,Y)+\l^2V(Y)$.\\
     Pour $X_1,...,X_n$ v.a.d. dans $\L^2$ et $\l_1,...,\l_n\in\R$ :
     \begin{equation*}
-        V(\sum_{i=1}^n \l_i X_i) = \sum_{i=1}^n \l_i\l_j\cov(X_i,X_j) = \sum_{i=1}^n\l_i^2 V(X_i) + 2\sum_{i\neq j}\l_i\l_j\cov(X_i, X_j).
+        V\left(\sum_{i=1}^n \l_i X_i\right) = \sum_{i=1}^n \l_i\l_j\cov(X_i,X_j) = \sum_{i=1}^n\l_i^2 V(X_i) + 2\sum_{i\neq j}\l_i\l_j\cov(X_i, X_j).
     \end{equation*}
     \tcblower
     \boxed{1.} \begin{align*} V(X+\l Y) &= \E((X+\l Y)^2) - \E(X+\l Y)^2 \\
@@ -352,11 +332,12 @@
         &=V(X) + \cov(X,Y) + \l^2V(Y).
     \end{align*}
     \boxed{2.} \begin{align*}
-        V\left( \sum_{i=1}^n \l_i X_i \right) &= \cov\left( \sum_{i=1}^n \l_iX_i, \sum_{j=1}^n\l_jX_j \right) = \sum_{i,j}\l_i\l_j\cov(X_i, X_j)\\
-        &= \sum_{i=1}^n \l_i^2\cov(X_i,X_i) + \sum_{i\neq j}\l_i\l_j\cov(X_i,X_j)\\
+        V\left( \sum_{i=1}^n \l_i X_i \right) &= \cov\left( \sum_{i=1}^n \l_iX_i, \sum_{j=1}^n\l_jX_j \right) = \sum_{i,j}\l_i\l_j\cov(X_i, X_j)= \sum_{i=1}^n \l_i^2\cov(X_i,X_i) + \sum_{i\neq j}\l_i\l_j\cov(X_i,X_j)\\
         &=\sum_{i=1}^n \l_i^2V(X_i) + \sum_{i\neq j}\l_i\l_j\cov(X_i,X_j).
     \end{align*}
 \end{prop}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{Inégalité de Cauchy-Schwarz.}{}
     Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ dans $\L^2$. Alors :
@@ -412,6 +393,8 @@
     Donc $V(\det A) = n!$.
 \end{exercice}
 
+\pagebreak      
+
 \section{Fonctions génératrices.}
 
 Dans ce paragraphe, on ne considère que des variables aléatoires à valeurs dans $\N$.
@@ -447,6 +430,21 @@ Dans ce paragraphe, on ne considère que des variables aléatoires à valeurs da
 
 \begin{prop}{}{}
     \begin{enumerate}
+        \item Soit $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$ telles que $X\ind Y$. Alors $G_{X+Y}=G_X\times G_Y$.
+        \item Soient $X_1,...,X_n$ des v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$ indépendantes, alors $G_{X_1+...+X_n}=G_{X_1}...G_{X_n}$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Déjà, $X+Y$ est à valeurs dans $\N$ donc $G_{X+Y}$ est bien définie.
+    \begin{equation*}
+        G_{X+Y}(t) = \E(t^{X+Y}) = \E(t^Xt^Y) = \E(t^X)\E(t^Y)=G_XG_Y.
+    \end{equation*}
+    Puisque $t^X$ et $t^Y$ sont indépendantes.
+\end{prop}
+
+\pagebreak
+
+\begin{prop}{}{}
+    \begin{enumerate}
         \item Soit $X\sim \B(p)$ alors $G_X(t)=(1-p)+pt$.
         \item Soit $X\sim \B(n,p)$, alors $G_X(t)=\left[ (1-p) + pt \right]^n$.
         \item Soit $X\sim\cursive{P}(\l)$, alors $G_X(t)=e^{\l(t-1)}$.
@@ -471,18 +469,7 @@ Dans ce paragraphe, on ne considère que des variables aléatoires à valeurs da
     \end{equation*}
 \end{prop}
 
-\begin{prop}{}{}
-    \begin{enumerate}
-        \item Soit $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$ telles que $X\ind Y$. Alors $G_{X+Y}=G_X\times G_Y$.
-        \item Soient $X_1,...,X_n$ des v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$ indépendantes, alors $G_{X_1+...+X_n}=G_{X_1}...G_{X_n}$.
-    \end{enumerate}
-    \tcblower
-    \boxed{1.} Déjà, $X+Y$ est à valeurs dans $\N$ donc $G_{X+Y}$ est bien définie.
-    \begin{equation*}
-        G_{X+Y}(t) = \E(t^{X+Y}) = \E(t^Xt^Y) = \E(t^X)\E(t^Y)=G_XG_Y.
-    \end{equation*}
-    Puisque $t^X$ et $t^Y$ sont indépendantes.
-\end{prop}
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     Soient $X_1,...,X_n$ des v.a.d. sur $(\O,\A,\Pr)$ indépendantes telles que $X_i\sim\cursive{P}(\l_i)$ $\forall i \in \lb1,n\rb$. Alors :
@@ -493,6 +480,8 @@ Dans ce paragraphe, on ne considère que des variables aléatoires à valeurs da
     Puisque $X_1,...,X_n$ sont indépendantes, $G_{X_1+...+X_n}=G_{X_1}\times...\times G_{X_n}$.\\
     i.e. $G_{X_1+...+X_n}(t) = e^{\l_1(t-1)}\times...\times e^{\l_n(t-1)} = e^{(\l_1+...+\l_n)(t-1)}$ donc $X_1+...+X_n\sim \cursive{P}(\l_1+...+\l_n)$.
 \end{prop}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$. Si $R>1$, alors $X$ admet des moments de tout ordre et :
@@ -508,8 +497,6 @@ Dans ce paragraphe, on ne considère que des variables aléatoires à valeurs da
     Or $G'_X(1)=\E(X)<\infty$; $G''_X(1)=\E(X(X-1))<\infty$...\\
     Par théorème de transfert, $\forall n \in \N^*, ~ G_X^{(n)}(1)=\E(X(X-1)...(X-(n-1)))$.
 \end{prop}
-
-\pagebreak
 
 \begin{prop}{}{}
     Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ à valeurs dans $\N$, on suppose $R=1$.
@@ -618,6 +605,32 @@ Dans ce paragraphe, on ne considère que des variables aléatoires à valeurs da
 
 \pagebreak
 
+\begin{exercice}{}{}
+    Soit $X$ une v.a.d. sur $(\O,\A,\Pr)$ et $I_X=\{t\in\R, ~ \E(^{tx}) < \infty\}$
+    \begin{enumerate}
+        \item Soit $a<t<b$, montrer que $\forall x \in \R, ~ e^{tx} \leq e^{ax} + e^{bx}$.
+        \item Montrer que $I_X$ est un intervalle qui contient 0.
+        \item Montrer que $\forall x \in \R, ~ \forall n \in \N, ~ \frac{|x^n|}{n!}\leq e^x + e^{-x}$.
+        \item On suppose $0\in I_x$. Montrer que $X$ admet des moments de tout ordre et $\E(e^{tx})=\sum \frac{\E(X^n)}{n!}t$
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $a<t<b$ et $x\in\R$.\\
+    $\hra$ Si $x\geq0$, $tx\leq bx$ donc $e^{tx}\leq e^{bx} \le e^{bx}+e^{ax}$.\\
+    $\hra$ Si $x<0$, alors $tx\leq ax$ puis $e^{tx} \leq e^{ax} \leq e^{ax} + e^{bx}$.\\
+    \boxed{2.} Déjà, $0\in I_X$. Soit $a,b\in I_X$ et $t\in~]a,b[$, alors $e^{tX} \leq e^{aX} + e^{bX}$.\\
+    Puis $e^{aX} \in \L^1$ donc $e^{aX} + e^{bX} \in \L^1$ puis $e^{tx^k} \in \L^1$ par domination donc $t\in I_X$.\\
+    \boxed{3.} Soit $x\in\R$, $n\in\N$ et $e^{|x|}=\sum_{k=0}\frac{|x|^k}{k!}\geq \frac{|x^n|}{n!}$.\\
+    \boxed{4.} Supposons $0\in I_X$ alors $\exists k>0, ~ ]-h,h[\subset I_X$.\\
+    D'après $3$, $\left( \frac{h}{2} \right)^n\frac{|X|^n}{n!}\leq e^{\frac{h}{2}X} + e^{-\frac{h}{2}X}$.\\
+    Par domination, $|X|^n\in\L^1$ donc $X$ admet un moment d'ordre $n$.\\
+    Soit $t\in]-h,h[$.
+    \begin{equation*}
+        \E(e^{tX}) = \sum_{x\in X(\O)} e^{tx}\Pr(X=x) = \sum_{n=0}^{\infty}\sum_{k=0}^{\infty}\frac{t^kkx_n^k}{k!}\Pr(X=x_n) =_{(*)} \sum_{k=0}^{\infty}\frac{t^k}{k!}\sum_{n=0}^\infty x^n = \sum_{n=0}^{\infty}\frac{t^k}{k}\E(X)
+    \end{equation*}
+    \begin{equation*}
+        \sum_{n=0}^{+\infty}\left( \sum_{k=0}^{\infty} |u_{k,n}| \right) = \sum_{n=0}^{+\infty}\sum_{k=0}^{\infty}\frac{|t|^k|x_n|^k}{k!}\Pr(X=x_n)=\E(e^{|tX|}) \leq \E(e^{tX}) + \E(e^{-tX})< \infty. \tag{*}
+    \end{equation*}
+\end{exercice}
 
 \begin{exercice}{}{}
     Soient $X,Y$ deux v.a.d. sur $(\O,\A,\Pr)$ indépendantes telles que $X\sim\cursive{G}(p)$ et $Y\sim\cursive{G}(q)$.\\

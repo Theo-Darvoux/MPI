@@ -142,7 +142,256 @@ L'équation est dite linéaire si l'ensemble des solutions de $E$ est stable par
 
 \section{Exponentielles de matrices et d'endomorphismes.}
 
+Rappelons que dans un espace vectoriel de dimension finie, une série absolument convergente est convergente.
+
+\begin{defi}{}{}
+    Soit $A\in\M_n(\K)$, on définit l'exponentielle de la matrice $A$ par : 
+    \begin{equation*}\exp(A)=\sum_{k=0}^{+\infty}\frac{A^k}{k!}.\end{equation*}
+    \tcblower
+    Toutes les normes sont équivalentes sur $\M_n(\K)$, on choisit $\|\.\|$ une norme d'algèbre (existe) :\\
+    $\hra$ $\forall A,B \in \M_n(\K), ~ \|AB\|\leq\|A\|\|B\|$ donc $\forall k \in \N, ~ \|A^k\|\leq\|A\|^k$.
+    \begin{equation*}
+        \forall k \in \N, ~ \left\|\frac{A^k}{k!}\right\| \leq \frac{\|A\|^k}{k!} ~ \nt{terme général d'une suite convergente réelle.}
+    \end{equation*}
+    Par théorème de comparaison des séries à terme général positif, $\sum\frac{A^k}{k!}$ converge absolument donc converge.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    Pour une matrice nilpotente $A\in\M_n(\K)$ d'ordre $p\in\N$ :
+    \begin{equation*}
+        \exp(A) = \sum_{k=0}^{+\infty}\frac{A^k}{k!} = \sum_{k=0}^{p-1}\frac{A^k}{k!}
+    \end{equation*} 
+    Pour une matrice scalaire $A=\a I_n$ avec $\a\in\R$ :
+    \begin{equation*}
+        \exp(A) = \sum_{k=0}^{+\infty}\frac{(\a I_n)^k}{k!} = I_n\sum_{k=0}^{+\infty}\frac{\a^k}{k!} = e^\a I_n.
+    \end{equation*}
+    Pour une matrice diagonale $D=\Diag(\l_1,...,\l_n)$, $\exp(D)=\Diag(e^{\l_1},...,e^{\l_n})$.\\
+    Pour une matrice diagonalisable $A=PDP^{-1}$, $\exp(A)=P\exp(D)P^{-1}$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soit $A\in\M_n(\K)$, alors $A$ et $\exp(A)$ commutent.
+    \tcblower
+    Rappel : $A$ commute avec tout polynôme en $A$ donc $\forall n \in \N, ~ A\left( \sum_{k=0}^n \frac{A^k}{k!}  \right) = \left( \sum_{k=0}^n\frac{A^k}{k!} \right)A$.\\
+    Par continuité de $M\mapsto AM$ et $M\mapsto MA$ (linéaires en dim. finie) et par passage à la limite : $A\exp(A)=\exp(A)A$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soit $A\in\M_n(\K)$, alors $\exp(A)\in\K[A]$ : c'est un polynôme en $A$.
+    \begin{equation*}
+        \exists ! P \in \K_{d-1}[X], ~ \exp(A) = P(A) \nt{ où } d=\deg\Pi_A
+    \end{equation*}
+    \tcblower
+    Puisque $\K[A]$ est fermé comme $\K$-algèbre en dimension finie, par passage à la limite : $\exp(A)\in\K[A]$.\\
+    Soit $P\in\K_{d-1}[X]$ tel que $\exp(A)=P(A)$, on a $\exp(A)=\sum_{k=0}^{+\infty}\frac{A^k}{k!} = P(A)$.\\
+    \bf{Unicité.} Pour $P(A)=Q(A)$ avec $\deg(P)<d$ et $\deg(Q)<d$, on a $(P-Q)(A)=0$ donc $P-Q=0$ par déf de $d$.
+\end{prop}
+
+\begin{ex}{}{}
+    Soit $D=\Diag(\l_1,...,\l_p)$. Calculer le polynôme $Q$ tel que $\exp(D)=Q(D)$.
+    \tcblower
+    Soient $L_1,...,L_p$ les polynômes de Lagrange associés : $\forall i,j : L_i(\l_j)=\d_{i,j}$.\\
+    Ces polynômes forment une base de $\R_{p-1}[X]$ puis $\forall Q \in \R_{p-1}[X], ~ Q = \sum_{i=1}^pQ(\l_i)L_i$.\\
+    Soit $Q$ l'unique polynôme de $\R_{p-1}[X]$ tel que $\forall i \in \lb1,p\rb, ~ Q(\l_i)=e^{\l_i}$ : $Q=\sum_{i=1}^pe^{\l_i}L_i$.\\
+    Alors $Q(D)=\exp(D)$, avec $Q$ qui est bien de degré inférieur à $\Pi_D$.
+\end{ex}
+
+\vspace*{-0.8cm}
+
+\begin{prop}{}{}
+    Soient $A,B\in\M_n(\K)$ tels que $A=PBP^{-1}$ avec $P\in\GL_n(\K)$, alors $\exp(A)=P(\exp B)P^{-1}$.
+    \tcblower
+    Par récurrence sur $k\in\N$ : $\forall k \in \N, ~ A^k = PB^kP^{-1}$ puis :
+    \begin{equation*}
+        \forall n_0 \in \N, ~ \sum_{k=0}^{n_0} \frac{A^k}{k!} = \sum_{k=0}^{n_0}P\frac{B^k}{k!}P^{-1} = P\left( \sum_{k=0}^{n_0}\frac{B^k}{k!} \right)P^{-1}
+    \end{equation*}
+    Puis par continuité de $M\mapsto PMP^{-1}$ (linéaire en dim. finie) et par passage à la limite : $\exp(A)=P\exp(B)P^{-1}$.
+\end{prop}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soit :
+    \begin{equation*}
+        A=\begin{pmatrix}0&1&1\\1&0&1\\1&1&0\end{pmatrix} \in \S_3(\R).
+    \end{equation*}
+    \begin{enumerate}
+        \item Déterminer $\X_A$ et $\Pi_A$.
+        \item Montrer que $A$ est diagonalisable, la diagonaliser et en déduire $\exp(A)$.
+        \item Calculer $A^n$ pour tout $n\in\N$.
+        \item Retrouver $\exp(A)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $A$ est diagonalisable par théorème spectral. Soit $\l\in\R$. $C_1\gets C_1 + C_2 + C_3$; $L_2 \gets L_2 - L_1$ et $L_3\gets L_3 - L_1$.
+    \begin{equation*}
+        \det(\l I_n - A) = \begin{vmatrix} \l & -1 & -1 \\ -1 & \l & -1 \\ -1 & -1 & \l\end{vmatrix} = (\l-2)\begin{vmatrix}1 & -1 & -1 \\ 1 & \l & -1 \\ 1 & -1 & \l\end{vmatrix} = (\l-2)\begin{vmatrix}1&-1&-1\\0&\l+1&0\\0&0&\l+1\end{vmatrix}=(\l-2)(\l+1)^2.
+    \end{equation*}
+    Donc $\X_A = (X-2)(X+1)^2$. Puis $\Pi_A=(X+1)(X+2)$ (car SRS et les vp sont exactement racines de $\Pi_A$).\\
+    \boxed{2.} $E_2=\Vect(1,1,1)$, $E_{-1}=\Vect((\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}, 0), (\frac{1}{\sqrt{6}}, \frac{1}{\sqrt{6}}, -\frac{\sqrt{2}}{\sqrt{3}}))$ donc $A=PDP^\top$ avec \begin{equation*}P=\begin{pmatrix}\frac{1}{\sqrt{3}} & \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} & -\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} & 0 & -\frac{\sqrt{2}}{\sqrt{3}}\end{pmatrix} \et D=\begin{pmatrix}2&0&0\\0&-1&0\\0&0&-1\end{pmatrix} \ra \exp(A) = P(\exp D)P^\top = \frac{1}{3e}\begin{pmatrix}  2+e^3 & e^3-1 & e^3-1 \\ e^3-1 & 2+e^3 & e^3-1 \\ e^3-1 & e^3-1 & 2+e^3 \end{pmatrix}\end{equation*}
+    \boxed{3.} $X^n = \Pi_A(X)Q(X)+R_n(X)$ avec $R_n(X)=a_n X + b_n I_3$ par division euclidienne donc $A^n=R_n(A)$.\\
+    En $X=2$ : $2^n = 2 a_n + b_n$; en $X=-1$ : $(-1)^n = -a_n+b_n$ donc $a_n = \frac{2^n}{3}+\frac{(-1)^{n+1}}{3}$ et $b_n = \frac{2^n}{3}+\frac{2(-1)^n}{3}$.
+\end{exercice}
+
+\begin{prop}{}{}
+    Soient $A,B\in\M_n(\K)$ telles que $AB=BA$, alors $\exp(A)\exp(B)=\exp(A+B)$.
+    \tcblower
+    Les séries $\exp(A)$ et $\exp(B)$ sont absolument convergentes, donc par produit de Cauchy :
+    \begin{equation*}
+        \left( \sum_{k=0}^{+\infty}\frac{A^k}{k!} \right)\left( \sum_{k=0}^{+\infty}\frac{B^k}{k!} \right) = \sum_{n=0}^{+\infty}\sum_{k=0}^n \frac{A^k}{k!}\frac{B^{n-k}}{(n-k)!} = \sum_{n=0}^{+\infty} \frac{1}{n!}\sum_{k=0}^{+\infty}\binom{n}{k}A^kB^{n-k} = \sum_{n=0}^{+\infty}\frac{(A+B)^n}{n!}
+    \end{equation*}
+    Donc $\exp(A)\exp(B)=\exp(A+B)$. La commutativité est utilisée par le binôme de Newton.
+\end{prop}
+
+\vspace*{-0.9cm}
+
+\begin{prop}{}{}
+    Soit $A\in\M_n(\K)$, alors $\exp(A)\in\GL_n(\K)$ et $(\exp A)^{-1} = \exp(-A)$.
+    \tcblower
+    \small $A$ et $-A$ commutent donc $\exp(A)\exp(-A)=\exp(A-A)=\exp(0)=I_n$ donc $\exp(A)\in\GL_n(\K)$ et $(\exp A)^{-1}=\exp(-A)$.
+\end{prop}
+
+\vspace*{-0.9cm}
+
+\begin{prop}{}{}
+    Soit $A\in\M_n(\K)$ telle que $\X_A$ est scindé, alors $\det(\exp(A))=e^{\Tr(A)}$.
+    \tcblower
+    Puisque $\X_A$ est scindé, $A$ est trigonalisable : $\exists P \in \GL_n(\K), ~ \exists T \in \T_n^+(\K), ~ A=PTP^{-1}$.\\
+    On rappelle que la diagonale de $T$ est composée des valeurs propres $(\l_1,...,\l_n)$ de $A$, et $\exp(A)=P\exp(T)P^{-1}$.
+    \begin{equation*}
+        \det(\exp A) = \det(\underbrace{\exp T}_{\in\T_n^+(\K)}) = \prod_{i=1}^n \exp(\l_i) = \exp(\sum_{i=1}^n \l_i) = e^{\Tr(A)}
+    \end{equation*}
+    En effet, puisque $\X_A$ est scindé, on a $\sum_{i=1}^n \l_i = \Tr(A)$, et on retrouve que $\exp(A)\in\GL_n(\K)$.
+\end{prop}
+
+\vspace*{-0.9cm}
+
+\begin{exercice}{}{}
+    Montrer que $A\in\A_n(\R) \ra \exp(A) \in O_n(\R)$, et même $A\in\SO_n(\R)$.\\
+    Pour $A\in\A_2(\K)$, donner la forme de $\exp(A)$.
+    \tcblower
+    \small
+    Soit $A\in\A_n(\R)$ : $A^\top = -A$.\\
+    $\hra$ Déjà, $\forall M \in \M_n(\R), ~ \exp(M)^\top = \exp(M^\top)$ :
+    \begin{equation*}
+        \forall n_0 \in \N, ~ \left( \sum_{k=0}^{n_0}\frac{M^k}{k!} \right)^\top = \sum_{k=0}^{n_0}\frac{(M^\top)^k}{k!}
+    \end{equation*}
+    On a utilisé la lin. de $M\mapsto M^\top$; puis par continuité de $M\mapsto M^\top$, lin. en dim. finie : $\exp(M)^\top = \exp(M^\top)$.\\
+    On revient à $A$ : $(\exp A)^\top = \exp(A^\top) = \exp(-A)=(\exp A)^{-1}$, donc $\exp A \in O_n(\R)$.\\
+    De plus, $\det(\exp A) = e^{\Tr(A)} > 0$ donc $\exp(A)\in\SO_n(\R)$, en fait $\det(\exp A)=1$.\\
+    $\hra$ Soit $A\in\A_2(\R)$, $\exists \a \in \R$ tel que :
+    \begin{equation*}
+        A = \begin{pmatrix}0 & \a \\ -\a & 0 \end{pmatrix}; ~ \forall n \in \N, ~ A^{2n} = (-1)^n\a^{2n}I_2; ~ A^{2n+1} = (-1)^n\a^{2n}A
+    \end{equation*}
+    Par sommation par paquets :
+    \begin{equation*}
+        \exp A = \sum_{n=0}^{\infty}\frac{A^n}{n!} = \sum_{n=0}^{\infty}\frac{A^{2n}}{(2n)!} + \sum_{n=0}^{+\infty}\frac{A^{2n+1}}{(2n+1)!} = \sum_{n=0}^\infty\frac{(-1)\a^{2n}}{(2n)!}I_2 + \sum_{n=0}^{+\infty}\frac{(-1)^n\a^{2n}}{(2n+1)!}A = \cos(\a)I_2 + \frac{1}{\a}\sin(\a)A
+    \end{equation*}
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $A\in\M_n(\C)$. Montrer que $\ds\lim_{p\to+\infty}\left( I_n + \frac{A}{p} \right)^p = \exp(A)$.
+\end{exercice}
+
+\begin{prop}{}{}
+    Soit $A\in\M_n(\K)$, on pose $\phi:t\mapsto\exp(tA)$, alors $\phi$ est dérivable sur $\R$ et $\forall t \in \R, ~ \phi'(t)=A\exp(tA)=\exp(tA)A$.
+    \tcblower
+    Soit $t_0\in\R$, $\forall h \in \R, ~ \exp((t_0 + h)A) - \exp(t_0A) = \exp(t_0A)(\exp(hA) - I_n)$.\\
+    Posons $\Delta_h = \frac{\phi(t_0 + h) - \phi(t_0)}{h}$ pour tout $h\neq0$.
+    \begin{equation*}
+        \Delta_h - \exp(t_0A) = \frac{\exp((t_0 + h)A) - \exp(t_0A)}{h} - \exp(t_0A)A = \exp(t_0A)\left(\frac{\exp(hA) - I_n}{h} - 1\right)
+    \end{equation*}
+    Or : 
+    \begin{equation*} \frac{\exp(hA) - I_n}{h} - A = \frac{1}{h}\left( \sum_{k=0}^\infty \frac{h^kA^k}{k!} - I_n \right)-A = \frac{1}{h}\left( \sum_{k=1}^{\infty}\frac{h^kA^k}{k!} \right) - A = \sum_{k=2}^{\infty}\frac{h^{k-1}A^k}{k!}\end{equation*}
+    On choisit une norme sous-multiplicative $\|\.\|$ (toutes les normes sont équivalentes).
+    \begin{align*}
+        \left\|\frac{\exp(hA) - I_n}{h}\right\| &= \left\| \sum_{k=2}^{\infty}\frac{h^{k-1}A^k}{k!} \right\| \leq \sum_{k=2}^{\infty}\frac{|h|^{k-1}\|A\|^k}{k!} = \frac{1}{|h|}\sum_{k=2}^{\infty}\frac{(|h|\|A\|)^k}{k!} \\&= \frac{1}{|h|}\left( e^{|h|\|A\|} - |h|\|A\| - 1 \right) \sim_0 \frac{1}{|h|}\frac{(|h|\|A\|)^2}{2} \xrightarrow[h\to0]{}0.
+    \end{align*}
+    Par encadrement, $\left\|\frac{\exp(hA)-I_n}{h}\right\|\xrightarrow[h\to0]{}0$ puis $\|\Delta_h-\exp(t_0A)A\|\xrightarrow[h\to0]{}0$ i.e. $\Delta_h \xrightarrow[h\to0]{}\exp(t_0A)A$.\\
+    Donc $\phi$ est dérivable en $t_0$ et $\phi'(t_0)=\exp(t_0A)A$ puis $\exp(t_0A)$ est un polynôme en $A$ donc commute avec $A$.
+\end{prop}
+
 \section{Systèmes différentiels linéaires autonomes.}
+
+Un système différentiel linéaire d'ordre 1 est dit autonome si $A$ ne dépend pas de $t$.
+
+\begin{thm}{Résolution de \texorpdfstring{$X'=AX$}{Lg}}{}
+    Soit $A\in\M_n(\K)$ et $(E) ~ : ~ X' = AX$.\\
+    Alors $X$ est solution de $(E)$ si et seulement si $\exists C \in \M_{n,1}(\K), ~ \forall t \in \R, ~ X(t) = \exp(tA)C$.
+    \tcblower
+    Soit $X:\R\to\M_{n,1}(\K)$ et posons $Y(t)=\exp(-tA)X(t)$ pour tout $t\in\R$. $X$ est dérivable ssi $Y$ l'est et :
+    \begin{equation*}
+        \forall t \in \R, ~ Y'(t) = -A\exp(tA)X(t)+\exp(-tA)X'(t)
+    \end{equation*}
+    Donc, puisque $X'=AX$ :
+    \begin{equation*}
+        X' = AX \iff Y' = -A\exp(-tA)X + \exp(-tA)X' = \exp(-tA)AX - \exp(-tA)AX = 0 \iff Y = \cste
+    \end{equation*}
+    Donc $X'=AX\iff X=(\exp tA)Y = \exp(tA)C$ avec $C\in\M_{n,1}(\K)$.
+\end{thm}
+
+\begin{prop}{}{}
+    Soit $A\in\M_n(\K)$ et $(E) ~:~ X'=AX$. L'ensemble $S$ des solutions de $(E)$ est un $\K$-ev de dimension $n$.\\
+    Un système fondamental de solutions est donné par les vecteurs colonnes de la matrice $\exp(tA)$.
+    \tcblower
+    On a déjà vu que l'espace vectoriel $S$ des solutions de $E$ est un $\K$-ev de dimension $n$.
+    \begin{equation*}
+        X' = AX \iff \exists C \in \M_{n,1}(\K), ~ \forall t \in \R, ~ X(t)=(\exp tA)C.
+    \end{equation*}
+    Notons $X_1(t),...,X_n(t)$ les vecteurs colonnes de $\exp(tA)$ et $C=(\a_i)\in\M_{n,1}(\K)$, alors :
+    \begin{equation*}
+        X(t) = \begin{pmatrix}x_{1,1}(t) & \dots & x_{1,n}(t) \\ \vdots & & \vdots \\ x_{n,1}(t) & \dots & x_{n,n}(t) \end{pmatrix}\begin{pmatrix}\a_1 \\ \vdots \\ \a_n\end{pmatrix} = \begin{pmatrix}\a_1 x_{1,1}(t) + \dots + \a_n x_{1,n}(t) \\ \vdots \\ \a_1x_{n,1}(t) + \dots + \a_nx_{n,n}(t) \end{pmatrix}= \a_1X_1(t) + ... + \a_nX_n(t)
+    \end{equation*}
+    Finalement, $X=\a_1X_1+...+\a_nX_n$, donc $(X_1,...,X_n)$ est génératrice de $S$, de cardinal $n$, donc une base de $S$.
+\end{prop}
+
+\vspace*{-0.9cm}
+
+\begin{thm}{}{}
+    Soit $A\in\M_n(\K)$ \bf{diagonalisable}, avec $\Sp(A)=\{\l_1,...,\l_n\}$ éventuellement répétées.
+    On note $(V_1,...,V_n)$ une base de vecteurs propres de $A$, et $(E) ~:~ X'=AX$.\\
+    Un système fondamental de solution est donné par $(X_1,...,X_n)$ où $\forall i \in \lb1,n\rb, ~ \forall t \in \R, ~  X_i(t)=e^{\l_i t}V_i$.
+    \tcblower
+    Diagonalisons $A$ avec $A=PDP^{-1}$ : $D=\Diag(\l_1,...,\l_n)$ et $P=(V_1 \dots V_n)$.\\
+    On a $X'=AX\iff X'=PDP^{-1}X$, on pose $Y=P^{-1}X$, $Y$ est dérivable sur $\R$ et $Y'=P^{-1}X'$.\\
+    Donc $X'=AX \iff P^{-1}X'=D(P^{-1}X)\iff Y'=DY \iff \forall i \in \lb1,n\rb, ~ y_i' = \l_iy_i \iff y_i = \a_i e^{\l_it}$.\\
+    Alors $\forall t \in \R, ~ Y(t)=(\a_i e^{\l_i t})\in\M_{n,1}(\K)$ avec $\a_1,...,\a_n \in \K$.\\
+    Enfin, $X=PY$ donc $X=\a_1e^{\l_1 t}V_1 + ... + \a_1e^{\l_nt}V_n$. On pose $\forall i \in \lb1,n\rb, ~ X_i = e^{\l_i t}V_i$.\\
+    Donc $(X_1,...,X_n)$ est génératrice de $S$ de cardinal $n$, c'est une base de $S$.
+\end{thm}
+
+\vspace*{-0.9cm}
+
+\begin{exercice}{}{}
+    Résoudre :
+    \begin{equation*}
+        \begin{cases}
+            x' = 2x - 2y \\ y' = -x + 3y
+        \end{cases}
+    \end{equation*}
+    \tcblower
+    Écriture matricielle : $X'=AX$ avec $X=\begin{pmatrix}x\\y\end{pmatrix}$ et $A=\begin{pmatrix}2&-2\\-1&3\end{pmatrix}$.\\
+    L'ensemble des solutions est un $\R$-ev de dimension 2. On a $\X_A = (X-1)(X-4)$, SRS donc $A$ est diagonalisable.\\
+    Les valeurs propres de $A$ sont $1$ et $4$ simples et $E_1=\Vect(2,1)$ et $E_4=\Vect(1,-1)$.\\
+    Par théorème, $(X_1,X_2)$ est un système fondamental de solutions avec :
+    \begin{equation*}
+        X_1(t) = e^{\l_1t}V_1 = e^t\begin{pmatrix}2\\1\end{pmatrix} = \begin{pmatrix}2e^t\\e^t\end{pmatrix} \et X_2(t) = e^{\l_2 t}V_2 = \begin{pmatrix}e^{4t}\\-e^{4t}\end{pmatrix}
+    \end{equation*}
+    Puis $X$ solution de $X'=AX$ ssi $\exists (\a_1,\a_2)\in\R^2, ~ X=\a_1X_1+\a_2X_2$ ssi $\forall t \in \R, ~ X(t)=\begin{pmatrix}2\a_1e^t + \a_2e^{4t} \\ \a_1e^t - \a_2e^{4t}\end{pmatrix}$.\\
+    Conclusion : $x$ et $y$ sont solutions ssi $\exists (\a_1,\a_2)\in\R^2$ tels que :
+    \begin{equation*}
+        \begin{cases}
+            x(t) = 2\a_1e^t + \a_2e^{4t}\\
+            y(t) = \a_1e^t - \a_2e^{4t}
+        \end{cases}
+    \end{equation*}
+\end{exercice}
+
 
 \section{Équation différentielle linéaire d'ordre \texorpdfstring{$n$}{n}.}
 

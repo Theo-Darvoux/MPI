@@ -47,7 +47,7 @@
 \begin{ex}{Cas particuliers.}{}
     \begin{enumerate}
         \item $A=[a,+\infty[~\subset\R$ : $(X\in A) = (X\geq a) = \bigcup_{\substack{x\geq a\\x\in X(\O)}}(X=x)$.
-        \item $A=]-\infty,a]~\subset\R$ : $(X \in A) = (X < a) = \bigcup_{\substack{x < a \\ x \in X(\O)}}(X=x)$. 
+        \item $A=~]-\infty,a]~\subset\R$ : $(X \in A) = (X < a) = \bigcup_{\substack{x < a \\ x \in X(\O)}}(X=x)$. 
     \end{enumerate}
     Supposons de plus que $X(\O) = \N$, alors $\forall n \in \N, ~ (X\geq n) = \bigcup_{k\geq n}(X=k)=(X=n)\sqcup(X\geq n+1)$.\\
     Par $\s$-additivité, $\Pr(X\geq n) = \Pr(X=n)+\Pr(X\geq n+1)$.
@@ -79,7 +79,7 @@
     $\bullet$ $\forall A \in \P(X(\O))$, $\Pr_X(A)=\Pr(X\in A)\geq 0$.\\
     $\bullet$ Pour $(A_n)_n\in\P(X(\O))^\N$ 2-à-2 incompatibles.
     \begin{equation*}
-        \Pr_X(\bigcup_{n\in\N}A_n) = \Pr(X\in\bigcup_{n\in\N}A_n) = \Pr(\bigcup_{n\in\N}(X\in A_n)) = \sum_{n\in\N}\Pr(X\in A_n).
+        \Pr_X\left(\bigcup_{n\in\N}A_n\right) = \Pr\left(X\in\bigcup_{n\in\N}A_n\right) = \Pr\left(\bigcup_{n\in\N}(X\in A_n)\right) = \sum_{n\in\N}\Pr(X\in A_n).
     \end{equation*}
 \end{defi}
 
@@ -342,7 +342,7 @@
     \end{equation*}
     \tcblower
     \boxed{\la} Soit $x\in X(\O)$ et $y\in Y(\O)$. On pose $A=\{x\}\subset X(\O)$ et $B=\{y\}\subset Y(\O)$, puis $(X \subset \{x\}) = (X=x)$.\\
-    \boxed{\ra} Soit $A\subset X(\O)$ et $B\subset Y(\O)$. On a $(X\in A \cap Y \in A) = \bigcup_{\substack{x\in A\\y\in B}}(X=x\cap Y=y)$. Par $\s$-additivité :
+    \boxed{\ra} Soit $A\subset X(\O)$ et $B\subset Y(\O)$. On a $(X\in A \cap Y \in B) = \bigcup_{\substack{x\in A\\y\in B}}(X=x\cap Y=y)$. Par $\s$-additivité :
     \begin{equation*}
         \Pr(X\in A \cap Y \in B) = \sum_{\substack{x\in A\\y\in B}}\Pr(X=x\cap Y=y)=\sum_{\substack{x\in A\\ y \in B}}\Pr(X=x)\Pr(Y=y)
     \end{equation*}
@@ -427,7 +427,7 @@
 
 \vspace*{-0.9cm}
 
-\begin{exercice}{}{}
+\begin{exercice}{Marche aléatoire.}{}
     Soit $(X_n)_{n\in\N^*}$ une suite de v.a.d. indépendantes sur $(\O,\A,\Pr)$, de mêmes lois que $X$.\\
     On note $S_n = \ds\sum_{k=1}^n X_k$ pour tout $n\in\N^*$.
     \begin{enumerate}
@@ -492,6 +492,8 @@
     Donc $Z\sim\cursive{G}(1-(1-p)(1-q))$.
 \end{exercice}
 
+\section{Khôlles.}
+
 \begin{exercice}{}{}
     Soit $(X,Y)$ un couple de v.a.d. sur $\N^2$ tel que $\forall i,j \in \N, ~ \Pr(X=i\cap Y=j)=\ds\frac{c(i+j)}{i!j!2^{i+j}}$.
     \begin{enumerate}
@@ -517,9 +519,8 @@
     \end{equation*}
     Puisque $i$ et $j$ jouent un rôle symétrique dans la loi conjointe, on a $\Pr(X=i)=\Pr(Y=i)$.\\
     Elles ne sont pas indépendantes : $\Pr(X=0)\Pr(Y=0)=(\frac{1}{2}e^{-1/2})^2\neq0$ et $\Pr(X=0\cap Y=0)=0$.\\
-    \boxed{3.} $\Pr(Y=i\mid X=1)=\frac{e^{-1}(1+i)}{i!2^i}$.\\
-    $\Pr(Y-1=i \mid X=0) = \Pr(Y=i+1 \mid X=0) = \frac{e^{-1}(i+1)}{(i+1)!2^{i+1}}$.\\
-    \boxed{4.} Formule du transfert (chapitre 18).
+    \boxed{3.} $\Pr(Y=i\mid X=1)=\frac{e^{-1}(1+i)}{i!2^i}$ et $\Pr(Y-1=i \mid X=0) = \Pr(Y=i+1 \mid X=0) = \frac{e^{-1}(i+1)}{(i+1)!2^{i+1}}$.\\
+    \boxed{4.} Théorème du transfert (chapitre 18).
 \end{exercice}
 
 \end{document}
