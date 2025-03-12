@@ -18,7 +18,7 @@
 \subsection{Rappels.}
 
 \begin{defi}{}{}
-    Soit $E$ un ensemble non-vide. On dit que $E$ est fini ssi $\exists n \in \N$ et $\phi$ une bijection $\lb 1, n \rb$ sur $E$.\\
+    Soit $E$ un ensemble non-vide. On dit que $E$ est fini ssi $\exists n \in \N$ et $\phi$ une bijection de $\lb 1, n \rb$ sur $E$.\\
     Alors $n$ est unique, appelé cardinal de $E$.
 \end{defi}
 
@@ -277,7 +277,7 @@ Une expérience aléatoire est une expérience dont le résultat peut varier à 
     \tcblower
     On a $\O=\lb1,6\rb^\N$, $\A$ une tribu de $\O$ et $\Pr$ une probabilité adaptée.\\
     Posons $A$ : << on tire un six >> et $A_n$ : << on tire un six au $n^{\nt{ème}}$ tirage >>.\\
-    Alors $\P(A_n)=\frac{1}{6}$ et $A=\bigcup_{n\in\N} A_n$, donc $\ov{A}=\bigcap_{n\in\N}\ov{A}$ avec $\Pr(\bigcap_{k=0}^n A_k)=\frac{1}{6^n}$ d'où $\Pr(\bigcap_{k=0}^n\ov{A_k})=\left( \frac{5}{6} \right)^n$.\\
+    Alors $\Pr(A_n)=\frac{1}{6}$ et $A=\bigcup_{n\in\N} A_n$, donc $\ov{A}=\bigcap_{n\in\N}\ov{A}$ avec $\Pr(\bigcap_{k=0}^n A_k)=\frac{1}{6^n}$ d'où $\Pr(\bigcap_{k=0}^n\ov{A_k})=\left( \frac{5}{6} \right)^n$.\\
     Par continuité monotone, $\Pr(A)=\lim \Pr(\bigcup_{k=1}^n A_k) = 1 - \Pr(\bigcap_{n\in\N}\ov{A_k})=1$.
 \end{exercice}
 
