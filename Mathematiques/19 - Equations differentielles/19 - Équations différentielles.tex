@@ -392,8 +392,142 @@ Un système différentiel linéaire d'ordre 1 est dit autonome si $A$ ne dépend
     \end{equation*}
 \end{exercice}
 
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Résoudre :
+    \begin{equation*}
+        \begin{cases}
+            x' = x - y \\ y' = x + y
+        \end{cases}
+    \end{equation*}
+    Avec $x(0)=0$ et $y(0)=1$.
+    \tcblower
+    Écriture matricielle : $X'=AX$ avec $X=\begin{pmatrix}x\\y\end{pmatrix}$ et $A=\begin{pmatrix}1&-1\\1&1\end{pmatrix}$.\\
+    On reconnaît un système différentiel linéaire autonome homogène, on sait que l'ensemble de ses solution est un $\R$-ev de dimension 2 car $A\in\M_2(\R)$. Le théorème de Cauchy s'applique : il existe une unique solution vérifiant la condition initiale donnée.\\
+    $\hra$ On regarde si $A$ est diagonalisable : $\X_A=X^2-2X+2=(X-1-i)(X-1+i)$, SRS dans $\M_2(\C)$, donc $A$ est dz dans $\M_2(\C)$. On a $E_{1+i}=\Vect(i, 1)$ et $E_{1-i}=\Vect(-i,1)$. On pose $V_1=(i~1)$ et $V_2=(-i~1)$.\\
+    Par théorème, $X_1=e^{(1+i)t}V_1$ et $X_2=e^{(1-i)t}V_2$ forment un système fondamental de solutions.\\
+    Alors $\exists!(\l,\mu)\in\C^2, ~ X = \l X_1 + \mu X_2 ~ : ~ X(t) = \l e^{(1+i)t}\begin{pmatrix}i\\1\end{pmatrix}+\mu e^{(1-i)t}\begin{pmatrix}-i\\1\end{pmatrix}$.\\
+    Puis $X(0)=\begin{pmatrix}0\\1\end{pmatrix}=\l\begin{pmatrix}i\\1\end{pmatrix}+\mu\begin{pmatrix}-i\\1\end{pmatrix}$ donc $\l=\mu=\frac{1}{2}$ puis $X(t)=\frac{1}{2}e^{(1+i)t}\begin{pmatrix}i\\1\end{pmatrix}+\frac{1}{2}e^{(1-i)t}\begin{pmatrix}-i\\1\end{pmatrix}$.\\
+    On sait cependant que l'unique solution est réelle, donc on peut travailler l'expression :
+    \begin{equation*}
+        \begin{cases}
+            x(t) = \frac{1}{2}e^{(1+i)t}i - \frac{1}{2}e^{(1-i)t}i = e^t\frac{i}{2}(e^{it}-e^{-it})\\
+            y(t) = \frac{1}{2}e^{(1+i)t} + \frac{1}{2}e^{(1-i)t} = \frac{e^t}{2}(e^{it} + e^{-it})
+        \end{cases} \iff \begin{cases}x(t) = e^t \frac{i}2{(2i\sin t)} = -e^t\sin t \\ y(t) = \frac{e^t}{2}(2\cos t) = e^t \cos t\end{cases}
+    \end{equation*}
+\end{exercice}
+
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Résoudre :
+    \begin{equation*}
+        \begin{cases}
+            x' = 2x + z \\ y' = 2y - z \\ z' = x - y + z
+        \end{cases}
+    \end{equation*}
+    \tcblower
+    Traduction matricielle : on pose $X=\begin{pmatrix}x\\y\\z\end{pmatrix}$ et $A=\begin{pmatrix}2 & 0 & 1 \\ 0 & 2 & -1 \\ 1 & -1 & 1\end{pmatrix}$.\\
+    Puisque $A$ est symétrique réelle, elle est orthodiagonalisable. $C_1\gets C_1 + C_2$ puis selon colonne 1.\\
+    On a $\X_A(\l) = \l(\l-2)(\l-3)$, $E_0 = \Vect(1,-1,-2)$, $E_2 = \Vect(1,1,0)$, $E_3=\Vect(1,-1,1)$.
+    \begin{equation*}
+        A=PDP^{-1}; ~ D=\begin{pmatrix}0&0&0\\0&2&0\\0&0&3\end{pmatrix} \et P=\begin{pmatrix}1&1&1\\-1&1&-1\\-2&0&1\end{pmatrix}\in\GL_3(\R).
+    \end{equation*}
+    Un système fondamental de solutions est donné par $\begin{cases}X_1(t)=e^{0t}V_0 = V_0 \\ X_2(t)=e^{2t}V_1 \\ X_3(t)=e^{3t}V_2\end{cases}$.\\
+    Puis $\exists!(\l,\mu,\g)\in\R^3, ~ X(t)=\l X_1(t)+\mu X_2(t) + \g X_3(t)$ i.e. 
+    \begin{equation*}
+        \begin{cases}
+            x(t) = \l + \mu e^{2t} + \g e^{3t} \\ y(t) = -\l + \mu e^{2t} - \g e^{3t} \\ z(t) = -2\l + \g e^{3t}.
+        \end{cases}
+    \end{equation*}
+\end{exercice}
+
+Soit $X'(t)=A(t)X(t)+B(t)$ pour $t\in I$ un intervalle de $\R$ tels que $A:I\to\M_n(\K)$ et $B:I\to\M_{n,1}(\K)$ continues sur $I$.\\
+Soit $(E_H) : ~ X'(t)=A(t)X(t)$ système différentiel homogène associé.
+
+\begin{defi}{}{}
+    Si $(X_1,...,X_n)$ est une famille de solutions de $(E_H)$, on pose $\forall t \in I, ~ W(t)=\det(X_1(t),...,X_n(t))$.\\
+    Alors $W$ est le Wronskien de la famille $(X_1,...,X_n)$.
+\end{defi}
+
+\begin{prop}{}{}
+    Soit $(X_1,...,X_n)$ une famille de solutions de $(E_H)$, les propositions suivantes sont équivalents :
+    \begin{enumerate}
+        \item $(X_1,...,X_n)$ est un S.F. de $E$.
+        \item $\forall t \in I, ~ W(t) \neq 0$.
+        \item $\exists t \in I, ~ W(t) \neq 0$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1\ra2} Soit $t_0\in I$ et $\phi:X\mapsto X(t_0)$ de $S$ dans $\K^n$.\\
+    Par théorème de Cauchy, $\phi$ est bijection donc l'image par $\phi$ d'une base $(X_1,...,X_n)$ de $S$ est base de $\K^n$.\\
+    Or $\phi(X_1,...,X_n)=(X_1(t_0),...,X_n(t_0))$ puis $(X_1(t_0),...,X_n(t_0))$ est une base de $\K^n$ ssi $\det(X_1(t_0),...,X_n(t_0))\neq0$ i.e. $W(t_0)\neq0$.\\
+    \boxed{2\ra3} Immédiat.\\
+    \boxed{3\ra 1} Par hypothèse, $\exists t_0 \in I, ~ W(t_0)\neq0$, par hypothèse, $(X_1(t_0),...,X_n(t_0))$ est base de $\K^n$.\\
+    L'image par $\phi^{-1}$ de cette base est donc une base de $S$. Par définition, $(X_1,...,X_n)$ est donc un $S.F.$ de $E$.
+\end{prop}
+
+Pour trouver une solution particulière, on peut utiliser la méthode de variation des constantes :
+
+\begin{prop}{}{}
+    Soit $(E) ~:~ X'(t)=A(t)X(t)+B(t)$ avec $A:I\to\M_n(\K)$ et $B:I\to\M_{n,1}(\K)$ continues sur $I$.\\
+    Soit $(X_1,...,X_n)$ un (S.F.) de solutions de $E$, i.e. de $E_H$.
+    Posons $X(t) = \l_1(t)X_1(t)+...+\l_n(t)X_n(t)$ pour $t\in I$ avec $\l_i : I \to \K$ pour tout $i\in\lb1,n\rb$.\\
+    Alors $X$ est dérivable sur $I$ ssi $\l_i$ est dérivable sur $I$ puis $X$ solution de $E$ ssi $\sum_{i=1}^n\l_i'(t)X_i(t)=B_i(t)$.\\
+    Ceci est un système de Cramer qui donne de manière unique $\l'_1,...,\l_n'$.\\
+    On les calcule avec $n$ calculs de primitives, alors $\l_i(t) = \a_i(t) + K_i$, avec $K_i$ une constante, puis :
+    \begin{equation*}
+        X(t) = \sum_{i=1}^n K_i X_i(t) + \sum_{i=1}^n \a_i(t)X_i(t).
+    \end{equation*}
+    \tcblower
+    Cas particulier $n=1$ :\\
+    $\hra$ $(E) ~:~ y'(t)=a(t)y(t)+b(t)$, $a,b$ continues de $I$ dans $\K$.\\
+    $\hra$ $(E_H) ~:~ y'(t)=a(t)y(t)$.\\
+    Les solutions de $E_H$ sont de la forme $y=\l e^{\a(t)}$ avec $\a$ primitive de $a$.\\
+    Alors $y_0(t) = e^{\a(t)}$ où $y_0$ est un S.F de $E_H$ i.e. de $E$. Posons $y=\l(t)e^{\a(t)}$.\\
+    On a $y$ dérivable sur $I$ ssi $\l$ est dérivable sur $I$ puis :
+    \begin{align*}
+        y \nt{ solution de } E &\iff \l'(t)e^{\a(t)} + \cancel{\l(t)\a(t)e^{\a(t)}} = \cancel{a(t)(\l(t)e^{\a(t)}) + b(t)}\\
+        &\iff \l'(t)y_0(t) = b(t) \iff \l'(t)=b(t)e^{-\a(t)} \iff \l(t) = \mu(t) + K \\
+        &\iff y(t) = (\mu(t) + K)e^{\a(t)} = \mu(t) e^{\a(t)} + Ke^{\a(t)}.
+    \end{align*}
+\end{prop}
+
+Dans le cas général, en reprenant les notations de l'énoncé : $X(t)=\sum_{i=1}^n \l_i(t)X_i(t)$ avec $X_1,...,X_n$ S.F. de $E$.
+Vérifions $X$ dérivable sur $I$ ssi $\forall i \in \lb1,n\rb, ~ \l_i$ dérivable sur $I$ :\\
+\boxed{\la} Par opérations.\\
+\boxed{\ra} Par hypothèse, $\l_1(t)X_1(t) + ... + \l_n(t)X_n(t)=X(t)$, i.e. 
+\begin{equation*}
+    \l_1(t) \begin{pmatrix}x_{1,1}(t) \\ \vdots \\ x_{n,1}(t)\end{pmatrix} + ... + \l_n(t)\begin{pmatrix}x_{1,n}(t) \\ \vdots \\ x_{n,n}(t)\end{pmatrix} = \begin{pmatrix}x_1(t) \\ \vdots \\ x_n(t)\end{pmatrix}
+\end{equation*}
+i.e.
+\begin{equation*}
+    \underbrace{\begin{pmatrix}
+        x_{1,1}(t) & \dots & x_{1,n} \\ \vdots & & \vdots \\ x_{n,1}(t) & \dots & x_{n,n}(t)
+    \end{pmatrix}}_{M(t)} \begin{pmatrix} \l_1(t) \\ \vdots \\ \l_n(t) \end{pmatrix} = \begin{pmatrix} x_1(t) \\ \vdots \\ x_n(t) \end{pmatrix}
+\end{equation*}
+On a $\det M(t) = W(t)$ (Wronskien) puis $\forall t \in I, ~ W(t)\neq 0$ par théorème donc $M(t)\in\GL_n(\K)$. Donc :
+\begin{equation*}
+    \begin{pmatrix}\l_1(t) \\ \vdots \\ \l_n(t) \end{pmatrix} = M(t)^{-1} \begin{pmatrix}x_1(t) \\ \vdots \\ x_n(t)\end{pmatrix}
+\end{equation*}
+Or $A^{-1}=\frac{1}{\det(A)}\Com(A)^\top$ si $A\in\GL_n(\K)$, donc $\forall t \in I, ~ (M(t))^{-1}=\frac{1}{W(t)}(\Com M(t))^\top$.\\
+Puis $W$ est dérivable avec $W'(t)=\det(X_1'(t),X_2,...,X_n(t))+...+det(X_1(t),...X_{n-1}(t),X_n'(t))$ et ne s'annulle pas.\\
+Puis $t\mapsto M$ est dérivable sur $I$, puis $t\mapsto \Com M(t)$ est dérivable car $[\Com A]_{i,j}=(-1)^{i+j}\Delta_{i,j}$.\\
+Puis $t\mapsto (\Com M)^\top$ est dérivable sur $I$, finalement $t\mapsto M(t)^{-1}$ est dérivable sur $I$ et $\forall i \in \lb1,n\rb$ dérivable sur $I$.\\
+Enfin, soit $X$ d. sur $I$ tq $X=\sum_{i=1}^n\l_iX_i$, alors $\l_1,...,\l_n$ sont d. sur $I$ et $X'=\sum_{i=1}^n\l_i'X_i + \sum_{i=1}^n\l_i X_i'$ (Leibniz)
+\begin{align*}
+    X' = AX + B &\iff \sum_{i=1}^n \l_i'X_i + \sum_{i=1}^n\l_iX'_i = A\left( \sum_{i=1}^n \l_i X_i \right) + B \\
+    &\iff \sum_{i=1}^n \l_i' X_i + \cancel{\sum_{i=1}^n \l_i X_i'} = \cancel{\sum_{i=1}^n \l_i AX_i} + B\\
+    &\iff \sum_{i=1}^n \l_i'X_i = B \iff M(t)\begin{pmatrix}\l'_1(t) \\ \vdots \\ \l'_n(t)\end{pmatrix} = B(t) \\
+    &\iff \begin{pmatrix}\l_1'(t) \\ \vdots \\ \l_n'(t)\end{pmatrix} = M(t)^{-1}B(t).
+\end{align*}
+
 
 \section{Équation différentielle linéaire d'ordre \texorpdfstring{$n$}{n}.}
+
+
+
+
 
 \section{Étude qualitative.}
 
