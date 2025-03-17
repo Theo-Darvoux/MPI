@@ -67,8 +67,6 @@ Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacent
     On le note $\G\vdash\phi$, et si $\G=\0$, on notera $\vdash\phi$.
 \end{defi}
 
-\vspace*{-0.8cm}
-
 \begin{defi}{}{}
     On appelle règle d'inférence un $(n+1)$-uplet de séquents et on la note : 
     \begin{center}
@@ -83,32 +81,38 @@ Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacent
     Les $n$ premiers séquents sont les prémisses, le dernier est la conclusion.
 \end{defi}
 
-\vspace*{-0.8cm}
-
-\begin{defi}{Élimination de l'implication.}{}
-    On appelle élimination de l'implication la règle d'inférence :
-    \begin{prooftree}
-        \AxiomC{$\G\vdash\phi$}
-        \AxiomC{$\G\vdash\phi\ra\psi$}
-        \RightLabel{$\Rightarrow_e$}
-        \BinaryInfC{$\G\vdash\psi$}
-    \end{prooftree}
-    Si avec les hypothèses $\G$ on prouve $\phi$, et que $\phi$ implique $\psi$, alors on peut prouver $\psi$ sous les hypothèses $\G$.
+\begin{defi}{Règles de base.}{}
+    On définit les règles de base de la logique propositionnelle :
+    \begin{center}
+        \begin{tabular}{c c c}
+            \begin{bprooftree}
+                \AxiomC{}
+                \RightLabel{ax}
+                \UnaryInfC{$\G,\phi\vdash\phi$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash\phi$}
+                \AxiomC{$\G\vdash\phi\ra\psi$}
+                \RightLabel{$\Rightarrow_e$}
+                \BinaryInfC{$\G\vdash\psi$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$\G, \phi\vdash\psi$}
+                \RightLabel{$\Rightarrow_i$}
+                \UnaryInfC{$\G\vdash\phi\ra\psi$}
+            \end{bprooftree}
+        \end{tabular}
+    \end{center}
+    La première est l'axiome, la seconde est l'élimination de l'implication et la dernière est l'introduction de l'implication.
 \end{defi}
-
-\vspace*{-0.8cm}
 
 \begin{defi}{Introduction de l'implication.}{}
     On appelle introduction de l'implication :
-    \begin{prooftree}
-        \AxiomC{$\G, \phi\vdash\psi$}
-        \RightLabel{$\Rightarrow_i$}
-        \UnaryInfC{$\G\vdash\phi\ra\psi$}
-    \end{prooftree}
+    
     Si on arrive à prouver $\psi$ en supposant $\G$ et $\phi$, on arrive à prouver $\phi\ra\psi$ sans supposer $\phi$, seulement $\G$.
 \end{defi}
-
-\vspace*{-0.8cm}
 
 \begin{defi}{Arbre de preuve.}{}
     Si $\G\vdash\phi$ est un séquent, on appelle arbre de preuve de $\G\vdash\phi$ :\\
@@ -247,7 +251,7 @@ Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacent
             \begin{bprooftree}
                 \AxiomC{$\G,\lnot\phi\vdash\bot$}
                 \RightLabel{abs}
-                \UnaryInfC{$\G\vdash \psi$}
+                \UnaryInfC{$\G\vdash \phi$}
             \end{bprooftree}
             &
             \begin{bprooftree}
@@ -536,6 +540,175 @@ Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacent
     \end{prooftree}
 \end{prop}
 
-% $\vdash(A\land B)\lor C \ra (A \lor C)\land (B\lor C)$
+\pagebreak
+
+\begin{ex}{Règles gauches.}{}
+    Des règles sont dites gauches si elles modifient le contexte :
+    \begin{center}
+        \begin{tabular}{c c}
+            \begin{bprooftree}
+                \AxiomC{$A,B\vdash C$}
+                \RightLabel{$\land_i'$}
+                \UnaryInfC{$A\land B \vdash C$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$A,B \vdash C$}
+                \RightLabel{$\Rightarrow_i'$}
+                \UnaryInfC{$A\ra B, A \vdash C$}
+            \end{bprooftree}
+        \end{tabular}
+    \end{center}
+    \tcblower
+    \boxed{1.}
+    \begin{prooftree}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$A, B \vdash C$}
+        \RightLabel{aff}
+        \UnaryInfC{$A\land B, A, B \vdash C$}
+        \RightLabel{$\Rightarrow_i$}
+        \UnaryInfC{$A\land B, A \vdash B\ra C$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$A\land B, A \vdash A\land B$}
+        \RightLabel{$\land_{ed}$}
+        \UnaryInfC{$A\land B,A\vdash B$}
+
+        \RightLabel{$\Rightarrow_e$}
+        \BinaryInfC{$A\land B, A \vdash C$}
+        \RightLabel{$\Rightarrow_e$}
+        \UnaryInfC{$A\land B \vdash A \ra C$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$A\land B \vdash A \land B$}
+        \RightLabel{$\land_{eg}$}
+        \UnaryInfC{$A\land B \vdash A$}
+        \RightLabel{$\Rightarrow_e$}
+        \BinaryInfC{$A\land B\vdash C$}
+    \end{prooftree}
+\boxed{2.}
+    \begin{prooftree}
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$A,B\vdash C$}
+        \RightLabel{aff}
+        \UnaryInfC{$A\ra B, A, B \vdash C$}
+        \RightLabel{$\Rightarrow_i$}
+        \UnaryInfC{$A\ra B, A \vdash B \ra C$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$A\ra B, A \vdash A \ra B$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$A\ra B, A \vdash A$}
+        
+        \RightLabel{$\Rightarrow_e$}
+        \BinaryInfC{$A\ra B, A\vdash B$}
+
+        \RightLabel{$\Rightarrow_e$}
+        \BinaryInfC{$A\ra B, A\vdash C$}
+    \end{prooftree}
+\end{ex}
+
+\vspace*{-0.8cm}
+
+Pour l'instant, le système déductif de la logique classique permet de prouver des séquents. Pour l'instant, on n'a pas de raisons de penser qu'un séquent prouvable est vrai.
+
+\begin{defi}{}{}
+    On dit d'une formule $\phi$ qu'elle est une conséquence sémantique de $\G$ si :
+    \begin{equation*}
+        \M(\G) \subset \M(\phi) ~\nt{où}~ \M(\G) = \M\left(\bigwedge_{\phi_i\in\G}\phi_i\right)
+    \end{equation*}
+    À chaque fois que le contexte $\G$ est vrai, la formule $\phi$ l'est aussi. On note cela $\G\models\phi$.\\
+    On dit d'un système déductif qu'il est :\\
+    $\hra$ \bf{Correct} si $(\G\vdash \phi) \ra (\G\models \phi)$ : tout ce qui est prouvable est vrai.\\
+    $\hra$ \bf{Complet} si $\G\models \phi \ra \G \vdash \phi$ : tout ce qui est vrai est prouvable.\\
+    $\hra$ \bf{Cohérent} si $\nvdash\bot$ : ce qui est faux n'est pas prouvable.
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{thm}{}{}
+    La logique classique est correcte et complète.
+    \tcblower
+    \bf{Correction.} Soit $\G\vdash\phi$ un séquent dont on possède l'arbre de preuve.\\
+    On regarde quelle est la règle qui a été utilisée pour conclure :\\
+    $\hra$ ax : on a $\M(\G',\phi)\subset\M(\phi)$ donc $\G',\phi\models\phi$ puis $\G\models\phi$.\\
+    $\hra$ $\land_{eg}$ : on a $\G\models\phi_1\land\phi_2$ donc $\M(\G)\subset\M(\phi_1\land\phi_2)=\M(\phi_1)\cap\M(\phi_2)\subset\M(\phi_1)$ puis $\G\models\phi_1$.\\
+    $\hra$ $\land_{ed}$ : on a $\G\models\phi_1\land\phi_2$ donc $\M(\G)\subset\M(\phi_1\land\phi_2)=\M(\phi)\cap\M(\phi_2)\subset\M(\phi_2)$ puis $\G\models\phi_2$.\\
+    $\hra$ $\land_i$ : on a $\G\models\phi_1$ et $\G\models\phi_2$ donc $\M(\G)\subset\M(\phi_1)\cap\M(\phi_2)=\M(\phi_1\land\phi_2)$ donc $\G\models\phi_1\land\phi_2$.\\
+    $\hra$ abs : on a $\G,\lnot \phi \models \bot$ : $\M(\G,\lnot \phi)=\M(\G)\cap\M(\lnot \phi)=\M(\G)\cap\ov{\M(\phi)}=\0$ : $\M(\G)\subset\M(\phi)$ : $\G\models\phi$.\\
+    etc... On a alors bien $(\G\vdash\phi)\ra (\G\models\phi)$. \\
+    La logique minimale et la logique classique sont correctes aussi; mais pas complètes.\\
+    \bf{Complétion.} Admise.
+\end{thm}
+
+\section{Logique du premier ordre.}
+
+\renewcommand*{\X}{\cursive{X}}
+\renewcommand*{\F}{\cursive{F}}
+\renewcommand*{\R}{\cursive{R}}
+
+On s'intéresse maintenant aux formules du premier ordre. Celles-ci introduisent les notions de quantificateurs.
+
+Si $\X$ est un ensemble de variables et $\F$ un ensemble de fonctions, on définit de façon inductive :\\
+--- $x$ est un terme si $x\in\X$\\
+--- $f(t_1,...,t_n)$ est un terme si $f$ est un élément de $\F$ d'arité $n$ et $t_1,...,t_n$ sont des termes.\\
+--- $f\in\F$ est un terme s'il est d'arité zéro.
+
+\begin{defi}{Formule logique du premier ordre.}{}
+    Étant donnés $\X$, $\F$ et un ensemble $\R$, une formule logique du premier ordre est définie inductivement par :\\
+    --- $r(t_1,t_2)$ où $t_1$ et $t_2$ sont des termes, et $r\in\R$.\\
+    --- $\lnot\phi_1$, $\phi_1\lor\phi_2$, $\phi_1\land\phi_2$, $\phi_1\ra\phi_2$ où $\phi_1,\phi_2$ sont des formules du premier ordre.\\
+    --- $\forall x.\phi_1$ et $\exists x.\phi_1$ où $x\in\X$ et $\phi_1$ est une formule du premier ordre. 
+\end{defi}
+
+\begin{defi}{}{}
+    Dans une formule $\phi$, une occurence de la variable $x$ est une feuille étiquetée par $x$ dans l'arbre syntaxique de $\phi$.\\
+    Une occurence de $x$ dans $\phi$ est dite liée si le chemin de la racine à l'occurence contient un $\forall.x$ ou un $\exists.x$.\\
+    Si une occurence n'est pas liée, on dit d'elle qu'elle est libre.\\
+    Si une formule $\phi$ ne possède aucune occurence d'une variable libre, on parle de formule close.
+\end{defi}
+
+\begin{defi}{}{}
+    Si $x$ est une variable et $t$ un terme, on définit $\phi[x/t]$ la substitution de $x$ par $t$ dans $\phi$.\\
+    C'est-à-dire qu'on remplace toutes les occurences \bf{libres} de $x$ par $t$ dans $\phi$. 
+\end{defi}
+
+\begin{ex}{}{}
+    Soit $\phi~:~\forall m, ~ 2m\geq n$.\\
+    $\hra$ $\phi[n/2] ~:~ \forall m, ~ 2m\geq2$.\\
+    $\hra$ $\phi[n/2m] ~:~ \forall m_1, ~ 2m_1 \geq 2m$ : on n'a pas remplacé $m$ par $2m$ car il est lié.\\
+    Lorsqu'on réalise une substitution, on doit veiller à renommer les variables liées qui apparaissent dans $t$ pour éviter tout conflit.
+\end{ex}
+
+\begin{defi}{Règles sur $\forall$.}{}
+    Si $x$ n'a pas d'occurences libres dans $\G$ : 
+    \begin{center}
+        \begin{tabular}{c c}
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash\forall x.\phi$}
+                \RightLabel{$\forall_e$}
+                \UnaryInfC{$\G\vdash \phi[x/t]$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash\phi$}
+                \RightLabel{$\forall_i$}
+                \UnaryInfC{$\G\vdash \forall x.\phi$}
+            \end{bprooftree}
+        \end{tabular}
+    \end{center}
+\end{defi}
+
+\begin{exercice}{}{}
+    Montrer que $\G\vdash\forall x.(\phi_1\land \phi_2)\ra\forall x.\phi_1\land\forall x.\phi_2$. 
+\end{exercice}
 
 \end{document}

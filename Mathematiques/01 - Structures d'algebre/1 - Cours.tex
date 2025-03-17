@@ -33,7 +33,7 @@
     \end{enumerate}
     \tcblower
     \boxed{1.} Soient $e,e'$ deux neutres, on a $ee'=e$ et $ee'=e'$, donc $e=e'$.\\
-    \boxed{2.} Soient $x\in E$ et $y,z\in E$ tels que $yx=xz=e$, donc $yxz=y\cancel{e}=\cancel{e}z$ donc $y=z$.
+    \boxed{2.} Soient $x,y,z\in E$ tels que $yx=xz=e$, donc $yxz=y\cancel{e}=\cancel{e}z$ donc $y=z$.
 \end{ex}
 
 \vspace*{-0.7cm}
@@ -199,7 +199,7 @@
     \boxed{3.\subset} Soit $\s\in Z(S_n)$. Supposons par l'absurde que $\s\neq\id$ : $\exists a,b\in\lb1,n\rb ~ : ~ \s(a)=b$ et $a\neq b$.\\
     On prend $c\in\lb1,n\rb\setminus\{a,b\}$. On a $\s(b~c)(a)=\s(a)=b$ et $(b~c)\s(a)=c$ donc $\s$ ne commute pas avec $(b~c)$.\\
     Or $\s\in Z(S_n)$, ce qui est absurde donc $\s=\id$.\\
-    \boxed{3.\supset} On a bien que $\id$ commute avec toutes les permutations, donc $Z(S_n,\circ)=\{\id\}$.\\
+    \boxed{3.\supset} $\id$ commute avec toutes les permutations, donc $Z(S_n,\circ)=\{\id\}$.\\
     \boxed{4.\subset} Soit $A\in Z(\GL_n(\R))$. Soient $i,j\in\lb1,n\rb$, soient $k,l\in\lb1,n\rb$.
     \begin{equation*}
         [AE_{i,j}]_{k,l}=\sum_{s=1}^na_{km,s}\e_{s,l}=\d_{l,j}a_{k,i}; \quad [E_{i,j}A]_{k,l}=\sum_{s=1}^n\e_{k,s}a_{s,l}=\d_{k,i}a_{j,l}.
@@ -392,7 +392,7 @@
 
 \begin{ex}{}{}
     Soit $(G,\times)$ un groupe, et $x,y\in G$ tels que $xy=yx$.\\
-    On suppose $x$ et $y$ d'ordre finis $p$ et $q$ respectivement tels que $p\land q = 1$.\\
+    On suppose $x$ et $y$ d'ordres finis $p$ et $q$ respectivement tels que $p\land q = 1$.\\
     Montrer que $xy$ est encore d'ordre fini, et que $o(xy)=pq$.
     \tcblower
     On a $\langle x \rangle = \{e,x,...,x^{p-1}\}$ et $x^n=e\iff p\mid n$; $\langle y \rangle = \{e,y,...,y^{q-1}\}$ et $y^n=e\iff q\mid n$.\\
@@ -635,7 +635,7 @@
     \bf{Analyse.} Soit $\phi$ endomorphisme de $(\C,+,\times)$ tel que $\forall x \in \R, ~ \phi(x)=x$.\\
     Soit $z=a+ib\in\C$, alors $\phi(z)=\phi(a)+\phi(i)\phi(b)=a+\phi(i)b$. Or $\phi(i)^2=\phi(-1)=-1$ donc $\phi(i)\in\{i,-i\}$.\\
     Si $\phi(i)=i$, alors $\phi(z)=z$, puis $\phi=\id_\C$; Si $\phi(i)=-i$, alors $\phi(z)=\ov{z}$, puis $\phi$ est la conjugaison.\\
-    \bf{Synthèse.} On a bien que l'identité et la conjugaison sont de tels morphismes.
+    \bf{Synthèse.} Donc l'identité et la conjugaison sont de tels morphismes.
 \end{ex}
 
 \vspace*{-0.8cm}
@@ -955,7 +955,7 @@
     Soit $p$ premier, alors $\forall a \in \Z, ~ a^{p}\equiv a[p]$.\\
     Si $a$ est premier avec $p$, alors $a^{p-1}\equiv1[p]$.
     \tcblower
-    On a $\phi(p)=p-1$, on applique le théorème d'Euler, puis $a^p\equiv a[p]$ est vrai si $a$ est multiple de $p$ car $0\equiv0[p]$, mais aussi s'il n'est pas multiple de $p$ car $a^{p-1}\equiv1[p]\ra a^p\equiv a[p]$.\n
+    On a $\phi(p)=p-1$, on applique le théorème d'Euler : $a^{p-1}\equiv 1[p]$, puis $a^p\equiv a[p]$ est vrai si $a$ est multiple de $p$ car $0\equiv0[p]$, mais aussi s'il n'est pas multiple de $p$ car $a^{p-1}\equiv1[p]\ra a^p\equiv a[p]$.\n
     On peut en faire une preuve directe par récurrence sur $a$. 
 \end{prop}
 
@@ -1087,7 +1087,7 @@
 
 \setexercicecounter{1}
 
-\begin{exercice}{Colle.}{}
+\begin{exercice}{}{}
     \begin{enumerate}
         \item Soit $G$ un groupe et $x\in G$ un élément d'ordre fini $n$.\\
         Si $d\geq1$, montrer que l'ordre de $x^d$ est $n/(n\land d)$.
@@ -1111,7 +1111,7 @@
 
 \vspace*{-0.7cm}
 
-\begin{exercice}{Victor.}{}
+\begin{exercice}{}{}
     Soit $(A,+,\times)$ un anneau commutatif.\\
     Si $I$ est un idéal, alors montrer que $\sqrt{I}=\{x\in A, ~ \exists n \in \N, ~ x^n \in I\}$ est un idéal.
     \tcblower
@@ -1123,7 +1123,7 @@
     On a $(x-y)=\sum_{k=0}^n\binom{n}{k}x^k(-y)^{n-k}$ car $x,y$ commutent.
 \end{exercice}
 
-\begin{exercice}{Martin.}{}
+\begin{exercice}{}{}
     \begin{enumerate}
         \item Calculer $|U(\Z/2^n\Z)|$.
         \item Montrer que $(U(\Z/2^n\Z), \ov{\times})$ est cyclique ssi $n\leq2$.
@@ -1145,7 +1145,7 @@
 
 \vspace*{-0.8cm}
 
-\begin{exercice}{Anaïs.}{}
+\begin{exercice}{}{}
     Soit $G$ un groupe abélien d'ordre $n$. Soit $(a,b)\in G^2$ tel que $o(a)=o(b)=p$ avec $p$ premier.\\
     On note $H=\langle a\rangle$, $K=\langle b\rangle$ et $HK=\{hk, ~ (h,k) \in H\times K\}$. On suppose $b\notin\langle a\rangle$.
     \begin{enumerate}
@@ -1165,7 +1165,7 @@
 
 \vspace*{-0.8cm}
 
-\begin{exercice}{Ibrahim}{}
+\begin{exercice}{}{}
     Soit $(k,+,\times)$ un corps et $G$ un sous-groupe fini de $(k^*,\times)$.
     \begin{enumerate}
         \item Montrer que si $d\geq1$ est un entier, alors dans $k^*$, il y a soit $0$, soit $\phi(d)$ éléments d'ordre $d$.

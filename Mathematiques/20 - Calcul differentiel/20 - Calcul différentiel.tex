@@ -179,7 +179,7 @@ Les dérivées partielles de $f$ en $a$ donnent des contraintes sur les valeurs 
     Soit $f:E\to\R$ avec $E$ un $\R$-evdf. On suppose $f$ continue sur $E$ et $\lim_{\|x\|\to+\infty}f(x)=+\infty$.\\
     Alors $f$ admet un minimum sur $E$.
     \tcblower
-    Par hypothèse, $\forall A \in \R, ~ \exists B \in \R, ~ \forall x \in E, ~ \|x\|>B B \ra f(x)\geq A$.\\
+    Par hypothèse, $\forall A \in \R, ~ \exists B \in \R, ~ \forall x \in E, ~ \|x\|>  B \ra f(x)\geq A$.\\
     Prenons $A=f(0)$ : $\exists R \in \R, ~ \forall x \in E, ~ \|x\|> R\ra f(x)\geq f(0)$.\\
     Puisque $f$ est continue sur $E$, $f$ est continue sur $B_f(0,R)$, qui est compact comme fermé borné en dim. finie.\\
     Ainsi, $f$ est continue sur le compact $B_f(0,R)$ et à valeurs réelles donc est minorée sur $B_f(0,R)$ et atteint son minimum $m$. Donc $\exists x_0 \in B_f(0,R), ~ m = f(x_0)$. Soit $x\in E$.\\
@@ -187,5 +187,133 @@ Les dérivées partielles de $f$ en $a$ donnent des contraintes sur les valeurs 
     $\hra$ Sinon, $\|x\|>R$ et $f(x)\geq f(0)\geq m$.
 \end{prop}
 
+\vspace*{-0.3cm}
+
+\begin{exercice}{}{}
+    Soit $f(x,y)=x^4+8xy+y^2-4y+6$ pour $x,y\in\R$.
+    \begin{enumerate}
+        \item $f$ est-elle bornée sur $[0,1]^2$ ? Déterminer ses bornes.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $K=[0,1]^2$ compact de $\R^2$ comme produit de compacts, donc $f$ est continue sur $K$ et à valeurs réelles donc $f$ est bornée sur $K$ et atteint ses bornes. Si le max est atteint sur $]0,1[^2$, alors il est atteint en un point critique $a=(a_1,a_2)$.\\
+    \bf{Points critiques.} On a $4a_1^3 + 8a_2 = 0$ et $8a_1 + 2a_2 - 4 = 0$ donc $a_2=-\frac{a_1^3}{2}<0$, il n'y a pas de point critique.\\
+    Le maximum est atteint aux bords : on étudie les valeurs de $f$ sur les bords de $K$.\\
+    On étudie $\phi_1:y\mapsto f(0,y)$; $\phi_2:x\mapsto f(x,0)$; $\phi_3:y\mapsto f(1,y)$ et $\phi_4:x\mapsto f(x,1)$ pour $(x,y)\in[0,1]^2$.
+\end{exercice}
+
+\vspace*{-0.3cm}
+
+\section{Différentielle.}
+
+\begin{defi}{}{}
+    Soit $f:U\subset E\to F$ et $a\in U$. Alors $f$ est différentiable en $a$ ssi $f$ admet un DL1 en $a$ ssi :
+    \begin{equation*}
+        \exists L \in \L(E,F], ~ f(a+h) =f(a) + L(h) + o(\|h\|).
+    \end{equation*}
+    \bf{Remarque.} $L\in\L(E,F)$ avec $E$ de dimension finie, donc $L$ est continue sur $E$.
+\end{defi}
+
+\vspace*{-0.3cm}
+
+\begin{lemme}{}{}
+    Soient $L_1,L_2\in\L(E,F)$ égales sur un voisinage de zéro, alors $L_1=L_2$.\\
+    Soit $L\in\L(E,F)$. Si $L(h)=o(\|h\|)$, alors $L=0$.
+    \tcblower
+    \boxed{1.} Par hypothèse, il existe $r>0, ~ \forall h \in B(0,r), ~ L_1(h)=L_2(h)$. Soit $x\in E$.\\
+    $\hra$ Si $x=0$, alors $L_1(0)=L_2(0)$ par hypothèse.\\
+    $\hra$ Sinon, on a $\frac{r}{2\|x\|}x\in B(0,r)$, donc $L_1(\frac{r}{2\|x\|}x)=L_2(\frac{r}{2\|x\|}x)$ puis $\frac{r}{2\|x\|}L_1(x)=\frac{r}{2\|x\|}L_2(x)$ puis $L_1(x)=L_2(x)$.\\
+    \boxed{2.} Par hypothèse, $L(h)=\|h\|\e(h)$ avec $\e(h)\to0$. Soit $x\in E$.\\
+    $\hra$ Si $x=0$, alors $L(tx)=0$.\\
+    $\hra$ Sinon, pour $t\in\R^*$, $L(tx)=\|tx\|\e(tx)$ avec $\e(tx)\to0$ puis $tL(x)=|t|\|x\|\e(tx)$ puis $L(x)=\frac{|t|}{t}\|x\|\e(tx)\to0$.\\
+    Par passage à la limite, $L(x)=0_E$.
+\end{lemme}
+
+\begin{defi}{Différentielle de $f$ en $a$.}{}
+    Soit $f:U\subset E\to F$ et $a\in U$. On suppose $f$ différentiable en $a$ :
+    \begin{equation*}
+        \exists L \in \L(E,F), ~ f(a+h) = f(a) + L(h) + \|h\|\e(h) \nt{ avec } \e(h)\xrightarrow[h\to0_E]{}0.
+    \end{equation*}
+    Alors $L$ est déterminée de manière unique, et notée $df_a$, appelée différentielle de $f$ en $a$.\\
+    \bf{Remarque.} L'unicité de $L$ est acquise par le lemme précédent.
+\end{defi}
+
+\begin{defi}{Différentielle de $f$ sur $U$.}{}
+    Soit $f:U\subset E \to F$. Si $f$ est différentiable en $a$ pour tout $a\in U$, alors $f$ est différentiable sur $U$ et :
+    \begin{equation*}
+        df : \begin{cases} U &\to \quad \L(E,F) \\ a &\mapsto \quad df_a\end{cases}.
+    \end{equation*}
+    est la différentielle de $f$ sur $U$.
+\end{defi}
+
+\begin{ex}{Exemples de calculs de différentielles.}{}
+    \begin{enumerate}
+        \item Si $f$ est constante sur $U$, alors $f(a+h)-f(a)=0=L(h)+\|h\|\e (h)$ donc $L=0$ i.e. $df_a=0$.
+        \item Pour $f$ linéaire et $a\in U$, $f(a+h)-f(a)=f(h)=L(h)+o(\|h\|)$.\\
+        Alors $L(h)=f(h)$ convient, donc $L=df_a(h)=f(h)$, $df_a=f$.
+        \item Soit $a\in U\subset \R$, $U$ ouvert de $\R$ et $f:U\to\R$.\\
+        On a $f$ différentiable en $a$ ssi $f$ admet un DL à l'ordre 1 en $a$ : $f(a+h)=f(a)+L(h)+o(h)$.\\
+        Alors $f$ est différentiable en $a$ ssi $f$ est dérivable en $a$ et $f'(a)=df_a(1)$.
+        \item Posons $f(M)=M^2$ pour $M\in\M_n(\R)$. Soit $A\in\M_n(\R)$.\\
+        On a $f(A+H)-f(A)=(A+H)^2-A^2 = A^2+H^2+AH+HA-A^2=AH+HA+H^2=L(H)+o(\|H\|)$.\\
+        Avec $L(H)=AH+HA$ et $\e(H)=\frac{H^2}{\|H\|}$ pour $H\neq0$ avec $\|\.\|$ une norme d'algèbre.\\
+        On a en effet $L$ linéaire et $\|\e(H)\|=\frac{\|H^2\|}{\|H\|}\leq\frac{\|H\|^2}{\|H\|}=\|H\|\to0$ donc $\e(H)\to0$. 
+        \item Soit $E$ euclidien, $f(x,y)=\Lg x,y\Rg$, soient $a,b\in E$.\\
+        On a $f((a,b)+(h,k))=f(a+h,b+k)=\Lg a, b \Rg + \Lg h,b\Rg + \Lg a,k\Rg + \Lg h,k\Rg = f(a,b) + L((h,k)) + o(\|(h,k)\|)$.\\
+        Avec $L(h,k)=\Lg a,k \Rg + \Lg h , b\Rg$ linéaire, et par C.S. $|\Lg h,k\Rg|\leq \|h\|\|k\|\leq \|(h,k)\|^2$ avec $\|\.\|_E$ euclidienne, et avec $\| (x,y) \|=\max(\|x\|_E,\|y\|_E)$; alors $\Lg h,k\Rg = o(\|(h,k)\|)$.
+    \end{enumerate}
+\end{ex}
+
+\begin{exercice}{}{}
+    Soit $E$ un $\R$-evdf, $\|\.\|$ une norme sur $E$ et $f:x\mapsto\|x\|$. Montrer que $f$ n'est pas différentiable en 0.
+    \tcblower
+    Supposons $f$ différentiable en $0$, alors :
+    \begin{equation*}
+        \exists L \in \L(E,F), ~ f(h) = L(h) + \|h\|\e(h).
+    \end{equation*}
+    Soit $h\in E$ fixé et $t\in\R$, alors $\|th\|=L(th)+\|th\|\e(th)$ puis $|t|\|h\|=t L(h)+|t|\|h\|\e(th)$.\\
+    Alors pour $t\neq0$, $\|h\|=\frac{t}{|t|}L(h)+\|h\|\e(th)$ puis par passage à la limite en $0^+$ : $\|h\|=L(h)$; en $0^-$ : $\|h\|=-L(h)$.\\
+    Donc $\forall h \in E, ~ L(h)=0$, puis $\|h\|=\|h\|\e(h)$, absurde.
+\end{exercice}
+
+\begin{prop}{}{}
+    Soit $f:U\subset E \to F$ et $a\in U$.
+    \begin{enumerate}
+        \item Si $f$ est différentiable en $a$, alors $f$ est continue en $a$.
+        \item Si $f$ est différentiable sur $U$, alors $f$ est continue sur $U$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $f(a+h)=f(a)+L(h)+\|h\|\e(h)$ avec $L=df_a\in\L(E,F)$ et $\e(h)\to0$.\\
+    Puis $L$ est continue sur $E$ donc $L(h)\xrightarrow[h\to 0]{}L(0)=0$ et $\|h\|\e(h)\xrightarrow[h\to0]{}0$ donc $f(a+h)\xrightarrow[h\to0]{} f(a)$.
+\end{prop}
+
+\begin{prop}{}{}
+    Soit $f:U\subset E\to F$, avec $E$ de dimension $n$ et $\B=(e_1,...,e_n)$ base de $E$. Soit $a\in U$ et $v\in E\setminus\{0_E\}$.\\
+    Si $f$ est différentiable en $a$, alors $f$ admet une dérivée en $a$ suivant le vecteur $v$ et $Df_v(a)=df_a(f)$.\\
+    En particulier, si $f$ est différentiable en $a$, alors $f$ admet des dérivées partielles en $a$.
+    \tcblower
+    Supposons que $f$ soit différentiable en $a$, alors $f(a+h)=f(a)+L(h)+\|h\|\e(h)$ avec $L=df_a$ et $\e(h)\to0$.\\
+    Soit $t\in\R$. On a $f(a+tv)=f(a)+L(tv)+\|tv\|\e(tv)$ donc $f(a+tv)-f(a)=L(tv)+\|tv\|\e(tv)$.\\
+    Puis $\forall t \in \R^*, ~ \frac{f(a+tv)-f(a)}{t}=L(v)+\|v\|\e(tv)\xrightarrow[t\to0]{} L(v)$.\\
+    Donc $Df_v(a)=L(v)=df_a(v)$, c'est vrai quel que soit $v$, donc $f$ admet des dérivées partielles.
+\end{prop}
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Soit $(\A,+,\times,\.)$ une $\K$-algèbre normée et $u\in\A$ tel que $\|u\|<1$. Notons $e$ le neutre de $\A$ pour $\times$.
+        Montrer que $e-u$ est inversible et que $(e-u)^{-1}=\sum_{n=0}^\infty u^n$.
+        \item On pose $f:A\mapsto A^{-1}$. Montrer que $f$ est diff. sur l'ouvert $\GL_n(\R)$ et déterminer $df_A$ pour tout $A\in\GL_n(\R)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Vérifions déjà que $\sum_{n\geq0}u^n$ converge absolument, donc converge.\\
+    Pour $n\in\N, ~ \|u^n\|\leq \|u\|^n$ puis par comparaison (positifs) avec une série géométrique, $\sum\|u^n\|$ converge.\\
+    Pour $n\in\N, ~ (e-u)\sum_{n=0}^nu^k=e-u^{n+1}$ et $\|u^{n+1}\|\leq \|u\|^{n+1}\to0$ donc $u^{n+1}\to0$ donc $(e-u)\sum_{n=0}^{\infty}u^n\to e$ par passage à la limite donc $(e-u)$ est inversible et $(e-u)^{-1}=\sum_{n=0}^{\infty}u^n$.\\
+    \boxed{2.} Soit $A\in\GL_n(\R)$, $\exists R > 0, ~ B(A,R)\subset\GL_n(\R)$. Soit $H\in B(0,R)$.\\
+    On a $f(A+H)-f(A)=(A+H)^{-1} - A^{-1} = (A(I_n + A^{-1}H))^{-1} - A^{-1} = (I_n + A^{-1}H)^{-1}A^{-1} - A^{-1}$.\\
+    Posons $u=A^{-1}H$, alors par le 1, $\|u\|<1 \ra I_n + u\in\GL_n(\R) \ra (I_n + u)^{-1}=\sum_{n=0}^{\infty}(-1)^nu^n$.\\
+    Donc avec $H\in B(A,R)$ et $\|H\|<\frac{1}{\|A^{-1}\|}$ : $\|u\|=\|A^{-1}H\| < 1$ puis $(I_n + u)^{-1}=(I_n + A^{-1}H)^{-1}=\sum_{n=0}^{+\infty}(-1)^n(A^{-1}H)^n$.\\
+    Donc $f(A+H)-f(A)=\sum_{n=0}^{\infty}(-1)^n(A^{-1}H)^nA^{-1}=-A^{-1}HA^{-1}+\sum_{n=2}^{+\infty}(-1)^n(A^{-1}H)^nA^{-1}$.\\
+    Donc $f(A+H)-f(A)=L(H)+\|H\|\e(H)$, avec $L(H)=-A^{-1}HA^{-1}$; $L$ linéaire et $\e(H)\to0$.\\
+    Alors $df_A(H)=-A^{-1}HA^{-1}$.
+\end{exercice}
 
 \end{document}
