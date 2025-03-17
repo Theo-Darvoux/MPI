@@ -511,7 +511,7 @@ On a $\det M(t) = W(t)$ (Wronskien) puis $\forall t \in I, ~ W(t)\neq 0$ par th�
     \begin{pmatrix}\l_1(t) \\ \vdots \\ \l_n(t) \end{pmatrix} = M(t)^{-1} \begin{pmatrix}x_1(t) \\ \vdots \\ x_n(t)\end{pmatrix}
 \end{equation*}
 Or $A^{-1}=\frac{1}{\det(A)}\Com(A)^\top$ si $A\in\GL_n(\K)$, donc $\forall t \in I, ~ (M(t))^{-1}=\frac{1}{W(t)}(\Com M(t))^\top$.\\
-Puis $W$ est dérivable avec $W'(t)=\det(X_1'(t),X_2,...,X_n(t))+...+det(X_1(t),...X_{n-1}(t),X_n'(t))$ et ne s'annulle pas.\\
+Puis $W$ est dérivable avec $W'(t)=\det(X_1'(t),X_2,...,X_n(t))+...+\det(X_1(t),...X_{n-1}(t),X_n'(t))$ et ne s'annulle pas.\\
 Puis $t\mapsto M$ est dérivable sur $I$, puis $t\mapsto \Com M(t)$ est dérivable car $[\Com A]_{i,j}=(-1)^{i+j}\Delta_{i,j}$.\\
 Puis $t\mapsto (\Com M)^\top$ est dérivable sur $I$, finalement $t\mapsto M(t)^{-1}$ est dérivable sur $I$ et $\forall i \in \lb1,n\rb$ dérivable sur $I$.\\
 Enfin, soit $X$ d. sur $I$ tq $X=\sum_{i=1}^n\l_iX_i$, alors $\l_1,...,\l_n$ sont d. sur $I$ et $X'=\sum_{i=1}^n\l_i'X_i + \sum_{i=1}^n\l_i X_i'$ (Leibniz)
@@ -522,13 +522,105 @@ Enfin, soit $X$ d. sur $I$ tq $X=\sum_{i=1}^n\l_iX_i$, alors $\l_1,...,\l_n$ son
     &\iff \begin{pmatrix}\l_1'(t) \\ \vdots \\ \l_n'(t)\end{pmatrix} = M(t)^{-1}B(t).
 \end{align*}
 
+\section{Équations différentielles scalaires.}
 
-\section{Équation différentielle linéaire d'ordre \texorpdfstring{$n$}{n}.}
+\subsection{Généralités.}
 
+\begin{defi}{}{}
+    Une équation différentielle scalaire linéaire d'ordre $n$ est une équation de la forme :
+    \begin{equation*}
+        (E) ~:~ \forall t \in I, ~ y^{(n)} + a_{n-1}(t)y^{(n-1)} + \dots + a_0(t)y = b(t)
+    \end{equation*}
+    avec $a_0,...,a_{n-1},b$ des fonctions de $I$ dans $\K$.\\
+    Elle est dite \bf{normalisée} car le coefficient devant $y^{(n)}$ est 1.\\Les théorèmes suivants ne s'appliquent qu'aux équations normalisées.
+\end{defi}
 
+\begin{thm}{}{}
+    Soit $(E) ~:~ y^{(n)} + a_{n-1}(t)y^{(n-1)} + ... + a_0(t)y = b(t)$ pour tout $t\in I$.\\
+    On suppose $a_{0},...,a_{n-1},b$ continues de $I$ dans $\K$.
+    \begin{enumerate}
+        \item L'ensemble des solutions de $(E_H)$ est un $\K$-espace vectoriel de dimension $n$.
+        \item L'ensemble des solutions de $(E)$ est un espace affine de dimension $n$, de direction $(E_H)$.
+        \item Il existe une unique solution $y$ de $(E)$ vérifiant une condition initiale donnée, de la forme :
+        \begin{equation*}
+            y(t_0) = \a_0, ~ y'(t_0) = \a_1, ~ \dots, ~ y^{(n-1)}(t_0) = \a_{n-1}; ~ (t_0 \in I)
+        \end{equation*}
+    \end{enumerate} 
+    \tcblower
+    \boxed{1.} Non-vide : $\zero\in S_H$, stable par combinaisons linéaires.
+    \begin{equation*}
+        Y=\begin{pmatrix}y\\y'\\\vdots\\ y^{n-1}\end{pmatrix}; ~ Y' = \begin{pmatrix}y'\\y''\\\vdots\\y^{(n)}\end{pmatrix}; ~ y \nt{ solution ssi } ~ Y'=AY ~ \nt{ssi} ~  A=\begin{pmatrix}0&1&0&\dots&\dots&0 \\ 0&0&1&0&\dots&0 \\ \vdots & \vdots & \ddots & \ddots & & \vdots \\ 0 & \dots & \dots & \dots & 0 & 1 \\ -a_0 & -a_1 & \dots & \dots & \dots & -a_{n-1} \end{pmatrix}
+    \end{equation*}
+    Notons $\tilde{S}$ l'ensemble des solutions de $Y'=AY$, on sait que $\tilde{S}$ est un $\K$-ev de dimension $n$.\\
+    Posons $\phi:y\mapsto Y$, de $S_H$ dans $\tilde{S}$ Alors $\phi$ bien définie, linéaire et bijective, donc $\dim S_H = \dim\tilde{S}=n$.\\
+    \boxed{3.} Le théorème de Cauchy s'applique sur $Y'=AY$, donc $\exists!Y\in\tilde{S}, ~ Y(t_0) = (\a_i)_i\in\M_{n,1}(\K)$ puis $\exists!y\in S_H$ vérifiant les conditions initiales. On a donc vérifié le théorème de Cauchy sur $(E_H)$. Pour $(E)$ :
+    On a $Y'=A'(t)Y+B(t)$, donc le théorème de Cauchy s'applique, avec $A,B$ continues sur $I$.
+\end{thm}
 
+\bf{Cas particulier des équations différentielles scalaires à coefficients constants.}
 
+On a un système différentiel autonome, on rappelle que $\X_A = \X_{A^\top} = X^n  + a_{n-1}X^{n-1} + ... + a_1X+a_0$.\\
+On appelle équation caractéristique de $(E_H)$ l'équation $r^n + a_{n-1}r^{n-1} + ... + a_1r + a_0 = 0$.\\
+Puis $r$ est solution de l'équation caractéristique ssi $\X_A(r)=0$ ssi $r$ est vp de $A$.\\
+Si $\X_A$ est scindé à racines simples : on note $r_1,...,r_n$ ses vp distinctes, on sait qu'un S.F. de solutions de $Y'=AY$ est donné par $(X_1,...,X_n)$ où $\forall i \in \lb1,n\rb, ~ X_i = e^{r_it}V_i$ avec $(V_1,...,V_n)$ une base de $\vp$ de $A$ associés à $(r_1,...,r_n)$.\\
+Puis $Y$ est solution de $Y'=AY$ ssi $\exists(\a_1,...,\a_n)\in\K^n$ tels que $Y=\a_1X_1+...+\a_nX_n$.\\
+Donc $Y=\a_1e^{r_1t}V_1 + ... + \a_ne^{r_nt}V_n$ puis $y=\a_1e^{r_1t}v_1+...+\a_ne^{r_nt}v_n$ en filtrant selon la première ligne.\\
+Finalement, $y$ est solution de $(E_H)$ implique $y$ est combinaison linéaire de $(e^{r_1t},...,e^{r_nt})$ donc c'est une famille génératrice de $S_H$, c'est donc une base par cardinalité.
 
-\section{Étude qualitative.}
+\subsection{Le cas \texorpdfstring{$n=2$}{Lg}.}
+
+On considère une équation différentielle scalaire linéaire d'ordre 2 : $(E) ~ : ~ y'' + a(t)y' + b(t)y = c(t)$ avec $a,b,c\in\cursive{C}(I,\K)$.\\
+On appelle solution de $(E)$ une fonction $y$ deux fois dérivable sur $I$ telle que $\forall t \in I, ~ y''(t)+a(t)y'(t)+b(t)y(t)=c(t)$.\\
+Pour trouver un S.F. de solutions, il suffit de trouver deux solutions de $(E_H)$ qui forment une famille libre.\\
+Le théorème de Cauchy s'applique (car $a,b,c$ continues sur $I$) : il existe une unique solution de $(E)$ vérifiant une condition initiale $y(t_0)=\a$ et $y'(t_0)=\b$ avec $t_0\in I$ et $\a,\b\in\K$.\\
+L'ensemble des solutions de $(E)$ est un espace affine de dimension 2, de direction $S_H$.\\
+Si $(y_1,y_2)$ est une famille de solutions de $(E_H)$, on définit le Wronskien par $W(t)=\det(Y_1(t),Y_2(t))=y_1(t)y_2'(t)-y_1'(t)y_2(t)$.
+
+\bf{Écriture matricielle.}
+
+Pour $Y=\begin{pmatrix}y\\y'\end{pmatrix}$, $Y'=\begin{pmatrix}y'\\y''\end{pmatrix}$, on a $Y$ solution de $(E)$ ssi $\begin{pmatrix}y'\\y''\end{pmatrix}=\begin{pmatrix}0&1\\-b(t)&-a(t)\end{pmatrix}\begin{pmatrix}y\\y'\end{pmatrix}+\begin{pmatrix}0\\c(t)\end{pmatrix}$.
+
+\begin{prop}{}{}
+    Soit $(E) ~:~ y''+a(t)y'+b(t)y = c(t)$ avec $a,b,c$ continues de $I$ dans $\K$ et $(E_H) ~:~ y''+a(t)y'+b(t)y=0$.\\
+    Soient $(y_1,y_2)$ une famille de solutions de $(E_H)$. Les trois propositions sont équivalents :
+    \begin{enumerate}
+        \item $(y_1,y_2)$ est un système fondamental de solutions de $(E)$.
+        \item $\forall t \in I, ~ W(t) \neq 0$.
+        \item $\exists t_0 \in I, ~ W(t_0) \neq 0$.
+    \end{enumerate}
+\end{prop}
+
+\bf{Cas particulier où $a$ et $b$ sont constants.}\n
+Soit $(E) ~:~ y''+ ay' + by=c(t)$ avec $c$ continue sur $I$ et $a,b\in\K$. On considère : $r^2+ar+b=0$.\\
+$\bullet$ Lorsque $\K=\R$ :\\
+\hspace*{0.2cm} $\hra$ Si l'équation admet deux racines réelles $r_1,r_2$, alors $(e^{r_1t}, e^{r_2t})$ est un S.F. de solutions.\\
+\hspace*{0.2cm} $\hra$ Si l'équation admet une racine double réelle $r$, alors $(e^{rt},te^{rt})$ est un S.F. de solutions.\\
+\hspace*{0.2cm} $\hra$ Si elle admet deux racines complexes conjuguées $\a\pm i\b$, alors $(e^{\a t}\cos(\b t), e^{\a t}\sin(\b t))$ est un S.F. de solutions.\\
+On retient les deux premiers cas uniquement lorsque $\K=\C$.
+
+Pour résoudre l'équation complète, on pourra appliquer la méthode de variation des constantes.
+
+\begin{prop}{}{}
+    Soit $(E) ~:~ y''+a(t)y'+b(t)y=c(t)$ avec $a,b,c$ continues de $I$ dans $\K$.\\
+    Notons $y_1,y_2$ un système fondamental de solutions. Posons $y(t)=\l_1(t)y_1(t)+\l_2(t)y_2(t)$ pour $t\in I$.\\
+    Alors $y$ est dérivable sur $I$ ssi $\l_1$ et $\l_2$ le sont, puis :
+    \begin{equation*}
+        y \nt{ est solution de } (E) \iff \begin{cases}\l_1' y_1 + \l_2' y_2 = 0 \\ \l_1' y_1' + \l_2'y_2' = c\end{cases}
+    \end{equation*}
+    Le système précédent est un système de Cramer qui détermine $\l_1'$ et $\l_2'$ de manière unique.\\
+    On calcule ensuite $\l_1$ et $\l_2$ à une constante près avec deux primitivations.
+\end{prop}
+
+\begin{exercice}{}{}
+    Résoudre $y'' - 5y' + 6y = te^t$ sur $\R$.
+    \tcblower
+    C'est une équation différentielle scalaire d'ordre 2 à coefficients continus sur $\R$. On sait que l'espace des solutions est un espace affine de dimension 2. On résout l'équation homogène : $y''-5y'+6y = 0$.\\
+    É.C. : $r^2-5r+6=0$ donc $(r-2)(r-3)=0$, donc un S.F. de solutions est donné par $(e^{2t}, e^{3t})$.\\
+    Solution particulière : de la forme $y=(at+b)e^{t}$.
+    \begin{equation*}
+        y' = (at+a+b)e^t \et y'' = (at+ 2a +b)e^{t} \ra (2at - 3a + 2b)e^t= te^t
+    \end{equation*}
+    Donc $a=1/2$ et $b = 3/4$. Donc $y$ solution ssi $\exists (\l,\mu)\in\R^2, ~ y=\l e^{2t} + \mu e^{3t} + \left( \frac{t}{2} + \frac{3}{4} \right)e^t$.
+\end{exercice}
 
 \end{document}
