@@ -207,7 +207,7 @@
 
 \begin{prop}{}{}
     Soit $A,B\in\K[X]$ non tous les deux nuls, et $D=A\land B$.\\
-    Alors $D\mid A$ et $D\mid B$; et $C\mid A, ~ C\mid B \ra C \mid D$.
+    On a $D\mid A$ et $D\mid B$, et $\left[C\mid A \et C\mid B\right] \ra C \mid D$.
     \tcblower
     Même preuve que pour le PGCD dans $\Z$.
 \end{prop}
@@ -236,7 +236,7 @@
 
 \begin{prop}{}{}
     Soient $A,B\in\K[X]$ non nuls, notons $M=A\lor B$.\\
-    Alors $A\mid M$ et $B\mid M$; et $A\mid N \et B\mid N \ra M \mid N$. 
+    On a $A\mid M$, $B\mid M$; et $(A\mid N \et B\mid N)\ra M \mid N$. 
 \end{prop}
 
 \vspace*{-0.7cm}
@@ -271,7 +271,7 @@
 
 \begin{prop}{}{}
     \begin{equation*}
-        A\land B=1 ~\et~ A\land C = 1 \ra A\land(BC)=1.
+        \left[A\land B=1 ~\et~ A\land C = 1\right] \ra A\land(BC)=1.
     \end{equation*}
     On le généralise avec un produit de $n$ polynômes.
     \tcblower
@@ -283,7 +283,7 @@
 
 \begin{prop}{}{}
     \begin{equation*}
-        A\mid BC ~\et~ A\land B = 1 \ra A \mid C
+        \left[A\mid BC ~\et~ A\land B = 1\right]\ra A \mid C
     \end{equation*}
     \tcblower
     On a $\exists (U,V)\in\K[X]^2, ~ AU+BV=1$, d'où $ACU+(BC)V=C$, or $A\mid BC$ donc $A\mid C$. 
@@ -293,7 +293,7 @@
 
 \begin{prop}{}{}
     \begin{equation*}
-        A\mid C ~\et~ B\mid C ~\et~ A\land B=1 \ra AB\mid C.
+        \left[A\mid C ~\et~ B\mid C ~\et~ A\land B=1\right] \ra AB\mid C.
     \end{equation*}
     \tcblower
     On a $\exists (U,V)\in\K[X]^2, ~ C=AU=BV$, alors $A\mid BV$ et $A\land B = 1$ d'où $A\mid V$.\\

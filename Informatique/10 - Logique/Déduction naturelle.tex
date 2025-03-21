@@ -196,7 +196,7 @@ Lorsqu'on prouve quelque chose, on cherche à prouver que la formule sous-jacent
             \end{bprooftree}
             &
             \begin{bprooftree}
-                \AxiomC{$\G\vdash\phi$}
+                \AxiomC{$\G\vdash\psi$}
                 \RightLabel{$\lor_{id}$}
                 \UnaryInfC{$\G\vdash\phi\lor\psi$}
             \end{bprooftree}
@@ -669,6 +669,8 @@ Si $\X$ est un ensemble de variables et $\F$ un ensemble de fonctions, on défin
     --- $\forall x.\phi_1$ et $\exists x.\phi_1$ où $x\in\X$ et $\phi_1$ est une formule du premier ordre. 
 \end{defi}
 
+\vspace*{-0.8cm}
+
 \begin{defi}{}{}
     Dans une formule $\phi$, une occurence de la variable $x$ est une feuille étiquetée par $x$ dans l'arbre syntaxique de $\phi$.\\
     Une occurence de $x$ dans $\phi$ est dite liée si le chemin de la racine à l'occurence contient un $\forall.x$ ou un $\exists.x$.\\
@@ -676,10 +678,14 @@ Si $\X$ est un ensemble de variables et $\F$ un ensemble de fonctions, on défin
     Si une formule $\phi$ ne possède aucune occurence d'une variable libre, on parle de formule close.
 \end{defi}
 
+\vspace*{-0.8cm}
+
 \begin{defi}{}{}
     Si $x$ est une variable et $t$ un terme, on définit $\phi[x/t]$ la substitution de $x$ par $t$ dans $\phi$.\\
     C'est-à-dire qu'on remplace toutes les occurences \bf{libres} de $x$ par $t$ dans $\phi$. 
 \end{defi}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Soit $\phi~:~\forall m, ~ 2m\geq n$.\\
@@ -687,6 +693,8 @@ Si $\X$ est un ensemble de variables et $\F$ un ensemble de fonctions, on défin
     $\hra$ $\phi[n/2m] ~:~ \forall m_1, ~ 2m_1 \geq 2m$ : on n'a pas remplacé $m$ par $2m$ car il est lié.\\
     Lorsqu'on réalise une substitution, on doit veiller à renommer les variables liées qui apparaissent dans $t$ pour éviter tout conflit.
 \end{ex}
+
+\vspace*{-0.8cm}
 
 \begin{defi}{Règles sur $\forall$.}{}
     Si $x$ n'a pas d'occurences libres dans $\G$ : 
@@ -707,8 +715,142 @@ Si $\X$ est un ensemble de variables et $\F$ un ensemble de fonctions, on défin
     \end{center}
 \end{defi}
 
+\vspace*{-0.8cm}
+
+\begin{defi}{Règles sur $\exists$.}{}
+    Si $x$ n'a pas d'occurences libres dans $\psi$ et $\G$ : 
+    \begin{center}
+        \begin{tabular}{c c}
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash\exists x.\phi,$}
+                \AxiomC{$\G,\phi\vdash\psi$}
+                \RightLabel{$\exists_e$}
+                \BinaryInfC{$\G\vdash \psi$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{$\G\vdash\phi[x/t]$}
+                \RightLabel{$\exists_i$}
+                \UnaryInfC{$\G\vdash \exists x.\phi$}
+            \end{bprooftree}
+        \end{tabular}
+    \end{center}
+\end{defi}
+
+\vspace*{-0.8cm}
+
+\begin{ex}{}{}
+    \begin{center}
+        \begin{tabular}{c c}
+            \begin{bprooftree}
+                \AxiomC{}
+                \RightLabel{ax}
+                \UnaryInfC{$\forall y.\phi\vdash \forall y.\phi$}
+                \RightLabel{$\forall_e$}
+                \UnaryInfC{$\forall y.\phi(y)\vdash\phi[x/y]$}
+                \RightLabel{$\exists_i$}
+                \UnaryInfC{$\forall y.\phi(y)\vdash\exists x.\phi(x)$}
+            \end{bprooftree}
+            &
+            \begin{bprooftree}
+                \AxiomC{}
+                \RightLabel{ax}
+                \UnaryInfC{$\G\vdash \exists x.(\phi\land \psi)(x)$}
+
+                \AxiomC{}
+                \RightLabel{ax}
+                \UnaryInfC{$\G,(\phi\land\psi)(x) \vdash (\phi\land\psi)(x)$}
+                \RightLabel{$\land_e$}
+                \UnaryInfC{$\G,(\phi\land\psi)(x)\vdash \phi(x)$}
+                \RightLabel{}
+                \UnaryInfC{$\G,(\phi\land\psi)(x)\vdash \phi(y)[y/x]$}
+                \RightLabel{$\exists_i$}
+                \UnaryInfC{$\G, (\phi\land\psi)(x) \vdash \exists y.\phi(y)$}
+                \RightLabel{$\exists_e$}
+                \BinaryInfC{$\exists x.(\phi\land\psi)(x)\vdash\exists y.\phi(y)$}
+            \end{bprooftree}
+        \end{tabular}
+    \end{center}
+\end{ex}
+
 \begin{exercice}{}{}
-    Montrer que $\G\vdash\forall x.(\phi_1\land \phi_2)\ra\forall x.\phi_1\land\forall x.\phi_2$. 
+    Montrer que $\G:\forall x.\forall y.\forall z.(y=x)\land(y=z)\Rightarrow(x=z),\forall x.(x\. e_2)=x,\forall x.(e_1\.x=x)\vdash e_1=e_2$.
+    \begin{prooftree}
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\G\vdash\forall x.(e_1.x = x)$}
+        \RightLabel{$\forall_e$}
+        \UnaryInfC{$\G\vdash (e_1\.e_2=e_2)$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\G\vdash\forall x.(x\.e_2=x)$}
+        \RightLabel{$\forall_e$}
+        \UnaryInfC{$\G\vdash(e_1\.e_2=e_1)$}
+
+        \RightLabel{$\land_i$}
+        \BinaryInfC{$\G\vdash(e_1\.e_2 = e_1) \land (e_1\.e_2)=2$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\G\vdash\forall x.\forall y. \forall z. (y=x)\land (y=z) \Rightarrow (x=z)$}
+        \RightLabel{$\forall_e$}
+        \UnaryInfC{$\G\vdash \forall y.\forall z. (y = e_1)\land (y=z)\Rightarrow (e_1=z)$}
+        \RightLabel{$\forall_e$}
+        \UnaryInfC{$\G\vdash\forall z (e_1\.e_2=e_1)\land(e_1\.e_2=z)\Rightarrow(e_1=z)$}
+        \RightLabel{$\forall_e$}
+        \UnaryInfC{$\G\vdash (e_1\. e_2 = e_1) \land (e_1 \. e_2 = e_2) \Rightarrow (e_1=e_2)$}
+        \RightLabel{$\Rightarrow_e$}
+        \BinaryInfC{$\G\vdash e_1 = e_2$}
+    \end{prooftree}
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $\G:\forall x. \exists y. (x\.y)=e$. Montrer que $\G\vdash \forall x.\forall y.\exists z. (x+y)\.z=e$.
+    \begin{prooftree}
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\G\vdash\forall x.\exists y.(x\.y)=e$}
+        \RightLabel{$\exists_e$}
+        \UnaryInfC{$\G\vdash\exists z.(x\.z)=e$}
+        \RightLabel{$[x/(x+y)]$}
+        \UnaryInfC{$\G\vdash\exists z. (x+y)\.z=e$}
+        \RightLabel{$\forall_i$}
+        \UnaryInfC{$\G\vdash \forall y.\exists z.(x+y)\.z=e$}
+        \RightLabel{$\forall_i$}
+        \UnaryInfC{$\G \vdash \forall x.\forall y.\exists z(x+y)\. z = e$}
+    \end{prooftree}
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $\G:\exists x.\forall y. (x^2\leq 2y+1)$. Montrer que $\G\vdash \forall v.\exists u.(u^2\leq 2v+1)$.
+    \begin{prooftree}
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\G\vdash \exists x.\forall y.(x^2\leq 2y+1)$}
+
+        \AxiomC{}
+        \RightLabel{ax}
+        \UnaryInfC{$\G,\forall y.(x^2\leq 2y+1)\vdash \forall y.(x^2\leq 2y+1)$}
+        \RightLabel{$\forall_e$}
+        \UnaryInfC{$\G,\forall y.(x^2\leq 2y+1)\vdash x^2\leq 2y+1$}
+        \RightLabel{[y/v]}
+        \UnaryInfC{$\G,\forall y.(x^2\leq 2y+1)\vdash x^2\leq 2v+1$}
+        \RightLabel{[u/x]}
+        \UnaryInfC{$\G,\forall y.(x^2\leq 2y+1)\vdash (u^2\leq 2v+1)$}
+        \RightLabel{$\exists_i$}
+        \UnaryInfC{$\G,\forall y.(x^2\leq 2y+1)\vdash\exists u(u^2\leq 2v+1)$}
+        \RightLabel{$\exists_e$}
+        \BinaryInfC{$\G\vdash\exists u.(u^2\leq 2v+1)$}
+        \RightLabel{$\forall_i$}
+        \UnaryInfC{$\G\vdash \forall v.\exists u.(u^2\leq 2v+1)$}
+    \end{prooftree}
+\end{exercice}
+
+Le $\exists$ est similaire au $\lor$ dans ses règles d'introduction et d'éllimination. Souvent lorsque l'on cherche à prouver $\exists x.\phi$, on a envie de faire $\exists_i$. En réalité, on doit souvent commencer par $\exists_e$ pour fixer celui pour lequel ce serait vrai.
+
+\begin{exercice}{}{}
+    Montrer que $\G\vdash \lnot(\exists.A) \iff \forall x.(\lnot A)$ et $\G\vdash\lnot(\forall x.A) \iff \exists x.(\lnot A)$.
 \end{exercice}
 
 \end{document}

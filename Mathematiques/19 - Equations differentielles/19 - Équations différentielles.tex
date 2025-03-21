@@ -600,7 +600,7 @@ On retient les deux premiers cas uniquement lorsque $\K=\C$.
 
 Pour résoudre l'équation complète, on pourra appliquer la méthode de variation des constantes.
 
-\begin{prop}{}{}
+\begin{prop}{Variation des constantes.}{}
     Soit $(E) ~:~ y''+a(t)y'+b(t)y=c(t)$ avec $a,b,c$ continues de $I$ dans $\K$.\\
     Notons $y_1,y_2$ un système fondamental de solutions. Posons $y(t)=\l_1(t)y_1(t)+\l_2(t)y_2(t)$ pour $t\in I$.\\
     Alors $y$ est dérivable sur $I$ ssi $\l_1$ et $\l_2$ le sont, puis :
@@ -620,7 +620,314 @@ Pour résoudre l'équation complète, on pourra appliquer la méthode de variati
     \begin{equation*}
         y' = (at+a+b)e^t \et y'' = (at+ 2a +b)e^{t} \ra (2at - 3a + 2b)e^t= te^t
     \end{equation*}
-    Donc $a=1/2$ et $b = 3/4$. Donc $y$ solution ssi $\exists (\l,\mu)\in\R^2, ~ y=\l e^{2t} + \mu e^{3t} + \left( \frac{t}{2} + \frac{3}{4} \right)e^t$.
+    Donc $a=1/2$ et $b = 3/4$. Donc $y$ solution ssi $\exists (\l,\mu)\in\R^2, ~ y=\l e^{2t} + \mu e^{3t} + \left( \frac{t}{2} + \frac{3}{4} \right)e^t$.\\
+    \bf{Ou par variation des constantes :} on pose $y=\l e^{2t} + \mu e^{3t}$ pour tout $t\in\R$, dérivable ssi $\l$ et $\mu$ le sont.
+    \begin{equation*}
+        \begin{cases}
+            \l' e^{2t} + \mu' e^{3t} = 0 \\ \l' 2e^{2t} + \mu' 3e^{3t} = te^t
+        \end{cases} \iff \begin{pmatrix}\l' \\ \mu'\end{pmatrix} = \begin{pmatrix}e^{2t} & e^{3t} \\ 2e^{2t} & 3e^{3t}\end{pmatrix}^{-1}\begin{pmatrix}0\\te^t\end{pmatrix} = \begin{pmatrix}-te^{-t} \\ te^{-2t}\end{pmatrix}
+    \end{equation*}
+    Donc $\l'(t) = -te^{-t}$ et $\mu'(t) = te^{-2t}$ puis $\l(t) = (t+1)e^{-t} + \a$ et $\mu(t)=-t=-(\frac{t}{2} - \frac{1}{4})e^{-2t} + \b$.\\
+    On en déduit $y=\l e^{2t} + \mu e^{3t} = \a e^{2t} + \b e^{3t} + (\frac{t}{2} + \frac{3}{4})e^t$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Résoudre $y''-2y'+y=(t+2)e^t$ sur $\R$.
+    \tcblower
+    C'est une équation différentielle scalaire d'ordre 2 à coefficients continus sur $\R$. On sait que l'espace des solutions est un espace affine de dimension 2. On résout l'équation homogène : $y''-2y'+y = 0$.\\
+    É.C. : $r^2-2r+1=0$ donc $(r-1)^2=0$, donc un S.F. de solutions est donné par $(e^t, te^t)$.\\
+    Puisque 1 est racine double, on a $y(t)=t^2(at+b)e^t$ une solution particulière.
+    \begin{equation*}
+        y' = (at^3 + 3at^2 + bt^2 + 2bt)e^t \et y'' = (at^3 + 6at^2 + bt^2 + 6at + 4bt + 2b)e^t \ra (6at+2b)e^t = (t+2)e^t
+    \end{equation*}
+    Donc $6a=1$ et $2b=2$ donc $a=\frac{1}{6}$ et $b=1$. Donc $y$ solution ssi $\exists (\l,\mu)\in\R^2, ~ y=\l e^{t} + \mu te^{t} + \left( \frac{t^3}{6} + t^2 \right)e^t$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Résoudre $y'' - 2y' + y = \frac{e^t}{1+t^2}$ sur $\R$.
+    \tcblower
+    C'est une équation différentielle scalaire d'ordre 2 à coefficients continus sur $\R$. On sait que l'espace des solutions est un espace affine de dimension 2. On ne cherche qu'une solution particulière.\\
+    Par variation des cosntantes, on pose $y=\l e^t + \mu te^t$, dérivable ssi $\l$ et $\mu$ le sont sur $\R$.
+    \begin{equation*}
+        \begin{cases}
+            \l' e^t + \mu' t e^t = 0 \\ \l' e^t + \mu'(t+1)e^t = \frac{e^t}{1+t^2} 
+        \end{cases} \iff \begin{pmatrix}\l'\\\mu'\end{pmatrix} = \begin{pmatrix}e^t & te^t \\ e^t & (t+1)e^t\end{pmatrix}^{-1}\begin{pmatrix}0\\\frac{e^t}{1+t^2}\end{pmatrix} = \begin{pmatrix}-\frac{t}{1+t^2} \\ \frac{1}{1+t^2}\end{pmatrix}
+    \end{equation*}
+    Donc $\l = -\frac{1}{2}\ln(1+t^2)+\a$ et $\mu = \arctan(t) + \b$ puis $y=\b e^t + \a te^t + (t\arctan t - \frac{1}{2}\ln(1+t^2))e^t$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Résoudre $x^2y'' + 3xy' + y = 0$ sur $\R_+^*$ en posant $x=e^t$.
+    \tcblower
+    C'est une équation différentielle scalaire linéaire d'ordre 2, homogène à coefficients continus sur $\R_+^*$. On sait que l'ensemble des solutions forme un $\R$-espace vectoriel de dimension 2 et que le théorème de Cauchy s'applique.\\
+    Soit $x>0$, puisque $\exp$ est bijection de $\R$ sur $\R_+^*$, il existe un unique $t\in\R$ tel que $x=\exp(t)$.\\
+    Ainsi, $y(x)=y(e^t)=z(t)$, on a $z'(t)=e^ty'(e^t)$ et $z''(t)=e^ty'(e^t)+e^{2t}y''(e^t)$.\\
+    Puis $y$ est solution donc $\forall t \in \R, ~ e^{2t}y''(e^t)+3e^ty'(e^t)+y(e^t)=0$ puis $z''(t)+2z'(t)+z(t)=0$.\\
+    Le changement de variable a permis d'obtenir une équaiton différentielle d'ordre 2 à coefficients constants.\\
+    É.C. : $r^2+2r+1=0$ donc $(r+1)^2=0$, donc un S.F. de solutions est donné par $(e^{-t}, te^{-t})$.\\
+    Puis $y(x)=y(e^t)=z(t)=z(\ln x)=\l e^{-\ln x} + \mu \ln x e^{-\ln x}$ donc $y(x)=\frac{\l}{x} + \frac{\mu \ln x}{x}$; $y_1(x)=\frac{1}{x}$ et $y_2(x)=\frac{\ln x}{x}$.\\
+    On vérifie que le Wronskien ne s'annule pas : $W(x)=y_1(x)y_2'(x)-y_2(x)y_1'(x)=\frac{1}{x^3}\neq0$ sur $\R_+^*$.
+\end{exercice}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    Soit $(E) ~:~ (t^2+2t+2)y'' - 2(t+1)y' + 2y = 0$.
+    \begin{enumerate}
+        \item Chercher des solutions polynomiales de $E$.
+        \item Proposer un système fondamental de solutions et calculer le Wronskien.
+    \end{enumerate}
+    \tcblower
+    C'est une équation différentielle scalaire linéaire d'ordre 2, homogène à coefficients continus et normalisée.\\
+    Cherchons une solution polynomiale $y=\sum_{k=0}^Na_kX^k$ avec $a_N\neq0$ et $N\in\N$.\\
+    On a $(t^2+2t+2)y'' - 2(t+1)y' + 2y$ est un polynôme de degré inférieur à $N$.\\
+    Coefficient dominant : $N(N-1)a_N - 2Na_n + 2a_N = 0$ puis $(N-1)(N-2)=0$ : $N\in\{1,2\}$.\\
+    On a donc une \bf{contrainte sur $N$}, on peut poser $y=at^2+bt+c$. Donc $y$ solution ssi $2a-b+c = 0$.\\
+    Par exemple, $y_1 = t^2 - 2$ et $y_2=t+1$ forme un système fondamental de solutions de $(E)$.\\
+    Puis $W(t)=y_1(t)y_2'(t)-y_2(t)y_1'(t)=-(t^2+2t+2)\neq0$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $(E) ~:~ ty'' + 2y' - ty = 0$.
+    \begin{enumerate}
+        \item Trouver une solution $y_1$ développable en série entière de $(E)$.
+        \item En posant $y=y_1z$ pour $t>0$, montrer que $\sh(t)z''(t)+2\ch(t)z'(t)=0$. (Méthode de Lagrange)
+        \item Déterminer $z$ et résoudre $(E)$ sur $\R_+^*$.
+    \end{enumerate}
+    \tcblower
+    C'est une équation différentielle scalaire linéaire d'ordre 2, homogène à coefficients continus et non normalisée.\\
+    L'équation est normalisée sur $]-\infty,0[$ et sur $]0,+\infty[$, donc le théorème de Cauchy s'y applique sur ces intervalles.\\
+    Cherchons une solution développable en série entière. On pose $y(t)=\sum_{n=0}^{\infty}a_nt^n$ de rayon de convergence $R\geq0$.\\
+    On a $y$ de classe $\cursive{C}^{\infty}$ sur $]-R,R[$, on dérive terme-à-terme avec conservation du rayon :
+    \begin{equation*}
+        y(t) = \sum_{n=0}^{\infty}a_nt^n; \quad y'(t) = \sum_{n=1}^\infty na_nt^{n-1}; \quad y''(t) = \sum_{n=2}^\infty n(n-1)a_nt^{n-2}
+    \end{equation*} 
+    Donc :
+    \begin{equation*}
+        \sum_{n=1}^{\infty}(n+1)na_{n+1}t^n + 2\sum_{n=0}^{\infty}(n+1)a_{n+1}t^n - \sum_{n=1}^{\infty}a_{n-1}t^n = 0
+    \end{equation*}
+    Par unicité du DSE : $2a_1 = 0$, $\forall n \geq 1, ~ (n+2)(n+1)a_{n+1} = a_{n-1}$.\\
+    Donc $\forall n \in \N, ~ a_{2n+1} = 0$ et $a_{2n} = \frac{a_0}{(2n+1)!}$ (récurrence immédiate) donc $y=a_0\sum_{n=0}^{\infty}\frac{t^{2n}}{(2n+1)!}=a_0\frac{\sh(t)}{t}$ (RCV $\infty$).\\
+    Recollement en zéro avec $y(0)=a_0$; $y$ devient $\cursive{C}^\infty$ sur $\R$ tout entier.
+\end{exercice}
+
+\pagebreak
+
+\section{Étude qualitative.}
+
+On cherche à obtenir des informations sur les équations différentielles sans forcément les résoudre.
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Résoudre $y'' + y = f(t)$ pour $t\in\R$, où $f:\R\to\R$ continue.
+        \item Soit $f:\R\to\R$ de classe $\cursive{C}^2$ sur $\R$ telle que $f(x)+f''(x)\geq0$ pour tout $x\in\R$.\\ Montrer que $f(x) + f(x+\pi)\geq0$ pour tout $x\in\R$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On reconnaît une équation différentielle scalaire d'ordre 2 linéaire à coefficients continus. On sait que l'ensemble des solutions forment un espace affine de dimension 2 et que le théorème de Cauchy s'applique :
+    On sait que $y$ est solution de l'équation homogène ssi $\exists (\l,\mu)\in\R^2, ~ \forall t \in \R, ~  y =\l\cos t + \mu \sin t$.\\
+    Avec variation des constantes : on pose $y(t) = \l(t)\cos(t) + \mu(t)\sin(t)$, $y$ est dérivable ssi $\l$ et $\mu$ le sont.\\
+    Puis $y$ est solution ssi :
+    \begin{equation*}
+        \begin{pmatrix} \cos t & \sin t \\ -\sin t & \cos t \end{pmatrix}  \begin{pmatrix}\l ' \\ \mu'\end{pmatrix} = \begin{pmatrix}0 \\ f(t)\end{pmatrix} \iff \begin{pmatrix}\l' \\ \mu '\end{pmatrix} = \begin{pmatrix}\cos t & -\sin t \\ \sin t & \cos t\end{pmatrix}\begin{pmatrix}0 \\ f(t) \end{pmatrix}
+    \end{equation*}
+    Donc $\l'= -\sin(t)f(t)$ et $\mu' = \cos(t)f(t)$, puis $\l(t) = \int_0^t - \sin(u)f(u)\du+\a$ et $\mu(t)=\int_0^t\cos(u)f(u)\du+\b$.
+    \begin{align*}
+        y &= \l(t)\cos(t) + \mu(t)\sin(t) = \a\cos t + \b \sin t + \int_0^t (-\cos t \sin u + \cos u \sin t)f(u)\du \\&= \a\cos t + \b \sin t + \int_0^t \sin(t-u)f(u)\du.
+    \end{align*}
+    \boxed{2.} Soit $f\in\cursive{C}^2(\R)$ telle que $f(x)+f''(x)\geq0$ pour tout $x\in\R$.\\
+    On pose $\phi(x) = f(x) + f''(x)\geq0$ pour $x\in\R$, alors $\phi$ est continue sur $\R$ et positive, $f$ est solution de $y''+y=\phi$.\\
+    D'après le 1, on a :
+    \begin{equation*}
+        \exists(\a,\b)\in\R^2, ~ \forall t \in \R, ~ f(t)=\a\cos t + \b\sin t + \int_0^t \sin(t-u)\phi(u)\du
+    \end{equation*}
+    Soit $x\in\R$. \small
+    \begin{align*}
+        f(x)+f(x+\pi)&=\a(\cos x + \cos(x + \pi)) + \b(\sin x + \sin(x+\pi)) + \int_0^x\sin(x-t)\phi(t)\dt + \int_0^{x+\pi}\sin(x+\pi-t)\phi(t)\dt\\
+        &=\int_0^x \sin(x-t)\phi(t)\dt - \int_0^{x+\pi} \sin(x-t)\phi(t)\dt = \int_x^{x+\pi} \sin(t-x)\phi(t)\dt
+    \end{align*}
+    Avec le changement de variable $u=t-x$ : $f(x)+f(x+\pi)=\int_0^\pi \sin u \phi(u+x)\du \geq 0$ comme intégrale de fonction positive.
+\end{exercice}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    Soit $(E) ~:~ y'' + a(t)y'(t) + b(t)y = 0$ avec $a,b$ continues sur $I$.
+    \begin{enumerate}
+        \item Soit $t_0 \in I$, montrer que $y(t_0) = y'(t_0) = 0 \ra y=0$ sur $I$.
+        \item Soient $t_0<t_1 \in I$, montrer que $y=0$ sur $[t_0,t_1] \ra y=0$ sur $I$.
+        \item Soient $t_0<t_1\in I$, montrer que $y$ s'annule un nombre fini de fois sur $[t_0,t_1]$ si $y\neq0$.
+        \item Montrer que les zéros de $y\neq0$ sont isolés. Justifier que l'on peut parler de << zéros consécutifs >> de $y$.
+    \end{enumerate}
+    \tcblower
+    On reconnaît une équation différentielle scalaire linéaire d'ordre 2 homogène à coefficients continus, normalisée. L'ensemble des solutions de $(E)$ est un $\R$-ev de dimension 2 et que le théorème de Cauchy s'applique.\\
+    \boxed{1.} Cauchy : $\forall (\a,\b)\in\R^2, ~ \forall t_0 \in I$, il existe une unique solution $y$ de $E$ tq $y(t_0)=\a$ et $y'(t_0)=\b$.\\
+    Ici, $\a=\b=0$, donc il existe une unique solution $y$ de $E$ telle que $y(t_0)=y'(t_0)=0$, la fonction $\0$ convient.\\
+    \boxed{2.} Soit $t_2 \in ]t_0,t_1[$. Puisque $y=0$ sur $[t_0,t_1]$, $y(t_2)=y'(t_2)=0$. D'après $1$, $y=0$ sur $I$.\\
+    \boxed{3.} Par l'absurde, supposons que $y$ s'annule une infinité de fois sur $[t_0,t_1]$.\\
+    Notons $(\a_n)_n$ une suite de $[t_0,t_1]$ d'éléments tous distincts telle que $\forall n \in \N, ~ y(\a_n)=0$.\\
+    On peut extraire de $(\a_n)_n$ une suite convergente par B-W : $\exists \phi : \N \to \N$ telle que $\a_{\phi(n)}\to \a \in [t_0,t_1]$.\\
+    Par continuité de $y$ sur $I$ donc en $\a$ : $\a_{\phi(n)}\to \a$ implique $y(\a)=0$ car $\forall n \in \N, ~ y(\a_{\phi(n)})=0$.\\
+    On applique le théorème de Rolle sur chacun des intervalles $(\a_{\phi(n)}, \a_{\phi(n+1)})$.\\
+    Ainsi, $\exists \b_n \in ]\a_{\phi(n)}, \a_{\phi(n+1)} [$ tel que $y'(\b_n)=0$ par Rolle. (on a supposé spdg $\a_{\phi(n)} < \a_{\phi(n+1)}$).\\
+    Puis par encadrement, $\b_n \to \a$, donc par continuité de $y'$ en $\a$ : $y'(\a)=0$ puisque $\forall n \in \N, ~ y'(\b_n)=0$.\\
+    Donc $y(\a)=0$ et $y'(\a)=0$, donc $y=0$ par 1, absurde.\\
+    \boxed{4.} Soit $\a$ un zéro de $y$, montrons que $\exists h > 0, ~ \forall t \in ]\a - h, \a + h[ \setminus\{\a\}, ~ y(t)\neq0$.\\
+    Puisque $y$ n'est pas nulle, $y'(\a)\neq0$ par 1, SPDG, $y'(\a)>0$.\\
+    Puis $y'$ est continue sur $I$ donc $\exists h > 0, ~ \forall t \in ]\a-h,\a+h[, ~  y'(t)>0$.\\
+    Puis $y$ est strictement croissante sur $]\a-h,\a+h[$ et $\a$ est le seul zéro de $y$ sur $]\a-h,\a+h[$.\\
+    Donnons un sens à la notion de << zéros consécutifs >> :\\
+    Soit $\a$ un zéro de $y$. On suppose que $y$ possède un zéro $\b>\a$, $\a$ est isolé par ce qui précède : $\exists h > 0$ tel que $y$ ne s'annule pas sur $]\a,\a+h[$.\\
+    On pose $E=\{t>a+h, ~ y(t)=0\}$, non-vide (contient $\b$) et minoré par $\a+h$, donc possède une borne inf $\tilde{a}$.\\
+    Alors $\tilde{a}$ est la limite d'une suite $(t_n)_n$ de $E$; par continuité de $y$ en $\tilde{a}$ : $y(t_n)\to y(\tilde{\a})=0$.\\
+    Par construction, $\tilde{a}$ est le plus petit zéro de $y$ après $\a$, alors $\a$ et $\tilde{\a}$ sont dits zéros consécutifs.
+\end{exercice}
+
+\begin{lemme}{}{}
+    Une fonction convexe ou concave sur $\R$, de classe $\cursive{C}^1$ et bornée est constante.
+    \tcblower
+    Soit $f$ convexe sur $\R$, de classe $\cursive{C}^1$ et bornée. Supposons qu'il existe $t_0\in\R, ~ f'(t_0)\neq0$.\\
+    $\hra$ Si $f'(t_0)>0$, alors $\forall t \in \R, ~ f(t) \geq f(t_0) + (t-t_0)f'(t_0)$ donc $f(t)\xrightarrow[t\to+\infty]{}+\infty$, absurde.\\
+    $\hra$ Si $f'(t_0)<0$, alors $\forall t \in \R, ~ f(t) \geq f(t_0) + (t-t_0)f'(t_0) \xrightarrow[t\to-\infty]{}+\infty$, absurde. 
+\end{lemme}
+
+\pagebreak
+
+\begin{exercice}{Équation de Sturm-Liouville.}{}
+    Soit $(E) ~:~ y'' + a(t)y = 0$ pour tout $t\in I$, avec $q$ continue sur $I$.
+    \begin{enumerate}
+        \item Soit $y_1,y_2$ un S.F. de $E$ de Wronskien $W$, montrer que $W$ est constant sur $I$.
+        \item On suppose $q\geq0$ sur $\R$ et non identiquement nulle. Soit $y$ une solution de $(E)$ bornée.\\
+        Montrer que $y$ s'annule au moins une fois.
+        \item On prend $q(t)=-e^t$ sur $\R$ et $y$ une solution de $(E)$. Étudier la convexité de $y^2$.\\
+        En déduire $y(0)=y(1)=0 \ra y = 0$.
+        \item Soit $y_1,y_2$ un S.F. de $E$, et $a,b$ deux zéros consécutifs de $y_1$. Montrer que $y_2$ s'annule exactement une fois sur $]a,b[$.
+    \end{enumerate}
+    \tcblower
+    Une équation de Sturm-Liouville est une équation différentielle liénaire d'ordre 2 normalisée scalaire homogène à coefficients continus. L'ensemble de solutions est un $\R$-ev de dimension 2. Ce théorème de Cauchy s'applique.\\
+    \boxed{1.} $W=y_1y'_2-y'_1y_2$ est dérivable sur $I$ et $W'=y_1y''_2-y''_1y_2$.\\
+    Par hypothèse, $y''_1+qy_1 = 0$ et $y''_2 + qy_2 = 0$ donc $W' = y_1(-qy_2)-(-qy_1)y_2=0$.\\ Donc $W$ est constant sur l'intervalle $I$.\\
+    \boxed{2.} Par hypothèse, $y''+qy=0$, supposons par l'absurde que $y$ ne s'annule pas sur $I$.\\
+    Supposons $y$ continue sur $\R$ et ne s'annule pas, donc par TVI, $y$ garde un signe constant sur $\R$.\\
+    SPDG, $y>0$ sur $\R$ puis $y'' = -qy \leq 0$ sur $\R$ donc $y'$ est concave sur $\R$.\\
+    Puisque $y$ est concave sur $\R$, de classe $\cursive{C}^2$ et bornée, elle est constante, donc $y''=0$ sur $\R$.\\
+    Or $y''=-qy$ donc $qy=0$ donc $q=0$ puisque $y>0$, absurde.\\
+    \boxed{3.} Posons $z=y^2$, deux fois dérivables : $z' = 2yy'$ et $z''=2y'^2 + 2yy' = 2(y')^2 + 2e^xy\geq0$.\\
+    Donc $z$ est convexe sur $\R$ donc $\forall t \in [0,1], ~ z(t)\leq 0$ (corde entre 0 et 1). Or $z\geq0$ (comme carré).\\
+    Donc $\forall t \in [0,1], ~ z(t)=0$.\\
+    \boxed{4.} Posons $W=y_1y'_2-y'_1y_2$, on a déjà vu que $W$ est constant ($W'=0$) et $W(a)=-y_1'(a)y_2(a)$.\\
+    SPDG, $y_1\geq0$ sur $[a,b]$, alors $y'_1(a)\geq0$ car $y_1'(a)=\lim \frac{y_1(t)-y_1(a)}{t-a}\geq0$.\\
+    De plus, $y'_1(b)\leq0$. Puis $y_1'(a)>0$ (car sinon $y_1(a)=y'_1(a)=0$ puis $y_1=0$ absurde) et $y_1'(b)<0$.\\
+    Donc $W(a)=-y_1'(a)y_2(a)$ et $W(b)=-y_1'(b)y_2(b)$ et $W(a)=W(b)$ car $W$ est constant.\\
+    Donc $y_2(a)$ et $y_2(b)$ sont de signes contraires puisque $y'_1(a)$ et $y'_1(b)$ le sont (non nuls car $W\neq0$).\\
+    On a $y_2$ continue sur $[a,b]$ donc $y_2$ s'annule au moins une fois sur $[a,b]$ par TVI.\\
+    Supposons par l'absurde que $y_2$ s'annule deux fois sur $]a,b[$ : en $c$ et en $d$, alors en échangeant les rôles de $y_1$ et $y_2$, $y_1$ s'annule au moins une fois entre $c$ et $d$, c'est absurde car $a$ et $b$ sont zéros consécutifs de $y_1$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $(E)$ l'ensemble des applications dérivables $f$ sur $\R$ telles que $f'(t) = f(-t)$ pour tout $t\in\R$.
+    \begin{enumerate}
+        \item Vérifier que $E$ est un $\R$-ev.
+        \item Résoudre et donner une base de $(E)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} C'est un sous-espace vectoriel de $\cursive{C}^1(\R,\R)$.\\
+    $\hra$ La fonction nulle est solution.\\
+    $\hra$ Soient $f,g\in E$ et $\l\in\R$, alors $(f+\l g)'(t) = f'(t) + \l g'(t) = f(-t) + \l g(-t) = (f + \l g)(-t)$.\\
+    Donc $f+\l g \in E$.\\
+    \boxed{2.} Déjà, $f\in E \ra f\in\cursive{C}^2(\R)$ car $f'=f\circ (-\Id)$, et même $\cursive{C}^\infty(\R)$.\\
+    Soit $f$ solution. On dérive l'équation : $f''(t) = -f'(-t) = -f(t)$ donc $f''(t) + f(t) = 0$.\\
+    Donc $\exists \l,\mu\in\R, ~ f(t)=\l\cos t + \mu\sin t$.\\
+    \bf{Synthèse.} Soit $f(t) = \l \cos t + \mu \sin t$ pour tout $t\in\R$, avec $(\l,\mu)\in\R^2$.\\
+    Alors $f$ est dérivable, et $f'(t)=-\l \sin t + \mu \cos t$ puis $\forall t \in \R, ~ f'(t)=f(-t) \iff \l = \mu$ avec $(t=0)$.\\
+    Donc $E=\{t\mapsto \l(\cos t + \sin t), ~ \l \in \R\}=\Vect(t\mapsto \cos t + \sin t)$ et $\dim E = 1$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $(E)~:~X'=AX+B$ avec $A:I\to\M_n(\R)$ et $B:I\to\M_{n,1}(\R)$ continues sur $I$ intervalle de $\R$.\\
+    On note $W$ le Wronskien associé à un SF de solutions $(X_1,...,X_n)$.\\
+    Montrer que $W$ est solution de l'équation différentielle $W'=\Tr(A)W$.
+    \tcblower
+    Par définition, $W(t)=\det(X_1(t),...,X_n(t))$ pour tout $t\in I$ et $(X_1,...,X_n)$ est base de $S_H$.\\
+    Donc pour tout $i\in\lb1,n\rb, ~ X_i$ est dérivable sur $I$ et $X'_i = AX_i$.\\
+    Puis $\det$ est $n$-linéaire et $X_1,...,X_n$ dérivables sur $I$ donc $W$ est dérivable sur $I$ et :
+    \begin{align*}
+        W'(t) &= \det(X'_1, X_2, \dots, X_n) + \det(X_1, X'_2, \dots, X_n) + \dots + \det(X_1,X_2, \dots, X'_n)\\
+        &= \det(AX_1, X_2, \dots, X_n) + \det(X_1, AX_2, \dots, X_n) + \dots + \det(X_1,X_2,\dots,AX_n).
+    \end{align*} 
+    Posons $\phi:(Y_1,...,Y_n) \mapsto \det(AY_1,...,Y_n) + ... + \det(Y_1,...,AY_n)$.\\
+    L'ensemble des formes $n$-linéaires alternées est un $\R$-espace vectoriel de dimension 1.\\
+    Vérifions que $\phi$ est une forme $n$-linéaire alternée.\\
+    $\hra$ Linéaire par rapport à la première variable : soient $y_1,z_1 \in \M_{n,1}(\R)$ et $\l\in\R$.
+    \begin{align*}
+        \phi(\l y_1 + z_1, ..., y_n) &= \det(\l Ay_1 + Az_1, ..., y_n) + ... + \det(\l y_1 + z_1, ... + Ay_n)\\
+        &=\l\det(Ay_1+z_1, ..., y_n) + \det(Az_1, ..., y_n)+ ... + \l\det(y_1,...,Ay_n) + \det(z_1,...,Ay_n) \\
+        &= \l \phi(y_1,...,y_n) + \phi(z_1,...,y_n).
+    \end{align*}
+    Puis linéaire de la même façon selon les autres variables.\\
+    $\hra$ Alternée, par exemple pour $y_1=y_2$ :
+    \begin{align*}
+        \phi(y_1,...,y_n) &= \det(Ay_1, y_2, ..., y_n) + det(y_1,Ay_2,...,y_n) + ... + \det(y_1,y_2,...Ay_n)\\
+        &=\det(Ay_1,y_1,...,y_n) + \det(y_1,Ay_1, ..., y_n) + ... + \det(y_1,y_1,...,Ay_n)\\
+        &=\det(Ay_1,y_1,...,y_n) - \det(Ay_1,y_1, ..., y_n) = 0
+    \end{align*}
+    Donc $\phi$ est $n$-linéaire alternée donc $\exists \l \in \R, ~ \phi = \l \det$ donc :
+    \begin{equation*}
+        \forall t \in I, ~ W'(t) = \phi(X_1,...,X_n) = \l\det(X_1,...,X_n) = \l W(t).
+    \end{equation*}
+    Soient $(E_1,...,E_n)$ les vecteurs de la base canonique de $\R^n$.\\
+    Alors $\phi(E_1,...,E_n) = \det(AE_1, E_2, ..., E_n) + ... + \det(E_1,..., AE_n)$ et pour tout $i\in\lb1,n\rb$ :
+    \begin{equation*}
+        \det(E_1,..., AE_i, ..., E_n) = \begin{vmatrix}1 & 0 & \dots & a_{1,i} & \dots & 0 \\ 0 & 1 & \dots & a_{2,i} & \dots & 0 \\ \vdots & \vdots & & \vdots & & \vdots \\ 0 & 0 & \dots & a_{n,i} & \dots & 1\end{vmatrix} = a_{i,i}.
+    \end{equation*}
+    Donc $\l=\sum_{i=1}^n a_{i,i}=\Tr(A)$ puis $W'(t)=\Tr(A(t))W(t)$.
+\end{exercice}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Soit $A\in\A_n(\R)$. Montrer que $\exp(A)\in O_n(\R)$.
+        \item Soit $S\in\M_n(\R)$ telle que $\forall U \in O_n(\R), ~ \Tr(US)\leq \Tr(S)$.
+        \begin{enumerate}
+            \item Soit $f(t)=\Tr(\exp(tA)S)$ avec $A\in \A_n(\R)$ et $t\in\R$, montrer que $f$ est dérivable et $f'(0)=0$.
+            \item En déduire que $\forall A \in \A_n(\R), ~ \Lg S,A \Rg = 0$ puis $S\in\S_n(\R)$.
+            \item Montrer que $\Sp(S)\subset\R_+$.
+        \end{enumerate}
+        \item $\forall U \in O_n(\R), ~ \forall A \in \M_n(\R) ~:~ \phi(U)=\Tr(UA)$.
+        \begin{enumerate}
+            \item Montrer que $\phi$ atteint un maximum en $U_0\in O_n(\R)$.
+            \item Montrer que $S=U_0A\in\S_n^+(\R)$.
+            \item Retrouver la décomposition polaire.
+        \end{enumerate}
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $A\in \A_n(\R)$, on a $(\exp A)^\top \exp A = \exp( A^\top)\exp(A) = \exp(-A)\exp(A)=\exp(0)=I_n:\exp(A)\in O_n(\R)$.\\
+    \boxed{2.a.} On sait que $g:t\mapsto \exp(tA)$ est dérivable sur $\R$ et $g'(t)=A\exp(tA)$.\\
+    Ainsi, $t\mapsto \phi(t)S$ est dérivable sur $\R$ puis $\Tr$ est linéaire donc $f$ est dérivable sur $\R$. \\
+    Avec $Q1$ : $\forall t \in \R, ~ tA \in \A_n(\R)$ donc $\exp(tA)\in O_n(\R)$ donc $f(t)=\Tr(\exp(t A) S) \leq \Tr(S) = f(0)$.\\
+    Donc 0 est maximum global de $f$ sur $\R$, donc $f'(0)=0$.\\
+    \boxed{2.b.} On a $f'(0)=\Tr(AS)$ donc $\Tr(AS)=0$.
+    \begin{equation*}
+        \forall A \in \A_n(\R), ~ \Tr(AS) = 0 \iff \Tr(A^\top S) = 0 \iff \Lg A,S \Rg = 0 \iff S \in \A_n(\R)^\bot = \S_n(\R).
+    \end{equation*}
+    \boxed{2.c.} Théorème spectral : $\exists P \in O_n(\R), ~ \exists D \in \cursive{D}_n(\R), ~ S=PDP^\top$.
+    \begin{equation*}
+        \forall U \in O_n(\R), ~ \Tr(US) = \Tr(UPDP^\top) \leq \Tr(S)
+    \end{equation*}
+    Soit $V\in O_n(\R)$, et $U=PVP^\top\in O_n(\R)$, alors $\Tr(US)=\Tr(PVDP^\top)=\Tr(VD)$.\\
+    Posons $D=\Diag(\l_1,...,\l_n)$, avec $\l_1,...,\l_p$ valeurs propres de $S$, et soit $V\in O_n(\R)$.
+    \begin{equation*}
+        [VD]_{i,j} = \sum_{k=1}^n v_{i,k}d_{k,j} = v_{i,j}\l_j \ra \Tr(VD) = \sum_{i=1}^n v_{i,i}\l_i.
+    \end{equation*}
+    Donc $\forall V \in O_n(\R), ~ \sum_{i=1}^nv_{i,i}\l_i \leq \sum_{i=1}^n \l_i$.\\
+    Spécifions en $V=\Diag(\e_i)$ avec $\e_i \in \{-1,1\}$ du signe de $\l_i$.
+    \begin{equation*}
+        \sum_{i=1}^n v_{i,i}\l_i = \sum_{i=1}^n |\l_i| \leq \sum_{i=1}^n\l_i.
+    \end{equation*}
+    Donc $\forall i \in \lb1,n\rb, ~ \l_i \geq 0$.\\
+    \boxed{3.a.} $O_n(\R)$ est compact de $\M_n(\R)$ puis $\phi$ y est continue et à valeurs réelles donc elle est bornée sur $O_n(\R)$ et atteint ses bornes, donc $\exists U_0 \in O_n(\R), ~ \forall U \in O_n(\R), ~ \phi(U) \leq U_0$.\\
+    \boxed{3.b.} Soit $U\in O_n(\R), ~ \Tr(US)=\Tr(UU_0A) = \phi(UU_0) \leq \phi(U_0) = \Tr(S)$ donc $S\in\S_n^+(\R)$ par la partie 2.\\
+    \boxed{3.c.} Soit $A\in\M_n(\R)$, on a $S=U_0A$ donc $U_0^\top S = A$ donc $A=\O S$ avec $\O = U_0^\top \in O_n(\R)$ et $S\in\S_n^+(\R)$.
 \end{exercice}
 
 \end{document}
