@@ -4,6 +4,8 @@
 \def\pagetitle{Calcul différentiel.}
 \input{setup.tex}
 
+\newcommand*{\Jac}{\nt{Jac}}
+
 \begin{document}
 
 \input{title.tex}
@@ -288,7 +290,7 @@ Les dérivées partielles de $f$ en $a$ donnent des contraintes sur les valeurs 
 
 \begin{prop}{}{}
     Soit $f:U\subset E\to F$, avec $E$ de dimension $n$ et $\B=(e_1,...,e_n)$ base de $E$. Soit $a\in U$ et $v\in E\setminus\{0_E\}$.\\
-    Si $f$ est différentiable en $a$, alors $f$ admet une dérivée en $a$ suivant le vecteur $v$ et $Df_v(a)=df_a(f)$.\\
+    Si $f$ est différentiable en $a$, alors $f$ admet une dérivée en $a$ suivant le vecteur $v$ et $Df_v(a)=df_a(v)$.\\
     En particulier, si $f$ est différentiable en $a$, alors $f$ admet des dérivées partielles en $a$.
     \tcblower
     Supposons que $f$ soit différentiable en $a$, alors $f(a+h)=f(a)+L(h)+\|h\|\e(h)$ avec $L=df_a$ et $\e(h)\to0$.\\
@@ -315,5 +317,165 @@ Les dérivées partielles de $f$ en $a$ donnent des contraintes sur les valeurs 
     Donc $f(A+H)-f(A)=L(H)+\|H\|\e(H)$, avec $L(H)=-A^{-1}HA^{-1}$; $L$ linéaire et $\e(H)\to0$.\\
     Alors $df_A(H)=-A^{-1}HA^{-1}$.
 \end{exercice}
+
+\pagebreak
+
+\begin{exercice}{}{}
+    \begin{enumerate}
+        \item Montrer que $A\mapsto\exp(A)$ est continue sur $\M_n(\R)$.
+        \item Calculer la différentielle de $A\mapsto \exp(A)$ en 0.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.}
+    \begin{equation*}
+        \forall A \in \M_n(\C), ~ \exp(A) = \sum_{n=0}^{+\infty}\frac{A^n}{n!}
+    \end{equation*}
+    Théorème de continuité des séries de fonctions :\\
+    $\hra$ $f_n:A\mapsto \frac{A^n}{n!}$ est continue pour tout $n\in\N$.\\
+    $\hra$ $\forall R \geq 0, ~ \forall A \in B'(0,R), ~ \left\|\frac{A^n}{n!}\right\|\leq \frac{\|A\|^n}{n!} \leq \frac{R^n}{n!}$ donc $\|f_n\|_{\infty}^{B'(0,R)}\leq\frac{R^n}{n!}$.\\
+    Donc $\sum_{n\geq0}u_n$ $\CN$ puis $\CU$ sur $B'(0,R)$, il y a convergence uniforme sur tout compact de $\M_n(\C)$.\\
+    Par théorème, $\exp$ est continue sur $\M_n(\C)$.\\
+    \boxed{2.} On cherche un développement limité à l'ordre 1 en 0 de l'exponentielle.\\
+    $\hra$ $\exp(0+H)=\exp(0) + L(H) + \|H\|\e(H)$ avec $L\in\L(\M_n(\C))$ et $\e(H)\xrightarrow[H\to0]{}0$.\\
+    Soit $H\in\M_n(\C)$. 
+    \begin{equation*}
+        \exp(H) = \sum_{n=0}^\infty\frac{H^n}{n!} = I_n + H + \sum_{n=2}^{\infty} \frac{H^n}{n!}
+    \end{equation*}
+    Par IT et passage à la limite : $\left\|\sum_{n=2}^\infty\frac{H^n}{n!}\right\|\leq\sum_{n=2}^{\infty}\frac{\|H^n\|}{n!}\leq\sum_{n=2}^\infty\frac{\|H\|^n}{n!}=e^{\|H\|}-1-\|H\| \sim_0 \frac{\|H\|^2}{2}$.\\
+    Donc par majoration, $\sum_{n=2}^\infty\frac{H^n}{n!}=o(\|H\|)$, finalement : $\exp$ est différentiable en 0 et $d\exp_0=\Id$.
+\end{exercice}
+
+\begin{thm}{}{}
+    Soient $f,g:U\subset E \to F$, $a\in U$ et $\l\in\R$. 
+    \begin{enumerate}
+        \item Si $f$ et $g$ sont différentiables en $a$, alors $f+\l g$ aussi et $d(f+\l g)_a =df_a + \l dg_a$.
+        \item Si $f$ et $g$ sont différentiables sur $U$, alors $f+\l g$ aussi et $d(f+\l g) = df + \l dg$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Par hypothèse, $f$ et $g$ admettent des DL1 en $a$ :
+    \begin{equation*}
+        f(a+h) = f(a) + L_f(h) + \|h\|\e_f(h) \et g(a+h) = g(a) + L_g(h) + \|h\|\e_g(h).
+    \end{equation*}
+    Où $L_f,L_g\in\L(E,F)$ et $\e_f(h),\e_g(h)\xrightarrow[h\to0]{}0$. Puis :
+    \begin{equation*}
+        (f + \l g)(a+h) = f(a+h) + \l g(a+h) = (f + \l g)(a) + (L_f + \l L_g)(h) + \|h\|(\e_f + \l \e_g)(h)
+    \end{equation*} 
+    Où $L_f+\l L_g \in \L(E,F)$ et $\e_f + \l \e_g \xrightarrow[h\to0]{}0$, donc $(f+\l g)$ est différentiable en $a$ et $d(f+\l g)_a=df_a+\l dg_a$.
+\end{thm}
+
+\begin{prop}{}{}
+    Soient $f:U\subset E \to F$, $\l:U\to\R$ et $a\in U$.
+    \begin{enumerate}
+        \item Si $f$ et $\l$ sont différentiables en $a$, alors $\l f$ aussi et $d(\l f)_a = \l(a)d f_a + d\l_af(a)$.
+        \item Si $f$ et $\l$ sont différentiables sur $U$, alors $\l f$ aussi et $d(\l f) = \l d_f + d\l f$.
+    \end{enumerate}
+\end{prop}
+
+\begin{prop}{}{}
+    Soient $f:U\subset E \to F$, $g:V\subset F \to G$ et $a\in U$, $b=f(a)\in V$.
+    \begin{enumerate}
+        \item Si $f$ est différentiable en $a$ et $g$ différentiable en $b$, alors $g\circ f$ est différentiable en $a$ et $d(g\circ f)_a = dg_{f(a)}\circ df_a$.
+        \item Si $f$ est différentiable sur $U$ et $g$ différentiable sur $V$, avec $f(U)\subset V$, alors $(g\circ f)$ est différentiable sur $U$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Supposons $f$ différentiable en $a$ et $g$ différentiable en $b$, alors :
+    \begin{equation*}
+        f(a+h) = f(a) + L_f(h) + \|h\|\e_f(h) \et g(b+k) = g(a) + L_g(k) + \|k\|\e_g(k).
+    \end{equation*}
+    Avec $L_f\in\L(E,F)$, $L_g\in\L(F,G)$, $\e_f(h)\xrightarrow[h\to 0]{}0$ et $\e_g(k)\xrightarrow[k\to0]{}0$.
+    \begin{align*}
+        (g\circ f)(a+h) &= g(f(a+h)) = g(f(a) + L_f(h) + \|h\|\e_1(h)) = g(f(a)) + L_g(k) + \|k\|\e_g(k)\\
+        &=(g\circ f)(a) + L_g\circ L_1(h) + \|h\|L_g\circ \e_f(h) + \|k\|\e_g(k).
+    \end{align*}
+    Avec $k=\L_f(h) + \|h\|\e_f(h)$.\\
+    $\hra$ $L_g\circ L_f \in \L(E,G)$;\\
+    $\hra$ $\e_f(h)\to0$ et $L_g$ continue sur $F$ donc en 0 : $L_g(\e_f(h))\to L_g(0)=0$ donc $\|h\|L_g\circ \e_f(h)=_0o(\|h\|)$.\\
+    $\hra$ $k\xrightarrow[h\to 0]{}0$ par continuité de $L_f$ en 0. Donc $\e_g(k)\xrightarrow[h\to0]{}0$ par composition des limites.\\
+    Puis $L_f$ est linéaire sur $E$ evdf donc : $\exists C\geq0, ~ \forall h \in E, ~ \|L_f(h)\|_F\leq C\|h\|_E$.\\
+    Puis $\|h\|_E\leq \|L_f(h)\|_F + \|h\|_E\|\e_f(h)\|_F \leq \|h\|(C+\|\e_f(h)\|_F)$ puis $\|k\|_F\e_g(k)=o(\|h\|)$.\\
+    Finalement, $(g\circ f)(a+h)=(g\circ f)(a) + L_g\circ L_f(h) + \|h\|\e(h)$ donc $d(g\circ f) = dg_{f(a)}\circ df_a$.
+\end{prop}
+
+\bf{Remarque.} Si $E=F=\R$ : $f'(a)=df_a(1)$ et $g'(b)=dg_b(1)$.\\
+Alors $(g\circ f)'(a)=d(g\circ f)_a(1)=(dg_{f(a)}\circ df_a)(1)=dg_{f(a)}(f'(a))=f'(a)dg_{f(a)}(1)=f'(a)g'(f(a))=f'(a)(g'\circ f)(a)$.
+
+\begin{defi}{Matrice jacobienne.}{}
+    Soit $f:U\subset E\to F$ et $a\in U$ tel que $f$ est différentiable en $a$.\\
+    Soit $\B_1=(e_1,...,e_p)$ base de $E$ et $\B_2=(e_1',...,e'_n)$ base de $F$. La matrice jacobienne de $f$ en $a$ est définie par :
+    \begin{equation*}
+        \Jac_a f = \Mat_{\B_2,\B_1}(df_a) \in \M_{n,p}(\R)
+    \end{equation*}
+    \tcblower
+    On sait que $\forall v \in E$ avec $v$ non nul, $df_a(v) = Df_v(a)$ et $df_a(e_i)=Df_{e_i}(a)=\frac{\6 f}{\6 x_i}(a)$.\\
+    Posons $f:x\mapsto \sum_{j=1}^nf_j(x)e'_j$ avec $f_1,...,f_n$ sont les applications coordonnées de $f$ dans la base $\B_2$ de $F$.\\
+    Finalement : $\Jac_a f = \left( \frac{\6 f_i}{\6 x_j}(a) \right)_{i,j}$
+\end{defi}
+
+\begin{ex}{}{}
+    Soit $f(x,y)=((\sin x)e^y,x^2y^3,x+\cos y)$ pour tout $(x,y)\in\R^2$.\\
+    Déterminer la matrice jacobienne de $f$ sur $\R^2$.
+    \tcblower
+    Notons $f_1(x,y)=(\sin x)e^y$ ; $f_2(x,y)=x^2y^3$ ; $f_3(x,y)=x+\cos y$.
+    \begin{equation*}
+        \Jac_af=\begin{pmatrix} (\cos x)e^y & (\sin x)e^y \\ 2xy^2 & 3x^2y^2 \\ 1 & -\sin y\end{pmatrix}
+    \end{equation*}
+\end{ex}
+
+\bf{Traduction matricielle du DL1.}
+
+Supposons que $f$ est différentiable en $a$ : $f(a+h) = f(a) + df_a(h) + \|h\|\e(h)$ avec $\e(h)\to0$.\\
+Deux vecteurs sont égaux ssi leurs coordonnées dans une base sont égaux. Avec les notations précédentes :
+\begin{equation*}
+    \begin{pmatrix}
+        f_1(a+h) \\ \vdots \\ f_n(a+h)
+    \end{pmatrix} = \begin{pmatrix}
+        f_1(a) \\ \vdots \\ f_n(a)
+    \end{pmatrix} + \begin{pmatrix}
+        \frac{\6 f_1}{\6 x_1}(a) & \cdots & \frac{\6 f_1}{\6 x_p}(a) \\ \vdots & \ddots & \vdots \\ \frac{\6 f_n}{\6 x_1}(a) & \cdots & \frac{\6 f_n}{\6 x_p}(a)
+    \end{pmatrix} \begin{pmatrix}
+        h_1 \\ \vdots \\ h_p
+    \end{pmatrix} + \|h\|\begin{pmatrix}
+        \e_1(h) \\ \vdots \\ \e_n(h)
+    \end{pmatrix}
+\end{equation*}
+i.e. $\forall j \in \lb1,n\rb, ~ f_j(a+h)=f_j(a) + \sum_{i=1}^p h_i\frac{\6 f_j}{\6_xi}(a) + \|h\|\e_j(h)$.
+
+\bf{Traduction matricielle des opérations.}
+
+Supposons $f$ et $g$ différentiables en $a$ et $\l\in\R$, $d(f+\l g)_a = df_a + \l dg_a$ i.e. $\Jac_a(f+\l g)=\Jac_a f + \l \Jac_a g$.\\
+Supposons $f$ et $\l$ différentiable en $a$, $d(\l f)_a = \l(a)df_a+d\l_af(a)$ i.e. $\Jac_a(\l f) = \l(a)\Jac_a(f)+f(a)\Jac_a(\l)$.\\
+Supposons $f$ différentiable en $a$ et $g$ en $f(a)$, $d(g\circ f)_a = dg_{f(a)}\circ df_a$ i.e. $\Jac_a(g\circ f)=\Jac_{f(a)}(g)\times \Jac_a(f)$.
+
+\begin{defi}{}{}
+    Soit $f:U\subset\R^n\to\R$, $f$ est différentiable en $a$ ssi 
+    \begin{equation*}
+        f(a+h) = f(a) + \sum_{i=1}^n \frac{\6 f}{\6 x_i}(a)h_i + o(\|h\|).
+    \end{equation*}
+\end{defi}
+
+Les applications numériques sont un faux cas particulier puisque si $f:E\to F$ avec $p=\dim F$, on peut identifier $f$ au $p$-uplet $(f_1,...,f_p)$ de ses applications coordonnées et chacune des applications coordonnées est une application numérique.
+
+\bf{Rappel.} Pour $(E,\Lg\.,\.\Rg)$ euclidien et $\phi\in\L(E)$, $\exists!a\in E, ~ \forall x \in E, ~ \phi(x)=\Lg a,x\Rg$.
+
+\begin{defi}{}{}
+    Soit $f:U\subset E \to \R$ avec $(E,\Lg\.,\.\Rg)$ euclidien et $a\in U$. Si $f$ est différentiable en $a$, alors 
+    \begin{equation*}
+        \exists ! v \in E, ~ \forall h \in E, ~ df_a(h) = \Lg v, h \Rg.
+    \end{equation*}
+    Ce vecteur $v$ est appelé vecteur gradient de $f$ en $a$ et noté $\grad f_a$ ou $\nabla f_a$.
+\end{defi}
+
+\begin{prop}{Coordonnées du vecteur gradient dans $\B$ b.o.n.}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien et $\B=(e_1,...,e_n)$ une b.o.n. de $E$. Soit $f:U\subset E \to \R$ et $a\in U$.\\
+    Si $f$ est différentiable en $a$, alors : $\ds\nabla f_a = \sum_{i=1}^n \frac{\6 f}{\6 x_i}(a)e_i$.
+    \tcblower
+    Rappel : $\forall x \in E, ~ x = \sum_{i=1}^n \Lg x, e_i \Rg e_i$ (car b.o.n.).\\
+    Ici, $\nabla f_a = \sum_{i=1}^n\Lg \nabla f_a, e_i\Rg e_i = \sum_{i=1}^n df_a(e_i)e_i = \sum_{i=1}^n Df_{e_i}(a)e_i = \sum_{i=1}^n\frac{\6 f}{\6 x_i}(a)e_i$.
+\end{prop}
+
+On réécrit le DL1 de $f$ en $a$ : $f(a+h) = f(a) + \Lg \nabla f_a, h\Rg + o(\|h\|)$ avec $\Lg \nabla d_a, h) = \sum_{i=1}^n \frac{\6 f}{\6 x_i}(a)h_i$.\\
+Par Cauchy-Schwarz : $|\Lg \nabla f_a, v \Rg| \leq \|\nabla f\|\|v\|$ donc $|Df_v(a)|\leq\|\nabla f_a\|$ pour tout $v$ unitaire.\\
+Avec égalité ssi $v$ est positivement lié à $\nabla f_a$, donc $\nabla f_a\neq0$ indique la direction de plus forte pente.\\
+Si $\nabla f_a=0$, alors $a$ est un point critique, donc $f$ peut admettre en $a$ un extremum local.
 
 \end{document}
