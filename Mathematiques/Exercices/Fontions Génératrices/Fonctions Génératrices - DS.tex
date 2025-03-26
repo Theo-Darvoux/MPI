@@ -1,0 +1,119 @@
+\documentclass[french, 11pt]{article}
+
+\input{setup.tex}
+
+\def\hidetitle{}
+\def\pagetitle{Exercice Proba - DS}
+
+\begin{document}
+
+\newif\colles
+
+\begin{center}
+    \Large{\bf\pagetitle}
+    \vspace*{0.5cm}
+\end{center}
+
+\renewcommand*{\E}{\mathbb{E}}
+\renewcommand*{\D}{\cursive{D}}
+
+\input{title.tex}
+
+\section*{Exercice.}
+
+Soient $X$ et $Y$ deux variables aléatoires indépendantes à valeurs dans $\N$ définies sur un même espace $(\O,\A,\Pr)$.\\
+Pour $|t|<1$, on définit les fonctions génératrices de $X$ et de $Y$ respectivement par :
+\begin{equation*}
+    G_X(t) = \frac{1}{2-t} \quad \et \quad G_Y(t) = 2 - \sqrt{2-t}
+\end{equation*}
+
+\begin{question}{}{}
+    Déterminer le développement en série entière de la fonction $G_X$.
+    \tcblower
+    \vspace*{-0.5cm}
+    \begin{equation*}
+        G_X(t) = \frac{1}{2-t} = \frac{1}{2}\.\frac{1}{1-\frac{t}{2}} = \frac{1}{2}\sum_{n=0}^{+\infty}\left( \frac{t}{2} \right)^n = \sum_{n=0}^\infty\frac{t^n}{2^{n+1}}.
+    \end{equation*}
+\end{question}
+
+\begin{question}{}{}
+    Donner le terme d'ordre $n\in\N^*$ du développement en série entière de la fonction $t\mapsto(a+t)^{1/2}$.
+    \tcblower
+    \vspace*{-0.5cm}
+    \begin{equation*}
+        (1+x)^\a = 1 + \sum_{n=1}^{+\infty}\prod_{i=0}^{n-1}\left( \frac{1}{2} - i \right)\frac{t^n}{n!}
+    \end{equation*}
+\end{question}
+
+\begin{question}{}{}
+    En déduire le développement en série entière de la fonction $G_Y$.
+    \tcblower
+    \vspace*{-0.5cm}
+    \begin{equation*}
+        G_Y(t) = 2 - \sqrt{2-t} = 2-\sqrt{2}\sqrt{1-\frac{t}{2}} = 2 - \sqrt{2}\left[ 1 + \sum_{n=1}^{\infty}\binom{1/2}{n}\left( \frac{-t}{2} \right)^n \right] = 2 - \sqrt{2} + \sum_{n=1}^{\infty}\frac{(-1)^{n+1}\sqrt{2}}{2^n}\binom{1/2}{n}t^n
+    \end{equation*}
+\end{question}
+
+\begin{question}{}{}
+    Pour tout $n\in\N$, calculer $\Pr(X=n)$ et $\Pr(Y=n)$.
+    \tcblower
+    Par définition, $G_X(t) = \sum_{n=0}^\infty t^n \Pr(X=n)$, donc par unicité du DSE, $\Pr(X=n)=\frac{1}{2^{n+1}}$.\\
+    De même, $\forall n \in \N, ~ \Pr(Y=0)=2-\sqrt{2}$ et $\Pr(Y=n)=-\frac{\sqrt{2}}{2^nn!}\prod_{i=0}^{n-1}\left( \frac{1}{2}-i \right)$.
+\end{question}
+
+\begin{question}{}{}
+    Soit $S=X+Y$. Déterminer la loi de $S$.
+    \tcblower
+    On a $G_S = G_{X+Y} = G_XG_Y$, donc : 
+    \begin{align*}
+        G_S(t) &= \frac{1}{2-t}(2-\sqrt{2-t}) = \frac{2}{2-t} - \frac{1}{\sqrt{2-t}} = - \frac{1}{\sqrt{2}} + \sum_{n=0}^{\infty}\left( \frac{t}{2} \right)^n - \frac{1}{\sqrt{2}} \sum_{n=1}^{\infty}\binom{-1/2}{n}\frac{(-1)^n}{2^n}t^n\\
+        &=1 - \frac{1}{\sqrt{2}} + \sum_{n=1}^{\infty}\frac{1}{2^n}\left[ 1 + \frac{(-1)^{n+1}}{\sqrt{2}} \binom{-1/2}{n} \right]t^n
+    \end{align*}
+    Par unicité du DSE, $\Pr(S=0) = 1 - \frac{1}{\sqrt{2}}$ et $\Pr(S=n)=\frac{1}{2^n}\left[ 1 + \frac{(-1)^{n+1}}{\sqrt{2}} \binom{-1/2}{n}\right]$
+\end{question}
+
+\begin{question}{}{}
+    Justifier que la variable aléatoire $X+1$ suit une loi géométrique dont on déterminera le paramètre.
+    \tcblower
+    On a $\forall n \in \N^*, ~ (X+1=n) = (X=n-1)$ puis $\Pr(X+1=n)=\Pr(X=n-1)=\frac{1}{2^n}=\frac{1}{2}(1-\frac{1}{2})^{n-1}$.\\
+    Donc $X+1\sim \cursive{G}(1/2)$.
+\end{question}
+
+\begin{question}{}{}
+    En déduire l'espérance et la variance de la variable aléatoire $X$.
+    \tcblower
+    On rappelle que si $Z\sim\cursive{G}(p)$, alors $\E(Z)=\frac{1}{p}$ et $\V(Z)=\frac{1-p}{p^2}$, alors $\E(X+1)=2$ et $\V(X+1)=2$.\\
+    $\hra$ $\E(X) = \E(X+1-1) = \E(X+1) - 1 = 1$ par linéarité de l'espérance.\\
+    $\hra$ $\V(X) = \V(X+1-1) = \V(X+1) = 2$ car $\forall (a,b) \in \R^2, ~ \V(aX+b) = a^2\V(X)$.
+\end{question}
+
+\begin{question}{}{}
+    Déterminer à l'aide de la fonction génératrice $G_Y$ l'espérance des variables aléatoires $Y$ et $Y(Y-1)$.
+    \tcblower
+    On rappelle que si $G_X(t)$ a un rayon de convergence $R>1$, alors $G_X$ est $\cursive{C}^\infty$ sur $]-R,R[$, on peut donc dériver terme-à-terme avec conservation du rayon et par théorème du transfert :
+    \begin{equation*}
+        G'_X(1) = \E(X) \quad \et \quad G''_X(1) = \E(X(X-1))
+    \end{equation*} 
+    Donc $\E(Y)=G'_Y(1) = \frac{1}{2}$ et $\E(Y(Y-1))=G''_Y(1)=\frac{1}{4}$.
+\end{question}
+
+\pagebreak
+
+\begin{question}{}{}
+    En déduire la variance de la variable aléatoire $Y$.
+    \tcblower
+    Par Koenig-Huygens : $\V(Y) = \E(Y^2) - \E(Y)^2 = \E(Y(Y-1))+\E(Y) - \E(Y)^2 = \frac{1}{4} + \frac{1}{2} - \frac{1}{4} = \frac{1}{2}$. 
+\end{question}
+
+\vspace*{-0.5cm}
+
+\begin{question}{}{}
+    Déterminer l'espérance et la variance de la variable aléatoire $S$.
+    \tcblower
+    $\hra$ $\E(S)=\E(X+Y)=\E(X) + \E(Y) = \frac{3}{2}$.\\
+    $\hra$ $\V(S)=\V(X+Y)=\V(X) + \V(Y) = \frac{5}{2}$ puisque $X\ind Y$.
+\end{question}
+
+\fin
+
+\end{document}

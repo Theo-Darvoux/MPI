@@ -20,16 +20,6 @@ $\hra$ Les applications coordonnées sont linéaires donc continues et lipschitz
 $\hra$ Tous les polynômes à plusieurs variables sont continus.
 
 \begin{exercice}{}{}
-    On pose : $\forall (x,y) \in \R^2, ~ f(x,y)=x^2 + 6xy + y^2 - 4x + 3$.
-    \begin{enumerate}
-        \item Montrer que $f$ est bornée sur $[0,1]^2$. Déterminer ses bornes sur $[0,1]$.
-        \item Montrer que $f$ est bornée sur $]0,1[^2$.
-    \end{enumerate}
-\end{exercice}
-
-\vspace*{-0.8cm}
-
-\begin{exercice}{}{}
     \begin{enumerate}
         \item Montrer que $f(x,y)=\frac{xy}{\sqrt{x^2+y^2}}$, $f(0,0)=0$ est continue sur $\R^2$.
         \item Montrer que $f(x,y)=\frac{xy}{x^2+y^2}$ n'est pas prolongeable par continuité en $(0,0)$.
@@ -477,5 +467,192 @@ On réécrit le DL1 de $f$ en $a$ : $f(a+h) = f(a) + \Lg \nabla f_a, h\Rg + o(\|
 Par Cauchy-Schwarz : $|\Lg \nabla f_a, v \Rg| \leq \|\nabla f\|\|v\|$ donc $|Df_v(a)|\leq\|\nabla f_a\|$ pour tout $v$ unitaire.\\
 Avec égalité ssi $v$ est positivement lié à $\nabla f_a$, donc $\nabla f_a\neq0$ indique la direction de plus forte pente.\\
 Si $\nabla f_a=0$, alors $a$ est un point critique, donc $f$ peut admettre en $a$ un extremum local.
+
+
+\begin{prop}{}{}
+    Soient $f,g:U\subset E \to \R$ et $\l\in\R$. On suppose que les vecteurs gradients existent.
+    \begin{equation*}
+        \forall a \in U, ~ \nabla(f+\l g)(a) = \nabla f(a) + \l \nabla g(a) \et \forall a \in U, ~ \nabla(fg)(a) = f(a)\nabla g(a) + g(a)\nabla f(a). 
+    \end{equation*}
+\end{prop}
+
+\begin{exercice}{}{}
+    Soit $(E,\Lg\.,\.\Rg)$ euclidien et $N$ la norme euclidienne associée.\\
+    Calculer $\nabla N(x)$ pour tout $x$ non nul.
+    \tcblower
+    On choisit $\B=(e_1,...,e_n)$ une b.o.n. de $E$, alors $\forall x \in E, ~ N(x)^2 = \sum_{i=1}^nx_i^2$ avec $\forall i \in \lb1,n\rb, ~ x_i = \Lg x, e_i \Rg$.\\
+    Donc $N(x) = \sqrt{\sum_{i=1}^n x_i^2}$ puis $\forall i \in \lb1,n\rb, ~ \frac{\6 N}{\6 x_i}(x)=\frac{1}{2}\frac{2x_i}{\sqrt{x_1^2+...+x_n^2}}=\frac{x_i}{N(x)}$ pour tout $x\neq0$.\\
+    Puis les coordonnées de $\nabla N(x)$ dans une b.o.n. sont les dérivées partielles :
+    \begin{equation*}
+        \forall x \neq 0, ~ \nabla N(x) = \sum_{i=1}^n\frac{x_i}{N(x)}e_i = \frac{x}{N(x)}.
+    \end{equation*}
+\end{exercice}
+
+\begin{exercice}{}{}
+    On pose $f(M)=\det(M)$ pour tout $M\in\M_n(\R)$.
+    \begin{enumerate}
+        \item Calculer $\nabla f(M)$ pour tout $M\in\M_n(\R)$.
+        \item En déduire le coefficient $a_1$ devant $X$ dans le polynôme caractéristique $\X_M$.
+    \end{enumerate}
+    \tcblower
+    On munit $\M_n(\R)$ du produit scalaire usuel. La base $\B=(E_{i,j})_{i,j}$ est une b.o.n. pour celui-ci.\\
+    \boxed{1.} Les coordonnées de $\nabla f(M)$ dans $\B$ sont les dérivées partielles.
+    \begin{equation*}
+        \forall i,j \in \lb1,n\rb, ~ \6_{i,j}f(M) = (-1)^{i+1}\Delta_{i,j}
+    \end{equation*}
+    Donc $\nabla f(M) = \sum_{i,j}(-1)^{i+j}\Delta_{i,j}E_{i,j} = \Com M$.\\
+    \boxed{2.} Posons $\X_M(\l) = \det(\l I_n - M)$ pour $\l\in\R$.
+    \begin{equation*}
+        a_1 = \X'_M(0) = \lim_{\l\to0} \frac{\X_M(\l) - \X_M(0)}{\l} = \lim_{\l\to0} \frac{\det(\l I_n - M) - \det(-M)}{\l} = \lim_{\l\to0} (-1)^n Df_{-I_n}(M).
+    \end{equation*}
+    i.e. $\X_M'(0)=(-1)^n Df_{-I_n}(M)=(-1)^n\Lg \nabla f(M), -I_n\Rg=(-1)^n\Lg \Com M, -I_n \Rg = (-1)^{n+1}\Tr(\Com M)$
+\end{exercice}
+
+\begin{prop}{Règle de la chaîne.}{}
+    Soit $f:U\subset\R^p\to\R^n$ et $g:V\subset\R^n\to\R$ différentiables.
+    \begin{equation*}
+        \forall i \in \lb1,p\rb, ~ \frac{\6(g\circ f)}{\6 x_i} = \sum_{j=1}^n \frac{\6 g}{\6 y_j}(f(x))\frac{\6 f_j}{\6 x_i}(x).
+    \end{equation*}
+    \tcblower
+    On a vu que $\Jac_a(g\circ f) = \Jac_{f(a)}(g)\times \Jac_a f$.
+\end{prop}
+
+\begin{ex}{}{}
+    Soit $f:(x,y)\mapsto(f_1(x,y), f_2(x,y))$ et $g:(x,y)\mapsto g(x,y)$.
+    \begin{align*}
+            &\frac{\6 (g\circ f)}{\6 x}(a) = \frac{\6 g}{\6 y_1}(f(a))\frac{\6 f_1}{\6 x}(a) + \frac{\6 g}{\6 y_2}(f(a))\frac{\6 f_2}{\6 x}(a)\\
+            &\frac{\6 (g\circ f)}{\6 y}(a) = \frac{\6 g}{\6 y_1}(f(a))\frac{\6 f_1}{\6 y}(a) + \frac{\6 g}{\6 y_2}(f(a))\frac{\6 f_2}{\6 y}(a)
+    \end{align*}
+\end{ex}
+
+\begin{exercice}{Calcul du gradient en coordonnées polaires.}{}
+    Soit $f:(x,y)\mapsto f(x,y)$, on pose $x=r\cos\theta$ et $y=r\sin\theta$ pour $(x,y)\neq(0,0)$, $r>0$ et $\theta\in[0,2\pi[$.\\
+    Alors $f(x,y)=f(r\cos\theta, r\sin\theta)=F(r,\theta)$ avec $F=f\circ g$ où $g(r,\theta)=(r\cos\theta,r\sin\theta)$.
+    \begin{align*}
+        &\frac{\6 F}{\6 r}(r,\theta) = \frac{\6 f}{\6 x}(x,y)\frac{\6 g_1}{\6 r}(r,\theta) + \frac{\6 f}{\6 y}(x,y)\frac{\6 g_2}{\6 r}(r,\theta) = \cos\theta\frac{\6 f}{\6 x}(x,y) + \sin\theta\frac{\6 f}{\6 y}(x,y).\\
+        &\frac{\6 F}{\6 \theta}(r,\theta) = \frac{\6 f}{\6 x}(x,y)\frac{\6 g_1}{\6 \theta}(r, \theta) + \frac{\6 f}{\6 y}(x,y)\frac{\6 g_2}{\6 \theta}(r,\theta) = -r\sin\theta\frac{\6 f}{\6 x}(x,y)+r\cos\theta\frac{\6 f}{\6 y}(x,y).
+    \end{align*} 
+    Puis $\nabla f(x,y) = \left(\frac{\6 f}{\6 x}(x,y), \frac{\6 f}{\6 y}(x,y) \right)$, coordonnées du gradient dans la base canonique de $\R^2$ (b.o.n.).\\
+    Notons $\v{i}=(1,0)$ et $\v{j}=0,1$, alors :
+    \begin{equation*}
+        \nabla f(x,y) = \frac{\6 f}{\6 x}(x,y)\v{i} + \frac{\6 f}{\6 y}(x,y)\v{j}.
+    \end{equation*}
+    Or d'après les calculs précédents :
+    \begin{equation*}
+        \begin{pmatrix} \frac{\6 f}{\6 x}(x,y) & \frac{\6 f}{\6 y}(x,y) \end{pmatrix} = \begin{pmatrix}\frac{\6 F}{\6 r}(r,\theta) & \frac{\6 F}{\6 \theta}(r,\theta)\end{pmatrix}\begin{pmatrix}\cos \theta & -r\sin \theta \\ \sin\theta & r\cos\theta\end{pmatrix}^{-1} = \frac{1}{r}\begin{pmatrix}\frac{\6 F}{\6 r}(r,\theta) & \frac{\6 F}{\6 \theta}(r,\theta)\end{pmatrix}\begin{pmatrix}r\cos\theta&r\sin\theta\\-\sin\theta&\cos\theta\end{pmatrix}
+    \end{equation*}
+    Donc $\nabla f(x,y) = \left( \cos\theta \frac{\6 F}{\6 r}(r,\theta) - \frac{\sin \theta}{r}\frac{\6 F}{\6 \theta}(r,\theta) \right)\v{i} + \left( \sin\theta\frac{\6 F}{\6 r}(r,\theta) + \frac{\cos\theta}{r}\frac{\6 F}{\6 \theta}(r,\theta) \right)\v{j}$.\\
+    Puis $\nabla f(x,y) = \frac{\6 F}{\6 r}(r,\theta)(\cos \theta \v{i} + \sin\theta\v{j}) + \frac{1}{r}\frac{\6 F}{\6 \theta}(r,\theta)(-\sin\theta\v{i} + \cos\theta\v{j})$.
+\end{exercice}
+
+\section{Classe \texorpdfstring{$\cursive{C}^k$}{Lg}.}
+
+\begin{defi}{Classe $\cursive{C}^1$.}{}
+    Soit $f:U\subset E \to F$ avec $E,F$ deux $\R$-evdf et $U$ un ouvert de $E$.\\
+    On dit que $f$ est de classe $\cursive{C}^1$ sur $U$ ssi $f$ est différentiable sur $U$ et si $df$ est continue sur $U$.
+\end{defi}
+
+\begin{thm}{Théorème fondamental (Admis).}{}
+    Soit $f:U\subset E\to F$ avec $E,F$ deux $\R$-evdf et $U$ un ouvert de $E$.
+    \begin{enumerate}
+        \item Si $f$ est $\cursive{C}^1$ sur $U$, alors $\forall v \in E, ~ v\neq0 \ra D_vf$ est continue sur $U$.
+        \item \fbox{Si $f$ admet $n$ dérivées partielles continues sur $U$, alors $f$ est $\cursive{C}^1$ sur $U$.}
+    \end{enumerate}
+\end{thm}
+
+\begin{thm}{}{}
+    La classe $\cursive{C}^1$ est stable par combinaisons linéaires, par produit et par composition.
+\end{thm}
+
+\begin{corr}{}{}
+    Les fonctions polynomiales de plusieurs variables sont de classe $\cursive{C}^1$ sur leur domaine de définition.
+\end{corr}
+
+\begin{prop}{Dérivée le long d'un arc.}{}
+    Soit $\g:I\subset\R\to U$ $\cursive{C}^1$ sur $I$ et $f:U\to\R$ $\cursive{C}^1$ sur $U$. Alors $f\circ \g$ est $\cursive{C}^1$ sur $I$ et
+    \begin{equation*}
+        \forall t \in I, ~ (f\circ \g)'(t) = \Lg \g'(t), \nabla f(\g(t)) \Rg = df_{\g(t)}(\g'(t)).
+    \end{equation*}
+    \tcblower
+    On sait déjà que $f\circ \g$ est $\cursive{C}^1$ sur $I$ par composition, et $d(f\circ \g)(t)=df_{\g(t)}\circ d_{\g}(t)$.\\
+    Ici, $\forall t \in \R, ~ (f\circ \g)'(t) = d(f\circ \g)_t(1) = (df_{\g(t)}\circ d\g_t)(1)=df_{\g(t)}(d\g_t(1))=df_{\g(t)}(\g'(t))$.
+\end{prop}
+
+\begin{prop}{Théorème fondamental de l'analyse ?}{}
+    Soit $f:U\subset E\to\R$ $\cursive{C}^1$ sur $U$ et $(a,b)\in U^2$. Soit $\g:[0,1]\to U$ $\cursive{C}^1$ telle que $\g(0)=a$ et $\g(1)=b$. Alors :
+    \begin{equation*}
+        f(b) - f(a) = \int_0^1 df_{\g(t)}(\g'(t))\dt
+    \end{equation*}
+    \tcblower
+    On a $f(b)-f(a)=f(\g(1))-f(\g(0))=f\circ\g(1) - f\circ\g(0)$, et $f\circ\g$ est $\cursive{C}^1$ sur $[0,1]$ à valeurs réelles. Par TFA :
+    \begin{equation*}
+        (f\circ \g)(1) - (f\circ\g)(0) = \int_0^1 (f\circ \g)'(t)\dt = \int_0^1 df_{\g(t)}(\g'(t))\dt
+    \end{equation*}
+\end{prop}
+
+\bf{Remarque.} Dans $\R$, avec $f$ de classe $\cursive{C}^1$ au sens classique :
+\begin{equation*}
+    f(b) - f(a) = \int_a^b f'(t)\dt = \int_0^1 f'(u a + (1-u)b)(a-b)\du
+\end{equation*}
+
+\begin{prop}{Caractérisation des fonctions constantes sur $U$.}{}
+    Soit $f:U\subset E \to \R$ de classe $\cursive{C}^1$ sur $U$ connexe par arcs. Soit $\B=(e_1,...,e_n)$ une base de $E$.\\ 
+    Alors $f$ est constante sur $U$ ssi toutes ses dérivées partielles sont nulles sur $U$.
+    \tcblower
+    \boxed{\la} Supposons que toutes les dérivées partielles de $f$ sont nulles sur $U$. Soit $(a,b)\in U$.\\
+    Alors $\forall t \in [0,1]$, on pose $\g(t)=tb+(1-t)a$, de classe $\cursive{C}^1$ sur $[0,1]$. Alors par dérivée le long d'un arc :
+    \begin{equation*}
+        f(b) - f(a) = \int_0^1 df_{\g(t)}(\g'(t))\dt = \int_0^1 \sum_{i=1}^n \frac{\6 f}{\6 x_i}(\g(t))\g_i'(t)\dt = 0
+    \end{equation*}
+    Avec $\g=(\g_1,...,\g_n)$, on a donc $f(a)=f(b)$, donc $f$ est bien constante sur $U$.\\
+    \boxed{\ra} Si $f$ est constante sur $U$, alors $\forall a \in E, ~ \forall v \in E, ~ v\neq 0 \ra Df_v(a)=0$.\\
+    En particulier, les dérivées partielles de $f$ sont nulles sur $U$.
+\end{prop}
+
+Dans le cas général $U$ connexe par arcs, on sait qu'il existe un chemin continu à valeurs dans $U$ qui joint $a$ et $b$.
+
+\begin{exercice}{}{}
+    Soit $f:\R^3\to\R$ de classe $\cursive{C}^1$ sur $\R^3$ et $a\in\R$.\\
+    On dit que $f$ est homogène d'ordre $a$ ssi $\forall (x,y,z)\in\R^3, ~ \forall t > 0, ~ f(tx,ty,tz)=t^af(x,y,z)$.\\
+    Montrer que $f$ est homogène d'ordre $a$ ssi $\forall (x,y,z)\in\R^3, ~ x\frac{\6 f}{\6 x}(x,y,z)+y\frac{\6 f}{\6 y}(x,y,z)+z\frac{\6 f}{\6 z}(x,y,z)=af(x,y,z)$.
+    \tcblower
+    \boxed{\ra} Par hypothèse, $\forall t > 0, ~ \forall (x,y,z)\in\R^3, ~ f(tx,ty,tz)=t^af(x,y,z)$. Soit $(x,y,z)\in\R^3$.
+    \begin{equation*}
+        g(t) := f(tx,ty,tz) = (f\circ\phi)(t) \nt{ avec } \phi(t)=(tx,ty,tz).
+    \end{equation*}
+    On dérive par rapport à $t$ en utilisant la règle de la chaîne.
+    \begin{equation*}
+        g'(t) = x \frac{\6 f}{\6 x}(tx,ty,tz) + y\frac{\6 f}{\6 y}(tx,ty,tz) + z\frac{\6 f}{\6 z}(tx,ty,tz).
+    \end{equation*}
+    D'autre part, $g'(t)=at^{a-1}f(x,y,z)$, en évaluant les deux expressions en $t=1$ :
+    \begin{equation*}
+        x\frac{\6 f}{\6 x}(x,y,z) + y\frac{\6 f}{\6 y}(x,y,z) + z\frac{\6 f}{\6 z}(x,y,z) = af(x,y,z).
+    \end{equation*}
+    \boxed{\la} Posons $g(t)=f(tx,ty,tz)$ pour $t>0$ et $(x,y,z)$ fixés.\\
+    Cherchons une expression de $g$ via une équation différentielle.
+    \begin{align*}
+        g'(t) &= x\frac{\6 f}{\6 x}(tx, ty,tz) + y\frac{\6 f}{\6 y}(tx,ty,tz) + z\frac{\6 f}{\6 z}(tx,ty,tz)\\
+        &=\frac{1}{t}\left( tx\frac{\6 f}{\6 x}(tx,ty,tz) + ty \frac{\6 f}{\6 y}(tx,ty,tz) + tz\frac{\6 f}{\6 z}(tx,ty,tz) \right)\\
+        &= \frac{1}{t}af(tx,ty,tz) = \frac{a}{t}g(t).
+    \end{align*}
+    Donc $g$ est solution sur $\R_+^*$ de $y'=\frac{a}{t}y$ donc $\exists \l \in \R, ~ \forall t > 0, ~ g(t)=\l e^{a\ln t}=\l t^a$.\\
+    Puis $\l=g(1)=f(x,y,z)$.
+\end{exercice}
+
+\begin{defi}{Vecteurs tangents à une partie.}{}
+    Soit $X\subset E$, $v\in E$ et $x\in X$ avec $E$ un $\R$-evdf.\\
+    On dit que $v$ est tangent à la partie $X$ au point $x$ ssi $\exists \e>0, ~ \exists\phi:~]-\e,\e[\to X, ~ \phi(0)=x$ et $\phi'(0)=v$.
+\end{defi}
+
+\begin{exercice}{}{}
+    Pour $f:I\subset\R\to\R$, on note $X=\{(x,f(x)); ~ x\in I\}$ le graphe de $f$.\\
+    Déterminer les vecteurs tangents à la partie $X$ en $M_0 = (x_0,f(x_0))\in X$ et en déduire une équation de la tangente à $f$ en $x_0$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $f:U\subset\R^2\to\R$ et $X=\{(x,y,f(x,y)), ~ (x,y)\in U\}$ la surface de $f$.\\
+    Déterminer les vecteurs tangents à la partie $X$ en $M_0 = (x_0,y_0, f(x_0,y_0))$.\\
+    En déduire une équation du plan tangent à $f$ en $(x_0,y_0)$.
+\end{exercice}
 
 \end{document}
