@@ -54,11 +54,11 @@
 
 \vspace*{-0.7cm}
 
-\begin{exi}{}{}
+\begin{exercice}{}{}
     Soit $(G,\times)$ un groupe tel que $\forall x \in G, ~ x^2=e$. Montrer que $G$ est commutatif.
     \tcblower
     Soient $x,y\in G$. On a $xyxy=(xy)^2=e$ donc $x(xyxy)y=xy$ donc $(xx)yx(yy)=xy$ donc $yx=xy$.
-\end{exi}
+\end{exercice}
 
 \vspace*{-0.7cm}
 
@@ -183,7 +183,7 @@
 
 \pagebreak
 
-\begin{exi}{}{}
+\begin{exercice}{}{}
     Soit $(G,\times)$ un groupe et $n\geq3$.
     \begin{enumerate}
         \item Soit $x\in G$. On pose $C(x)=\{y\in G \mid yx=xy\}$, appelé commutant de $x$.
@@ -210,7 +210,7 @@
     Donc les coefficients sur la diagonale sont tous égaux, les autres sont nuls. On a $A=a_{1,1}I_n$.\\
     \bf{Remarque.} On a $A(I_n+E_{i,j})=(I_n+E_{i,j})A$ donc $A+AE_{i,j}=A+E_{i,j}A$ donc $AE_{i,j}=E_{i,j}A$.\\
     \boxed{4.\supset} Triviale.
-\end{exi}
+\end{exercice}
 
 \begin{thm}{Sous-groupes de $\Z$. $\star$}{}
     Les sous-groupes de $(\Z,+)$ sont exactement les $n\Z,n\in\N$.\\
@@ -313,9 +313,9 @@
 \begin{thm}{}{}
     Soit $(G,\times)$ un groupe et $a\in G$. Alors $\langle a\rangle =\{a^n,n\in\Z\}$.
     \tcblower
-    \boxed{\subset} Posons $H=\{a^n, n\in \Z\}$, montrons que c'est un sous-groupe de $G$ qui contient $a$.\\
+    Posons $H=\{a^n, n\in \Z\}$, montrons que c'est un sous-groupe de $G$ qui contient $a$.\\
     Il contient effectivement $a$ car $a^1\in H$, $H\subset G$ et $H\neq\0$ et stable par produit.\\
-    De plus, $\forall n \in \Z ~ (a^n)^{-1}=a^{-n}\in H$, on a bien $\langle a\rangle ~\subset H$.\\
+    \boxed{\subset} $\forall n \in \Z ~ (a^n)^{-1}=a^{-n}\in H$, on a bien $\langle a\rangle ~\subset H$.\\
     \boxed{\supset} On a bien $a\in\langle a\rangle $, stable par produit et inverse donc $\forall n \in \Z, ~ a^n \in\langle a\rangle $.
 \end{thm}
 
@@ -337,12 +337,12 @@
         \item Si $a$ est d'ordre fini $p$, alors $\langle a \rangle = \{e,a,...,a^{p-1}\}$.
     \end{enumerate}
     \tcblower
-    En effet, si tous les itérés de $a$ sont distincts, alors $o(a)=|\langle a\rangle|=+\infty$.\\
-    Sinon, $\exists n,m\in\N, ~ n<m ~\et~ a^n=a^m$. Notons $E=\{k\in\N^*,~a^k=e\}$.\\
-    On a $m-n\in E$ car $a^{m-n}=e$ donc $E\neq\0$. C'est une partie non-vide de $\N^*$. Il admet un minimum $p$.\\
-    $\bullet$ Montrons que les itérés de $a$ jusqu'à l'ordre $p$ sont distincts.\\
+    \boxed{1.} En effet, si tous les itérés de $a$ sont distincts, alors $o(a)=|\langle a\rangle|=+\infty$.\\
+    \boxed{2.} Sinon, $\exists n,m\in\N, ~ n<m ~\et~ a^n=a^m$. Notons $E=\{k\in\N^*,~a^k=e\}$.\\
+    On a $m-n\in E$ car $a^{m-n}=e$ donc $E\neq\0$. C'est une partie non-vide de $\N^*$, elle admet un minimum $p$.\\
+    $\hra$ Montrons que les itérés de $a$ jusqu'à l'ordre $p$ sont distincts.\\
     \hspace*{0.3cm}Supposons que $\exists k<h \in \lb0,p-1\rb, ~ a^k=a^h$. Alors $a^{k-h}=e$, or $0\leq k-h<p$. Absurde.\\
-    $\bullet$ Montrons que $\langle a \rangle = \{e,a,...,a^{p-1}\}$.\\
+    $\hra$ Montrons que $\langle a \rangle = \{e,a,...,a^{p-1}\}$.\\
     \boxed{\supset} Trivial.\\
     \boxed{\subset} Soit $n\in\Z$. On a $\exists (q,r)\in\Z\times\N, ~ n=qp+r$ et $r<p$ donc $a^n=a^{pq}a^r=a^r\in\{e,a,...,a^{p-1}\}$ car $r<p$.\\
     En particulier, $o(a)=|\langle a \rangle|=p$.
@@ -354,8 +354,8 @@
     Soit $(G,\times)$ un groupe de neutre $e$ et $a\in G$ d'ordre $p\in\N$. Alors $\forall n \in \Z, ~ a^n=e\iff p \mid n$.
     \tcblower
     \boxed{\la} Supposons $\exists q\in\Z, ~ n=pq$. Alors $a^n=(a^p)^q=e$.\\
-    \boxed{\ra} Supposons $a^n=e$. Alors $\exists (q,r)\in\Z\times\N, ~ n=pq+r$ et $r<p$ donc $a^n=(a^p)^qa^r=a^r=e$ et $r=0$ $(r<p)$.\\
-    Ainsi, $p\mid n$ car $r=0$.
+    \boxed{\ra} Supposons $a^n=e$. Alors $\exists (q,r)\in\Z\times\N, ~ n=pq+r$ et $r<p$ donc $a^n=(a^p)^qa^r=a^r=e$.\\
+    Donc $a^r=0$, ce qui implique que $r=0$ puisque $r<p$ et par définition de $p$. Ainsi, $p\mid n$.
 \end{prop}
 
 \vspace*{-0.8cm}
@@ -376,7 +376,7 @@
         Calculer l'ordre de $A$, de $B$ et de $AB$. Conclusion ?
     \end{enumerate}
     \tcblower
-    \boxed{1.} C'est un sous-groupe de $\GL_2(\R)$...\\
+    \boxed{1.} C'est un sous-groupe de $\GL_2(\R)$.\\
     \boxed{2.} On peut étudier l'ensemble des itérés de ces matrices.
     \begin{align*}
         &A^2=\begin{pmatrix}-1&0\\0&-1\end{pmatrix}; \quad A^3=\begin{pmatrix}0&1\\-1&0\end{pmatrix}; \quad A^4=\begin{pmatrix}1&0\\0&1\end{pmatrix}.\\
@@ -397,10 +397,10 @@
     \tcblower
     On a $\langle x \rangle = \{e,x,...,x^{p-1}\}$ et $x^n=e\iff p\mid n$; $\langle y \rangle = \{e,y,...,y^{q-1}\}$ et $y^n=e\iff q\mid n$.\\
     Comme $x$ et $y$ commutent, on a $\forall k \in \Z, ~ (xy)^k=x^ky^k$.\\
-    $\bullet$ On a bien $(xy)^{pq}=(x^p)^q(y^q)^p=e$. Alors par théorème, $xy$ est d'ordre fini, et cet ordre divise $pq$.\\
-    $\bullet$ On a $(xy)^k=e\ra x^ky^k=e \ra \cancel{(x^k)^p}(y^k)^p=e$ donc $y^{kp}=e$ donc $q \mid kp$. Or $p\land q=1$ donc $q\mid k$.\\
+    $\hra$ On a bien $(xy)^{pq}=(x^p)^q(y^q)^p=e$. Alors par théorème, $xy$ est d'ordre fini, et cet ordre divise $pq$.\\
+    $\hra$ On a $(xy)^k=e\ra x^ky^k=e \ra \cancel{(x^k)^p}(y^k)^p=e$ donc $y^{kp}=e$ donc $q \mid kp$. Or $p\land q=1$ donc $q\mid k$.\\
     Par symétrie, on a $p\mid k$. On a donc $p\mid k, ~ q \mid k$ et $p\land q=1$, alors $pq\mid k$.\\
-    On a bien $o(xy)=pq$ et $\langle xy \rangle = \{e,xy,...,(xy)^{pq-1}\}$.
+    On a bien \fbox{$o(xy)=pq$} et $\langle xy \rangle = \{e,xy,...,(xy)^{pq-1}\}$.
 \end{ex}
 
 \vspace*{-0.8cm}
@@ -440,7 +440,7 @@
 
 \vspace*{-0.8cm}
 
-\begin{thm}{$\star$}{}
+\begin{thm}{Théorème de Lagrange. $\star$}{}
     Soit $(G,\times)$ un groupe de cardinal fini $n\in\N$.
     \begin{enumerate}
         \item L'ordre de tout élément de $G$ divise $n$.
@@ -462,7 +462,7 @@
 \vspace*{-0.8cm}
 
 \begin{ex}{}{}
-    Soit $(G,\times)$ un groupe fini de cardinal $p$ premier. Alors $p$ est un groupe cyclique.
+    Soit $(G,\times)$ un groupe fini de cardinal $p$ premier. Alors $G$ est un groupe cyclique.
     \tcblower
     Soit $a\in G$, tel que $a\neq e$. On a $o(a)\mid p$ d'après le théorème précédent, d'où $o(a)=p$.\\
     Donc $G=\langle a \rangle$. En fait $G$ est engendré par n'importe lequel de ses éléments distincts de $e$.
@@ -482,7 +482,7 @@
 \subsection{Groupe \texorpdfstring{$\Z/n\Z$}{Lg}.}
 
 \begin{defi}{Congruence.}{}
-    Soit $n\in\N^*$. On définit la congruence modulo $n$ sur $\Z$ par :
+    Soit $n\in\N^*$. On définit la \bf{congruence} modulo $n$ sur $\Z$ par :
     \begin{equation*}
         \forall (x,y)\in\Z^2 \quad x \equiv y[n] \iff \exists k \in \Z \mid x=y+kn.
     \end{equation*}
@@ -553,7 +553,7 @@
     \boxed{1.} $o([0])=1$, $o([1])=6$, $o([2])=3$, $o([3])=2$, $o([4])=3$, $o([5])=6$.\\
     \boxed{2.} Montrons que $[k]$ engendre $(\Z/n\Z,\ov{+})$ ssi $k\land n=1$.\\
     \boxed{\ra} En particulier, $[1]$ est itéré de $[k]$. Donc $\exists u\in\Z, ~ [1]=u[k]=[ku]$, puis $1\equiv ku[n]$.\\
-    Ainsi, $\exists v \in \Z, ~ ku+nv=1$, et d'après la relation de Bezout, $k\land n=1$.\\
+    Ainsi, $\exists v \in \Z, ~ ku+nv=1$, et d'après la relation de Bézout, $k\land n=1$.\\
     \boxed{\la} Par hypothèse : $\exists u,v \in \Z, ~ ku+nv=1$, donc $ku\equiv 1[n]$ donc $[ku]=[1]$ donc $[1]$ est itéré de $[k]$.\\
     Puis toute classe est un itéré de $[1]$ donc toute classe est itéré de $[k]$ par transitivité.
 \end{ex}
@@ -591,11 +591,11 @@
 \end{rappel}
 
 \begin{defi}{Anneau commutatif.}{}
-    Un anneau $(A,+,\times)$ est dit commutatif si $\times$ est commutative.
+    Un anneau $(A,+,\times)$ est dit \bf{commutatif} si $\times$ est commutative.
 \end{defi}
 
 \begin{defi}{Inversibles.}{}
-    Soit $(A,+,\times)$ un anneau. L'ensemble des inversibles, noté $U(A)$ est l'ensemble des inversibles pour $\times$.
+    Soit $(A,+,\times)$ un anneau. L'ensemble des \bf{inversibles}, noté $U(A)$ est l'ensemble des inversibles pour $\times$.
 \end{defi}
 
 \begin{rappel}{Groupe des inversibles.}{}
@@ -604,7 +604,7 @@
 \end{rappel}
 
 \begin{defi}{Intégrité.}{}
-    Un anneau $(A,+,\times)$ est intègre ssi il n'admet pas de diviseurs de $0$ :
+    Un anneau $(A,+,\times)$ est dit \bf{intègre} ssi il n'admet pas de diviseurs de $0$ :
     \begin{equation*}
         \forall (x,y) \in A^2, ~ xy = 0 \ra x = 0 ~\ou~ y = 0.
     \end{equation*}
@@ -617,8 +617,7 @@
         \item Déterminer $U(G)$. 
     \end{enumerate}
     \tcblower
-    \boxed{1.} Vérifions que c'est un sous-anneau de $(\C,+,\times)$.\\
-    --- $1=1+i0\in G$; $a+ib-a'-ib'=(a-a')+i(b-b')\in G$; $(a+ib)(a'+ib')=(aa'-bb')+i(ab'+ab)$.\\
+    \boxed{1.} Facile comme sous-anneau de $(\C,+,\times)$.\\
     \boxed{2.} Soit $a+ib\in U(G)$, et $c+id$ son inverse. On passe au module (au carré):
     \begin{equation*}
         (a^2+b^2)(c^2+d^2)=1
@@ -633,8 +632,9 @@
     Déterminer les morphismes d'anneaux de $(\C,+,\times)$ dans lui-même qui laissent $\R$ invariant.
     \tcblower
     \bf{Analyse.} Soit $\phi$ endomorphisme de $(\C,+,\times)$ tel que $\forall x \in \R, ~ \phi(x)=x$.\\
-    Soit $z=a+ib\in\C$, alors $\phi(z)=\phi(a)+\phi(i)\phi(b)=a+\phi(i)b$. Or $\phi(i)^2=\phi(-1)=-1$ donc $\phi(i)\in\{i,-i\}$.\\
-    Si $\phi(i)=i$, alors $\phi(z)=z$, puis $\phi=\id_\C$; Si $\phi(i)=-i$, alors $\phi(z)=\ov{z}$, puis $\phi$ est la conjugaison.\\
+    Soit $a+ib\in\C$, alors $\phi(a+ib)=a+\phi(i)b$ et $\phi(i)^2=\phi(i^2)=\phi(-1)=-1$ donc $\phi(i)\in\{-1,1\}$.\\
+    $\hra$ Si $\phi(i)=i$, alors $\phi(a+ib)=a+ib$, puis $\phi=\Id_\C$.\\
+    $\hra$ Sinon, $\phi(i)=-i$, donc $\phi(a+ib)=a-ib$ donc $\phi$ est la conjugaison.\\
     \bf{Synthèse.} Donc l'identité et la conjugaison sont de tels morphismes.
 \end{ex}
 
@@ -642,16 +642,15 @@
 
 \begin{defi}{Anneau produit.}{}
     Soient $(A,+,\times)$ et $(B,+,\times)$ deux anneaux. On munit $A\times B$ des lois produits.\\
-    Alors $(A\times B, +, \times)$ est un anneau, appelé anneau produit, et $U(A\times B)=U(A)\times U(B)$.
+    Alors $(A\times B, +, \times)$ est un anneau, appelé \bf{anneau produit}, et $U(A\times B)=U(A)\times U(B)$.
 \end{defi}
 
-\vspace*{-0.8cm}
+\vspace*{-1cm}
 
 \subsection{Divisibilité, Idéaux.}
 
 \begin{defi}{Corps.}{}
-    Un corps est un anneau dont tous les éléments non nuls sont inversibles.\\
-    Si $(K,+,\times)$ est un corps, alors $U(K)=K^*$.
+    Un \bf{corps} est un anneau dont tous les éléments non nuls sont inversibles.
 \end{defi}
 
 \vspace*{-0.8cm}
@@ -665,17 +664,19 @@
 \begin{prop}{}{}
     Un corps est un anneau intègre.
     \tcblower
-    Soit $(K,+,\times)$ un corps. Soit $(a,b)\in\K^2$ tel que $a\times b=0_K$.\\
-    Si $a\neq0_K$, alors $a$ est inversible et $b=0_K$ en multipliant par $a^{-1}$.
+    Soient $a,b$ deux éléments de $K$ un corps tels que $ab=0_K$.\\
+    $\hra$ Si $a\neq0_K$, alors $b=0_K$ en multipliant par $a^{-1}$.\\
+    $\hra$ Si $b\neq0_K$, alors $a=0_K$ en multipliant par $b^{-1}$.\\
+    Donc $a=0_K$ ou $b=0_K$.
 \end{prop}
 
 \vspace*{-0.8cm}
 
 \begin{defi}{Idéal. $\star$}{}
-    Soit $(A,+,\times)$ un anneau commutatif, et $I\subset A$. On dit que c'est un idéal de $A$ ssi :
+    Soit $(A,+,\times)$ un anneau commutatif, et $I\subset A$. On dit que c'est un \bf{idéal} de $A$ ssi :
     \begin{enumerate}
         \item $(I,+)$ est un sous-groupe de $(A,+)$.
-        \item $\forall a \in A, ~ \forall x \in I \quad a\times x \in I$ (propriété d'absorption).
+        \item $\forall a \in A, ~ \forall x \in I \quad a\times x \in I$ (propriété d'\bf{absorption}).
     \end{enumerate}
 \end{defi}
 
@@ -689,7 +690,7 @@
     Les idéaux de $(\Z,+,\times)$ sont exactement les $n\Z$, où $n\in\N$.
     \tcblower
     Soit $I$ un idéal de $(\Z,+,\times)$, alors $(I,+)$ est sous-groupe de $(\Z,+)$ donc est de la forme $n\Z$.\\
-    De plus, $\forall a \in \Z, ~ \forall b \in I = n\Z$, ~ $ab\in n\Z$, c'est bien un idéal. 
+    De plus, $\forall a \in \Z, ~ \forall b \in I$, ~ $ab\in n\Z$, c'est bien un idéal. 
 \end{prop}
 
 \vspace*{-0.7cm}
@@ -704,7 +705,7 @@
 \vspace*{-0.7cm}
 
 \begin{ex}{}{}
-    Les seuls idéaux d'un corps commutatif $K$ sont les deux idéaux triviaux, $\{0\}$ et $K$.
+    Les seuls idéaux d'un corps commutatif $K$ sont ses deux idéaux triviaux : $\{0\}$ et $K$.
     \tcblower
     Soit $I$ un idéal non nul, montrons que $I=K$.\\
     Soit $x\in I$ non nul, on a $x^{-1}\in K$ car corps, donc $xx^{-1}\in I$ donc $1\in I$ donc $I=K$.
@@ -737,8 +738,8 @@
 
 \vspace*{-0.7cm}
 
-\begin{defi}{}{}
-    Un anneau est dit principal ssi tous ses idéaux sont engendrés par un seul élément.
+\begin{defi}{Anneau principal.}{}
+    Un anneau est dit \bf{principal} ssi tous ses idéaux sont engendrés par un seul élément.
 \end{defi}
 
 \vspace*{-0.7cm}
@@ -769,7 +770,7 @@
     C'est un idéal comme somme de $(a)$ et $(b)$, idéaux.\\
     Alors $\exists d \in \N, ~ I = d\Z$, et $d\neq0$ car $a$ ou $b$ non nul.\\
     Enfin, $(a)\subset (a) + (b) = (d)$ donc $d \mid a$; $(b)\subset (d)$, donc $d\mid b$.\\
-    Soit $c$ diviseur commun de $a$ et $b$. $d\in (a)+(b)$ donc $\exists u,v \in \Z^2 ,~ d=au+bv$ (Bezout).\\
+    Soit $c$ diviseur commun de $a$ et $b$. $d\in (a)+(b)$ donc $\exists u,v \in \Z^2 ,~ d=au+bv$ (Bézout).\\
     Ainsi, $[c\mid a \et c \mid b] \ra c \mid au + bv = d$. 
 \end{defi}
 
@@ -796,10 +797,10 @@
         $[k]$ est inversible dans $\Z/n\Z$ ssi $k\land n = 1$.
     \end{center}
     \tcblower
-    \boxed{\ra} Supposons $k\land n = 1$, $\exists u,v \in \Z, ~ ku+nv=1$. Alors $[ku]+[nv]=[1]$, puis $[k][u]+[n][v]=[1]$.\\
+    \boxed{\ra} Supposons $k\land n = 1$ : $\exists u,v \in \Z, ~ ku+nv=1$. Alors $[ku]+[nv]=[1]$, puis $[k][u]+[n][v]=[1]$.\\
     Or $[n]=0$ donc $[k][u]=1$, donc $[k]$ est inversible d'inverse $[u]$.\\
     \boxed{\la} Supposons $[k]$ inversible : $\exists l \in \Z, ~ [k][l]=[1]$, donc $[kl]=[1]$, donc $\exists v \in \Z, ~ kl-nv=1$.\\
-    Ainsi, $k\land n = 1$.
+    Ainsi, $k\land n = 1$ par Bézout.
 \end{thm}
 
 \begin{ex}{}{}
@@ -831,8 +832,7 @@
 
 \begin{thm}{chinois. $\star$}{}
     Soient $n,m\in\N^*$ tels que $n\land m=1$.\\
-    Alors les deux anneaux $(\Z/(nm)\Z,+,\times)$ et $(\Z/n\Z\times\Z/m\Z,+,\times)$ sont isomorphes.\\
-    De plus, $\phi(nm)=\phi(n)\phi(m)$ : $\phi$ est multiplicative.
+    Alors les deux anneaux $(\Z/(nm)\Z,+,\times)$ et $(\Z/n\Z\times\Z/m\Z,+,\times)$ sont isomorphes.
     \tcblower
     Posons $f:(\Z/(nm)\Z,+,\times)\to(\Z/n\Z\times\Z/m\Z,+,\times)$; $\ov{x}\mapsto(\tilde{x},\hat{x})$.\\
     Avec $\ov{x}$ dans $\Z/(nm)\Z$, $\tilde{x}$ dans $\Z/n\Z$ et $\hat{x}$ dans $\Z/m\Z$.\\
@@ -847,7 +847,8 @@
 \end{thm}
 
 \begin{prop}{$\star$}{}
-    Les groupes $(U(\Z/(nm)\Z),\times)$ et $(U(\Z/n\Z),\times)\times(U(\Z/m\Z),\times)$ sont isomorphes.
+    Les groupes $(U(\Z/(nm)\Z),\times)$ et $(U(\Z/n\Z),\times)\times(U(\Z/m\Z),\times)$ sont isomorphes.\\
+    Cela implique $\phi(nm)=\phi(n)\phi(m)$ : $\phi$ est multiplicative.
     \tcblower
     On a toujours $f:(\Z/(nm)\Z,\times)\to(\Z/n\Z\times\Z/m\Z,\times)$, $\ov{x}\mapsto(\tilde{x},\hat{x})$.\\
     En effet, si $\ov{a}\in U(\Z/(nm)\Z)$, alors $x\land(nm)=1$ : $\exists (u,v)\in\Z^2, ~ ux+v(nm)=1$ (Bézout).\\
@@ -864,8 +865,7 @@
 \begin{lemme}{}{}
     Soit $n\in\N^*$ et $k\in\N^*$. Le nombre de multiples de $k$ compris entre $1$ et $n$ est égal à $\left\lfloor\frac{n}{k}\right\rfloor$. 
     \tcblower
-    Un multiple de $k$ s'écrit sous la forme $ku$, $u\in\Z$.\\
-    On a $1\leq ku\leq n \iff 1\leq u\leq \frac{n}{k}$.\\
+    Un multiple de $k$ s'écrit sous la forme $ku$, $u\in\Z$. On a $1\leq ku\leq n \iff 1\leq u\leq \frac{n}{k}$.\\
     Ainsi, le nombre de multiples de $k$ compris entre $1$ et $n$ est $\left\lf\frac{n}{k}\right\rf$.
 \end{lemme}
 
