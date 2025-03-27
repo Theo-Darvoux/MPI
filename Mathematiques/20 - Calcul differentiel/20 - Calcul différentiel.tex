@@ -172,7 +172,7 @@ Les dérivées partielles de $f$ en $a$ donnent des contraintes sur les valeurs 
     Alors $f$ admet un minimum sur $E$.
     \tcblower
     Par hypothèse, $\forall A \in \R, ~ \exists B \in \R, ~ \forall x \in E, ~ \|x\|>  B \ra f(x)\geq A$.\\
-    Prenons $A=f(0)$ : $\exists R \in \R, ~ \forall x \in E, ~ \|x\|> R\ra f(x)\geq f(0)$.\\
+    Prenons \boxed{A=f(0)} : $\exists R \in \R, ~ \forall x \in E, ~ \|x\|> R\ra f(x)\geq f(0)$.\\
     Puisque $f$ est continue sur $E$, $f$ est continue sur $B_f(0,R)$, qui est compact comme fermé borné en dim. finie.\\
     Ainsi, $f$ est continue sur le compact $B_f(0,R)$ et à valeurs réelles donc est minorée sur $B_f(0,R)$ et atteint son minimum $m$. Donc $\exists x_0 \in B_f(0,R), ~ m = f(x_0)$. Soit $x\in E$.\\
     $\hra$ Si $x\in B_f(0,R)$, alors $f(x) \geq m = f(x_0)$ par choix de $m$/\\
@@ -653,6 +653,104 @@ Dans le cas général $U$ connexe par arcs, on sait qu'il existe un chemin conti
     Soit $f:U\subset\R^2\to\R$ et $X=\{(x,y,f(x,y)), ~ (x,y)\in U\}$ la surface de $f$.\\
     Déterminer les vecteurs tangents à la partie $X$ en $M_0 = (x_0,y_0, f(x_0,y_0))$.\\
     En déduire une équation du plan tangent à $f$ en $(x_0,y_0)$.
+\end{exercice}
+
+\section{Optimisation.}
+
+\subsection{Optimisation du premier ordre.}
+
+\begin{exercice}{(Rolle).}{}
+    Soit $f:\R^n\to\R$ différentiable sur $\R^n$ telle que $f$ soit constante sur la sphère unité.\\
+    Montrer que $\exists x_0 \in \B(0,1), ~ df_{x_0}=\zero_{\L(\R^n,R)}$.
+    \tcblower
+    $\hra$ Si $f$ est constante sur la boule unité fermée, alors $\forall x \in \B(0,1), ~ df_x=\zero$.\\
+    $\hra$ Sinon, $f$ est continue sur le compact $\B_f(0,1)$ à valeurs réelles donc $f$ est bornée et atteint ses bornes.\\
+    Soit $m=\min_{\B_f(0,1)}f$ et $M=\max_{\B_f(0,1)}f$, alors $m<M$ puisque $f$ n'est pas constante sur $\B_f(0,1)$.\\
+    Soit $\l$ la valeur prise par $f$ sur $\S(0,1)$, alors $m\neq\l$ ou $M\neq\l$.\\
+    Donc $f$ admet un extremum local sur $\B(0,1)$ en $x_0$, on sait alors que $df_{x_0}=\zero$.
+\end{exercice}
+
+\begin{exercice}{(CCINP)}{}
+    Soit $f:(x,y)\mapsto2x^3+6xy-3y^2+2$ pour $(x,y)\in\R^2$.
+    \begin{enumerate}
+        \item Quels sont les extrema locaux possibles de $f$ ?
+        \item $f$ admet-elle des extrema globaux sur $\R^2$ ?
+        \item Déterminer le min et le max de $f$ sur $[0,1]^2$.
+    \end{enumerate}
+    \tcblower
+    Déjà, $f$ est un polynôme à deux variables donc continue et même $\cursive{C}^1$ sur $\R^2$.\\
+    \boxed{1.} Si $a$ est extremum local de $f$, alors $\nabla f(a)=0$.
+    \begin{equation*}
+        \frac{\6 f}{\6 x}(x,y) = 6x^2 + 6y \et \frac{\6 f}{\6 y}(x,y)  = 6x - 6y.
+    \end{equation*}
+    Puis $6x^2+6y = 0$ et $6x - 6y = 0$ donc $x(x+1)=0$ et $x=y$.\\
+    On a donc deux points critiques  : $(0,0)$ et $(-1,-1)$.\\
+    \boxed{2.} $\forall n \in \N, ~ f(n, 0) = 2n^3 + 2 \to +\infty$ donc $f$ n'est pas majorée. Pas minorée non plus avec $f(-n,0)$.\\
+    \boxed{3.} On a $[0,1]^2$ compact comme produit de compacts, donc $f$ y est bornée et y atteint ses bornes.\\
+    D'après la question 1, les seuls points critiques de $f$ sont $(0,0)$ et $(-1,1)$ qui ne sont pas dans l'intérieur de $[0,1]^2$, donc les bornes sont atteintes sur le bord.\\
+    $\hra$ $(x,0)$ : $\phi_1(x) = 2x^3+2$ croissante : $\phi_1(0)=2$ et $\phi_1(1)=4$.\\
+    $\hra$ $(0, y)$ : $\phi_2(y) = -3y^2 + 2$ décroissante : $\phi_2(0)=2$ et $\phi_2(1)=-1$.\\
+    $\hra$ $(1, y)$ : $\phi_3(y) = -3y^2+6y+4 = 6(1-y)$ croissante : $\phi_3(0)=4$ et $\phi_3(1)=7$.\\
+    $\hra$ $(x,1)$ : $\phi_4(x)=2x^3 + 6x - 1$ croissante : $\phi_4(0)=-1$ et $\phi_4(1)=7$.\\
+    Donc $\min_{[0,1]^2}f=-1$ et $\max_{[0,1]^2}f = 7$. 
+\end{exercice}
+
+\begin{prop}{Optimisation sous contraintes. (Admis)}{}
+    Soit $U$ un ouvert de $E$ $\R$-evdf et soient $f,g:U\subset E\to\R$ de classe $\cursive{C}^1$ sur $U$.\\
+    On note $X$ l'ensemble des zéros de $g$, et on suppose que $\forall x \in X, ~ \nabla g(x)\neq0$.\\
+    Si $f$ admet un extremum local sur $X$, alors $\exists \l \in \R, ~ \nabla f(x) = \l\nabla g(x)$.\\
+    Alors $\l$ est appelé multiplicateur de Lagrange.
+\end{prop}
+
+\begin{ex}{}{}
+    On pose $f(x,y)=4x^2+12xy-y^2$ pour tout $(x,y)\in\R^2$ et $\mathcal{C}=\{(x,y)\in\R^2, ~ x^2+y^2=13\}$.\\
+    Déterminer les extrema de $f$ sur $\mathcal{C}$.
+    \tcblower
+    Déjà, $f$ est continue sur $\R^2$, et même $\cursive{C}^1$ sur $\R^2$, et $\mathcal{C}$ est compact de $\R^2$.\\
+    Alors $f$ est continue sur $\mathcal{C}$, donc y est bornée et atteint ses bornes. Il s'agit d'une optimisation sous contraintes.\\
+    Posons $g(x,y)=x^2+y^2-13$ pour $(x,y)\in\R^2$, alors $\mathcal{C}=\{(x,y)\in\R^2, ~ g(x,y)=0\}$, et $g\in\cursive{C}^1$.\\
+    Montrons que $\nabla g$ ne s'annule pas sur $\mathcal{C}$ :
+    \begin{equation*}
+        \frac{\6 g}{\6 x}(x,y) = 2x \et \frac{\6 g}{\6 y}(x,y) = 2y \ra \nabla g(x,y) = (2x,~2y).
+    \end{equation*}
+    Et $\nabla g(x,y)\neq(0,0)$ car $x^2+y^2=13$ donc $2x$ et $2y$ ne peuvent pas être nuls en même temps.\\
+    D'après le théorème, si $f$ admet un extremum en $(x,y)$ sur $\mathcal{C}$, alors $\exists \l \in \R, ~ \nabla f(x,y) = \l \nabla g(x,y)$.
+    \begin{equation*}
+        \begin{cases} 8x + 12y = 2x\l \\ 12x - 2y = 2y\l\end{cases} \iff \begin{cases}(4-\l)x + 6y = 0 \\ 6x - (1+\l)y=0\end{cases} \iff \begin{pmatrix}4 - \l & 6 \\ 6 & -(1+\l)\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}0\\0\end{pmatrix}.
+    \end{equation*}
+    Avec $X\neq0$ puisque $x^2+y^2=13$, donc $A\notin\GL_2(\R)$ i.e. $\det(A)=0$ donc $(\l+5)(\l-8)=0$.\\
+    $\hra$ $\l=-5$ : $9x+6y=0$ et $6x+4y=0$ donc $y=-\frac{3}{2}x$ donc $x^2+\frac{9}{4}x^2 = 13$ donc $x\in\{-2,2\}$ .\\
+    Puis $(x,y)\in\{(-2,3),(2,-3)\}$.\\
+    $\hra$ $\l=8$ : $-4x+6y = 0$ et $6x -9y = 0$ donc $y=\frac{2}{3}x$ donc $x^2 + \frac{4}{9}x^2 = 13$ donc $x\in\{-3,3\}$.\\
+    Puis $(x,y)\in\{(-3,-2), (3,2)\}$.\\
+    Puis $f(-2,3)= -65$, $f(2,-3)= -65$, $f(-3,-2)= 104$ et $f(3,2)=104$.\\
+    Donc $f$ admet un minimum de $-65$ en $(-2,3)$ et $(2,-3)$ et un maximum de $104$ en $(-3,-2)$ et $(3,2)$.
+\end{ex}
+
+\begin{exercice}{}{}
+    Déterminer les extremum sur $SL_2(\R)$ de la fonction $f$ définie par :
+    \begin{equation*}
+        \forall M = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in \M_2(\R), ~ f(M) = a^2 + b^2 + c^2 + d^2.
+    \end{equation*}
+    \tcblower
+    On reconnaît $f(M)=\Tr(M^\top M)=\|M\|^2$, avec $\|\.\|$ la norme euclidienne sur $\M_2(\R)$.\\
+    On identifie $\M_2(\R)$ à $\R^4$, alors $f$ est continue sur $\R^4$ comme polynôme à 4 variables.\\
+    On a $SL_2(\R)$ fermé de $\M_2(\R)$ comme image réciproque du fermé $\{1\}$ par l'application continue $\det$.\\
+    Or $SL_2(\R)$ n'est pas borné donc pas compact (avec $\Diag(n,1/n) \in SL_2(\R)$).\\
+    On va utiliser le théorème d'optimisation sous contrainte : $g(a,b,c,d)=ad-bc-1$; $g\in\cursive{C}^1(\M_2(\R))$.
+    \begin{equation*}
+        \nabla g(a,b,c,d) = (d,-c,-b,a) \neq (0,0,0,0) \nt{ car } (a,b,c,d)\in X.
+    \end{equation*}
+    D'après le théorème d'optimisation sous contraintes, $f$ admet un extremum en $(a,b,c,d)$ sur $X$.\\
+    Donc $\exists \l \in \R, ~ \nabla f(a,b,c,d) = \l \nabla g(a,b,c,d)$.
+    \begin{equation*}
+        \begin{cases}
+            2a = \l d; \quad 2b = -\l c\\ 2c = - \l b; \quad 2d = \l a
+        \end{cases} \iff \begin{cases} 2a = \l d; \quad 4a = \l^2 a \\ 2b = -\l c; \quad -4b = -\l^2 b\end{cases} \iff \begin{cases}(4-\l^2)a = 0 \et 2a = \l d \\ (4-\l^2)b = 0 \et 2b = -\l c\end{cases}
+    \end{equation*}
+    Avec la contrainte $ad-bc=1$, $\l^2\neq 4 \ra a=b=0$ puis $ad-bc\neq1$, exclu, donc $\l\in\{-2,2\}$.\\
+    $\hra$ Si $\l=2$, alors $a=d$ et $b=-c$, donc $f(M)=2$.\\
+    $\hra$ Si $\l=-2$, alors $a=-d$ et $b=c$, donc $-a^2-b^2=1$, impossible.
 \end{exercice}
 
 \end{document}
