@@ -18,7 +18,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 \section{Applications linéaires.}
 
 \begin{defi}{}{}
-    Soit $f\in\F(E,F)$. On dit que $f$ est linéaire si et seulement si :
+    Soit $f\in\F(E,F)$. On dit que $f$ est \bf{linéaire} si et seulement si :
     \begin{equation*}
         \forall (x,y) \in E^2, ~ \forall \l \in \K \quad f(x+\l y)=f(x) + \l f(y).
     \end{equation*}
@@ -59,8 +59,8 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 \begin{prop}{}{}
     Soit $f\in\L(E,F)$ puis $g\in\L(F,G)$.
     \begin{enumerate}
-        \item Si $\rg(g)$ fini, alors $\rg(g\circ f)$ est fini et $\rg(g\circ f)\leq\rg(g)$.
-        \item Si $\rg(f)$ fini, alors $\rg(g\circ f)$ est fini et $\rg(g\circ f)\leq\rg(f)$.
+        \item Si $\rg(g)$ est fini, alors $\rg(g\circ f)$ est fini et $\rg(g\circ f)\leq\rg(g)$.
+        \item Si $\rg(f)$ est fini, alors $\rg(g\circ f)$ est fini et $\rg(g\circ f)\leq\rg(f)$.
     \end{enumerate}
     On retiendra que $\rg(g\circ f)\leq\min(\rg(f),\rg(g))$.
     \tcblower
@@ -115,9 +115,8 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
         \item Supposons $f$ bijective, alors $\rg(g\circ f)=\rg(g)$.
     \end{enumerate}
     \tcblower
-    \boxed{2.} On a $\dim(E)=\dim(F)$ car $f$ envoie une base de $E$ sur une base de $F$ puisque bijective.\\
-    Soit $(a_1,...,a_n)$ une base de $E$, alors $(f(a_1),...,f(a_n))$ est base de $F$.\\
-    On a alors $\rg(g\circ f)=\dim(\Im g\circ f)=\dim(\Vect(g(f(a_1)),...,g(f(a_n))))=\Im(g)$, on a bien $\rg(g\circ f)=\rg(g)$.
+    \boxed{1.} Puisque $g$ est bijective, $g_{|\Im f}$ est bijective de $\Im f$ dans $\Im g_{|\Im f} = \Im(g\circ f)$ donc $\rg(g\circ f) = \rg(f)$.\\
+    \boxed{2.} $rg(g\circ f) = \rg(g_{\Im f}) = \rg(g_{|F}) = \rg(g)$
 \end{prop}
 
 \vspace*{-0.7cm}
@@ -141,7 +140,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
         \item Soient $A,B\in \M_{n,p}(\K)$, alors $\rg(A+B)\leq\rg(A)+\rg(B)$.
         \item Soient $A\in \M_{n,p}(\K)$, et $B\in\M_{p,q}(\K)$, alors $\rg(AB)\leq \rg(A)$ et $\rg(AB)\leq \rg(B)$.
         \item Soient $A\in \M_{n,p}(\K)$, et $B\in\GL_p(\K)$, alors $\rg(AB)=\rg(A)$.
-        \item Soient $A\in \M_{n,p}(\K)$, et $B\in\GL_n(\K)$, alors $\rg(AB)=\rg(B)$.
+        \item Soient $A\in \M_{n,p}(\K)$, et $B\in\GL_n(\K)$, alors $\rg(BA)=\rg(B)$.
         \item Soient $A\in \M_{n,p}(\K)$, on a $p=\dim(\Ker A)+\rg(A)$.
     \end{enumerate}
 \end{prop}
@@ -218,43 +217,44 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     \tcblower
     On ne fait pas les inclusions triviales.\\
     \boxed{1.\ra} Supposons $\Ker(f)=\Ker(f^2)$.\\
-    \boxed{\subset} Soit $x\in\Ker(f)\cap\Im(f)$. On a $\exists a \in E, ~ x=f(t)$ et $f(x)=0$ donc $f(f(t))=0$ donc $t\in\Ker(f^2)$ donc $x=0$.\\
+    \boxed{\subset} Soit $x\in\Ker(f)\cap\Im(f)$. On a $\exists t \in E, ~ x=f(t)$ et $f(x)=0$ donc $f(f(t))=0$ donc $t\in\Ker(f^2)$ donc $x=0$.\\
     \boxed{1.\la} Supposons $\Ker(f)\cap\Im(f)=\{0\}$.\\
     \boxed{\supset} Soit $x\in\Ker(f^2)$, alors $f(f(x))=0$ donc $f(x)\in\Ker(f)\cap\Im(f)$ donc $f(x)=0$ donc $x\in\Ker(f)$.\\
     \boxed{2.\ra} Supposons $\Im(f)=\Im(f^2)$.\\
-    \boxed{\subset} Soit $x\in E$. On a $f(x)\in\Im(f)=\Im(f^2)$, puis $\exists a \in E, ~ x=f(a)$ donc $x=x-f(t)+f(t)$.\\
+    \boxed{\subset} Soit $x\in E$. On a $f(x)\in\Im(f)=\Im(f^2)$, puis $\exists t \in E, ~ x=f(t)$ donc $x=x-f(t)+f(t)$.\\
     \boxed{2.\la} Supposons $E=\Ker(f)+\Im(f)$.\\
     \boxed{\subset} Soit $y\in\Im(f)$, $\exists x \in E, ~ y=f(x)$, $\exists x_1,x_2\in\Ker(f)\times\Im(f), ~ x=x_1+x_2$; $\exists a \in E, ~ x_2 = f(a)$ : $y=f^2(a)$. 
 \end{ex}
 
-\vspace*{-0.7cm}
+\vspace*{-0.9cm}
 
 \begin{defi}{}{}
-    Un projecteur de $E$ est un endormorphisme $p$ de $E$ vérifiant $p\circ p = p$.
+    Un projecteur de $E$ est un endomorphisme $p$ de $E$ vérifiant $p\circ p = p$.
 \end{defi}
 
-\vspace*{-0.7cm}
+\vspace*{-0.9cm}
 
 \begin{prop}{}{}
     Soit $p$ un projecteur de $E$. Alors $E=\Ker(p)\oplus\Im(p)$, et $\Im(p)=\{x\in E, ~ p(x)=x\}$.
     \tcblower
     On a $p^2=p\ra\Im(p^2)=\Im(p)\et\Ker(p^2)=\Ker(p)\ra E=\Im(p)+\Ker(p)\et\Im(p)\cap\Ker(p)=\{0\}$ (\ref{ex:17}).\\
-    \boxed{\subset} Soit $y\in\Im(p)$. On a $\exists x\in E, ~ p(t)=p^2(x)=p(x)=y$.\\
-    \boxed{\supset} Soit $x\in E, ~ p(x)=x$, alors $x\in\Im(p)$.
+    \boxed{\subset} Soit $y\in\Im(p)$. On a $\exists x\in E, ~ p(x)=y$ puis $p(y)=p^2(x)=p(x)=y$.\\
+    \boxed{\supset} Soit $x\in E$ tel que $p(x)=x$, alors $x\in\Im(p)$.
 \end{prop}
 
-\vspace*{-0.7cm}
+\vspace*{-0.9cm}
 
 \begin{ex}{}{}
     Soit $p\in\L(\R^3)$ tel que $\forall (x,y,z)\in\R^3, ~ p(x,y,z)=(y,y,-x+y+z)$.\\
     Montrer que $p$ est un projecteur et donner ses espaces caractéristiques.
     \tcblower
-    Soit $(x,y,z)\in\R^3$, on a $p^2(x,y,z)=p(y,y,-x+y+z)=(y,y,-x+y+z)$ donc $p^2=p$.\\
-    Supposons $p(x,y,z)=0$, alors $y=0$ et $z=x$, donc $\Ker(p)=\{(a,0,a), ~ a\in\R\}$.\\
-    On a $\Im(p)=\{(a,a,b), ~ a,b\in\R\}$.
+    $\hra$ Déjà, $p$ est une application linéaire.\\
+    $\hra$ Puis pour $(x,y,z)\in\R^3$, on a $p^2(x,y,z)=p(y,y,-x+y+z)=(y,y,-x+y+z)$ donc $p^2=p$.\\
+    \fbox{Ker} Soit $(x,y,z)\in\Ker(p)$. Alors $y=0$ et $z=x$, donc $\Ker(p)=\{(a,0,a), ~ a\in\R\}$.\\
+    \fbox{Im} $\Im(p)=\{(a,a,b), ~ a,b\in\R\}$.
 \end{ex}
 
-\vspace*{-0.7cm}
+\vspace*{-0.9cm}
 
 \begin{ex}{}{}
     Soient $p,q$ deux projecteurs de $E$.
@@ -266,7 +266,8 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     \boxed{1.\ra} Supposons $p+q$ projecteur de $E$. Alors $(p+q)(p+q)-(p+q)=q\circ p+p\circ q=0$ donc $q\circ p=p\circ q=0$.\\
     \boxed{1.\la} Supposons $p\circ q=q\circ p=0$. Alors $(p+q)(p+q)=p+pq+qp+q=p+q$.\\
     \boxed{2.} Soit $y\in\Im(p+q)$, $\exists x \in E, ~ p(x)+q(x)=y$ avec $p(x)\in\Im(p)$ et $q(x)\in\Im(q)$ donc $\Im(p+q)=\Im(p)+\Im(q)$.\\
-    Soit $y\in\Im(p)\cap\Im(q)$, montrons que $y=0$.  
+    Soit $y\in\Im(p)\cap\Im(q)$, $\exists x,x'\in E, ~ y=p(x)=q(x')$ donc $p^2(x)=p\circ q(x')$ donc $p(x)=0$ donc $y=0$.\\
+    Par caractérisation, $\Im(p+q)=\Im(p)\oplus\Im(q)$.
 \end{ex}
 
 \begin{prop}{Caractérisation des homothéties. $\star$}{}
@@ -274,11 +275,11 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     \tcblower
     Il existe $\l\in\K$ tel que $f=\l\id_E$.\\
     \boxed{\ra} On a bien $(x,\l x)$ liée.\\
-    \boxed{\la} Supposons que $\forall x \in E, ~ (x,f(x))$ est liée, donc $\forall x \in E, ~ \exists \l \in \K, ~ f(x)=\l x$.\\
+    \boxed{\la} Supposons que $\forall x \in E, ~ (x,f(x))$ est liée, donc $\forall x \in E, ~ \exists \l_x \in \K, ~ f(x)=\l_x x$.\\
     Soient $(x,y)\in E^2$, et $\l_x,\l_y$ leurs scalaires associés, on suppose $x,y\neq0_E$.\\
     $\bullet$ Supposons que $(x,y)$ forme une famille libre, on a $f(x)=\l_xx$ et $f(y)=\l_yy$ et $f(x+y)=\l_{x+y}(x+y)$.\\
     On a alors que $\l_xx+\l_yy=\l_{x+y}x+\l_{x+y}y$, et par identification (famille libre), on a $\l_x=\l_{x+y}=\l_y$.\\
-    $\bullet$ Supposons que $(x,y)$ soit liée, on a $y=\a x$ avec $\a\in\K^*$, alors $f(x)=\l_xx$, $f(y)=\l_yy=\l_y\a x$\\
+    $\bullet$ Supposons que $(x,y)$ soit liée, on a $y=\a x$ avec $\a\in\K^*$, alors $f(y)=\l_yy=\l_y\a x$\\
     On a aussi $f(y)=\a f(x)=(\a\l_x)x$ donc $\l_y\a=\a\l_x$ d'où $\l_y=\l_x$.\\
     $\bullet$ L'égalité est toujours vraie pour $x=0_E$, donc finalement, $f=\l\id_E$. 
 \end{prop}
@@ -286,13 +287,12 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 \vspace*{-0.7cm}
 
 \begin{prop}{}{}
-    Soit $f\in\L(E)$. Si $\forall y \in \L(E), ~ f\circ y = y \circ f$, alors $f$ est une homothétie.
+    Soit $f\in\L(E)$ tel que $\forall g \in \L(E), ~ f\circ g = g \circ f$, alors $f$ est une homothétie.
     \tcblower
-    Supposons que $\forall y \in \L(E), ~ f\circ y = y\circ f$.\\
-    Soit $x\in E$. Si $x=0_E$, on a $(x,f(x))$ est liée.\\
-    Sinon, on considère $p$ projecteur sur $F=\Vect(x)$, dans une direction $G$ telle que $E=F\oplus G$.\\
-    En particulier, $\Im(p)=F$, donc $p(y)=y$ et $y\in E$ donc $y\in\Vect(x)$.\\
-    Par hypothèse, $f\circ p = p\circ f$, donc en particulier, $(f\circ p)(x)=(p\circ f)(x)$ donc $f(x)=p(f(x))$, puis $f(x)\in\Vect(x)$.
+    Soit $x\in E$, si $x=0_E$, alors $(x,f(x))$ est liée.\\
+    Sinon, soit $p$ un projecteur sur $\Vect(x)$ parallèlement à un supplémentaire de $\Vect(x)$ (existe car dim. finie).\\
+    Par hypothèse, $(f\circ p)(x) = (p \circ f)(x)$ donc $f(x)=p(f(x))$ donc $f(x)\in\Vect(x)$ donc $(x,f(x))$ est liée.\\
+    Donc par caractérisation, $f$ est une homothétie.
 \end{prop}
 
 \vspace*{-0.7cm}
@@ -307,7 +307,8 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     --- $I_n\in \cursive{D}_n(\K)$.\\
     --- $\cursive{D}_n(\K)$ est stable par CL.\\
     --- $\cursive{D}_n(\K)$ est stable par produit matriciel.\\
-    $(E_{11},...,E_{nn})$ forme une base de $\cursive{D}_n(\K)$.
+    $(E_{11},...,E_{nn})$ forme une base de $\cursive{D}_n(\K)$, de cardinal $n$, donc $\dim(\D_n\K)=n$.\\
+    On procède de la même manière pour $\T_n^+(\K)$.
 \end{prop}
 
 \vspace*{-0.7cm}
@@ -324,12 +325,12 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     \end{equation*}
 \end{prop}
 
-\begin{defi}{}{}
-    Soient $A,B\in \M_{n,p}(\K)$.
+\begin{defi}{Équivalence, similitude.}{}
+    Soient $A,B\in \M_{n,p}(\K)$. Elles sont \bf{équivalentes} ssi :
     \begin{equation*}
-        A \sim B \iff \exists P \in \GL_n(\K), ~ \exists Q \in \GL_p(\K), ~ A = PBQ.
+        A \simeq B \iff \exists P \in \GL_n(\K), ~ \exists Q \in \GL_p(\K), ~ A = PBQ.
     \end{equation*}
-    Si $n=p$, alors $A$ et $B$ sont semblables si et seulement si :
+    Soient $A,B\in\M_n(\K)$. Elles sont \bf{semblables} ssi :
     \begin{equation*}
         \exists P \in \GL_n(\K), ~ A = PBP^{-1}.
     \end{equation*}
@@ -350,32 +351,46 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 \vspace*{-0.7cm}
 
 \begin{thm}{}{}
-    Soient $A\in \M_{n,p}(\K)$ et $r\leq n,p$.
-    \begin{enumerate}
-        \item $\rg(A)=r\iff A\sim J_r$.
-        \item Soient $A,B\in \M_p(\K)$, on a $\rg(A)=\rg(B)\iff A \sim B$.
-    \end{enumerate}
+    Soient $A\in \M_{n,p}(\K)$. On a, pour $r\leq\min(n,p)$ :
+    \begin{equation*}
+        \rg(A)=r\iff A\simeq J_r.
+    \end{equation*}
     \tcblower
-    \boxed{\la} $\exists (P,Q) \in \GL_n(\K)\times\GL_p(\K), ~ A = PJ_rQ$.\\
-    Or le rang n'est pas modifié en multipliant par une matrice inversible, donc $\rg A = \rg J_r = r$.\\
-    \boxed{\ra} Soit $f$ l'alca de $A$. On a $\rg f = \dim A = r$. On prend une base $(a_1',...,a_r')$ de $\Im f$.\\
-    On la complète en une base $\B_2=(a_1', ..., a_n')$ de $\K^n$, on a $\forall i \in \lb 1, r \rb, ~ \exists a_i \in \K^p, ~ a_i'=f(a_i)$.\\
-    On a $\dim\Ker f = p - r$ donc on prend $(a_{r+1},...,a_p)$ une base de $\Ker f$. On va vérifier que $(a_1,...,a_p)$ base de $\K^n$.\\
-    \bf{Libre:} Soient $\l_1,...,\l_p\in\K, ~ \l_1a_1+...+\l_pa_p=0$, alors $\l_1a_1'+...+\l_ra_r'=0$, en appliquant $f$.\\
-    On a donc $(\l_1,...,\l_r)=0$ car $(a_1',...,a_r')$ libre. Il reste $\l_{r+1}a_{r+1}+...+\l_pa_p=0$, or $(a_{r+1},...,a_p)$ est une base...\\
-    On a $\B_1=(a_1,...,a_p)$ libre et de cardinal $\dim\K^p$, c'est bien une base de $\K^p$.\\
-    Alors $\Mat_{\B_2\B_1}(f)=J_r$ puis $A=PJ_rQ$ avec $P$ matrice de passage de la base c. de $\K^n$ à $\B_1$ puis $Q$ de $\B_2$ à la base c. de $\K^p$.
+    \boxed{\la} Supposons $A\simeq J_r$ : $\exists (P,Q) \in \GL_n(\K)\times\GL_p(\K), ~ A = PJ_rQ$.\\
+    Or le rang n'est pas modifié en multipliant par une matrice inversible, donc $\rg(A) = \rg(J_r) = r$.\\
+    \boxed{\ra} Notons $f$ l'application linéaire canoniquement associée à $A$.\\
+    $\hra$ Soit $(a_1',...,a_r')$ une base de $\Im f$, qu'on complète en $\B_2=(a_1',...,a_n')$ une base de $\K^n$.\\
+    $\hra$ Puisque $\forall i \in \lb1,r\rb, ~ a_i' \in \Im f$, on a $\exists a_i \in \K^p , ~ a_i' = f(a_i)$.\\
+    $\hra$ Par théorème du rang, $\dim\Ker f = p-r$, donc on prend $(a_{r+1},...,a_p)$ une base de $\Ker(f)$.\\
+    On va vérifier que la famille $\B_1=(a_1,...,a_p)$ est alors une base $\K^p$.\\
+    \bf{Libre.} Soit $(\l_1,...,\l_p)\in\K^p$ tels que $\l_1a_1+...+\l_pa_p=0$.\\
+    $\hra$ On applique $f$ : $\l_1a_1' + ... + \l_ra_r' = 0$.\\
+    $\bullet$ Puisque $(a_1',...,a_r')$ est libre comme base, on a bien $\l_1=...=\l_r=0$.\\
+    $\hra$ Il reste $\l_{r+1}a_{r+1}+...+\l_pa_p = 0$, or $(a_{r+1},...,a_p)$ est une base, donc $\l_{r+1}=...=\l_p=0$.\\
+    Donc $(a_1,...,a_p)$ est une famille libre de $\K^p$, de cardinal $p$, c'est bien une base de $\K^p$.\\
+    On a construit deux bases telles que $\Mat_{\B_2\B_1}(f)=J_r$ donc $A=PJ_rQ$, avec $P=\Mat_{\B_1\B_c}$ et $Q=\Mat_{\B_c\B_2}$.
 \end{thm}
+
+\begin{corr}{}{}
+    Soient $A,B\in\M_n(\K)$, on a $\rg(A)=\rg(B) \iff A \simeq B$.
+    \tcblower
+    Notons $r\in\N$ le rang de $A$.
+    \begin{equation*}
+        \rg(A) = \rg(B) \iff A \simeq J_r \et B\simeq J_r \iff A \simeq B.
+    \end{equation*}
+\end{corr}
+
+% \item Soient $A,B\in \M_p(\K)$, on a $\rg(A)=\rg(B)\iff A \simeq B$.
 
 \vspace*{-0.7cm}
 
 \begin{corr}{}{}
     Soit $A\in \M_{n,p}(\K)$. On a $\rg(A^\top)=\rg(A)$.
     \tcblower
-    On a $\exists Q,P, ~ A = PJ_rQ$, puis $A^\top = Q^\top J_r^\top P^\top$, donc $\rg(A^\top)=r$.
+    Notons $r\in\N$ le rang de $A$, alors $A=PJ_rQ$ puis $A^\top = Q^\top J_r^\top P^\top$, donc $\rg(A^\top)=r$.
 \end{corr}
 
-\vspace*{-0.7cm}
+
 
 \begin{ex}{}{}
     \begin{enumerate}
@@ -384,10 +399,10 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     \end{enumerate}
     \tcblower
     \boxed{1.} Supposons $\forall i \in \lb1,n\rb, ~ a_{i,j}\in\Z$, alors $\det(A)=\sum_{\s\in S_n}\e(\s)\prod_{i=1}^n a_{\s(i),i}\in\Z$.\\
-    \boxed{2.} Soit $A\in M_n(\C)$, on a $\ov{\det(A)}=\ov{\sum_{\s\in S_n}\e(\s)\prod_{i=1}^na_{\s(i),i}}=\det(\ov{A})$.
+    \boxed{2.} Soit $A\in M_n(\C)$, on a $\ov{\det(A)}=\ov{\sum_{\s\in S_n}\e(\s)\prod_{i=1}^na_{\s(i),i}}=\sum_{\s\in S_n}\e(\s)\prod_{i=1}^n\ov{a_{\s(i),i}}\det(\ov{A})$.
 \end{ex}
 
-\pagebreak
+\vspace*{-0.7cm}
 
 \begin{prop}{Caractérisation des matrices de rang 1.}{}
     Soit $A\in\M_{n,p}(\K)$.
@@ -428,19 +443,19 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 
 \begin{ex}{}{}
     \begin{enumerate}
-        \item Vérifier que $\S_n(\R)$ et $\A_n(\R)$ sont supplémentaires dans $\M_(\R)$.
+        \item Vérifier que $\S_n(\R)$ et $\A_n(\R)$ sont supplémentaires dans $\M_n(\R)$.
         \item Montrer que la transposition est une symétrie sur $\M_n(\R)$.
-        \item Calculer rang et déterminant de la transposition sur $\M_n(\R)$.
+        \item Calculer le rang et le déterminant de la transposition sur $\M_n(\R)$.
     \end{enumerate}
     \tcblower
-    \boxed{1.} Soit $M\in\M_n(\K)$. On a $M=\frac{1}{2}(M-M^\top) + \frac{1}{2}(M+M^\top)$, et $\S_n(\R)\cap\A_n(\R)=\0$.\\
-    \boxed{2.} On note $\phi$ la transposition. On a $\phi^2=\id$, c'est une symétrie.\\
-    On a $S_n(\R)=\Ker(\phi-\id)$ et $A_n(\R)=\Ker(\phi+\id)$, puis $M_n(\R)=(\Ker \phi - \id) \oplus (\Ker \phi + \id)$.\\
-    \boxed{3.} Soit $\B_1$ base de $S_n(\R)$ et $\B_2$ base de $A_n(\R)$. Alors $\B=\B_1\sqcup\B_2$ est base de $\M_n(\R)$.
+    \boxed{1.} Soit $M\in\M_n(\K)$. $M=\frac{1}{2}(M-\M^\top) + \frac{1}{2}(M+M^\top)$ et $\S_n(\R)\cap\A_n(\R)=\0$ donc $\M_n(\R)=\S_n(\R)\oplus \A_n(\R)$.
+    \boxed{2.} Notons $\phi$ l'endomorphisme de transposition, on a $\phi^2=\id$, c'est une symétrie.\\
+    \boxed{3.} On a de plus $\S_n(\R)=\Ker(\phi-\id)$ et $\A_n(\R)=\Ker(\phi+\id)$ donc $\M_n(\R)=\Ker(\phi-\id)\oplus\Ker(\phi+\id)$.\\
+    Soit $\B_1$ une base de $\S_n(\R)$ et $\B_2$ une base de $\A_n(\R)$, on note $\B$ leur concaténation, alors :
     \begin{equation*}
-        \Mat_{\B}\phi=\begin{pmatrix} I_{\frac{n(n+1)}{2}} & 0 \\ 0 & -I_{\frac{n(n+1)}{2}}\end{pmatrix}.
+        \Mat_{\B}(\phi) = \begin{pmatrix} I_{\frac{n(n+1)}{2}} & (0) \\ (0) & -I_\frac{n(n-1)}{2}\end{pmatrix}
     \end{equation*}
-    On a alors $\rg(\phi)=n^2$, et $\phi$ est bijection de $M_n$ vers $M_n$; $\det(\phi)=(-1)^{\frac{n(n+1)}{2}}$ et $\Tr(\phi)=n$.
+    Donc $\rg(\phi)=n^2$, $\det(\phi)=(-1)^{\frac{n(n-1)}{2}}$ et $\Tr(\phi)=n$.
 \end{ex}
 
 \vspace*{-0.7cm}
@@ -467,12 +482,6 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     \end{equation*}
     avec $A_{i,j}\in\M_{n_i,p_j}(\K)$.
 \end{defi}
-
-\vspace*{-0.5cm}
-
-\begin{ex}{}{}
-    Un exemple : $A=\begin{pmatrix} 1 & 2 & \Big| & 3 & 4 \\ 5 & 6 & \Big| & 7 & 8 \\ \hline 9 & 10 & \Big| & 11 & 12 \end{pmatrix}$.
-\end{ex}
 
 \vspace*{-0.5cm}
 
@@ -523,9 +532,9 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
         \item Pour $A_{i,i}\in M_{\a_i}$, $\det\begin{pmatrix}A_{1,1}&...&(*)\\\ &\ddots&\vdots\\(0)&&A_{n,n}\end{pmatrix}=\prod_{i=1}^n\det(A_{i,i})$.
     \end{enumerate}
     \tcblower
+    \bf{Rappel.} L'ensemble des formes $n$-linéaires alternées sur $\K^n$ forme un $\K$-espace vectoriel de dimension 1.\\
     \boxed{1.} On note $A_1,...,A_p$ les colonnes de $A$. Posons $\phi:(A_1,...,A_p)\mapsto\det\begin{pmatrix}A&B\\0&C\end{pmatrix}$.\\
-    \textcolor{red}{\bf{!!!}} Alors $\phi$ est $p$-linéaire, et alternée : $A_i=A_j$ avec $i\neq j\ra\det\begin{pmatrix}A&B\\0&C\end{pmatrix}=0\ra\phi(A_1,...,A_n)=0_\K$.\\
-    Or l'ensemble des formes $p$-linéaires alternées sur $\K^p$ est de dimension $1$, donc $\exists \l\in\K, ~ \phi=\l\det$.\\
+    Alors $\phi$ est $p$-linéaire, alternée, donc $\exists \l \in \K, ~ \phi=\l\det$ (rappel).\\
     On a donc $\phi(I_p)=\l\det(I_p)=\l=\det(C)$, donc $\forall A\in M_p(\K), \phi(A)=\det(A)\det(C)$.\\
     \boxed{2.} Par récurrence immédiate sur le nombre de blocs de la diagonale.
 \end{thm}
@@ -536,10 +545,9 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 
 \vspace*{-0.2cm}
 
-\begin{defi}{}{}
-    Soit $E$ un $\K$-ev. Une forme linéaire sur $E$ est une application linéaire de $E$ dans $\K$.\\
-    L'ensemble des formes linéaires sur $E$ est donc $\L(E,\K)$, noté aussi $E^*$, appelé dual de $E$.\\
-    Si $E$ est de dimension finie, alors $\dim(E^*)=\dim(E)$.
+\begin{defi}{Forme linéaire.}{}
+    Soit $E$ un $\K$-ev. Une \bf{forme linéaire} sur $E$ est une application linéaire de $E$ dans $\K$.\\
+    L'ensemble des formes linéaires sur $E$ est donc $\L(E,\K)$.
 \end{defi}
 
 \vspace*{-0.7cm}
@@ -572,19 +580,9 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     On dit alors que $H$ est un hyperplan de $E$.
     \tcblower
     \boxed{1\ra 2} Fait dans le théorème précédent.\\
-    \boxed{2\ra 1} Par hypothèse, $E=H\oplus\Vect(a)$. Soit $x\in E, ~ \exists!(y,\a)\in\K, ~ x=y+\a a$. On pose $\phi(x)=a$.\\
+    \boxed{2\ra 1} Par hypothèse, $E=H\oplus\Vect(a)$. Soit $x\in E, ~ \exists!(y,\a)\in\K, ~ x=y+\a a$. On pose $\phi(x)=\a$.\\
     On a bien $\phi:E\to\K$ et linéaire (facile) et $H=\Ker(\phi)$. 
 \end{thm}
-
-\begin{ex}{}{}
-    Soit $E$ un $\K$-evdf et $B=(e_1,...,e_n)$ base de $E$. Soit $\phi$ forme linéaire sur $E$. Soit $x\in E$.\\
-    Soit $H=\Ker(\phi)$ un hyperplan de $E$, alors $\dim(H)=n-1$, alors $\exists(u_1,...u_n)\in\K^n$ tels que :
-    \begin{equation*}
-        x \in H \iff \sum_{i=1}^nu_ix_i=0.
-    \end{equation*}
-\end{ex}
-
-\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Soit $H=\{A\in M_n(\R), ~ \Tr(A)=0\}$. Soit $A\in M_n(\R), ~ A=\left( A-\frac{\Tr(A)}{n}I_n \right)+\frac{\Tr(A)}{n}I_n$.
@@ -615,7 +613,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     Soit $(a'_1,...,a'_r)$ une base de $\Im(f)$ que l'on complète en $(a'_1,...,a'_p)$ base de $F$.     On a $\forall i \in \lb1,r\rb, \exists a_i \in E, a'_i=f(a_i)$.\\
     On définit $h$ comme l'unique application linéaire de $F$ dans $G$ telle que $\forall i \in \lb1,r\rb, ~ h(a'_i)=g(a_i)$.\\
     Il reste à vérifier que $g=h\circ f$. On cherche une base de $E$ utilisant une base de $\Ker(f)$ : $(a_{r+1},...,a_n)$.\\
-    Notons $\B=(a_1,...,a_r,a_{r+1},...,a_n)$ base de $E$. Vérifions enfin que $\forall i \in \lb1,n_rb, ~ g(a_i)=h\circ f(a_i)$.\\
+    Notons $\B=(a_1,...,a_r,a_{r+1},...,a_n)$ base de $E$. Vérifions enfin que $\forall i \in \lb1,n\rb, ~ g(a_i)=h\circ f(a_i)$.\\
     Si $i\in\lb1,r\rb$, alors $(h\circ f)(a_i)=h(a'_i)=g(a_i)$ par définition de $h$.\\
     Sinon, $i\in\lb r+1,n\rb$, donc $(h\circ f)(a_i)=h(0)=0$ et $g(a_i)=0$ car $\Ker(f)\subset\Ker(g)$.
 \end{lemme}
@@ -667,7 +665,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     \begin{enumerate}
         \item $E_1,...,E_n$ sont en somme directe.
         \item $\forall (x_1,...,x_n),(y_1,...,y_p)\in E_1\times...\times E_n, ~ x_1+...+x_n=y_1+...+y_n \ra \forall i \in \lb1,n\rb, ~ x_i=y_i$.
-        \item $\forall (x_1,...,x_n)\in E_1\times E_n, ~ x_1+...+x_n=0_E \ra \forall i \in \lb1,n\rb, ~ x_i = 0_E$.
+        \item $\forall (x_1,...,x_n)\in E_1\times...\times E_n, ~ x_1+...+x_n=0_E \ra \forall i \in \lb1,n\rb, ~ x_i = 0_E$.
     \end{enumerate}
     \tcblower
     \boxed{2\ra 3} Soient $x_1,...,x_n\in E_1\times...\times E_n$ tels que $x_1+...+x_n=0_E$. Alors $x_1+...+x_n=0_E+...+0_E$.\\
@@ -684,7 +682,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 
 \begin{defi}{Projecteurs associés à une somme directe. $\star$}{}
     Soit $E$ un $\K$-ev, et $E_1,...,E_n$ des ssev de $E$ tels que $E=E_1\oplus...\oplus E_n$.\\
-    En particulier, $\forall x \in E, ~ \exists!(x_1,...,x_n)\in E_1\times...\times E_n ~ x=x_1+...+x_n$.\\
+    En particulier, $\forall x \in E, ~ \exists!(x_1,...,x_n)\in E_1\times...\times E_n, ~ x=x_1+...+x_n$.\\
     On définit $p_i:x\mapsto x_i$ pour tout $i\in\lb1,n\rb$.
     \tcblower
     On vérifie que les $p_i$ sont des projecteurs. Soient $x,y\in E$ et $\l\in\K$, $x=x_1+...+x_n$ et $y=y_1+...+y_n$.\\
@@ -708,7 +706,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     \tcblower
     Par récurrence sur $n$ :\\
     \bf{Initialisation.} $\dim(E_1+E_2)=\dim(E_1)+\dim(E_2)-\dim(E_1\cap E_2) \leq \dim(E_1)+\dim(E_2)$ (GRASSMAN).\\
-    \bf{Hérédité.} Soit $n\in\N$ tel que $P(2)$ et $P(n)$. Alors :
+    \bf{Hérédité.} Soit $n\in\N$ tel que la propriété soit vraie aux rangs $2$ et $n$. Alors :
     \begin{equation*}
         \dim(E_1+...+E_n+E_{n+1})\leq \dim(E_1+...+E_n)+\dim(E_{n+1})\leq \sum_{i=1}^n\dim(E_i) + \dim(E_{n+1}).
     \end{equation*}
@@ -724,21 +722,21 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     \boxed{\ra} Même récurrence que précédemment.\\
     \boxed{\la} Par récurrence sur $n$ :\\
     \bf{Initialisation.} $\dim(E_1+E_2)=\dim(E_1)+\dim(E_1)$ donc $\dim(E_1\cap E_2)=0$, donc $E_1\oplus E_2$.\\
-    \bf{Hérédité.} Soit $n\in\N$ tel que $P(2)$ et $P(n)$ soient vraies.
+    \bf{Hérédité.} Soit $n\in\N$ tel que la propriété soit vraie aux rangs $2$ et $n$. Alors :
     \begin{equation*}
         \dim((E_1+...+E_n)+E_{n+1}) \leq \dim(E_1+...+E_n) + \dim(E_{n+1}) \leq \dim(E_1) + ... + \dim(E_{n+1}).\\
     \end{equation*}
-    Par H \small$\dim(E_1+...+E_{n+1})=\dim(E_1)+...+\dim(E_{n+1})$ donc $\dim((E_1+...+E_n)+E_{n+1})=\dim(E_1+...+E_n)+\dim(E_{n+1})$.\\
+    On a \small$\dim(E_1+...+E_{n+1})=\dim(E_1)+...+\dim(E_{n+1})$ donc $\dim((E_1+...+E_n)+E_{n+1})=\dim(E_1+...+E_n)+\dim(E_{n+1})$.\\
     Donc d'après $P(2)$, $E_{n+1}\oplus(E_1+...+E_n)$ puis $\dim(E_1+...+E_n)=\dim(E_1)+...+\dim(E_n)$ donc $E_1\oplus...\oplus E_n$.\\
     On conclut que $E_1\oplus ... \oplus E_{n+1}$.
 \end{thm}
 
 \section{Sous-espaces stables.}
 
-\begin{defi}{}{}
+\begin{defi}{Espace stable.}{}
     Soit $E$ un $\K$-ev, $F$ un ssev de $E$ et $u\in\L(E)$.
     \begin{center}
-        $F$ est stable par $u$ ssi $u(F)\subset F$.
+        $F$ est \bf{stable} par $u$ ssi $u(F)\subset F$.
     \end{center}
 \end{defi}
 
@@ -782,7 +780,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
 
 \vspace*{-0.4cm}
 
-\begin{thm}{Caractérisation des sous-espaces stables en dimension finie.}{}
+\begin{thm}{Caractérisation des sous-espaces stables en dimension finie. $\star$}{}
     Soit $E$ un $\K$-evdf de dimension $n$, soit $F$ un ssev de $E$, et $u\in\L(E)$.
     \begin{center}
         $F$ est stable par $u$ ssi il existe une base $\B$ de $E$ telle que $\Mat_{\B}(u)=\begin{pmatrix}A_1&A_2\\0&A_3\end{pmatrix}$.
@@ -812,8 +810,6 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     Par théorème, $\exists P,Q\in\GL \nt{Pour } k := \rg(A), \nt{ on pose } _n(\K)$ tels que $T_k=PAQ$, alors $f_A(QP)=\Tr(AQP)=\Tr(PAQ)=\Tr(T_k)=0$.
 \end{exercice}
 
-\vspace*{-0.4cm}
-
 \begin{exercice}{}{}
     Soit $f:M_n(\R)\to\R$ non constante telle que $\forall(M,N)\in M_n(\R), ~ f(MN)=f(N)f(M)$.\\
     Montrer que $f(M)\neq0\iff M\in \GL_n(\K)$.
@@ -824,7 +820,7 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     \boxed{\la} Supposons $M\in\GL_n(\K)$, alors $f(I_n)=f(M)f(M^{-1})$ donc $f(M)\neq0$. 
 \end{exercice}
 
-\begin{exercice}{(Daouda)}{}
+\begin{exercice}{}{}
     Soit $E=(\m{C}^\infty(\R,\R), +, \cdot)$, $\a\in\R$, et soient :
     \begin{equation*}
         \forall k \in \N, ~ f_k : \begin{cases}
@@ -835,41 +831,15 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     \begin{equation*}
         \forall n \in \N, ~ E_n = \Vect(f_0,...,f_n), ~ \nt{ss-ev de } E, ~ D_n = (f_0,...,f_n).
     \end{equation*}
-    1. Quelle est la dimension de $E_n$ ? Montrer que $D_n:f\mapsto f'$ est un endomorphisme de $E_n$.\\
-    2. Montrer que $D_n$ est bijective ssi $\a\neq0$.
-    \tcblower
-    \boxed{1.} Soient $\l_0,...,\l_n\in\R$ tels que $\sum\l_if_i=0_E$. Soit $x\in\R$ :
-    \begin{align*}
-        \sum_{i=0}^n\l_if_i(x)=0_\R &\iff e^{\a x}\sum_{i=0}^n\l_ix^i = 0_\R &\iff \sum_{i=0}^n\l_i x^i = 0_\R \iff \forall i \in \lb0,n\rb, ~ \l_i = 0.
-    \end{align*}
-    Donc $(f_0,...,f_n)$ est libre et génératrice : c'est une base.\\
-    C'est un endomorphisme car dérivation.\\
-    \boxed{2.} On a $D_n(f_0) = \a f_0$. $\forall k \in \N, ~ D_n(f_n)=kf_{k-1}+\a f_k$. $D_n(B_n)\subset \Vect(B_n)$.\\
-    Supposons $\a=0$, alors $D_n(f_0)=0$ et $f_0\neq0_E$ donc $D_n$ est non injectif.\\
-    Supposons $\a\neq0$, soit $f=\sum \l_i f_i$, avec $\l_i \in \R$. On a $D_n(f)=0$. On pose $f_{-1}=0$.
-    \begin{align*}
-        \sum_{i=0}^n\l_if'(x)=0 &\iff \sum_{i=0}^n\l_i\left[ if_{i-1}(x) + \a f_i(x) \right] = 0\\
-        &\iff \sum_{i=0}^n\l_iif_{i-1}(x) + \sum_{i=0}^n\l_i\a f_i(x)=0\\
-        &\iff \sum_{j=0}^{n-1}\l_{j+1}(j+1)f_j(x) + \sum_{i=0}^n\l_i\a f_i(x)=0\\
-        &\iff \l_n\a f_n(x) + \sum_{i=0}^{n-1}\left[ \l_{i+1}(i+1) + \l_i \a \right]f_i(x)=0\\
-        &\iff \forall i \in \lb1,n-1\rb, ~ \left[ \l_{i+1}(i+1) + \l_i\a \right]=0 \et \l_n\a=0.
-    \end{align*}
-    Donc $\l_n\a=0$ puis $\l_n=0$, on a par récurrence descendante $\forall i \in \lb0,n\rb, ~ \l_i=0$.
+    \begin{enumerate}
+        \item Quelle est la dimension de $E_n$ ? Montrer que $D_n:f\mapsto f'$ est un endomorphisme de $E_n$.
+        \item Montrer que $D_n$ est bijective ssi $\a\neq0$.
+    \end{enumerate}
 \end{exercice}
 
-\begin{exercice}{(Christophe)}{}
-    Soit $E$ un ev tel que $\dim(E)=n$. Soit $u\in\L(E)$.\\
-    1. Montrer que $(u^k, ~ k\in\N)$ est liée.\\
-    2. Montrer que $E=\Im u \oplus \Ker u \iff u \in \Vect(u^k, ~ k \geq 2)$.
-    \tcblower
-    \boxed{1.} On a $\dim\L(E)=n^2$, la famille possède $n^2+1$ vecteurs.\\
-    \boxed{2.\la} Supposons que $\exists p \in \N^*, ~ \exists \l_2, ..., \l_p \in \K, ~ u=\l_2u^2+...+\l_pu^p$.\\
-    Soit $y\in\Im u \cap \Ker u$ : $\exists x \in E, ~ u(x)=y$ et $u^2(x)=u(y)=0$. Or $u(x)=\l_2u^2(x)+...+\l_pu^p(x)=0$.\\
-    Donc $y=0$ donc $\Im u \cap \Ker u = \{0\}$, et avec thm du rang et caractérisation des supplémentaires, $\Im u \oplus \Ker u$.\\
-    \boxed{2.\ra} Supposons $E=\Im $
-\end{exercice}
+\pagebreak
 
-\begin{exercice}{(Martin)}{}
+\begin{exercice}{}{}
     Soit $u\in\L(E)$ avec $E$ un evdf, $u$ nilpotent d'indice $p\in\N^*$.
     \begin{enumerate}
         \item Montrer que $\forall k \in \lb1,p\rb$, ~ $\exists F_k$ un ev de $E$ tel que $\Ker u^k = \Ker u^{k-1}\oplus F_k$.
@@ -894,8 +864,10 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     \end{equation*}
 \end{exercice}
 
-\begin{exercice}{(Balthazar)}{}
-    Soit $(E,+,\cdot)$ un ev de dimension $n$, $u\in\L(E), ~ u^3=0$, $\rg(u^2)=r$. Montrer $n\geq3r$.
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Soit $(E,+,\cdot)$ un ev de dimension $n$, $u\in\L(E), ~ u^3=0$, $\rg(u^2)=r$. Montrer que $n\geq3r$.
     \tcblower
     On pose $\B=(e_1,...,e_n)$ base de $\Im(u^2)$. Alors $\forall i \in \lb1,r\rb, ~ \exists a_i \in E, ~ c_i=u^2(a_i)$.\\
     On pose $\forall i \in \lb1,r\rb, ~ b_i = u(a_i)$. Montrons que $(a_1,...,ar,b_1,...,b_r,c_1,...,c_r)$ est libre.\\
@@ -910,7 +882,9 @@ Dans tout ce chapitre, $E,F$ ou $G$ désignent des $\K$-ev, de dimension finie o
     Donc $S=\sum_{i=1}^r\g_ic_i=0$, donc tous les $\g_i$ sont nuls. La famille est bien libre, donc $3r\leq n$.
 \end{exercice}
 
-\begin{exercice}{(Arthur)}{}
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
     Soient $A,B\in M_n(\R)$ tels que $AB=0$ et $A+B\in \GL_n(\R)$. Montrer que $\rg(A+B)=\rg(A)+\rg(B)$.
     \tcblower
     Notons $\rg(A+B)=n$. Par théorème du rang, $n=\rg(A)=\dim\Ker A$ et $n=\rg(B)+\dim\Ker(B)$.\\
