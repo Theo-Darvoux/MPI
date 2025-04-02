@@ -350,7 +350,7 @@
 
 \vspace*{-0.8cm}
 
-\begin{prop}{$\star$}{}
+\begin{prop}{$\star$}{div}
     Soit $(G,\times)$ un groupe de neutre $e$ et $a\in G$ d'ordre $p\in\N$. Alors $\forall n \in \Z, ~ a^n=e\iff p \mid n$.
     \tcblower
     \boxed{\la} Supposons $\exists q\in\Z, ~ n=pq$. Alors $a^n=(a^p)^q=e$.\\
@@ -440,11 +440,11 @@
 
 \vspace*{-0.8cm}
 
-\begin{thm}{Théorème de Lagrange. $\star$}{}
+\begin{thm}{Théorème de Lagrange. $\star$}{lag}
     Soit $(G,\times)$ un groupe de cardinal fini $n\in\N$.
     \begin{enumerate}
         \item L'ordre de tout élément de $G$ divise $n$.
-        \item Le $n^{\nt{ème}}$ itéré de tout élément de $G$ est le neutre.
+        \vspace{0.1cm}\item \fbox{Le $n^{\nt{ème}}$ itéré de tout élément de $G$ est le neutre.}
     \end{enumerate}
     \bf{Remarque.} $G$ est monogène ssi $\exists a \in G \mid o(a)=n$. Peut servir à montrer que $G$ est cyclique.
     \tcblower
@@ -453,7 +453,7 @@
     \begin{equation*}
         \prod_{x\in G}x=\prod_{x\in G}(ax)=a^{n}\prod_{x\in G}x.
     \end{equation*}
-    Enfin, $\prod_{x\in G}x$ est inversible ($G$ est un groupe) donc en multipliant par l'inverse : $a^{n}=e$, puis $p\mid n$ par thm.\\
+    Enfin, $\prod_{x\in G}x$ est inversible ($G$ est un groupe) donc en multipliant par l'inverse : $a^{n}=e$, puis $p\mid n$ par thm (\ref{prop:div}).\\
     \boxed{2.} Fait ci-dessus.\\
     Justifions la remarque : soit $a\in G$ tel que $o(a)=n$.\\
     Alors $\langle a \rangle \subset G$ et $|\langle a\rangle|=n<\infty$ donc $\langle a \rangle = G$. (et $G$ est bien cyclique!)
@@ -921,10 +921,9 @@
         &\iff p_1...p_r=(p_1-1)...(p_r-1)
     \end{align*}
     Donc $r=0$, donc $n=2^\a3^\b$ avec $\a\geq1$ et $\b\geq1$.\\
-    \bf{Synthèse.} Soit $n=2^\a3^\b$ avec $\a,\b\in\N^*$.
+    \bf{Synthèse.} Soit $n=2^\a3^\b$ avec $\a,\b\in\N^*$. Puisque $2\land 3 =1$ :
     \begin{align*}
-        \phi(n)&=\phi(2^\a)\phi(3^\b) \quad \nt{car } 2\land 3 = 1.\\
-        &=(2^\a-2^{\a-1})(3^\b-3^{\b-1})=2^{\a-1}\times 2 \times 3^{\b-1} = \frac{1}{3}n
+        \phi(n)&=\phi(2^\a)\phi(3^\b) =(2^\a-2^{\a-1})(3^\b-3^{\b-1})=2^{\a-1}\times 2 \times 3^{\b-1} = \frac{1}{3}n
     \end{align*}
 \end{ex}
 
@@ -944,7 +943,7 @@
 \begin{thm}{d'Euler. $\star$}{}
     Soit $n\geq1$, $a\in\Z$ premier avec $n$. Alors $a^{\phi(n)}\equiv1[n]$.
     \tcblower
-    On rappelle que si $(G,\times)$ est un groupe multiplicatif fini de cardinal $n$, alors $\forall a \in G, ~ a^n = e$.\\
+    On rappelle que si $(G,\times)$ est un groupe multiplicatif fini de cardinal $n$, alors $\forall a \in G, ~ a^n = e$ (\ref{thm:lag}).\\
     On se place dans $(U(\Z/n\Z),\times)$, alors $|U(\Z/n\Z)|=\phi(n)$, et $[a]$ est inversible dans $\Z/n\Z$.\\
     On a donc $[a]\in U(\Z/n\Z)$ donc $[a]^{\phi(n)}=[1]$, d'où $a^{\phi(n)}\equiv 1[n]$.
 \end{thm}
@@ -1113,7 +1112,7 @@
 
 \begin{exercice}{}{}
     Soit $(A,+,\times)$ un anneau commutatif.\\
-    Si $I$ est un idéal, alors montrer que $\sqrt{I}=\{x\in A, ~ \exists n \in \N, ~ x^n \in I\}$ est un idéal.
+    Si $I$ est un idéal, alors montrer que $\sqrt{I}:=\{x\in A, ~ \exists n \in \N, ~ x^n \in I\}$ est un idéal.
     \tcblower
     Soit $x \in \sqrt{I}$ et $a\in A$. Montrons que $ax\in\sqrt{I}$.
     \begin{equation*}

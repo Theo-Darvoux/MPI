@@ -19,11 +19,11 @@
         \item Montrer de deux manières qu'une fonction polynomiale périodique est constante.
     \end{enumerate}
     \tcblower
-    \boxed{1.} Soit $f$ continue sur $\R$ et périodique de période $T$. On a $f$ bornée sur $[0,T]$ par TBA car continue.\\
-    Donc $\exists M \in \R_+, ~ \forall x \in [0,T], ~ |f(x)| \leq M$, puis $\forall x \in \R, ~ \exists n \in \Z, ~ x-nT\in[0,T]$.\\
-    Puis par $T$-périodicité de $f$, $|f(x)|=|f(x-nT)|\leq M$.\\
+    \boxed{1.} Soit $f$ continue sur $\R$ et périodique de période $T$. Alors $f$ est bornée sur $[0,T]$ par TBA car continue.\\
+    Donc $\exists M \in \R_+, ~ \forall x \in [0,T], ~ |f(x)| \leq M$, or $\forall x \in \R, ~ \exists n \in \Z, ~ x-nT\in[0,T]$.\\
+    Donc par $T$-périodicité de $f$, $|f(x)|=|f(x-nT)|\leq M$.\\
     \boxed{2.} Soit $P\in\R[X]$ périodique, on a donc $P$ continu et périodique donc borné d'après $1.$\\
-    Or les seuls polynômes bornés sont les polynômes constants.
+    Or les seuls polynômes bornés sont les polynômes constants (par limite en $\infty$) donc $P$ est constant.
 \end{ex}
 
 \begin{ex}{Une caractérisation des fonctions polynomiales.}{}
@@ -42,7 +42,7 @@
 \begin{ex}{Des équations différentielles.}{}
     \begin{enumerate}
         \item Résoudre les équations différentielles $y'=y$ et $xy'=y$.
-        \item Quelles sont les solutions polynomiales ?
+        \item Quelles sont les solutions polynomiales parmis leurs solutions ?
         \item Résoudre dans $\K[X]$ les équations $P'=P$, puis $XP'=P$ sans utiliser les questions précédentes.
     \end{enumerate}
     \tcblower
@@ -52,7 +52,7 @@
     On a $XP'=P$ ssi $\sum_{k=0}^d ka_k X^k=\sum_{k=0}^d a_k X^k$ ssi $\forall k \neq 1, ~ ka_k=a_k=0$, et $\exists \l \in \R, ~ a_1=\l$. 
 \end{ex}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{ex}{Anneau intègre.}{}
     \begin{enumerate}
@@ -62,23 +62,27 @@
     \end{enumerate}
     \tcblower
     \boxed{1.} Soient $P,Q\in\K[X]$ non nuls. Alors $\deg(PQ)=\deg(P)+\deg{Q}\in\N$ donc $PQ\neq0$.\\
-    \boxed{2.} Soient $P,Q\in\K[X]$ non nuls. Alors $PQ=a_0b_0+...+a_Nb_{N'}X^{N+N'}$.\\
+    \boxed{2.} Soit $f$ nulle partout sauf en $0$, et $g$ nulle partout sauf en $1$. Leur produit est $\zero$, mais $f,g\neq\zero$.\\ 
+    \boxed{3.} Soient $P,Q\in\K[X]$ non nuls. Alors $PQ=a_0b_0+...+a_Nb_{N'}X^{N+N'}$.\\
     Si $(A,+,\times)$ est intègre, alors $a_N\neq0$ et $b_{N'}\neq0$ implique $a_Nb_{N'}\neq0$.\\
     Donc $P\neq0$ et $Q\neq0$ implique $PQ\neq0$. $(A,+,\times)$ intègre $\iff$ $(A[X],+,\times)$ intègre.
 \end{ex}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
-    Montrer que les polynômes de $\R[X]$ de degré impair, ont forcément une racine réelle.
+    Montrer que les polynômes de $\R[X]$ de degré impair ont forcément une racine réelle.
     \tcblower
-    Soit $P\in\R[X]$ de degré impair $N$. Alors $P=\sum^{N}_{k=0} a_k X^K$.\\
-    On a $P(X)\sim_{+\infty}a_Nx^N$ (SPDG $a_N>0$), alors $P(x)\xrightarrow[x\to+\infty]{}+\infty$ et $P(x)\xrightarrow[x\to-\infty]{}-\infty$.\\
-    Alors $\exists x_0<0, ~ \forall x \leq x_0, ~ P(x)<0$ et $\exists x_1 > 0, ~ \forall x \geq x_1, ~ P(x)>0$.\\
-    On applique le TVI sur $[x_0,x_1]$ : $\exists x \in [x_0,x_1], ~ P(x)=0$.
+    Soit $P\in\R[X]$, qu'on suppose de degré impair $n\in\N$, on note $a_n\neq0$ son coefficient dominant.\\
+    Alors $P(x)\sim_{\infty} a_nx^n$, nous allons supposer $a_n>0$, le cas négatif est similaire.
+    \begin{equation*}
+        \lim_{x\to-\infty} P(x) = \lim_{x\to-\infty} a_nx^n = -\infty; \et \lim_{x\to+\infty}P(x) = \lim_{x\to+\infty} a_nx^n = +\infty.
+    \end{equation*}
+    Par définition de la limite, $\exists a < 0, ~ \forall x < a, ~ P(x) < 0$ et $\exists b > 0, ~ \forall x > b, ~ P(x) > 0$.\\
+    Puisque $P$ est un polynôme, il est continu sur $[a,b]$, on lui applique donc le TVI : $\exists x_0 \in [a,b], ~ P(x)=0$. 
 \end{ex}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{ex}{Polynômes scindés.}{}
     \begin{enumerate}
@@ -89,11 +93,13 @@
     \boxed{1.} Soit $P\in\R[X]$ scindé à racines simples : $P=\l(X-\a_1)...(X-\a_p)$. On suppose que les $\a_i$ sont croissants.\\
     Par Rolle, $P'$ s'annule une fois dans tous les $]a_i,a_{i+1}[$ car $P$ est continue et dérivable sur $[a_i,a_{i+1}]$.\\
     Donc $P'$ s'annule $p-1$ fois, et est de degré $p-1$, il est scindé à racines simples.\\
-    \boxed{2.} Soit $P\in\R[X]$ scindé : $P=\l(X-\a_1)^{n_1}...(X-\a_p)^{n_p}$. On suppose les $\a_i$ croissants.\\
-    Comme à la première question, on obtient $p$ racines distinctes de $P'$.\\
-    Ensuite, $\forall i \in \lb1,p\rb,~\a_i$ est racine de $P$ de multiplicité $n_i$ implique $\a_i$ est racine de $P'$ de mult $n_i-1$.\\
-    Donc $(X-\a_i)^{n_i-1}$ divise $P'$ donc $\exists Q \in \R[X], ~ P'=(X-b_1)...(X-b_{p-1})(X-\a_1)^{n_1-1}...(X-\a_p)^{n_p-1}Q$.\\
-    Or $\deg(P')=p-1=n_1+...+n_p-1$ donc $\deg(Q)=0$, on a le résultat.
+    \boxed{2.} Soit $P\in\R[X]$ scindé de degré $n=n_1+...+n_p$ : $P=\l(X-\a_1)^{n_1}...(X-\a_p)^{n_p}$. On suppose les $\a_i$ croissants.\\
+    En appliquant (1), on obtient $(b_1,...b_{p-1})$, racines distinctes de $P'$ (et distinctes des $(\a_i)$).\\
+    Rappelons qu'une racine de $P$ de multiplicité $n$ est racine de $P'$ de multiplicité $n-1$, alors :\vspace*{-0.2cm}
+    \begin{equation*}
+        \exists Q \in \R[X], ~ P'(X) = (X-b_1)...(X-b_{p-1})(X-\a_1)^{n_1-1}...(X-\a_p)^{n_p-1}Q(X).
+    \end{equation*}
+    Or $P'$ est de degré $n-1$, donc $n-1=n-1+\deg(Q)$, donc $Q$ est constant, donc $P'$ est scindé.
 \end{ex}
 
 \begin{ex}{Relations coefficients racines.}{}
@@ -102,10 +108,10 @@
     \tcblower
     On pose $P=(X-x)(X-y)(X-z)$, alors $P=X^3-(x+y+z)X^2+(xy+xz+yz)X-xyz$. D'après les hypothèses :
     \begin{equation*}
-        P=X^3-xyz ~ \nt{car} ~ \frac{1}{x}+\frac{1}{y}=\frac{1}{z}=\frac{yz+xz+xy}{xyz} \ra yz+xz+xy=0.
+        P=X^3-xyz ~ \nt{car} ~ \frac{1}{x}+\frac{1}{y}=\frac{1}{z}=\frac{yz+xz+xy}{xyz} = 0 \ra yz+xz+xy=0.
     \end{equation*}
-    Donc $P=X^3+\l$ avec $\l\in\C$, or $x,y,z$ sont racines de $P$, et $P(x)=x^3+\l$, $P(y)=y^3+\l$, et $P(z)=z^3+\l$.\\
-    Finalement, $x^3=-\l=y^3=z^3$, puis $|x|^3=|y|^3=|z|^3$ puis $|x|=|y|=|z|$.
+    Donc $P(X)=X^3-xyz$, avec $x,y,z$ racines de $P$, donc $x^3=y^3=z^3=xyz$.\\
+    On en conclut que $|x|^3=|y|^3=|z|^3$ puis que $|x|=|y|=|z|$.
 \end{ex}
 
 \section{Arithmétique dans \texorpdfstring{$\K[X]$}{Lg}.}
@@ -142,7 +148,7 @@
 \begin{ex}{}{}
     Faire la division euclidienne de $X^4+3X^3+X^2-X+1$ par $X^2+3X-4$.
     \tcblower
-    ...
+    Sans détailler :
     \begin{equation*}
         X^4+3X^3+X^2-X+1=(X^2+5)(X^2+3X-4)-16X+21
     \end{equation*}
@@ -154,7 +160,7 @@
         P(a) = 0 \iff (X-a) \mid P.
     \end{equation*}
     \tcblower
-    \boxed{\ra} On a $\exists (Q,R)\in\K[X] ~ P=(X-a)Q+R$, et $\deg(R)<1$ donc $R$ constant.\\
+    \boxed{\ra} Par division euclidienne : $\exists (Q,R)\in\K[X] ~ P=(X-a)Q+R$, et $\deg(R)<1$ donc $R$ constant.\\
     On a alors $P(a)=R(a)=0$ donc $R=0$, donc $P=(X-a)Q$ donc $(X-a) \mid P$.\\ 
     \boxed{\la} $\exists Q \in \K[X], ~ P=(X-a)Q$, puis $P(a)=0\cdot Q(a)=0$.
 \end{prop}
@@ -165,12 +171,12 @@
     Trouver tous les polynômes $P\in\R[X]$ tels que $(X+4)P(X)=XP(X+1)$.
     \tcblower
     \bf{Analyse.} Soit $P\in\R[X]$ tel que $(X+4)P(X)=XP(X+1)$.\\
-    On a alors $P(0)=0$ et $P(-3)=0$, ainsi : $\exists Q \in \R[X], ~ P=X(X+3)Q$.\\
-    Alors $(X+4)(X+3)XQ(X)=X(X+1)(X+4)Q(X+1)$. Alors $(X+3)Q(X)=(X+1)Q(X+1)$.\\
-    On simplifie car $\K[X]$ est un anneau intègre. Alors $Q(-1)=Q(-2)=0$ : $\exists Q_2\in\K[X], ~ Q=(X+1)(X+2)Q_2$.\\
+    On a alors $P(0)=0$ et $P(-3)=0$, ainsi : $\exists Q_1 \in \R[X], ~ P=X(X+3)Q_1$.\\
+    Alors $(X+4)(X+3)XQ_1(X)=X(X+1)(X+4)Q_1(X+1)$. On peut simplifier car $\K[X]$ est un anneau intègre.\\
+    Alors $(X+3)Q_1(X)=(X+1)Q_1(X+1)$, puis $Q_1(-1)=Q_1(-2)=0$ : $\exists Q_2\in\K[X], ~ Q_1=(X+1)(X+2)Q_2$.\\
     Donc $(X+3)(X+2)(X+1)Q_2(X)=(X+3)(X+2)(X+1)Q_2(X+1)$ donc $Q_2(X)=Q_2(X+1)$.\\
-    Enfin, $Q_2$ est constant. Donc $P=\l X(X+1)(X+2)(X+3)$.\\
-    \bf{Synthèse.} On vérifie facilement que c'est bon.
+    On en déduit que $Q_2$ est constant. Donc $P=\l X(X+1)(X+2)(X+3)$, avec $\l\in\K$.\\
+    \bf{Synthèse.} On vérifie facilement que ces polynômes conviennent.
 \end{ex}
 
 \vspace*{-0.7cm}
@@ -192,7 +198,9 @@
     Alors $(P)\subset(Q)$ : $Q \mid P$, puis $(Q)\subset(P)$ : $P\mid Q$, donc $P$ et $Q$ sont associés. Ils sont unitaires, donc égaux.
 \end{thm}
 
-\vspace*{-0.7cm}
+\vspace*{-0.4cm}
+
+\bf{Remarque.} La preuve est en réalité la même que celle sur les sous-groupes de $\Z$.
 
 \begin{defi}{PGCD.}{}
     Soient $(A,B)\in\K[X]^2$ non tous les deux nuls.\\
@@ -200,21 +208,21 @@
     On appelle alors $D$ le PGCD de $A$ et $B$, noté $A\land B$.
     \tcblower
     On remarque que $I=(A)+(B)$, c'est donc un idéal de $\K[X]$ comme somme d'idéaux, non nul car $A,B\in I$.\\
-    On conclut avcec le théorème précédent.
+    On conclut avec le théorème précédent.
 \end{defi}
 
 \vspace*{-0.7cm}
 
 \begin{prop}{}{}
-    Soit $A,B\in\K[X]$ non tous les deux nuls, et $D=A\land B$.\\
-    On a $D\mid A$ et $D\mid B$, et $\left[C\mid A \et C\mid B\right] \ra C \mid D$.
-    \tcblower
-    Même preuve que pour le PGCD dans $\Z$.
+    Soient $A,B\in\K[X]$ non tous les deux nuls, on note $D=A\land B$.\\
+    $\hra$ $D \mid A$ et $D \mid B$.\\
+    $\hra$ Pour $C\in\K[X]$, si $C \mid A$ et $C\mid B$, alors $C \mid D$.\\
+    Le PGCD est donc bien le plus grand diviseur commun de $A$ et $B$ au sens de la relation divise.
 \end{prop}
 
 \vspace*{-0.7cm}
 
-\begin{prop}{Bézout. $\star$}{}
+\begin{prop}{Bézout. $\star$}{b1}
     Soient $A,B\in\K[X]$ non tous les deux nuls et $D=A\land B$.
     \begin{equation*}
         \exists (U,V) \in \K[X]^2 \quad D=AU+BV.
@@ -225,40 +233,41 @@
 
 \begin{defi}{PPCM.}{}
     Soient $A,B\in\K[X]$ non nuls.\\
-    Le PPCM de $A$ et $B$, noté $M$ est l'unique générateur unitaire de $A\K[X]\cap B\K[X]$.\\
-    Alors $M$ est le plus petit commun multiple de $A$ et $B$ au sens de la relation divise.
+    Alors $I=A\K[X]\cap B\K[X]$ est un idéal non-nul de $\K[X]$ engendré par un unique polynôme unitaire $M$.\\
+    On appelle alors $M$ le PPCM de $A$ et $B$, noté $A\lor B$.
     \tcblower
-    On a $I=A\K[X]\cap B\K[X]$ un idéal de $\K[X]$ comme intersection d'idéaux de $\K[X]$, d'où l'existence de $M$.\\
-    Les éléments de $I$ sont exactement les multiples communs à $A$ et $B$, donc $M$ est le plus petit, en degré unit..
+    On a $I=A\K[X]\cap B\K[X]$ un idéal de $\K[X]$ comme intersection d'idéaux de $\K[X]$, non nul car $AB\in I$.
 \end{defi}
 
 \vspace*{-0.7cm}
 
 \begin{prop}{}{}
     Soient $A,B\in\K[X]$ non nuls, notons $M=A\lor B$.\\
-    On a $A\mid M$, $B\mid M$; et $(A\mid N \et B\mid N)\ra M \mid N$. 
+    $\hra$ $A\mid M$ et $B\mid M$.\\
+    $\hra$ Pour $N\in\K[X]$, si $A\mid N$ et $B\mid N$, alors $M \mid N$.\\
+    Le PPCM est donc bien le plus petit multiple commun de $A$ et $B$ au sens de la relation divise.
 \end{prop}
 
 \vspace*{-0.7cm}
 
 \subsection{Polynômes premiers entre eux.}
 
-\begin{prop}{Caractérisation par Bezout.}{}
+\begin{prop}{Caractérisation par Bézout.}{}
     Soit $(A,B)\in\K[X]^2$.
     \begin{equation*}
         A\land B = 1 \iff \exists (U,V) \in \K[X]^2, ~ AU+BV=1.
     \end{equation*}
     \tcblower
-    \boxed{\ra} Égalité de Bezout avec $D=1$.\\
-    \boxed{\la} Soit $D$ tel que $D\mid A$ et $D\mid B$. Alors $D\mid AU+BV=1$ donc $D$ constant.
+    \boxed{\ra} Égalité de Bézout (\ref{prop:b1}) avec $D=1$.\\
+    \boxed{\la} Soit $D=A\land B$, alors $D\mid A$ et $D\mid B$, donc $D\mid AU+BV=1$ donc $D=1$.
 \end{prop}
 
 \vspace*{-0.8cm}
 
-\begin{thm}{Caractérisation du PGCD.}{}
-    Soient $A,B\in\K[X]^2$ non nuls et $D\in\K[X]$.
+\begin{thm}{Caractérisation du PGCD. $\star$}{}
+    Soient $A,B\in\K[X]$ non nuls et $D\in\K[X]$.
     \begin{equation*}
-        D=A\land B \iff (A = DA', ~ B=DB', ~ A'\land B'=1)
+        D=A\land B \iff \exists (A',B')\in\K[X]^2, ~ (A = DA', ~ B=DB', ~ A'\land B'=1)
     \end{equation*}
     \tcblower
     \boxed{\ra} Alors $\exists (A',B')\in\K[X], ~ A=DA' \et B=DB'$ puis $\exists (U,V)\in\K[X]^2, ~ AU+BV=1$.\\
@@ -275,11 +284,12 @@
     \end{equation*}
     On le généralise avec un produit de $n$ polynômes.
     \tcblower
-    \boxed{1.} $AU_1+BV_1=1$ et $AU_2+CV_2=1$ donc $(AU_1+BV_1)(AU_2+CV_2)=1$...\\
+    \boxed{1.} Par Bézout : $AU_1+BV_1=1$ et $AU_2+CV_2=1$ donc par produit : $(AU_1+BV_1)(AU_2+CV_2)=1$.\\
+    Ainsi : $A(AU_1U_2 + CU_1V_2 + BU_2V_1) + BC(V_1V_2) = 1$, donc par Bézout : $A\land (BC)=1$.\\
     \boxed{2.} Généralisation immédiate, par récurrence sur $n$.
 \end{prop}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     \begin{equation*}
@@ -289,7 +299,7 @@
     On a $\exists (U,V)\in\K[X]^2, ~ AU+BV=1$, d'où $ACU+(BC)V=C$, or $A\mid BC$ donc $A\mid C$. 
 \end{prop}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     \begin{equation*}
@@ -297,10 +307,10 @@
     \end{equation*}
     \tcblower
     On a $\exists (U,V)\in\K[X]^2, ~ C=AU=BV$, alors $A\mid BV$ et $A\land B = 1$ d'où $A\mid V$.\\
-    On a $\exists W \in \K[X], ~ V=AW$, puis $C=(AB)W$.
+    On a $\exists W \in \K[X], ~ V=AW$, puis $C=(AB)W$ donc $AB\mid C$.
 \end{prop}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Soit $P$ un polynôme admettant $a_1,...,a_n$ pour racines distinctes.\\
@@ -310,36 +320,42 @@
     Puis $(X-a_1)$,...,$(X-a_n)$ sont premiers deux-à-deux, donc $(X-a_1)...(X-a_n)\mid P$.
 \end{ex}
 
+\vspace*{-0.8cm}
+
 \begin{corr}{}{}
     \begin{enumerate}
-        \item Un polynôme de degré $n$ de $\K[X]$ admet au plus $n$ racines distinctes.
-        \item Un polynôme admettant une infinité de racines est nul.
+        \item Un polynôme de degré $n\in\N$ de $\K[X]$ admet au plus $n$ racines distinctes.
+        \item Si un polynôme admet plus de racines distinctes que son degré, alors il est nul.
     \end{enumerate}
     \tcblower
-    \boxed{1.} Soit $P$ de degré $n$, et $a_1,...,a_r$ des racines distinctes de $P$.\\
-    On a $(X-a_1)...(X-a_r)\mid P$, puis $r\leq n$ en passant au degré.\\
-    \boxed{2.} Par contraposée, soit $P$ non nul, on a $\deg(P)\in\N$, donc $P$ admet un nombre fini $r\leq n$ de racines.
+    \boxed{1.} Soit $P$ de degré $n$, et $(a_1,...,a_r)$ ses racines distinctes : $(X-a_1)...(X-a_r)\mid P$, puis $r\leq n$ par degré.\\
+    \boxed{2.} Par contraposée, soit $P$ non nul, de degré $n\in\N$, alors $P$ admet un nombre fini $r\leq n$ de racines.
 \end{corr}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Soit $P\in\R[X]$ et $a<b$ tels que $\forall x \in [a,b], ~ P(x)=0$, alors $P=0_{\K[X]}$.
+    \tcblower
+    Notons $n\in\N$ le degré de $P$, et soit $k > n$, on pose $\forall i \in \lb1,k\rb, ~ a_i = a + i\frac{b-a}{k}\in[a,b]$.\\
+    Les $a_i$ sont tous distincts et dans $[a,b]$, donc $\forall i \in \lb1,k\rb, ~ P(a_i)=0$, donc $P$ admet $k>n$ racines distinctes.\\
+    Par la proposition précédente, $P=0_{\K[X]}$.  
 \end{ex}
 
 \begin{ex}{}{}
     Soit $P=a_0+...+a_nX^n\in\K[X]$ polynôme formel. On note $\tilde{P}:x\mapsto a_0+...+a_nx^n$.\\
-    De manière réciproque, si on connaît une fonction polynomiale, est-ce qu'on peut retrouver de manière unique le polynôme formel associé ?\\
-    \hspace*{1cm}i.e. $\tilde{P}=\tilde{Q}\ra P=Q$ ?\\
+    De manière réciproque, si on connaît une fonction polynomiale, est-ce qu'on peut retrouver de manière unique le polynôme formel associé ? i.e. $\tilde{P}=\tilde{Q}\ra P=Q$ ?\\
     Si $\K$ est infini, la réponse est oui, car $\tilde{P}-\tilde{Q}$ admet une infinité de racines.\\
     Dans $\R[X]$ et $\C[X]$ on pourra confondre (via isomorphisme) polynômes formels et fonctions polynomiales.\\
     Par exemple dans $\Z/2\Z$, et $P=X^2-X$, on a $\tilde{P}=0$ et $P\neq0$.
 \end{ex}
 
-\vspace*{-0.7cm}
+\vspace*{-0.8cm}
 
 \subsection{Généralisation du PGCD, du PPCM.}
 
 \begin{defi}{PGCD généralisé. $\star$}{}
-    Soit $n\in\N\setminus\{1\}$, et $A_1,...,A_n\in\K[X]$ non tous nuls.
+    Soit $n\in\N^*\setminus\{1\}$, et $A_1,...,A_n\in\K[X]$ non tous nuls.
     \begin{equation*}
         I=(A_1)+...+(A_n)=\{A_1U_1+...+A_nU_n; ~ U_1,...,U_n\in\K[X]\}.
     \end{equation*}
@@ -350,7 +366,7 @@
     En particulier, $\exists (U_1,...,U_n)\in\K[X], ~ D=A_1U_1+...+A_nU_n$.
 \end{defi}
 
-\vspace*{-0.7cm}
+\vspace*{-0.8cm}
 
 \begin{defi}{PPCM généralisé.}{}
     Soit $n\in\N^*\setminus\{1\}$, et $A_1,...,A_n\in\K[X]$ tous non nuls.
@@ -360,37 +376,44 @@
     On a $I$ engendré par un unique polynôme unitaire $M$, et $M$ est le PPCM de $A_1,...,A_n$, noté $A_1\lor...\lor A_n$.
 \end{defi}
 
-\vspace*{-0.7cm}
+\vspace*{-0.8cm}
 
-\begin{defi}{}{}
+\begin{defi}{Polynômes premiers entre-eux.}{}
     Soit $n\in\N^*\setminus\{1\}$, et $A_1,...,A_n\in\K[X]$ tous non nuls.\\
     Alors $A_1,...,A_n$ sont premiers entre-eux dans leur ensemble ssi $A_1\land...\land A_n=1$.
 \end{defi}
 
-\vspace*{-0.7cm}
+\vspace*{-0.8cm}
 
-\begin{prop}{Caractérisation par Bezout.}{}
+\begin{prop}{Caractérisation par Bézout.}{}
     Soit $n\in\N^*\setminus\{1\}$, et $A_1,...,A_n$ tous non nuls. Alors :
     \begin{equation*}
         A_1\land ... \land A_n = 1 \iff \exists (U_1,...,U_n)\in\K[X], ~ A_1U_1+...+A_nU_n=1
     \end{equation*}
 \end{prop}
 
-\vspace*{-0.7cm}
+\vspace*{-0.8cm}
 
 \subsection{Polynômes irréductibles.}
 
-\begin{defi}{}{}
-    Soit $P\in\K[X]$ et $\deg(P)\geq1$. On dit que $P$ est irréductible ssi ses seuls diviseurs sont les polynômes constants et les polynômes associés à $P$.
+\begin{defi}{Polynômes associés.}{}
+    On dit que deux polynômes $P,Q\in\K[X]$ sont \bf{associés} ssi $P\mid Q$ et $Q\mid P$.
 \end{defi}
 
-\vspace*{-0.7cm}
+\vspace*{-0.8cm}
+
+\begin{defi}{}{}
+    Soit $P\in\K[X]$ non-constant.\\
+    On dit que $P$ est \bf{irréductible} ssi ses seuls diviseurs sont les polynômes constants et les polynômes associés à $P$.
+\end{defi}
+
+\vspace*{-0.8cm}
 
 \begin{thm}{d'Alembert-Gauss.}{}
     Tout polynôme non constant de $\C[X]$ admet au moins une racine.
 \end{thm}
 
-\vspace*{-0.7cm}
+\vspace*{-0.8cm}
 
 \begin{corr}{$\star$}{}
     Les irréductibles de $\C[X]$ sont exactement les polynômes de degré $1$.
@@ -406,13 +429,13 @@
 
 \begin{thm}{Polynômes irréductibles de $\R$. $\star$}{}
     Les polynômes irréductibles de $\R[X]$ sont exactement :\\
-    --- Les polynômes de degré 1.\\
-    --- Les polynômes de degré 2 à discriminant négatif.
+    $\hra$ Les polynômes de degré 1.\\
+    $\hra$ Les polynômes de degré 2 à discriminant négatif.
     \tcblower
     Il est clair que les polynômes cités sont irréductibles. Réciproquement, par contraposée, soit $P\in\R[X]$.\\
-    --- Si $\deg(P)\geq3$, alors $P$ admet une racine $\a$ dans $\C$. Donc $\ov{\a}$ est aussi racine.\\
+    $\hra$ Si $\deg(P)\geq3$, alors $P$ admet une racine $\a$ dans $\C$. Donc $\ov{\a}$ est aussi racine.\\
     Si $\a\in\R$, $(X-\a)\mid P$, sinon $(X-\a)(X-\ov{\a})=X^2-2\Re(\a)X+|\a|^2\mid P$.\\
-    --- Si $\deg(P)=2$, on suppose qu'il admet une racine réelle, il admet un diviseur.
+    $\hra$ Si $\deg(P)=2$, on suppose qu'il admet une racine réelle, il admet un diviseur.
 \end{thm}
 
 \vspace*{-0.7cm}
@@ -431,37 +454,35 @@
 \begin{thm}{Décomposition en polynômes irréductibles.}{}
     Soit $P\in\K[X]$ tel que $\deg(P)\geq1$. Alors $P$ s'écrit de manière unique sous la forme :
     \begin{equation*}
-        P=\l P_1^{\a_1}...P_r^{\a_r}, \quad r\in\N^*, ~ P_1,...,P_r ~ \nt{irréductibles}, ~ \a_1,...,\a_r \in \N^*.
+        P=\l P_1^{\a_1} \cdots P_r^{\a_r}, \quad r\in\N^*, ~ P_1,...,P_r ~ \nt{irréductibles}, ~ \a_1,...,\a_r \in \N^*.
     \end{equation*}
 \end{thm}
 
 \vspace*{-0.7cm}
 
 \begin{prop}{}{}
-    Soient $A,B\in\K[X]$ tels que $\deg(A)\geq1$ et $\deg(B)\geq1$.
+    Soient $P_1,...,P_r\in\K[X]$ irréductibles, distincts et unitaires et :
     \begin{equation*}
-        \begin{cases}
-            A=\l P_1^{\a_1}...P_r^{\a_r}, \quad \l\in\K^*n, ~ P_1,...,P_r ~ \nt{irréductibles distincts unitaires.}\\
-            B=\mu P_1^{\b_1}...P_r^{\b_r}, \quad \mu \in \K^*
-        \end{cases}
+        A = \l\prod_{i=1}^rP_i^{\a_i}; \quad B = \mu\prod_{i=1}^rP_i^{\a_i}.
     \end{equation*}
-    Alors $A\land B = P_1^{\min(\a_1,\b_1)}...P_r^{\min(\a_r,\b_r)}$ et $A\lor B = P_1^{\max(\a_1,\b_1)}...P_r^{\max(\a_r,\b_r)}$.
+    Alors $A\land B = P_1^{\min(\a_1,\b_1)}\cdots P_r^{\min(\a_r,\b_r)}$ et $A\lor B = P_1^{\max(\a_1,\b_1)}\cdots P_r^{\max(\a_r,\b_r)}$.
 \end{prop}
 
 \vspace*{-0.7cm}
 
 \begin{ex}{}{}
+    Décomposer les polynômes suivantes en irréductibles dans $\R[X]$ et $\C[X]$ :
     \begin{enumerate}
-        \item Décomposer $X^3-1$ en polynômes irréductibles dans $\R[X]$ et $\C[X]$.
-        \item Décomposer $X^4-1$ ...
-        \item Décomposer $X^n-1$ ...
-        \item Décomposer $X^4+X^2+1$.
+        \item $X^3-1$.
+        \item  $X^4-1$.
+        \item  $X^n-1$.
+        \item  $X^4+X^2+1$.
     \end{enumerate}
     \tcblower
     \boxed{1.} $X^3-1=(X-1)(X^2+X+1)=(X-1)(X-j)(X-j^2)$.\\
     \boxed{2.} $X^4-1=(X-1)(X+1)(X^2+1)=(X-1)(X+1)(X+i)(X-i)$.\\
     \boxed{3.} $X^n-1=\prod_{k=0}^{n-1}(X-e^{\frac{2ik\pi}{n}})=(X-1)\prod_{k=1}^{\frac{n-1}{2}}(X-e^{2ik\pi/n})(X-e^{-2ik\pi/n})$.\\
-    \boxed{4.} 
+    \boxed{4.} $X^{4}+X^2+1=(X^2-j)(X^2-j^2)(X^2+j)(X^2+j^2)$.
 \end{ex}    
 
 \section{Un peu d'algèbre linéaire.}
@@ -469,36 +490,45 @@
 \begin{defi}{Famille libre.}{}
     Soit $E$ un $\K$-ev et $(a_n)_{n\in\N}$ une famille infinie de vecteurs de $E$.
     \begin{equation*}
-        (a_n)_{n\in\N} \nt{ est libre } \iff \nt{ toute sous-famille finie est libre.} 
+        (a_n)_{n\in\N} \nt{ est libre } \iff \nt{ toute sous-famille finie de $(a_n)_{n\in\N}$ est libre.} 
     \end{equation*}
 \end{defi}
 
 \vspace*{-0.7cm}
 
 \begin{prop}{}{}
-    Une famille de polynômes non nuls de degrés distincts est libre.  
+    Une famille de polynômes tous non nuls et de degrés distincts est libre.  
 \end{prop}
 
 \vspace*{-0.7cm}
 
 \begin{ex}{Base de Taylor.}{}
     \begin{enumerate}
-        \item Soit $a\in\K$, et $n\in\N^*$. Justifier que $(1,(X-a),...,(X-a)^n)$ est une base de $\K_n[X]$.
+        \item Soit $a\in\K$, et $n\in\N^*$. Justifier que $\B=(1,(X-a),...,(X-a)^n)$ est une base de $\K_n[X]$.
         \item Donner les coordonnées de $P\in\K_n[X]$ dans cette base.
-        \item Résoudre $P' \mid P$ dans $K[X]$.
+        \item Résoudre $P' \mid P$ dans $\K[X]$.
         \item Rappeler la caractérisation des racines multiples avec la formule de Taylor.
     \end{enumerate}
     \tcblower
-    \boxed{1.} On a $\forall k \in \lb0,n\rb, ~ (X-a)^k\in\K_n[X]$. On pose $B=(1,(X-a),...,(X-a)^n)$.\\
-    Alors $B$ est une famille de $\K_n[X]$ de cardinal $n+1$ donc $B$ libre $\iff$ $B$ génératrice $\iff$ $B$ base.\\
-    Ici, $B$ est libre car les vecteurs de $B$ sont non nuls et de degrés tous distincts.\\
-    \boxed{2.} Soit $P\in\K_n[X]$, $\exists!(\l_0,...,\l_n)\in\K^{n+1}, ~ P=\sum_{k=0}^n\l_k(X-a)^k$.\\
-    On dérive $N$ fois, on obtient au final que $\l_k=\frac{P^{(k)}(a)}{k!}$.\\
-    \boxed{3.} $P'\mid Q \iff \exists Q \in \K[X], ~ P=P'Q$, donc $\deg(Q)=1$ : $\exists \l\in\K^*, ~ a\in\K, ~ Q=\l(X-a)$.\\
-    Alors $P=\l(X-a)P'\ra \l=\frac{1}{n}$ par égalité des coefficients dominants.\\
-    D'après la formule de Taylor, $P=\sum_{k=0}^n\a_k(X-a)^k$ avec $\a_k=\frac{P^{(k)(a)}}{k!}$.\\
-    Alors $\sum_{k=0}^n\a_k(X-a)^k=\sum_{k=0}^n\frac{k}{n}\a_k(X-a)^k$, puis $\forall k \in \lb0,n\rb, ~ \a_k=\frac{k}{n}\a_k$ donc $(n-k)\a_k=0$.\\
-    Donc si $k<n$, alors $\a_k=0$, il reste $P=\a_n(X-a)^n$.
+    \boxed{1.} Déjà, c'est une famille de $\K_n[X]$ : $\forall k \in \lb0,n\rb, ~ (X-a)^k \in \K_n[X]$.\\
+    De plus, cette famille est libre puisque ses polynômes sont de degrés tous distincts.\\
+    Ainsi, $\B$ est une famille libre de $\K_n[X]$, de cardinal $n+1=\dim(\K_n[X])$ : c'est donc une base de $\K_n[X]$.\\
+    \boxed{2.} Soit $P\in\K_n[X]$, on l'écrit dans la base $\B$ :
+    \begin{equation*}
+        \exists (\l_0,...,\l_n) \in \K^{n+1}, ~ P(X) = \sum_{k=0}^n\l_k(X-a)^k.
+    \end{equation*} 
+    En dérivant cette somme (finie) $m$ fois, pour $m \leq n$, et en évaluant en $a$, on obtient :
+    \begin{equation*}
+        P^{(m)}(a) = m!\l_m + \sum_{k=1}^{n-m}\l_{k+m}(a-a)^k = m!\l_m \ra \l_m = \frac{P^{(m)}(a)}{m!}.
+    \end{equation*}
+    \boxed{3.} Si $P'\mid P$, alors $\exists Q \in \K[X], ~ P = P'Q$.\\
+    $\hra$ Par passage au degré, $\deg(Q)=1$, donc $\exists \l,a \in \K^*, ~ Q = \l(X-a)$.\\
+    Ainsi, $P=\l(X-a)P'$ puis $\l = \frac{1}{n}$ par égalité des coefficients dominants, puisque $\cd(P)=a_n$ et $\cd(P')=na_n$.\\
+    Dans la base de Taylor :
+    \begin{equation*}
+        P = \sum_{k=0}^n\l_k(X-a)^k; \et \l(X-a)P' = \frac{1}{n}\sum_{k=0}^nk\l_k(X-a)^{k} \ra \forall k \in \lb0,n\rb, ~ \l_k = \frac{k}{n}\l_k.
+    \end{equation*}
+    Donc si $k<n, ~ \l_k = 0$, ce qui laisse $P=\l_n(X-a)^n$.
 \end{ex}
 
 \vspace*{-0.7cm}
@@ -506,9 +536,9 @@
 \begin{ex}{}{}
     Soit $P=(X-1)^{31}(X-2)^2$. Calculer $P^{(n)}(1)$ pour $n\in\N$.
     \tcblower
-    On a $\deg(P)=33$ donc $\forall n > 33, ~ P^{(n)}=0_{\R[X]}$ puis $P^{(n)}(1)=0$.\\
-    Ensuite, 1 est racine de multiplicité $31$ donc $\forall n \in \lb0,30\rb, ~ P^{(n)}(1)=0$.\\
-    Formule de Taylor-Young : $(X-2)^2=(X-1)^2-2(X-1)+1$ donc $P=(X-1)^{33}-2(X-1)^{32}+(X-1)^31$.\\
+    $\hra$ $\deg(P)=33$, donc $\forall n > 33, ~ P^{(n)}=0_{\R[X]}$ donc $P^{(n)}(1)=0$.\\
+    $\hra$ 1 est racine de multiplicité $31$ donc $\forall n \in \lb0,30\rb, ~ P^{(n)}(1)=0$.\\
+    $\hra$ Taylor : $(X-2)^2=(X-1)^2-2(X-1)+1$ donc $P=(X-1)^{33}-2(X-1)^{32}+(X-1)^{31}$.\\
     Par identification : $P^{(31)}(1)=31!$, $P^{(32)}(1)=-2\times32!$, $P^{(33)}(1)=33!$.
 \end{ex}
 
@@ -516,21 +546,23 @@
 
 \begin{prop}{Polynômes échelonnés. $\star$}{}
     \begin{enumerate}
-        \item Soit $n\in\N^*$ et $(P_k)_{k\leq n}$ une famille de polynômes échelonnés de $\K_n[X]$, alors $(P_k)$ est une base de $\K_n[X]$.
-        \item Soit $(P_n)_{n\in\N}$ une famille échelonnée de $\K[X]$. Alors $(P_n)$ est une base de $\K[X]$.
+        \item Soit $n\in\N^*$ et $(P_k)_{k\leq n}$ une famille \bf{finie} de polynômes échelonnés de $\K_n[X]$, alors $(P_k)$ est base de $\K_n[X]$.
+        \item Soit $(P_n)_{n\in\N}$ une famille \bf{infinie} échelonnée de $\K[X]$. Alors $(P_n)_{n\in\N}$ est une base de $\K[X]$.
     \end{enumerate}
     \tcblower
     \boxed{1.} $(P_k)$ est une famille de polynômes non nuls de degrés distincts donc libre.\\
-    Notons $\B=(P_0,...,P_n)$, c'est une famille de $\K_n[X]$, et $|\B|=n+1=\dim(\K_n[X])$ donc $\B$ est une base.\\
+    Notons $\B=(P_0,...,P_n)$, c'est une famille libre de $\K_n[X]$, et $|\B|=n+1=\dim(\K_n[X])$ donc $\B$ est une base.\\
     \boxed{2.} Par les mêmes arguments, $(P_n)$ est une famille libre de $\K[X]$ car toutes ses familles finies sont libres.\\
     Soit $P\in\K[X]$. Si $P=0$, trivial. Sinon, on note $n=\deg(P)\in\N$. Alors $P\in\K_n[X]$.\\
-    Cependant, $(P_0,...,P_n)$ est base de $\K_n[X]$, donc $P\in\Vect(P_1,...,P_n)$, donc $P$ est CL de $\B$.
+    Cependant, $(P_0,...,P_n)$ est base de $\K_n[X]$, donc $P\in\Vect(P_1,...,P_n)$, donc $(P_n)_{n\in\N}$ est base de $\K[X]$.
 \end{prop}
 
-\begin{exi}{Polynômes de Lagrange.}{}
+\vspace*{-0.8cm}
+
+\begin{exercice}{Polynômes de Lagrange. $\star$}{}
     Soient $a_0<...<a_n\in\R$. On définit $L_i\in\K_n[X]$ par $L_i(a_j)=\d_{i,j}$ pour $i,j\in\lb0,n\rb$.
     \begin{enumerate}
-        \item Vérifier que $L_i$ est définie de manière unique et donner une expression explicite de $L_i$.
+        \item Vérifier que $L_i$ est défini de manière unique et donner une expression explicite de $L_i$.
         \item Montrer que $(L_0,...,L_n)$ est une base de $\K_n[X]$.
         \item Donner les coordonnées de $P\in\K_n[X]$ dans cette base.
         \item En déduire que $\forall (b_0,...,b_n)\in\K^{n+1}, ~ \exists!P\in\K_n[X], ~ \forall i \in \lb0,n\rb$ tel que $P(a_i)=b_i$.
@@ -538,31 +570,43 @@
         \item Soit $p\in\N$. Calculer $\sum_{i=0}^nL_i$, $\sum_{i=0}^na_i^pL_i$.
     \end{enumerate}
     \tcblower
-    \boxed{1.} \bf{Analyse.} Pour $i=0$, par exemple : $L_0(a_0)=1$, $L_0(a_1)=...=L_0(a_n)=0$ et $L_0\in\K_n[X]$.\\
-    On a donc $(X-a_1)...(X-a_n)\mid L_0$, puis $\exists Q\in\K[X], ~ L_0=(X-a_1)...(X-a_n)Q$. Par degré, $\exists \l, ~ Q=\l$.\\
-    On a $L_0(a_0)$ donc $\l=\frac{1}{(a_0-a_1)...(a_0-a_n)}$, on a bien unicité de $L_0$.\\
-    \bf{Synthèse.} On vérifie $\deg(L_0)\leq n, ~ L_0(a_0)=1, ~ L_0(a_1)=...=L_0(a_n)=0$\\
-    Plus généralement, $\forall i \in \lb0,n\rb, ~ L_i = \prod_{j\neq i}\frac{X-a_j}{a_i-a_j}$.\\
-    \boxed{2.} Soient $(\l_0,...,\l_n)\in\K^{n-1}$ tels que $\sum_{i=0}^n\l_iL_i=0_{\K[X]}$.\\
-    On évalue en $a_j$, on a $\l_j=0_\K$ donc $\l_0=...=\l_n=0_\K$ et $B$ est libre.\\
-    Ensuite, $B$ est une famille de $\K_n[X]$ et $|\B|=\dim(\K_n[X])$, donc $\B$ libre $\iff$ $\B$ génératrice $\iff$ $\B$ base.\\
-    \boxed{3.} Coordonnées de $P$ dans la base $\B$: $\exists!(\l_0,...,\l_n)\in\K^{n+1}, ~ P=\sum_{i=0}^n\l_iL_i$.\\
-    On évalue en $a_j$, et on trouve $\l_j=P(a_j)$, donc $\forall P \in \K_n[X], ~ P=\sum_{i=0}^,P(a_i)L_i$.\\
-    \boxed{4.} Soit $(b_0,...,b_n)\in\K^{n+1}$. On cherche $P\in\K_n[X]$ tel que $P(a_i)=b_i$.\\
-    On cherche donc $P\in\K_n[X]$ tel que les coordonnées de $P$ dans $(L_0,...,L_n)$ soient $(b_0,...,b_n)$.\\
-    Un vecteur étant entièrement déterminé par ses coordonnées, $P=\sum_{i=0}^nb_iL_i$ est le seul polynôme qui convient.\\
-    \boxed{5.} C'est une application linéaire, injective car $\Ker(\phi)=\{0\}$, puis $\dim(K_n[X])=\dim(\K^{n+1})$ donc $\phi$ bijective.\\
-    On a donc $\forall (b_0,...,b_n)\in\K^{n+1}, ~ \exists!P\in\K_n[X], ~ \forall i \in \lb0,n\rb$ tel que $P(a_i)=b_i$ par bijectivité.\\
-    \boxed{6.} On a $\forall P \in \K_n[X], ~ P=\sum_{i=0}^nP(a_i)L_i$ donc $\sum_{i=0}^nL_i=1$ et $X^p=\sum_{i=0}^na_i^pL_i$
-\end{exi}
+    \small
+    \boxed{1.} \bf{Analyse.} Soit $i\in\lb0,n\rb$, alors $\forall j \neq i, ~ L_i(a_j) = 0$, donc :
+    \begin{equation*}
+        \prod_{\substack{j=0 \\ j\neq i}}^n (X-a_j) ~ \mid ~ L_i ~~\nt{alors}~~ \exists Q \in \K[X], ~ L_i = Q(X)\prod_{\substack{j=0\\j\neq i}}^n(X-a_j).
+    \end{equation*}
+    Par passage au degré, $\deg(Q)=0$ : $\exists \l \in \K, ~ Q = \l$, et $L_i(a_i) = 1$, donc :
+    \begin{equation*}
+        L_i(a_i) = \l \prod_{j\neq i}(a_i - a_j) \ra \l = \frac{1}{\prod_{j\neq i}(a_i - a_j)}.
+    \end{equation*}
+    Cette division a un sens car les $(a_j)$ sont distincts deux-à-deux. On a donc obtenu l'unicité de $L_0$.\\
+    \bf{Synthèse.} On vérifie facilement que $\deg(L_i)=n$ et que $\forall j \in \lb0,n\rb, ~ L_i(a_j)=\d_{i,j}$.\\
+    \boxed{2.} Montrons que la famille $(L_0,...,L_n)$ est libre dans $\K_n[X]$.\\
+    $\hra$ Déjà, c'est bien une famille de $\K_n[X]$ puisque $\forall i \in \lb0,n\rb, ~ \deg(L_i)=n$.\\
+    $\hra$ Soient $(\l_0,...,\l_n)\in\K^{n+1}$ tels que $\l_0L_0+...+\l_nL_n=0_{\K[X]}$.\\
+    Alors en évaluant en $a_i$ pour tout $i\in\lb0,n\rb$, on obtient $\l_i = 0$ : c'est bien une famille libre.\\
+    C'est donc une famille libre de $\K_n[X]$ de cardinal $n+1=\dim(\K_n[X])$ : c'est une base de $\K_n[X]$.\\
+    \boxed{3.} Soit $P\in\K_n[X]$. Puisque $(L_0,...,L_n)$ est une base de $\K_n[X]$, $\exists (\l_0,...,\l_n)\in\K^{n+1}, ~ P=\l_0L_0+...+\l_nL_n$.
+    \begin{equation*}
+        \forall i \in \lb0,n\rb, ~ P(a_i) = \l_i \ra P = \sum_{i=0}^n P(a_i)L_i.
+    \end{equation*}
+    \boxed{4.} Soit $(b_0,...,b_n)\in\K^{n+1}$. Le polynôme suivant convient : (unicité facile)
+    \begin{equation*}
+        P = \sum_{i=0}^n b_iL_i ~ \nt{alors} ~ \forall i \in \lb 1, n\rb, ~ P(a_i) = b_iL_i(a_i) = b_i.
+    \end{equation*}
+    \boxed{5.} $\phi$ est une application linéaire de $\K_n[X]$ dans $\K^{n+1}$ injective ($\Ker(\phi)=\{0\}$) puis bijective par égalité des dimensions. À chaque $n$-uplet $(b_0,...,b_n)\in\K^{n+1}$ on peut donc associer un unique polynôme $P\in\K_n[X]$ qui convient.\\
+    \boxed{6.} Soit $P\in\K_n[X]$, alors :
+    \begin{equation*}
+        P = \sum_{i=0}^nP(a_i)L_i \ra \sum_{i=0}^nL_i = 1 \et \sum_{i=0}^na_i^pL_i = X^p.
+    \end{equation*}
+\end{exercice}
 
 \vspace*{-0.7cm}
 
 \section{Fractions rationnelles.}
 
-\begin{defi}{Fraction rationnelle}{}
-    Une fonction fraction rationnelle est de la forme $x\mapsto~\frac{P(x)}{Q(x)}$ avec $P,Q\in\K[X]$.\\
-    En fait il faut définir une relation d'équivalence $(P,Q)~\m{R}~(P',Q')\iff PQ'=P'Q$.
+\begin{defi}{Fraction rationnelle.}{}
+    Une fonction \bf{fraction rationnelle} est de la forme $x\mapsto~\frac{P(x)}{Q(x)}$ avec $P,Q\in\K[X]$.
 \end{defi}
 
 \vspace*{-0.7cm}
@@ -579,7 +623,7 @@
 
 \vspace*{-0.7cm}
 
-\begin{thm}{}{}
+\begin{thm}{}{50}
     Soient $P,Q\in\K[X]$ non nuls. Alors $\exists!E\in\K[X], ~ \exists!G\in\K(X), ~ \frac{P}{Q}=E+G$ avec $\deg(G)<0$.\\
     Alors on appelle $E$ la partie entière, et $G$ la partie fractionnaire de $P/Q$.
     \tcblower
@@ -587,83 +631,111 @@
     Puis on a $\frac{P}{Q}=E+\frac{R}{Q}$, on pose $G:=\frac{R}{Q}$, on a alors $\deg(G)=\deg(R)-\deg(Q)<0$.
 \end{thm}
 
-\begin{defi}{}{}
-    Soient $P,Q\in\K[X]$, avec $P,Q\in\K[X]$ non nuls et tels que $P\land Q = 1$.
+\begin{defi}{Racines, pôles.}{}
+    Soient $P,Q\in\K[X]$ non nuls et tels que $P\land Q = 1$. Soit $F=P/Q$.
     \begin{itemize}
-        \item Les racines de $F$ (comptées avec leurs multiplicité) sont les racines de $P$.
-        \item Les pôles de $F$ (comptés avec leurs multiplicité) sont les racines de $Q$.
+        \item Les \bf{racines} de $F$ (comptées avec leurs multiplicité) sont les racines de $P$.
+        \item Les \bf{pôles} de $F$ (comptés avec leurs multiplicité) sont les racines de $Q$.
     \end{itemize}
 \end{defi}
 
 \begin{thm}{Calcul des coefficients associés aux pôles simples.}{}
+    Soient $P,Q\in\K[X]$, et $a$ une racine simple de $Q$ : $\exists R \in \K[X], ~ Q=(X-a)R$ et $R(a)\neq0$.\\
+    Si $P\land Q = 1$, alors :
     \begin{equation*}
-        F=\frac{P}{(X-a)R} \quad \nt{avec} \quad Q=(X-a)R, \quad P\land Q = 1 \quad R(a)\neq0.
+        \exists!\l \in \K, ~ \frac{P}{Q} = \frac{\l}{X-a} + F
     \end{equation*}
-    D'après le théorème de décomposition : $\exists!\lambda\in\K, ~ F=\frac{\l}{X-a}+\tilde{F}, \tilde{F}\in\K(X)$ et $a$ non pôle de $\tilde{F}$.\\
-    Ainsi, $\frac{P}{(X-a)R}=\frac{\l}{X-a}+\tilde{F}$ puis $\l=\frac{P(a)}{R(a)}$ (formule du Cache), en multipliant par $X-a$ et en évaluant en $a$.\\
-    Mais aussi, $Q=(X-a)\R\ra Q'(a)=R(a)$, donc $\l=\frac{P(a)}{Q'(a)}$ (formule de la dérivée).
+    où $F\in\K(X)$, et $a$ n'est pas pôle de $F$.\\
+    $\hra$ En multipliant par $X-a$ puis en évaluant en $a$, on trouve $\l=\frac{P(a)}{R(a)}$ (formule du cache).\\
+    $\hra$ En remarquant que $Q'(a)=R(a)$, on a aussi $\l=\frac{P(a)}{Q'(a)}$ (formule de la dérivée).\\
+    \bf{Remarque.} Si $P\land Q\neq 1$, revenir au théorème \ref{thm:50}.
 \end{thm}
 
 \begin{ex}{}{}
-    On pose $F=\frac{X+4}{(X-2)(X-3)}$, alors $\exists!(\l,\mu)\in\K^2, ~ F=\frac{\l}{X-2}+\frac{\mu}{X-3}$, puis $(\l,\mu)=(-6,6)$.
+    Pour $\ds F=\frac{X+4}{(X-2)(X-3)}$, $\exists!(\l,\mu)\in\K^2, ~ F=\frac{\l}{X-2}+\frac{\mu}{X-3}$, puis $(\l,\mu)=(-6,6)$.
 \end{ex}
 
 \begin{ex}{}{}
-    On pose $F=\frac{X^3+4}{(X-1)(X-2)}$, on calcule la partie entière : $X^3+4=(X+3)(X^2-3X+2)+7X-2$.\\
+    Pour $F=\frac{X^3+4}{(X-1)(X-2)}$, on calcule la partie entière : $X^3+4=(X+3)(X^2-3X+2)+7X-2$.\\
     On a alors $F=X+3+\frac{7X-2}{(X-1)(X-2)}=X+3+\frac{\l}{X-1}+\frac{\mu}{X-2}$, avec $(\l,\mu)=(-5,12)$.
 \end{ex}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Décomposer en éléments simples $F=\frac{1}{X^3-1}$ dans $\C[X]$ puis dans $\R[X]$.
     \tcblower
-    Elle a trois pôles simples : $1,j,j^2$ : $\exists(\l,\mu,\g)\in\C^3, ~ F=\frac{\l}{X-1}+\frac{\mu}{X-j}+\frac{\g}{X-j^2}$.\\
-    Alors $\l=\frac{1}{(1-j)(1-j^2)}=-\frac{1}{j+j^2}=\frac{1}{3}$, $\mu=\frac{1}{(j-1)(j-j^2)}$, $\g=\frac{1}{(j^2-1)(j^2-j)}$.\\
-    Dans $\R(X)$: $G=\frac{1}{(X-1)(X^2+X+1)}=\frac{\l}{X-1}+\frac{\mu X + \g}{X^2+X+1}$.\\
-    On a alors $\l=\frac{1}{3}$, on multiplie par $X$ puis $X\to+\infty$ : $0=\l+\mu$ donc $\mu=-1/3$.\\
-    On spécifie en $X=0$ : $-1=-\l+\g$ donc $\g=-2/3$.
+    $\bullet$ Dans $\C[X]$, cette fraction a trois pôles simples : $1,j,j^2$ : $\exists(\l,\mu,\g)\in\C^3, ~ F=\frac{\l}{X-1}+\frac{\mu}{X-j}+\frac{\g}{X-j^2}$.\\
+    $\hra$ On multiplie par $(X-1)$ et on évalue en 1 : $\l = \frac{1}{(1-j)(1-j^2)}=\frac{1}{2-(j+j^2)}=\frac{1}{3}$.\\
+    $\hra$ On multiplie par $(X-j)$ et on évalue en $j$ : $\mu = \frac{1}{(j-1)(j-j^2)}$.\\
+    $\hra$ On multiplie par $(X-j^2)$ et on évalue en $j^2$ : $\g=\frac{1}{(j^2-1)(j^2-j)}$.\\
+    $\bullet$ Dans $\R[X]$, on a $F=\frac{1}{(X-1)(X^2+X+1)}=\frac{\l}{X-1} + \frac{\mu X + \g}{X^2+X+1}$.\\
+    On retrouve $\l=\frac{1}{3}$ de la même manière, puis en évaluant en $0$ : $-1 = -\frac{1}{3} + \g$ donc $\g = -\frac{2}{3}$.\\
+    En multipliant par $(X^2+X+1)$ et en évaluant en -1, on trouve $\mu = -\frac{1}{3}$.
 \end{ex}
 
-\begin{ex}{}{}
-    On pose $\w=e^{\frac{2i\pi}{n}}$
+\vspace*{-0.8cm}
+
+\begin{exercice}{}{}
+    Décomposer en éléments simples dans $\C[X]$ la faction rationnelle suivante :
     \begin{equation*}
-        \frac{1}{X^n-1}=\sum_{k=0}^{n}\frac{\l k}{X-\w^k}.
+        \frac{1}{X^n-1}.
     \end{equation*}
-    Alors $\l_k=\frac{1}{n\w^{n-1}}=\frac{\w^k}{n}$ car $\w^n=1$, avec $\l=\frac{P(a)}{Q'(a)}$.\\
-    Donc $\frac{1}{X^n-1}=\frac{1}{n}\sum_{k=0}^{n-1}\frac{\w^k}{(X-\w^k)}$.
-\end{ex}
-
-\begin{ex}{}{}
-    Soit $P\in\K[X]$ scindé à racines simples, avec $n=\deg(P)\geq1$.\\
-    Décomposer $\frac{P'}{P}$ en éléments simples.\\
-    (*) Même question avec $P$ scindé seulement.
     \tcblower
-    Supposons $P=\l(X-a_1)...(X-a_n)$, avec $a_1,...,a_n$ distincts, et $\l\in\K^*$.\\
-    On a $F=\frac{P'}{P}$ de degré -1, et $P'\land P=1$, donc $\exists(\l_1,...,\l_n)\in\K^n, ~ F=\sum_{i=1}^n\frac{\l_i}{X-a_i}$.\\
-    On obtient alors $\forall i \in \lb1,n\rb, ~ \l_i=\frac{P'(a_i)}{P'(a_i)}=1$.
+    Soit $\w=e^{\frac{2i\pi}{n}}$, alors $\forall k \in \N, ~ \w^k$ est pôle simple de la fraction rationnelle :
     \begin{equation*}
-        \frac{P'}{P}=\sum_{i=1}^n\frac{1}{X-a_i}, \quad \nt{si} \quad P=(X-a_1)...(X-a_n).
-    \end{equation*}\\
-    Plus généralement, si $P=(X-a_1)^{\a_1}...(X-a_n)^{\a_n}$, alors $\frac{P'}{P}=\sum_{i=1}^n\frac{\a_i}{X-a_i}$.
-\end{ex}
+        \exists (l_0,...,l_n) \in \K^{n+1}, ~ \frac{1}{X^n - 1} = \sum_{k=0}^n \frac{\l_k}{X-\w^k}.
+    \end{equation*}
+    Par la formule de la dérivée : $\l_k = \frac{1}{n\w^{k(n-1)}}=\frac{1}{nw^{kn}\w^{-k}}=\frac{\w^k}{n}$ car $w^{kn}=1$. On conlut :
+    \begin{equation*}
+        \frac{1}{X^n-1} = \frac{1}{n}\sum_{k=0}^n\frac{\w^k}{X-w^k}.
+    \end{equation*}
+\end{exercice}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
-    Soit $P=\frac{1}{(X-2)^3(X+3)}$, on a bien $\deg(P)<0$, donc $E=0$.\\
-    Par théorème de décomposition : $P=\frac{\a}{X+3}+\frac{\b_1}{X-2}+\frac{\b_2}{(X-2)^2}+\frac{\b_3}{(X-2)^3}$.\\
-    Alors $\a=-\frac{1}{5^3}$, $\b_3=\frac{1}{5}$. On pose $P_1=P-\frac{1}{5(X-2)^3}$.
+    Soit $P\in\K[X]$ scindé, avec $n=\deg(P)\geq1$. Décomposer $\frac{P'}{P}$ en éléments simples.
+    \tcblower
+    Soit $P=\l(X-a_1)^{\a_1}...(X-a_n)^{\a_n}$, avec $a_1,...,a_n$ distincts, $(\a_1,...,\a_n)\in\N^*$ et $\l\in\K^*$.\\
+    $\hra$ $\deg(\frac{P'}{P})=-1$, donc la partie entière de $\frac{P'}{P}$ est nulle.\\
+    Soit $i\in\lb1,n\rb$ alors $\exists Q \in \K[X], ~ P(X) = (X - a_i)^{\a_i}Q(X)$ et $Q(a_i)\neq0$, donc :
     \begin{equation*}
-        P_1=\frac{5-(X+3)}{5(X-2)^3(X+3)}=-\frac{1}{5(X-2)^2(X+3)}=\frac{\a}{X+3}+\frac{\b_1}{X-2}+\frac{\b_2}{(X-2)^2}.
+        \frac{P'(X)}{P(X)} = \frac{\a_i(X-a_i)^{\a_i-1}Q(X) + (X-a_i)^{\a_i}Q'(X)}{(X-a_i)^{\a_i}Q(X)} = \frac{\a_i}{X-a_i} + \frac{Q'(X)}{Q(X)}.
+    \end{equation*}
+    où $a_i$ n'est pas pôle de $\frac{Q'(X)}{Q(X)}$, donc :
+    \begin{equation*}
+        \frac{P'(X)}{P(X)} = \sum_{i=1}^n \frac{\a_i}{X-a_i}.
     \end{equation*}
 \end{ex}
 
-\begin{defi}{Nombres algébriques - transcendants.}{}
+\begin{ex}{}{}
+    Décomposer la fraction rationnelle suivante en éléments simples :
+    \begin{equation*}
+        F = \frac{1}{(X-2)^3(X+3)}.
+    \end{equation*}
+    \tcblower
+    $\hra$ $\deg(F)<0$ donc la partie entière de $F$ est nulle. Donc :
+    \begin{equation*}
+        F = \frac{\a}{X+3} + \frac{\b_1}{X-2} + \frac{\b_2}{(X-2)^2} + \frac{\b_3}{(X-2)^3}.
+    \end{equation*}
+    Puis par la formule du cache, on trouve $\a=-\frac{1}{5^3}$ et $\b_3 = \frac{1}{5}$.\\
+    $\hra$ Posons $F_1 = F - \frac{\b_3}{(X-2)^3}=-\frac{1}{5(X-2)^2(X+3)}$; mais aussi $F_1=\frac{\a}{X+3}+\frac{\b_1}{X-2}+\frac{\b_2}{(X-2)^2}$.\\
+    Par la formule du cache, on trouve $\b_2=-\frac{1}{5^2}$.\\
+    $\hra$ Posons $F_2 = F_1 - \frac{\b_2}{(X-2)^2}=\frac{1}{5^2(X-2)(X+3)}$; mais aussi $F_2=\frac{\a}{X+3}+\frac{\b_1}{X-2}$.\\
+    Par la formule du cache, on trouve $\b_1=\frac{1}{5^3}$.
+    \begin{equation*}
+        F = -\frac{1}{125(X+3)} + \frac{1}{125(X-2)} - \frac{1}{25(X-2)^2} + \frac{1}{5(X-2)^3}.
+    \end{equation*}
+\end{ex}
+
+\begin{defi}{Nombres algébriques - transcendants. (HP)}{}
     Soit $\a\in\R$ et $I=\{P\in\Q[X], ~ P(\a)=0\}$ un idéal de $(\Q[X],+,\times)$.\\
     Si $I=(0)$, on dit que $\a$ est transcendant, sinon $I\neq(0)$ et $\exists!\pi\in\Q[X]$ unitaire tel que $I=(\pi)$.\\
     On dit alors que $\a$ est algébrique, et $\pi$ est appelé polynôme minimal de $\a$.\\
     Alors $\pi$ est aussi le polynôme de plus bas degré (non nul) dans $\Q[X]$ qui admet $\a$ comme racine.\\
     Par définition, le degré de $\a$ est le degré de $\pi$.\\
-    \bf{Remarque.} Le polynôme minimal s'il existe est forcément irréductible dans $\Q[X]$.
+    \bf{Remarque.} Le polynôme minimal, s'il existe, est forcément irréductible dans $\Q[X]$.
 \end{defi}
 
 \begin{ex}{}{}
@@ -672,8 +744,10 @@
 \end{ex}
 
 \begin{ex}{}{}
-    Pour $\a=\sqrt{2}$, on a $P=X^2-2\in\Q[X]$ et annule $\a$, donc $\sqrt{2}$ est algébrique.
+    Pour $\a=\sqrt{2}$, on a $P=X^2-2\in\Q[X]$ annule $\a$, donc $\sqrt{2}$ est algébrique.
 \end{ex}
+
+\pagebreak
 
 \section{Khôlles, exercices supplémentaires...}
 
@@ -745,12 +819,28 @@
     Soient $a_0,...,a_n\in\R$ deux-à-deux distincts.
     \begin{enumerate}
         \item Montrer que si $b_0,...,b_n\in\R$, alors existe $P\in\R[X]$ tel que $\deg(P)\leq n$ et $\forall i\in\lb0,n\rb, ~ P(a_i)=b_i$.
-        \item Soit $k\in\lb0,n\rb$. Expliciter ce polynôme, que l'on notera $L_k$ lorsque :
+        \item Soit $i\in\lb0,n\rb$. Expliciter ce polynôme, que l'on notera $L_i$ lorsque :
         \begin{equation*}
-            \forall i \in \lb0,n\rb, ~ b_i = \begin{cases}0 &\nt{si} \quad i\neq k \\ 1 &\nt{si} \quad i = k\end{cases}
+            \forall j \in \lb0,n\rb, ~ b_j = \begin{cases}0 &\nt{si} \quad i\neq j \\ 1 &\nt{si} \quad i = j\end{cases}
         \end{equation*}
         \item Prouver que $\forall p \in \lb0,n\rb, ~ \sum_{k=0}^na_k^pL_k=X^p$.
     \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $\phi:P\mapsto (P(a_0),...,P(a_n))$, montrons que c'est un isomorphisme de $\R_n[X]$ dans $\R^{n+1}$.\\
+    $\hra$ C'est bien une forme linéaire par linéarité de l'évaluation de polynômes.\\
+    $\hra$ Soit $P\in\Ker\phi$, $P$ admet $n+1$ racines tout en étant de degré $n$, donc $P$ est nul, donc $\phi$ est injective.\\
+    Par égalité des dimensions de $\R_n[X]$ et de $\R^{n+1}$, $\phi$ est donc aussi bijective.\\
+    On a bien montré que $\forall (b_0,...,b_n)\in\R^{n+1}, ~ \exists!P\in\R_n[X], ~ \forall i \in \lb0,n\rb, ~ P(a_i)=b_i$.\\
+    \boxed{2.} On reconnaît un polynôme d'interpolation de Lagrange, qui s'exprime :
+    \begin{equation*}
+        L_i = \prod_{\substack{j = 0\\j\neq i}}^n \frac{X-a_j}{a_i-a_j}.
+    \end{equation*}
+    C'est bien un polynôme de degré $n$, et on vérifie facilement les conditions sur les $b_j$.\\
+    \boxed{3.} Soit $p\in\lb0,n\rb$ et $i\in\lb0,n\rb$, on évalue les deux polynômes en $a_i$ :
+    \begin{equation*}
+        \sum_{k=0}^na_k^pL_k(a_i) = \sum_{k=0}^na_k^p\d_{i,k} = a_i^p; \et X^p(a_i) = a_i^p.
+    \end{equation*}
+    Les deux polynômes coïncident donc sur les tous les $a_i$, donc par l'unicité vue en 1, ils sont égaux.
 \end{exercice}
 
 \end{document}
