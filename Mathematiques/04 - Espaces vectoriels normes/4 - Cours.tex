@@ -13,38 +13,43 @@
 
 \thispagestyle{fancy}
 
-L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) sur d'autres objets que les réels ou les complexes.
+L'idée du chapitre est de faire de l'analyse (définir la notion de limite) sur d'autres objets que les réels ou les complexes.
 
 \section{Normes et distances.}
 
 \begin{defi}{Norme. $\star$}{}
-    Soit $E$ un $\K$-ev et $N:x\mapsto N(x)$ de $E$ dans $\R_+$. C'est une norme sur $E$ ssi :
+    Soit $E$ un $\K$-ev et $N:x\mapsto N(x)$ de $E$ dans $\R_+$. C'est une \bf{norme} sur $E$ ssi :
     \begin{enumerate}
-        \item $\forall x \in E, ~ N(x)=0 \iff x = 0_E$. (Séparation.)
-        \item $\forall x \in E, ~ \forall \lambda \in \K, ~ N(\lambda x) = |\lambda|N(x)$. (Homogénéité.)
-        \item $\forall x,y \in E, ~ N(x+y) \leq N(x) + N(y)$. (Inégalité triangulaire.)
+        \item $\forall x \in E, ~ N(x)=0 \iff x = 0_E$ (\bf{Séparation})
+        \item $\forall x \in E, ~ \forall \lambda \in \K, ~ N(\lambda x) = |\lambda|N(x)$ (\bf{Homogénéité})
+        \item $\forall x,y \in E, ~ N(x+y) \leq N(x) + N(y)$ (\bf{Inégalité triangulaire})
     \end{enumerate}
 \end{defi}
 
+\vspace*{-0.8cm}
+
 \begin{ex}{}{}
-    La valeur absolue est une norme sur $\R$, le module est une norme sur $\C$.
+    La valeur absolue est une norme sur $\R$, le module est une \bf{norme} sur $\C$.
 \end{ex}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Montrer que toutes les normes sur $\R$ sont proportionnelles à la valeur absolue.
     \tcblower
-    Soit $\N$ une norme sur $\R$. On a $\forall x \in \R, \forall \l \in \R, ~ N(\l x)=|\l|N(x)$ donc $N(\l)=|\l|N(1)$.\\
-    On a bien que $\forall \l \in \R, ~ N(\l)=a|\l|$.
+    Soit $N$ une norme sur $\R$, alors $\forall \l \in \R, ~ N(\l)=|\l|N(1)$ par homogénéité.
 \end{ex}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Donner deux normes non proportionnelles sur $\C$.
     \tcblower
-    Le module est une norme sur $\C$, $N(a+ib)=|a|+|b|$ aussi.
+    Le module est une norme sur $\C$, et $N(a+ib)=|a|+|b|$ aussi; non proportionnelles.
 \end{ex}
 
 \begin{prop}{Généralisation de l'inégalité triangulaire.}{}
-    Soit $E$ un $\K$-ev et $N$ une norme sur $E$, notée $\|\cdot\|$.
+    Soit $E$ un $\K$-ev et $\|\cdot\|$ une norme sur $E$.
     \begin{enumerate}
         \item $\forall(x_1,...,x_n)\in E^n, ~ \|\sum_{i=1}^nx_i\|\leq\sum_{i=1}^n\|x_i\|$.
         \item $\forall x,y \in E, ~ |\|x\|-\|y\||\leq\|x-y\|$.
@@ -67,18 +72,22 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Donc $|\|x\|-\|y\|| \leq \|x-y\|$.
 \end{prop}
 
-\begin{defi}{}{}
-    Un espace vectoriel normé est un espace vectoriel muni d'une norme, noté $(E,\|\cdot\|)$.
+\vspace*{-0.8cm}
+
+\begin{defi}{Espace vectoriel normé.}{}
+    Un \bf{espace vectoriel normé} (evn) est un espace vectoriel $E$ muni d'une norme $\|\.\|$, noté $(E,\|\cdot\|)$.
 \end{defi}
 
-\begin{defi}{}{}
-    Soit $(E,\|\cdot\|)$ un evn. Soit $x\in E$. On dit que $x$ est unitaire si $\|x\|=1$.
+\vspace*{-0.8cm}
+
+\begin{defi}{Vecteur unitaire.}{}
+    Un vecteur d'un evn est dit \bf{unitaire} ssi il est de norme 1.
 \end{defi}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
-\begin{defi}{}{}
-    Soit $E$ un ensemble. Alors $d:E\times E \to \R_+$ est une distance sur $E$ ssi
+\begin{defi}{Distance.}{}
+    Soit $E$ un ensemble. Alors $d:E\times E \to \R_+$ est une \bf{distance} sur $E$ ssi
     \begin{enumerate}
         \item $\forall (x,y)\in E^2, ~ d(x,y)=0 \iff x = y$. (séparation)
         \item $\forall (x,y)\in E^2, ~ d(x,y)=d(y,x)$. (symétrie)
@@ -86,7 +95,7 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     \end{enumerate}
 \end{defi}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{prop}{Distance associée à une norme. $\star$}{}
     Soit $(E,\|\cdot\|)$ un evn, alors $d:(x,y)\mapsto \|x-y\|$ est une distance sur $E$.
@@ -96,24 +105,24 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     \boxed{3.} $d(x,z)=\|x-z\|=\|x-y+y-z\|\leq \|x-y\| + \|y-z\| = d(x,y) + d(y,z)$.
 \end{prop}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{rappel}{}{}
     Un produit scalaire sur $E$ est une forme bilinéaire, symétrique, définie, positive.
 \end{rappel}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{prop}{Norme associée à un produit scalaire. $\star$}{}
-    Soit $(E,\langle\cdot\rangle)$ un espace préhilbertien réel. On pose $\|x\|=\sqrt{\langle x,x \rangle}$, alors $\|\cdot\|$ définit une norme sur $E$.\\
+    Soit $(E,\Lg\.,\.\Rg)$ un espace préhilbertien réel. On pose $\|x\|=\sqrt{\langle x,x \rangle}$, alors $\|\cdot\|$ définit une norme sur $E$.\\
     \bf{Remarque.} Si $\|\cdot\|$ est définie avec une racine carrée, on passe par le produit scalaire.
 \end{prop}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{exi}{$\K^n$. $\star$}{}
-    On définit trois normes sur $\K^n$ :
-    \begin{enumerate}
+    On définit trois normes (à connaître) sur $\K^n$ :
+    \begin{enumerate}[itemsep=0.1cm]
         \item $\forall (x_1,...,x_n) \in E^n, ~ \|(x_1,...,x_n)\|_1=\sum_{i=1}^n|x_i|$.
         \item $\forall (x_1,...,x_n) \in E^n, ~ \|(x_1,...,x_n)\|_2=\sqrt{\sum_{i=1}^n|x_i|^2}$.
         \item $\forall (x_1,...,x_n) \in E^n, ~ \|(x_1,...,x_n)\|_\infty=\max(|x_i|)$.
@@ -122,17 +131,32 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 
 \vspace*{-0.4cm}
 
+\begin{lemme}{Homogénéité du sup. $\star$}{}
+    Soit $A$ une partie non-vide et majorée de $\R$, et $\l\in\R_+^*$. Alors :
+    \begin{equation*}
+        \sup(\l A) = \l\sup(A).
+    \end{equation*}
+    \tcblower
+    \boxed{\leq} Soit $a \in \l A ~ : ~ \exists x \in A, ~ a = \l x$, et $x\leq \sup(A)$ puisque $x\in A$.\\
+    Donc $\l x \leq \l \sup(A)$ puisque $\l>0$, puis $a \leq \l \sup(A)$. Par passage au sup, $\sup(\l A) \leq \l \sup(A)$.\\
+    \boxed{\geq} Soit $x\in A$, alors $\l x \in \l A$ donc $\l x \leq \sup(\l A)$ puis $x \leq \frac{1}{\l}\sup(\l A)$.\\
+    Par passage au sup, $\sup(A) \leq \frac{1}{\l}\sup(\l A)$ donc $\l\sup(A) \leq \sup(\l A)$.\\
+    \bf{Conclusion.} Par double-inégalité, $\sup(\l A) = \l\sup(A)$. 
+\end{lemme}
+
+\vspace*{-0.8cm}
+
 \begin{exi}{Fonctions bornées. $\star$}{}
     On note $\m{B}(A,\R)$ l'ensemble des fonctions de $A\subset \R$ bornées sur $A$ non vide.\\
-    On définit la norme $\|f\|=\sup_{x\in A}|f(x)|$.
+    Montrer que $\|f\|=\sup_{x\in A}|f(x)|$ définit une norme sur $\m{B}(A,\R)$.
     \tcblower 
-    On a $\{|f(x)|, ~ x \in A\}$ est non-vide et majoré de $\R$. Par théorème, il admet une borne supérieure.\\
-    \boxed{1.} $\|f\|=0\ra\forall x \in A, ~ 0 \leq |f(x)| \leq \|f\|=0$, donc $f=0$.\\
-    \boxed{2.} $|(\l f)(x)|=|\l f(x)|=|\l||f(x)|\leq |\l|\|f\|$ donc $\|\l f\| \leq |\l|\|f\|$ et $\|f\|\leq|\frac{1}{\l}|\|\l f\|$ donc $|\l|\|f\|\leq\|\l f\|$.\\
-    \boxed{3.} $|(f+g)(x)|=|f(x)+g(x)|\leq|f(x)|+|g(x)|\leq \|f\|+\|g\|$ donc $\|f+g\|\leq\|f\|+\|g\|$    
+    $\hra$ $\{|f(x)|, ~ x \in A\}$ est un sous-ensemble non-vide et majoré de $\R$ : il admet une borne supérieure.\\
+    \bf{Séparation.} $\|f\|=0\ra\forall x \in A, ~ 0 \leq |f(x)| \leq \|f\|=0$, donc $\forall x \in A, f(x)=0$ puis $f=\zero_A$.\\
+    \bf{Homogénéité.} Pour $\l\in\R$, $\|\l f\| = \sup_{x\in A}|\l f(x)| = |\l|\sup_{x\in A}|f(x)| = |\l|\|f\|$ par le lemme précédent.\\
+    \bf{I.T.} $|(f+g)(x)|=|f(x)+g(x)|\leq|f(x)|+|g(x)|\leq \|f\|+\|g\|$ donc $\|f+g\|\leq\|f\|+\|g\|$    
 \end{exi}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{exi}{Fonctions continues. $\star$}{}
     On définit trois normes sur $\m{C}^0([a,b],\K)$, avec $a<b$ réels :
@@ -143,23 +167,23 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     \end{enumerate}
 \end{exi}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Pour $P\in\R[X]$, on définit $\|P\|=\int_0^1|P(t)|\dt$, une norme sur $\R[X]$.
     \tcblower
-    \boxed{1.} $\|P\|=0 \ra \forall t \in [0,1], ~ P(t)=0$ car $|P|$ positive et continue, donc $P=0$ par rigidité.\\
-    \boxed{2.} $\|\l P\|=\int_0^1|\l P(t)|\dt = |\l|\int_0^1|P(t)|\dt=|\l|\|P\|$.\\
-    \boxed{3.} $|(P+Q)(t)|\leq|P(t)|+|Q(t)|$, puis par croissance et linéarité : $\|P+Q\|\leq\|P\|+\|Q\|$.
+    \bf{Séparation.} $\|P\|=0 \ra \forall t \in [0,1], ~ P(t)=0$ car $|P|$ positive et continue, donc $P=0$ par rigidité.\\
+    \bf{Homogénéité.} $\|\l P\|=\int_0^1|\l P(t)|\dt = |\l|\int_0^1|P(t)|\dt=|\l|\|P\|$.\\
+    \bf{I.T.} $|(P+Q)(t)|\leq|P(t)|+|Q(t)|$, puis par croissance et linéarité : $\|P+Q\|\leq\|P\|+\|Q\|$.
 \end{ex}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Soient $a_1<...<a_n\in\R$. Pour $P\in\R[X]$, on definit $\|P\|=\sum_{i=0}^n|P(a_i)|$.
 \end{ex}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     On définit trois normes sur $M_n(\R)$ :
@@ -174,31 +198,24 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 
 \begin{prop}{Normes sur les espaces produits.}{}
     Soit $(E_1,\|\cdot\|_1)$, ..., $(E_n,\|\cdot\|_n)$ des evn.\\
-    On pose $E=E_1\times...\times E_n$ l'espace produit, on sait que $E$ est un espace vectoriel pour les lois produits.\\
-    On définit $\|\cdot\|_{\infty}$ sur $E$ par $\|(x_1,...,x_n)\|_{\infty}=\max(\|x_i\|_i, ~ 1\leq i \leq n)$.\\
+    On définit $\|\cdot\|_{\infty}$ sur $E=E_1\times...\times E_n$ par $\|(x_1,...,x_n)\|_{\infty}=\max(\|x_i\|_i, ~ 1\leq i \leq n)$.\\
     Alors $\|\cdot\|_{\infty}$ est une norme sur $E$, et $(E,\|,\|_{\infty})$ est l'evn produit.
     \tcblower
-    \boxed{1.} $\|x\|_{\infty}=0\ra\forall i \in \lb1,n\rb, ~ \|x_i\|_i=0 $ donc $x_i=0_{E_i}$ donc $x=0_E$.\\
-    \boxed{2.} $\|\l x\|_\infty = \max(\|\l x_i\|_i, ~ 1 \leq i \leq n) = |\l|\max(\|x_i\|_i, ~ 1 \leq i \leq n)=\l\|x\|_{\infty}$.\\
-    \boxed{3.} $\|x_i+y_i\|\leq \|x\|_{\infty} + \|y\|_\infty$ donnc $\|x+y\|_\infty\leq\|x\|_{\infty}+\|y\|_{\infty}$.
+    \bf{Séparation.} $\|x\|_{\infty}=0\ra\forall i \in \lb1,n\rb, ~ \|x_i\|_i=0 $ donc $x_i=0_{E_i}$ donc $x=0_E$.\\
+    \bf{Homogénéité.} $\|\l x\|_\infty = \max(\|\l x_i\|_i, ~ 1 \leq i \leq n) = |\l|\max(\|x_i\|_i, ~ 1 \leq i \leq n)=\l\|x\|_{\infty}$.\\
+    \bf{I.T.} $\|x_i+y_i\|\leq \|x\|_{\infty} + \|y\|_\infty$ donc $\|x+y\|_\infty\leq\|x\|_{\infty}+\|y\|_{\infty}$.
 \end{prop}
-
-\vspace*{-0.8cm}
-
-\begin{corr}{}{}
-    Si $\|\cdot\|$ est définie avec une racine carrée, on l'associe à un produit scalaire; avec un max, on l'associe à un espace produit; sinon on vérifie les 3 axiomes à la main.
-\end{corr}
 
 \vspace*{-0.8cm}
 
 \section{Boules ouvertes, fermées, sphères.}
 
-\begin{defi}{$\star$}{}
+\begin{defi}{Boule ouverte, fermée et sphère.$\star$}{}
     Soit $(E,\|\cdot\|)$ un evn, $a\in E$ et $r\in\R_+$.
     \begin{enumerate}
-        \item La boule ouverte de centre $a$ et de rayon $r$ est l'ensemble $B(a,r)=\{x\in E, ~ \|x-a\| < r\}$.
-        \item La boule fermée de centre $a$ et de rayon $r$ est l'ensemble $B'(a,r)=\{x\in E, ~ \|x-a\|\leq r\}$.
-        \item La sphère de centre $a$ et de rayon $r$ est l'ensemble $S(a,r)=\{x\in E, ~ \|x-a\|=r\}$.
+        \item La \bf{boule ouverte} de centre $a$ et de rayon $r$ est l'ensemble $B(a,r)=\{x\in E, ~ \|x-a\| < r\}$.
+        \item La \bf{boule fermée} de centre $a$ et de rayon $r$ est l'ensemble $B'(a,r)=\{x\in E, ~ \|x-a\|\leq r\}$.
+        \item La \bf{sphère} de centre $a$ et de rayon $r$ est l'ensemble $S(a,r)=\{x\in E, ~ \|x-a\|=r\}$.
     \end{enumerate}
     \bf{Remarque.} $B(a,r)\sqcup S(a,r) = B'(a,r)$ et $r_1<r_2 \ra B(a,r_1)\subset B(a,r_2)$.\\
     \bf{Remarque.} Dans $\R$, les boules sont des intervalles ouverts ou fermés.
@@ -228,18 +245,18 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 
 \vspace*{-0.8cm}
 
-\begin{defi}{}{}
-    Soient $A$ un ensemble, $F$ un evn et $f:A\to F$. On dit que $f$ est bornée ssi $f(A)$ est bornée dans $F$.
+\begin{defi}{Fonction bornée.}{}
+    Soient $A$ un ensemble, $F$ un evn et $f:A\to F$. On dit que $f$ est \bf{bornée} ssi $f(A)$ est bornée dans $F$.
 \end{defi}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{defi}{Partie convexe.}{}
     Soit $E$ un $\K$-ev et $A\subset E$.\\
-    On dit que $A$ est convexe ssi $\forall (a,b) \in A^2, \forall \l \in [0,1], ~ \l a + (1-\l)b \in A$.
+    On dit que $A$ est \bf{convexe} ssi $\forall (a,b) \in A^2, \forall \l \in [0,1], ~ \l a + (1-\l)b \in A$.
 \end{defi}
 
-\vspace*{-0.4cm}
+\vspace*{-0.8cm}
 
 \begin{rappel}{}{}
     Les parties convexes de $\R$ sont exactement les intervalles de $\R$.
@@ -248,21 +265,28 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 \vspace*{-0.4cm}
 
 \begin{prop}{}{}
-    Soit $E$ un $\K$-ev et $A\subset E$ convexe.
+    Soit $E$ un $\K$-ev et $A\subset E$ convexe. Une partie convexe est stable par passage aux barycentres :
     \begin{equation*}
         \forall n \in \N^*, ~ \forall (a_1,...,a_n) \in A^n, ~ \forall (\l_1,...,\l_n) \in \R_+^n, ~ \sum_{i=1}^n \l_i = 1 \ra \sum_{i=1}^n\l_ia_i\in A.
     \end{equation*}
-    Une partie convexe est stable par passage aux barycentres.
     \tcblower
-    On notera $y=\sum_{i=1}^n\frac{\l_i}{1-\l_{n+1}}a_i$ et $\a_i = \frac{\l_i}{1-\l_{n+1}}$.\\
-    Par récurrence sur $n$.\\
-    \bf{Initialisation.} Pour $n\leq 2$, c'est la définition de la convexité.\\
-    \bf{Hérédité.} Soit $n\in\N^*$ tel que $P(n)$. Soit $(a_1,...,a_{n+1})\in A^{n+1}$, soit $(\l_1,...,\l_{n+1})\in\R_+^{n+1}$ sommant à 1.\\
-    $\bullet$ Si $\l_{n+1}=1$, alors $\forall i \in \lb1,n\rb, ~ l_i=0$, et $\sum\l_i a_i = a_{n+1}\in A$.\\
-    $\bullet$ Si $\l_{n+1}<1$, alors $\sum_{i=1}^{n+1}\l_ia_i=\sum_{i=1}^n\l_ia_i+\l_{n+1}a_{n+1}=(1-\l_{n+1})\sum_{i=1}^n\frac{\l_i}{1-\l_{n+1}}a_i+\l_{n+1}a_{n+1}$.\\
-    Alors $\forall i \in \lb1,n\rb, ~ \a_i \geq 0$ et $\sum_{i=1}^n\a_i=1$.\\
-    D'après $P(n)$, $\sum_{i=1}^n\a_i a_i \in A$, puis $(1-\l_{n+1})y+\l_{n+1}a_{n+1}\in A$ car $A$ convexe. Donc $P(n+1)$.
+    Par récurrence sur $n\in\N^*$.\\
+    \bf{Initialisation.} Pour $n\leq2$, c'est la définition de la convexité.\\
+    \bf{Hérédité.} Soit $n\in\N^*$ tel que la propriété soit vraie, et $(a_1,...,a_{n+1})\in A^{n+1}$.\\
+    Soit $(\l_1,...,\l_{n+1})\in\R_{+}^{n+1}$ une famille de réels positifs sommant à 1.\\
+    $\hra$ Si $\l_{n+1}=1$, alors $\forall i \in \lb1,n\rb, ~ \l_i = 0$ puis $\sum_{i=1}^{n+1}\l_ia_i=a_{n+1}\in A$.\\
+    $\hra$ Sinon, $\l_{n+1}<1$ puis :
+    \begin{equation*}
+        \sum_{i=1}^{n+1}\l_ia_i = (1-\l_{n+1})\sum_{i=1}^n \frac{\l_i}{1-\l_{n+1}}a_i + \l_{n+1}a_{n+1}.
+    \end{equation*}
+    Or $\forall i \in \lb1,n\rb, ~ \frac{\l_i}{1-\l_{n+1}} \geq 0$ et $\sum_{i=1}^n\frac{\l_i}{1-\l_{n+1}}=1$, donc par hypothèse de récurrence :
+    \begin{equation*}
+        \sum_{i=1}^n \frac{\l_i}{1-\l_{n+1}} a_i \in A ~\nt{puis}~ (1-\l_{n+1})\sum_{i=1}^n\frac{\l_i}{1-\l_{n+1}}a_i+\l_{n+1}a_{n+1}\in A
+    \end{equation*}
+    car $A$ est convexe.
 \end{prop}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{$\star$}{}
     Soit $(E,\|\cdot\|)$ un evn.
@@ -271,19 +295,21 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
         \item Les boules ouvertes sont convexes.
     \end{enumerate}
     \tcblower
-    \boxed{1.} Soit $a\in E, ~ r\geq 0$. Soient $x,y\in B'(a,r)$ et $\l\in[0,1]$.
+    Soient $a\in E$, $r\geq0$, $\l\in[0,1]$ et $x,y\in B(a,r)$.
     \begin{equation*}
-        \| \l x + (1 - \l)y - a \| = \| \l(x-a) + (1-\l)(y-a) \| \leq \l\|x-a\| + (1-\l)\|y-a\| \leq \l r + (1-\l)r = r.
+        \|\l x + (1-\l)y - a\| = \|\l(x-a) + (1-\l)(y-a)\| \leq \l\|x-a\| + (1-\l)\|y-a\| < \l r + (1-\l) r = r.
     \end{equation*}
-    On a bien que $\l x + (1-\l)y \in B'(a,r)$.\\
-    \boxed{2.} Idem (attention au cas $\l=0$).
+    Donc $\l x + (1-\l)y \in B(a,r)$ : c'est un convexe.
 \end{prop}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Vérifier que $S(a,r)$ pour $r>0$ n'est pas convexe.
     \tcblower
-    Soit $x\in E$ non nul. On pose $y=a+\frac{r}{\|x\|}x$ et $y'=a-\frac{r}{\|x\|}x$ tous deux dans $S(a,r)$.\\
-    On a $\frac{1}{2}y+\frac{1}{2}y'=a\notin S(a,r)$, donc pas convexe.
+    Soit $x\in E$ non-nul.\\
+    $\hra$ $y_1 = a - \frac{r}{\|x\|}x\in S(a,r)$ et $y_2 = a + \frac{r}{\|x\|}x\in S(a,r)$.\\
+    $\hra$ $\frac{1}{2}y_1 + (1-\frac{1}{2})y_2 = a \notin S(a,r)$, donc $S(a,r)$ n'est pas convexe.
 \end{ex}
 
 \section{Suites dans un EVN.}
@@ -291,28 +317,36 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 \begin{defi}{Suite bornée. $\star$}{}
     Soit $(E,\|\cdot\|)$ un evn et $(u_n)_{n\in\N}$ une suite de $E$.
     \begin{center}
-        $(u_n)$ est bornée ssi $\exists M \geq 0, ~ \forall n \in \N, ~ \|u_n\| \leq M$.
+        $(u_n)$ est \bf{bornée} ssi $\exists M \geq 0, ~ \forall n \in \N, ~ \|u_n\| \leq M$.
     \end{center}
 \end{defi}
+
+\vspace*{-0.8cm}
 
 \begin{defi}{Convergence d'une suite. $\star$}{}
     Soit $(E,\|\cdot\|)$ un evn, $(u_n)_{n\in\N}$ une suite de $E$, et $l\in E$.
     \begin{center}
-        $(u_n)_{n\in\N}$ converge vers $l$ ssi $\lim \|u_n - l\| = 0$ ssi $\forall \e > 0, ~ \exists n_0 \in \N, ~ \forall n \geq n_0, ~ \| u_n - l \| \leq \e$.
+        $(u_n)_{n\in\N}$ \bf{converge} vers $l$ ssi $\lim \|u_n - l\| = 0$ ssi $\forall \e > 0, ~ \exists n_0 \in \N, ~ \forall n \geq n_0, ~ \| u_n - l \| \leq \e$.
     \end{center}
 \end{defi}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Soit $A\in M_n(\R)$, pour $k\in\N$, posons $A_k=A+\frac{1}{k+1}I_n$. Alors $\|A_k-A\|=\frac{1}{k+1}\|I_n\|\to 0$ puis $\lim A_k = A$.
 \end{ex}
 
+\vspace*{-0.8cm}
+
 \begin{prop}{Unicité de la limite.}{}
     La limite d'une suite, si elle existe, est unique.
     \tcblower
-    Supposons que $\lim u_n = l$ et $\lim u_n = l'$. Supposons par l'absurde que $l\neq l'$. On pose $\e=\frac{\|l-l'\|}{2}>0$.\\
-    On a alors $\exists n_0 \in \N, ~ \forall n \geq n_0, ~ \|u_n - l\| < \e$ et $\exists n_1 \in \N, ~ \forall n \geq n_1, ~ \|u_n - l'\| < \e$.\\
-    On pose $N=\max(n_0,n_1)$, donc $\forall n \geq N, ~ \|u_n-l\| < \e \et \|u_n - l\| < \e$.\\
-    On a alors que $\|l-l'\| \leq \|u_n - l\| + \|u_n - l'\| < 2\e = \|l-l'\|$, absurde.
+    Soit $(u_n)$ une suite, convergente vers $l$ et $l'$. On suppose $l\neq l'$ par l'absurde.\\
+    Soit $\e=\frac{1}{2}\|l-l'\| > 0$.\\
+    $\hra$ $\exists n_0 \in \N, ~ \forall n \geq n_0, ~ \|u_n-l\|<\e$.\\
+    $\hra$ $\exists n_1 \in \N, ~ \forall n \geq n_1, ~ \|u_n-l'\|<\e$.\\
+    Soit $N = \max(n_0,n_1)$, alors $\forall n \geq N, ~ \|u_n-l\| < \e \et \|u_n-l'\|<\e$.\\
+    $\hra$ $\|l-l'\| = \|(u_n - l) - (u_n - l')\| \leq \|u_n - l\| + \|u_n - l'\| < 2\e = \|l-l'\|$, absurde.
 \end{prop}
 
 \vspace*{-0.4cm}
@@ -320,10 +354,12 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 \begin{thm}{Caractère borné d'une suite convergente. $\star$}{}
     Toute suite convergente est bornée.
     \tcblower
-    Soit $(u_n)$ une suite convergente de $(E,\|\cdot\|)$. On note $l=\lim u_n$.\\
-    Avec $\e=1$, $\exists n_0\in\N, ~ \forall n \geq n_0, ~ \| u_n - l \| < 1$, donc $u_n \in B(l,1)$.\\
-    On pose $r=\max \{1, \|u_1-l\|, ..., \|u_{n_0-1} - l\|\}$. On a $\forall n \geq n_0, ~ u_n \in B(l,r)$ car $\|u_n - l\| < 1 \leq r$.\\
-    C'est vrai pour $0 \leq n \leq n_0 - 1$ car $\|u_n - l\| \leq r$.
+    Soit $(u_n)$ une suite de $(E,\|\cdot\|)$, supposée convergente vers $l\in E$.\\
+    $\hra$ Par convergence de $(u_n)$ : $\exists n_0 \in \N, ~ \forall n \geq n_0, ~ \|u_n - l\| < 1$.\\
+    Posons alors $r=\max(1,\|u_1-l\|,...,\|u_{n_0}-l\|)$.\\
+    $\hra$ Pour $n\geq n_0$, $\|u_n - l\| \leq 1\leq r$ donc $u_n\in B(l,r)$.\\
+    $\hra$ Pour $n\leq n_0, ~ \|u_n - l\|\leq r$ par définition de $r$, donc $u_n\in B(l,r)$.\\
+    Donc $\forall n \in \N, ~ u_n \in B(l,r)$ : $(u_n)$ est bornée.
 \end{thm}
 
 \vspace*{-0.4cm}
@@ -341,9 +377,9 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 
 \vspace*{-0.4cm}
 
-\begin{defi}{}{}
-    Soit $(A,+,\times,\cdot)$ une $\K$-algèbre. Soit $\|\cdot\|$ une norme sur $(A,+,\cdot)$.\\
-    On dit que $\|\cdot\|$ est une norme d'algèbre ssi $\forall (x,y)\in A, ~ \|x\times y\| \leq \|x\|\cdot\|y\|$.\\
+\begin{defi}{Norme d'algèbre.}{}
+    Soit $(A,+,\times,\cdot)$ une $\K$-algèbre, et $\|\cdot\|$ une norme sur $(A,+,\cdot)$.\\
+    On dit que $\|\cdot\|$ est une \bf{norme d'algèbre} ssi $\forall (x,y)\in A, ~ \|x\times y\| \leq \|x\|\cdot\|y\|$.\\
     Une algèbre est dite normée si elle est munie d'une norme d'algèbre.
 \end{defi}
 
@@ -363,7 +399,7 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 \vspace*{-0.7cm}
 
 \begin{prop}{Convergence dans un espace produit. $\star$}{}
-    Soit $(E_1,\|\cdot\|_1),...,(E_N,\|\cdot\|_N)$ des evn et $E=E_1\times ... \times E_N$ l'evn produit.\\
+    Soient $(E_1,\|\cdot\|_1),...,(E_N,\|\cdot\|_N)$ des evn et $E=E_1\times ... \times E_N$ l'evn produit.\\
     Soit $(u_n)_{n\in\N}$ une suite de $E$, $\forall n \in \N, ~ u_n = (u_n^1, ..., u_n^N)$.\\
     Soit $l=(l_1,...,l_N)\in E$. On a $u_n \to l \iff \forall i \in \lb1,N\rb, ~ (u_n^i)\to l_i$ dans $(E_i,\|\cdot\|_i)$.
     \tcblower
@@ -376,7 +412,7 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 
 \vspace*{-0.7cm}
 
-\begin{exi}{}{}
+\begin{prop}{}{}
     Soient $E$ un $\K$-evdf de dimension $N$, et $\B=(e_1,...,e_n)$ une base de $E$.\\
     Soient $(u_n)_{n\in\N}\in E^\N$, et $l\in E$.
     \begin{equation*}
@@ -384,7 +420,7 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     \end{equation*}
     On munit $E$ de la norme $\|x\|_\infty=\max(|x_i|, ~ 1\leq i \leq N)$, où $x=\sum x_i e_i$.\\
     Alors $u_n\to l$ dans $(E,\|\cdot\|_\infty) \iff \forall i \in \lb1,N\rb, ~ u_n^i \to l^i$.
-\end{exi}
+\end{prop}
 
 \vspace*{-0.7cm}
 
@@ -404,7 +440,7 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 \end{ex}
 
 \begin{defi}{Suites extraites.}{}
-    Soit $E$ un ensemble et $(u_n)_{n\in\N}\in E^\N$, alors $(v_n)_{n\in\N}$ est une suite extraite de $(u_n)_{n\in\N}$ si et seulement si :
+    Soit $E$ un ensemble et $(u_n)_{n\in\N}\in E^\N$, alors $(v_n)_{n\in\N}$ est une \bf{suite extraite} de $(u_n)_{n\in\N}$ si et seulement si :
     \begin{equation*}
         \exists \phi : \N \to \N \nt{ strictement croissante telle que } \forall n \in \N, ~ v_n = u_{\phi(n)}.
     \end{equation*}
@@ -435,18 +471,23 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Si $(u_n)_{n\in\N}$ converge, alors toutes ses suites extraites convergent vers la même limite.\\
     Si $(u_n)_{n\in\N}$ possède deux suites extraites convergentes vers des limites distinctes, alors $(u_n)_{n\in\N}$ diverge.
     \tcblower
-    On suppose $(u_n)$ convergente, et on note $l$ sa limite. Soit $\phi:\N\to\N$ strictement croissante.\\
-    Soit $\e>0, ~ \exists n_0 \in \N, ~ \forall n \geq n_0, ~ \|u_n-l\|\leq \e$, puis $\phi(n_0)\geq n_0$, donc $\|u_{\phi(n_0)}-l\|\leq \|u_{n_0}-l\|\leq \e$ donc $u_{\phi(n)}\to l$.
+    Supposons $(u_n)_{n\in\N}$ convergente vers $l\in E$. Soit $\phi:\N\to\N$ strictement croissante.\\
+    Pour $\e>0$, $\exists n_0 \in \N, ~ \forall n \geq n_0, ~ \|u_n-l\| < \e$, puis $\phi(n_0)\geq n_0$ donc $\|u_{\phi(n_0)}-l\|\leq \|u_{n_0} - l\| < \e$ donc $u_{\phi(n)}\to l$.
 \end{prop}
 
 \vspace*{-0.7cm}
 
 \begin{prop}{}{}
-    Soient $(E,\|\cdot \|)$ un evn et $(u_n)_{n\in\N}\in E^\N$. Soit $l\in\R$.
+    Soit $(E,\|\cdot \|)$ un evn et $(u_n)_{n\in\N}\in E^\N$. Soit $l\in\R$.
     \begin{equation*}
-        u_{2n} \to l ~\et~ u_{2n+1} \to l \ra u_n \to l.
+        \left[ u_{2n} \to l ~\et~ u_{2n+1} \to l \right] \ra u_n \to l.
     \end{equation*}
     \bf{Remarque.} Ce théorème est valable pour n'importe quelle partition finie des indices.
+    \tcblower
+    Soit $\e>0$.\\
+    $\hra$ $u_{2n}\to l$ donc $\exists n_0 \in \N, ~ \forall n \geq n_0, ~ \|u_{2n}-l\|\leq \e$.\\
+    $\hra$ $u_{2n+1}\to l$ donc $\exists n_1 \in \N, ~ \forall n \geq n_1, ~ \|u_{2n+1}-l\|\leq \e$.\\
+    Soit $N=\max(n_0,n_1)$, alors $\forall n \geq N, ~ \|u_n - l\| \leq \e$.
 \end{prop}
 
 \vspace*{-0.7cm}
@@ -458,8 +499,10 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     On note $l=\lim u_{2n}$, $l'=\lim u_{2n+1}$ et $l''=\lim u_{3n}$.\\
     On a $(u_{6n})$ suite extraite de $(u_{2n})$ et de $(u_{3n})$, donc $\lim u_{6n}=l=l''$.\\
     On a $(u_{6n+3})$ suite extraite de $(u_{2n+1})$ et de $(u_{3n})$, donc $\lim u_{6n+3}=l'=l''$.\\
-    Alors $l=l'=l''$. On a par théorème que $\lim u_n = l$.
+    Alors $l=l'=l''$, donc $\lim u_n = l$.
 \end{ex}
+
+\vspace*{-0.7cm}
 
 \begin{ex}{}{}
     Soit $(u_n)_{n\in\N}$ une suite réelle non majorée positive.
@@ -468,9 +511,9 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
         \item Montrer que l'on peut extraire de $(u_n)_{n\in\N}$ une suite qui tend vers $+\infty$.
     \end{enumerate}
     \tcblower
-    \boxed{1.} Par exemple, $u_2n=666^n$ et $u_{2n+1}=1$.\\
+    \boxed{1.} Par exemple, $u_{2n}=666^n$ et $u_{2n+1}=1$.\\
     \boxed{2.} $\forall M \in \R_+, ~ \exists n \in \N, ~ u_n \geq M$.\\
-    Soit $M\geq0$, $\exists n_0 \in \a deuxN, u_{n_0}>M$, puis avec $M=u_{n_0}$, $\exists n_1, ~ u_{n_1}\geq u_{n_0}$...\\
+    Soit $M\geq0$, $\exists n_0 \in \N, ~ u_{n_0}>M$, puis avec $M=u_{n_0}$, $\exists n_1, ~ u_{n_1}\geq u_{n_0}$...\\
     On a donc une infinité de majorants pour tout $M\geq0$. On construit $\phi$.\\
     --- $\exists n_0 \in \N, ~ u_{n_0}>0$, on pose $\phi(0)=n_0$.\\
     --- $\exists n_1 \in \N, ~ u_{n_1}>1$, on pose $\phi(1)=n_1$, on peut choisir $n_1>n_0$ car infinité d'entiers.\\
@@ -481,7 +524,7 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 
 \begin{defi}{Valeur d'adhérence.}{}
     Soient $(E,\|\cdot\|)$ un evn, $(u_n)_{n\in\N}\in E^\N$ et $l\in E$.\\
-    On dit que $l$ est une valeur d'adhérence de $(u_n)_{n\in\N}$ ssi $l$ est la limite d'une suite extraite de $(u_n)_{n\in\N}$.\\
+    On dit que $l$ est une \bf{valeur d'adhérence} de $(u_n)_{n\in\N}$ ssi $l$ est la limite d'une suite extraite de $(u_n)_{n\in\N}$.\\
     On notera $\Val((u_n)_{n\in\N})$ l'ensemble des valeurs d'adhérence de la suite $(u_n)_{n\in\N}$.
 \end{defi}
 
@@ -510,7 +553,7 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 
 \begin{defi}{Normes équivalentes.}{}
     Soient $E$ un $\K$-ev et $\|\cdot\|_1$, $\|\cdot\|_2$ deux normes sur $E$.\\
-    On dit que les deux normes sont équivalentes ssi $\exists a,b > 0, ~ \forall x \in E, ~ a\|x\|_1\leq\|x\|_2\leq b\|x\|_1$.\\
+    On dit que les deux normes sont \bf{équivalentes} ssi $\exists a,b > 0, ~ \forall x \in E, ~ a\|x\|_1\leq\|x\|_2\leq b\|x\|_1$.\\
     \bf{Remarque.} Cela définit une relation d'équivalence.
 \end{defi}
 
@@ -527,34 +570,25 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 \begin{prop}{}{}
     Soit $E$ un $\K$-ev.
     \begin{enumerate}
-        \item Soit $A\subset E$. Le fait que $A$ soit bornée ne dépend pas de la norme équivalente choisie.
+        \item Soit $A\subset E$. Le fait que $A$ soit borné ne dépend pas de la norme équivalente choisie.
         \item Soit $(u_n)_{n\in\N}\in E^\N$. Le fait que $(u_n)_{n\in\N}$ soit bornée ne dépend pas de la norme équivalente choisie.
         \item Soit $(u_n)_{n\in\N}\in E^\N$. Le fait que $(u_n)_{n\in\N}$ converge et sa limite ne dépendent pas de la norme éq. choisie.
     \end{enumerate}
     \tcblower
-    \boxed{1.} Supposons $A$ bornée pour $\|\cdot\|_1$, et $\|\cdot\|_1\sim\|\cdot\|_2$, $\exists M \geq 0 ,~ \forall x \in A, ~ \|x\|_1\leq M$.\\
-    De plus, $\exists b>0, ~ \forall x \in E, ~ \|x\|_2\leq b\|x\|_1$, alors $\|x\|_2\leq bM$.\\
-    \boxed{2.} Cas particulier de 1., avec $A=\{u_n, ~ n\in\N\}$.\\
-    \boxed{3.} Supposons $u_n\to l$, et $\|\cdot\|_1\sim\|\cdot\|_2$. Alors $\|u_n-l\|_1\to 0$.\\
-    On a alors $\exists a,b>0, ~ \forall x \in E, ~ a\|x\|_1\leq \|x\|_1 \leq b\|x\|_2$, donc en croisant les inégalités, on a par encadrement $\|u_n-l\|_2\to0$.
+    \boxed{1.} Supposons $A$ borné pour $\|\.\|_1$, et $\|\.\|_1\sim\|\.\|_2$.\\
+    $\hra$ $\exists M \geq 0, ~ \forall x \in A, ~ \|x\|_1\leq M$ et $\exists b > 0, ~ \forall x \in E, ~ \|x\|_2 \leq b\|x\|_1$.\\
+    Alors $\forall x \in E, ~ \|x\|_2 \leq bM$, donc $A$ est borné pour $\|\.\|_2$.\\
+    \boxed{2.} En posant $A=\{u_n, ~ n\in\N\}$, on retrouve le cas précédent.\\
+    \boxed{3.} Supposons $\|u_n-l\|_1\to0$ et $\|\.\|_1\sim\|\.\|_2$.\\
+    $\hra$ $\exists a,b>0, ~ \forall x \in E, ~ a\|x\|_1\leq\|x\|_2\leq b\|x\|_1$.\\
+    Alors $a\|u_n - l\|_1 \leq \|u_n-l\|_2 \leq b\|u_n-l\|_1$ et par encadrement, $\|u_n-l\|_2\to0$.
 \end{prop}
 
 \vspace*{-0.7cm}
 
 \begin{ex}{}{}
-    Soit $E=\m{C}^0([0,1],\R)$ un $\R$-ev. Vérifions que $\|\cdot\|_1$ et $\|\cdot\|_\infty$ sont non-équivalentes.
-    \tcblower
-    Soit $f_n$ affine par morceaux, $\forall n \geq 1, ~ f_n\in E$, on a donc $(f_n)_{n\in\N^*}$ une suite de vecteurs de $E$.\\
-    On a d'une part $\|f_n\|_\infty=n\to+\infty$ donc $(f_n)_{n\in\N^*}$ non bornée dans $(E,\|\cdot\|_\infty)$.\\
-    D'autre part, $\|f_n\|_1=\int_0^1|f_n(t)|\dt=\frac{1}{2}$ donc $(f_n)_{n\in\N}$ est bornée dans $(E,\|\cdot\|_1)$.\\
-    On peut quand même remarquer que $\|\cdot\|_1\leq\|\cdot\|_\infty$.\\
-    On a pris $f_n$ valant $n-nx$ entre $0$ et $1/n$, puis égale à 0.
-\end{ex}
-
-\vspace*{-0.7cm}
-
-\begin{ex}{}{}
-    Soit $E=\R[X]$, muni des normes $\|P\|_1=\sum|a_k|$ et $\|P\|_\infty=\max |a_k|$.
+    Soit $E=\R[X]$, muni des normes $\|P\|_1=\sum|a_k|$ et $\|P\|_\infty=\max |a_k|$.\\
+    Montrer que ces normes ne sont pas équivalentes.
     \tcblower
     Posons $P_n=1+...+X^n\in E$. On a $\|P_n\|_\infty=1$ et $\|P\|_1=n+1\to+\infty$ donc $(P_n)$ non bornée dans $(E,\|\cdot\|_1)$.
 \end{ex}
@@ -562,21 +596,25 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 \vspace*{-0.7cm}
 
 \begin{ex}{}{}
-    Soit $E=\{(u_n)_{n\in\N} \in \R^\N, ~ \sum|u_n| \nt{ converge}\}$, muni de $\|(u_n)\|_1=\sum|u_n|$ et $\|(u_n)\|_{\infty}=\sup|u_n|$.
+    Soit $E=\{(u_n)_{n\in\N} \in \R^\N, ~ \sum|u_n| \nt{ converge}\}$, muni de $\|(u_n)\|_1=\sum|u_n|$ et $\|(u_n)\|_{\infty}=\sup|u_n|$.\\
+    Montrer que ces normes ne sont pas équivalentes.
 \end{ex}
 
 \vspace*{-0.7cm}
 
 \begin{exi}{}{}
-    Soit $E=\m{C}^1([0,1],\R)$ muni de $\|\cdot\|_\infty$ et de $\|f\|=|f(0)|+\sup|f'|$.
+    Soit $E=\cursive{C}^1([0,1],\R)$ muni de $\|\cdot\|_\infty$ et de $\|f\|=|f(0)|+\sup|f'|$.
     \tcblower
-    Vérifions qu'elles sont bien définies. On a $f'\in\m{C}^0([0,1])$ donc $f'$ bornée sur $[0,1]$, donc $\|f\|$ est bien définie.\\
-    TFA : $\forall x \in [0,1], ~ f(x)=f(0)+\int_0^xf'(t)\dt$, donc $|f(x)|\leq|f(0)|+\int_0^x|f'(t)|\dt\leq|f(0)|+\int_0^1|f'(t)|\dt$.
-    Donc $|f(x)|\leq|f(0)|+\sup|f'(x)|$ donc $|f(x)|\leq\|f\|$ donc $\|f\|_\infty\leq\|f\|$.\\
-    On pose $f_n:x\mapsto\sin\left(\frac{n\pi}{2}x \right)$ pour $x\in[0,1]$ et $n\in\N$, alors $f_n\in E$.\\
-    On a donc $\|f_n\|_{n\in\N}=1$, puis $\forall x \in \R, ~ f'_n(x)=\frac{n\pi}{2}\cos\left( n\frac{\pi}{2}x \right)$.\\
-    Ainsi, $\|f_n\|=|f_n(0)|+n\frac{\pi}{2}\to+\infty$.\\
-    Penser à vérifier que $\|\cdot\|$ est bien une norme.
+    $\hra$ Pour $f\in\cursive{C}^1([0,1],\R)$, $f'$ est continue donc bornée sur $[0,1]$, donc $\|f\|$ est bien définie.\\
+    Par TFA :
+    \begin{equation*}
+        \forall x \in [0,1], ~ f(x) = f(0) + \int_0^xf'(t)\dt ~\nt{donc}~ |f(x)|\leq|f(0)|+\int_0^x|f'(t)|\dt\leq|f(0)|+\int_0^1|f'(t)|\dt.
+    \end{equation*}
+    Donc $|f(x)|\leq\|f\|$, donc $\|f\|_{\infty} \leq \|f\|$.\\
+    $\hra$ Posons $f_n(x)=\sin(\frac{n\pi}{2}x)\in E$ pour $x\in[0,1]$ et $n\in\N$.\\
+    $\bullet$ $\forall n \in \N, ~ \|f_n\|_{\infty}=1$.\\
+    $\bullet$ $\forall x \in \R, ~ f_n'(x) = \frac{n\pi}{2}\cos(\frac{n\pi}{2}x)$ donc $\|f_n\|=|f_n(0)|+n\frac{\pi}{2}\to+\infty$.\\
+    Les deux normes ne sont pas équivalentes.
 \end{exi}
 
 \section{Topologie.}
@@ -584,43 +622,47 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 \subsection{Ouverts, fermés.}
 
 \begin{defi}{Voisinage.}{}
-    Soit $(E,\|\cdot\|)$ evn et $a\in E$, $V\subset E$ est un voisinage de $a$ ssi $\exists r > 0, ~ B(a,r)\subset V$.\\
+    Soit $(E,\|\cdot\|)$ evn et $a\in E$, $V\subset E$ est un \bf{voisinage} de $a$ ssi $\exists r > 0, ~ B(a,r)\subset V$.\\
     On notera $\m{V}(a)$ l'ensemble des voisinages de $a$.\\
     \bf{Remarque.} On a $E\in\m{V}(a)$ donc $\m{V}(a)\neq\0$.
 \end{defi}
 
-\vspace*{-0.7cm}
+\vspace*{-0.8cm}
 
 \begin{defi}{Ouvert.}{}
-    Soit $(E,\|\cdot\|)$ un evn, alors $O\subset E$ est un ouvert de $E$ ssi $\forall x \in O, ~ O\in\m{V}(x)$.
+    Soit $(E,\|\cdot\|)$ un evn, alors $O\subset E$ est un \bf{ouvert} de $E$ ssi $\forall x \in O, ~ O\in\m{V}(x)$.
 \end{defi}
 
-\vspace*{-0.7cm}
+\vspace*{-0.8cm}
 
 \begin{defi}{Fermé.}{}
-    Soit $(E,\|\cdot\|)$ un evn, alors $F\subset E$ est un fermé ssi $E\setminus F$ est ouvert.
+    Soit $(E,\|\cdot\|)$ un evn, alors $F\subset E$ est un \bf{fermé} ssi $E\setminus F$ est un ouvert.
 \end{defi}
 
-\vspace*{-0.7cm}
-
-\begin{ex}{}{}
-    Les intervalles ouverts de $E$ sont des ouverts.
-\end{ex}
-
-\vspace*{-0.7cm}
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     Les boules ouvertes sont des ouverts, les boules fermées et les singletons sont des fermés.
     \tcblower
-    \boxed{1.} Soit $a\in E$, $r>0$. Soit $x\in B(a,r)$. On a $\|x-a\|<r$, on pose $r'=r-\|x-a\|>0$.\\
-    Soit $y\in B(x,r')$, on a $\|y-a\|\leq \|y-x\|+\|x-a\|<r'+\|x-a\|<r$.\\
-    \boxed{3.} Soit $a\in E$. Soit $x\in E\setminus \{a\}$. On a $\|x-a\|>0$, on pose $r=\frac{\|x-a\|}{2}$.\\
-    Soit $y\in B(x,r)$, on a $y\neq a$ car sinon $\|x-a\|<r$, absurde, donc $y\in B(x,r)$.
+    \boxed{1.} Soit $a\in E$, $r>0$ et $x\in B(a,r)$.\\
+    $\hra$ $\|x-a\|<r$, donc on pose $r'=r-\|x-a\|>0$.\\
+    $\bullet$ Montrons que $B(x,r')\subset B(a,r)$.\\
+    $\hra$ Soit $y\in B(x,r')$, on a $\|y-a\|\leq \|y-x\|+\|x-a\| < r' + \|x-a\| < r$, donc $y\in B(a,r)$.\\
+    Ainsi, $B(a,r)$ est un ouvert par définition.\\
+    \boxed{2.} Soit $a\in E$, $r>0$ et $x\in E\setminus B'(a,r)$.\\
+    $\hra$ $\|x-a\|>r$, donc on pose $r'=\|x-a\|-r>0$.\\
+    $\bullet$ Montrons que $B(x,r)\subset E\setminus B'(a,r)$.\\
+    $\hra$ Soit $y\in B(x,r)$, on a $\|y-a\| \geq |\|x-a\| - \|y-x\|| > \|x-a\| - r' = \|x-a\| - (\|x-a\| - r) = r$.\\
+    Ainsi, $B'(a,r)$ est un fermé par définition.\\
+    \boxed{3.} Soit $a\in E$ et $x\in E\setminus\{a\}$.\\
+    $\hra$ $\|x-a\|>0$, donc on pose $r=\|x-a\|$.\\
+    Soit $y\in B(x,r)$, on a $y\neq a$, car sinon $\|x-a\|<r$, ce qui est absurde, donc $y\in B(x,r)$.\\
+    Ainsi, $\{a\}$ est un fermé par définition.
 \end{prop}
 
-\vspace*{-0.7cm}
+\vspace*{-0.8cm}
 
-\begin{prop}{}{}
+\begin{prop}{Réunions et intersections. $\star$}{}
     \begin{enumerate}
         \item Toute réunion d'ouverts est un ouvert.
         \item Toute intersection finie d'ouverts est un ouvert.
@@ -628,17 +670,22 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
         \item Toute intersection de fermés est un fermé.
     \end{enumerate}
     \tcblower
-    \boxed{1.} Soit $(O_i)_{i\in I}$ une famille d'ouverts, on pose $O=\bigcup O_i$. Pour $x\in O, ~ \exists i \in I, ~ x \in O_i$ puis $O_i$ est ouvert.\\
-    On a donc $\exists r_i > 0, ~ B(x,r_i)\subset O_i$ donc $B(x,r_i)\subset O$, donc $O$ est un ouvert.\\
-    \boxed{2.} Soit $(O_i)_{i\leq n}$ une famille d'ouverts finie, on pose $O=\bigcap O_i$. Pour $x\in O, ~ \forall i\in\lb1,n\rb, ~ x \in O_i$.\\
-    Donc $\forall i \in\lb1,n\rb, ~ \exists r_i > 0 ~ B(x,r_i)\in O_i$, on pose $r=\min(r_1,...,r_n)>0$, alors $\forall i \in \lb1,n\rb, ~ B(x,r)\subset O_i$.\\
-    Alors $B(x,r)\subset O$.\\
-    \boxed{3.} Soit $(F_i)_{i\leq n}$ une famille finie de fermés, on pose $F=\bigcup F_i$.\\
-    Alors $\leftindex^CF = \bigcap \leftindex^CF_i$ est ouvert d'après 2, donc $F$ est fermé.\\
-    \boxed{4.} Idem.
+    \boxed{1.} Soit $(O_i)_{i\in I}$ une famille d'ouverts, on pose $O$ leur réunion.\\
+    $\hra$ Pour $x\in O$, il existe $i\in I$ tel que $x\in O_i$, et $O_i$ est un ouvert.\\
+    Donc il existe $r_i > 0$ tel que $B(x,r_i)\subset O_i$, donc $B(x,r_i)\subset O$ : $O$ est un ouvert.\\
+    \boxed{2.} Soit $(O_i)_{i\leq n}$ un famille finie d'ouverts, et $O$ leur intersection.\\
+    $\hra$ Pour $x\in O, ~ \forall i \in \lb1,n\rb, ~ x \in O_i$ : $\exists r_i > 0, ~ B(x,r_i)\subset O_i$.\\
+    Donc il existe $r=\min(r_1,...,r_n)$ tel que $\forall i\lb1,n\rb, ~ B(x,r)\subset O_i$, donc $B(x,r)\subset O$ et $O$ est un ouvert.\\
+    \boxed{3.} Soit $(F_i)_{i \leq n}$ une famille finie de fermés, et $F$ leur réunion.\\
+    $\hra$ $\forall i \in \lb1,n\rb, ~ \ov{F_i}$ est un ouvert, et $\ov{\bigcup F_i}=\bigcap\ov{F_i}$, intersection finie d'ouverts.\\
+    \boxed{4.} idem au cas 2.
 \end{prop}
 
-\vspace*{-0.7cm}
+\begin{ex}{}{}
+    Les intervalles ouverts de $\R$ sont des ouverts.
+\end{ex}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     Soit $E$ un evn, et $A\subset E$ fini. Alors $A$ est fermé.
@@ -646,12 +693,15 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Notons $n=|A|$, et $A=\{a_1,...,a_n\}=\bigcup \{a_i\}$; A est réunion finie de fermés.
 \end{prop}
 
+\vspace*{-0.8cm}
+
 \begin{ex}{}{}
     Montrer que $\Z$ est un fermé.
     \tcblower
-    On a $\leftindex^C\Z=\bigcup_{n\in\Z}]n,n+1[$ réunion d'ouverts donc ouvert, puis $\Z$ est fermé.\\
-    \bf{Remarque:} $\Z$ n'est pas ouvert non plus, et n'est le voisinage d'aucun de ses points.
+    On a $\ov{\Z}=\bigcup_{n\in\Z}]n,n+1[$ réunion d'ouverts donc ouvert, puis $\Z$ est fermé.
 \end{ex}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{Ouvert dans un espace produit.}{}
     Soit $(E_i,\|\cdot\|_i)_i$ des evn et $E=E_1\times...\times E_n$ l'evn produit.\\
@@ -663,8 +713,10 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Soit $r=\min(r_1,...,r_n)$, et $y=(y_1,...,y_n)\in B(x,r)$. On a $\forall i \in \lb1,n\rb, ~ \|y_i-x_i\|_i < r$ donc $y_i \in O_i$ donc $y \in O$.
 \end{prop}
 
+\vspace*{-0.8cm}
+
 \begin{prop}{}{}
-    Soient $E$ un $\K$-ev, $\|\cdot\|_1$ et $\|\cdot\|_2$ deux normes sur $E$.
+    Soit $E$ un $\K$-ev, $\|\cdot\|_1$ et $\|\cdot\|_2$ deux normes sur $E$.
     \begin{enumerate}
         \item On suppose qu'il existe $a>0, ~ \forall x \in E, ~ \|x\|_1\leq a\|x\|_2$.\\
         Soit $O\subset E$, alors $O$ ouvert pour $\|\cdot\|_1 \ra O$ ouvert pour $\|\cdot\|_2$.
@@ -680,25 +732,33 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Enfin, $F$ fermé pour $\|\cdot\|_1 \iff \leftindex^CF$ ouvert pour $\|\cdot\|_1 \iff \leftindex^CF$ ouvert pour $\|\cdot\|_2\iff F$ fermé pour $\|\cdot\|_2$.
 \end{prop}
 
+\vspace*{-0.8cm}
+
 \begin{defi}{Ouverts relatifs.}{}
     Soit $(E,\|\cdot\|)$ un evn et $A\subset E$.\\
-    Un ouvert relatif de $A$ est un ensemble de la forme $O\cap A$ avec $O$ ouvert de $E$. 
+    Un \bf{ouvert relatif} de $A$ est un ensemble de la forme $O\cap A$ avec $O$ ouvert de $E$. 
 \end{defi}
 
+\vspace*{-0.8cm}
+
 \begin{ex}{}{}
-    Soit $A=[1,2]$ et $O'=[1,\frac{3}{2}[$ ouvert relatif de $A$, en effet, $O'=]0,\frac{3}{2}[\cap[1,2]$.
+    Soit $A=[1,2]$. $O'=[1,\frac{3}{2}[$ est un ouvert relatif de $A$, en effet : $O'=~]0,\frac{3}{2}[~\cap~[1,2]$.
 \end{ex}
 
 \subsection{Intérieur, adhérence.}
 
+À partir de maintenant, on note le complémentaire d'un ensemble $A$ par $\leftindex^C A$.
+
 \begin{defi}{}{}
     Soit $(E,\|\cdot\|)$ un evn et $A\subset E$.\\
-    --- L'\bf{intérieur} de $A$, noté ${\acc{A}}$, est le plus grand ouvert inclus dans $A$.\\
-    --- L'\bf{adhérence} de $A$, notée $\ov{A}$, est le plus petit fermé contenant $A$.
+    $\hra$ L'\bf{intérieur} de $A$, noté ${\acc{A}}$, est le plus grand ouvert inclus dans $A$.\\
+    $\hra$ L'\bf{adhérence} de $A$, notée $\ov{A}$, est le plus petit fermé contenant $A$.
     \begin{equation*}
         {\acc{A}}\subset A \subset \ov{A}
     \end{equation*}
 \end{defi}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{}{}
     Soit $(E,\|\cdot\|)$ un evn et $A\subset E$.
@@ -710,12 +770,16 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     \boxed{\ra} Supposons $A$ ouvert, alors $A={\acc{A}}$, le plus grand ouvert inclus dans $A$.
 \end{prop}
 
+\vspace*{-0.8cm}
+
 \begin{defi}{Frontière.}{}
-    Soit $(E,\|\cdot\|)$ evn et $A\subset E$. La frontière de $A$, notée $\Fr(A)$ est l'ensemble $\Fr(A)=\ov{A}\setminus{\acc{A}}=\ov{A}\cap\leftindex^C({\acc{A}})$.\\
+    Soit $(E,\|\cdot\|)$ evn et $A\subset E$. La \bf{frontière} de $A$, notée $\Fr(A)$ est l'ensemble $\Fr(A)=\ov{A}\setminus{\acc{A}}$.\\
     \bf{Remarque.} La frontière de $A$ est toujours fermée, comme intersection de fermés.
 \end{defi}
 
-\begin{thm}{}{}
+\vspace*{-0.8cm}
+
+\begin{thm}{}{67}
     Soit $(E,\|\cdot\|)$ et $A,B\in\P(E)$.
     \begin{enumerate}
         \item $A\subset B \ra {\acc{A}}\subset\accentset{\circ}{B}$.
@@ -726,18 +790,22 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     \boxed{2.} On a $A\subset B \subset \ov{B}$ donc $\ov{B}$ est un fermé contenant $A$ donc $\ov{A}\subset\ov{B}$.
 \end{thm}
 
+\vspace*{-0.8cm}
+
+\renewcommand*{\A}{\accentset{\circ}{A}}
+\renewcommand*{\c}{\leftindex^C}
+
 \begin{lemme}{}{}
     Soit $(E,\|\cdot\|)$ un evn. Soit $A\subset E$.
     \begin{enumerate}
         \item $\leftindex^C{\ov{A}}=\accentset{\circ}{\leftindex^CA}$.
         \item $\leftindex^C{\acc{A}}=\ov{\leftindex^CA}$.
     \end{enumerate} 
-    \tcblower
-    \boxed{1.}
-    \boxed{2.} ${\acc{A}}\subset A \ra \leftindex^C A \subset \leftindex^C{\acc{A}} \ra \ov{\leftindex^CA}\subset\leftindex^C{{\acc{A}}}$ puis $\leftindex^CA\subset\leftindex^C{\ov{A}}\ra\leftindex^C{\ov{\leftindex^CA}}\subset A \ra \leftindex^C{\ov{\leftindex^CA}}\subset{\acc{A}}\ra\leftindex^C{\acc{A}}\subset\ov{\leftindex^CA}$.
 \end{lemme}
 
-\begin{thm}{Caractérisation des éléments de l'intérieur et de l'adhérence.}{caradh}
+\pagebreak
+
+\begin{thm}{Caractérisation des éléments de l'intérieur et de l'adhérence. $\star$}{caradh}
     Soit $(E,\|\cdot\|)$ un evn et $A\subset E$.
     \begin{enumerate}
         \item $x\in{\acc{A}} \iff \exists V \in \m{V}(x), ~ V \subset A \iff \exists r>0, ~ B(x,r)\subset A$.\\
@@ -756,22 +824,7 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Alors $x\in \ov{A} \iff \forall r > 0, ~ B(x,r) \cap A \neq 0$.
 \end{thm}
 
-\begin{ex}{}{}
-    Soient $(E,\|\cdot\|)$ un evn, et $A,B\in\P(E)$.
-    \begin{enumerate}
-        \item Montrer que $\accentset{\circ}{{\acc{A}}}={\acc{A}}$, et $\ov{\ov{A}}=\ov{A}$.\vspace*{-0.7cm}
-        \item Combien d'ensemble différents possibles avec $\accentset{\vdots}{\ov{\accentset{\circ}{\ov{{\acc{A}}}}}}$.
-        \item Montrer que $\accentset{\circ}{A\cap B} = {\acc{A}}\cap\accentset{\circ}{B}$ et que $\ov{A\cup B}=\ov{A}\cup\ov{B}$.
-        \item Montrer que ${\acc{A}}\cup\accentset{\circ}{B}\subset\accentset{\circ}{A\cup B}$ et que $\ov{A\cap B}\subset \ov{A}\cap\ov{B}$.
-    \end{enumerate}
-    \tcblower
-    \boxed{1.} On a ${\acc{A}}$ ouvert et on a vu que $B$ ouvert $\iff \accentset{\circ}{B}=B$.\\
-    \boxed{3.} Déjà, $A\cap B \subset A$ et $A\cap B \subset B$. On passe aux rondes : $\accentset{\circ}{A\cap B}\subset {\acc{A}}$ et $\accentset{\circ}{A\cap B}\subset \accentset{\circ}{B}$. Donc $\accentset{\circ}{A\cap B} \subset {\acc{A}}\cap\accentset{\circ}{B}$.\\
-    Réciproquement, soit $x\in {\acc{A}}\cap\accentset{\circ}{B}$. Alors $x\in{\acc{A}}$ et $x\in\accentset{\circ}{B}$ donc $\exists r_1 > 0, ~ B(x,r_1)\subset A$ et $\exists r_2 >0, ~ B(x,r_2)\subset B$.\\
-    On pose $r=\min(r_1,r_2)$, et on a $B(x,r)\subset A\cap B$, donc $x\in\accentset{\circ}{A\cap B}$.
-\end{ex}
-
-\begin{thm}{Caractérisation séquentielle de l'adhérence.}{seqadh}
+\begin{thm}{Caractérisation séquentielle de l'adhérence. $\star$}{seqadh}
     Soit $(E,\|\cdot\|)$ un evn et $A\subset E$.
     \begin{equation*}
         x \in \ov{A} \iff \exists (a_n)_{n\in\N} \in A^\N, ~ \lim a_n = x.
@@ -784,6 +837,8 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Ainsi, $\forall n \in \N^*, ~ \exists a_n \in B(x,\frac{1}{n})\cap A$, on a construit la suite $(a_n)$, et par encadrement, $a_n\to x$.
 \end{thm}
 
+\vspace*{-0.4cm}
+
 \begin{corr}{Caractérisation séquentielle d'un fermé.}{}
     Soit $(E,\|\cdot\|)$ un evn et $F\subset E$.
     \begin{center}
@@ -793,15 +848,21 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     On a toujours $F\subset\ov{F}$ donc $F=\ov{F} \iff \ov{F} \subset F \iff $ l'énoncé.
 \end{corr}
 
+\vspace*{-0.4cm}
+
 \begin{ex}{}{}
-    On a $[1,2]$ un fermé de $\R$ car pour $(u_n)\in[1,2]^\N$ convergente vers $l$, on a :
+    $\hra$ $[1,2]$ est un fermé de $\R$ puisque pour $(u_n)\in[1,2]^\N$ convergente vers $l$ :
     \begin{equation*}
         \forall n \in \N, ~ 1 \leq u_n \leq 2 \ra 1 \leq l \leq 2.
     \end{equation*}
-    On a $\Z$ un fermé de $\R$ car pour $(u_n)\in\Z^\N$ convergente vers $l$, on a:\\
-    $\forall \e > 0, ~ \exists n_0, ~ \forall n \geq n_0, ~ |u_n-l|<\e$ donc $|u_n-u_{n_0}|\leq2\e$.\\
-    Avec $\e=\frac{1}{2}$, on a $\exists N \in \N, ~ \forall n \geq N, ~ |u_n-u_N|<1$ donc $u_n=u_N$, et $l=u_N\in\Z$.
+    $\hra$ $\Z$ est un fermé de $\R$ car pour $(u_n)\in\Z^\N$, convergente vers $l$, on a :
+    \begin{equation*}
+        \exists n_0 \in \N, ~ \forall n \geq n_0, ~ |u_n-l| <\frac{1}{2}, ~ \nt{donc} ~ |u_n - u_{n_0}| < 1.
+    \end{equation*}
+    Donc $\forall n \geq n_0, ~ u_n = u_{n_0}$, donc $l=u_{n_0}\in\Z$.
 \end{ex}
+
+\vspace*{-0.4cm}
 
 \begin{ex}{}{}
     Soit $(E,\|\cdot\|)$ un evn et $F$ un ssev de $E$. Montrer que $\ov{F}$ est un ssev de $E$.
@@ -811,13 +872,17 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     On a $(a_n+\l b_n)\to x + \l y$ par théorème, or $a_n+\l b_n \in F$ donc $x+\l y \in \ov{F}$.
 \end{ex}
 
+\vspace*{-0.8cm}
+
 \begin{defi}{Distance à une partie.}{}
     Soit $(E,\|\cdot\|)$ un evn, et $A\subset E$ non-vide. Soit $x\in E$.\\
-    La distance de $x$ à $A$ est définie par $d(x,A)=\inf\{\|x-y\|, ~ y \in A\}$.
+    La \bf{distance} de $x$ à $A$ est définie par $d(x,A)=\inf\{\|x-y\|, ~ y \in A\}$.
     \tcblower
     Notons $D=\{\|x-y\|, ~ y \in A\}$, on a $D\subset\R_+$ et $A$ non-vide donc $y_0\in A$ puis $\|x-y_0\|\in D$ donc $D\neq\0$.\\
     On a alors $D$ une partie non-vide de $\R$ et minorée par 0, donc l'inf existe par théorème. 
 \end{defi}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Soit $(E,\|\cdot\|)$ un evn et $A\subset E$ non-vide. Montrer que :
@@ -830,6 +895,8 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Donc $\forall n \in \N, ~ \a_n\in D$, donc $\exists y_n \in A, ~ \a_n = \|x-y_n\|$.\\
     On a donc $\lim \|x-y_n\|=0$ donc $y_n\to x$ donc $x\in\ov{A}$.
 \end{ex}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Soit $(E,\|\cdot\|)$ un evn, $a\in E$ et $r>0$.
@@ -858,10 +925,10 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     \begin{enumerate}
         \item $\ov{A}=E$.
         \item $\forall x \in E, ~ \exists (a_n) \in A^\N, ~ \lim a_n = x$.
-        \item $\forall O \subset E$ ouvert non-vide de $E$, \quad $O\cap A \neq \0$.
+        \item $\forall O$ ouvert non-vide de $E$, $O\cap A \neq \0$.
         \item $\forall x \in E, ~ \forall r > 0, ~ B(x,r) \cap A \neq \0$
     \end{enumerate}
-    Ces équivalences viennent des théorèmes \ref{thm:caradh} et \ref{thm:seqadh}.
+    Ces équivalences sont justifiées par les théorèmes \ref{thm:caradh} et \ref{thm:seqadh}.
 \end{defi}
 
 \vspace*{-0.7cm}
@@ -886,7 +953,7 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 \begin{defi}{Compacité.}{}
     Soit $(E,\|\cdot\|)$ un evn et $K\subset E$.
     \begin{center}
-        $K$ est compact ssi de toute suite d'éléments de $K$, on peut extraire une suite convergente dans $K$.
+        $K$ est \bf{compact} ssi de toute suite d'éléments de $K$, on peut extraire une suite convergente dans $K$.
     \end{center}
     \bf{Remarque.} L'ensemble vide et les singletons sont compacts.
 \end{defi}
@@ -921,6 +988,8 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Aucune suite extraite de $(x_n)_{n\in\N}$ n'est bornée, donc aucune suite extraite ne converge, donc $K$ n'est pas compacte.
 \end{prop}
 
+\vspace*{-0.8cm}
+
 \begin{ex}{}{}
     Soit $\|\cdot\|$ une norme sur $\R[X]$ définie par $\|P\|=\max(|a_k|, ~ k \in \N)$.\\
     Soit $S=\{P \in E, ~ \|P\|=1\}$ la sphère unité, $S$ est fermée et bornée.\\
@@ -932,12 +1001,16 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Donc $n,m>N\ra \|P_{\phi(m)-P_{phi(n)}}\|\leq \|P_{\phi(n)} - l\| + \|P_{\phi(m)} - l\| < \frac{1}{2} \ra 1 < \frac{1}{2}$, ...
 \end{ex}
 
+\vspace*{-0.8cm}
+
 \begin{prop}{$\star$}{}
     Soit $(E,\|\cdot\|)$ un evn, $K$ un compact et $F$ fermé tel que $F\subset K$, alors $F$ est compact.
     \tcblower
     Soit $(u_n)\in F^\N$, alors $\forall n \in \N, ~ u_n \in K$. Or $K$ compact, donc $\exists \phi, \exists l \in K, ~ u_{\phi(n)}\to l$.\\
     Puis $l=\lim u_{\phi(n)}\in F$ car $F$ est fermé et $u_{\phi(n)}\in F$, donc $F$ compact.
 \end{prop}
+
+\vspace*{-0.8cm}
 
 \begin{ex}{}{}
     Soit $(E,\|\cdot\|)$ un evn.
@@ -984,21 +1057,23 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Soit $(E,\|\cdot\|)$ un evn. Soit $K\subset E$ un compact et $(u_n)_n\in K^\N$.\\
     Alors $(u_n)$ converge ssi $(u_n)_n$ admet une unique valeur d'adhérence.
     \tcblower
-    \boxed{\ra} Si $(u_n)_n$ converge vers $l$, alors $\Val((u_n))=\{l\}$.\\
+    \boxed{\ra} Si $(u_n)_n$ converge vers $l$, alors ses suites extraites aussi : $\Val((u_n))=\{l\}$.\\
     \boxed{\la} Supposons que $\Val(u_n)=\{l\}$. Par l'absurde, on suppose que $\exists \e > 0, ~ \forall N \in \N, ~ \exists n \geq N, ~ \|u_n - l\| > \e$.\\
     Équivalent à $\exists \e > 0, ~ \{n \in \N, ~ \|u_n - l\| > \e\}$ est infini puis $\exists\e>0, ~ \exists \phi , ~ \forall n \in \N, ~ \|u_{\phi(n)}-l\|>\e$.\\
     Comme $K$ est compact, $\exists \psi, ~ u_{\phi\circ\psi(n)}\to l' \in K$, donc $l'\neq l$, puis $l'\in \Val(u_n)$, absurde.
 \end{prop}
 
 \begin{ex}{}{}
-    Soit $(E,\|\cdot\|)$ un evn et $(u_n)_nn\in E^\N$ convergente vers $l\in E$. Montrer que $K=\{u_n, ~ n\in\N\}\cup\{l\}$ est un compact.
+    Soit $(E,\|\cdot\|)$ un evn et $(u_n)_{n\in\N}\in E^\N$ convergente vers $l\in E$. Montrer que $K=\{u_n, ~ n\in\N\}\cup\{l\}$ est un compact.
     \tcblower
     \bf{Idée.} Pour $(v_n)\in K^\N$, en extraire une suite convergente dans $K$. 
 \end{ex}
 
+\pagebreak
+
 \section{Khôlles.}
 
-\begin{exercice}{(Martin)}{}
+\begin{exercice}{}{}
     Soit $E$ un evndf, $f\in\L(E)$ tel que $\forall x \in E, ~ \|f(x)\|\leq\|x\|$.\\
     Montrer que $E=\Ker(f-\id)\oplus\Im(f-\id)$.
     \tcblower
@@ -1017,9 +1092,7 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Alors $E=\rg(f-\id)+\dim\Ker(f-\id)$, puis par caractérisation, $E=\Ker(f-\id)\oplus\Im(f-\id)$.
 \end{exercice}
 
-\pagebreak
-
-\begin{exercice}{(Morgan)}{}
+\begin{exercice}{}{}
     Soit $E\subset\R^\N$ le $\R$-ev des suites réelles bornées. Pour $u\in E$, on définit :
     \begin{equation*}
         \|u\|=\sum_{n=0}^{+\infty}\frac{|u_n|}{2^n}
@@ -1036,9 +1109,9 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     (...) 
 \end{exercice}
 
-\vspace*{-0.7cm}
+\pagebreak
 
-\begin{exercice}{(Etienne)}{}
+\begin{exercice}{}{}
     Soit $f:\R\to\R$ de classe $\m{C}^0$. Soit $K$ un compact. Montrer que :
     \begin{equation*}
         f^{-1}(K) \nt{ est compact} \iff \lim_{x\to\pm\infty}|f(x)|=+\infty.
@@ -1055,7 +1128,7 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
 
 \vspace*{-0.7cm}
 
-\begin{exercice}{(Tom)}{}
+\begin{exercice}{}{}
     On munit $M_n(\R)$ du produit défini par $(A\mid B)=\Tr(A^\top B)$.
     \begin{enumerate}
         \item Montrer que la base canonique $(E_{i,j})_{1\leq i,j \leq n}$ de $M_n(\R)$ est orthonormée.
@@ -1071,15 +1144,17 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Supposons $A=\l I_n$, alors $\Tr(A)=\l n$ puis $\sqrt{n}\sqrt{\Tr(A^\top A)}=\sqrt{n}\sqrt{\Tr(\l^2 I_n)}=|\l|n$.
 \end{exercice}
 
-\begin{exercice}{(Florian)}{}
+\begin{exercice}{}{}
     Déterminer l'adhérence de $A=\{(x,\cos\left( \frac{1}{x} \right)) \mid x\in\R, ~ x > 0\}$.
     \tcblower
-    Conjecture : $\{(0,y), ~ y \in [-1,1]\}\cup\{(x,\cos(\frac{1}{x})), ~ x > 0\}$.
+    $\{(0,y), ~ y \in [-1,1]\}\cup\{(x,\cos(\frac{1}{x})), ~ x > 0\}$.
 \end{exercice}
 
-\begin{exercice}{(Florian)}{}
+\begin{exercice}{}{}
     \small Soit $A$ une partie de $\R$. Un point $x\in\R$ est dit d'accumulation de $A$ si tout voisinage $x$ dans $\R$ privé de $x$ rencontre $A$. Montrer que si $A$ est bornée et n'admet qu'un seul point d'accumulation, alors il existe une bijection entre $\N$ et $A$.
 \end{exercice}
+
+\pagebreak
 
 \begin{exercice}{(Enzo)}{}
     Soit $A\in M_n(\R)$ telle que $A^\top A=I_n$ et $\Ker(A-I_n)=\{0\}$.
@@ -1099,15 +1174,6 @@ L'idée du chapitre est de faire de l'analyse (ie définir la notion de limite) 
     Ensuite, $\|(A-I)^{-1}v_p\|\leq\|(A-I_n)^{-1}\|\|v_p\|\leq\|(A-I_n)^{-1}\|\frac{2\sqrt{n}}{p+1}\to_{p\to+\infty}0$.\\
     Alors $\|u_p\|\to 0$ puis $u_p\to0$.\\
     \boxed{2.} [...]
-\end{exercice}
-
-\begin{exercice}{(Daouda)}{}
-    Soit $f\in\m{C}^1([0,1],\R)$.
-    \begin{enumerate}
-        \item Montrer que $f\mapsto|f(0)| + \int_0^1|f(t)|\dt = \|f\|$ est une norme.
-        \item Montrer que $\|f\|\leq\|f\|_\infty$.
-    \end{enumerate}
-    (Fait en classe.)
 \end{exercice}
 
 \end{document}
