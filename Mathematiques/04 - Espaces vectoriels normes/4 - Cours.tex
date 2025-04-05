@@ -760,7 +760,7 @@ L'idée du chapitre est de faire de l'analyse (définir la notion de limite) sur
 
 \vspace*{-0.8cm}
 
-\begin{prop}{}{}
+\begin{prop}{}{67}
     Soit $(E,\|\cdot\|)$ un evn et $A\subset E$.
     \begin{equation*}
         A \nt{ ouvert} \iff A = {\acc{A}}; \quad A \nt{ fermé} \iff A = \ov{A}.
@@ -801,6 +801,14 @@ L'idée du chapitre est de faire de l'analyse (définir la notion de limite) sur
         \item $\leftindex^C{\ov{A}}=\accentset{\circ}{\leftindex^CA}$.
         \item $\leftindex^C{\acc{A}}=\ov{\leftindex^CA}$.
     \end{enumerate} 
+    \tcblower
+    $\hra$ $A\subset\ov{A}$ donc $\c{\ov{A}}\subset\c{A}$ donc $\c{\ov{A}}\subset\accentset{\circ}{\c{A}}$.\\
+    $\hra$ $\accentset{\circ}{\c{A}}\subset\c{A}$ donc $A \subset \c{\left(\accentset{\circ}{\c{A}}\right)}$ donc $\ov{A}\subset \c{\left(\accentset{\circ}{\c{A}}\right)}$ donc $\acc{\c{A}} \subset \c{\ov{A}}$.\\
+    Par double-inclusions : $\c{\ov{A}}=\acc{\c{A}}$.\\
+    On utilise la proposition \ref{prop:67} sans détailler, et $B$ fermé (resp. ouvert) de $A$ implique $\ov{A}\subset B$ (resp. $B \subset \A$).\\
+    $\hra$ $\A \subset A$ donc $\c{A}\subset\c{\A}$ donc $\ov{\c A} \subset \c{\A}$.\\
+    $\hra$ $\c{A}\subset\ov{\c{A}}$ donc $\c{\ov{\c{A}}}\subset A$ donc $\c{\ov{\c{A}}}\subset\A$ puis $\c{\A}\subset\ov{\c{A}}$.\\
+    Par double-inclusions : $\c{\A}=\ov{\c{A}}$.
 \end{lemme}
 
 \pagebreak

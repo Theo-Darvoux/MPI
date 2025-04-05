@@ -16,20 +16,20 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
 \section{Généralités.}
 
 \begin{defi}{Série.}{}
-    Soit $(u_n)_{n\in\N}\in E^\N$. La série de terme général $(u_n)_{n\in\N}$, notée $\sum u_n$ est la suite $(S_n)_{n\in\N}$ définie par :
+    Soit $(u_n)_{n\in\N}\in E^\N$. La \bf{série} de terme général $(u_n)_{n\in\N}$, notée $\sum u_n$ est la suite $(S_n)_{n\in\N}$ définie par :
     \begin{equation*}
         \forall n \in \N, \quad S_n = \sum_{k=0}^n u_k.
     \end{equation*}
-    Alors $S_n$ est appelée somme partielle de la série $\sum u_n$.
+    Alors $S_n$ est appelée \bf{somme partielle} de la série $\sum u_n$.
 \end{defi}
 
 \begin{defi}{Convergence d'une série.}{}
     Soit $\sum u_n$ une série de terme général $(u_n)$. On note $(S_n)$ les sommes partielles.
     \begin{center}
-        $\sum u_n$ converge ssi la suite des sommes partielles $(S_n)_{n\in\N}$ converge.
+        $\sum u_n$ converge simplement $(\CS)$ ssi la suite des sommes partielles $(S_n)_{n\in\N}$ converge.
     \end{center}
     En cas de convergence, on notera la limite $\sum_{n=0}^{\infty}u_n$.\\
-    On définit de plus le reste $R_n$ de la série : $R_n=S-S_n$ où $S=\sum_{n=0}^\infty u_n$ et $S_n=\sum_{k=0}^nu_k$.
+    On définit de plus le \bf{reste} $R_n$ de la série : $R_n=S-S_n$ où $S=\sum_{n=0}^\infty u_n$ et $S_n=\sum_{k=0}^nu_k$.
 \end{defi}
 
 \begin{prop}{Condition nécessaire de convergence.}{}
@@ -38,7 +38,7 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
     Soit $\sum u_n$ convergente vers $S\in E$ et $S_n=\sum_{k=0}^nu_k$. Alors $u_{n+1}=S_{n+1}-S_n\to S-S = 0$.
 \end{prop}
 
-\begin{prop}{}{}
+\begin{prop}{Linéarité.}{}
     Soit $\sum u_n$ et $\sum v_n$ deux séries convergentes de $E$ et $\l\in\K$.\\
     Alors $\sum(u_n +\l v_n)$ converge et $\sum_{n=0}^\infty(u_n+\l v_n) = \sum_{n=0}^\infty u_n + \l\sum_{n=0}^\infty v_n$.
 \end{prop}
@@ -48,10 +48,12 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
 \begin{prop}{}{}
     Deux séries qui diffèrent par un nombre fini de termes sont de mêmes natures.
     \tcblower
-    Soient $(u_n)\in E^\N$ et $(v_n)\in E^\N$ tels que $\exists N \in \N, ~ \forall n \geq N, ~ u_n = v_n$.\\
-    On pose $S_n =\sum_{k=0}^nu_k$ et $T_n =\sum_{k=0}^n v_k$ pour tout $n\in\N$.\\
-    Alors $\forall n \geq N, ~ S_n - T_n = \sum_{k=0}^{N-1}(u_k-v_k)=c$.\\
-    Donc $S_n=T_n+c$, donc $(S_n)$ cv $\iff (T_n)$ cv et $\lim S_n = \lim T_n + c$.
+    Soient $(u_n)$ et $(v_n)$ deux suites de $E$ telles que $\exists n_0 \in \N, ~ \forall n \geq n_0, ~ u_n = v_n$.
+    \begin{equation*}
+        \forall n \in \N, ~ U_n := \sum_{k=0}^n u_k \et V_n := \sum_{k=0}^n v_k.
+    \end{equation*}
+    $\hra$ $\forall n \geq n_0, ~ U_n - V_n = \sum_{k=0}^{n_0-1}(u_k - v_k)$. Notons $c$ cette constante.\\
+    Alors $U_n = V_n + c$, donc $(U_n)$ converge ssi $(V_n)$ converge, et même $\lim U_n = \lim V_n + c$.
 \end{prop}
 
 \vspace*{-0.7cm}
@@ -59,19 +61,8 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
 \begin{prop}{}{}
     La suite $(u_n)_{n\in\N}\in E^\N$ et la série $\sum(u_{n+1}-u_n)$ sont de mêmes natures.
     \tcblower
-    En effet, $\forall n \in \N, ~ \sum_{k=0}^n(u_{k+1} - u_k)=u_{n+1}-u_0$. Notons $S_n = \sum_{k=0}^n(u_{k+1}-u_k)$ la somme partielle.\\
-    Alors $\forall n \in \N, ~ S_n = u_{n+1}-u_0$ puis $(S_n)_{n\in\N}$ et $(u_n)_{n\in\N}$ sont de mêmes natures.
+    Notons $(S_n)$ les sommes partielles. Par téléscopage, $S_n = u_{n+1} - u_0$ donc $(S_n)$ et $(u_n)$ sont de même nature.
 \end{prop}
-
-\vspace*{-0.7cm}
-
-\begin{defi}{Produit de Cauchy.}{}
-    Soit $(A,\times,+,\cdot)$ une algèbre normée. Soit $(u_n)_{n\in\N}\in A^\N$ et $(v_n)_{n\in\N}\in A^\N$.\\
-    La série produit de Cauchy des deux séries $\sum u_n$ et $\sum v_n$ est la série $\sum w_n$ telle que :
-    \begin{equation*}
-        \forall n \in \N, \quad w_n = \sum_{k=0}^nu_kv_{n-k}=\sum_{i+j=n}u_iv_j.
-    \end{equation*}
-\end{defi}
 
 \vspace*{-0.7cm}
 
@@ -95,7 +86,9 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
     $\sum v_n \nt{ cv.} \iff \sum_{k=0}^n v_k \nt{ cv.} \ra \sum_{k=0}^n v_k \nt{ bornée} \ra \sum_{k=0}^n u_k \nt{ bornée} \ra \sum u_n \nt{ cv.}$ d'après $\ref{prop:8}$
 \end{thm}
 
-\begin{thm}{Comparaison des suites à termes positifs.}{}
+\pagebreak
+
+\begin{thm}{Comparaison des séries à termes positifs. (TCSTG+) $\star$}{}
     Soient $\sum u_n$ et $\sum v_n$ deux séries à \bf{termes positifs}, ou positifs apdcr.
     \begin{enumerate}
         \item Si $u_n \underset{+\infty}{=}O(v_n)$ et $\sum v_n$ converge, alors $\sum u_n$ converge.
@@ -109,58 +102,68 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
     \tcblower
     \boxed{1.} $\exists M \geq 0 , ~ \forall n \in \N, ~ 0 \leq u_n \leq Mv_n$, on revient à la proposition précédente.\\
     \boxed{2.} $u_n = \e_nv_n$ avec $\e_n\to0$ donc bornée.\\
-    \boxed{3.} On a $u_n\underset{+\infty}{=}O(v_n)$ et $v_n\underset{+\infty}{=}O(u_n)$. On admet la suite du résultat.
+    \boxed{3.} On a $u_n\underset{+\infty}{=}O(v_n)$ et $v_n\underset{+\infty}{=}O(u_n)$, le reste du résultat est admis.
 \end{thm}
 
-\begin{prop}{Séries de Riemann}{}
+\begin{prop}{Séries de Riemann. $\star$}{}
     \begin{equation*}
         \sum\frac{1}{n^\a} \nt{ converge} \iff \a>1.
     \end{equation*}
     \tcblower
-    Soit $\g\in\R$.
-    \begin{align*}
-        (n+1)^\g-n^\g &= n^\g(1+\frac{1}{n})^\g-n^\g=n^\g\left(1+\frac{\g}{n}+o\left(\frac{1}{n}\right)\right)-n^\g=\g n^{\g-1}+o(n^{\g-1})
-    \end{align*}
-    Donc $(n+1)^\g-n^\g\sim\g n^{\g-1}$. Or $\frac{1}{n^\a}\sim\frac{1}{1-\a}\left( (n+1)^{1-\a} - n^{1-\a} \right)$.\\
-    Par théorème de comparaison (\bf{termes positifs}), leurs séries sont de mêmes natures.\\
-    La deuxième est de même nature que $(n^{1-\a})_{n\in\N}$ car téléscopique, donc converge pour $\a>1$.\\
-    On étudie le cas $\a=1$ (série harmonique). On a $\ln(n+1)-\ln(n)=\ln(1+\frac{1}{n})=\frac{1}{n}+o(\frac{1}{n})\sim\frac{1}{n}$.\\
-    On a alors $\sum\frac{1}{n}$ et $\sum\left(\ln(n+1)-\ln(n)\right)$ de mêmes natures, puis $\sum\frac{1}{n}\sim\ln(n)$, divergentes.
+    Soit $\g\in\R$, on cherche un équivalent de $\g n^{\g-1}$ en l'infini :
+    \begin{equation*}
+        (n+1)^\g - n^\g = n^\g\left( 1 + \frac{1}{n} \right)^\g - n^\g \underset{+\infty}{=} n^\g \left( 1 + \frac{\g}{n} + o\left( \frac{1}{n} \right) \right) - n^\g = \g n^{\g-1} + o(n^{\g-1}).
+    \end{equation*}
+    $\hra$ $\g n^{\g-1}$ est équivalent à $(n+1)^\g - n^\g$ en l'infini.\\
+    Pour $\a\in\R$, on peut spécifier en $1-\a$ pour obtenir :
+    \begin{equation*}
+        \frac{1}{n^\a} \underset{+\infty}{\sim} \frac{1}{1-\a}\left( \left( n+1 \right)^{1-\a} - n^{1-\a} \right).
+    \end{equation*}
+    Par TCSTG+, $\sum \frac{1}{n^\a} \nt{ converge} \iff \sum \left( (n+1)^{1-\a} - n^{1-\a} \right)$ converge.\\
+    $\hra$ $\forall n \in \N, ~ \sum_{k=1}^n((k+1)^{1-\a} - k^{1-\a})=(n+1)^{1-\a}-1$ converge ssi $\a>1$.\\
+    Donc $\sum \frac{1}{n^\a}$ converge ssi $\a>1$.
 \end{prop}
 
 \begin{prop}{Série harmonique.}{}
     Pour $n\in\N$, soit $H_n=\sum \frac{1}{n}$. Alors $H_n\sim\ln(n)$ et $H_n=\ln(n)+\g+o(1)$ où $\g$ est la constante d'Euler.
     \tcblower
-    On vient de voir que $\ln(n+1)-\ln(n)\sim\frac{1}{n}$ et que $\sum\frac{1}{n}$ diverge.\\
-    Notons $T_n=\sum_{k=0}^n\ln(n+1)-\ln(n)=\ln(n+1)$ par téléscopage.\\
-    Par théorème de comparaison (\bf{termes positifs}) : $H_n\sim T_n$, puis $\ln(n+1)=\ln(n)+\ln(1+\frac{1}{n})\sim \ln(n)$.\\
-    On pose $u_n=H_n-\ln(n)$. On a $u_{n+1}-u_n = \frac{1}{n+1}-\ln(n+1)+\ln(n)=\frac{1}{n}\frac{1}{(1+\frac{1}{n})}-\ln(1+\frac{1}{n})=-\frac{1}{2n^2}+o(\frac{1}{n^2})$.\\
-    On a donc $u_{n+1}-u_n\sim-\frac{1}{2n^2}$. Par théorème de comparaison, $u_{n+1}-u_n$ converge.\\
-    On note $\g=\lim u_n$, on a alors $H_n=\ln n + u_n = \ln n + \g + o(1)$.\\
-    On peut étudier $v_n = H_n - \ln(n) - \g$, et trouver un équivalent...
+    $\hra$ $\ln(n+1) = \ln(n) + \ln(1+\frac{1}{n}) = \ln(n) + \frac{1}{n} + o(\frac{1}{n}) \sim \ln(n)$ en l'infini.\\
+    Posons $u_n = H_n - \ln(n)$ pour $n\in\N$.
+    \begin{equation*}
+        u_{n+1} - u_n = \frac{1}{n+1} - \ln(n+1) + \ln(n) = \frac{1}{n}\frac{1}{(1+\frac{1}{n})} - \ln(1+\frac{1}{n}) \underset{+\infty}{=} -\frac{1}{2n^2} + o(\frac{1}{n^2}).
+    \end{equation*}
+    $\hra$ $u_{n+1} - u_n \sim -\frac{1}{2n^2}$ en l'infini, puis $(u_{n+1}-u_n)$ converge par comparaison.\\
+    En notant $\g$ la limite de $u_n$, on a bien $H_n = \ln(n) + u_n = \ln(n) + \g + o(1)$ en l'infini.\\
+    $\hra$ On pourrait continuer le développement en posant $v_n = H_n - \ln(n) - \g$ pour $n\in\N$.
 \end{prop}
 
 \begin{prop}{Reste d'une série de Riemann convergente.}{}
-    Soit $\sum \frac{1}{n^\a}$ avec $\a>1$. On note $R_n$ le reste d'ordre $n$, alors $R_n \sim \frac{1}{\a-1}\frac{1}{n^{\a-1}}$.
+    Pour $\a>1$, le reste d'ordre $n$ de la série $\sum \frac{1}{n^\a}$ est équivalent à $\frac{1}{(\a-1)n^{\a-1}}$ en l'infini.
     \tcblower
-    On utilise le théorème de comparaison des séries à \bf{termes positifs} (cas de convergence).
+    $\hra$ On a déjà montré précedemment que $\frac{1}{n^\a}\sim \frac{1}{1-\a}((n+1)^{1-\a} - n^{1-\a})$ en l'infini.\\
+    $\hra$ Notons $R_n$ le reste associé à la série $\sum \frac{1}{n^\a}$, et $R_n'$ celui associé à $\sum \frac{1}{1-\a}((n+1)^{1-\a}-n^{1-\a})$.\\
+    On a $R_n\sim R_n'$ par TCSTG+, et :
     \begin{equation*}
-        (n+1)^\g - n^\g \sim \g n^{\g - 1} = \frac{\g}{n^{1-\g}}
-    \end{equation*} 
-    On pose $\g=1-\a<0$, donc $\frac{1}{n^\a}\sim \frac{1}{1-\a}((n+1)^{1-\a}-n^{1-\a})$.\\
-    On note $R_n$ le reste associé à $\frac{1}{n^\a}$ et $R'_n$ associé à $\frac{1}{1-\a}((n+1)^{1-\a}-n^{1-\a})$, on a $R_n\sim R'_n$.
-    \begin{equation*}
-        R'_n = \frac{1}{1-\a}\sum_{k=n+1}^\infty\left( \frac{1}{(k+1)^{\a-1}}-\frac{1}{k^{\a-1}} \right)=\frac{1}{1-\a}\left( -\frac{1}{(n+1)^{\a-1}} \right)=\frac{1}{(\a-1)(n+1)^{\a-1}}.
+        R_n' = \frac{1}{1-\a} \sum_{k=n+1}^{+\infty}\left( \frac{1}{(k+1)^{\a-1}} - \frac{1}{k^{\a-1}} \right) = \frac{1}{1-\a}\left( - \frac{1}{(n+1)^{\a-1}} \right) = \frac{1}{(\a-1)(n+1)^{\a-1}}.
     \end{equation*}
-    Puis $R_n\sim R'_n \sim \frac{1}{(\a-1)n^{\a-1}}$, en effet, $(n+1)^{\a-1}\sim n^{\a-1}$.
+    $\hra$ $(n+1)^{\a-1}\sim n^{\a-1}$ donc $R_n \sim \frac{1}{(\a-1)n^{\a-1}}$.
 \end{prop}
 
+\vspace*{-0.8cm}
+
 \begin{ex}{Nature de $\sum \left[ e - \left( 1 + \frac{1}{n} \right)^n \right]$.}{}
-    On a déjà que $\lim \left( 1 + \frac{1}{n} \right)^n = e$ : $(1+\frac{1}{n})^n=e^{n\ln(1+\frac{1}{n})}=e^{1-\frac{1}{2n}+o(\frac{1}{n})}\to e$ par continuité de $\exp$.\\
-    Le terme général de la série tend vers 0, elle n'est pas grossièrement divergente. On pose $u_n$ le t.g. de la série.\\
-    On a $u_n=e-ee^{-\frac{1}{2n}+o(\frac{1}{n})}=e(1-e^{-\frac{1}{2n}+o(\frac{1}{n})})=e\left( 1-1+\frac{1}{2n}-o(\frac{1}{n}) \right)\sim \frac{e}{2n}$.\\
-    Ainsi, $\sum u_n$ et $\sum \frac{e}{2n}$ sont de mêmes natures (théorème de comparaison à \bf{termes positifs}), ici divergentes...
+    Posons $u_n = e - \left( 1 + \frac{1}{n} \right)^n$, sa limite est bien 0 par continuité de $\exp$ en 1 :
+    \begin{equation*}
+        \left( 1 + \frac{1}{n} \right)^n = \exp\left(n\ln\left(1+\frac{1}{n}\right)\right) \underset{+\infty}{=} \exp\left(1 - \frac{1}{2n} + o\left( \frac{1}{n} \right)\right) \xrightarrow[n\to+\infty]{} e.
+    \end{equation*}
+    Cependant, on ne peut pas conclure pour le moment, en effet :
+    \begin{equation*}
+        u_n \underset{+\infty}{=} e - e^{1 - \frac{1}{2n} + o\left( \frac{1}{n} \right)} \underset{+\infty}{=} e\left(1 + \frac{1}{2n} + o\left( \frac{1}{n} \right)\right) \underset{+\infty}{\sim} \frac{e}{2n}.
+    \end{equation*}
+    Cette série diverge donc par comparaison avec une série de Riemann.
 \end{ex}
+
+\vspace*{-0.8cm}
 
 \begin{prop}{Séries de Bertrand. (HP)}{}
     \begin{equation*}
@@ -188,13 +191,17 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
 
 \vspace*{0.4cm}
 
-\begin{ex}{Théorème de Césaro.}{}
+\begin{ex}{Théorème de Cesàro.}{}
     Soit $(u_n)_{n\in\N}$ une suite réelle et $v_n=\frac{u_0+...+u_n}{n+1}$ sa moyenne de Césaro. Si $u_n\to l$, alors $v_n \to l$.
     \tcblower
-    Supposons que $\forall n \in \N, ~ u_n \geq 0$, et soient $S_n = \sum_{k=0}^n u_k$, $v_n=\frac{S_n}{n+1}$.\\
-    Supposons que $u_n \to l \neq 0$, alors $u_n \sim l$. Alors $\sum l$ est divergente grossièrement.\\
-    D'après le théorème de comparaison des séries à \bf{termes positifs}, on a $S_n \sim (n+1)l$, puis $v_n=\frac{S_n}{n+1}\to l$.\\
-    Le cas $l=0$ est facile en se ramenant au cas précédent.
+    $\hra$ Supposons que $(u_n)$ converge vers $l\in\R$.\\
+    $\hra$ Alors pour $\e>0$, $\exists n_0 \in \N, ~ \forall n \geq n_0, ~ |u_n - l| \leq \e$.\\
+    On sépare la somme en deux parties, pour $n\geq n_0$ :
+    \begin{align*}
+        |v_n - l| &= \left| \frac{1}{n+1}\sum_{k=0}^n u_k - l\right| \leq \frac{1}{n+1}\sum_{k=0}^n|u_k - l| \leq \frac{1}{n+1}\sum_{k=0}^{n_0-1}|u_k-l| + \frac{1}{n+1}\sum_{k=n_0}^n\e\\
+        &= \frac{c}{n+1} + \frac{n-n_0+1}{n+1}\e \xrightarrow[n\to+\infty]{} 0 + \e
+    \end{align*}
+    Alors $|v_n-l|\leq\e$, donc $v_n\to l$.
 \end{ex}
 
 \vspace*{-0.7cm}
@@ -205,22 +212,30 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
         \sum_{n=0}^\infty a^n = \frac{1}{1-a}, \quad \sum_{k=n+1}^\infty a^k = \frac{a^{n+1}}{1-a}.
     \end{equation*}
     \tcblower
-    Si $|a|\geq1$, la série diverge grossièrement.\\
-    Sinon, $(1-a)\sum_{k=0}^na^k=\sum_{k=0}^na^k-\sum_{k=0}^na^{k+1}=1-a^{n+1}\to1$ donc $S_n\to\frac{1}{1-a}$.\\
-    Puis $\sum_{n+1}^\infty a^k = a^{n+1}\left( \sum_{k=0}^\infty a^k \right)=\frac{a^{n+1}}{1-a}$.
+    $\hra$ Si $|a|\geq1$, la série diverge grossièrement.\\
+    $\hra$ Sinon, on suppose $|a|<1$, et alors :
+    \begin{equation*}
+        (1-a)\sum_{k=0}^n a^k = \sum_{k=0}^n a^k - \sum_{k=0}^na^{k+1} = 1 - a^{n+1} \xrightarrow[n\to+\infty]{}1.
+    \end{equation*}
+    D'où le premier résultat, puis :
+    \begin{equation*}
+        \sum_{k=n+1}^{+\infty}a^k = a^{n+1}\sum_{k=0}^{+\infty}a^k = \frac{a^{n+1}}{1-a}.
+    \end{equation*}
 \end{rappel}
+
+\pagebreak
 
 \section{Étude générale des séries.}
 
 \subsection{Convergence absolue.}
 
-\begin{defi}{}{}
-    Soit $(u_n)_{n\in\N}\in E^\N$, alors $\sum u_n$ est absolument convergente (AC) ssi $\sum|u_n|$ converge.
+\begin{defi}{Convergence absolue.}{}
+    Soit $(u_n)_{n\in\N}\in E^\N$, alors $\sum u_n$ est \bf{absolument convergente} ($\CA$) ssi $\sum|u_n|$ converge.
 \end{defi}
 
 \vspace*{-0.7cm}
 
-\begin{prop}{}{}
+\begin{prop}{$\CA\ra\CS$. $\star$}{}
     \begin{enumerate}
         \item Soit $(u_n)\in\R^\N, ~ \sum u_n$ converge absolument $\ra$ $\sum u_n$ converge.
         \item Soit $(z_n)\in\C^\N, ~ \sum z_n$ converge absolument $\ra$ $\sum z_n$ converge.
@@ -242,7 +257,7 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
 \begin{ex}{}{}
     \begin{enumerate}
         \item $\sum \frac{\sin n}{n^2+1}$ converge car absolument convergente.
-        \item $\sum\frac{(-1)^n}{n^2}$ converge car absolument convergente, ou CSSA.
+        \item $\sum\frac{(-1)^n}{n^2}$ converge car absolument convergente.
     \end{enumerate}
 \end{ex}
 
@@ -259,7 +274,7 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
     \bf{Initialisation.} Vraie.\\
     \bf{Hérédité.} Soit $n\in\N$ tel que $\P(n)$. Alors $\|A^{n+1}\|=\|A^n\cdot A\|\leq\|A^n\|\|A\|\leq \|A\|^{n+1}$.\\
     Par récurrence, $\forall n \in \N, \left\|\frac{A^n}{n!}\right\| \leq \frac{\|A\|^n}{n!}$ terme général d'une série convergente.\\
-    Par théorème de comparaison des séries à \bf{termes positifs}, $\sum\frac{A^n}{n!}$ converge absolument, donc converge.
+    Par TCSTG+, $\sum\frac{A^n}{n!}$ converge absolument, donc converge.
 \end{prop}
 
 \begin{exi}{Lemme d'Abel}{}
@@ -276,15 +291,19 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
     Or $|(u_k-u_{k+1})V_k|\leq(u_k-u_{k+1})M$, puis $\sum_{k\geq0}(u_k-u_{k+1})$ converge car téléscopique\\
     Par comparaison (positif), $\sum |(u_k-u_{k+1})V_k|$ converge, donc $\sum(u_k-u_{k+1})V_k$ converge.\\
     Donc $(S_n)$ converge par somme.\\
-    \bf{Remarque.} On retrouve le critère spécial des séries alternées avec $v_n=(-1)^n$.\\
-    \bf{Remarque.} Étude des séries $\sum\frac{e^{in\theta}}{n^\a}$ avec $\a\in\R$ et $\theta\in\R$.\\
+    \bf{Remarque.} On retrouve le critère spécial des séries alternées avec $v_n=(-1)^n$.
+\end{exi}
+
+\begin{app}{}{}
+    Étude des séries $\sum\frac{e^{in\theta}}{n^\a}$ avec $\a\in\R$ et $\theta\in\R$.
+    \tcblower
     \boxed{\a>1} Alors $\left|\frac{e^{in\theta}}{n^\a}\right|=\frac{1}{n^\a}$, série de Riemann convergente, donc $\sum\frac{e^{in\theta}}{n^\a}$ converge absolument, donc converge.\\
     \boxed{\a<1} Alors la série est grossèrement divergente, avec $\left|\frac{e^{in\theta}}{n^\a}\right|=\frac{1}{n^\a}\to+\infty$ si $\a<0$, et vers 1 si $\a=0$.\\
     \boxed{0<\a\leq1} La série n'est pas absolument convergente, on utilise le lemme en posant $u_n=\frac{1}{n^\a}$ et $v_n=e^{in\theta}$.\\
     On a $(u_n)$ décroissante vers 0, et $V_n = e^{i\theta}\sum_{k=0}^{n-1}(e^{i\theta})^k$.\\
     $\bullet$ Si $e^{i\theta}=1$, alors $\frac{e^{in\theta}}{n^\a}=\frac{1}{n^\a}$ diverge comme série de Riemann.\\
-    $\bullet$ Si $e^{i\theta}\neq1$, alors $V_n=...$ donc $|V_n|\leq\frac{1}{|\sin\frac{\theta}{2}|}$, donc convergente.
-\end{exi}
+    $\bullet$ Si $e^{i\theta}\neq1$, alors $V_n=$ donc $|V_n|\leq\frac{1}{|\sin\frac{\theta}{2}|}$, donc convergente.
+\end{app}
 
 \begin{prop}{Produit de Cauchy de deux series absolument convergentes.}{}
     Soit $(u_n)\in\K^\N$ et $(v_n)\in\K^\N$ telles que $\sum u_n$ et $\sum v_n$ absolument convergentes.
