@@ -753,4 +753,85 @@ Dans le cas général $U$ connexe par arcs, on sait qu'il existe un chemin conti
     $\hra$ Si $\l=-2$, alors $a=-d$ et $b=c$, donc $-a^2-b^2=1$, impossible.
 \end{exercice}
 
+\subsection{Optimisation du second ordre.}
+
+\begin{defi}{}{}
+    Soit $f:U\subset E\to F$ avec $E,F$ deux $\R$-evdf et $U$ un ouvert de $E$.\\
+    On note $n$ la dimension de $E$, et $\B=(e_1,...,e_n)$ une base de $E$.\\
+    Si $f$ admet $n$ dérivées partielles sur $U$, on peut étudier leurs dérivées partielles :
+    \begin{equation*}
+        \frac{\6}{\6 x_j}\left( \frac{\6 f}{\6 x_i} \right) ~\ou~ \frac{\6^2f}{\6 x_j \6 x_i} ~~ (1 \leq i,j \leq n).
+    \end{equation*}
+    quand elles existent, il y a $n^2$ dérivées partielles secondes.
+\end{defi}
+
+\begin{defi}{}{}
+    Une application $f:U\subset E\to F$ est $\cursive{C}^2$ sur $I$ si $f$ admet des dérivées partielles secondes sur $U$, et que toutes ses dérivées partielles sont continues sur $U$.
+\end{defi}
+
+\begin{prop}{Théorème de Schwarz.}{}
+    Soit $f:U\subset E \to F$, de classe $\cursive{C}^2$ sur $U$.
+    \begin{equation*}
+        \forall i,j \in \lb1,n\rb, ~ \frac{\6^2 f}{\6 x_i \6 x_j} = \frac{\6^2 f}{\6 x_j x_i}.
+    \end{equation*}
+\end{prop}
+
+\begin{defi}{}{}
+    Soit $f\in\cursive{C}^2(U,\R)$ avec $U\subset\R^n$.\\
+    On définit la matrice Hessienne de $f$, notée $H_f$ par :
+    \begin{equation*}
+        \forall x \in U, ~ H_f(x) = \left( \frac{\6^2 f}{\6 x_i \6 x_j}(x) \right)_{1 \leq i,j \leq n} \in \S_n(\R).
+    \end{equation*}
+\end{defi}
+
+\begin{ex}{}{}
+    Soit $f:x,y\mapsto x^2y^3 + 4x + 5y$, de classe $\cursive{C}^2(\R^2,\R)$.
+    \begin{equation*}
+        H_f(x,y) = \begin{pmatrix} 2y^3 & 6xy^2 \\ 6xy^2 & 6x^2y\end{pmatrix}.
+    \end{equation*}
+\end{ex}
+
+\begin{prop}{}{}
+    Soit $f:U\subset\R^n\to\R$, de classe $\cursive{C}^2$ sur $U$. Soit $a\in U$.
+    \begin{equation*}
+        f(a+h) = f(a) + \Lg \nabla f(a), h \Rg + \frac{1}{2}\Lg h, H_f(a)h \Rg + \|h\|^2\e(h).
+    \end{equation*}
+\end{prop}
+
+\begin{prop}{Condition nécessaire d'extremum local.}{}
+    Soit $f:U\subset \R^n \to \R$, de classe $\cursive{C}^2$ sur $U$. Soit $a\in U$.
+    \begin{equation*}
+        f \nt{ admet un minimum local en } a \ra \begin{cases} \nabla f(a) = 0 \\ H_f(a) \in S_n^+(\R)\end{cases}
+    \end{equation*}
+    \tcblower
+    On sait qu'un minimum local en $a$ implique $\nabla f(a) = 0$.
+    \begin{equation*}
+        \forall h \in \R^n, ~ h^\top H_f(a)h = \sum_{1 \leq i,j \leq n} h_ih_j \frac{\6^2 f}{\6 x_i x_j}.
+    \end{equation*}
+    Donc $\forall t \in \R, ~ f(a+th) - f(a) = \frac{1}{2}t^2 h^\top H_f(a)h + t^2\|h\|^2\e(th)$.\\
+    $\hra$ $t^2(\frac{1}{2}h^\top H_f(a)h + \|h\|^2\e(th)) \geq 0$.\\
+    $\hra$ $\frac{1}{2}h^\top H_f(a)h + \|h\|^2\e(th)\geq 0$.\\
+    Notons $\a:=\frac{1}{2}h^\top H_f(a)h$, supposons $\a<0$ par l'absurde.\\
+    $\hra$ $\|h\|^2\e(th) \in ]\frac{\a}{2}, -\frac{\a}{2}$ pour $t$ petit.\\
+    Puis $\a^2 + \|h\|^2\e(th) \leq \a - \frac{\a}{2} = \frac{\a}{2} < 0$, absurde.\\
+    $\hra$ $\a\geq0$ donc $h^\top H_f(a)h \geq 0$ pour tout $h$, donc $H_f(a)\in\S_n^+(\R)$.
+\end{prop}
+
+\begin{prop}{Condition suffisante d'extremum local.}{}
+    Soit $f:U\subset \R^n \to \R$, de classe $\cursive{C}^2$ sur $U$. Soit $a\in U$.
+    \begin{equation*}
+        \left[ \nabla f(a) = 0 \et H_f(a) \in \S_n^{++}(\R) \right] \ra a \nt{ est minimum local de } f
+    \end{equation*}
+    \tcblower
+    $\hra$ $f(a+h) - f(a) = \Lg \nabla f(a), h \Rg + \frac{1}{2}\Lg h, H_f(a)h\Rg + \|h\|^2\e(h)$, avec $\e(h)\to0$.\\
+    Notons $u$ l'endomorphisme canoniquement associé à $H_f(a)\in\S_n^{++}(\R)$ ($\Sp(u)\subset\R_+^*$).\\
+    Soit $\a=\min(\Sp(u)) > 0$.\\
+    $\hra$ $\Lg h, H_f(a)h \Rg \geq \a\|h\|^2$ donc :
+    \begin{equation*}
+        f(a+h) - f(a) = \frac{1}{2}\Lg h, H_f(a)h \Rg + \|h\|^2 \e(h) \geq \|h\|^2(\frac{\a}{2} + \e(h)) > 0 
+    \end{equation*}
+    pour $h$ petit, donc $f(a+h)-f(a)\geq 0$ pour $h$ petit.\\
+    $\hra$ $a$ est un minimum local.
+\end{prop}
+
 \end{document}

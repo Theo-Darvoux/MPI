@@ -201,7 +201,7 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
         |v_n - l| &= \left| \frac{1}{n+1}\sum_{k=0}^n u_k - l\right| \leq \frac{1}{n+1}\sum_{k=0}^n|u_k - l| \leq \frac{1}{n+1}\sum_{k=0}^{n_0-1}|u_k-l| + \frac{1}{n+1}\sum_{k=n_0}^n\e\\
         &= \frac{c}{n+1} + \frac{n-n_0+1}{n+1}\e \xrightarrow[n\to+\infty]{} 0 + \e
     \end{align*}
-    Alors $|v_n-l|\leq\e$, donc $v_n\to l$.
+    Alors àpdcr, $|v_n-l|\leq\e$, donc $v_n\to l$.
 \end{ex}
 
 \vspace*{-0.7cm}
@@ -305,33 +305,17 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
     $\bullet$ Si $e^{i\theta}\neq1$, alors $V_n=$ donc $|V_n|\leq\frac{1}{|\sin\frac{\theta}{2}|}$, donc convergente.
 \end{app}
 
-\begin{prop}{Produit de Cauchy de deux series absolument convergentes.}{}
+\begin{prop}{Produit de Cauchy de deux séries absolument convergentes.}{}
     Soit $(u_n)\in\K^\N$ et $(v_n)\in\K^\N$ telles que $\sum u_n$ et $\sum v_n$ absolument convergentes.
     \begin{equation*}
         \sum_{n=0}^{\infty} w_n = \left( \sum_{n=0}^{\infty} u_n \right) \left( \sum_{n=0}^{\infty} v_n \right).
-    \end{equation*}
-    \tcblower
-    Supposons dans un premier temps que $\forall n \in \N, ~ u_n \in \R_+$ et $v_n\in\R_+$.\\
-    Notons $S_n=\sum_{k=0}^n u_k$, $T_n = \sum_{k=0}^n v_n$ et $U_n = \sum_{k=0}^n w_k$. Par hypothèse, $(S_n)$ et $(T_n)$ convergent.\\
-    Elles sont donc bornées : $\exists M \in \R_+, ~ \forall n \in \N, ~ 0 \leq S_n, T_n \leq M$.
-    \begin{equation*}
-        U_n = \sum_{k=0}^n\left( \sum_{\substack{i+j=k\\i,j\in\N}} u_iv_j \right)=\sum_{\substack{i+j\leq n\\i,j\in\N}}u_iv_i.
-    \end{equation*}
-    puis $i+j\leq n \ra \left[ i \leq n \et j \leq n \right]$ donc $U_n \leq \sum_{0\leq i,j \leq n}u_iv_j=S_nT_n$.\\
-    Alors $U_n \leq M^2$, et $(U_n)$ est croissante et majorée donc est convergente, donc $\sum w_n$ est convergente.
-    \begin{equation*}
-        \sum_{i,j\leq n}u_i v_j \leq \sum_{i+j\leq 2n}u_iv_j \leq \sum_{i,j\leq 2n}u_iv_j ~~\nt{donc}~~ S_nT_n \leq U_{2n} \leq S_{2n}T_{2n}
-    \end{equation*}
-    Or $S_n\to S$ et $T_n\to T$, donc $U_{2n}\to ST$ par encadrement, puis $U_n\to ST$ car on sait que $(U_n)$ est convergente.
-    \begin{equation*}
-        \sum_{n=0}^\infty w_n = \left( \sum_{n=0}^\infty u_n \right)\left( \sum_{n=0}^\infty v_n \right)
     \end{equation*}
 \end{prop}
 
 \begin{app*}{}{}
     Montrons que $\forall(x,y)\in\R^2$, $e^x\cdot e^y=e^{x+y}$.
     \tcblower
-    Soient $x,y\in\R$. On a $e^x$ et $e^y$ sont absolument convergentes, donc leur produit de Cauchy l'est :
+    Soient $x,y\in\R$. On a $e^x$ et $e^y$ absolument convergentes, donc leur produit de Cauchy l'est :
     \begin{equation*}
         w_n=\sum_{k=0}^n\frac{x^k}{n!}\frac{y^{n-k}}{(n-k)!}=\frac{1}{n!}\sum_{k=0}^n\binom{n}{k}x^ky^{n-k}=\frac{(x+y)^n}{n!}
     \end{equation*}
@@ -400,7 +384,7 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
     \tcblower
     Formule de Taylor-Young car $f$ est $\m{C}^3$:
     \begin{equation*}
-        f(x)=f(0)+xf'(0)+\frac{x^2}{2}f''(0)=\frac{x^3}{6}f'''(0) + o(x^3).
+        f(x)=f(0)+xf'(0)+\frac{x^2}{2}f''(0)+\frac{x^3}{6}f'''(0) + o(x^3).
     \end{equation*}
     On a alors $f\left( \frac{1}{n} \right) = f(0)+\frac{1}{n}f'(0)+\frac{1}{2n^2}f''(0)+\frac{1}{6n^3}f'''(0)+o(\frac{1}{n^3})$\\
     Et : $f\left( -\frac{1}{n} \right) = f(0)-\frac{1}{n}f'(0)+\frac{1}{2n^2}f''(0)-\frac{1}{6n^3}f'''(0)+o(\frac{1}{n^3})$.\\
@@ -416,7 +400,7 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
 
 \begin{prop}{Critère spécial des séries alternées.}{}
     Soit $\sum u_n$ une série alternée (i.e. alternée en signe).\\
-    Si $|u_n|$ tend en décroissante vers 0, alors $\sum u_n$ converge.\\
+    Si $|u_n|$ tend vers 0 \bf{en décroissant}, alors $\sum u_n$ converge.\\
     De plus, $S_n$ et $R_n$ sont du signe du premier terme de leur somme, et $|R_n|\leq|u_{n+1}|$.
     \tcblower
     SPDG, $u_0>0$. Vérifions que $(S_{2n})$ et $(S_{2n+1})$ sont adjacentes.\\
@@ -459,7 +443,7 @@ Soit $(E,\|\cdot\|)$ un espace vectoriel normé.
     Soit $u_n=v_n=\frac{(-1)^n}{\sqrt{n}}$. On a $\sum u_n$ cv.\\
     Calculer le produit de Cauchy de $\sum u_n$ et $\sum v_n$ et vérifier qu'il diverge.
     \tcblower
-    On a $w_n = \sum_{k=1}^{n-1} \frac{(-1)^n}{\sqrt{k}\sqrt{n-k}}$. Soit $f(x)=\sqrt{x\sqrt{n-x}}$ pour $x\in[0,n]$.\\
+    On a $w_n = \sum_{k=1}^{n-1} \frac{(-1)^n}{\sqrt{k}\sqrt{n-k}}$. Soit $f(x)=\sqrt{x}\sqrt{n-x}$ pour $x\in[0,n]$.\\
     Donc $\forall k \in \lb1,n-1\rb$, on a $f(k)\leq f(\frac{n}{2})=\frac{n}{2}$, puis $\frac{1}{f(k)}=\frac{1}{\sqrt{k}\sqrt{n-k}}\geq\frac{2}{n}$.\\
     Puis $|w_n|=\sum_{k=1}^{n-1}\frac{1}{\sqrt{k}\sqrt{n-k}}\geq\frac{2(n-1)}{n}\to2$. Donc $\sum w_n$ diverge grossièrement.
 \end{ex}
