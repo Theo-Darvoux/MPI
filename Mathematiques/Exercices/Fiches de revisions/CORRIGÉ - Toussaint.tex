@@ -1,0 +1,1333 @@
+\documentclass[11pt]{article}
+
+\def\chapitre{NaN}
+\def\pagetitle{Conseils de travail Vacances de la Toussaint.}
+
+\input{setupj.tex}
+
+\begin{document}
+
+\input{titlej.tex}
+
+\thispagestyle{fancy}
+
+\begin{center}
+    \bf{Élément 1.}
+\end{center}
+
+\begin{defi}{Norme.}{}
+    Soit $E$ un $\K$-ev et $N:x\mapsto N(x)$ de $E$ dans $\R_+$. C'est une norme sur $E$ ssi :
+    \begin{enumerate}
+        \item $\forall x \in E, ~ N(x)=0 \iff x = 0_E$. (Séparation.)
+        \item $\forall x \in E, ~ \forall \lambda \in \K, ~ N(\lambda x) = |\lambda|N(x)$. (Homogénéité.)
+        \item $\forall x,y \in E, ~ N(x+y) \leq N(x) + N(y)$. (Inégalité triangulaire.)
+    \end{enumerate}
+\end{defi}
+
+\begin{defi}{Normes équivalentes.}{}
+    Soient $E$ un $\K$-ev et $\|\cdot\|_1$, $\|\cdot\|_2$ deux normes sur $E$.\\
+    On dit que les deux normes sont équivalentes ssi $\exists a,b > 0, ~ \forall x \in E, ~ a\|x\|_1\leq\|x\|_2\leq b\|x\|_1$.\\
+    \bf{Remarque.} Cela définit une relation d'équivalence.
+\end{defi}
+
+\begin{center}
+    \bf{Élément 2.}
+\end{center}
+
+\begin{defi}{Groupe.}{}
+    Un \bf{groupe} est un couple $(G,\times)$ tel que $G$ est un ensemble et $\times$ une l.c.i. associative, de neutre noté $e$, telle que tout élément de $G$ admet un inverse.\\
+    \bf{Remarque:} Si la loi est commutative, on la notera plutôt $+$.
+\end{defi}
+
+\begin{defi}{Anneau.}{}
+    Un anneau est un ensemble $A$ muni de deux lois $+$ et $\times$ telles que
+    \begin{itemize}
+        \item $(A,+)$ groupe abélien, de neutre $0$.
+        \item $\times$ l.c.i. associative, de neutre 1.
+        \item $\times$ distributive par rapport à $+$.
+    \end{itemize}
+\end{defi}
+
+\begin{defi}{Idéal.  }{}
+    Soit $(A,+,\times)$ un anneau commutatif, et $I\subset A$. On dit que c'est un idéal de $A$ ssi :
+    \begin{enumerate}
+        \item $(I,+)$ est un sous-groupe de $(A,+)$.
+        \item $\forall a \in A, ~ \forall x \in I \quad a\times x \in I$ (propriété d'absorption).
+    \end{enumerate}
+\end{defi}
+
+\begin{defi}{$\K$-algèbre.}{}
+    Soit $\K$ un corps commutatif, et $A$ un ensemble. Alors $(A,+,\times,\cdot)$ est une $\K$-algèbre ssi :
+    \begin{itemize}
+        \item $(A,+,\times)$ est un anneau.
+        \item $(A,+,\cdot)$ est un $\K$-espace vectoriel.
+        \item $\forall (x,y)\in A^2, ~ \forall \l \in \K \quad \l\cdot(x\times y)=(\l\cdot x) \times y=x\times(\l\cdot y)$.
+    \end{itemize}
+    La dimension d'une algèbre est la dimension de l'espace vectoriel sous-jacent.
+\end{defi}
+
+\begin{center}
+    \bf{Élément 3.}
+\end{center}
+
+\begin{prop}{Caractérisation des sous-groupes.}{}
+    Soit $(G,\times)$ un groupe et $H\subset G$. On a $(H,\times)$ sous-groupe de $(G,\times)$ ssi :
+    \begin{itemize}
+        \item $e\in H$.
+        \item $\forall x,y \in H, ~ xy^{-1}\in H$.
+    \end{itemize}
+\end{prop}
+
+\begin{prop}{Caractérisation des sous-anneaux.}{}
+    Soit $(A,+,\times)$ et $B\subset A$. On a $(B,+,\times)$ est un sous-anneau ssi :
+    \begin{itemize}
+        \item $1_A\in B$.
+        \item $\forall x,y \in B, ~ x-y\in B$.
+        \item $\forall x,y \in B, ~ xy\in B$.
+    \end{itemize}
+    \bf{Remarque:} le seul sous-anneau de $\Z$, c'est $\Z$.
+\end{prop}
+
+\begin{prop}{Caractérisation des sous-espaces vectoriels.}{}
+    Soit $(E,+,\cdot)$ un $\K$-espace vectoriel et $F\subset E$. Il y a équivalence entre :
+    \begin{enumerate}
+        \item $F$ est un sous-espace vectoriel de $E$.
+        \item $F$ est non-vide et stable par combinaisons linéaires.
+    \end{enumerate}
+\end{prop}
+
+\begin{prop}{Caractérisation des sous-algèbres.}{}
+    Soit $A$ une $\K$-algèbre. Soit $B$ un sous-ensemble de $A$. Alors $B$ est une sous-algèbre de $A$ ssi :
+    \begin{itemize}
+        \item $1_A\in B$.
+        \item $\forall (x,y)\in B^2, ~ \forall \l \in \K, ~ x+\l y \in B$.
+        \item $\forall (x,y)\in B^2, ~ x\times y \in B$.
+    \end{itemize}
+\end{prop}
+
+\begin{center}
+    \bf{Élément 4.}
+\end{center}
+
+\begin{defi}{}{}
+    Soit $(u_n)_n$ une suite. On dit qu'elle n'est pas bornée si :
+    \begin{equation*}
+        \forall M > 0, ~ \exists n \in \N, ~ |u_n| > M.
+    \end{equation*}
+    On dit qu'elle n'est pas convergente si :
+    \begin{equation*}
+        \forall l \in \R, ~ \exists \e > 0, ~ \forall N \in \N, ~ \exists n \geq N, ~ |u_n-l|\geq\e
+    \end{equation*}
+\end{defi}
+
+\begin{center}
+    \bf{Élément 5.}
+\end{center}
+
+\begin{defi}{Famille libre, famille liée.}{}
+    Soit $E$ un $\K$-ev et $p\in\N^*$. On dit qu'une famille $(x_1,...,x_p)\in E^p$ est \bf{libre} si :
+    \begin{equation*}
+        \forall (\l_1,...,\l_p) \in \K^p, ~ \sum_{i=1}^p\l_ix_i=0_E \ra \forall i \in \lb1,p\rb, ~ \l_i = 0.
+    \end{equation*}
+    Une famille qui n'est pas libre est dite \bf{liée}.
+\end{defi}
+
+\begin{center}
+    \bf{Élément 6.}
+\end{center}
+
+\begin{defi}{Déterminant.}{}
+    Soit $A=(a_{i,j})_{i,j}\in M_n(\K)$. On définit $\det(A)$ par :
+    \begin{equation*}
+        \sum_{\s\in S_n}\e(\s)\prod_{i=1}^na_{\s(i),i}
+    \end{equation*}
+\end{defi}
+
+\vspace*{-0.4cm}
+
+\begin{ex}{}{}
+    Démontrer que si $A=(a_{i,j})_{i,j}\in M_n(\Z)$, alors $\det(A)\in\Z$.
+    \tcblower
+    On a :
+    \begin{equation*}
+        \det(A)=\sum_{s\in S_n}\e(\s)\prod_{i=1}^na_{\s(i),i} \in \Z.
+    \end{equation*}
+    Puis $\det(A) \in \Z$ car $(\Z, +, \times)$ est un anneau, donc stable par $+$ et $\times$.
+\end{ex}
+
+\begin{center}
+    \bf{Élément 7.}
+\end{center}
+
+\begin{defi}{}{}
+    Soit $A=(a_{i,j})\in M_n(\K)$ et $(i,j)\in\lb1,n\rb^2$.\\
+    Le réel $A_{i,j}=(-1)^{i+j}\D_{i,j}$ est appelé \bf{cofacteur} de $a_{i,j}$ dans $A$.\\
+    La matrice $(A_{i,j})_{1\leq i,j \leq n}$ est appelée \bf{comatrice} de $A$ et notée $\Com(A)$.
+\end{defi}
+
+\pagebreak
+
+\begin{prop}{}{}
+    \begin{equation*}
+        \forall A \in M_n(\K), ~ A\cdot(\Com(A))^\top = (\Com(A))^\top\cdot A=\det(A)I_n.
+    \end{equation*}
+    En particulier, si $A$ est inversible, alors $A^{-1}=\frac{1}{\det(A)}(\Com(A))^\top$.
+    \tcblower
+    Soient $i,j\in\lb1,n\rb$. Alors:
+    \begin{align*}
+        \left[ A(\Com(A))^\top \right]_{i,j}&=\sum_{k=1}^na_{i,k}\left[\Com(A)^\top\right]_{k,j}\\
+        &=\sum_{k=1}^na_{i,k}[\Com(A)]_{j,k}\\
+        &=\sum_{k=1}^na_{i,k}(-1)^{j+k}\D_{j,k}
+    \end{align*}
+    Si $i=j$, on reconnaît le développement selon la $i^{\nt{ème}}$ ligne de $\det(A)$.\\
+    Si $i\neq j$, on reconnaît le développement selon la $j^{\nt{ème}}$ ligne de la matrice $\tilde{A}$ obtenue en remplaçant la $j^{\nt{ème}}$ ligne de $A$ par la $i^{\nt{ème}}$ ligne de $A$. Donc le déterminant est nul (argument de rang).\\
+    Bilan: $\left[ A(\Com(A))^\top \right]_{i,j}=\begin{cases}\det(A)~\nt{si}~i=j.\\0~\nt{sinon.}\end{cases}$\\
+    Donc $A(\Com(A))^\top=\det(A)I_n$.
+\end{prop}
+
+\begin{center}
+    \bf{Élément 8.}
+\end{center}
+
+\begin{defi}{Ouvert.}{}
+    Soit $(E,\|\cdot\|)$ un evn, alors $O\subset E$ est un ouvert de $E$ ssi $\forall x \in O, ~ O\in\m{V}(x)$.
+\end{defi}
+
+\begin{defi}{Fermé.}{}
+    Soit $(E,\|\cdot\|)$ un evn, alors $F\subset E$ est un fermé ssi $E\setminus F$ est ouvert.
+\end{defi}
+
+\begin{defi}{Compacité.}{}
+    Soit $(E,\|\cdot\|)$ un evn et $K\subset E$.
+    \begin{center}
+        $K$ est compact ssi de toute suite d'éléments de $K$, on peut extraire une suite convergente dans $K$.
+    \end{center}
+    \bf{Remarque.} L'ensemble vide et les singletons sont compacts.
+\end{defi}
+
+\begin{defi}{Connexité par arcs.}{}
+    Soient $(E,\|\cdot\|)$ et $A\subset E$.
+    \begin{center}
+        $A$ est connexe par arcs ssi $\forall(x,y)\in A^2, ~ \exists \phi : t \mapsto \phi(t)$ continue sur $[0,1]$ telle que $\phi(0)=x$ et $\phi(1)=y$.
+    \end{center}
+    Il existe un chemin continu dans $A$ qui relie $x$ à $y$.
+\end{defi}
+
+\begin{defi}{Intérieur, adhérence.}{}
+    Soit $(E,\|\cdot\|)$ un evn et $A\subset E$.\\
+    --- L'\bf{intérieur} de $A$, noté $\A$, est le plus grand ouvert inclus dans $A$.\\
+    --- L'\bf{adhérence} de $A$, notée $\ov{A}$, est le plus petit fermé contenant $A$.
+    \begin{equation*}
+        \A\subset A \subset \ov{A}
+    \end{equation*}
+\end{defi}
+
+\begin{center}
+    \bf{Élément 9.}
+\end{center}
+
+\begin{thm}{Lemme de Gauss.}{}
+    \begin{equation*}
+        \forall(a,b,c)\in\Z^3,\quad\begin{cases}
+            a\mid bc\\
+            a\land b = 1
+        \end{cases}\ra a \mid c.
+    \end{equation*}
+    \tcblower
+    Supposons que $a\mid bc$ et $a\land b=1$ donc $\exists k \in \Z \mid bc = ak$.\\
+    D'après le théorème de Bézout, $\exists (u,v)\in\Z^2\mid au+bv=1$.\\
+    On a $c=acu+bcv=a(cu+kv)$ donc $a\mid c$.
+\end{thm}
+
+\begin{center}
+    \bf{Élément 10.}
+\end{center}
+
+\begin{thm}{de Bézout.}{}
+    \begin{equation*}
+        \forall(a,b)\in\Z^2\quad a\land b = 1 \iff \exists(u,v)\in\Z^2\mid au+bv=1.
+    \end{equation*}
+    \tcblower
+    \fbox{$\Leftarrow$} Supposons qu'il existe $(u,v)\in\Z^2$ tels que $au+bv=1$.\\
+    Notons $d:=a\land b$, il divise $a$ et $b$ donc $au+bv$. Donc $d\mid 1$, c'est 1.\n
+    \fbox{$\Rightarrow$} Supposons que $a\land b = 1$, alors $a\Z+b\Z=1\Z$ donc $1\in a\Z+b\Z$ donc $\exists (u,v)\in\Z^2\mid au+bv=1$.
+\end{thm}
+
+\begin{thm}{ }{}
+    Soit $n\in\N^*$, $k\in\Z$.
+    \begin{center}
+        $[k]$ est inversible dans $\Z/n\Z$ ssi $k\land n = 1$.
+    \end{center}
+    \tcblower
+    \boxed{$\Leftarrow$} Supposons $k\land n = 1$, $\exists u,v \in \Z, ~ ku+nv=1$. Alors $[ku]+[nv]=[1]$, puis $[k][u]+[n][v]=[1]$.\\
+    Or $[n]=0$ donc $[k][u]=1$, donc $[k]$ est inversible d'inverse $[u]$.\\
+    \boxed{$\Rightarrow$} Supposons $[k]$ inversible : $\exists l \in \Z, ~ [k][l]=[1]$, donc $[kl]=[1]$, donc $\exists v \in \Z, ~ kl-nv=1$.\\
+    Ainsi, $k\land n = 1$.
+\end{thm}
+
+\pagebreak
+
+\begin{center}
+    \bf{Élément 11.}
+\end{center}
+
+\begin{thm}{chinois.  }{}
+    Soient $n,m\in\N^*$ tels que $n\land m=1$.\\
+    Alors les deux anneaux $(\Z/(nm)\Z,+,\times)$ et $(\Z/n\Z\times\Z/m\Z,+,\times)$ sont isomorphes.\\
+    De plus, $\phi(nm)=\phi(n)\phi(m)$ : $\phi$ est multiplicative.
+    \tcblower
+    Posons $f:(\Z/(nm)\Z,+,\times)\to(\Z/n\Z\times\Z/m\Z,+,\times)$; $\ov{x}\mapsto(\tilde{x},\hat{x})$.\\
+    Avec $\ov{x}$ dans $\Z/(nm)\Z$, $\tilde{x}$ dans $\Z/n\Z$ et $\hat{x}$ dans $\Z/m\Z$.\\
+    Vérifions que c'est un morphisme d'anneaux :\\
+    --- $f(\ov{1})=(\tilde{1},\hat{1})$, $f$ envoie le neutre sur le neutre.\\
+    --- $\forall (x,y) \in \Z^2, ~ f(\ov{x}+\ov{y})=f(\ov{x+y})=(\tilde{x+y},\hat{x+y})=(\tilde{x}+\tilde{y},\hat{x}+\hat{y})=(\tilde{x},\hat{x})+(\tilde{y},\hat{y})=f(\ov{x})+f(\ov{y})$.\\
+    --- $\forall (x,y) \in \Z^2, ~ f(\ov{x}\ov{y})=...=f(\ov{x})f(\ov{y})$.\\
+    Vérifions que $f$ est bijective :\\
+    Soit $(x,y)\in\Z^2 \mid f(\ov{x})=f(\ov{y})$. Alors $(\tilde{x},\hat{x})=(\tilde{y},\hat{y})$ puis $\tilde{x}=\tilde{y}$ et $\hat{x}=\hat{y}$.\\
+    Ainsi, $n \mid (x-y)$ et $m \mid (x-y)$ or $n\land m = 1$ donc $nm \mid (x-y)$, i.e. : $\ov{x}=\ov{y}$.\\
+    On a bien $f$ injective, et par égalité des cardinaux, $f$ est bijective.
+\end{thm}
+
+\begin{exercice}{CCINP  }{}
+    \begin{enumerate}
+        \item Énoncer le théorème de Bézout dans $\Z$.
+        \item Soient $a,b,c\in \N$ tels que $a\land b = 1$. Montrer que $[a \mid c \et b \mid c] \iff ab \mid c$.
+        \item On considère le système $(S):\begin{cases} x &\equiv \quad 6[17] \\ x &\equiv \quad 4[15]\end{cases}$ dans lequel l'inconnue $x$ appartient à $\Z$.
+        \begin{enumerate}
+            \item Déterminer une solution particulière $x_0$ de $(S)$ dans $\Z$.
+            \item Déduire des questions précédentes la résolution dans $\Z$ du système $(S)$.
+        \end{enumerate}
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soient $a,b\in \Z$. On a $a\land b = 1 \iff \exists (u,v)\in\Z, ~ au+bv=1$.\\
+    \boxed{2.\ra} Supposons $a\mid c$ et $b\mid c$. On a $\exists u,v \in \Z, ~ au+bv=1$, et $\exists p,q \in \Z, ~ c=ap=bq$.\\
+    On a alors $cau+cbv=c$ donc $ab(qu+pv)=c$ donc $ab\mid c$.\\
+    \boxed{2.\la} Supposons $ab\mid c$, alors $\exists p \in \Z, ~ c = abp$ donc $a\mid c$ et $b\mid c$.\\
+    \boxed{3.a)} $x$ solution $\iff$ $\exists k,k' \in \Z, ~ x = 6 + 17k$ et $15k'-17k=2$.\\
+    On a $17=15+2$ et $15=2\times7+1$ donc $1=15-2\times7$ puis $1=15-7\times (17 - 5)=8\times15-7\times17$.\\
+    Donc $15\times16 - 17\times 14 = 2$, donc $x_0=6+17\times14=244$ est solution particulière.\\
+    \boxed{3.b)} $x$ est solution $\iff \begin{cases}x-x_0 &\equiv \quad 0[17]\\ x-x_0 &\equiv \quad 4[15]\end{cases} \iff 17\times15 \mid x-x_0\iff \exists k \in \Z, ~ x = 244 + 255k$.
+\end{exercice}
+
+\vspace*{-0.4cm}
+
+\begin{center}
+    \bf{Élément 12.}
+\end{center}
+
+\begin{prop}{Calcul de $\phi$.  }{}
+    \begin{enumerate}
+        \item Soit $p$ premier et $\a\in\N^*$, alors $\phi(p^\a)=p^\a-p^{\a-1}=p^{\a-1}(p-1)$.
+        \item Soit $n\in\N\setminus\{0,1\}$ alors $n=p_1^{\a_1}...p_r^{\a_r}$. On a:
+        \begin{equation*}
+            \phi(n)=n\left(1-\frac{1}{p_1}\right)...\left(1-\frac{1}{p_r}\right).
+        \end{equation*}
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} On a $\phi(p)=p-1$ car $p$ est premier.\\
+    Le seul diviseur premier de $p^\a$, c'est $p$. Les entiers non premiers avec $p^\a$ sont donc multiples de $p$.\\
+    D'après le lemme, $\phi(p^\a)=p^\a-\left\lf\frac{p^\a}{p}\right\rf=p^{\a-1}(p-1)$.\\
+    \boxed{2.} Par multiplicativité de $\phi$, et par récurrence facile sur $r$ :
+    \begin{align*}
+        \phi(n)&=\phi(p_1^{\a_1})...\phi(p_r^{\a_r})=(p_1^{\a_1}-p_1^{\a_1-1})...(p_r^{\a_r}-p_r^{\a_r-1}) \quad (\in\N)\\
+        &=p_1^{\a_1}\left(1-\frac{1}{p_1}\right)...p_r^{\a_r}\left(1-\frac{1}{p_r}\right)=p_1^{\a_1}...p_r^{\a_r}\left( 1-\frac{1}{p_1} \right)...\left( 1-\frac{1}{p_r} \right)\\
+        &=n\left( 1-\frac{1}{p_1} \right)...\left( 1-\frac{1}{p_r} \right).
+    \end{align*} 
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{thm}{d'Euler.  }{}
+    Soit $n\geq1$, $a\in\Z$ premier avec $n$. Alors $a^{\phi(n)}\equiv1[n]$.
+    \tcblower
+    On rappelle que si $(G,\times)$ est un groupe multiplicatif fini de cardinal $n$, alors $\forall a \in G, ~ a^n = e$.\\
+    On se place dans $(U(\Z/n\Z),\times)$, alors $|U(\Z/n\Z)|=\phi(n)$, et $[a]$ est inversible dans $\Z/n\Z$.\\
+    On a donc $[a]\in U(\Z/n\Z)$ donc $[a]^{\phi(n)}=[1]$, d'où $a^{\phi(n)}=1[n]$.
+\end{thm}
+
+\begin{center}
+    \bf{Élément 13.}
+\end{center}
+
+\begin{defi}{}{}
+    Soient $(u_n)_n \in E^\N$ et $l\in E$. On dit que $\lim u_n = l$ si :
+    \begin{equation*}
+        \forall \e > 0, ~ \exists N \in \N, ~ \forall n \geq N, ~ \|u_n - l\| \leq \e.
+    \end{equation*}
+\end{defi}
+
+\begin{center}
+    \bf{Élément 14.}
+\end{center}
+
+\begin{defi}{Distance à une partie.}{}
+    Soit $(E,\|\cdot\|)$ un evn, et $A\subset E$ non-vide. Soit $x\in E$.\\
+    La distance de $x$ à $A$ est définie par $d(x,A)=\inf\{\|x-y\|, ~ y \in A\}$.
+    \tcblower
+    Notons $D=\{\|x-y\|, ~ y \in A\}$, on a $D\subset\R_+$ et $A$ non-vide donc $y_0\in A$ puis $\|x-y_0\|\in D$ donc $D\neq\0$.\\
+    On a alors $D$ une partie non-vide de $\R$ et minorée par 0, donc l'inf existe par théorème. 
+\end{defi}
+
+\pagebreak
+
+\begin{center}
+    \bf{Élément 15.}
+\end{center}
+
+\begin{prop}{ }{}
+    Soit $E$ un $\K$-ev et $u,v\in\L(E)$ tels que $uv=vu$, alors $\Im(u)$ et $\Ker(u)$ sont stables par $v$.
+    \tcblower
+    $\bullet$ Soit $x\in\Ker(u)$. Alors $uv(x)=vu(x)=v(0_E)=0_E$ donc $v(x)\in\Ker(u)$.\\
+    $\bullet$ Soit $z\in v(\Im u)$, $\exists y \in \Im(u), ~ z=v(y)$ puis $\exists x \in E, ~ y=u(x)$, donc $z=vu(x)=uv(x)\in\Im(u)$.
+\end{prop}
+
+\begin{center}
+    \bf{Élément 16.}
+\end{center}
+
+\begin{ex}{}{}
+    Soient $A\in M_n(\K)$, $i,j,k,l\in\lb1,n\rb$.\\
+    --- $E_{i,j}E_{k,l}=\d_{j,k}E_{i,l}$.\\
+    --- $E_{i,j}A=AE_{i,j}$ donc $\tr(AE_{i,j})=\tr(E_{i,j}A)=a_{j,i}$.
+\end{ex}
+
+\begin{center}
+    \bf{Élément 17.}
+\end{center}
+
+\begin{prop}{Division euclidienne.}{}
+    \begin{equation*}
+        \forall (A,B) \in \K[X]^2, ~ B\neq0 \ra \exists!(Q,R) \in \K[X]^2 ~ A = BQ + R ~\et~ \deg(R) < \deg(B).
+    \end{equation*}
+    \tcblower
+    \bf{Unicité.} Supposons que $(Q,R),(Q',R')\in\K[X]$ conviennent.\\
+    Alors $B(Q-Q')=R'-R$ or $\deg(R'-R)\leq\max(\deg(R),\deg(R'))\leq\deg(B)$.\\
+    De plus, si $Q-Q'\neq0$, alors $\deg(B(Q-Q'))=\deg(B)+\deg(Q-Q')\geq\deg(B)$, absurde.\\
+    Donc $Q-Q'=0$, puis $R'-R=0$.\\
+    \bf{Existence.} Si $\deg(A)<\deg(B)$, on a le couple $(0,A)$ qui convient. Sinon par récurrence :\\
+    \bf{Initialisation.} Pour $A=a\in\K$, $B=b\in\K$, on a $A=\frac{a}{b}\cdot b$.\\
+    \bf{Hérédité.} Soit $n\in\N$ tel que pour $k\leq n$, la propriété soit vraie. Soit $A=a_0+...+a_{n+1}X^{n+1}$.\\
+    Soit $B=b_0+...+b_pX^p$ où $p=\deg(B)\leq n+1$. On pose $A'=A-\frac{a_{n+1}}{b_p}X^{n+1-p}B\in\K[X]$.\\
+    Évident : $\deg(A')\leq n+1$, et $a'_{n+1}=a_{n+1}-\frac{a_{n+1}}{b_p}b_p=0$ donc $\deg(A')\leq n$.\\
+    Par hyp. : $\exists Q',R'\in\K[X], ~ A'=BQ'+R'$ avec $\deg(R')<\deg(B)$ d'où $A=A'+B(Q'+\frac{a_{n+1}}{b_p}X^{n+1-p})+R'$.
+\end{prop}
+
+\begin{center}
+    \bf{Élément 18.}
+\end{center}
+
+\begin{rappel}{}{}
+    Si $\dim(E)=n$, on prend une base $(e_1,...,e_n)$ de $E$.\\
+    Si $|A|=n$, on énumère ses éléments : $\{x_1,...,x_n\}$.\\
+    Si $a\land b = d$, alors $\exists u,v \in \Z, ~ au+bv=d$.
+\end{rappel}
+
+\pagebreak
+
+\begin{center}
+    \bf{Élément 19.}
+\end{center}
+
+\begin{defi}{Produit de Cauchy.}{}
+    Soit $(A,\times,+,\cdot)$ une algèbre normée. Soit $(u_n)_{n\in\N}\in A^\N$ et $(v_n)_{n\in\N}\in A^\N$.\\
+    La série produit de Cauchy des deux séries $\sum u_n$ et $\sum v_n$ est la série $\sum w_n$ telle que :
+    \begin{equation*}
+        \forall n \in \N, \quad w_n = \sum_{k=0}^nu_kv_{n-k}=\sum_{i+j=n}u_iv_j.
+    \end{equation*}
+\end{defi}
+
+\begin{prop}{Produit de Cauchy de deux series absolument convergentes.}{}
+    Soit $(u_n)\in\K^\N$ et $(v_n)\in\K^\N$ telles que $\sum u_n$ et $\sum v_n$ absolument convergentes.
+    \begin{equation*}
+        \sum_{n=0}^{\infty} w_n = \left( \sum_{n=0}^{\infty} u_n \right) \left( \sum_{n=0}^{\infty} v_n \right).
+    \end{equation*}
+    \tcblower
+    Supposons dans un premier temps que $\forall n \in \N, ~ u_n \in \R_+$ et $v_n\in\R_+$.\\
+    Notons $S_n=\sum_{k=0}^n u_k$, $T_n = \sum_{k=0}^n v_n$ et $U_n = \sum_{k=0}^n w_k$. Par hypothèse, $(S_n)$ et $(T_n)$ convergent.\\
+    Elles sont donc bornées : $\exists M \in \R_+, ~ \forall n \in \N, ~ 0 \leq S_n, T_n \leq M$.
+    \begin{equation*}
+        U_n = \sum_{k=0}^n\left( \sum_{\substack{i+j=k\\i,j\in\N}} u_iv_j \right)=\sum_{\substack{i+j\leq n\\i,j\in\N}}u_iv_i.
+    \end{equation*}
+    puis $i+j\leq n \ra \left[ i \leq n \et j \leq n \right]$ donc $U_n \leq \sum_{0\leq i,j \leq n}u_iv_j=S_nT_n$.\\
+    Alors $U_n \leq M^2$, et $(U_n)$ est croissante et majorée donc est convergente, donc $\sum w_n$ est convergente.
+    \begin{equation*}
+        \sum_{i,j\leq n}u_i v_j \leq \sum_{i+j\leq 2n}u_iv_j \leq \sum_{i,j\leq 2n}u_iv_j ~~\nt{donc}~~ S_nT_n \leq U_{2n} \leq S_{2n}T_{2n}
+    \end{equation*}
+    Or $S_n\to S$ et $T_n\to T$, donc $U_{2n}\to ST$ par encadrement, puis $U_n\to ST$ car on sait que $(U_n)$ est convergente.
+    \begin{equation*}
+        \sum_{n=0}^\infty w_n = \left( \sum_{n=0}^\infty u_n \right)\left( \sum_{n=0}^\infty v_n \right)
+    \end{equation*}
+\end{prop}
+
+\begin{center}
+    \bf{Élément 20.}
+\end{center}
+
+\begin{thm}{Heine.}{}
+    Toute fonction continue sur un compact y est uniformément continue.
+    \tcblower
+    Soit $f:K\subset E\to F$ continue sur $K$. On suppose par l'absurde que $f$ n'est pas uniformément continue.\\
+    Alors $\exists \e > 0, \forall n \in \N, \exists(x_n,y_n)\in K^2, \|x_n-y_n\|<\frac{1}{n} \et \|f(x_n)-f(y_n)\|>\e$.\\
+    Alors $\|x_n-y_n\|\to0$, $K$ est compact, on peut extraire de $(x_n)$ une suite $(x_{\phi(n)})$ convergente vers $l\in K$.\\
+    Alors $y_{\phi(n)}$ converge vers $l$ car $y_{\phi(n)}=x_{\phi(n)}-(x_{\phi(n)}-y_{\phi(n)})$. Puis $f$ est continue en $l\in K$.\\
+    Alors $f(x_{\phi(n)})\to f(l)$ et $\|f(x_{\phi(n)}) - f(y_{\phi(n)})\| \to 0 < \e$.
+\end{thm}
+
+\begin{center}
+    \bf{Élément 21.}
+\end{center}
+
+\begin{prop}{Série harmonique.}{}
+    Pour $n\in\N$, soit $H_n=\sum \frac{1}{n}$. Alors $H_n\sim\ln(n)$ et $H_n=\ln(n)+\g+o(1)$ où $\g$ est la constante d'Euler.
+    \tcblower
+    On vient de voir que $\ln(n+1)-\ln(n)\sim\frac{1}{n}$ et que $\sum\frac{1}{n}$ diverge.\\
+    Notons $T_n=\sum_{k=0}^n\ln(n+1)-\ln(n)=\ln(n+1)$ par téléscopage.\\
+    Par théorème de comparaison (\bf{termes positifs}) : $H_n\sim T_n$, puis $\ln(n+1)=\ln(n)+\ln(1+\frac{1}{n})\sim \ln(n)$.\\
+    On pose $u_n=H_n-\ln(n)$. On a $u_{n+1}-u_n = \frac{1}{n+1}-\ln(n+1)+\ln(n)=\frac{1}{n}\frac{1}{(1+\frac{1}{n})}-\ln(1+\frac{1}{n})=-\frac{1}{2n^2}+o(\frac{1}{n^2})$.\\
+    On a donc $u_{n+1}-u_n\sim-\frac{1}{2n^2}$. Par théorème de comparaison, $u_{n+1}-u_n$ converge.\\
+    On note $\g=\lim u_n$, on a alors $H_n=\ln n + u_n = \ln n + \g + o(1)$.\\
+    On peut étudier $v_n = H_n - \ln(n) - \g$, et trouver un équivalent...
+\end{prop}
+
+\begin{center}
+    \bf{Élément 22.}
+\end{center}
+
+\begin{defi}{}{}
+    Soit $n\in\N^*$ et $(x_1,...,x_n)\in\K^n$, où les $x_i$ sont deux-à-deux distincts. On pose
+    \begin{equation*}
+        \forall i \in \lb1,n\rb, ~ L_i = \prod_{\substack{k=1\\k\neq i}}^n\frac{X-x_k}{x_i-x_k}
+    \end{equation*}
+    Les polynômes $(L_1,...,L_n)$ sont appelés \bf{polynômes de Lagrange} associés à $(x_1,...,x_n)$.
+\end{defi}
+
+\begin{center}
+    \bf{Élément 23.}
+\end{center}
+
+\begin{ex}{}{}
+    Décomposer des fractions rationnelles simples. Exemple :\\
+    $F_1 = \frac{1}{(X-2)(X-3)}$ ; $F_2 = \frac{X^3+1}{(X-2)(X-3)} $ ; $F_3 = \frac{1}{(X-1)^2(X-3)}$
+    \tcblower
+    \boxed{1.}
+    $F_1 = \frac{1}{(X-2)(X-3)} = \frac{(X-2)-(X-3)}{(X-2)(X-3)} = \frac{1}{X-3} - \frac{1}{X-2}$\\
+    \boxed{2.}
+    On remarque que $\deg(X^3+1) \ge \deg((X-2)(X-3))$. On fait la division euclidienne pour déterminer la partie entière, qui vaut $X+5$\\
+    Puis $F_2 = X + 5 + \frac{a}{X-2} + \frac{b}{X-3}$\\
+    On pose $P(X) = X^3 + 1$ ; $Q(X) = (X-2)(X-3)$ ce qui donne $Q'(X) = 2X-5$\\
+    Puis on évalue $\frac{P(X)}{Q'(X)}$ en les pôles de $F_2$ :\\
+    -- $\frac{P(2)}{Q'(2)} = -9 \Rightarrow a = -9$\\
+    -- $\frac{P(3)}{Q'(3)} = 28 \Rightarrow b = 28$\\
+    Finalement $F_2 = X + 5 - \frac{9}{X-2} + \frac{28}{X-3}$\\
+    \boxed{3.}
+    $\frac{1}{(X-1)^2(X-3)} = \frac{a}{X-3} + \frac{b}{X-1} + \frac{c}{(X-1)^2} \Rightarrow 1 = a(X-1)^2 + b(X-1)(X-3) + c(X-3)$\\
+    $\Rightarrow 0X^2 + 0X + 1 = (a+b)X^2 + (-2a-4b+c)X + a + 3b-3c$\\
+    On identifie les coefficients ce qui donne trois équations à trois inconnues. On résoud le système et on trouve :\\
+    $a = \frac 1 4$ ; $b = -\frac 1 2$ ; $c = -\frac 1 4$ ie $F_3 = \frac{1}{4(X-3)} - \frac{1}{4(X-1)} - \frac{1}{2(X-1)^2}$
+\end{ex}
+
+\pagebreak
+
+\begin{center}
+    \bf{Élément 24.}
+\end{center}
+
+\begin{prop}{Formule de Taylor pour les polynômes}{}
+    Soit $n\in\N$, $P\in\K_n[X]$ et $a\in\K$. Alors :
+    \begin{equation*}
+        P=\sum_{k=0}^n\frac{P^{(k)}(a)}{k!}(X-a)^k
+    \end{equation*}
+    \tcblower
+    \bf{Initialisation.} $\frac{P^{(0)}(a)}{0!}(X-a)^0=P(a)$ avec $P\in\K_0[X]$, or $P$ constant donc $P=P(a)$. Vrai.\\
+    \bf{Hérédité.} Soit $n\in\N$ tel que la propriété soit vraie. Soit $P\in\K_{n+1}[X]$, alors $P'\in\K_n[X]$ :
+    \begin{equation*}
+        P'=\sum_{k=0}^n\frac{P^{(k+1)}(a)}{k!}(X-a)^k.
+    \end{equation*}
+    On pose $Q=\sum_{k=0}^{n+1}\frac{P^{(k)}(a)}{k!}(X-a)^k$ donc $(P-Q)'=...=0$ donc $\exists c\in\K\mid P-Q=c$.\\
+    Or $Q(a)=...=P(a)$ donc $c=0$ donc $P=Q$ donc la propriété est vraie au rang $n+1$.\\
+    Par récurrence, la propriété est vraie pour tout $n\in\N$.
+\end{prop}
+
+\begin{center}
+    \bf{Élément 25.}
+\end{center}
+
+\begin{defi}{Continuité en un point.}{}
+    Soit $f:A\subset E\to F$ et $a\in A$.
+    \begin{center}
+        $f$ est continue en $a$ $\iff$ $\forall \e > 0, ~ \exists \a>0, ~ \forall x \in E, \|x-a\|<\a \ra \|f(x)-f(a)\| < \e$.
+    \end{center}
+\end{defi}
+
+\begin{center}
+    \bf{Élément 26.}
+\end{center}
+
+\begin{prop}{Caractérisation séquentielle de la limite.}{}
+    Soit $f:A\subset E\to F$, $a\in\ov{A}$ et $l\in F$.
+    \begin{equation*}
+        \lim_{x\to a}f(x) = l \iff \left[ \forall (u_n)_n \in A^\N, ~ \lim_{x\to+\infty}u_n = a \ra \lim_{n\to+\infty}f(u_n) = l \right].
+    \end{equation*}
+    \bf{Remarque.} Si $a\notin\ov{A}$, aucune suite d'éléments de $A$ ne converge vers $a$, il n'y a plus de contrainte sur la définition.
+    \tcblower
+    \boxed{\ra} Soit $(u_n)_n \in A^\N$ telle que $\lim u_n = a$. Soit $\e>0$, $\exists \a > 0, ~ \forall x \in A, ~ \|x-a\|_E < \a \ra \|f(x)-l\|_F \leq \e$.\\
+    Ensuite, $\exists N\in\N, ~ \forall n \in \N, ~ n\geq N \ra \|u_n-a\|_E < \a$, donc $n\geq N \ra \|f(u_n)-l\|_F<\e$. Donc $f(u_n)\to l$.\\
+    \boxed{\la} Par contraposée, supposons $\exists \e > 0, ~ \forall \a > 0, ~ \exists x \in A, ~ \|x-a\|_E < \a ~\et~ \|f(x)-l\|_F \geq \e$.\\
+    Alors $\exists \e > 0, ~ \forall n \in \N^*, ~ \exists x_n \in A, ~ \|x_n-a\|_E<\frac{1}{n} ~\et~ \|f(x_n)-l\|\geq\e$.\\
+    On a construit une suite $(x_n)_n$ d'éléments de $A$ telle que $\lim x_n=a$ et $f(x_n)\not\to l$.
+\end{prop}
+
+\begin{center}
+    \bf{Élément 27.}
+\end{center}
+
+\begin{prop}{}{}
+    Soient $f,g:E\to F$ continues sur $E$, et $A$ une partie dense dans $E$. Si $f,g$ coïncident sur $A$, alors $f=g$.
+    \tcblower
+    Soit $x\in E$. On a $\ov{A}=E$ donc $\exists (a_n) \in A^\N, ~ \lim a_n = x$. On a $\forall n \in \N, ~ f(a_n)=g(a_n)$ par hypothèse.\\
+    On a $f$ et $g$ continues sur $E$ donc sur $x$ donc $f(x)=g(x)$ par passage à la limite.
+\end{prop}
+
+\begin{center}
+    \bf{Élément 28.}
+\end{center}
+
+\begin{ex}{}{}
+    Soit $A\subset E$ non-vide et $x\in E$. On a $d(x,A)=\inf\{\|x-y\|, ~ y \in A\}$.\\
+    On sait que $d(x,A)=0 \iff x \in \ov{A}$. Vérifions que $x\mapsto d(x,A)$ est lipschitzienne.
+    \tcblower
+    Soit $(x,y)\in A^2$. $\forall z \in A, ~ d(x,A) \leq \|x-z\| \leq \|x-y\| + \|y-z\|$.\\
+    Alors $\forall z \in A, ~ d(x,A) - \|x-y\| \leq \|y-z\|$. Par passage à l'inf : $d(x,A)-\|x-y\|\leq d(y,A)$.\\
+    Donc $d(x,A) - d(y,A) \leq \|x-y\|$. Par symétrie, $d(y,A)-d(x,A)\leq\|y-x\|$.\\
+    Donc $|d(x,A)-d(y,A)|\leq\|x-y\|$. Elle est 1-lipschitzienne donc \bf{continue}.
+\end{ex}
+
+\begin{center}
+    \bf{Élément 29.}
+\end{center}
+
+\begin{rappel}{}{}
+    Dérivée : $x\mapsto\frac{1}{1+x^2}$, strict. croissante sur $\R$, DL : $\sum(-1)^{k}\frac{x^{2k+1}}{2k+1} = x - \frac{x^3}{3} + \frac{x^5}{5} + o(x^6)$.
+\end{rappel}
+
+
+\begin{center}
+    \bf{Élément 30.}
+\end{center}
+
+\begin{prop}{Critère de D'Alembert.  }{}
+    Soit $(u_n)_{n\in\N}$ une suite réelle strictement positive telle que $\left(\frac{u_{n+1}}{u_n}\right)$ converge vers $l\in\R$.
+    \begin{enumerate}
+        \item Si $\lim\frac{u_{n+1}}{u_n}>1$, alors $\sum u_n$ diverge grossièrement.
+        \item Si $\lim\frac{u_{n+1}}{u_n}<1$, alors $\sum u_n$ converge.
+        \item Si $\lim\frac{u_{n+1}}{u_n}=1$, alors on ne peut rien dire.
+    \end{enumerate}
+    \tcblower
+    \boxed{l>1} Soit $k\in]1,l[$ : $\exists N \in \N, ~ \forall n \geq N, ~ \frac{u_{n+1}}{u_n} \geq k$ donc $u_{n+1}\geq ku_n$. Récurrence : $\forall n \geq N, ~ u_n \geq k^{n-N}u_N$.\\
+    Par théorème de comparaison : $\sum k^{n-N}u_N$ diverge donc $\sum u_n$ diverge.\\
+    \boxed{l<1} Soit $k\in]l,1[$ : $\exists N \in \N, ~ \forall n \geq N, ~ \frac{u_{n+1}}{u_n}\leq k$ donc $u_{n+1}\leq ku_n$. Récurrence : $\forall n \geq N, ~ u_n \leq k^{n-N}u_N$.\\
+    Par théorème de comparaison, $\frac{u_n}{k^N}k^n$ converge donc $\sum u_n$ converge.
+\end{prop}
+
+\begin{prop}{Série exponentielle.}{}
+    \begin{enumerate}
+        \item Soit $z\in\C$, $\sum\frac{z^n}{n!}$ est absolument convergente, donc convergente.\\
+        On peut noter $\exp(z)=\sum\frac{z^n}{n!}$, c'est une définition possible de l'exponentielle complexe.
+        \item Soit $E$ une $\K$-algèbre normée par $\|\cdot\|$, $B=(e_1,...,e_n)$ une base de $E$, et $A\in E$.\\
+            Alors $\sum\frac{A^n}{n!}$ est absolument convergente, donc convergente. On peut la noter $\exp(A)$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $\forall n \geq 0, ~ \left|\frac{z^n}{n!}\right| = \frac{|z|^n}{n!}$, terme général d'une série convergente par D'Alembert.\\
+    \boxed{2.} Par récurrence sur $n$, montrons $\P_n$ : << $\|A^n\|\leq\|A\|^n$ >>.\\
+    \bf{Initialisation.} Vraie.\\
+    \bf{Hérédité.} Soit $n\in\N$ tel que $\P(n)$. Alors $\|A^{n+1}\|=\|A^n\cdot A\|\leq\|A^n\|\|A\|\leq \|A\|^{n+1}$.\\
+    Par récurrence, $\forall n \in \N, \left\|\frac{A^n}{n!}\right\| \leq \frac{\|A\|^n}{n!}$ terme général d'une série convergente.\\
+    Par théorème de comparaison des séries à \bf{termes positifs}, $\sum\frac{A^n}{n!}$ converge absolument, donc converge.
+\end{prop}
+
+\begin{center}
+    \bf{Élément 31.}
+\end{center}
+
+\begin{prop}{Séries de Bertrand. (HP)}{}
+    \begin{equation*}
+        \sum \frac{1}{n^\a(\ln n)^\b} \nt{ converge} \iff \left[ \a > 1, ~ \ou ~ (\a = 1 ~ \et ~ \b > 1) \right]
+    \end{equation*}
+    \tcblower
+    L'idée est de comparer le terme général de la série au terme général d'une série de Riemann.\\
+    \boxed{\a>1} Soit $\g\in]1,\a[$, puis $\frac{1}{n^\a(\ln n)^\b}=o\left( \frac{1}{n^\g} \right)$ car $\frac{n^\g}{n^\a(\ln n)^\b}=\frac{n^{\g-a}}{(\ln n)^\b}\to0$ par CC.\\
+    Alors $\sum \frac{1}{n^\g}$ converge puisque $\g>1$ donc par théorème de comparaison des séries à \bf{termes positifs} :
+    \begin{equation*}
+        \forall \b \in \R, ~ \sum \frac{1}{n^\a(\ln n)^\b} \nt{ converge}.
+    \end{equation*}
+    \boxed{\a<1} Soit $\g \in ]\a,1[$, puis $\frac{1}{n^\a(\ln n)^\b} \geq \frac{1}{n^\g}$ apdcr car $\frac{n^\g}{n^\a\ln(n)^\b}=\frac{n^{\g-a}}{(\ln n)^\b}\to+\infty$ par CC.\\
+    Or $\sum\frac{1}{\g}$ diverge puisque $\g<1$, donc par théorème de comparaison des séries à \bf{termes positifs} :
+    \begin{equation*}
+        \forall \b \in \R, ~ \sum \frac{1}{n^\a(\ln n)^\b} \nt{ diverge}.
+    \end{equation*}
+    \boxed{\a=1, \b=1} Vérifions que $\sum \frac{1}{n\ln n}$ diverge.\\
+    On a $t\mapsto \frac{1}{t\ln t}$ est cpm décroissante de $[3,+\infty[$ dans $\R_+$.
+    \begin{equation*}
+        \frac{1}{n\ln n} \geq \int_n^{n+1} \frac{\dt}{t \ln t} \geq \frac{1}{(n+1)\ln(n+1)}\sim \int_n^{n+1}\frac{\dt}{t\ln t}=\ln(\ln(n+1))-\ln(\ln(n))
+    \end{equation*}
+    par théorème de comparaison, $\sum \frac{1}{n\ln n}$ de même nature que $\sum \ln(\ln n)$ divergente.\\
+    \boxed{\a=1,\b\neq1}...
+\end{prop}
+
+\begin{center}
+    \bf{Élément 32.}
+\end{center}
+
+\begin{ex}{}{}
+    \begin{equation*}
+        u_n = \frac{(-1)^n}{\sqrt{n}+(-1)^n}.
+    \end{equation*}
+    \tcblower
+    Montrons que $\sum u_n$ diverge.
+    \begin{equation*}
+        u_n = \frac{(-1)^n}{\sqrt{n}\left( 1 + \frac{(-1)^n}{\sqrt{n}} \right)} = \frac{(-1)^n}{\sqrt{n}}\left( 1-\frac{(-1)^n}{\sqrt{n}} + \frac{1}{n} + o(\frac{1}{n})\right) = \frac{(-1)^n}{\sqrt{n}} - \frac{1}{n} + \frac{(-1)^n}{n\sqrt{n}} + o(\frac{1}{n\sqrt{n}}).
+    \end{equation*}
+    On a $\sum \frac{1}{n}$ diverge, $\sum \frac{(-1)^n}{n\sqrt{n}}$ converge par CSSA, $\sum\frac{(-1)^n}{\sqrt{n}}$ converge, donc $\sum u_n$ diverge.
+\end{ex}
+
+\begin{center}
+    \bf{Élément 33.}
+\end{center}
+
+\begin{prop}{Généralisation de l'inégalité triangulaire.}{}
+    Soit $E$ un $\K$-ev et $N$ une norme sur $E$, notée $\|\cdot\|$.
+    \begin{equation*}
+        \forall x,y \in E, ~ |\|x\|-\|y\||\leq\|x-y\|.
+    \end{equation*}
+    \tcblower
+    Soient $x,y\in E$.
+    \begin{equation*}
+        \begin{cases}
+            x=x-y+y\\
+            y=y-x+x
+        \end{cases} \ra \begin{cases}
+            \|x\|\leq\|x-y\|+\|y\|\\
+            \|y\|\leq\|y-x\|+\|x\|
+        \end{cases} \ra \begin{cases}
+            \|x\|-\|y\| \leq \|x-y\|\\
+            \|y\|-\|x\| \leq \|x-y\|
+        \end{cases}
+    \end{equation*}
+    Donc $|\|x\|-\|y\|| \leq \|x-y\|$.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{center}
+    \bf{Élément 34.}
+\end{center}
+
+\begin{ex}{}{}
+    DL usuels en 0.
+    \tcblower
+    \begin{itemize}
+        \item $\exp(x) = \sum\limits_{k=0}^n \frac{x^k}{k!} + o(x^n)$ \quad ($x \in \R$)
+        
+        \item $\ch(x) = \sum\limits_{k=0}^n \frac{x^{2k}}{(2k)!} + o(x^{2n})$ \quad ($x \in \R$)
+        
+        \item $\sh(x) = \sum\limits_{k=0}^n \frac{x^{2k+1}}{(2k+1)!} + o(x^{2n+1})$ \quad ($x \in \R$)
+        
+        \item $\cos(x) = \sum\limits_{k=0}^n (-1)^k \frac{x^{2k}}{(2k)!} + o(x^{2n})$ \quad ($x \in \R$)
+        
+        \item $\sin(x) = \sum\limits_{k=0}^n (-1)^k \frac{x^{2k+1}}{(2k+1)!} + o(x^{2n+1})$ \quad ($x \in \R$)
+        
+        \item $\frac{1}{1-x} = \sum\limits_{k=0}^n x^k + o(x^n)$ \quad ($x \in ]-1,1[$)
+        
+        \item $\frac{1}{1+x} = \sum\limits_{k=0}^n (-1)^k x^k + o(x^n)$ \quad ($x \in ]-1,1[$)
+        
+        \item $(1+x)^a = 1 + \sum\limits_{k=1}^n \frac{a(a-1)\cdots(a-k+1)}{k!} x^k + o(x^n)$ \quad ($x \in ]-1,1[$, $a \in \R$)
+        
+        \item $\ln(1+x) = \sum\limits_{k=1}^n (-1)^{k-1} \frac{x^k}{k} + o(x^n)$ \quad ($x \in ]-1,1]$)
+        
+        \item $\ln(1-x) = -\sum\limits_{k=1}^n \frac{x^k}{k} + o(x^n)$ \quad ($x \in [-1,1[$)
+        
+        \item $\arctan(x) = \sum\limits_{k=0}^n (-1)^k \frac{x^{2k+1}}{2k+1} + o(x^{2n+1})$ \quad ($x \in [-1,1]$)
+        
+        \item $\arcsin(x) = x + \sum\limits_{k=1}^n \frac{(2k)!}{4^k (k!)^2 (2k+1)} x^{2k+1} + o(x^{2n+1})$ \quad ($x \in [-1,1]$)
+    \end{itemize}
+\end{ex}
+
+\pagebreak
+
+\begin{center}
+    \bf{Élément 35.}
+\end{center}
+
+\begin{prop}{Caractérisation des matrices de rang 1.}{}
+    Soit $A\in M_{n,p}(\K)$.
+    \begin{equation*}
+        \rg(A)=1 \iff \exists C \in M_{n,1}(\K)\setminus\{0\}, ~ \exists L \in M_{1,p}(\K)\setminus\{0\}, ~ A=CL.
+    \end{equation*}
+    \tcblower
+    \boxed{\la} Supposons que $A=CL$. Alors $\rg(A)\leq \rg(C)\leq 1$. De plus, $A\neq0$, donc $\rg(A)=1$.\\
+    \boxed{\ra} Supposons $\rg(A)=1$, alors $\exists P,Q, ~ A = PJ_1Q$. Or :
+    \begin{equation*}
+        J_1=\begin{pmatrix}
+            1 & 0 & \cdots & 0\\
+            0 & 0 & \cdots & 0\\
+            \vdots & \vdots & \ddots & \vdots\\
+            0 & 0 & \cdots & 0
+        \end{pmatrix} = \underbrace{\begin{pmatrix}
+            1\\
+            0\\
+            \vdots\\
+            0
+        \end{pmatrix}}_{C'}\underbrace{\begin{pmatrix}
+            1 & 0 & \cdots & 0
+        \end{pmatrix}}_{L'}
+    \end{equation*}
+    Donc $A=PC'L'Q$, et $PC'\in M_{n,1}(\K)$, $L'Q\in M_{1,n}(\K)$, on a bien le résultat. 
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{center}
+    \bf{Élément 36.}
+\end{center}
+
+\begin{exercice}{}{}
+    Calculer $\sum_{k=1}^n \cos(ikt)$.
+    \tcblower
+    On a :
+    \begin{equation*}
+        \sum_{k=1}^ne^{ikt} = \sum_{k=1}^n(e^{it})^k.
+    \end{equation*}
+    Si $t\in2\pi\Z$, alors $e^{it}=1$ puis la somme vaut $n$.\\
+    Sinon :
+    \begin{align*}
+        \sum_{k=1}^ne^{ikt} &= e^{it}\frac{1-e^{int}}{1-e^{it}} = \frac{e^{\frac{i(n+2)t}{2}}\left( e^{-\frac{int}{2}} - e^{\frac{int}{2}} \right)}{e^{\frac{it}{2}}\left( e^{-\frac{it}{2}} - e^{\frac{it}{2}} \right)} = e^{\frac{i(n+1)t}{2}}\frac{\sin\left( \frac{nt}{2} \right)}{\sin\left( \frac{t}{2} \right)}.
+    \end{align*}
+    On passe à la partie réelle pour obtenir le cos, à la partie imaginaire pour le sin.
+\end{exercice}
+
+\vspace*{-0.4cm}
+
+\begin{center}
+    \bf{Élément 37.}
+\end{center}
+
+\begin{defi}{}{}
+    Un projecteur de $E$ est un endormorphisme $p$ de $E$ vérifiant $p\circ p = p$.
+\end{defi}
+
+\vspace*{-0.4cm}
+
+\begin{prop}{}{}
+    Soit $p$ un projecteur de $E$, $\Im(p)=\{x\in E, ~ p(x)=x\}$.
+    \tcblower
+    \boxed{\subset} Soit $y\in\Im(p)$. On a $\exists x\in E, ~ p(t)=p^2(x)=p(x)=y$.\\
+    \boxed{\supset} Soit $x\in E, ~ p(x)=x$, alors $x\in\Im(p)$.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{center}
+    \bf{Élément 38.}
+\end{center}
+
+\begin{prop}{}{}
+    Soit $A\in M_{n,p}(\K)$ et $B\in M_{p,n}(\K)$.
+    \begin{equation*}
+        \tr(AB)=\tr(BA).
+    \end{equation*}
+    \tcblower
+    On a :
+    \begin{equation*}
+        \tr(AB)=\sum_{i=1}^n(AB)_{i,i}=\sum_{i=1}^n\sum_{k=1}^pa_{i,k}b_{k,i}=\sum_{k=1}^p\sum_{i=1}^nb_{k,i}a_{i,k}=\sum_{k=1}^p(BA)_{k,k}=\tr(BA).
+    \end{equation*}
+\end{prop}
+
+\begin{center}
+    \bf{Élément 39.}
+\end{center}
+
+\begin{prop}{}{}
+    Soient $A,B\in M_n(\K)$ semblables. Alors $\tr(A)=\tr(B)$.
+    \tcblower
+    $\exists P \in \GL_n(\K), ~ A=P^{-1}BP$ donc $\tr(A)=\tr(P^{-1}BP)=\tr(BPP^{-1})=\tr(B)$.
+\end{prop}
+
+\begin{center}
+    \bf{Élément 40.}
+\end{center}
+
+\begin{prop}{}{}
+    Soit $f:A\subset E \to F$.
+    \begin{center}
+        $f$ lipschitzienne sur $A$ $\ra$ $f$ uniformément continue sur $A$ $\ra$ $f$ continue sur $A$.
+    \end{center}
+    \tcblower
+    Supposons $f$ lipschitzienne sur $A$ : $\exists k \geq 0, ~ \forall (x,y)\in A, ~ \|f(y)-f(x)\|\leq k\|y-x\|$.\\
+    Soit $(u_n)\in A^\N$ et $(v_n)\in A^\N$ telles que $\lim(u_n-v_n)=0$, alors $\|f(v_n)-f(u_n)\|\leq k\|v_n - u_n\| \to 0$.\\
+    Alors par encadrement, $\lim(f(v_n)-f(u_n))=0$.
+\end{prop}
+
+\begin{center}
+    \bf{Élément 41.}
+\end{center}
+
+\begin{thm}{Caractère borné d'une suite convergente.  }{}
+    Toute suite convergente est bornée.
+    \tcblower
+    Soit $(u_n)$ une suite convergente de $(E,\|\cdot\|)$. On note $l=\lim u_n$.\\
+    Avec $\e=1$, $\exists n_0\in\N, ~ \forall n \geq n_0, ~ \| u_n - l \| < 1$, donc $u_n \in B(l,1)$.\\
+    On pose $r=\max \{1, \|u_1-l\|, ..., \|u_{n_0-1} - l\|\}$. On a $\forall n \geq n_0, ~ u_n \in B(l,r)$ car $\|u_n - l\| < 1 \leq r$.\\
+    C'est vrai pour $0 \leq n \leq n_0 - 1$ car $\|u_n - l\| \leq r$.
+\end{thm}
+
+\pagebreak
+
+\begin{center}
+    \bf{Élément 42.}
+\end{center}
+
+\begin{prop}{Condition nécessaire de convergence.}{}
+    Si une série converge, alors son terme général tend vers 0, réciproque fausse.
+    \tcblower
+    Soit $\sum u_n$ convergente vers $S\in E$ et $S_n=\sum_{k=0}^nu_k$. Alors $u_{n+1}=S_{n+1}-S_n\to S-S = 0$.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{center}
+    \bf{Élément 43.}
+\end{center}
+
+\begin{prop}{}{}
+    Soit $(u_n)\in\R^\N, ~ \sum u_n$ converge absolument $\Rightarrow$ $\sum u_n$ converge.
+    \tcblower
+    Soit $(u_n)\in\R^\N$. On pose $u_n^+$ la partie positive de $u_n$, et $u_n^-$ sa partie négative.\\
+    On a $\forall n \in \N, ~ u_n^+ + u_n^- = |u_n|$, et $u_n^+-u_n^-=u_n$. On a aussi $0\leq u_n^+,u_n^- \leq |u_n|$.\\
+    Par hypothèse, $\sum |u_n|$ converge, donc par comparaison, $\sum u_n^+$ et $\sum u_n^-$ convergent, puis $\sum u_n$ converge (somme).
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{center}
+    \bf{Élément 44.}
+\end{center}
+
+\begin{prop}{Reste d'une série de Riemann convergente.}{}
+    Soit $\sum \frac{1}{n^\a}$ avec $\a>1$. On note $R_n$ le reste d'ordre $n$, alors $R_n \sim \frac{1}{\a-1}\frac{1}{n^{\a-1}}$.
+    \tcblower
+    On utilise le théorème de comparaison des séries à \bf{termes positifs} (cas de convergence).
+    \begin{equation*}
+        (n+1)^\g - n^\g \sim \g n^{\g - 1} = \frac{\g}{n^{1-\g}}
+    \end{equation*} 
+    On pose $\g=1-\a<0$, donc $\frac{1}{n^\a}\sim \frac{1}{1-\a}((n+1)^{1-\a}-n^{1-\a})$.\\
+    On note $R_n$ le reste associé à $\frac{1}{n^\a}$ et $R'_n$ associé à $\frac{1}{1-\a}((n+1)^{1-\a}-n^{1-\a})$, on a $R_n\sim R'_n$.
+    \begin{equation*}
+        R'_n = \frac{1}{1-\a}\sum_{k=n+1}^\infty\left( \frac{1}{(k+1)^{\a-1}}-\frac{1}{k^{\a-1}} \right)=\frac{1}{1-\a}\left( -\frac{1}{(n+1)^{\a-1}} \right)=\frac{1}{(\a-1)(n+1)^{\a-1}}.
+    \end{equation*}
+    Puis $R_n\sim R'_n \sim \frac{1}{(\a-1)n^{\a-1}}$, en effet, $(n+1)^{\a-1}\sim n^{\a-1}$.
+\end{prop}
+
+\vspace*{-0.4cm}
+
+\begin{center}
+    \bf{Élément 45.}
+\end{center}
+
+\begin{ex}{}{}
+    Soient $x,a\in E$ et $r>0$ tel que $x\neq0$.\\
+    --- On a $a+\frac{r}{\|x\|}x\in S(a,r)$.\\
+    --- On a $\forall r' < r, ~ a + \frac{r'}{\|x\|}x\in B(a,r)$.
+\end{ex}
+
+\pagebreak
+
+\begin{center}
+    \bf{Élément 46.}
+\end{center}
+
+\begin{prop}{}{}
+    La suite $(u_n)_{n\in\N}\in E^\N$ et la série $\sum(u_{n+1}-u_n)$ sont de mêmes natures.
+    \tcblower
+    En effet, $\forall n \in \N, ~ \sum_{k=0}^n(u_{k+1} - u_k)=u_{n+1}-u_0$. Notons $S_n = \sum_{k=0}^n(u_{k+1}-u_k)$ la somme partielle.\\
+    Alors $\forall n \in \N, ~ S_n = u_{n+1}-u_0$ puis $(S_n)_{n\in\N}$ et $(u_n)_{n\in\N}$ sont de mêmes natures.
+\end{prop}
+
+\begin{center}
+    \bf{Élément 47.}
+\end{center}
+
+\begin{thm}{Déterminant de Vandermonde.}{}
+    Soient $a_1,...,a_n$ $n$ nombres réels ou complexes.
+    \begin{equation*}
+        \begin{vmatrix}
+            1&a_1&a_1^2&...&a_1^{n-1}\\
+            1&a_2&a_2^2&...&a_2^{n-1}\\
+            \vdots&\vdots&\vdots&&\vdots\\
+            1&a_n&a_n^2&...&a_n^{n-1}
+        \end{vmatrix}
+        = \prod_{1\leq i < j \leq n}(a_j-a_i)
+    \end{equation*}
+    \tcblower
+    On va factoriser les $a_i-a_1$ de droite à gauche: $c_i \gets c_i - a_1 c_{i-1}$.\\
+    Notation: $V(a_1,...,a_n)$ le déterminant à calculer.
+    \begin{equation*}
+        V(a_1,...,a_n)=\begin{vmatrix}
+            1&0&\dots&0&0\\
+            1&a_2-a_1&\dots&a_2^{n-3}(a_2-a_1)&a_2^{n-2}(a_2-a_1)\\
+            \vdots&\vdots&&\vdots&\vdots\\
+            1&a_n-a_1&\dots&a_n^{n-3}(a_n-a_1)&a_n^{n-2}(a_n-a_1)
+        \end{vmatrix}
+    \end{equation*}
+    On développe selon la première ligne.
+    \begin{align*}
+        V(a_1,...,a_n)&=(-1)^{1+1}\begin{vmatrix}
+            a_2-a_1&...&a_2^{n-2}(a_2-a_1)\\
+            \vdots&&\vdots\\
+            a_n-a_1&...&a_n^{n-2}(a_n-a_1)
+        \end{vmatrix}\\
+        &=(a_2-a_1)...(a_n-a_1)\begin{vmatrix}
+            1&a_2&...&a_2^{n-2}\\
+            \vdots&\vdots&&\vdots\\
+            1&a_n&...&a_n^{n-2}
+        \end{vmatrix}\\
+        &=\prod_{j=2}^n(a_j-a_1)V(a_2,...,a_n)\\
+        &=\prod_{j=2}^n(a_j-a_1)\prod_{j=3}^n(a_j-a_2)V(a_3,...,a_n)\\
+        &=\prod_{i<j}(a_j-a_i)V(a_n)\\
+        &=\prod_{i<j}(a_j-a_i)
+    \end{align*}
+\end{thm}
+
+\pagebreak
+
+\begin{center}
+    \bf{Élément 48.}
+\end{center}
+
+\begin{ex}{Théorème de Cesàro}{}
+    Soit $(u_n)$ une suite réelle qui converge vers $l \in \R$. On pose 
+    $$v_n = \frac{1}{n+1} \sum_{k=0}^n u_k$$
+    Montrer que $(v_n)$ converge également vers $l$.
+    
+    \tcblower
+    
+    Soit $ \e > 0$. Puisque $u_n \to l$, il existe $N_1 \in \N$ tel que :
+    $$\forall n \geq N_1,\ |u_n - l| < \frac{ \e}{2}$$
+    
+    Soit $N_2 > N_1$ tel que pour tout $n \geq N_2$, on ait :
+    $$\frac{1}{n+1} \sum_{k=0}^{N_1} |u_k - l| < \frac{ \e}{2}$$
+    (ce qui est possible car le numérateur est constant et le dénominateur tend vers $+\infty$)
+    
+    Soit $N = \max(N_1, N_2)$. Pour tout $n \geq N$, on a :
+    \begin{align*}
+    |v_n - l| &= \left| \frac{1}{n+1} \sum_{k=0}^n u_k - l \right| \\
+    &= \left| \frac{1}{n+1} \sum_{k=0}^n (u_k - l) \right| \\
+    &\leq \frac{1}{n+1} \sum_{k=0}^n |u_k - l| \\
+    &= \frac{1}{n+1} \left( \sum_{k=0}^{N_1} |u_k - l| + \sum_{k=N_1+1}^n |u_k - l| \right) \\
+    &< \frac{ \e}{2} + \frac{1}{n+1} \sum_{k=N_1+1}^n \frac{ \e}{2} \\
+    &\leq \frac{ \e}{2} + \frac{n - N_1}{n+1} \cdot \frac{ \e}{2} \\
+    &< \frac{ \e}{2} + \frac{ \e}{2} =  \e
+    \end{align*}
+    
+    Donc $v_n \to l$.
+\end{ex}
+
+\pagebreak
+
+\begin{center}
+    \bf{Élément 49.}
+\end{center}
+
+\begin{thm}{L'image directe d'un compact est un compact.}{}
+    Soit $f:E\to F$ continue sur $E$. Alors $K$ compact de $E$ implique $f(K)$ compact de $F$.
+    \tcblower
+    Soit $K$ un compact, soit $(y_n)\in f(K)^\N$. On a $\forall n \in \N, ~ \exists x_n \in K, ~ y_n = f(x_n)$.\\
+    Or $K$ compact : $\exists \phi, ~ x_{\phi(n)}\to l \in K$ et $f$ continue en $l$ donc $f(x_{\phi}(n))\to f(l) \in f(K)$.
+\end{thm}
+
+\begin{center}
+    \bf{Élément 50.}
+\end{center}
+
+\begin{ex}{Polynômes scindés.}{}
+    \begin{enumerate}
+        \item Montrer que si $P\in\R[X]$ est scindé à racines simples, alors $P'$ aussi.
+        \item Montrer que si $P\in\R[X]$ est scindé, alors $P'$ aussi.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $P\in\R[X]$ scindé à racines simples : $P=\l(X-\a_1)...(X-\a_p)$. On suppose que les $\a_i$ sont croissants.\\
+    Par Rolle, $P'$ s'annule une fois dans tous les $]a_i,a_{i+1}[$ car $P$ est continue et dérivable sur $[a_i,a_{i+1}]$.\\
+    Donc $P'$ s'annule $p-1$ fois, et est de degré $p-1$, il est scindé à racines simples.\\
+    \boxed{2.} Soit $P\in\R[X]$ scindé : $P=\l(X-\a_1)^{n_1}...(X-\a_p)^{n_p}$. On suppose les $\a_i$ croissants.\\
+    Comme à la première question, on obtient $p$ racines distinctes de $P'$.\\
+    Ensuite, $\forall i \in \lb1,p\rb,~\a_i$ est racine de $P$ de multiplicité $n_i$ implique $\a_i$ est racine de $P'$ de mult $n_i-1$.\\
+    Donc $(X-\a_i)^{n_i-1}$ divise $P'$ donc $\exists Q \in \R[X], ~ P'=(X-b_1)...(X-b_{p-1})(X-\a_1)^{n_1-1}...(X-\a_p)^{n_p-1}Q$.\\
+    Or $\deg(P')=p-1=n_1+...+n_p-1$ donc $\deg(Q)=0$, on a le résultat.
+\end{ex}
+
+\begin{center}
+    \bf{Élément 51.}
+\end{center}
+
+\begin{thm}{Anneau principal.}{}
+    Soit $I$ un idéal non nul de $\K[X]$. Alors $I$ est engendré par un unique polynôme unitaire.
+    \begin{equation*}
+        \exists P_0 \in \K[X] ~\nt{unitaire}, ~ I=(P_0).
+    \end{equation*}
+    Dans ce cas, $I$ est dit principal.
+    \tcblower
+    Soit $I$ un idéal non nul de $\K[X]$.\\
+    \bf{Existence.} Notons $E=\{\deg(P), ~ P\in I, ~ P\neq 0\}$, sous-ensemble non-vide de $\N$. On note $n_0:=\min(E)$.\\
+    Soit $P_0\in I$ tel que $\deg(P_0)=n_0$. On suppose $P_0$ unitaire SPDG, montrons que $I=(P_0)$.\\
+    \boxed{\subset} Soit $P\in I$. Par division euclidienne : $\exists (Q,R)\in\K[X], ~ P=QP_0+R$ et $\deg(R)<\deg(P_0)$.\\
+    On a $R=P-P_0Q\in I$, car c'est un groupe, donc $R=0$ par définition de $P_0$, puis $P=P_0Q\in (P_0)$.\\
+    \boxed{\supset} On a $P_0\in I$ et $I$ est un idéal donc $I \supset (P_0)$.\n
+    \bf{Unicité.} Supposons $I=(P)=(Q)$ avec $P$ et $Q$ unitaires.\\
+    Alors $(P)\subset(Q)$ : $Q \mid P$, puis $(Q)\subset(P)$ : $P\mid Q$, donc $P$ et $Q$ sont associés. Ils sont unitaires, donc égaux.
+\end{thm}
+
+\pagebreak
+
+\begin{center}
+    \bf{Élément 52.}
+\end{center}
+
+\begin{ex}{}{}
+    Montrer que $\Z$ est un fermé.
+    \tcblower
+    On a $\leftindex^C\Z=\bigcup_{n\in\Z}]n,n+1[$ réunion d'ouverts donc ouvert, puis $\Z$ est fermé.\\
+    \bf{Remarque:} $\Z$ n'est pas ouvert non plus, et n'est le voisinage d'aucun de ses points.
+\end{ex}
+
+\begin{ex}{}{}
+    On a $\Z$ un fermé de $\R$ car pour $(u_n)\in\Z^\N$ convergente vers $l$, on a:\\
+    $\forall \e > 0, ~ \exists n_0, ~ \forall n \geq n_0, ~ |u_n-l|<\e$ donc $|u_n-u_{n_0}|\leq2\e$.\\
+    Avec $\e=\frac{1}{2}$, on a $\exists N \in \N, ~ \forall n \geq N, ~ |u_n-u_N|<1$ donc $u_n=u_N$, et $l=u_N\in\Z$.
+\end{ex}
+
+\begin{center}
+    \bf{Élément 53.}
+\end{center}
+
+\begin{ex}{}{}
+    Les seuls idéaux d'un corps commutatif $K$ sont les deux idéaux triviaux, $\{0\}$ et $K$.
+    \tcblower
+    Soit $I$ un idéal non nul, montrons que $I=K$.\\
+    Soit $x\in I$ non nul, on a $x^{-1}\in K$ car corps, donc $xx^{-1}\in I$ donc $1\in I$ donc $I=K$.
+\end{ex}
+
+\begin{center}
+    \bf{Élément 54.}
+\end{center}
+
+\begin{prop}{}{}
+    Soit $(E,\|\cdot\|)$ un evn. Toute partie compacte est fermée et bornée.\\
+    \bf{Remarque.} La réciproque est fausse en dimension infinie.
+    \tcblower
+    Soit $K$ une partie compacte de $E$. Montrons que $K$ est fermée par caractérisation séquentielle.\\
+    Soit $(u_n)_{n\in\N}\in K^\N$ convergente de limite $l$. Il existe $\phi:\N\to\N$ strictement croissante et $l'\in K$ tq $u_{\phi(n)}\to l'$.\\
+    Or $u_{\phi(n)}\to l$ donc $l=l'$ par unicité de la limite, puis $l\in K$.\\
+    Par contraposée, supposons $K$ non borné, montrons que $K$ n'est pas compact. Alors $\forall M > 0, ~ \exists x \in K, ~ \|x\|>M$.\\
+    Alors $\forall n \in \N^*, ~ \exists x_n \in K, ~ \|x_n\|>n$. On a construit la suite $(x_n)$.\\
+    Alors $\forall \phi : \N \to \N$ strictement croissante, $\forall n \in \N^*, ~ \|x_{\phi(n)}\|>\phi(n)\geq n$, donc $\|x_{\phi(n)} \| \to +\infty$.\\
+    Aucune suite extraite de $(x_n)_{n\in\N}$ n'est bornée, donc aucune suite extraite ne converge, donc $K$ n'est pas compacte.
+\end{prop}
+
+\pagebreak
+
+\begin{center}
+    \bf{Élément 55.}
+\end{center}
+
+\begin{ex}{}{}
+    Soient $A,B\in\Z[X]$, et $B\neq0$. Montrer que si $B$ est unitaire, alors $Q,R\in\Z[X]$.
+    \tcblower
+    Si $\deg(A)<\deg(B)$, $Q=0$ et $R=A$ donc $Q,R\in\Z[X]$. Sinon par récurrence :\\
+    \bf{Initialisation.} Pour $A=a\in\Z$, $B=1\in\Z^*$, on a $Q=a$ et $R=0$ donc $Q,R\in\Z[X]$.\\
+    \bf{Hérédité.} Soit $n\in\N$ tel que pour $k\leq n$, la propriété soit vraie. Soit $A=a_0+...+a_{n+1}X^{n+1}$.\\
+    Soit $B=b_0+...+X^p$ où $p=\deg(B)\leq n+1$. On pose $A'=A-a_{n+1}X^{n+1-p}B\in\Z[X]$.\\
+    Par hyp. : $\exists Q',R'\in\Z[X], ~ A'=BQ'+R'$ avec $\deg(R')<\deg(B)$ d'où $A=B\underbrace{(Q'+a_{n+1}X^{n+1-p})}_{Q}+R'$.\\
+    On a bien $Q,R'\in\Z[X]$
+\end{ex}
+
+\begin{center}
+    \bf{Élément 56.}
+\end{center}
+
+\begin{prop}{}{}
+    Soient $f,g\in\L(E,F)$ de rangs finis $p$ et $q$. Alors $\rg(f+g)\leq\rg(f)+\rg(g)$.
+    \tcblower
+    On a bien $f+g$ une application linéaire de $E$ dans $F$, puis $\Im(f+g)\subset\Im(f)+\Im(g)$.\\
+    D'après Grassmann, on a $\dim(\Im f + \Im g)=\dim(\Im f) + \dim(\Im g) - \dim(\Im f \cap \Im g)$.\\
+    Enfin, $\rg(f+g)\leq\dim(\Im f + \Im g)=\rg(f) + \rg(g)  - \dim(\Im f \cap \Im g)\leq \rg(f) + \rg(g)$.
+\end{prop}
+
+\begin{center}
+    \bf{Élément 57.}
+\end{center}
+
+\begin{ex}{Un polynôme périodique est constant.}{}
+    \begin{enumerate}
+        \item Montrer qu'une fonction continue sur $\R$ et périodique est bornée.
+        \item Montrer de deux manières qu'une fonction polynomiale périodique est constante.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} Soit $f$ continue sur $\R$ et périodique de période $T$. On a $f$ bornée sur $[0,T]$ par TBA car continue.\\
+    Donc $\exists M \in \R_+, ~ \forall x \in [0,T], ~ |f(x)| \leq M$, puis $\forall x \in \R, ~ \exists n \in \Z, ~ x-nT\in[0,T]$.\\
+    Puis par $T$-périodicité de $f$, $|f(x)|=|f(x-nT)|\leq M$.\\
+    \boxed{2.} Soit $P\in\R[X]$ périodique, on a donc $P$ continu et périodique donc borné d'après $1.$\\
+    Or les seuls polynômes bornés sont les polynômes constants.
+\end{ex}
+
+\begin{center}
+    \bf{Élément 58.}
+\end{center}
+
+\begin{ex}{}{}
+    Soit $P\in\K[X]$ scindé à racines simples, avec $n=\deg(P)\geq1$.\\
+    Décomposer $\frac{P'}{P}$ en éléments simples.
+    \tcblower
+    Supposons $P=\l(X-a_1)...(X-a_n)$, avec $a_1,...,a_n$ distincts, et $\l\in\K^*$.\\
+    On a $F=\frac{P'}{P}$ de degré -1, et $P'\land P=1$, donc $\exists(\l_1,...,\l_n)\in\K^n, ~ F=\sum_{i=1}^n\frac{\l_i}{X-a_i}$.\\
+    On obtient alors $\forall i \in \lb1,n\rb, ~ \l_i=\frac{P'(a_i)}{P'(a_i)}=1$.
+    \begin{equation*}
+        \frac{P'}{P}=\sum_{i=1}^n\frac{1}{X-a_i}, \quad \nt{si} \quad P=(X-a_1)...(X-a_n).
+    \end{equation*}\\
+    Plus généralement, si $P=(X-a_1)^{\a_1}...(X-a_n)^{\a_n}$, alors $\frac{P'}{P}=\sum_{i=1}^n\frac{\a_i}{X-a_i}$.
+\end{ex}
+
+\begin{center}
+    \bf{Élément 59.}
+\end{center}
+
+\begin{prop}{Polynômes échelonnés.  }{}
+    \begin{enumerate}
+        \item Soit $n\in\N^*$ et $(P_k)_{k\leq n}$ une famille de polynômes échelonnés de $\K_n[X]$, alors $(P_k)$ est une base de $\K_n[X]$.
+        \item Soit $(P_n)_{n\in\N}$ une famille échelonnée de $\K[X]$. Alors $(P_n)$ est une base de $\K[X]$.
+    \end{enumerate}
+    \tcblower
+    \boxed{1.} $(P_k)$ est une famille de polynômes non nuls de degrés distincts donc libre.\\
+    Notons $\B=(P_0,...,P_n)$, c'est une famille de $\K_n[X]$, et $|\B|=n+1=\dim(\K_n[X])$ donc $\B$ est une base.\\
+    \boxed{2.} Par les mêmes arguments, $(P_n)$ est une famille libre de $\K[X]$ car toutes ses familles finies sont libres.\\
+    Soit $P\in\K[X]$. Si $P=0$, trivial. Sinon, on note $n=\deg(P)\in\N$. Alors $P\in\K_n[X]$.\\
+    Cependant, $(P_0,...,P_n)$ est base de $\K_n[X]$, donc $P\in\Vect(P_1,...,P_n)$, donc $P$ est CL de $\B$.
+\end{prop}
+
+\begin{center}
+    \bf{Élément 60.}
+\end{center}
+
+\begin{ex}{}{}
+    Soient $(G,\times)$ un groupe, et $H,K$ deux sous-groupes de $G$.\\
+    \boxed{\la} Trivial.\\
+    \boxed{\ra} Par l'absurde supposons que $H\cup K$ soit un sous-groupe de $G$ et que $H\not\subset K$ et $K\not\subset H$.\\
+    Alors $\exists h \in H \setminus K$ et $\exists k \in K \setminus H$ et $h,k\in H\cup K$ donc $h+k\in H\cup K$.\\
+    Ainsi, $hk\in H$ ou $hk\in K$ puis $k=h^{-1}hk\in H$ ou $h=hkk^{-1}\in K$, tous les deux absurdes.
+\end{ex}
+
+\vspace*{-0.4cm}
+
+\begin{center}
+    \bf{Élément 61.}
+\end{center}
+
+\begin{thm}{Sous-groupes de $\Z$.  }{}
+    Les sous-groupes de $(\Z,+)$ sont exactement les $n\Z,n\in\N$.\\
+    Il y a unicité de l'écriture : $n\Z=m\Z\ra n=m$, $(n,m\in\N)$.
+    \tcblower
+    \bf{Unicité.} Pour $n,m\in\N$, supposons $n\Z=m\Z$. Alors $n\mid m$ et $m\mid n$, donc $m=n$ car positifs.\\
+    \bf{Existence.} Les ensembles $n\Z$ $(n\in\N)$ sont bien des sous-groupes de $\Z$ (facile !).\\
+    Réciproquement, soit $H$ un sous-groupe de $\Z$. Si $H=\{0\}$, alors $H=0\Z$, c'est bon.\\
+    Sinon, $H\cap\N^*$ est non-vide, minoré par 0, on pose $n$ son minimum. Vérifions que $H=n\Z$.\\
+    \boxed{\supset} On a $n\in H$, et puisque $H$ est stable par addition, il contient tous les multiples de $n$. Donc $n\Z\subset H$.\\
+    \boxed{\subset} Soit $h\in H$, par \bf{division euclidienne} : $\exists (q,r)\in\Z\times\N \mid h = nq+r$ et $r<n$.\\
+    On a donc $r=h-nq\in H$, et par définition de $n$, $r=0$, car $0\leq r<n$. On a bien $h=nq\in n\Z$.
+\end{thm}
+
+\vspace*{-0.4cm}
+
+\pagebreak
+
+\begin{center}
+    \bf{Élément 62.}
+\end{center}
+
+\begin{thm}{ }{}
+    Soit $n\in\N^*$, $k\in\Z$.
+    \begin{center}
+        $[k]$ est inversible dans $\Z/n\Z$ ssi $k\land n = 1$.
+    \end{center}
+    \tcblower
+    \boxed{\ra} Supposons $k\land n = 1$, $\exists u,v \in \Z, ~ ku+nv=1$. Alors $[ku]+[nv]=[1]$, puis $[k][u]+[n][v]=[1]$.\\
+    Or $[n]=0$ donc $[k][u]=1$, donc $[k]$ est inversible d'inverse $[u]$.\\
+    \boxed{\la} Supposons $[k]$ inversible : $\exists l \in \Z, ~ [k][l]=[1]$, donc $[kl]=[1]$, donc $\exists v \in \Z, ~ kl-nv=1$.\\
+    Ainsi, $k\land n = 1$.
+\end{thm}
+
+\vspace*{-0.4cm}
+
+\begin{center}
+    \bf{Élément 63.}
+\end{center}
+
+\begin{thm}{Structure des groupes monogènes.  }{}
+    Soit $(G,\times)$ un groupe monogène, engendré par $a\in G$.\\
+    Si $G$ est de cardinal infini, alors $(G,\times)$ est isomorphe à $(\Z,+)$.
+    \tcblower
+    \boxed{1.} On suppose $G$ de cardinal infini. Alors les itérés de $a$ sont tous distincts : \\
+    (théorème de structure de l'ensemble des itérés. Pour $a \in G$, si $o(a) = +\infty$ alors tous les itérés de a sont distincts.)\\
+    Puis on pose $f:n\mapsto a^n$, c'est un isomorphisme de $\Z$ dans $G$.
+\end{thm}
+
+\vspace*{-0.4cm}
+
+\begin{center}
+    \bf{Élément 64.}
+\end{center}
+
+\begin{prop}{ }{}
+    Soit $(E,\|\cdot\|)$ un evn. Les boules fermées sont convexes.
+    \tcblower
+    Soit $a\in E, ~ r\geq 0$. Soient $x,y\in B'(a,r)$ et $\l\in[0,1]$.
+    \begin{equation*}
+        \| \l x + (1 - \l)y - a \| = \| \l(x-a) + (1-\l)(y-a) \| \leq \l\|x-a\| + (1-\l)\|y-a\| \leq \l r + (1-\l)r = r.
+    \end{equation*}
+    On a bien que $\l x + (1-\l)y \in B'(a,r)$.
+\end{prop}
+
+\pagebreak
+
+\begin{center}
+    \bf{Élément 65.}
+\end{center}
+
+\begin{defi}{Normes subordonnées.}{}
+    Soit $f\in\L_c(E,F)$, on définit la norme subordonnée par
+    \begin{equation*}
+        \abs f \abs = \sup_{x\neq0}\left\{\frac{\|f(x)\|_F}{\|x\|_E}\right\}.
+    \end{equation*}
+    On a aussi $\forall f \in \L_c(E,F), ~ \forall x \in E, ~ \|f(x)\|_F \leq \abs f \abs \cdot \|x\|_E$ et $\abs f \abs$ plus petite constante vérifiant cette propriété.
+    \tcblower
+    Soit $f\in\L_c(E,F)$. le sup existe car ensemble non-vide et majoré de $\R$ (\ref{thm:calc}).\\
+    Soit $x\in E$ tel que $\|x\|_E=1$, alors $\|f(x)\|=\frac{\|f(x)\|}{\|x\|}\leq\abs f \abs$, par passage au sup : $M\leq \abs f \abs$.\\
+    Soit $x\in E$ non nul, alors $\left\|\frac{x}{\|x\|}\right\|=1$, donc $\|f\left( \frac{x}{\|x\|}  \right) \leq M$ i.e. $\frac{\|f(x)\|}{\|x\|}\leq M$, par passage au sup, $\abs f \abs \leq M$.\\
+    --- Séparation : $\abs f \abs = 0 \ra \forall x \in E, ~ \| f(x) \| \leq \abs f \abs\cdot\|x\|=0 \ra \|f(x)\|=0 \ra f(x)=0\ra f=0$.\\
+    --- Homogénéité : $\abs \l f \abs = \sup \|(\l f)(x)\| = \sup |\l|\|f(x)\| = |\l| \sup \|f(x)\| = |\l| \abs f \abs$.\\
+    --- I.T. : $\|(f+g)(x)\|\leq\|f(x)\|+\|g(x)\|\leq \abs f \abs\cdot\|x\| + \abs g \abs\cdot\|x\|$, passage au sup...
+\end{defi}
+
+\begin{center}
+    \bf{Élément 66.}
+\end{center}
+
+\begin{ex}{Composantes connexes.}{}
+    Soit $(E,\|\cdot\|)$ un evn. Montrer qu'une réunion de parties connexes par arcs, d'intersection non-vide, est encore connexe par arcs.
+    \tcblower
+    \boxed{1.} Soit $(C_i)_{i\in I}$ une famille de connexes par arcs de $A$ d'intersection non-vide. Soit $x$ dans l'intersection.\\
+    Soient $(a,b)\in\bigcup C_i$. Alors $\exists i_0,j_0 \in I, ~ a\in C_{i_0} \et b\in C_{j_0}$.\\
+    On joint $a$ et $x$ par un chemin continu dans $C_{i_0}$ et $x$ et $b$ par un chemin continu dans $C_{j_0}$.\\
+    On joint $a$ et $b$ par un chemin continu dans $C_{i_0}\cap C_{j_0}$, donc $a$ et $b$ sont dans la même composante connexe par arcs.
+\end{ex}
+
+
+
+\end{document}
