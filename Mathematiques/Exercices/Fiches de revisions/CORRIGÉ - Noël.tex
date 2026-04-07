@@ -1,0 +1,820 @@
+\documentclass[french, 11pt]{article}
+
+\input{setupj.tex}
+
+\def\chapitre{NaN}
+\def\pagetitle{Noël.}
+
+\begin{document}
+
+\input{titlej.tex}
+
+\thispagestyle{fancy}
+
+\begin{exercice}{}{}
+    Définition de la convergence simple puis de la convergence uniforme d'une suite de fonctions $(f_n)_n$ sur $I$.
+    \tcblower
+    Pour tout $n\in\N$, soit $f_n:A\subset E \to F$ et $f:A\subset E \to F$.\\
+    On dit que $(f_n)_n$ converge simplement vers $f$ sur $A$ ssi $\forall x \in A, ~ \lim\limits_{n\to+\infty} f_n(x) = f(x)$.\\
+    Alors $f$ est appelée limite simple de la suite $(f_n)_n$.\\
+    \\
+    Pour tout $n\in\N$, soit $f_n:A\subset E \to F$ et $f:A\subset E \to F$.\\
+    On dit que $(f_n)_n$ converge uniformément vers $f$ sur $A$ ssi $(f_n-f)$ bornée sur $A$ et $\lim\limits_{n\to+\infty} \|f_n - f\|_\infty = 0$.\\[-0.14cm]
+    Alors $f$ est appelée limite uniforme de la suite $(f_n)_n$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que $\CU \, \Rightarrow \, \CS$ sur $I$.
+    \tcblower
+    Soit $(f_n)_n$ convergeant uniformément vers une fonction $f$ sur $I$.\\
+    $\forall \e > 0, ~ \exists N \in \N, ~ \forall x \in I, ~ \forall n \geq N, ~ \|f - f_n\|_{\infty}^{I} \leq \e$ ($\CU$).\\
+    Donc $\forall x \in I$, $\|f_n(x) - f(x)\|_F \le \|f - f_n\|_{\infty}^{I} \le \e$. On a bien :\\ 
+    $\forall x \in I, ~ \forall \e > 0, ~ \exists N \in \N, ~ \forall n \geq N, ~ \|f(x) - f_n(x)\|_F\leq \e$ $(\CS)$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Montrer que la limite simple d'une suite de fonctions convexes sur $I$ est encore une fonction convexe sur $I$.
+    \tcblower
+    Soit $(f_n)_n$ convergeant simplement vers une fonction $f$ sur $I$. Supposons que $\forall n \in \N, \, f_n$ est convexe sur $I$.\\
+    ie $\forall n \in \N, \, \forall (x,y) \in I^2, \, \forall t \in [0, 1], \, f_n(tx + (1-t)y) \le tf_n(x) + (1-t)f_n(y)$\\
+    Puis, par hypothèse de convergence simple, par passage à la limite et conservation des inégalités larges on trouve :\\
+    $\forall (x,y) \in I^2, \, \forall t \in [0, 1], \, f(tx + (1-t)y) \le tf(x) + (1-t)f(y)$.\\
+    $f$ est bien convexe sur $I$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Connaître les deux énoncés de théorème d'approximation de Weierstrass.
+    \tcblower
+    \boxed{1.} Toute fonction continue par morceaux sur un segment est limite uniforme d'une suite de fonctions en escaliers.\\
+    \boxed{2.} Toute fonction continue de $[a,b]$ dans $\K$ est limite uniforme d'une suite de polynômes.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer qu'une fonction en escalier sur un segment est bornée.
+    \tcblower
+    Par définition, une fonction en escalier est une fonction constante par morceaux, avec un nombre fini de morceaux. Donc toute fonction en escalier admet un nombre fini de valeurs. Donc toute fonction en escalier est bornée (par le max des valeurs atteintes en valeurs absolues, qui est donc un ensemble fini).
+\end{exercice}
+
+\begin{exercice}{}{}
+    Connaitre la définition d'une fonction cpm sur un segment.
+    \tcblower
+    Soit $f : [a,b] \to \R$ une fonction.\\
+    On dit que $f$ est continue par morceaux s'il existe $\sigma = \{x_0, ..., x_n\}$ une subdivision de $[a,b]$, avec $x_0 = a$ ; $x_n = b$, que $\forall i \in \lb 0, n-1 \rb$, $f$ est continue sur $]x_i, x_{i+1}[$ et prolongeable par continuité à gauche et à droite sur tous les $x_i$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    On pose $f_n = nxe^{-nx}$.\\
+    Savoir montrer que la suite de fonctions $(f_n)_n$ $\CS$ sur $\R_+$, $\CU$ sur tout segment de $]0, +\infty[$ et même sur $[a, +\infty[$ avec $a > 0$ mais qu'il n'y a pas $\CU$ sur $\R_+$.
+    \tcblower
+    \boxed{$\CS$} Si $x = 0$, $f_n(0) = 0 \to 0$.\\
+    Si $x > 0$, $f_n(x) \to 0$ par croissances comparées.\\
+    Si $x < 0$, $f_n(x) \to -\infty$ par produit de limites.\\
+    On en déduit que $(f_n)_n \, \cs 0$ sur $\R_+$.\\
+    \boxed{$\CU$} Avec la suite $x_n = \frac 1 n \, \forall n \in \N^*$, on a que $f_n(x_n) - f(x_n) = \frac 1 e \ne 0$, donc il n'y a pas $\CU$ sur $\R_+$\\
+    Soit $a > 0$. $\forall x \ge a, \, f_n(x) - f(x) = nxe^{-nx} \le nae^{-na} \underset{n\to\infty}{\to} 0$\\
+    Donc $\|f_n - f\|_{\infty}^{[a, +\infty[} \to 0$, donc $f_n \cu f$ sur tout segment de $R^*_+$
+\end{exercice}
+
+\begin{exercice}{}{}
+    Connaitre les définitions de $\CS, \CU, \CA, \CN$ d'une série de fonctions sur un intervalle $I$.
+    \tcblower
+    Soit $u_n:I\subset\R\to\K$.
+    \begin{enumerate}
+        \item $\sum u_n$ converge simplement ssi $\forall x \in I, ~ \sum u_n(x)$ converge.\\
+        $R_n\cs0$ sur $I$ automatiquement.
+        \item $\sum u_n$ converge uniformément sur $I$ ssi $R_n\cu0$ sur $I$.
+        \item $\sum u_n$ converge absolument sur $I$ ssi $\forall x \in I, ~ \sum|u_n(x)|$ converge.
+        \item $\sum u_n$ converge normalement sur $I$ ssi $\forall n \in \N, ~ u_n$ bornée sur $I$ et $\sum\|u_n\|_\infty^I$ converge.
+    \end{enumerate}
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que $\CN \Rightarrow \CU \Rightarrow \CS$ et $\CN \Rightarrow \CA \Rightarrow \CS$ sur $I$.
+    \tcblower
+    On sait déjà que $\CU \Rightarrow \CS$ (cours suite de fonctions) et $\CA \Rightarrow \CS$ (cours séries numériques).\\
+    \boxed{$\CN \Rightarrow \CA$} Soit $u_n:I\subset\R\to\K$ pour $n\in\N$. On suppose $\sum u_n$ convergente normalement sur $I$.\\
+    Soit $x\in I$ : $|u_n(x)|\leq\|u_n\|_\infty^I$ et par TCSTG+, $\sum|u_n(x)|$ converge donc $\sum u_n$ converge absolument sur $I$.\\
+    \boxed{$\CN\Rightarrow\CU$} Posons $\ds R_n(x)=\sum_{k=n+1}^{+\infty}u_k(x)$ et $\ds \tilde{R_n}=\sum_{k=n+1}^{+\infty}\|u_k\|_\infty^I$ bien défini car $\sum u_n$ $\texttt{CN}$ sur $I$.
+    \begin{equation*}\forall n \in \N, ~ \forall N\in\N, ~ \forall x \in I, ~ N\geq n+1 \Rightarrow \left|\sum_{k=n+1}^Nu_k(x)\right|\leq\sum_{k=n+1}^N\left|u_k(x)\right|\end{equation*}
+    Par passage à la limite, $\ds \forall n \in \N, ~ \forall x \in I, ~ |R_n(x)|\leq\sum_{k=n+1}^{+\infty}|u_k(x)|$.\\
+    Or $\forall k \geq n+1, ~ \forall x \in I, ~ |u_k(x)|\leq\|u_k\|_\infty^I$, on somme terme à terme de $k=n+1$ à $N\geq n+1$, puis on passe à la limite :
+    \begin{equation*}
+        \sum_{k=n+1}^{\infty}|u_k(x)| \leq \sum_{k=n+1}^{\infty}\|u_k\|_{\infty}^I = \tilde{R_n}.
+    \end{equation*}
+    Finalement, $\forall n \in \N, ~ \forall x \in I, ~ |R_n(x)|\leq\tilde{R_n}$ puis $\|R_n\|_\infty^I\leq\tilde{R_n}\xrightarrow[n\to+\infty]{}0$.\\
+    Ainsi, $R_n\cu0$ sur $I$ donc $\sum u_n$ converge uniformément sur $I$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    On pose $f_n(x) = \frac{(-1)^n}{n + x}$\\
+    Savoir montrer avec le CSSA que la série de fonctions $\sum f_n \, \CS$ puis $\CU$ sur $]0, +\infty[$, mais qu'il n'y a pas $\CN$ sur $]0, +\infty[$.
+    \tcblower
+    À $x$ fixé, $n\mapsto\frac{1}{n+x}$ décroît vers 0, donc CSSA : $\sum u_n(x)$ converge, donc $\sum u_n$ converge simplement sur $\R_+^*$.\\
+    D'après le CSSA, $|R_n(x)|\leq\frac{1}{n+1+x}\leq\frac{1}{n+1}$ puis $\|R_n\|_\infty^{\R_+^*}\leq\frac{1}{n+1}\xrightarrow[n\to+\infty]{}0$. Donc $R_n\cu0$ sur $\R_+^*$.\\
+    Ainsi, $\sum u_n$ converge uniformément sur $]0,+\infty[$.\\
+    Enfin, $\|f_n\|_\infty^{\R^*_+} = \frac 1 n$, terme général d'une série divergente (série harmonique) donc il n'y a pas $\CN$ sur $\R^*_+$
+\end{exercice}
+    
+\begin{exercice}{}{}
+    Connaitre la définition du rayon de convergence d'une série entière.
+    \tcblower
+    Soient $(a_n)_n \in \K^n$ et $E=\{r \geq 0, ~ (a_n r^n)_n ~ \nt{bornée}\}$.\\
+    Le rayon de convergence (RCV) de la série entière $\sum a_nx^n$ est défini par : $R=\sup E$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir écrire la définition avec quantificateurs d'une suite bornée puis d'une suite convergente.
+    \tcblower
+    Bornée : $\exists M \ge 0 ~ \forall n \in N ~ |u_n| \le M$\\
+    Convergente : $\exists l \in E ~ \forall \e > 0 ~ \exists N \in \N ~ \forall n \in \N ~ n\ge N \Rightarrow \|u_n - l\|_E \le \e$
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que $\sum a_nx^n$ et $\sum |a_n|z^n$ ont même rayon de convergence avec la définition du rayon.
+    \tcblower
+    Soit $x \in \K$. $(a_nx^n)_n$ bornée ssi $\exists M \ge 0 ~ \forall n \in \N ~ |a_nx^n| \le M$. Or $|a_nx^n| = |a_n|z^n$, d'où le résultat.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir démontrer le Lemme d'Abel.
+    \tcblower
+    Soient $(a_n)_n\in\K^\N$ et $z_0\in\C$ tel que $(a_nz_0^n)_n$ bornée.
+    \begin{equation*}
+        \forall z \in \C, ~ |z| < |z_0| \Rightarrow \sum_{n\geq0} a_nz^n ~ \CA
+    \end{equation*}
+    \boxed{$\text{En effet :}$}
+    Soit $z\in\C, ~ |z|<|z_0|$. On montre la convergence absolue de la série numérique.
+    \begin{equation*}
+        \forall n \in \N, ~ |a_nz^n| = |a_n||z|^n = |a_n||z_0|^n\left(\frac{|z|}{|z_0|}\right)^n
+    \end{equation*}
+    Par hypothèse, $\exists M > 0, ~ \forall n \in \N, ~ |a_nz_0^n| \leq M$ donc $|a_nz^n|\leq M\left( \frac{|z|}{|z_0|} \right)^n$ terme général de série convergente.\\
+    Par TCSTG+, $\sum|a_nz^n|$ converge, donc la série converge absolument.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que si la suite $(a_n)_n$ est bornée et ne tend pas vers 0, alors le RCV vaut 1.
+    \tcblower
+    Si la suite est bornée, alors par définition du rayon de convergence $R \ge 1$.\\
+    Supposons par l'absurde que $R > 1$. Alors pour $x = 1$, la série $\sum a_n$ pas hypothèse. Donc $a_n \to 0$ : absurde. On a bien $R \le 1$\\
+    par antisymétrie, $R = 1$
+\end{exercice}
+
+\begin{exercice}{}{}
+    Connaitre la règle de D'Alembert spécifique aux séries entières non lacunaires.
+    \tcblower
+    Soit $(a_n)_n \in (R_+)^\N$ tel que $a_n\neq0$ àpdcr.
+    \begin{center}
+        \fbox{Si $\ds\frac{a_{n+1}}{a_n}\to l \in \ov{\R}$, alors $\ds R=\frac{1}{l}$.}
+    \end{center}
+    (avec $R=0$ si $l = +\infty$ et $R=+\infty$ si $l = 0$)
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir justifier que $\sum_{n=1}^{+\infty} \frac{(-1)^n}{n} = -\ln(2)$ de deux manières :\\
+    \boxed{1.} en utilisant les sommes partielles de la série harmonique alternée\\
+    \boxed{2.} en utilisant une série entière continue au bord gauche.
+    \tcblower
+    Déjà, d'après le CSSA, $\sum \frac{(-1)^n}{n}$ converge.\\
+    Donc toutes les suites extraites convergent même la même limite.\\
+    \boxed{1.} Posons $S_n = \sum_{k = 1}^{n} \frac{(-1)^k}{k}$ (bien def)
+    \[
+    \begin{aligned}
+        S_{2n} &= -1 + \frac 1 2 - \frac 1 3 + ... - \frac{1}{2n-1} + \frac 1 {2n} + (\mathcolor{red}{\sum_{k = 1}^{n} \frac{1}{2k} - \sum_{k = 1}^n \frac{1}{2k}})\\
+        &= -1 -\frac 1 3 - ... - \frac 1 {2n+1} \mathcolor{red}{- \sum_{k = 1}^n \frac{1}{2k}} + \frac 1 2 + \frac 1 4 + ... + \frac 1 {2n} \mathcolor{red}{+ \sum_{k = 1}^{n}\frac{1}{2k}}\\
+        &= -1 - \frac 1 2 -...-\frac{1}{2n} + 2(\frac 1 2 + \frac 1 4 + ... + \frac 1 {2n})\\
+        &= -H_{2n} + H_n\\
+        &= -(\ln(2n) + \gamma + o(1)) + \ln(n) + \gamma + o(1)\\
+        &= -\ln(2) + o(1)\\
+        &\to -\ln(2)
+    \end{aligned}
+    \]
+    \boxed{2.} On peut le voir aussi comme une série entière évaluée en une valeur de $x$.
+    \begin{equation*}
+        S(x) = \sum_{n=1}^{\infty}\frac{x^n}{n}, \quad \forall n \in \N, ~ a_n = \frac{1}{n}.
+    \end{equation*}
+    On a alors $R=1$, par exemple avec d'Alembert. Définie sur $[-1,1[$ par CSSA, donc continue en $-1$ par Abel.
+    \begin{equation*}
+        \sum_{n=1}^\infty\frac{(-1)^{n+1}}{n} = -\sum_{n=1}^\infty\frac{(-1)^n}{n} = -S(-1) = - \lim_{x\to-1}S(x)
+    \end{equation*}
+    Or $S$ est $\cursive{C}^\infty$ sur $]-1,1[$, et $S'(x)=\sum_{n=0}^\infty x^n = \frac{1}{1-x}$, donc $\forall x \in ]-1,1[, ~  S(x)=-\ln(1-x)+\l$.\\
+    On évalue en $0$, $\l=0$. Donc $\forall x \in ]-1,1[$, ~ $S(x)=-\ln(1-x)$.\\
+    Par continuité de $\ln$, $\lim_{x\to-1}S(x)=-\ln(2)$ puis par Abel Radial, $S(-1)=-\ln(2)$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Connaitre la définition d'une fonction développable en série entière et la définition de sa série de Taylor.
+    \tcblower
+    Soit $f:A\subset \K \to \K$, où $A\in\cursive{V}(0)$. On dit que $f$ est développable en série entière en $0$ ssi $f$ est égale à la somme d'une série sur un domaine non trivial $D(0,r)$ avec $r>0$.\\
+    C'est-à-dire $\exists (a_n)_n \in \K^\N, ~ \exists r > 0, \forall x \in ]-r,r[ ~ f(x)=\sum_{n=0}^{+\infty} a_nx^n$.\\
+    \\
+    Soit $f:V\in\cursive{V}(0)\to\R$ et $\cursive{C}^\infty$ en zéro. On définit sa série de Taylor :
+    \begin{equation*}
+        S_f(x) = \sum_{k=0}^{+\infty}\frac{f^{(k)}(0)}{k!}x^k
+    \end{equation*}
+\end{exercice}
+
+\begin{exercice}{}{}
+    Connaitre par coeur les dse usuels (exp, ch, sh, cos, sin, série géométrique, ln, arctan).
+    \tcblower
+    \begin{itemize}
+        \item \textbf{Exponentielle} : 
+        \[
+        e^{x} = \sum_{n=0}^{+\infty} \frac{x^{n}}{n!} \quad \text{pour tout } x \in \mathbb{R} \ (\text{rayon } R = +\infty)
+        \]
+
+        \item \textbf{ch} : 
+        \[
+        \operatorname{ch}(x) = \sum_{n=0}^{+\infty} \frac{x^{2n}}{(2n)!} \quad \text{pour tout } x \in \mathbb{R} \ (R = +\infty)
+        \]
+
+        \item \textbf{sh} : 
+        \[
+        \operatorname{sh}(x) = \sum_{n=0}^{+\infty} \frac{x^{2n+1}}{(2n+1)!} \quad \text{pour tout } x \in \mathbb{R} \ (R = +\infty)
+        \]
+
+        \item \textbf{Cosinus} : 
+        \[
+        \cos(x) = \sum_{n=0}^{+\infty} (-1)^{n} \frac{x^{2n}}{(2n)!} \quad \text{pour tout } x \in \mathbb{R} \ (R = +\infty)
+        \]
+
+        \item \textbf{Sinus} : 
+        \[
+        \sin(x) = \sum_{n=0}^{+\infty} (-1)^{n} \frac{x^{2n+1}}{(2n+1)!} \quad \text{pour tout } x \in \mathbb{R} \ (R = +\infty)
+        \]
+
+        \item \textbf{Série géométrique} : 
+        \[
+        \frac{1}{1 - x} = \sum_{n=0}^{+\infty} x^{n} \quad \text{pour } |x| < 1 \ (R = 1)
+        \]
+
+        \item \textbf{ln} (au voisinage de 1) : 
+        \[
+        \ln(1 + x) = \sum_{n=1}^{+\infty} (-1)^{n-1} \frac{x^{n}}{n} \quad \text{pour } -1 < x \le 1 \ (R = 1)
+        \]
+        Convergence en \(x = 1\) (série alternée), divergence en \(x = -1\).
+
+        \item \textbf{Arctangente} : 
+        \[
+        \arctan(x) = \sum_{n=0}^{+\infty} (-1)^{n} \frac{x^{2n+1}}{2n+1} \quad \text{pour } |x| \le 1 \ (R = 1)
+        \]
+        Convergence en \(x = \pm 1\) (série alternée à termes décroissants).
+    \end{itemize}
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir trouver le dse de $(1+x)^{\a}$ en utilisant une équation différentielle.
+    \tcblower
+    Si $\a\in\N$, c'est le binôme de Newton. Sinon, on pose $f:x\mapsto (1+x)^\a$.
+    \begin{equation*}
+        \forall x \in ]-1,1[, ~ (1+x)f'(x)=\a f(x) \quad \et \quad f(0)=1.
+    \end{equation*}
+    Par unicité des solutions d'un problème de Cauchy en EDL1, $f$ est l'unique solution.\\
+    On va chercher une solution $y$ du problème développable en 0.\\
+    Posons $\forall x \in ]-1,1[, ~ y(x)=\sum_{n=0}^\infty a_nx^n$, avec $R$ son rayon de convergence.\\
+    On sait que $y$ est $\cursive{C}^1$ sur $]-R,R[$ donc $y'(x)=\sum_{n=0}^\infty(n+1)a_{n+1}x^n$. Ainsi :
+    \begin{equation*}
+        (1+x)g'(x)-\a g(x) = \sum_{n=0}^\infty((n+1)a_{n+1} + na_n - \a a_n)x^n
+    \end{equation*}
+    Par unicité du DSE en 0, $\forall n \in \N, ~ (n+1)a_{n+1}+na_n = \a a_n$ donc :
+    \begin{equation*}
+        \forall n \in \N, ~ a_{n+1} = \frac{\a-n}{n+1}a_n = \frac{\a(\a-1)...(\a-n)}{n!}a_0 \et a_0=1.
+    \end{equation*}
+    On a trouvé une solution $y$ du problème, développable en 0, $y(0)=1$, donc par unicité $\forall x \in ]-1,1[, ~ f(x)=y(x)$.\\
+    Conclusion :\\
+    \begin{equation*}
+        \forall x \in ]-1,1[, ~ (1+x)^\a = 1 + \sum_{n=1}^\infty\frac{\a(\a-1)...(\a-(n-1))}{n!}x^n = \sum_{n=0}^\infty\binom{\a}{n}x^n.
+    \end{equation*}
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que $x \mapsto \frac{e^x - 1}{x}$ est $\cursive{C}^{\infty}$ sur $\R$.
+    \tcblower
+    Elle est $\cursive{C}^\infty$ sur $\R^*$ comme quotient de fonctions $\cursive{C}^\infty$.
+    \begin{equation*}
+        \forall x \in \R^*, ~ e^x = \sum_{n=0}^\infty \frac{x^n}{n!} \quad\nt{puis}\quad e^x-1=\sum_{n=1}^\infty\frac{x^n}{n!} \quad\nt{puis}\quad \frac{e^x-1}{x}=\sum_{n=0}^\infty\frac{x^n}{(n+1)!}.
+    \end{equation*}
+    C'est aussi vrai en zéro, donc $f$ est développable en série entière, donc $f$ est $\cursive{C}^\infty$ en zéro.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir démontrer la formule de Taylor avec reste intégral.
+    \tcblower
+    Soit $f\in\cursive{C}^{n+1}([a,b],E)$.
+    \begin{equation*}
+        f(b) = \sum_{k=0}^n\frac{(b-a)^k}{k!}f^{(k)}(a) + \int_a^b\frac{(b-t)^n}{n!}f^{(n+1)}(t)\dt.
+    \end{equation*}
+    \boxed{$\text{En effet :}$}\\
+    Par récurrence sur $n$.\\
+    \bf{Initialisation.} Soit $f\in\cursive{C}^1([a,b])$, $\int_a^b f'(t)\dt = \left[ f(t) \right]_a^b = f(b) - f(a) \Rightarrow f(b) = f(a) + \int_a^b f'(t)\dt$.\\
+    \bf{Hérédité.} Soit $f\in\cursive{C}^{n+2}([a,b])$. Par hypothèse de récurrence :
+    \begin{align*}
+        f(b) = \sum_{k=0}^n \frac{(b-a)^k}{k!}f^{(k)}(a) + \int_a^b\frac{(b-t)^n}{n!}f^{(n+1)}(t)\dt.
+    \end{align*}
+    Par IPP, puisque $f^{(n+1)}$ et $\frac{(b-t)^n}{n!}$ sont $\cursive{C}^1$, alors pour $B:(\l,x)\mapsto \l x$ bilinéaire :
+    \begin{align*}
+        \int_a^b \frac{(b-t)^n}{n!}f^{(n+1)}(t)\dt &= \left[ - \frac{(b-t)^{n+1}}{(n+1)!} f^{(n+1)}(t)\right]_a^b - \int_a^b\frac{(b-t)^{n+1}}{(n+1)!}f^{(n+2)}(t)\dt\\
+        &=\frac{(b-a)^{n+1}}{(n+1)!}f^{(n+1)}(a) + \int_a^b\frac{(b-t)^{n+1}}{(n+1)!}f^{(n+2)}(t)\dt
+    \end{align*}
+    On a le résultat.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir démontrer le théorème de Rolle.
+    \tcblower
+    Soit $f:[a,b]\to\R$ continue sur $[a,b]$ et dérivable sur $]a,b[$ et telle que $f(a)=f(b)$, alors
+    \begin{equation*}
+        \exists c \in ]a,b[, ~ f'(c)=0.
+    \end{equation*}
+    \boxed{$\text{En effet :}$}\\
+    On a $f$ continue sur $[a,b]$, donc d'après le TBA : $\exists c,d \in[a,b] ~ f(c)=\max_{[a,b]} f$ et $f(d)=\min_{[a,b]} f$.\\
+    $\bullet$ Cas $c\in]a,b[$ ou $d\in]a,b[$ (SPDG on prend $c$).\\
+    Alors $f$ admet un extremum en $c$, $c\in]a,b[$ et $f$ est dérivable en $c$ donc (thm) : $f'(c)=0$.\\
+    $\bullet$ Cas $c\in\{a,b\}$ et $d\in\{a,b\}$. Alors $f(c)=f(a)=f(b)=f(d)$. Donc $\min f = \max f$ donc $f$ est constante.\\
+    Alors $\forall c \in ]a,b[, ~ f'(c)=0$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir démontrer le lemme de Riemann-Lebesgues pour les fonctions $\cursive{C}^1$.
+    \tcblower
+    Soit \(f : [a,b] \to \mathbb{C}\) de classe \(\cursive C^1\). On considère :
+    \[
+    I(\lambda) = \int_a^b f(t) e^{i\lambda t} \, dt.
+    \]
+
+    Intégrons par parties :
+    \[
+    I(\lambda) = \left[ \frac{f(t) e^{i\lambda t}}{i\lambda} \right]_{t=a}^{t=b} 
+    - \int_a^b \frac{f'(t) e^{i\lambda t}}{i\lambda} \, dt.
+    \]
+
+    Puisque \(f\) est \(\cursive C^1\), \(f\) et \(f'\) sont continues sur \([a,b]\), donc bornées : 
+    \(\exists M > 0, \ \forall t \in [a,b], \ |f(t)| \le M,\ |f'(t)| \le M\).
+
+    On majore :
+
+    \[
+    \left| \left[ \frac{f(t) e^{i\lambda t}}{i\lambda} \right]_a^b \right| 
+    = \left| \frac{f(b)e^{i\lambda b} - f(a)e^{i\lambda a}}{i\lambda} \right| 
+    \le \frac{|f(b)| + |f(a)|}{|\lambda|} 
+    \le \frac{2M}{|\lambda|}.
+    \]
+
+    \[
+    \left| \int_a^b \frac{f'(t) e^{i\lambda t}}{i\lambda} \, dt \right| 
+    \le \int_a^b \frac{|f'(t)|}{|\lambda|} \, dt 
+    \le \frac{M(b-a)}{|\lambda|}.
+    \]
+
+    Donc :
+    \[
+    |I(\lambda)| \le \frac{2M}{|\lambda|} + \frac{M(b-a)}{|\lambda|}
+    = \frac{M(2 + b-a)}{|\lambda|}.
+    \]
+
+    D’où :
+    \[
+    \boxed{\lim_{\lambda \to +\infty} I(\lambda) = 0}.
+    \]
+\end{exercice}
+
+\begin{exercice}{}{}
+    Connaitre la définition du polynôme minimal d'un endomorphisme.
+    \tcblower
+    Soit $E$ un $\K$-ev, $I$ l'idéal des polynômes annulateurs de $u$, si $I\neq(0)$, alors (thm) $I$ est engendré par un unique polynôme unitaire noté $\Pi_u$ appelé polynôme minimal de $u$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que toute matrice admet un polynôme minimal (sans passer par le polynôme caractéristique).
+    \tcblower
+    Soit $A \in \M_n(\K)$.\\ 
+    $\dim(\M_n(\K)) = n^2$, donc la famille $(A^0, ..., A^{n^2})$ est une famille liée de $\M_n(\K)$ (car de cardinal supérieur strict à la dimension de l'espace).\\
+    ie $\exists (\lambda_0, ..., \lambda_{n^2}) \in \K$ tels que $\lambda_0 I_n + ... + \lambda_{n^2}A^{n^2} = 0$ et $\exists i \in \lb 0, n^2 \rb ~ \lambda_i \ne 0$.\\
+    Ainsi, en posant $P = \sum_{i = 0}^{n^2} \lambda_iX^i$, on a un polynôme annulateur non nul de $A$ et donc par structure, on a l'existence de $\Pi_A$
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que si $A\in \M_n(\K)$ possède un polynôme minimal $\Pi_A$ de degré $d$, alors l'algèbre $\K[A]$ des polynômes en $A$ est de dimension $d$.
+    \tcblower
+    Soit $A \in \M_n(\K)$ qui vérifie les hypothèses.\\
+    On sait montrer que $(\K[A],+,\times,\cdot)$ est une $\K$-algèbre.\\
+    On pose $\B=(I_n,A,...,A^{d-1})$, c'est une famille de vecteurs de $\K[A]$.\\
+    \bf{Libre.} Soient $(\l_0,..,\l_{d-1})\in\K^d, ~ \l_0 I_n+...+\l_{d-1}A^{d-1}=0_{\M_n(\K)}$. C'est un polynôme de degré strictement inférieur à $d$ et annulant $A$, il est donc nul, donc $\forall k \in \lb0,d-1\rb, ~ \l_k=0$.\\
+    \bf{Génératrice.} Soit $B\in\K[A]$, $\exists P \in \K[X], ~ B=P(A)$, puis $P=\Pi_AQ + R$, ~ $Q,R\in\K[X]$, $\deg(R)<d$.\\
+    Puis $P(A)=\cancel{\Pi_A(A)}\times Q(A) + R(A) = R(A) \in \Vect(I_n,A,...,A^{d-1})$ car $\deg(R)<d$.\\
+    C'est donc une base de $\K[A]$, qui est alors de dimension $d$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que si $\Pi_A(0) \ne 0$, alors $A$ est inversible et $A^{-1}$ est un polynôme en $A$.
+    \tcblower
+    Notons $\Pi_A=a_0+...+a_nX^n$, $a_n\neq0$, alors $\Pi_A(A)=0_{\M_n(\K)} \Rightarrow a_0 I_n+...+a_nA^n=0_{\M_n(\K)}$.\\
+    Ainsi, $a_1A + ... + a_nA^n = -a_0 I_n$ puis en posant $B=-\left( \frac{a_1}{a_0}I_n + ... + \frac{a_n}{a_0}A^{n-1} \right)$, $AB = BA = I_n$.\\
+    On a montré que $A\in\GL_n(\K)$ et $A^{-1}=B\in\K[A]$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir démontrer le lemme des noyaux pour deux polynômes $P$ et $Q$ premiers entre eux.
+    \tcblower
+    Soit $E$ un $\K$-ev, $u\in\L(E)$, $P,Q\in\K[X]$ tels que $P\land Q=1$. Alors $\Ker~(PQ)(u)=\Ker~P(u) \oplus \Ker~Q(u)$.\\
+    De plus, tous ces sous-espaces sont stables par $u$.
+    \tcblower
+    Par hypothèse, $\exists (U,V)\in\K[X]^2, ~ PU+QV=1$, puis $P(u)\circ U(u)+Q(u)\circ V(u) = \id_E$.\\
+    Puis $(U(u)\circ P(u))(x) + (V(u)\circ Q(u))(x)=x$ i.e. $U(u)(\underbrace{P(u)(x)}_{0_E})+V(u)(\underbrace{Q(u)(x)}_{0_E})=x$, donc $x=0_E$.\\
+    \boxed{\subset} Soit $x\in \Ker(PQ)(u)$. On note $y=U(u)(P(u)(x))$ et $z=V(u)(Q(u)(x))$ donc $x=y+z$.\\
+    On a $Q(u)(y)=(U(u) \circ (PQ)(u))(x) = U(u)(0_E)=0_E$, donc $y\in\Ker(Q(u))$. (même raisonnement pour $z$)\\
+    \boxed{\supset} Soit $x=y+z\in\Ker(P(u))+\Ker(Q(u))$.\\
+    Alors $(PQ)(u)(x)=(PQ)(u)(y)+(PQ)(u)(z)=Q(u)(P(u)(y))+P(u)(Q(u)(z))=0_E$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que si deux endomorphismes $u$ et $v$ commutent, alors tout polynôme en $u$ commute avec tout polynôme en $v$.
+    \tcblower
+    \paragraph{1. Étape 1 : \(u^k\) commute avec \(v\) pour tout \(k \in \mathbb{N}\).}  
+
+    Pour \(k=0\), \(u^0 = \mathrm{Id}_E\) commute trivialement avec \(v\).  
+    Pour \(k=1\), c’est l’hypothèse \(u \circ v = v \circ u\).  
+
+    Supposons \(u^k \circ v = v \circ u^k\) pour un \(k\ge 1\). Alors :  
+    \[
+    u^{k+1} \circ v = u \circ (u^k \circ v) = u \circ (v \circ u^k) 
+    = (u \circ v) \circ u^k = (v \circ u) \circ u^k = v \circ u^{k+1}.
+    \]  
+    Donc la propriété est vraie pour tout \(k \in \mathbb{N}\).
+
+    \paragraph{2. Étape 2 : \(u^k\) commute avec \(v^\ell\) pour tous \(k, \ell \in \mathbb{N}\).}  
+
+    Fixons \(k\), montrons par récurrence sur \(\ell\) que \(u^k \circ v^\ell = v^\ell \circ u^k\).
+
+    - Pour \(\ell = 0\), c’est évident.
+    - Pour \(\ell = 1\), c’est l’étape 1.
+    - Supposons \(u^k \circ v^\ell = v^\ell \circ u^k\). Alors :
+    \[
+    u^k \circ v^{\ell+1} = (u^k \circ v^\ell) \circ v = (v^\ell \circ u^k) \circ v
+    = v^\ell \circ (u^k \circ v) = v^\ell \circ (v \circ u^k) = v^{\ell+1} \circ u^k.
+    \]
+
+    \paragraph{3. Étape 3 : Extension aux polynômes.}  
+
+    Écrivons \(P = \sum_{k=0}^m a_k X^k\), \(Q = \sum_{\ell=0}^n b_\ell X^\ell\).
+
+    Alors :
+    \[
+    P(u) \circ Q(v) = \left( \sum_{k=0}^m a_k u^k \right) \circ \left( \sum_{\ell=0}^n b_\ell v^\ell \right)
+    = \sum_{k=0}^m \sum_{\ell=0}^n a_k b_\ell \left( u^k \circ v^\ell \right).
+    \]
+
+    De même :
+    \[
+    Q(v) \circ P(u) = \sum_{\ell=0}^n \sum_{k=0}^m b_\ell a_k \left( v^\ell \circ u^k \right).
+    \]
+
+    Or d’après l’étape 2, \(u^k \circ v^\ell = v^\ell \circ u^k\) pour tous \(k,\ell\), donc les deux sommes sont égales.
+
+    \paragraph{Conclusion :}  
+    \[
+    \boxed{P(u) \circ Q(v) = Q(v) \circ P(u)}.
+    \]
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que les sous-espaces propres de $u$ endomorphisme sont stables par $u$.
+    \tcblower
+    Soit \(\lambda \in E\) une valeur propre de \(u\) et  
+    \[
+    E_\lambda = \ker(u - \lambda\mathrm{Id})
+    \]
+    le sous-espace propre associé.
+
+    \paragraph{Montrons que \(E_\lambda\) est stable par \(u\).}  
+
+    Soit \(x \in E_\lambda\). Par définition, \(u(x) = \lambda x\).\\
+    \[
+    (u - \lambda\mathrm{Id})\big(u(x)\big) = u(u(x)) - \lambda u(x) 
+    = u(\lambda x) - \lambda(\lambda x) 
+    = \lambda^2 x - \lambda^2 x = 0,
+    \]
+    donc \(u(x) \in \ker(u - \lambda\mathrm{Id}) = E_\lambda\).
+
+    \paragraph{Conclusion :} Tout sous-espace propre de \(u\) est stable par \(u\).
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir énoncer le théorème de Cayley-Hamilton et savoir déduire que le polynôme minimal divise le polynôme caractéristique.
+    \tcblower
+    Le théorème de Cayley-Hamilton dit que le polynôme caractéristique d'une matrice est un polynôme annulateur, ie $\X_A(A) = 0$. Or $\Pi_A$ est le polynôme annulateur de $A$ de plus bas degré, donc $\Pi_A \mid \X_A$
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir justifier qu'une matrice nilpotente et dz est forcément nulle.
+    \tcblower
+    Soit $N$ nilpotente et dz. Alors $\X_N$ = $X^n$. Donc (thm) $\Sp(N) = \{0\}$. Donc $N$ est semblable à la matrice diagonale qui contient toutes ses valeurs propres sur la diagonale, donc $N$ est semblable à la matrice nulle. Donc (thm) $N$ est la matrice nulle.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir justifier qu'une matrice dz ayant une seule valeur propre est forcément scalaire.
+    \tcblower
+    Soit $A \in \M_n(\K)$. Supposons $\Sp(A) = \{\l\}$.\\
+    Donc $\exists P \in \GL_n(\K)$ tel que $A = P \Diag(\l,..,\l)P^{-1} = \l PP^{-1} = \l I_n$, donc $A$ est scalaire.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que l'ensemble des matrices diagonales de taille $n$ est une algèbre de dimension $n$.
+    \tcblower
+    Soit \( \mathcal{D}_n(\mathbb{K}) \) l'ensemble des matrices diagonales de taille \( n \times n \) à coefficients dans \(\mathbb{K}\).
+
+    \[
+    \mathcal{D}_n(\mathbb{K}) = \{ 
+    \operatorname{diag}(a_1, a_2, \dots, a_n) \mid a_i \in \mathbb{K} \}.
+    \]
+
+    \subsection*{1. \( \mathcal{D}_n(\mathbb{K}) \) est une sous-algèbre de \( \M_n(\K) \)}
+
+    \paragraph{Stabilité par somme :} 
+    Si \( D = \operatorname{diag}(a_1,\dots,a_n) \) et \( D' = \operatorname{diag}(b_1,\dots,b_n) \), alors
+    \[
+    D + D' = \operatorname{diag}(a_1+b_1,\dots,a_n+b_n) \in \mathcal{D}_n(\mathbb{K}).
+    \]
+
+    \paragraph{Stabilité par produit (interne) :} 
+    \[
+    D D' = \operatorname{diag}(a_1 b_1, \dots, a_n b_n) \in \mathcal{D}_n(\mathbb{K}).
+    \]
+
+    \paragraph{Stabilité par multiplication par un scalaire :} 
+    Pour \( \lambda \in \mathbb{K} \),
+    \[
+    \lambda D = \operatorname{diag}(\lambda a_1, \dots, \lambda a_n) \in \mathcal{D}_n(\mathbb{K}).
+    \]
+
+    \paragraph{Contient l’identité :} 
+    \( I_n = \operatorname{diag}(1,\dots,1) \in \mathcal{D}_n(\mathbb{K}) \).
+
+    Puisque \(\mathcal{D}_n(\mathbb{K})\) est stable par somme, produit interne, multiplication externe, et contient \(I_n\), c’est une sous-algèbre de \( \M_n(\K) \).\\
+    Puis $\mathcal{D}_n(\K) = \Vect(E_{ii},~i\in \lb 1,n\rb)$, donc sa dimension est bien $n$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que si $D$ est diagonale à éléments tous distincts alors $M$ commute avec $D$ si et seulement si $M$ est diagonale.
+    \tcblower
+    \boxed{$\Leftarrow$} On sait que deux matrices diagonales commutent.\\
+    \boxed{$\Rightarrow$} Notons $A=(a_{i,j})$, $D=(d_{i,j})$ avec $\forall i,j \in \lb1,n\rb, ~ d_{i,j}=\d_{i,j}\l_i$.
+    \begin{align*}
+        AD=DA &\iff \forall i,j \in \lb1,n\rb, ~ [AD]_{i,j} = [DA]_{i,j} \iff \sum_{k=1}^na_{i,k}d_{k,j} = \sum_{k=1}^n d_{i,k}a_{k,j}\\
+        &\iff a_{i,j}\l_j = \l_i a_{i,j} \iff (\l_i - \l_j)a_{i,j} = 0
+    \end{align*}
+    Donc $i\neq j \Rightarrow a_{i,j}=0$ car $\l_i \neq \l_j$, donc $A\in\mathcal{D}_n(\K)$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que si $A$ est dz, alors $Q(A)$ est dz pour tout $Q \in \K[X]$.
+    \tcblower
+    Soit $A$ diagonalisable. On a $A = PDP^{-1}$, avec $P \in \GL_n(\K)$ et $D = \Diag(\lambda_1,...,\lambda_n)$.\\
+    On montre par récurrence facile que $\forall k \in \N$, $A^k = PD^kP^{-1}$ : \\
+    Pour $k = 0$ et $k = 1$, c'est immédiat.\\
+    Soit $k \in \N$. Supposons que $A^k = PD^kP^{-1}$. $A^{k+1} = AA^k = (PDP^{-1})(PD^kP^{-1}) = (PD)(P^{-1}P)(D^kP^{-1}) = PDD^kP^{-1} = PD^{k+1}P^{-1}$.\\
+    Donc $\forall k \in \N ~ A^k = PD^kP^{-1}$, donc $\forall k \in \N ~ A^k \overset{\text{sb}}{\sim} D^k$, avec $D^k$ diagonale.\\
+    Puis soit $Q \in \K[X]$, avec $Q = \sum_{k = 0}^{p}a_kX^k$.\\
+    Donc $Q(A) = \sum_{k = 0}^{p}a_kA^k = \sum_{k = 0}^{p}a_k(PD^kP^{-1}) = P(\sum_{k = 0}^{p}a_kD^k)P^{-1}$.\\
+    Or $\sum_{k = 0}^{p}a_kD^k$ est une matrice diagonale, donc $Q(A)$ est bien diagonalisable.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Connaitre la caractérisation des matrices carrées de rang 1, puis savoir montrer que $A^2 = \tr(A)A$ et connaitre une CNS pour $A$ dz.
+    \tcblower
+    On rappelle la caractérisation des matrices de rang 1 : $\exists C \in \M_{n,1}(\K), ~ \exists L \in \M_{1,n}(\K), ~ A=CL$ (non-nulles).\\
+    Alors $A^2=CLCL=C(LC)L$, or $LC=\tr(A)$, donc $A^2=\tr(A)CL=\tr(A)A$.\\
+    Alors $P=X^2-\tr(A)X=X(X-\tr(A))$ est polynôme annulateur de $A$.\\
+    Si $\tr(A)\neq0$, alors $P$ est scindé à racines simples, donc $A$ est diagonalisable.\\
+    Sinon, $P=X^2$ puis $\Sp(A)\subset\{0\}$ puis si $A$ diagonalisable, alors $A\sim0_n$, or $\rg(A)=1$, absurde.\\
+    Donc $A$ est diagonalisable ssi $\tr(A)\neq0$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Soit $A\in\GL_n(\C)$. Montrer que $A$ est diagonalisable ssi $A^2$ l'est.
+    \tcblower
+    \boxed{$\Rightarrow$} $A = PDP^{-1} \Rightarrow A^2 = PDP^{-1}PDP^{-1} = PD^2P^{-1} \Rightarrow A^2$ dz car semblable à une matrice diagonale. 
+    \boxed{$\Leftarrow$} Supposons $A^2$ diagonalisable. Soit $P=(X-\a_1)...(X-\a_p)$ annulateur de $A^2$ scindé à racines simples.\\
+    Alors $P(A^2)=(A^2-\a_1I_n)...(A^2-\a_pI_n)=0_n$ donc $Q=(X^2-\a_1)...(X^2-\a_p)$ est annulateur de $A$.\\
+    Supposons qu'il existe $i\in\lb1,p\rb, ~ \a_i=0$, par exemple $\a_1$, alors $Q=X^2(X^2-\a_2)...(X^2-\a_p)$.\\
+    Or $A^2\in\GL_n(\C)$, on multiplie par $A^{-2}$ : $(A^2-\a_2I_n)...(A^2-\a_pI_n)=0_n$.\\
+    On suppose donc SPDG que $\forall i \in \lb1,n\rb, ~ \a_i\neq0$, or tout complexe $\a_i$ non nul possède deux racines carrées : $\pm\b_i$.\\
+    Donc $Q=(X-\b_1)(X+\b_1)...(X-\b_p)(X+\b_p)$, et toutes les racines sont distinctes.\\
+    Donc $Q$ est scindé à racines simples donc $A$ est diagonalisable.  
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que si $A \in \M_n(\K)$ est nilpotente, alors son indice de nilpotence est plus petit que $n$ puis que $I_n + A$ est inversible et donner son inverse.
+    \tcblower
+    Soit $A$ nilpotente d'indice $p$, ie $A^p = 0$, ie $X^p$ est un polynôme annulateur de $A$. Or $\Pi_A \mid X^p$ et $\Pi_A \nmid X^{p-1}$ (car par def de l'indice de nilpotence, $A^{p-1} \ne 0$). Donc $\Pi_A = X^p$.\\
+    Les valeurs propres sont exactement les racines du polynôme minimal, donc $\Sp(A)=\{0\}$.\\
+    Les racines de $\X_A$ sont exactement les valeurs propres, et $\X_A$ unitaire et de degré $n$, donc $\X_A=X^n$.\\
+    Donc $p\leq n$ par le théorème de Cayley-Hamilton.\\
+    Puis $(I_n + A)(I_n - A + A^2+...+(-1)^{p-1}A^{p-1}) = I_n + (-1)^{p-1}A^p = I_n$, donc $I_n + A$ est inversible, d'inverse $(I_n - A + A^2+...+(-1)^{p-1}A^{p-1})$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Connaitre les caractérisations des valeurs propres d'une matrice avec un rang, un déterminant, un noyau ou une matrice inversible.
+    \tcblower
+    $\lambda$ valeur propre de $A$ $\Leftrightarrow$ $\rg(A - \lambda I_n) < n \Leftrightarrow \det(A - \lambda I_n) = 0 \Leftrightarrow \Ker(A-\l I_n) \ne \{0\} \Leftrightarrow A - \l I_n \notin \GL_n(\K)$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Connaitre le spectre d'un projecteur ou d'une symétrie non triviale.
+    \tcblower
+    \boxed{$\text{projecteur}$} : $p^2 = p$ donc $\Pi_p = X^2-X = X(X-1)$ (car projecteur non trivial). Donc (thm) $\Sp(p) = \{0,1\}$.\\
+    \boxed{$\text{symétrie}$} : $s^2 = \id_E$ donc $\Pi_s = X^2 - 1 = (X-1)(X+1)$ (car symétrie non triviale). Donc (thm) $\Sp(s) = \{-1,1\}$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que pour $p$ projecteur en dimension finie, $\tr(p) = \rg(p)$.
+    \tcblower
+    Soit $p$ un projecteur de $E$ $\K$-evdf. Alors $E=\Ker(p)\oplus\Im(p)=\Ker(p)\oplus\Ker(p-\id_E)$.\\
+    Soit $\B_1$ une base de $\Ker(p)$ et $\B_2$ une base de $\Ker(p-\id_E)$. Alors $\B=\B_1\sqcup\B_2$ est base de $E$.
+    \begin{equation*}
+        \Mat_\B(p)=\begin{pmatrix} 0_{n-r} & \Big| & (0) \\ \hline (0) & \Big| & I_{r}\end{pmatrix}
+    \end{equation*}
+    On a bien $\rg(p) = r = \tr(p)$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que deux matrices semblables ont même polynôme caractéristique et même polynôme minimal.
+    \tcblower
+    Soient $A,B \in \M_n(\K) ~ \exists P \in \GL_n(\K) ~ A = PBP^{-1}$.\\
+    Soit $\l \in \K$. Alors $\X_A(\l)=\det(\l I_n - A) = \det(P)\times\det(\l I_n - B)\times \det(P^{-1})=\det(\l I_n - B) = \X_B(\l)$.\\
+    Puis : Soit $Q \in \K[X]$. On montre par récurrence (savoir le faire !) que $Q(A) = PQ(B)P^{-1}$. Donc $Q(A) = 0 \Leftrightarrow PQ(B)P^{-1} = 0 \Leftrightarrow Q(B) = P^{-1}0P = 0$.\\
+    Donc l'idéal des polynômes annulateurs de $A$ est égal à l'idéal des polynômes annulateurs de $B$, donc (thm) $\Pi_A = \Pi_B$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Connaitre l'inégalité entre dimension d'un sous-espace propre et la multiplicité de la valeur propre.
+    \tcblower
+    On a $1 \le \dim(E_{\l}) \le n_{\l}$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir démontrer la formule de Leibniz dans le cas vectoriel.
+    \tcblower
+    Soient $E,F,G$ des $\K$-evdf, et $I$ un intervalle de $\R$.\\
+    Soit $f:I\to E, ~ g:I\to F, ~ B:E\times F \to G; ~ (x,y)\mapsto B(x,y)$ bilinéaire.
+    \begin{enumerate}
+        \item $\forall n \in \N, ~ f,g\in\cursive{C}^n(I) \Rightarrow B(f,g)\in\cursive{C}^n(I) \et B(f,g)^{(n)}=\sum_{k=0}^n\binom{n}{k}B(f^{(k)},g^{(n-k)})$.
+        \item $f,g\in\cursive{C}^{\infty}(I)\Rightarrow B(f,g)\in\cursive{C}^{\infty}(I)$.
+    \end{enumerate}
+    \boxed{$\text{En effet :}$}\\
+    Par récurrence sur $n$. Vrai pour $n=0$, $n=1$.\\
+    Soit $n\in\N$ tel que $\P(n)$. Soient $f,g\in\cursive{C}^{n+1}(I)$, alors $f,g\in\cursive{C}^1(I)$ et $B(f,g)'=B(f',g)+B(f,g')$.\\
+    Puis $f',g,f,g'\in\cursive{C}^n(I)$, et par hypothèse : $B(f',g),B(f,g')\in\cursive{C}^n(I)$.\\
+    Par combinaisons linéaires, $B(f,g)'\in\cursive{C}^n(I)$ i.e. $B(f,g)\in\cursive{C}^{n+1}(I)$, puis $B(f,g)^{(n+1)}=(B(f,g)^{(n)})'$.
+    \begin{align*}
+        B(f,g)^{(n+1)} &= (B(f,g)^{(n)})' = \left( \sum_{k=0}^n\binom{n}{k}B(f^{(k)}, g^{(n-k)}) \right)'\\
+        &=\sum_{k=0}^n\binom{n}{k}\left( B(f^{(k)}, g^{(n-k)}) \right) ' = \sum_{k=0}^n\binom{n}{k}(B(f^{(k+1)},g^{(n-k)}) + B(f^{(k)}, g^{(n+1-k)}))\\
+        &=\sum_{k=0}^n\binom{n}{k}B(f^{(k+1)},g^{(n-k)})+\sum_{k=0}^n\binom{n}{k}B(f^{(k)},g^{(n+1-k)})\\
+        &=\sum_{k=1}^{n+1}\binom{n}{k-1}B(f^{(k)}, g^{(n-k+1)}) + \sum_{k=0}^n\binom{n}{k}B(f^{(k)},g^{(n+1-k)})\\
+        &=\sum_{k=1}^n\left( \binom{n}{k-1} + \binom{n}{k} \right)B(f^{(k)},g^{(n+1-k)}) + B(f^{(n+1)}, g^{(0)}) + B(f^{(0)}, g^{(n+1)})\\
+        &=\sum_{k=1}^n\binom{n+1}{k}B(f^{(k)},g^{(n+1-k)}) + B(f^{(n+1),g}) + B(f,g^{(n+1)})\\
+        &=\sum_{k=0}^{n+1}\binom{n+1}{k}B(f^{(k)},g^{(n+1-k)}).
+    \end{align*} 
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir démontrer que si $A$ et $B$ commutent et sont dz, alors $A$ et $B$ sont simultanément dz.
+    \tcblower
+    Notons $u$ et $v$ les endomorphismes canoniquement associés à $A$ et $B$.\\
+    Par hypothèse $u$ et $v$ sont diagonalisables et $uv=vu$. Notons $\Sp(u)=\{\l_1,...,\l_p\}$.\\
+    Puisque $u$ est diagonalisable, $\K^n = \bigoplus_{i=1}^pE_{\l_i}$. Alors $\forall i \in \lb1,p\rb, ~ (u-\l_i\id_E)v=uv-\l_iv\stackrel{uv=vu}{=}v(u-\l_i\id_E)$.\\
+    On sait alors que $E_{\l_i}=\Ker(u-\l_i\id_E)$ est stable par $v$, on pose alors $v_i=v_{|E_{\l_i}}$ l'endormorphisme induit.\\
+    Or $v$ est diagonalisable donc (thm) $\forall i \in \lb1,p\rb, ~ v_i$ est diagonalisable.\\
+    On peut donc choisir une base $\B_i$ de $E_{\l_i}$ constituée de $\vp$ de $v_i$ (donc de $v$).\\
+    Or les vecteurs de $\B_i$ sont des vecteurs de $E_{\l_i}$ donc des $\vp$ de $u$ associés à la vp $\l_i$.\\
+    Finalement, les vecteurs $\B_i$ sont des $\vp$ de $u$ et de $v$. On pose $\B=\B_1\sqcup...\sqcup\B_p$ par concaténation.\\
+    Alors $E=\bigoplus_{i=1}^pE_{\l_i}$ donc $\B$ est une base de $E$ donc les vecteurs sont $\vp$ de $u$ et de $v$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir démontrer que $\GL_n(\K)$ est dense dans $\M_n(\K)$.
+    \tcblower
+    Toutes les normes sont équivalentes en dimension finie. Soit $A\in M_n(\K)$. On pose $\forall p \in \N^*, ~ A_p = A-\frac{1}{p}I_n$.\\
+    On a $\|A_p - A\| = \frac{1}{p}\|I_n\| \to 0$. On a $\det(A_p)=(-1)^n\det(\frac{1}{p}I_n-A)=(-1)^n\X_A(\frac{1}{p})$.\\
+    Or $\X_A$ a au plus $n$ racines, donc àpdcr, $\det(A_p)\neq0$ donc $A_p$ est inversible àpdcr.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que le polynôme caractéristique (resp minimal) de l'endomorphisme induit divise le polynôme caractéristique (resp minimal) de l'endomorphisme de départ.
+    \tcblower
+    \boxed{1.}
+    Soit $u\in\L(E)$, $F$ stable par $u$ et $P\in\K[X]$. Alors :
+    \begin{equation*}
+        \forall x \in F, ~ P(u)(x) = P(u_F)(x).
+    \end{equation*}
+    \boxed{$\text{En effet :}$}\\
+    Par récurrence sur $k\in\N$, $\forall x \in F, ~ u_F^k(x)=u^k(x)$.\\
+    Puis $P=\sum_{k=0}^N a_kX^k$ et $P(u_F)(x)=\sum_{k=0}^N a_k u_F^k(x)=\sum_{k=0}^N a_ku^k(x)=P(u)(x)$.\\
+    En particulier pour $P = \Pi_u$, on a $\forall x \in F, ~ \Pi_u(u)(x)=\Pi_u(u_F)(x)$ donc $\Pi_u(u_F)=0_{\L(F)}$.\\
+    Donc $u$ possède un polynôme annulateur $\Pi_u$ non-nul, donc $u_F$ possède un polynôme minimal et $\Pi_{u_F}\mid \Pi_u$.\\
+    \boxed{2.} Soit $\B_F=(e_1,...,e_p)$ base de $F$, donc famille libre de $E$, on la complète en $\B=(e_1,...,e_n)$ base de $E$.
+    \begin{equation*}
+        \Mat_\B(u) = \begin{pmatrix} A & \Big| & C \\ \hline (0) & \Big| & D \end{pmatrix} \Rightarrow \forall \l \in \K, ~ \Mat_\B(\l\id_E-u) = \begin{pmatrix} \l I_p - A & \Big| & -C \\ \hline (0) & \Big| & \l I_{n-p} - D \end{pmatrix}
+    \end{equation*}
+    Où $A=\Mat_{\B_F}(u_F)\in \M_p(\K)$, $C\in \M_{p,n-p}(\K)$ et $D\in \M_{n-p}(\K)$. Puis :
+    \begin{equation*}
+        \X_u(\l) = \det\begin{pmatrix}\l I_p - A & \Big| & -C \\ \hline (0) & \Big| & \l I_{n-p} - D \end{pmatrix} = \det(\l I_p - A)\det(\l I_{n-p}-D).
+    \end{equation*}
+    i.e. $\X_u(\l) = \X_{u_F}(\l)\det(\l I_{n-p}-D)$, on a bien $\X_F \mid \X_u$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir démontrer que la dimension du sous-espace caractéristique est égale à la multiplicité de la vp.
+    \tcblower
+    Soit $E$ un $\K$-evdf de dimension $n$ et $u\in\L(E)$ tel que $\X_u$ est scindé.\\
+    On note $\X_u=(X-\l_1)^{\a_1}...(X-\l_p)^{\a_p}$ avec $\a_1+...+\a_p=n$ et $\a_i \geq 1$.\\
+    On note $F_i=\Ker(u-\l_i\id_E)^{\a_i}$ sous-espace caractéristiques associés.\\
+    On a donc $\dim(F_i) = \a_i$.\\
+    \boxed{$\text{En effet :}$}\\
+    $F_i$ est stable par $u$, on note $u_i$ l'endomorphisme induit.\\
+    Alors $(u-\l_i \id_E)^{\a_i}=P_i(u)\in\K[u]$ en posant $P_i=(X-\l_i)^{\a_i}$.\\
+    Donc $\forall x \in F_i, ~ P_i(u_i)(x)=0_{F_i}, ~ P_i$ est aussi annulateur de $u_i$ : $\Sp(u_i)\subset\{$ racines de $P_i\}=\{\l_i\}$.\\
+    Donc $\X_{u_i}=(X-\l_i)^{\dim F_i}$ ($\deg \X_{u_i}=\dim F_i$). Or $\X_{u_i}\mid \X_u$ donc $\forall i \in \lb1,p\rb, ~ \dim F_i \leq \a_i$.\\
+    D'autre part, $\X_u$ est un polynôme annulateur de $u$ (Cayley-Hamilton).\\
+    D'après décomposition des noyaux, $E=\Ker(\X_u(u))=\Ker(u-\l_1\id)^{\a_1}\oplus...\oplus\Ker(u-\l_p\id)^{\a_p}=F_1\oplus...\oplus F_p$.\\
+    On passe aux dimensions : $\dim E = \sum_{i=1}^p\dim F_i$, d'autre part, $\dim E = \deg \X_u = \sum \a_i$\\
+    Donc $\sum_{i=1}^p(\a_i-\dim F_i) = 0 \Rightarrow \forall i \in \lb1,p\rb,~ \dim F_i = \a_i$ car somme de positifs.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir démontrer la formule de Cauchy qui donne le coefficient $a_n$ d'une série entière sous forme intégrale.
+    \tcblower
+    Notons $f(z)=\sum_{n=0}^\infty a_nz^n$ avec $(a_n)\in\K^\N$, et $R>0$. On a :
+    \begin{equation*}
+        \forall r < R, ~ a_n = \frac{1}{2\pi r^n} \int_0^{2\pi} e^{-in\theta} f(re^{i\theta})\nt{d}\theta.
+    \end{equation*}
+    \boxed{$\text{En effet :}$}\\
+    On a :
+    \begin{align*}
+        \int_0^{2\pi}e^{-in\theta}f(re^{i\theta})\nt{d}\theta &= \int_0^{2\pi}e^{-in\theta}\sum_{k=0}^{+\infty}a_k r^ke^{ik\theta} \nt{d}\theta = \int_0^{2\pi}\sum_{k=0}^{+\infty}a_kr^ke^{i(k-n)\theta}\nt{d}\theta\\
+        &\overset{(*)}{=}\sum_{k=0}^{+\infty}a_kr^k\int_0^{2\pi}e^{i(k-n)\theta}\nt{d}\theta=2\pi a_n r^n
+    \end{align*}
+    (*) On pose $u_k=a_kr^ke^{i(k-n)\theta}$, on vérifie que $\sum_{k\geq0}u_k$ $\CU$ sur $[0,2\pi]$.
+    \begin{equation*}
+        \forall \theta \in [0,2\pi], ~ \forall k \in \N, ~ |u_k(\theta)|=|a_k|r^k
+    \end{equation*}
+    Puis $\|u_k\|_\infty=|a_k|r^k$ terme général d'une série convergente. Enfin, $\CN$ implique $\CU$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que si $A \in \M_n(\K)$ alors $\X_A$ est un polynôme de degré $n$ et savoir calculer son terme constant et le coefficient de $X^{n-1}$.
+    \tcblower
+    On note $B=\l I_n-A$, $A=(a_{i,j})$ et $B=(b_{i,j})$.
+    \begin{equation*}
+        \X_A(\l) = \det(B) = \sum_{\s \in S_n}\e(\s)(\l\d_{\s(1),1}-a_{\s(1),1})...(\l\d_{\s(n),n}-a_{\s(n),n}).
+    \end{equation*}
+    Donc $\X_A$ est bien un polynôme en $\l$.
+    \begin{align*}
+        \X_A&=\sum_{\s\in S_n}\e(\s)(\d_{\s(1),1}X-a_{\s(1),1})...(\d_{\s(n),n}X-a_{\s(n),n})\\
+        &=(X-a_{1,1})...(X-a_{n,n}) + \sum_{\s\neq\id\in S_n}\e(\s)(\d_{\s(1),1}X-a_{\s(1),1})...(\d_{\s(n),n}X-a_{\s(n),n}).
+    \end{align*}
+    On remarque que si $\s\neq\id$, alors $\exists i \in \lb1,n\rb$ tel que $\s(i)\neq i$, puis forcément, $\exists j \in \lb1,n\rb, ~ j \neq i, ~ \s(j)\neq j$.\\
+    Donc $\forall \s \in S_n, ~ \s\neq\id, ~ \deg(Q_\s)\leq n-2$ puis $\deg\left( \sum_{\s\neq\id\in S_n}\e(\s)Q_\s \right)\leq n-2$.\\
+    Finalement :
+    \begin{align*}
+        \X_A &= (X-a_{1,1})...(X-a_{n,n})+R \quad \deg(R)\leq n-2\\
+        &= X^n - (a_{1,1}+...+a_{n,n})X^{n-1} + T \quad \deg(T)\leq n-2\\
+        &= X^n - \tr(A)X^{n-1} + T \quad \deg(T) \leq n-2
+    \end{align*}
+    Il reste à déterminer le coefficient constant noté $a_0$, or $a_0=\X_A(0)=\det(0I_n-A)=(-1)^n\det(A)$.
+\end{exercice}
+
+\begin{exercice}{}{}
+    Savoir montrer que la suite de polynômes de Bernstein associé à $f$ continue sur $[0,1]$ converge uniformément vers $f$ sur $[0,1]$.
+    \tcblower
+    Soient $f:[0,1]\to\K$, $n\in\N^*$, on pose le $n^{\nt{ème}}$ polynôme de Bernstein associé à $f$ :
+    \begin{equation*}
+        B_n(f)=\sum_{k=0}^n\binom{n}{k}f\left( \frac{k}{n} \right) X^k(1-X)^{n-k} \in \K[X]
+    \end{equation*}
+    Vérifions que $B_n(f)\cu f$. Soit $x\in[0,1]$.
+    \begin{equation*}
+        B_n(f)(x)-f(x) = \sum_{k=0}^n\binom{n}{k}\left( f\left( \frac{k}{n} \right) - f(x)\right)x^k(1-x)^{n-k}.
+    \end{equation*}
+    Soit $\e>0$, on a $f$ continue sur $[a,b]$, donc par théorème de Heine, uniformément continue sur $[a,b]$.
+    \begin{equation*}
+        \exists \a > 0, ~ \forall (x,y)\in[a,b]^2, ~ |x-y| < \a \Rightarrow |f(x)-f(y)|\leq\e.
+    \end{equation*}
+    De plus, $f$ est continue sur $[a,b]$, donc bornée : $\exists M > 0, ~ \forall x \in [a,b], ~ |f(x)| \leq M$.
+    \begin{equation*}
+        \forall x \in [0,1], ~ |B_n(f)(x)-f(x)| \leq \sum_{k=0}^n\binom{n}{k}\left|f\left( \frac{k}{n} \right) - f(x) \right| x^k (1-x)^k.
+    \end{equation*}
+    Soit $x\in[0,1]$, on pose $I_n=\{k\in\lb0,n\rb, ~ \left|\frac{k}{n}-x\right| < \a\}$ et $J_n = \lb0,n\rb \setminus I_n$.\\
+    On découpe la somme en deux (type Cesàro) :
+    \[
+    \begin{aligned}
+        |B_n(f)(x)-f(x)| &\leq \sum_{k\in I_n}\binom{n}{k}\underbrace{\left| f\left( \frac{k}{n} \right)-f(x) \right|}_{\leq\e}x^k(1-x)^{n-k} + \sum_{k\in J_n}\binom{n}{k}\underbrace{\left|f\left( \frac{k}{n} \right)  - f(x) \right|}_{\leq2M} x^k(1-x)^{n-k}\\
+        &\leq\e\sum_{k\in I_n}\binom{n}{k}x^k(1-x)^{n-k} + 2M \sum_{k \in J_n}\binom{n}{k}x^k(1-x)^{n-k}\\
+        &\leq \e + 2M\sum_{k=0}^n \1_{\left|\frac{k}{n}-x\right|\geq\a}\binom{n}{k}x^k(1-x)^{n-k}\\
+        &\leq\e + 2M\sum_{k=0}^n\frac{\left( \frac{k}{n}-x \right)^2}{\a^2}\binom{n}{k}x^k(1-x)^{n-k}\\
+        &\leq\e + \frac{2M}{\a^2}\left[ B_n(x^2) + B_n(x) + B_n(1) \right]\\
+        &\leq \e + \frac{2M}{\a^2}\frac{x-x^2}{n} \leq \e + \frac{M}{2\a^2n}
+    \end{aligned}
+    \]
+    Par passage au sup : $\|B_n(f)-f\|_{\infty}^{[0,1]}\leq\e+\frac{M}{2\a^2 n}$, et $\exists n_0\in\N, ~ \forall n \geq n_0, ~ \frac{M}{2\a^2n} \leq \e$.\\
+    Alors $\forall n \geq n_0, ~ \|B_n(f)-f\|_\infty^{[0,1]}\leq2\e$.
+\end{exercice}
+\end{document}
